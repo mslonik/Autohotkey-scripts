@@ -83,10 +83,12 @@ Loop ; external loop
 			}
 		ToolTip, Diactric?, % A_CaretX, % A_CaretY - 20
 		Input, NextKey, L1, %MyEndKey%, %MyMatchList%
+		IsShiftPressed := GetKeyState("Shift")
+		WhatCapsLockState := GetKeyState("CapsLock", "T")
 		if (ErrorLevel = "Max")
 			{
-			ToolTip,
 			Send, % NextKey
+			ToolTip,
 			FlagDoubleLetter := 1
 			Break
 			}
@@ -139,6 +141,8 @@ Loop ; external loop
 	{
 	ToolTip, Double?, % A_CaretX, % A_CaretY - 20
 	Input, NextKey, L1, %MyEndKey%, %MyMatchList%
+	IsShiftPressed := GetKeyState("Shift")
+	WhatCapsLockState := GetKeyState("CapsLock", "T")
 	if (ErrorLevel = "Max")
 		{
 		ToolTip,
