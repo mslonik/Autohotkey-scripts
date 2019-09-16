@@ -55,7 +55,7 @@ o------------------------------------------------------------o
 | !Numpad9/^Numpad3     | Inc./dec. wheel maximum speed per  |
 |                       | button press*.                     |
 | Numpad4/Numpad6       | Inc./dec. rotation angle to        |
-|                       | right in degrees. (i.e. 180° =     |
+|                       | right in degrees. (i.e. 180Â° =     |
 |                       | = inversed controls).              |
 |------------------------------------------------------------|
 | * = These options are affected by the mouse wheel speed    |
@@ -73,6 +73,8 @@ o------------------------------------------------------------o
 |                       |    MouseWheelAccelerationSpeed     |
 |                       |    MouseWheelMaxSpeed              |
 |                       |    MouseRotationAngle              |
+|                       | Added tooltips for ScrollLock and  |
+|                       | NumLock                            |
 |------------------------------------------------------------|
 | 1.02 by mslonik       | Added menu info about app.         |
 |------------------------------------------------------------|
@@ -84,7 +86,7 @@ o------------------------------------------------------------o
 #MaxHotkeysPerInterval 500
 
 ; Using the keyboard hook to implement the Numpad hotkeys prevents them from interfering with the generation of ANSI characters such
-; as à.  This is because AutoHotkey generates such characters by holding down ALT and sending a series of Numpad keystrokes.
+; as Å•.  This is because AutoHotkey generates such characters by holding down ALT and sending a series of Numpad keystrokes.
 ; Hook hotkeys are smart enough to ignore such keystrokes.
 #UseHook
 
@@ -104,9 +106,9 @@ Temp = 0
 Temp2 = 0
 
 MouseRotationAnglePart = %MouseRotationAngle%
-;Divide by 45º because MouseMove only supports whole numbers and changing the mouse rotation to a number lesser than 45º
+;Divide by 45ÅŸ because MouseMove only supports whole numbers and changing the mouse rotation to a number lesser than 45ÅŸ
 ;could make strange movements.
-;For example: 22.5º when pressing NumpadUp: First it would move upwards until the speed to the side reaches 1.
+;For example: 22.5ÅŸ when pressing NumpadUp: First it would move upwards until the speed to the side reaches 1.
 MouseRotationAnglePart /= 45
 
 MouseCurrentAccelerationSpeed = 0
@@ -253,8 +255,8 @@ else
 }
 return
 
-; NumLock key support
-~NumLock::
+
+~NumLock:: ; NumLock key support
 KeyWait, NumLock
 NumLockState := GetKeyState("NumLock", "T")
 
@@ -266,8 +268,17 @@ if (NumLockState)
 }
 else
 {
-	ToolTip, NumPadMouse configuration mode DEACTIVATED
+	ToolTip, NumPadMouse configuration mode DEACTIVATED, configuration SAVED
 	SetTimer, RemoveToolTip, 1000
+	IniWrite, %MouseSpeed%, %ApplicationName%.ini, MouseSpeed, MouseSpeed
+	IniWrite, %MouseAccelerationSpeed%, %ApplicationName%.ini, MouseSpeed, MouseAccelerationSpeed
+	IniWrite, %MouseMaxSpeed%, %ApplicationName%.ini, MouseSpeed, MouseMaxSpeed
+	
+	IniWrite, %MouseWheelSpeed%, %ApplicationName%.ini, MouseWheel, MouseWheelSpeed
+	IniWrite, %MouseWheelAccelerationSpeed%, %ApplicationName%.ini, MouseWheel, MouseWheelAccelerationSpeed
+	IniWrite, %MouseWheelMaxSpeed%, %ApplicationName%.ini, MouseWheel, MouseWheelMaxSpeed
+
+	IniWrite, %MouseRotationAngle%, %ApplicationName%.ini, MouseRotationAngle, MouseRotationAngle
 }	
 
 ;Mouse click support
@@ -333,8 +344,14 @@ Button2 = NumpadMult
 ButtonClick = X2
 Goto ButtonClickStart
 
-ButtonClickStart:
-MouseClick, %ButtonClick%,,, 1, 0, D
+ButtonClickStart: ; tu jestem
+WinGetActiveStats, Title, Width, Height, X, Y
+;~ MouseClick, %ButtonClick%,,, 1, 0, D
+;~ Title: The name of the variable in which to store the title of the active window.
+;~ Width, Height: The names of the variables in which to store the width and height of the active window.
+;~ X, Y: The names of the variables in which to store the X and Y coordinates of the active window's upper left corner.
+MouseMove, X + Width/2, Y + Height/2, 0
+MsgBox, % "X: " . X " Y: " . Y
 SetTimer, ButtonClickEnd, 10
 return
 
@@ -344,7 +361,7 @@ if kclickstate = D
 	return
 
 SetTimer, ButtonClickEnd, Off
-MouseClick, %ButtonClick%,,, 1, 0, U
+;~ MouseClick, %ButtonClick%,,, 1, 0, U
 return
 
 ;Mouse movement support
@@ -353,7 +370,7 @@ ButtonSpeedUp:
 	MouseSpeed++
 	ToolTip, Mouse speed: %MouseSpeed% pixels
 	SetTimer, RemoveToolTip, 1000
-	IniWrite, %MouseSpeed%, %ApplicationName%.ini, MouseSpeed, MouseSpeed
+	;~ IniWrite, %MouseSpeed%, %ApplicationName%.ini, MouseSpeed, MouseSpeed
 return
 ButtonSpeedDown:
 	if (MouseSpeed > 1) {
@@ -365,14 +382,12 @@ ButtonSpeedDown:
 		ToolTip, Mouse speed: %MouseSpeed% pixels
 	}
 	SetTimer, RemoveToolTip, 1000
-	IniWrite, %MouseSpeed%, %ApplicationName%.ini, MouseSpeed, MouseSpeed
 return
 
 ButtonAccelerationSpeedUp:
 	MouseAccelerationSpeed++
 	ToolTip, Mouse acceleration speed: %MouseAccelerationSpeed% pixels
 	SetTimer, RemoveToolTip, 1000
-	IniWrite, %MouseAccelerationSpeed%, %ApplicationName%.ini, MouseSpeed, MouseAccelerationSpeed
 return
 ButtonAccelerationSpeedDown:
 	if (MouseAccelerationSpeed > 1) {
@@ -384,14 +399,12 @@ ButtonAccelerationSpeedDown:
 		ToolTip, Mouse acceleration speed: %MouseAccelerationSpeed% pixels
 	}
 	SetTimer, RemoveToolTip, 1000
-	IniWrite, %MouseAccelerationSpeed%, %ApplicationName%.ini, MouseSpeed, MouseAccelerationSpeed
 return
 
 ButtonMaxSpeedUp:
 	MouseMaxSpeed++
 	ToolTip, Mouse maximum speed: %MouseMaxSpeed% pixels
 	SetTimer, RemoveToolTip, 1000
-	IniWrite, %MouseMaxSpeed%, %ApplicationName%.ini, MouseSpeed, MouseMaxSpeed
 return
 ButtonMaxSpeedDown:
 	if (MouseMaxSpeed > 1) {
@@ -403,7 +416,6 @@ ButtonMaxSpeedDown:
 		ToolTip, Mouse maximum speed: %MouseMaxSpeed% pixels
 	}
 	SetTimer, RemoveToolTip, 1000
-	IniWrite, %MouseMaxSpeed%, %ApplicationName%.ini, MouseSpeed, MouseMaxSpeed
 return
 
 ButtonRotationAngleUp:
@@ -413,9 +425,8 @@ ButtonRotationAngleUp:
 	}
 	MouseRotationAngle = %MouseRotationAnglePart%
 	MouseRotationAngle *= 45
-	ToolTip, Mouse rotation angle: %MouseRotationAngle%°
+	ToolTip, Mouse rotation angle: %MouseRotationAngle%Â°
 	SetTimer, RemoveToolTip, 1000
-	IniWrite, %MouseRotationAngle%, %ApplicationName%.ini, MouseRotationAngle, MouseRotationAngle
 return
 ButtonRotationAngleDown:
 	MouseRotationAnglePart--
@@ -426,7 +437,6 @@ ButtonRotationAngleDown:
 	MouseRotationAngle *= 45
 	ToolTip, Mouse rotation angle: %MouseRotationAngle%
 	SetTimer, RemoveToolTip, 1000
-	IniWrite, %MouseRotationAngle%, %ApplicationName%.ini, MouseRotationAngle, MouseRotationAngle
 return
 
 ButtonUp:
@@ -843,16 +853,16 @@ Gui, MyAbout: Font, Bold
 Gui, MyAbout: Add, Text, , %ApplicationName% v.1.02 by deguix and mslonik
 Gui, MyAbout: Font
 
-Info1 =
+Gui, MyAbout: Add, Text, xm+10, 
 (
 This script is an example of use of AutoHotkey. It uses the remapping of numpad keys of a keyboard to transform it
 into a mouse. Some features are the acceleration which enables you to increase the mouse movement when holding a key
 a key for a long time, and the rotation which makes the numpad mouse to "turn". I.e. NumpadDown as NumpadUp
 and vice-versa. See the list of keys used below:
 )
-Gui, MyAbout: Add, Text, xm+10, %Info1%
 
-Info2 =
+Gui, MyAbout: Font, s10, Courier New
+Gui, MyAbout: Add, Text, xm+10, 
 (
 o--------------------------------------------------------------------------o
 | Keys                  | Description                                      |
@@ -882,15 +892,13 @@ o--------------------------------------------------------------------------o
 | !Numpad8/^Numpad2     | Inc./dec. wheel initial speed per button press*. |
 | !Numpad9/^Numpad3     | Inc./dec. wheel maximum speed per button press*. |
 | Numpad4/Numpad6       | Inc./dec. rotation angle to right in degrees.    |
-|                       | (i.e. 180° = inversed controls).                 |
+|                       | (i.e. 180Â° = inversed controls).                 |
 |--------------------------------------------------------------------------|
 | * = These options are affected by the mouse wheel speed adjusted on      |
 | Control Panel. If you don't have a mouse with wheel, the default is 3    |
 |  +/- lines per option button press.                                      |
 o--------------------------------------------------------------------------o
 )
-Gui, MyAbout: Font, s10, Courier New
-Gui, MyAbout: Add, Text, xm+10, %Info2%
 
 Gui, MyAbout: Add, Button, Default Hidden w100 gMyOK Center vOkButtonVariabl hwndOkButtonHandle, &OK
 GuiControlGet, MyGuiControlGetVariable, MyAbout: Pos, %OkButtonHandle%
