@@ -1,4 +1,4 @@
-﻿#NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
+#NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn  							; Enable warnings to assist with detecting common errors.
 SendMode Input  				; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
@@ -120,7 +120,7 @@ return
 :*:unirc::UniRC
 :*:wsu::wheel sensor unit
 :*:azc::AZC
-:*:mag::MAG
+::mag::MAG
 
 :*:tilde::{U+223C}
 :*:ddelta::{U+2206}
@@ -131,7 +131,7 @@ return
 :*:guenther::G{U+00FC}nther ; Gunther Lehner
 :*:pek::P{U+00E9}k	; Piotr Pek
 
-; ----------------- SEKCJA INNYCH URZĄDZEŃ WE-WY -------------------------------
+; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
 ; pedały
 
 F13:: ; przełączanie pomiędzy kolejnymi okienkami Worda; autor: Taran VH
@@ -171,21 +171,46 @@ return
 
 ;~ https://autohotkey.com/board/topic/116740-switch-between-one-window-of-each-different-applications/
 
-; mysz
+; computer mouse: OPTO 325 (PS/2)
 
 ; Make the mouse wheel perform alt-tabbing
 MButton::AltTabMenu
-
-;~ WheelDown::
-	;~ MsgBox, Kółko
-;~ return
-
 WheelDown::AltTab
-;~ WheelLeft::AltTab
-;~ WheelLeft::
-	;~ MsgBox, Lewe kółko
-;~ return	
 WheelUp::ShiftAltTab
-;~ WheelRight::ShiftAltTab
 
-; ----------------- KONIEC SEKCJI INNYCH URZĄDZEŃ WE-WY ------------------------
+; Left side button XButton1
+XButton1:: ; switching between Chrome browser tabs; author: Taran VH
+	if !WinExist("ahk_class Chrome_WidgetWin_1")
+		{
+		Run, chrome.exe
+		}
+	if WinActive("ahk_class Chrome_WidgetWin_1")
+		{
+		Send, ^{Tab}
+		}
+	else
+		{
+		WinActivate ahk_class Chrome_WidgetWin_1
+		}
+return
+
+; Right side button XButton2
+XButton2:: ; switching between Chrome browser tabs; author: Taran VH
+	if !WinExist("ahk_class Chrome_WidgetWin_1")
+		{
+		Run, chrome.exe
+		}
+	if WinActive("ahk_class Chrome_WidgetWin_1")
+		{
+		Send, ^+{Tab}
+		}
+	else
+		{
+		WinActivate ahk_class Chrome_WidgetWin_1
+		}
+return
+
+
+
+
+; ----------------- END OF ADDITIONAL I/O DEVICES SECTION ------------------------
