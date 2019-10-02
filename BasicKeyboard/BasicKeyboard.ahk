@@ -121,6 +121,9 @@ return
 :*:wsu::wheel sensor unit
 :*:azc::AZC
 ::mag::MAG
+:*:dtr::DTR
+:*:dpiz::DPiZ
+:*:wtwio::WTWiO
 
 :*:tilde::{U+223C}
 :*:ddelta::{U+2206}
@@ -132,9 +135,8 @@ return
 :*:pek::P{U+00E9}k	; Piotr Pek
 
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
-; pedały
-
-F13:: ; przełączanie pomiędzy kolejnymi okienkami Worda; autor: Taran VH
+; pedals (Foot Switch FS3-P)
+F13:: ; switching beetween windows of Word; author: Taran VH
 	Process, Exist, WINWORD.EXE
 	if (ErrorLevel = 0)
 		{
@@ -154,7 +156,7 @@ F13:: ; przełączanie pomiędzy kolejnymi okienkami Worda; autor: Taran VH
         }
 return
 
-F14:: ; przełączanie pomiędzy zakładkami Chrome; autor: Taran VH
+F14:: ; switching between tabs of Chrome; author: Taran VH
 	if !WinExist("ahk_class Chrome_WidgetWin_1")
 		{
 		Run, chrome.exe
@@ -186,7 +188,7 @@ XButton1:: ; switching between Chrome browser tabs; author: Taran VH
 		}
 	if WinActive("ahk_class Chrome_WidgetWin_1")
 		{
-		Send, ^{Tab}
+		Send, ^+{Tab}
 		}
 	else
 		{
@@ -202,7 +204,7 @@ XButton2:: ; switching between Chrome browser tabs; author: Taran VH
 		}
 	if WinActive("ahk_class Chrome_WidgetWin_1")
 		{
-		Send, ^+{Tab}
+		Send, ^{Tab}
 		}
 	else
 		{
