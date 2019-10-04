@@ -1,12 +1,12 @@
-#NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
+﻿#NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn  							; Enable warnings to assist with detecting common errors.
 SendMode Input  				; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #SingleInstance force 			; only one instance of this script may run at a time!
 
 ; --------------- SEKCJA ZMIENNYCH GLOBALNYCH -----------------------------
-WordTrue := -1
-WordFalse := 0
+;~ WordTrue := -1
+;~ WordFalse := 0
 ; --------------- KONIEC SEKCJI ZMIENNYCH GLOBALNYCH ----------------------
 
 
@@ -61,7 +61,7 @@ PrintScreen::#+s ; Windows + Shift + s
 ; ---------------------- SEKCJA KOMBOSÓW ang. hotstrings-----------------------------------
 :*:dd::Dzień dobry,{Enter}
 :*:p ms::Pozdrawia ms
-:*:ms`t::Maciej Słojewski
+:*:ms`t::Maciej S{U+0142}ojewski
 ;~ :*:m@::maciej.slojewski@mslonik.pl
 :*:ms@2::
 	tmp := StrLen("maciej.slojewski@voestalpine.com") - 3
@@ -105,7 +105,7 @@ return
 :*:mminus::{U+2212}
 :*:stopc::{U+00B0}
 
-:*b0:vo::
+:b0:vo::
 	Send, {Backspace 2}voestalpine
 return
 :*b0:voe::
@@ -121,18 +121,34 @@ return
 :*:wsu::wheel sensor unit
 :*:azc::AZC
 ::mag::MAG
+::asm::ASM
+::acm::ACM
+::cok::COK
+:*:adm::ADM
+
+:*:pcb::PCB
 :*:dtr::DTR
+::dp::DPiZ
 :*:dpiz::DPiZ
+::du::DUiR
+:*:duir::DUiR
+::dr::DR
 :*:wtwio::WTWiO
+:*:pkp::PKP
+:*:plk::PLK
+:*:ups::UPS
+:*:qnx::QNX
+:*:rs232::RS232
+:*:rs485::RS485
 
 :*:tilde::{U+223C}
 :*:ddelta::{U+2206}
 :*:--::{U+2500}
 
 ; ------------------ Sekcja imion i nazwisk ------------------------
-:*:rene::Ren{U+00E9} ; Rene Berger
-:*:guenther::G{U+00FC}nther ; Gunther Lehner
-:*:pek::P{U+00E9}k	; Piotr Pek
+:*:rene::Ren{U+00E9}            ; Rene Berger
+:*:guenther::G{U+00FC}nther     ; Gunther Lehner
+:*:pek::P{U+00E9}k	            ; Piotr Pek
 
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
 ; pedals (Foot Switch FS3-P)
@@ -173,7 +189,7 @@ return
 
 ;~ https://autohotkey.com/board/topic/116740-switch-between-one-window-of-each-different-applications/
 
-; computer mouse: OPTO 325 (PS/2)
+; computer mouse: OPTO 325 (PS/2): 3 + 2 buttons, 2x wheels, but only one is recognizable by AHK.
 
 ; Make the mouse wheel perform alt-tabbing
 MButton::AltTabMenu
