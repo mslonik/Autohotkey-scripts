@@ -13,55 +13,68 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 ;~ - dopisać pozostałe klawisze multimedialne
 ;~ - restart komputera pod Ctrl + przekreślony głośniczek
 
-; ---------------- SEKCJA KLAWISZY MULTIMEDIALNYCH -----------------------------
+; ---------------- SECTION OF MULTIMEDIA KEYBOARD HOTKEYS -----------------------------
+; These are valid only for "Logitech Internet 350 Keyboard" and alike.
+
 Launch_Media:: ; uruchom Word - nutka, pierwszy klawisz multimedialny z lewej
 	tooltip, [%A_thishotKey%] Uruchom procesor tekstu MS Word  
-	SetTimer, ZgasTooltip, -5000
+	SetTimer, TurnOffTooltip, -5000
 	Run, WINWORD.EXE
 return
 
 Launch_Mail:: ; uruchom Total Commander
 	tooltip, [%A_thishotKey%] Uruchom Total Commander
-	SetTimer, ZgasTooltip, -5000
+	SetTimer, TurnOffTooltip, -5000
 	Run, c:\totalcmd\TOTALCMD64.EXE 
 return
 
 Browser_Home:: ; uruchom Narzędzie wycinanie
 	tooltip, [%A_thishotKey%] Uruchom Narzędzie wycinanie
-	SetTimer, ZgasTooltip, -5000
+	SetTimer, TurnOffTooltip, -5000
 	Run, %A_WinDir%\system32\SnippingTool.exe
 return
 
 Media_Play_Pause:: ; Paint
 	tooltip, [%A_thishotKey%] Uruchom narzędzie Malarz (Paint)
-	SetTimer, ZgasTooltip, -5000
+	SetTimer, TurnOffTooltip, -5000
 	Run, %A_WinDir%\system32\mspaint.exe
 return
+; ---------------- END OF MULTIMEDIA KEYBOARD HOTKEYS SECTION -----------------------------
+
+; - - - - - - - -  SECTION OF ORDINARY HOTKEYS - - - - - - - - - - - - - - - - - - - - - - -
++^k:: ; Kee Pass 2
+	Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 
+return
+
+; - - - - - - - - END OF ORDINARY HOTKEYS SECTION - - - - - - - - - - - - - - - - - - - - - 
 
 
 
-; ----------KLAWIATURA NUMERYCZNA - NUMLOCK == ON -----------------------------------------------
+
+; ---------- SECTION OF NUMERIC KEYBOARD HOTKEYS - NUMLOCK == ON -----------------------------------------------
+
+; ---------- SECTION OF NUMERIC KEYBOARD HOTKEYS - NUMLOCK == OFF ---------------------------------------------
 
 
 
-; ---------- KLAWIATURA NUMERYCZNA - NUMLOCK == OFF ---------------------------------------------
 
+; ---------------------- SECTION OF LABELS ------------------------------------
 
-
-
-; ---------------------- SEKCJA ETYKIET ------------------------------------
-
-ZgasTooltip:
+TurnOffTooltip:
 	ToolTip ,
 return
 
+; ---------------------- KEYS REMAPPING -----------------------------------
 ;~ https://support.microsoft.com/pl-pl/help/4488540/how-to-take-and-annotate-screenshots-on-windows-10
 PrintScreen::#+s ; Windows + Shift + s
 
-; ---------------------- SEKCJA KOMBOSÓW ang. hotstrings-----------------------------------
+; ---------------------- HOTSTRINGS -----------------------------------
 :*:dd::Dzień dobry,{Enter}
 :*:p ms::Pozdrawia ms
-:*:ms`t::Maciej S{U+0142}ojewski
+:C:M::Maciej
+:C:S::S{U+0142}ojewski
+:C:tel::{+}48 601 403 775
+::ms`t::Maciej S{U+0142}ojewski
 ;~ :*:m@::maciej.slojewski@mslonik.pl
 :*:ms@2::
 	tmp := StrLen("maciej.slojewski@voestalpine.com") - 3
@@ -145,13 +158,14 @@ return
 :*:ddelta::{U+2206}
 :*:--::{U+2500}
 
-; ------------------ Sekcja imion i nazwisk ------------------------
+; ------------------ Section of first or second names with local diacritics ------------------------
 :*:rene::Ren{U+00E9}            ; Rene Berger
 :*:guenther::G{U+00FC}nther     ; Gunther Lehner
 :*:pek::P{U+00E9}k	            ; Piotr Pek
 
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
-; pedals (Foot Switch FS3-P)
+; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
+
 F13:: ; switching beetween windows of Word; author: Taran VH
 	Process, Exist, WINWORD.EXE
 	if (ErrorLevel = 0)
@@ -185,6 +199,9 @@ F14:: ; switching between tabs of Chrome; author: Taran VH
 		{
 		WinActivate ahk_class Chrome_WidgetWin_1
 		}
+return
+
+F15::
 return
 
 ;~ https://autohotkey.com/board/topic/116740-switch-between-one-window-of-each-different-applications/
@@ -227,8 +244,5 @@ XButton2:: ; switching between Chrome browser tabs; author: Taran VH
 		WinActivate ahk_class Chrome_WidgetWin_1
 		}
 return
-
-
-
 
 ; ----------------- END OF ADDITIONAL I/O DEVICES SECTION ------------------------
