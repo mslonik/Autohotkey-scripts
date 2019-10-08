@@ -15,7 +15,7 @@
    version="1.1"
    id="svg38"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="Word_Macros_60x60.svg"
+   sodipodi:docname="Word_TemplateEN_60x60.svg"
    inkscape:export-filename="C:\Users\macie\Documents\GitHub\Autohotkey-scripts\Flow\Word_Styles_60x60.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11.2"
-     inkscape:cx="41.580354"
-     inkscape:cy="33.026784"
+     inkscape:cx="19.392854"
+     inkscape:cy="37.598217"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -72,32 +72,39 @@
      inkscape:label="Content"
      style="display:inline">
     <rect
-       style="fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:0.2641893;stroke-opacity:1"
+       style="fill:#d8bc78;fill-opacity:1;stroke:none;stroke-width:0.2641893;stroke-opacity:1"
        id="rect59"
        width="15.875"
        height="15.827753"
        x="0"
        y="0.047246993"
        inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96"
-       inkscape:export-filename="C:\Users\macie\Documents\GitHub\Autohotkey-scripts\Flow\Layer1\Word_Macros_60x60.png" />
+       inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="1.0914061"
-       y="8.6131334"
+       x="0.69925588"
+       y="7.6776423"
        id="text57"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
-         id="tspan55"
-         x="1.0914061"
-         y="8.6131334"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.26458332">Macros</tspan><tspan
+         x="0.69925588"
+         y="7.6776423"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.88055563px;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.26458332"
+         id="tspan922">Template</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="4.9420385"
+       y="13.418152"
+       id="text57-8"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
-         x="1.0914061"
-         y="21.842299"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.26458332"
-         id="tspan922" /></text>
+         x="4.9420385"
+         y="13.418152"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.3499999px;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.26458332"
+         id="tspan922-4">EN</tspan></text>
   </g>
 </svg>
