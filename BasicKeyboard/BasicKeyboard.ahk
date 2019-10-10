@@ -1,13 +1,20 @@
+/*
+Author:      
+Purpose:     Facilitate normal operation for company desktop.
+Description: 
+License:     GNU GPL v.3
+*/
+
 #NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn  							; Enable warnings to assist with detecting common errors.
 SendMode Input  				; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #SingleInstance force 			; only one instance of this script may run at a time!
 
-; --------------- SEKCJA ZMIENNYCH GLOBALNYCH -----------------------------
+; --------------- SECTION OF GLOBAL VARIABLES -----------------------------
 ;~ WordTrue := -1
 ;~ WordFalse := 0
-; --------------- KONIEC SEKCJI ZMIENNYCH GLOBALNYCH ----------------------
+; --------------- END OF GLOBAL VARIABLES SECTION ----------------------
 
 
 ;~ - dopisać pozostałe klawisze multimedialne
@@ -46,6 +53,14 @@ return
 	Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 
 return
 
+^Volume_Up:: ; Reboot
+	Shutdown, 2
+return
+
+^Volume_Mute:: ; Shutdown + Powerdown
+	Shutdown, 1 + 8
+return
+
 ; - - - - - - - - END OF ORDINARY HOTKEYS SECTION - - - - - - - - - - - - - - - - - - - - - 
 
 
@@ -74,7 +89,7 @@ PrintScreen::#+s ; Windows + Shift + s
 :C:M::Maciej
 :C:S::S{U+0142}ojewski
 :C:tel::{+}48 601 403 775
-::ms`t::Maciej S{U+0142}ojewski
+:*:ms.::Maciej S{U+0142}ojewski
 ;~ :*:m@::maciej.slojewski@mslonik.pl
 :*:ms@2::
 	tmp := StrLen("maciej.slojewski@voestalpine.com") - 3
@@ -152,6 +167,7 @@ return
 :*:pkp::PKP
 :*:plk::PLK
 :*:ups::UPS
+:*:usb::USB
 :*:qnx::QNX
 :*:rs232::RS232
 :*:rs485::RS485
