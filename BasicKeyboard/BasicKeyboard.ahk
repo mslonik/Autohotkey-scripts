@@ -1,7 +1,7 @@
 /*
-Author:      
+Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
-Description: 
+Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
 License:     GNU GPL v.3
 */
 
@@ -136,14 +136,20 @@ return
 :*:stopc::{U+00B0}
 
 :b0:vo::
-	Send, {Backspace 2}voestalpine
+	Send, {Backspace 3}voestalpine{Space}
 return
 :*b0:voe::
-	Send, {Backspace}{Space}Signaling Sopot
+	Send, stalpine Signaling Sopot
 return
 :*b0:voes::
 	Send, {Backspace 1}{Space}Sp. z o.o.
 return
+
+:*b0:voesi::
+	Send, {Backspace 17}Siershahn
+return
+
+::sie::Siershahn
 
 :*:uniac::UniAC
 :*:unias::UniAS
@@ -156,6 +162,12 @@ return
 ::cok::COK
 :*:adm::ADM
 
+:*:anszua::AnSzuA
+
+:*:ram::RAM
+:*:rams::RAMS
+:*:qrams::QRAMS
+:*:sil::SIL
 :*:pcb::PCB
 :*:dtr::DTR
 ::dp::DPiZ
