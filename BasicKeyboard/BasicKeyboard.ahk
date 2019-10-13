@@ -20,7 +20,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 ;~ - dopisać pozostałe klawisze multimedialne
 ;~ - restart komputera pod Ctrl + przekreślony głośniczek
 
-; ---------------- SECTION OF MULTIMEDIA KEYBOARD HOTKEYS -----------------------------
+; ---------------- SECTION OF KEYBOARD HOTKEYS -----------------------------
 ; These are valid only for "Logitech Internet 350 Keyboard" and alike.
 
 Launch_Media:: ; uruchom Word - nutka, pierwszy klawisz multimedialny z lewej
@@ -46,9 +46,7 @@ Media_Play_Pause:: ; Paint
 	SetTimer, TurnOffTooltip, -5000
 	Run, %A_WinDir%\system32\mspaint.exe
 return
-; ---------------- END OF MULTIMEDIA KEYBOARD HOTKEYS SECTION -----------------------------
 
-; - - - - - - - -  SECTION OF ORDINARY HOTKEYS - - - - - - - - - - - - - - - - - - - - - - -
 +^k:: ; Kee Pass 2
 	Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 
 return
@@ -61,7 +59,11 @@ return
 	Shutdown, 1 + 8
 return
 
-; - - - - - - - - END OF ORDINARY HOTKEYS SECTION - - - - - - - - - - - - - - - - - - - - - 
++^F2:: ; Suspend: 
+	DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0)
+return
+
+; - - - - - - - - END OF KEYBOARD HOTKEYS SECTION - - - - - - - - - - - - - - - - - - - - - 
 
 
 
@@ -84,7 +86,7 @@ return
 PrintScreen::#+s ; Windows + Shift + s
 
 ; ---------------------- HOTSTRINGS -----------------------------------
-:*:dd::Dzień dobry,{Enter}
+:*:dd::Dzie{U+0144} dobry,{Enter}
 :*:p ms::Pozdrawia ms
 :C:M::Maciej
 :C:S::S{U+0142}ojewski
@@ -98,8 +100,8 @@ return
 :*b0:ms@::
 	Send, {BackSpace 3}maciej.slojewski@voestalpine.com
 return
-:*:zws::Z wyrazami szacunku`, Maciej Słojewski
-:*:kr`t::Kind regards`, Maciej Słojewski
+:*:zws::Z wyrazami szacunku`, Maciej S{U+0142}ojewski
+:*:kr`t::Kind regards`, Maciej S{U+0142}ojewski
 
 :*:axm`t::AXM
 :*:axmr::AXM^=R^=
@@ -135,8 +137,8 @@ return
 :*:mminus::{U+2212}
 :*:stopc::{U+00B0}
 
-:b0:vo::
-	Send, {Backspace 3}voestalpine{Space}
+:b0o:vo::
+	Send, estalpine
 return
 :*b0:voe::
 	Send, stalpine Signaling Sopot

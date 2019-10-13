@@ -7,11 +7,26 @@ SendMode Input  				; Recommended for new scripts due to its superior speed and 
 #SingleInstance, Force
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 
+global ApplicationName := "Flow"
+
 global LastLayer
 global TempVarLayerLayer
-global Word_TemplateStyles := 3
-global Word_BBLayer := 2
+global BaseLayer := 0
 global Word_BaseLayer := 1
+global Word_BBLayer := 2
+global Word_TemplateStyles := 3
+
+global X
+global Y
+;~ global Width
+;~ global Height
+
+;~ global SM_CXSIZEFRAME := 32 ; Thickness of the sizing border around the perimeter of a window that can be resized, in pixels. The width of the horizontal border
+;~ global SM_CYSIZEFRAME := 33 ; Thickness of the sizing border around the perimeter of a window that can be resized, in pixels. the height of the vertical border.
+;~ global SM_CYCAPTION := 4    ;  Height of a caption area, in pixels.
+;~ global xborder
+;~ global yborder
+;~ global titlebar
 
 #Include %A_ScriptDir%\Layer0\Layer0.ahk
 #Include %A_ScriptDir%\Layer1\Layer1.ahk
@@ -19,8 +34,11 @@ global Word_BaseLayer := 1
 #Include %A_ScriptDir%\Layer3\Layer3.ahk
 
 LastLayer := 0
-Gui, Layer0:Show
+Gui, Layer0:Show, , %ApplicationName%
 
+;~ SysGet, xborder, %SM_CXSIZEFRAME%
+;~ SysGet, yborder, %SM_CYSIZEFRAME%
+;~ SysGet, titlebar, %SM_CYCAPTION%
 
 ; - - - - - - - - - - END OF INITIALIZATION - - - - - - - - - - - - - - -
 
@@ -53,13 +71,13 @@ return
 NumpadMult::
 NumpadMultP:
 NumpadMultB:
-     if (LastLayer < 2)
+     if (LastLayer == BaseLayer)
           {
-          MoveToTheNextLayer()     
+          MoveToLayer(Word_BaseLayer)
           }
-     else if (LastLayer ==  Word_TemplateStyles)
+     else if (LastLayer == Word_BaseLayer)
           {
-          TemplateStyle("Normalny pomiedzy ms", "Normalny pomiedzy ms")
+          MoveToLayer(Word_BBLayer)
           }
 return
 
@@ -111,12 +129,12 @@ NumPadAddP:
 NumPadAddB:
      if (LastLayer == Word_BaseLayer)
           {
-          MoveToThePreviousLayer()
+          MoveToLayer(BaseLayer)
           ;~ MsgBox, % LastLayer
           }
      else if (LastLayer == Word_BBLayer)
           {
-          MoveToThePreviousLayer()
+          MoveToLayer(Word_BaseLayer)
           ;~ MsgBox, % LastLayer     
           }
      else if (LastLayer == Word_TemplateStyles)
@@ -179,64 +197,21 @@ Layer1GuiClose:
 
 ; - - - - - - - - - - - FUNCTIONS - - - - - - - - - - -
 
+
 F_NumLockLayer(V_NumLockState)
 {
+global     
+     
 if (V_NumLockState == 0) ; Show
      {
-     if (LastLayer == 0)
-          {
-          Gui, Layer0:Show
-          }
-     else if (LastLayer == 1)
-          {
-          Gui, Layer1:Show
-          }     
-     else if (LastLayer == 2)
-          {
-          Gui, Layer2:Show     
-          }     
+     TempVarLayer := "Layer" . LastLayer
+     Gui, %TempVarLayer%:Show     
      }
 else ; Hide
      {
-     if (LastLayer == 0)
-          {
-          Gui, Layer0:Hide
-          }
-     else if (LastLayer == 1)
-          {
-          Gui, Layer1:Hide
-          }
-     else if (LastLayer == 2)
-          {
-          Gui, Layer2:Hide     
-          }     
+     TempVarLayer := "Layer" . LastLayer
+     Gui, %TempVarLayer%:Hide
      }
-}
-
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-MoveToTheNextLayer()
-{
-     global
-     
-     TempVarLayer := "Layer" . LastLayer
-     Gui, %TempVarLayer%:Hide     
-     LastLayer++
-     TempVarLayer := "Layer" . LastLayer
-     Gui, %TempVarLayer%:Show     
-}
-
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-MoveToThePreviousLayer()
-{
-     global
-     
-     TempVarLayer := "Layer" . LastLayer
-     Gui, %TempVarLayer%:Hide     
-     LastLayer--
-     TempVarLayer := "Layer" . LastLayer
-     Gui, %TempVarLayer%:Show     
 }
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -246,21 +221,19 @@ MoveToLayer(WhichLayer)
      global
      
      TempVarLayer := "Layer" . LastLayer
-     ;~ MsgBox, % "LastLayer: "LastLayer
+     WinGetPos, X, Y, %ApplicationName%
      Gui, %TempVarLayer%:Hide
      LastLayer := WhichLayer
      TempVarLayer := "Layer" . LastLayer
-     Gui, %TempVarLayer%:Show     
-}
-
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-#Include %A_ScriptDir%\Layer1\SetTemplate.ahk
-#Include %A_ScriptDir%\Layer3\TemplateStyle.ahk
-
+     Gui, %TempVarLayer%:Show, X%X% Y%Y%, %ApplicationName%
 
 ; - - - - - - - - LABELS - - - - - - - - - - - - - - - 
 
 SwitchOffTooltip:
 	ToolTip ,
 return
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+#Include %A_ScriptDir%\Layer1\SetTemplate.ahk
+#Include %A_ScriptDir%\Layer3\TemplateStyle.ahk
