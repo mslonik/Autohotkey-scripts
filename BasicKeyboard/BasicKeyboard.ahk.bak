@@ -52,12 +52,15 @@ return
 return
 
 ^Volume_Up:: ; Reboot
-
 	Shutdown, 2
 return
 
 ^Volume_Mute:: ; Shutdown + Powerdown
 	Shutdown, 1 + 8
+return
+
++^F2:: ; Suspend: 
+	DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0)
 return
 
 ; - - - - - - - - END OF KEYBOARD HOTKEYS SECTION - - - - - - - - - - - - - - - - - - - - - 

@@ -190,6 +190,8 @@ return
 :*:ddelta::{U+2206}
 :*:--::{U+2500}
 
+:*:tabela`t::| | |{Enter}
+
 ; ------------------ Section of first or second names with local diacritics ------------------------
 :*:rene::Ren{U+00E9}            ; Rene Berger
 :*:guenther::G{U+00FC}nther     ; Gunther Lehner

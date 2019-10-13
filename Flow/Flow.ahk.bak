@@ -14,7 +14,8 @@ global TempVarLayerLayer
 global BaseLayer := 0
 global Word_BaseLayer := 1
 global Word_BBLayer := 2
-global Word_TemplateStyles := 3
+global Word_TemplateStyles1 := 3
+global Word_TemplateStyles2 := 4
 
 global X
 global Y
@@ -32,6 +33,7 @@ global Y
 #Include %A_ScriptDir%\Layer1\Layer1.ahk
 #Include %A_ScriptDir%\Layer2\Layer2.ahk
 #Include %A_ScriptDir%\Layer3\Layer3.ahk
+#Include %A_ScriptDir%\Layer4\Layer4.ahk
 
 LastLayer := 0
 Gui, Layer0:Show, , %ApplicationName%
@@ -60,12 +62,16 @@ NumpadDivP:
 NumpadDivB:
      if (LastLayer == Word_BaseLayer)
           {
-          MoveToLayer(Word_TemplateStyles)
+          MoveToLayer(Word_TemplateStyles1)
           }
-     else if (LastLayer == Word_TemplateStyles)
+     else if (LastLayer == Word_TemplateStyles1)
           {
           TemplateStyle("Normalny ms", "Normalny ms")
-          }     
+          }
+     else if (LastLayer == Word_TemplateStyles2)
+          {
+          TemplateStyle("Normalny ms", "Normalny ms")
+          }    
 return
 
 NumpadMult::
@@ -84,7 +90,7 @@ return
 NumpadSub::
 NumpadSubP:
 NumpadSubB:
-     if (LastLayer ==  Word_TemplateStyles)
+     if (LastLayer ==  Word_TemplateStyles1)
           {
           TemplateStyle("Nag³ówek 1 ms", "Nag³ówek 1 ms")     
           }     
@@ -98,7 +104,7 @@ NumpadHomeB:
           {
           SetTemplate("PL", "Do³¹cz domyœlny szablon dokumentu PL")     
           }     
-     else if (LastLayer ==  Word_TemplateStyles)
+     else if (LastLayer ==  Word_TemplateStyles1)
           {
           TemplateStyle("Nag³ówek 2 ms")     
           }
@@ -111,18 +117,20 @@ NumpadUpB:
           {
           SetTemplate("EN", "Do³¹cz domyœlny szablon dokumentu EN")     
           }
-     else if (LastLayer ==  Word_TemplateStyles)
+     else if (LastLayer ==  Word_TemplateStyles1)
           {
           TemplateStyle("Nag³ówek 3 ms")     
           }          
 return
 
-
-
 NumpadPgup::
 NumpadPgUpP:
 NumpadPgUpB:
-MsgBox, 2th row
+     if (LastLayer ==  Word_TemplateStyles1)
+          {
+          TemplateStyle("Nag³ówek 4 ms")     
+          }          
+return          
 
 NumpadAdd::
 NumPadAddP:
@@ -137,9 +145,14 @@ NumPadAddB:
           MoveToLayer(Word_BaseLayer)
           ;~ MsgBox, % LastLayer     
           }
-     else if (LastLayer == Word_TemplateStyles)
+     else if (LastLayer == Word_TemplateStyles1)
           {
           MoveToLayer(Word_BaseLayer)
+          ;~ MsgBox, % LastLayer
+          }     
+     else if (LastLayer == Word_TemplateStyles2)
+          {
+          MoveToLayer(Word_TemplateStyles1)
           ;~ MsgBox, % LastLayer
           }     
 return
@@ -148,22 +161,39 @@ return
 NumpadLeft::
 NumpadLeftP:
 NumpadLeftB:
+     if (LastLayer ==  Word_TemplateStyles1)
+          {
+          TemplateStyle("Nag³ówek 5 ms")     
+          }          
+return
 
 NumpadClear::
 NumpadBlankP:
 NumpadBlankB:
+     if (LastLayer ==  Word_TemplateStyles1)
+          {
+          TemplateStyle("Nag³ówek 6 ms")     
+          }          
+return
 
 NumpadRight::
 NumpadRightP:
 NumpadRightB:
-
-     MsgBox, 3th row
+     if (LastLayer ==  Word_TemplateStyles1)
+          {
+          TemplateStyle("Nag³ówek 7 ms")     
+          }          
 return
 
 ;~ 4th row
 NumpadEnd::
 NumpadEndP:
 NumpadEndB:
+     if (LastLayer ==  Word_TemplateStyles1)
+          {
+          TemplateStyle("Nag³ówek 8 ms")     
+          }          
+return
 
 NumpadDown::
 NumpadDownP:
@@ -176,18 +206,29 @@ NumpadPgDnB:
 NumpadEnter::
 NumpadEnterP:
 NumpadEnterB:
-     MsgBox, 4th row
+     if (LastLayer ==  Word_TemplateStyles1)
+          {
+          MoveToLayer(Word_TemplateStyles2)     
+          }          
 return
 
 ;~ 5th row
 NumpadIns::
 NumpadInsP:
 NumpadInsB:
+     if (LastLayer ==  Word_TemplateStyles1)
+          {
+          TemplateStyle("Linia przerwy ms")     
+          }          
+return
 
 NumpadDel::
 NumpadDelP:
 NumpadDelB:
-     MsgBox, 5th row
+     if (LastLayer ==  Word_TemplateStyles1)
+          {
+          TemplateStyle("Ukryty ms")     
+          }          
 return
 
 Layer0GuiClose:
@@ -226,6 +267,7 @@ MoveToLayer(WhichLayer)
      LastLayer := WhichLayer
      TempVarLayer := "Layer" . LastLayer
      Gui, %TempVarLayer%:Show, X%X% Y%Y%, %ApplicationName%
+}
 
 ; - - - - - - - - LABELS - - - - - - - - - - - - - - - 
 
