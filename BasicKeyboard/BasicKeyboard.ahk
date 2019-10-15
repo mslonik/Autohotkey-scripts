@@ -17,32 +17,30 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 ; --------------- END OF GLOBAL VARIABLES SECTION ----------------------
 
 
-;~ - dopisać pozostałe klawisze multimedialne
-;~ - restart komputera pod Ctrl + przekreślony głośniczek
 
 ; ---------------- SECTION OF KEYBOARD HOTKEYS -----------------------------
 ; These are valid only for "Logitech Internet 350 Keyboard" and alike.
 
 Launch_Media:: ; uruchom Word - nutka, pierwszy klawisz multimedialny z lewej
-	tooltip, [%A_thishotKey%] Uruchom procesor tekstu MS Word  
+	tooltip, [%A_thishotKey%] Run text processor Microsoft Word  
 	SetTimer, TurnOffTooltip, -5000
 	Run, WINWORD.EXE
 return
 
 Launch_Mail:: ; uruchom Total Commander
-	tooltip, [%A_thishotKey%] Uruchom Total Commander
+	tooltip, [%A_thishotKey%] Run twin-panel file manager Total Commander
 	SetTimer, TurnOffTooltip, -5000
 	Run, c:\totalcmd\TOTALCMD64.EXE 
 return
 
 Browser_Home:: ; uruchom Narzędzie wycinanie
-	tooltip, [%A_thishotKey%] Uruchom Narzędzie wycinanie
+	tooltip, [%A_thishotKey%] Run system tool Snipping Tool
 	SetTimer, TurnOffTooltip, -5000
 	Run, %A_WinDir%\system32\SnippingTool.exe
 return
 
 Media_Play_Pause:: ; Paint
-	tooltip, [%A_thishotKey%] Uruchom narzędzie Malarz (Paint)
+	tooltip, [%A_thishotKey%] Run basic graphic editor Paint
 	SetTimer, TurnOffTooltip, -5000
 	Run, %A_WinDir%\system32\mspaint.exe
 return
@@ -165,6 +163,7 @@ return
 :*:adm::ADM
 
 :*:anszua::AnSzuA
+:*:unibl::UniBL
 
 :*:ram::RAM
 :*:rams::RAMS
@@ -185,6 +184,7 @@ return
 :*:qnx::QNX
 :*:rs232::RS232
 :*:rs485::RS485
+:*:bhp::BHP
 
 :*:tilde::{U+223C}
 :*:ddelta::{U+2206}
@@ -193,9 +193,9 @@ return
 :*:tabela`t::| | |{Enter}
 
 ; ------------------ Section of first or second names with local diacritics ------------------------
-:*:rene::Ren{U+00E9}            ; Rene Berger
-:*:guenther::G{U+00FC}nther     ; Gunther Lehner
-:*:pek::P{U+00E9}k	            ; Piotr Pek
+:*:rene::Ren{U+00E9}            ; Rene 
+:*:guenther::G{U+00FC}nther     ; Gunther 
+:*:pek::P{U+00E9}k	            ; Pek
 
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
 ; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
@@ -240,7 +240,7 @@ return
 
 ;~ https://autohotkey.com/board/topic/116740-switch-between-one-window-of-each-different-applications/
 
-; computer mouse: OPTO 325 (PS/2): 3 + 2 buttons, 2x wheels, but only one is recognizable by AHK.
+; computer mouse: OPTO 325 (PS/2 interface and PS/2 to USB adapter): 3 (top) + 2 (side) buttons, 2x wheels, but only one is recognizable by AHK.
 
 ; Make the mouse wheel perform alt-tabbing
 MButton::AltTabMenu
