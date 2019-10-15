@@ -274,11 +274,20 @@ MoveToLayer(WhichLayer)
      global
      
      TempVarLayer := "Layer" . LastLayer
-     WinGetPos, X, Y, %ApplicationName%
+     WinGetPos, X, Y, , , %ApplicationName% ; amount of parameters matters...
      Gui, %TempVarLayer%:Hide
      LastLayer := WhichLayer
      TempVarLayer := "Layer" . LastLayer
-     Gui, %TempVarLayer%:Show, X%X% Y%Y%, %ApplicationName%
+     ;~ Gui, %TempVarLayer%:Show, x%X% y%Y%, %ApplicationName% ; it works
+     Gui, % TempVarLayer ":Show", % "x"X "y"Y, % ApplicationName ; it works as well, alternative solution
+     ;~ Gui, % TempVarLayer ":Show", "x"X "y"Y, ApplicationName ; it doesn't work...
+     
+     ;~ Gui, %TempVarLayer%:Show, X%X% Y%Y%, %ApplicationName% ; to z jakiœ powodów nie dzia³a
+     ;~ Gui, %TempVarLayer%:Show, x%nx% y%ny%, %ApplicationName%
+     ;~ Gui, TempVarLayer:Show, x%a% y%b%, ApplicationName
+     ;~ Gui, TempVarLayer:Show, x800 y1500, ApplicationName
+     ;~ Gui, %TempVarLayer%:Show, x800 y1500, ApplicationName ; to dzia³a
+     ;~ Gui, %TempVarLayer%:Show, x800 y1500, %ApplicationName% ; to dzia³a
 }
 
 ; - - - - - - - - LABELS - - - - - - - - - - - - - - - 

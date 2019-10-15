@@ -70,7 +70,7 @@ NumpadDivB:
           }
      else if (LastLayer == Word_TemplateStyles2)
           {
-          TemplateStyle("Normalny ms", "Normalny ms")
+          TemplateStyle("Tabela ms", "Tabela ms")
           }    
 return
 
@@ -85,6 +85,10 @@ NumpadMultB:
           {
           MoveToLayer(Word_BBLayer)
           }
+     else if (LastLayer == Word_TemplateStyles2)
+          {
+          TemplateStyle("Podpis tabeli ms", "Podpis tabeli ms")
+          }    
 return
 
 NumpadSub::
@@ -94,6 +98,10 @@ NumpadSubB:
           {
           TemplateStyle("Nag³ówek 1 ms", "Nag³ówek 1 ms")     
           }     
+     else if (LastLayer == Word_TemplateStyles2)
+          {
+          TemplateStyle("Tabela bez krawêdzi ms", "Tabela bez krawêdzi ms")
+          }    
 return
 
 ;~ 2nd row
@@ -108,6 +116,10 @@ NumpadHomeB:
           {
           TemplateStyle("Nag³ówek 2 ms")     
           }
+     else if (LastLayer == Word_TemplateStyles2)
+          {
+          TemplateStyle("Tabela tekst ms", "Tabela tekst ms")
+          }    
 return
 
 NumpadUp::
@@ -262,11 +274,20 @@ MoveToLayer(WhichLayer)
      global
      
      TempVarLayer := "Layer" . LastLayer
-     WinGetPos, X, Y, %ApplicationName%
+     WinGetPos, X, Y, , , %ApplicationName% ; amount of parameters matters...
      Gui, %TempVarLayer%:Hide
      LastLayer := WhichLayer
      TempVarLayer := "Layer" . LastLayer
-     Gui, %TempVarLayer%:Show, X%X% Y%Y%, %ApplicationName%
+     ;~ Gui, %TempVarLayer%:Show, x%X% y%Y%, %ApplicationName% ; it works
+     Gui, % TempVarLayer ":Show", % "x"X "y"Y, % ApplicationName ; it works as well, alternative solution
+     Gui, % TempVarLayer ":Show", "x"X "y"Y, ApplicationName
+     
+     ;~ Gui, %TempVarLayer%:Show, X%X% Y%Y%, %ApplicationName% ; to z jakiœ powodów nie dzia³a
+     ;~ Gui, %TempVarLayer%:Show, x%nx% y%ny%, %ApplicationName%
+     ;~ Gui, TempVarLayer:Show, x%a% y%b%, ApplicationName
+     ;~ Gui, TempVarLayer:Show, x800 y1500, ApplicationName
+     ;~ Gui, %TempVarLayer%:Show, x800 y1500, ApplicationName ; to dzia³a
+     ;~ Gui, %TempVarLayer%:Show, x800 y1500, %ApplicationName% ; to dzia³a
 }
 
 ; - - - - - - - - LABELS - - - - - - - - - - - - - - - 
