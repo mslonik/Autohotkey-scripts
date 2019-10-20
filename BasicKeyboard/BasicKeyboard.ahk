@@ -1,4 +1,4 @@
-/*
+﻿/*
 Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
@@ -131,6 +131,9 @@ return
 :*:>=::{U+2265}
 :*:większyrówny::{U+2265}
 :*:wiekszyrowny::{U+2265}
+:*:<=::{U+2264}
+:*:mniejszyrówny::{U+2264}
+:*:mniejszyrowny::{U+2264}
 
 :*:mminus::{U+2212}
 :*:stopc::{U+00B0}
@@ -165,9 +168,12 @@ return
 :*:anszua::AnSzuA
 :*:unibl::UniBL
 
-:*:ram::RAM
+:o:ram::RAM
 :*:rams::RAMS
 :*:qrams::QRAMS
+::mtbf::MTBF
+::mttr::MTTR
+::pm::PM
 :*:sil::SIL
 :*:pcb::PCB
 :*:dtr::DTR
@@ -185,6 +191,11 @@ return
 :*:rs232::RS232
 :*:rs485::RS485
 :*:bhp::BHP
+:*:svn::SVN
+:*:iris::IRIS
+:*:tsi::TSI
+:*:faq::FAQ
+:*:hdmi::HDMI
 
 :*:tilde::{U+223C}
 :*:ddelta::{U+2206}

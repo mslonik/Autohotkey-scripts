@@ -2,7 +2,6 @@
 ;~ WHERE TO LOOK FOR HELP:
 ;~ Taran VH: 					https://youtu.be/GZEoss4XIgc
 ;~ Taran Github: 				https://github.com/TaranVH/2nd-keyboard/
-;~ AutoHotKey (AHK) tutorial: 	https://autohotkey.com/docs/Tutorial.htm
 ;~ Tool for AHK:				http://fincs.ahk4.net/scite4ahk/
 ;~ COM help:					https://docs.microsoft.com/en-us/office/vba/api/word.application
 ;~ Here is the full list of scan code substitutions that I made:
@@ -437,13 +436,13 @@ NumpadHome::
 return
 
 NumpadUp:: 
-	TemplateStyle("ListaSeq 2")
+	TemplateStyle("ListaSeq 2 ms")
 	MoveCursorToBeginningOfParagraph()
 	BB_Insert("nnewlist", "NUMLOCK is off")
 return	
 
 NumpadPgUp:: 
-	TemplateStyle("ListaSeq 2")
+	TemplateStyle("ListaSeq 2 ms")
 	MoveCursorToBeginningOfParagraph()
 	BB_Insert("nnextlist", "NUMLOCK is off")
 return	
@@ -464,13 +463,13 @@ return
 
 
 NumpadClear:: 
-	TemplateStyle("ListaSeq 3")
+	TemplateStyle("ListaSeq 3 ms")
 	MoveCursorToBeginningOfParagraph()
 	BB_Insert("nnnewlist", "NUMLOCK is off")
 return	
 
 NumpadRight:: 
-	TemplateStyle("ListaSeq 3")
+	TemplateStyle("ListaSeq 3 ms")
 	MoveCursorToBeginningOfParagraph()
 	BB_Insert("nnnextlist", "NUMLOCK is off")
 return	
@@ -480,13 +479,13 @@ ShowHiddenText("W³¹cz/wy³¹cz tekst ukryty")
 return	
 
 NumpadDown:: 
-	TemplateStyle("ListaSeq 4")
+	TemplateStyle("ListaSeq 4 ms")
 	MoveCursorToBeginningOfParagraph()
 	BB_Insert("nnnnewlist", "NUMLOCK is off")
 return	
 
 NumpadPgDn:: 
-	TemplateStyle("ListaSeq 4")
+	TemplateStyle("ListaSeq 4 ms")
 	MoveCursorToBeginningOfParagraph()
 	BB_Insert("nnnnextlist", "NUMLOCK is off")
 return	
@@ -513,13 +512,13 @@ NumpadSub::
 return	
 
 NumpadAdd:: 
-	TemplateStyle("ListaSeq 1")
+	TemplateStyle("ListaSeq 1 ms")
 	MoveCursorToBeginningOfParagraph()
 	BB_Insert("newlist", "NUMLOCK is off")
 return	
 
 NumpadEnter:: 
-	TemplateStyle("ListaSeq 1")
+	TemplateStyle("ListaSeq 1 ms")
 	MoveCursorToBeginningOfParagraph()
 	BB_Insert("nextlist", "NUMLOCK is off")
 return	
@@ -547,7 +546,7 @@ return
 
 #if
 
-;;============= BEGINNING OF SVN & Total Commander pocz¹tek =========================;;
+;;============= BEGINNING OF SVN & Total Commander =========================;;
 
 #if (getKeyState("F24", "P")) and WinActive("ahk_class TTOTAL_CMD") ; <--Everything after this line will only happen on the secondary keyboard that uses F24 AND in Total Commander.
 F24:: return 					; this line is mandatory for proper functionality
@@ -626,11 +625,8 @@ right::
 	Send, {d down}{d up}
 return	
 
-;~ Do zrobienia:
-;~ - ikonki
-
 #if ; this line will end the F24 secondary keyboard assignments.
-;;============= END OF SVN & Total Commander pocz¹tek ===========================;;
+;;============= END OF SVN & Total Commander ===========================;;
 
 
 
@@ -639,6 +635,58 @@ return
 ;;*******************************************************************************
 
 #if  WinActive(, "Microsoft Word") ; <--Everything after this line will only happen in Microsoft Word.
+
++^h:: ; Shift + Ctrl + H - hide text; there is dedicated style to do that
+	
+	;~ try
+		;~ {
+		;~ TemplateStyle("Ukryty ms")
+		;~ }
+		;~ catch e
+		;~ {
+		;~ MsgBox, 48, Zostanie ukryty tekst bez zastosowania dedykowanego stylu z szablonu.
+		
+		;~ }
+		
+	oWord := ComObjActive("Word.Application")
+	;~ trzeba zrobiæ tak: odczytaæ, który (nr) paragrafu jest zaznaczony i wtedy sprawdziæ jego styl: https://word.tips.net/T000824_Determining_a_Paragraphs_Style_in_VBA.html
+	;~ trzeba te¿ sprawdziæ za pomoc¹ edytora makr, czy poni¿sze przyk³ady przypadkiem nie dzia³aj¹ w czystym VBA
+	;~ google: microsoft word vba read a style of selection property
+	
+	CurrentStyle := oWord.ActiveDocument.Paragraphs(2).Style ; to nie dzia³a
+	;~ CurrentStyle := ""
+	;~ CurrentStyle := oWord.ActiveDocument.Selection.Style ; to nie dzia³a
+	;~ CurrentStyle := oWord.Selection.Style ; to nie dzia³a
+	;~ CurrentStyle := oWord.Selection.ParagraphFormat.Style ; to nie dzia³a
+	;~ CurrentStyle := oWord.Selection.Range.Style ; to nie dzia³a
+	;~ CurrentStyle := oWord.Selection.Characters ; to nie dzia³a
+	;~ CurrentStyle := oWord.Selection.Text ; to dzia³a
+	;~ SelectionVar1 := oWord.Selection.Type ; to dzia³a
+	;~ SelectionVar2 := oWord.Selection.Information(2) ; to dzia³a
+	;~ SelectionVar3 := oWord.Selection.Flags ; to dzia³a
+	;~ CurrentStyle := oWord.Selection.Paragraphs.Style ; to nie dzia³a
+	;~ CurrentStyle := oWord.Selection.Information(21) ; to dzia³a, zwraca stan CapsLock
+	;~ CurrentStyle := oWord.Selection.Font.Name ; to dzia³a, zwraca nazwê fontu
+	;~ oWord.Selection.Style ; to nie dzia³a
+	;~ CurrentStyle := oWord.ActiveDocument.ActiveWindow.Selection.Style ; to nie dzia³a
+	;~ CurrentStyle := oWord.Selection.Text.Style ; to nie dzia³a
+	;~ CurrentStyle := "Fiko³ek"
+	;~ MsgBox, % SelectionVar1 . " " . SelectionVar2 . " " . SelectionVar3
+	MsgBox, % CurrentStyle
+	;~ MsgBox, % oWord.Selection.Style ; to nie dzia³a
+	;~ oWord.Selection.Style := "Ukryty ms"
+	;~ MsgBox, %CurrentStyle%
+	oWord := "" ; Clear global COM objects when done with them
+	
+;~ Selection.MoveRight Unit:=wdWord, Count:=5, Extend:=wdExtend
+    ;~ With Selection.Font
+        ;~ .Hidden = True
+    ;~ End With
+
+	;~ oWord.Selection.Style := StyleName
+	;~ oWord := "" ; Clear global COM objects when done with them
+
+return
 
 +^x:: ; Shift + Ctrl + X - strike through the selected text 
 	StrikeThroughText()
