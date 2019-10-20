@@ -196,6 +196,8 @@ return
 :*:tsi::TSI
 :*:faq::FAQ
 :*:hdmi::HDMI
+:*:vba::VBA
+:*:ahk::AHK
 
 :*:tilde::{U+223C}
 :*:ddelta::{U+2206}
