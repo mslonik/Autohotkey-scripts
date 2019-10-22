@@ -1,4 +1,4 @@
-﻿/*
+/*
 Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
@@ -195,7 +195,12 @@ return
 :*:iris::IRIS
 :*:tsi::TSI
 :*:faq::FAQ
+:*:ahk::AHK
+:*:vba::VBA
 :*:hdmi::HDMI
+:*:hbd::HBD
+:*:hwd::HWD
+:*:emc::EMC
 
 :*:tilde::{U+223C}
 :*:ddelta::{U+2206}
