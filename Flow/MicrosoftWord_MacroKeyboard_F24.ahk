@@ -2,7 +2,6 @@
 ;~ WHERE TO LOOK FOR HELP:
 ;~ Taran VH: 					https://youtu.be/GZEoss4XIgc
 ;~ Taran Github: 				https://github.com/TaranVH/2nd-keyboard/
-;~ AutoHotKey (AHK) tutorial: 	https://autohotkey.com/docs/Tutorial.htm
 ;~ Tool for AHK:				http://fincs.ahk4.net/scite4ahk/
 ;~ COM help:					https://docs.microsoft.com/en-us/office/vba/api/word.application
 ;~ Here is the full list of scan code substitutions that I made:
@@ -638,20 +637,14 @@ return
 #if  WinActive(, "Microsoft Word") ; <--Everything after this line will only happen in Microsoft Word.
 
 +^h:: ; Shift + Ctrl + H - hide text; there is dedicated style to do that
-	
-	try
+	if (OurTemplate == OurTemplateEN || OurTemplate == OurTemplatePL)
 		{
-		TemplateStyle("Ukryty ms")
+		TemplateStyle("Ukryty ms")	
 		}
-		catch e
+	else
 		{
-		MsgBox, 48, Zostanie ukryty tekst bez zastosowania dedykowanego stylu z szablonu.
-		
+		HideSelectedText()	
 		}
-;~ Selection.MoveRight Unit:=wdWord, Count:=5, Extend:=wdExtend
-    ;~ With Selection.Font
-        ;~ .Hidden = True
-    ;~ End With
 return
 
 +^x:: ; Shift + Ctrl + X - strike through the selected text 
@@ -725,6 +718,16 @@ return
 ; ----------------------- SEKCJA FUNKCJI -----------------------------------------------------
 ; --------------------------------------------------------------------------------------------
 
+HideSelectedText() ; 2019-10-22
+	{
+	global oWord	
+	oWord := ComObjActive("Word.Application")
+	oWord.Selection.Font.Hidden := WordTrue
+	oWord := "" ; Clear global COM objects when done with them
+	}
+
+; -----------------------------------------------------------------------------------------------------------------------------
+
 ToggleApplyStylesPane() ; 2019-10-03
 	{
 	global oWord
@@ -737,6 +740,7 @@ ToggleApplyStylesPane() ; 2019-10-03
 	oWord := ""
 	}
 
+; -----------------------------------------------------------------------------------------------------------------------------
 
 DeleteLineOfText() ; 2019-10-03
 	{
