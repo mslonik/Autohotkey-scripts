@@ -243,6 +243,9 @@ NumpadDelB:
           }          
 return
 
+AuxiliaryInformation:
+return
+
 Layer0GuiClose:
 Layer1GuiClose:
      ExitApp
