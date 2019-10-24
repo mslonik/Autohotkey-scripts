@@ -1,11 +1,24 @@
 Layer0:
      ;~ Gui,  +AlwaysOnTop +ToolWindow +Border +E0x08000000 +LastFound
+     WindowMarginLeft := 12
+     WindowMarginTop := 9
+     ColumnMargin := 20
+     PictureWidth := 60
+     PictureHeight := 60
+     PictureWidth := 60
+     ButtonWidth := 60
+     ButtonHeight := 60
      
      ;~ 1st row
-     Gui, Layer0:Add, Picture, x12 y9 w60 h60 gNumLockP, %A_ScriptDir%\Layer0\ShowHide_60x60.png  
-     Gui, Layer0:Add, Button, x12 y69 w60 h60 gNumLockB, Num Lock
+     CurrentX := WindowMarginLeft
+     CurrentY := WindowMarginTop
+     Gui, Layer0:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumLockP, %A_ScriptDir%\Layer0\ShowHide_60x60.png  
+     CurrentY += PictureHeight
+     Gui, Layer0:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumLockB, Num Lock
      
-     Gui, Layer0:Add, Picture, x92 y9 w60 h60 gNumpadDivP, %A_ScriptDir%\Layer0\KeePass_60x60.png 
+     CurrentX += ColumnMargin + PictureWidth
+     CurrentY := WindowMarginTop
+     Gui, Layer0:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDivP, %A_ScriptDir%\Layer0\KeePass_60x60.png 
      Gui, Layer0:Add, Button, x92 y69 w60 h60 gNumpadDivB, /
      
      Gui, Layer0:Add, Picture, x172 y9 w60 h60 gNumpadMultP, %A_ScriptDir%\Layer0\MicrosoftWord_60x60.png 
