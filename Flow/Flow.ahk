@@ -7,62 +7,58 @@ SendMode Input  				; Recommended for new scripts due to its superior speed and 
 #SingleInstance, Force
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 
-global ApplicationName := "Flow"
+global ApplicationName := "O T A G L E"
 
 global LastLayer
-global TempVarLayerLayer
 global BaseLayer := 0
 global Word_BaseLayer := 1
 global Word_BBLayer := 2
 global Word_TemplateStyles1 := 3
 global Word_TemplateStyles2 := 4
+global NumLock_Layer := 5
 
-global X
-global Y
+global TouchScreenWidth := 600 ; onfiguration parameter
+global TouchScreenHeight := 1024 ; onfiguration parameter
 
-;~ #Include %A_ScriptDir%\Layer0\Layer0.ahk
-;~ #Include %A_ScriptDir%\Layer1\Layer1.ahk
-;~ #Include %A_ScriptDir%\Layer2\Layer2.ahk
-;~ #Include %A_ScriptDir%\Layer3\Layer3.ahk
-;~ #Include %A_ScriptDir%\Layer4\Layer4.ahk
+global WindowMarginLeft := WindowMarginTop := 10
+global ColumnMargin := RowMargin := 20
+global PictureWidth := PictureHeight := 130
+global ButtonHeight := 30
+global PictureHeightLong := PictureHeight * 2 + RowMargin + ButtonHeight
+global PictureWidthLong := PictureWidth * 2 + ColumnMargin
+global ButtonWidth := PictureWidth
+global ButtonWidthLong := ButtonWidth * 2 + ColumnMargin
 
-LastLayer := 0
-Gui, Layer0:Show, , %ApplicationName%
+global WindowWidth := 4 * PictureWidth + 3 * ColumnMargin + 2 * WindowMarginLeft ; 600 px
+global WindowHeight := 5 * PictureHeight + 5 * ButtonHeight + 4 * RowMargin + 2 * WindowMarginTop ; 900 px
+
+global AuxiliaryTextWidth := WindowWidth - 2 * WindowMarginLeft
+global AuxiliaryTextHeight := TouchScreenHeight - WindowHeight - 2 * WindowMarginTop
+     
+
+
+#Include %A_ScriptDir%\Layer0\Layer0.ahk
+#Include %A_ScriptDir%\Layer1\Layer1.ahk
+#Include %A_ScriptDir%\Layer2\Layer2.ahk
+#Include %A_ScriptDir%\Layer3\Layer3.ahk
+#Include %A_ScriptDir%\Layer4\Layer4.ahk
+#Include %A_ScriptDir%\Layer5\Layer5.ahk
 
 SysGet, HowManyMonitors, MonitorCount
-
-MonitorBoundingCoordinatesArray := [] 
-;~ MonitorBoundingCoordinatesArray := Object() ; := Object("Left", 0, "Top", 0, "Right", 0, "Bottom", 0)
-
-;~ For HowManyMonitors, v in MonitorBoundingCoordinates 
-;~ MsgBox, % "How many monitors are installed: " . HowManyMonitors
-     ;~ SysGet, MonitorBoundingCoordinates, Monitor, v
-     ;~ SysGet, MonitorBoundingCoordinates[Left, Top, Right, Bottom], Monitor, v
-
-;~ global MonitorBoundingCoordinatesBottom := ""
-;~ global MonitorBoundingCoordinatesTop := ""
-;~ global MonitorBoundingCoordinatesLeft := ""
-;~ global MonitorBoundingCoordinatesRight := ""
-
-global MonitorBoundingCoordinates := ""
-
 Loop, %HowManyMonitors%
      {
      SysGet, MonitorBoundingCoordinates, Monitor, %A_Index%
-     ;~ MonitorBoundingCoordinatesArray[%A_Index%] := %A_Index%
-     ;~ MonitorBoundingCoordinatesArray[A_Index, A_Index] := A_Index
-     ;~ MonitorBoundingCoordinatesArray[A_Index, A_Index + 1] := MonitorBoundingCoordinatesLeft
-     ;~ MonitorBoundingCoordinatesArray[A_Index, A_Index + 2] := MonitorBoundingCoordinatesTop
-     ;~ MonitorBoundingCoordinatesArray[A_Index, A_Index + 3] := MonitorBoundingCoordinatesRight
-     ;~ MonitorBoundingCoordinatesArray[A_Index, A_Index + 4] := MonitorBoundingCoordinatesBottom
-     ;~ MonitorBoundingCoordinates .=  "Monitor no.: " . %A_Index% . " Left: " . MonitorBoundingCoordinatesLeft . " Top: " . MonitorBoundingCoordinatesTop . " Right: " MonitorBoundingCoordinatesRight . " Bottom: " MonitorBoundingCoordinatesBottom . "`n"
-     MonitorBoundingCoordinates .=  "Monitor no.: " . A_Index . " Left - Right: " . MonitorBoundingCoordinatesLeft - MonitorBoundingCoordinatesRight . " Top - Bottom: " . MonitorBoundingCoordinatesTop - MonitorBoundingCoordinatesBottom . "`n"
-     ;~ .InsertAt(A_Index, MonitorBoundingCoordinatesTop, MonitorBoundingCoordinatesLeft, MonitorBoundingCoordinatesBottom, MonitorBoundingCoordinatesRight) 
-     ;~ MonitorBoundingCoordinatesArray.InsertAt(A_Index, MonitorBoundingCoordinatesTop, MonitorBoundingCoordinatesLeft, MonitorBoundingCoordinatesBottom, MonitorBoundingCoordinatesRight) 
+     MonitorWidth := Abs(MonitorBoundingCoordinatesLeft - MonitorBoundingCoordinatesRight)
+     MonitorHeight := Abs(MonitorBoundingCoordinatesTop - MonitorBoundingCoordinatesBottom)
+     if (MonitorWidth == TouchScreenWidth && MonitorHeight == TouchScreenHeight)
+          {
+          DefaultX := MonitorBoundingCoordinatesLeft - 4
+          DefaultY := MonitorBoundingCoordinatesTop     
+          }     
      }     
-;~ MsgBox % MonitorBoundingCoordinatesArray[1] " " MonitorBoundingCoordinatesArray[2] " " MonitorBoundingCoordinatesArray[3] " " MonitorBoundingCoordinatesArray[4]
-;~ MsgBox % MonitorBoundingCoordinatesArray[1,1] " " MonitorBoundingCoordinatesArray[1,2] " " MonitorBoundingCoordinatesArray[1,3] " " MonitorBoundingCoordinatesArray[1,4] " " MonitorBoundingCoordinatesArray[1,5] 
-MsgBox % MonitorBoundingCoordinates
+
+LastLayer := BaseLayer
+F_NumLockLayer(GetKeyState("NumLock", "T"))
 
 ; - - - - - - - - - - END OF INITIALIZATION - - - - - - - - - - - - - - -
 
@@ -73,10 +69,37 @@ return
 
 NumLockP:
 NumLockB:
-     SetNumLockState % !GetKeyState("CapsLock", "T") ; Toggles NumLock state to its opposite state
+     SetNumLockState % !GetKeyState("NumLock", "T") ; Toggles NumLock state to its opposite state
      F_NumLockLayer(GetKeyState("NumLock", "T"))
 return
 
+Numpad0P:
+Numpad0B:
+Numpad1P:
+Numpad1B:
+Numpad2P:
+Numpad2B:
+Numpad3P:
+Numpad3B:
+Numpad4P:
+Numpad4B:
+Numpad5P:
+Numpad5B:
+Numpad6P:
+Numpad6B:
+Numpad7P:
+Numpad7B:
+Numpad8P:
+Numpad8B:
+Numpad9P:
+Numpad9B:
+     Send, {Alt Down}{Tab}
+     Send, {Alt Up}
+     WinActivate 
+     ;~ KeyWait, Alt ; to nie dzia³a
+     ;~ Sleep, 100 ; to dzia³a
+     Send, {Numpad0}
+return
 
 ;~ 1st row
 NumpadDiv::
@@ -270,6 +293,10 @@ return
 
 Layer0GuiClose:
 Layer1GuiClose:
+Layer2GuiClose:
+Layer3GuiClose:
+Layer4GuiClose:
+Layer5GuiClose:
      ExitApp
 
 
@@ -278,17 +305,25 @@ Layer1GuiClose:
 
 F_NumLockLayer(V_NumLockState)
 {
-global     
+global LastLayer, ApplicationName, DefaultX, DefaultY    
      
 if (V_NumLockState == 0) ; Show
      {
      TempVarLayer := "Layer" . LastLayer
-     Gui, %TempVarLayer%:Show     
+     Gui, %TempVarLayer%:Hide
+     LastLayer := BaseLayer     
+     TempVarLayer := "Layer" . LastLayer
+     Gui, %TempVarLayer%:Show, , %ApplicationName%
+     WinMove, %ApplicationName%, , DefaultX, DefaultY     
      }
-else ; Hide
+else 
      {
      TempVarLayer := "Layer" . LastLayer
      Gui, %TempVarLayer%:Hide
+     LastLayer := NumLock_Layer     
+     TempVarLayer := "Layer" . LastLayer
+     Gui, %TempVarLayer%:Show, , %ApplicationName%
+     WinMove, %ApplicationName%, , DefaultX, DefaultY
      }
 }
 
@@ -296,7 +331,7 @@ else ; Hide
 
 MoveToLayer(WhichLayer)
 {
-     global
+     global LastLayer, ApplicationName
      
      TempVarLayer := "Layer" . LastLayer
      WinGetPos, X, Y, , , %ApplicationName% ; amount of parameters matters...

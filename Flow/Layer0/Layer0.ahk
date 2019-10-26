@@ -1,21 +1,5 @@
 Layer0:
      ;~ Gui,  +AlwaysOnTop +ToolWindow +Border +E0x08000000 +LastFound
-     WindowMarginLeft := WindowMarginTop := 10
-     ColumnMargin := RowMargin := 20
-     PictureWidth := PictureHeight := 130
-     ButtonHeight := 30
-     PictureHeightLong := PictureHeight * 2 + RowMargin + ButtonHeight
-     PictureWidthLong := PictureWidth * 2 + ColumnMargin
-     ButtonWidth := PictureWidth
-     ButtonWidthLong := ButtonWidth * 2 + ColumnMargin
-     
-     WindowWidth := 4 * PictureWidth + 3 * ColumnMargin + 2 * WindowMarginLeft ; 600 px
-     WindowHeight := 5 * PictureHeight + 5 * ButtonHeight + 4 * RowMargin + 2 * WindowMarginTop ; 900 px
-     ;~ MsgBox, % "WindowWidth: " . WindowWidth . " WindowHeight: " . WindowHeight
-     
-     AuxiliaryTextWidth := WindowWidth - 2 * WindowMarginLeft
-     AuxiliaryTextHeight := 1024 - WindowHeight - 2 * WindowMarginTop
-     
      Gui, Layer0:Margin, %WindowMarginLeft%, %WindowMarginTop%
      Gui, Layer0:Font, cBlack s12 bold, Calibri
 
@@ -23,7 +7,7 @@ Layer0:
      ;~ 1st row
      CurrentX := WindowMarginLeft
      CurrentY := WindowMarginTop
-     Gui, Layer0:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumLockP, %A_ScriptDir%\Layer0\ShowHide_60x60.png  
+     Gui, Layer0:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumLockP, %A_ScriptDir%\Layer0\NumLock_Off.png 
      CurrentY += PictureHeight
      Gui, Layer0:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumLockB, Num Lock
      
@@ -132,7 +116,7 @@ Layer0:
      
      CurrentX := WindowMarginLeft
      CurrentY += RowMargin + ButtonHeight
-     Gui, Layer0:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, Auxiliary information
+     Gui, Layer0:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl
 
      Gui, Layer0:Hide
      Gui, Layer0:Font, ,
