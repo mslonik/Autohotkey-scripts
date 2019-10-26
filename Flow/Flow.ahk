@@ -19,28 +19,50 @@ global Word_TemplateStyles2 := 4
 
 global X
 global Y
-;~ global Width
-;~ global Height
 
-;~ global SM_CXSIZEFRAME := 32 ; Thickness of the sizing border around the perimeter of a window that can be resized, in pixels. The width of the horizontal border
-;~ global SM_CYSIZEFRAME := 33 ; Thickness of the sizing border around the perimeter of a window that can be resized, in pixels. the height of the vertical border.
-;~ global SM_CYCAPTION := 4    ;  Height of a caption area, in pixels.
-;~ global xborder
-;~ global yborder
-;~ global titlebar
-
-#Include %A_ScriptDir%\Layer0\Layer0.ahk
-#Include %A_ScriptDir%\Layer1\Layer1.ahk
-#Include %A_ScriptDir%\Layer2\Layer2.ahk
-#Include %A_ScriptDir%\Layer3\Layer3.ahk
-#Include %A_ScriptDir%\Layer4\Layer4.ahk
+;~ #Include %A_ScriptDir%\Layer0\Layer0.ahk
+;~ #Include %A_ScriptDir%\Layer1\Layer1.ahk
+;~ #Include %A_ScriptDir%\Layer2\Layer2.ahk
+;~ #Include %A_ScriptDir%\Layer3\Layer3.ahk
+;~ #Include %A_ScriptDir%\Layer4\Layer4.ahk
 
 LastLayer := 0
 Gui, Layer0:Show, , %ApplicationName%
 
-;~ SysGet, xborder, %SM_CXSIZEFRAME%
-;~ SysGet, yborder, %SM_CYSIZEFRAME%
-;~ SysGet, titlebar, %SM_CYCAPTION%
+SysGet, HowManyMonitors, MonitorCount
+
+MonitorBoundingCoordinatesArray := [] 
+;~ MonitorBoundingCoordinatesArray := Object() ; := Object("Left", 0, "Top", 0, "Right", 0, "Bottom", 0)
+
+;~ For HowManyMonitors, v in MonitorBoundingCoordinates 
+;~ MsgBox, % "How many monitors are installed: " . HowManyMonitors
+     ;~ SysGet, MonitorBoundingCoordinates, Monitor, v
+     ;~ SysGet, MonitorBoundingCoordinates[Left, Top, Right, Bottom], Monitor, v
+
+;~ global MonitorBoundingCoordinatesBottom := ""
+;~ global MonitorBoundingCoordinatesTop := ""
+;~ global MonitorBoundingCoordinatesLeft := ""
+;~ global MonitorBoundingCoordinatesRight := ""
+
+global MonitorBoundingCoordinates := ""
+
+Loop, %HowManyMonitors%
+     {
+     SysGet, MonitorBoundingCoordinates, Monitor, %A_Index%
+     ;~ MonitorBoundingCoordinatesArray[%A_Index%] := %A_Index%
+     ;~ MonitorBoundingCoordinatesArray[A_Index, A_Index] := A_Index
+     ;~ MonitorBoundingCoordinatesArray[A_Index, A_Index + 1] := MonitorBoundingCoordinatesLeft
+     ;~ MonitorBoundingCoordinatesArray[A_Index, A_Index + 2] := MonitorBoundingCoordinatesTop
+     ;~ MonitorBoundingCoordinatesArray[A_Index, A_Index + 3] := MonitorBoundingCoordinatesRight
+     ;~ MonitorBoundingCoordinatesArray[A_Index, A_Index + 4] := MonitorBoundingCoordinatesBottom
+     ;~ MonitorBoundingCoordinates .=  "Monitor no.: " . %A_Index% . " Left: " . MonitorBoundingCoordinatesLeft . " Top: " . MonitorBoundingCoordinatesTop . " Right: " MonitorBoundingCoordinatesRight . " Bottom: " MonitorBoundingCoordinatesBottom . "`n"
+     MonitorBoundingCoordinates .=  "Monitor no.: " . A_Index . " Left - Right: " . MonitorBoundingCoordinatesLeft - MonitorBoundingCoordinatesRight . " Top - Bottom: " . MonitorBoundingCoordinatesTop - MonitorBoundingCoordinatesBottom . "`n"
+     ;~ .InsertAt(A_Index, MonitorBoundingCoordinatesTop, MonitorBoundingCoordinatesLeft, MonitorBoundingCoordinatesBottom, MonitorBoundingCoordinatesRight) 
+     ;~ MonitorBoundingCoordinatesArray.InsertAt(A_Index, MonitorBoundingCoordinatesTop, MonitorBoundingCoordinatesLeft, MonitorBoundingCoordinatesBottom, MonitorBoundingCoordinatesRight) 
+     }     
+;~ MsgBox % MonitorBoundingCoordinatesArray[1] " " MonitorBoundingCoordinatesArray[2] " " MonitorBoundingCoordinatesArray[3] " " MonitorBoundingCoordinatesArray[4]
+;~ MsgBox % MonitorBoundingCoordinatesArray[1,1] " " MonitorBoundingCoordinatesArray[1,2] " " MonitorBoundingCoordinatesArray[1,3] " " MonitorBoundingCoordinatesArray[1,4] " " MonitorBoundingCoordinatesArray[1,5] 
+MsgBox % MonitorBoundingCoordinates
 
 ; - - - - - - - - - - END OF INITIALIZATION - - - - - - - - - - - - - - -
 
