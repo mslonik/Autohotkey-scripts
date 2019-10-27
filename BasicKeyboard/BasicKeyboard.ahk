@@ -198,11 +198,15 @@ return
 :*:ahk::AHK
 :*:vba::VBA
 :*:hdmi::HDMI
-:*:vba::VBA
-:*:ahk::AHK
 :*:hbd::HBD
 :*:hwd::HWD
 :*:emc::EMC
+:*:phoenix::PHOENIX
+:*:gotcha::GOTCHA
+:*:mds::MDS
+:*:tuv::T{U+00DC}V
+::sud::S{U+00DC}D
+:*:gmbh::GmbH
 
 :*:tilde::{U+223C}
 :*:ddelta::{U+2206}
@@ -214,6 +218,7 @@ return
 :*:rene::Ren{U+00E9}            ; Rene 
 :*:guenther::G{U+00FC}nther     ; Gunther 
 :*:pek::P{U+00E9}k	            ; Pek
+:*:stuhn::St{U+00FC}hn				; Man
 
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
 ; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
