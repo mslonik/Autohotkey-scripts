@@ -21,31 +21,31 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 ; ---------------- SECTION OF KEYBOARD HOTKEYS -----------------------------
 ; These are valid only for "Logitech Internet 350 Keyboard" and alike.
 
-Launch_Media:: ; uruchom Word - nutka, pierwszy klawisz multimedialny z lewej
+Launch_Media:: ; run Microsoft Word application - a note, the very first multimedia key from a left 
 	tooltip, [%A_thishotKey%] Run text processor Microsoft Word  
 	SetTimer, TurnOffTooltip, -5000
 	Run, WINWORD.EXE
 return
 
-Launch_Mail:: ; uruchom Total Commander
+Launch_Mail:: ; run Total Commander application
 	tooltip, [%A_thishotKey%] Run twin-panel file manager Total Commander
 	SetTimer, TurnOffTooltip, -5000
 	Run, c:\totalcmd\TOTALCMD64.EXE 
 return
 
-Browser_Home:: ; uruchom Narzędzie wycinanie
+Browser_Home:: ; run Snipping Tool (Microsoft Windows operating system tool) no longer required as the same action is now taken by PrintScreen
 	tooltip, [%A_thishotKey%] Run system tool Snipping Tool
 	SetTimer, TurnOffTooltip, -5000
 	Run, %A_WinDir%\system32\SnippingTool.exe
 return
 
-Media_Play_Pause:: ; Paint
+Media_Play_Pause:: ; run Paint (Microsoft Windows operating system tool)
 	tooltip, [%A_thishotKey%] Run basic graphic editor Paint
 	SetTimer, TurnOffTooltip, -5000
 	Run, %A_WinDir%\system32\mspaint.exe
 return
 
-+^k:: ; Kee Pass 2
++^k:: ; run Kee Pass application (password manager)
 	Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 
 return
 
@@ -57,7 +57,7 @@ return
 	Shutdown, 1 + 8
 return
 
-+^F2:: ; Suspend: 
++^F1:: ; Suspend: 
 	DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0)
 return
 

@@ -6,8 +6,8 @@ SetTemplate(PLorEN := "", AdditionalText := "")
 	WordFalse := 0 ; ComObj(0xB, 0) ; 0xB = VT_Bool || 0 = false
 	oWord := ""
 	OurTemplate := ""
-	OurTemplateEN := "C:\WordTemplates\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
-	OurTemplatePL := "C:\WordTemplates\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
+	OurTemplateEN := "C:\AHK\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
+	OurTemplatePL := "C:\AHK\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
 
 	tooltip,  %AdditionalText%
 	SetTimer, SwitchOffTooltip, -5000

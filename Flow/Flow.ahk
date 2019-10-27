@@ -1,6 +1,16 @@
 ; Script Function:
 ;	Put a virtual numeric keypad on the screen
 
+;~ To do:
+;~ - CurrentLayer - display value at the bottom of app
+;~ - Turn on / off sound
+;~ - Configuration file
+;~ - Menu
+
+;~ Hardware:
+;~ - voice speaker,
+;~ - small engine like in a phone
+
 #NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn  							; Enable warnings to assist with detecting common errors.
 SendMode Input  				; Recommended for new scripts due to its superior speed and reliability.
@@ -60,12 +70,14 @@ F_NumLockLayer(GetKeyState("NumLock", "T"))
 
 ~NumLock:: ; NumLock key support
      KeyWait, NumLock
+     F_SoundPlay()
      F_NumLockLayer(GetKeyState("NumLock", "T"))
 return
 
 NumLockP:
 NumLockB:
      SetNumLockState % !GetKeyState("NumLock", "T") ; Toggles NumLock state to its opposite state
+     F_SoundPlay()
      F_NumLockLayer(GetKeyState("NumLock", "T"))
 return
 
@@ -76,15 +88,21 @@ NumpadDivP:
 NumpadDivB:
      if (LastLayer == Word_BaseLayer)
           {
+          F_SoundPlay()
           MoveToLayer(Word_TemplateStyles1)
+          ActivateWord()
           }
      else if (LastLayer == Word_TemplateStyles1)
           {
+          F_SoundPlay()
           TemplateStyle("Normalny ms", "Normalny ms")
+          ActivateWord()
           }
      else if (LastLayer == Word_TemplateStyles2)
           {
+          F_SoundPlay()
           TemplateStyle("Tabela ms", "Tabela ms")
+          ActivateWord()
           }    
 return
 
@@ -93,15 +111,26 @@ NumpadMultP:
 NumpadMultB:
      if (LastLayer == BaseLayer)
           {
+          F_SoundPlay()
           MoveToLayer(Word_BaseLayer)
+          RunOrActivateWord()
           }
      else if (LastLayer == Word_BaseLayer)
           {
+          F_SoundPlay()
           MoveToLayer(Word_BBLayer)
           }
+     else if (LastLayer == Word_TemplateStyles1)
+          {
+          F_SoundPlay()
+          TemplateStyle("Normalny pomiedzy ms", "Normalny pomiedzy ms")
+          ActivateWord()     
+          }     
      else if (LastLayer == Word_TemplateStyles2)
           {
+          F_SoundPlay()
           TemplateStyle("Podpis tabeli ms", "Podpis tabeli ms")
+          ActivateWord()
           }    
 return
 
@@ -110,11 +139,15 @@ NumpadSubP:
 NumpadSubB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
+          F_SoundPlay()
           TemplateStyle("Nag³ówek 1 ms", "Nag³ówek 1 ms")     
+          ActivateWord()
           }     
      else if (LastLayer == Word_TemplateStyles2)
           {
+          F_SoundPlay()
           TemplateStyle("Tabela bez krawêdzi ms", "Tabela bez krawêdzi ms")
+          ActivateWord()
           }    
 return
 
@@ -124,15 +157,20 @@ NumpadHomeP:
 NumpadHomeB:
      if (LastLayer == Word_BaseLayer)
           {
-          SetTemplate("PL", "Do³¹cz domyœlny szablon dokumentu PL")     
+          F_SoundPlay()
+          SetTemplate("PL", "Do³¹cz domyœlny szablon dokumentu PL")    
           }     
      else if (LastLayer ==  Word_TemplateStyles1)
           {
+          F_SoundPlay()
           TemplateStyle("Nag³ówek 2 ms")     
+          ActivateWord()
           }
      else if (LastLayer == Word_TemplateStyles2)
           {
+          F_SoundPlay()
           TemplateStyle("Tabela tekst ms", "Tabela tekst ms")
+          ActivateWord()
           }    
 return
 
@@ -141,11 +179,14 @@ NumpadUpP:
 NumpadUpB:
      if (LastLayer == Word_BaseLayer)
           {
+          F_SoundPlay()
           SetTemplate("EN", "Do³¹cz domyœlny szablon dokumentu EN")     
           }
      else if (LastLayer ==  Word_TemplateStyles1)
           {
+          F_SoundPlay()
           TemplateStyle("Nag³ówek 3 ms")     
+          ActivateWord()
           }          
 return
 
@@ -154,7 +195,9 @@ NumpadPgUpP:
 NumpadPgUpB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
+          F_SoundPlay()
           TemplateStyle("Nag³ówek 4 ms")     
+          ActivateWord()
           }          
 return          
 
@@ -163,23 +206,26 @@ NumPadAddP:
 NumPadAddB:
      if (LastLayer == Word_BaseLayer)
           {
+          F_SoundPlay()
           MoveToLayer(BaseLayer)
-          ;~ MsgBox, % LastLayer
           }
      else if (LastLayer == Word_BBLayer)
           {
+          F_SoundPlay()
           MoveToLayer(Word_BaseLayer)
-          ;~ MsgBox, % LastLayer     
+          ActivateWord()
           }
      else if (LastLayer == Word_TemplateStyles1)
           {
+          F_SoundPlay()
           MoveToLayer(Word_BaseLayer)
-          ;~ MsgBox, % LastLayer
+          ActivateWord()
           }     
      else if (LastLayer == Word_TemplateStyles2)
           {
+          F_SoundPlay()
           MoveToLayer(Word_TemplateStyles1)
-          ;~ MsgBox, % LastLayer
+          ActivateWord()
           }     
 return
 
@@ -187,18 +233,34 @@ return
 NumpadLeft::
 NumpadLeftP:
 NumpadLeftB:
-     if (LastLayer ==  Word_TemplateStyles1)
+     if (LastLayer ==  Word_BaseLayer)
           {
-          TemplateStyle("Nag³ówek 5 ms")     
+          F_SoundPlay()
+          StrikeThroughText()
+          ActivateWord()
+          }          
+          else if (LastLayer ==  Word_TemplateStyles1)
+          {
+          F_SoundPlay()
+          TemplateStyle("Nag³ówek 5 ms")
+          ActivateWord()
           }          
 return
 
 NumpadClear::
 NumpadBlankP:
 NumpadBlankB:
-     if (LastLayer ==  Word_TemplateStyles1)
+     if (LastLayer ==  Word_BaseLayer)
           {
-          TemplateStyle("Nag³ówek 6 ms")     
+          F_SoundPlay()
+          HideSelectedText()
+          ActivateWord()
+          }          
+     else if (LastLayer ==  Word_TemplateStyles1)
+          {
+          F_SoundPlay()
+          TemplateStyle("Nag³ówek 6 ms")
+          ActivateWord()
           }          
 return
 
@@ -207,7 +269,9 @@ NumpadRightP:
 NumpadRightB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
+          F_SoundPlay()
           TemplateStyle("Nag³ówek 7 ms")     
+          ActivateWord()
           }          
 return
 
@@ -217,24 +281,30 @@ NumpadEndP:
 NumpadEndB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
+          F_SoundPlay()
           TemplateStyle("Nag³ówek 8 ms")     
+          ActivateWord()
           }          
 return
 
 NumpadDown::
 NumpadDownP:
 NumpadDownB:
+return
 
 NumpadPgdn::
 NumpadPgDnP:
 NumpadPgDnB:
+return
 
 NumpadEnter::
 NumpadEnterP:
 NumpadEnterB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
+          F_SoundPlay()
           MoveToLayer(Word_TemplateStyles2)     
+          ActivateWord()
           }          
 return
 
@@ -244,7 +314,9 @@ NumpadInsP:
 NumpadInsB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
+          F_SoundPlay()
           TemplateStyle("Linia przerwy ms")     
+          ActivateWord()
           }          
 return
 
@@ -253,7 +325,9 @@ NumpadDelP:
 NumpadDelB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
+          F_SoundPlay()
           TemplateStyle("Ukryty ms")     
+          ActivateWord()
           }          
 return
 
@@ -278,23 +352,11 @@ global LastLayer, ApplicationName, DefaultX, DefaultY
      
 if (V_NumLockState == 0) ; Show
      {
-     TempVarLayer := "Layer" . LastLayer
-     Gui, %TempVarLayer%:Hide
-     LastLayer := BaseLayer     
-     TempVarLayer := "Layer" . LastLayer
-     ;~ Gui, %TempVarLayer%:Show, , %ApplicationName%
-     ;~ WinMove, %ApplicationName%, , DefaultX, DefaultY     
-     Gui, % TempVarLayer ":Show", % "x"DefaultX "y"DefaultY, % ApplicationName 
+     MoveToLayer(BaseLayer)     
      }
 else 
      {
-     TempVarLayer := "Layer" . LastLayer
-     Gui, %TempVarLayer%:Hide
-     LastLayer := NumLock_Layer     
-     TempVarLayer := "Layer" . LastLayer
-     ;~ Gui, %TempVarLayer%:Show, , %ApplicationName%
-     ;~ WinMove, %ApplicationName%, , DefaultX, DefaultY
-     Gui, % TempVarLayer ":Show", % "x"DefaultX "y"DefaultY, % ApplicationName 
+     MoveToLayer(NumLock_Layer)     
      }
 }
 
@@ -302,7 +364,6 @@ else
 
 MoveToLayer(WhichLayer)
 {
-     ;~ global LastLayer, ApplicationName
      global LastLayer, ApplicationName, DefaultX, DefaultY
      
      TempVarLayer := "Layer" . LastLayer
@@ -366,6 +427,9 @@ return
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+#Include %A_ScriptDir%\Layer0\RunOrActivateWord.ahk
 #Include %A_ScriptDir%\Layer1\SetTemplate.ahk
+#Include %A_ScriptDir%\Layer1\StrikeThroughText.ahk
+#Include %A_ScriptDir%\Layer1\HideSelectedText.ahk
 #Include %A_ScriptDir%\Layer3\TemplateStyle.ahk
 #Include %A_ScriptDir%\Layer5\Numlock.ahk ; Numpad hostrings

@@ -68,13 +68,13 @@ F_Layer1()
      ;~ 3rd row
      CurrentX := WindowMarginLeft
      CurrentY += RowMargin + PictureHeight + ButtonHeight
-     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadLeftP, %A_ScriptDir%\Layer1\Default_60x60.png
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadLeftP, %A_ScriptDir%\Layer1\Word_TextStrikethrough_130x130.png 
      CurrentY += PictureHeight
      Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadLeftB, Left
 
      CurrentX += PictureWidth + ColumnMargin
      CurrentY -= PictureHeight
-     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadBlankP, %A_ScriptDir%\Layer1\Default_60x60.png
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadBlankP, %A_ScriptDir%\Layer1\Word_TextHidden_130x130.png
      CurrentY += PictureHeight
      Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadBlankB, Blank
 

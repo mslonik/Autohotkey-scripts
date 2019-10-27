@@ -1,8 +1,8 @@
 TemplateStyle(StyleName := "", AdditionalText := "")
 	{
 	oWord := ""
-	OurTemplateEN := "C:\WordTemplates\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
-	OurTemplatePL := "C:\WordTemplates\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
+	OurTemplateEN := "C:\AHK\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
+	OurTemplatePL := "C:\AHK\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
 
 	tooltip,  %AdditionalText%
 	SetTimer, SwitchOffTooltip, -5000
