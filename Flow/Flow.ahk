@@ -1,15 +1,20 @@
-; Script Function:
-;	Put a virtual numeric keypad on the screen
+/*
+Author:      Maciej Słojewski, mslonik, http://mslonik.pl
+Purpose:     Mimic Elgato stream deck solution with some cheap hardware from China.
+Description: Put a virtual numeric keypad on the screen.
+Name:        otagle <- anagram of elgato or just "flow"
+License:     GNU GPL v.3
 
-;~ To do:
-;~ - CurrentLayer - display value at the bottom of app
-;~ - Turn on / off sound
-;~ - Configuration file
-;~ - Menu
+To do - software:
+     - CurrentLayer - display value at the bottom of app
+     - Turn on / off sound
+     - Configuration file
+     - Menu
 
-;~ Hardware:
-;~ - voice speaker,
-;~ - small engine like in a phone
+To do - hardware:
+     - voice speaker,
+     - small engine like in a phone
+*/
 
 #NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn  							; Enable warnings to assist with detecting common errors.
