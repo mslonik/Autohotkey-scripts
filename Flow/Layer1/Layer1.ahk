@@ -17,7 +17,7 @@ F_Layer1()
      CurrentX := WindowMarginLeft
      CurrentY := WindowMarginTop
 
-     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumLockP, %A_ScriptDir%\Layer1\ShowHide_60x60.png  
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumLockP, %A_ScriptDir%\Layer1\NumLock_Off.png
      CurrentY += PictureHeight
      Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumLockB, Num Lock
      
