@@ -41,13 +41,14 @@ global WhichSound := 0 ; to play different sounds upon key presses
 #Include %A_ScriptDir%\Layer1\Layer1.ahk
 #Include %A_ScriptDir%\Layer2\Layer2.ahk
 #Include %A_ScriptDir%\Layer3\Layer3.ahk
-;~ #Include %A_ScriptDir%\Layer4\Layer4.ahk
+#Include %A_ScriptDir%\Layer4\Layer4.ahk
 ;~ #Include %A_ScriptDir%\Layer5\Layer5.ahk
 
 F_Layer0()
 F_Layer1()
 F_Layer2()
 F_Layer3()
+F_Layer4()
 
 F_FindTouchScreen()
 
