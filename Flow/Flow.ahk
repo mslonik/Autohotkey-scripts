@@ -35,27 +35,19 @@ global WindowHeight := 5 * PictureHeight + 5 * ButtonHeight + 4 * RowMargin + 2 
 global AuxiliaryTextWidth := WindowWidth - 2 * WindowMarginLeft
 global AuxiliaryTextHeight := TouchScreenHeight - WindowHeight - 2 * WindowMarginTop
      
-
+global WhichSound := 0 ; to play different sounds upon key presses
 
 #Include %A_ScriptDir%\Layer0\Layer0.ahk
 #Include %A_ScriptDir%\Layer1\Layer1.ahk
-#Include %A_ScriptDir%\Layer2\Layer2.ahk
-#Include %A_ScriptDir%\Layer3\Layer3.ahk
-#Include %A_ScriptDir%\Layer4\Layer4.ahk
-#Include %A_ScriptDir%\Layer5\Layer5.ahk
+;~ #Include %A_ScriptDir%\Layer2\Layer2.ahk
+;~ #Include %A_ScriptDir%\Layer3\Layer3.ahk
+;~ #Include %A_ScriptDir%\Layer4\Layer4.ahk
+;~ #Include %A_ScriptDir%\Layer5\Layer5.ahk
 
-SysGet, HowManyMonitors, MonitorCount
-Loop, %HowManyMonitors%
-     {
-     SysGet, MonitorBoundingCoordinates, Monitor, %A_Index%
-     MonitorWidth := Abs(MonitorBoundingCoordinatesLeft - MonitorBoundingCoordinatesRight)
-     MonitorHeight := Abs(MonitorBoundingCoordinatesTop - MonitorBoundingCoordinatesBottom)
-     if (MonitorWidth == TouchScreenWidth && MonitorHeight == TouchScreenHeight)
-          {
-          DefaultX := MonitorBoundingCoordinatesLeft - 4
-          DefaultY := MonitorBoundingCoordinatesTop     
-          }     
-     }     
+F_Layer0()
+F_Layer1()
+
+F_FindTouchScreen()
 
 LastLayer := BaseLayer
 F_NumLockLayer(GetKeyState("NumLock", "T"))
@@ -73,33 +65,8 @@ NumLockB:
      F_NumLockLayer(GetKeyState("NumLock", "T"))
 return
 
-Numpad0P:
-Numpad0B:
-Numpad1P:
-Numpad1B:
-Numpad2P:
-Numpad2B:
-Numpad3P:
-Numpad3B:
-Numpad4P:
-Numpad4B:
-Numpad5P:
-Numpad5B:
-Numpad6P:
-Numpad6B:
-Numpad7P:
-Numpad7B:
-Numpad8P:
-Numpad8B:
-Numpad9P:
-Numpad9B:
-     Send, {Alt Down}{Tab}
-     Send, {Alt Up}
-     WinActivate 
-     ;~ KeyWait, Alt ; to nie dzia³a
-     ;~ Sleep, 100 ; to dzia³a
-     Send, {Numpad0}
-return
+;~ Numpad 
+#Include %A_ScriptDir%\Layer5\Numlock.ahk
 
 ;~ 1st row
 NumpadDiv::
@@ -340,6 +307,49 @@ MoveToLayer(WhichLayer)
      TempVarLayer := "Layer" . LastLayer
      ;~ Gui, %TempVarLayer%:Show, x%X% y%Y%, %ApplicationName% ; it works
      Gui, % TempVarLayer ":Show", % "x"X "y"Y, % ApplicationName ; it works as well, alternative solution to above line
+}
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+F_SoundPlay()
+{
+     global WhichSound
+     
+     WhichSound++
+     if (WhichSound == 1)
+          {
+          SoundPlay, %A_ScriptDir%\\Sounds\MechanicalKeyboarSingleButtonPresses4_wwwFesliyanStudiosCom.mp3 
+          }
+     else if (WhichSound == 2)
+          {
+          SoundPlay, %A_ScriptDir%\\Sounds\MechanicalKeyboarSingleButtonPresses7_wwwFesliyanStudiosCom.mp3 
+          }
+     else if (WhichSound == 3)
+          {
+          SoundPlay, %A_ScriptDir%\\Sounds\MechanicalKeyboarSingleButtonPresses9_wwwFesliyanStudiosCom.mp3 
+          WhichSound := 0
+          }
+}
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+F_FindTouchScreen()
+
+{
+     global DefaultX, DefaultY
+     
+     SysGet, HowManyMonitors, MonitorCount
+     Loop, %HowManyMonitors%
+          {
+          SysGet, MonitorBoundingCoordinates, Monitor, %A_Index%
+          MonitorWidth := Abs(MonitorBoundingCoordinatesLeft - MonitorBoundingCoordinatesRight)
+          MonitorHeight := Abs(MonitorBoundingCoordinatesTop - MonitorBoundingCoordinatesBottom)
+          if (MonitorWidth == TouchScreenWidth && MonitorHeight == TouchScreenHeight)
+               {
+               DefaultX := MonitorBoundingCoordinatesLeft - 4 ; to do: determine why I need -4
+               DefaultY := MonitorBoundingCoordinatesTop     
+               }     
+          }     
 }
 
 ; - - - - - - - - LABELS - - - - - - - - - - - - - - - 

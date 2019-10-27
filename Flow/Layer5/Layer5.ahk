@@ -13,21 +13,21 @@ Layer5:
      CurrentX += ColumnMargin + PictureWidth
      CurrentY -= PictureHeight
      ;~ CurrentY -= ButtonHeight
-     Gui, Layer5:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDivP, %A_ScriptDir%\Layer5\NumLock_Slash.png 
+     Gui, Layer5:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadNumlockDivP, %A_ScriptDir%\Layer5\NumLock_Slash.png 
      CurrentY += PictureHeight
-     Gui, Layer5:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadDivB, /
+     Gui, Layer5:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadNumlockDivB, /
      
      CurrentX += ColumnMargin + PictureWidth
      CurrentY -= PictureHeight
-     Gui, Layer5:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadMultP, %A_ScriptDir%\Layer5\NumLock_Asterisk.png  
+     Gui, Layer5:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadNumlockMultP, %A_ScriptDir%\Layer5\NumLock_Asterisk.png  
      CurrentY += PictureHeight
-     Gui, Layer5:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadMultB, *
+     Gui, Layer5:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadNumlockMultB, *
      
      CurrentX += ColumnMargin + PictureWidth
      CurrentY -= PictureHeight
-     Gui, Layer5:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadSubP, %A_ScriptDir%\Layer5\NumLock_Minus.png 
+     Gui, Layer5:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadNumlockSubP, %A_ScriptDir%\Layer5\NumLock_Minus.png 
      CurrentY += PictureHeight
-     Gui, Layer5:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadSubB, -
+     Gui, Layer5:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadNumlockSubB, -
      
      ;~ 2nd row
      CurrentX := WindowMarginLeft
@@ -50,9 +50,9 @@ Layer5:
      
      CurrentX += PictureWidth + ColumnMargin
      CurrentY -= PictureHeight
-     Gui, Layer5:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeightLong% gNumPadAddP, %A_ScriptDir%\Layer5\NumLock_Plus.png 
+     Gui, Layer5:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeightLong% gNumpadNumlockAddP, %A_ScriptDir%\Layer5\NumLock_Plus.png 
      CurrentY += PictureHeightLong
-     Gui, Layer5:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumPadAddB, +
+     Gui, Layer5:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadNumlockAddB, +
      CurrentY -= PictureHeightLong 
      
      ;~ 3rd row
@@ -95,9 +95,9 @@ Layer5:
      
      CurrentX += PictureWidth + ColumnMargin
      CurrentY -= PictureHeight
-     Gui, Layer5:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeightLong% gNumpadEnterP, %A_ScriptDir%\Layer5\NumLock_Enter.png 
+     Gui, Layer5:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeightLong% gNumpadNumlockEnterP, %A_ScriptDir%\Layer5\NumLock_Enter.png 
      CurrentY += PictureHeightLong
-     Gui, Layer5:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadEnterB, Enter
+     Gui, Layer5:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadNumlockEnterB, Enter
      CurrentY -= PictureHeightLong
      
      ;~ 5th row
@@ -109,9 +109,9 @@ Layer5:
      
      CurrentX += PictureWidthLong + ColumnMargin
      CurrentY -= PictureHeight
-     Gui, Layer5:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDelP, %A_ScriptDir%\Layer5\NumLock_Dot.png 
+     Gui, Layer5:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadNumlockDelP, %A_ScriptDir%\Layer5\NumLock_Dot.png 
      CurrentY += PictureHeight
-     Gui, Layer5:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadDelB, .
+     Gui, Layer5:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadNumlockDelB, .
      
      CurrentX := WindowMarginLeft
      CurrentY += RowMargin + ButtonHeight

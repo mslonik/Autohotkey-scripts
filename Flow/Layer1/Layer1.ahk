@@ -1,57 +1,132 @@
-Layer1:
-     ;~ Gui,  +AlwaysOnTop +ToolWindow +Border +E0x08000000 +LastFound
+F_Layer1()
+{
+     global WindowMarginLeft, WindowMarginTop 
+     global ColumnMargin, RowMargin 
+     global PictureWidth, PictureHeight 
+     global ButtonHeight 
+     global PictureHeightLong 
+     global PictureWidthLong 
+     global ButtonWidth, PictureWidth
+     global ButtonWidthLong 
+
+;~ Gui,  +AlwaysOnTop +ToolWindow +Border +E0x08000000 +LastFound
+     Gui, Layer1:Margin, %WindowMarginLeft%, %WindowMarginTop%
+     Gui, Layer1:Font, cBlack s12 bold, Calibri
      
      ;~ 1st row
-     Gui, Layer1:Add, Picture, x12 y9 w60 h60 gNumLockP, %A_ScriptDir%\Layer1\ShowHide_60x60.png  
-     Gui, Layer1:Add, Button, x12 y69 w60 h60 gNumLockB, Num Lock
+     CurrentX := WindowMarginLeft
+     CurrentY := WindowMarginTop
+
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumLockP, %A_ScriptDir%\Layer1\ShowHide_60x60.png  
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumLockB, Num Lock
      
-     Gui, Layer1:Add, Picture, x92 y9 w60 h60 gNumpadDivP, %A_ScriptDir%\Layer1\Word_Styles_60x60.png 
-     Gui, Layer1:Add, Button, x92 y69 w60 h60 gNumpadDivB, /
+     CurrentX += ColumnMargin + PictureWidth
+     CurrentY -= PictureHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDivP, %A_ScriptDir%\Layer1\Word_Styles_60x60.png 
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadDivB, /
      
-     Gui, Layer1:Add, Picture, x172 y9 w60 h60 gNumpadMultP, %A_ScriptDir%\Layer1\Word_BuildingBlocks_60x60.png 
-     Gui, Layer1:Add, Button, x172 y69 w60 h60 gNumpadMultB, *
-     
-     Gui, Layer1:Add, Picture, x252 y9 w60 h60 gNumpadSubP, %A_ScriptDir%\Layer1\Word_Macros_60x60.png
-     Gui, Layer1:Add, Button, x252 y69 w60 h60 gNumpadSubB, -
+     CurrentX += ColumnMargin + PictureWidth
+     CurrentY -= PictureHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadMultP, %A_ScriptDir%\Layer1\Word_BuildingBlocks_60x60.png 
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadMultB, *
+
+     CurrentX += ColumnMargin + PictureWidth
+     CurrentY -= PictureHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadSubP, %A_ScriptDir%\Layer1\Word_Macros_60x60.png
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadSubB, -
      
      ;~ 2nd row
-     Gui, Layer1:Add, Picture, x12 y149 w60 h60 gNumpadHomeP, %A_ScriptDir%\Layer1\Word_TemplatePL_60x60.png
-     Gui, Layer1:Add, Button, x12 y209 w60 h60 gNumpadHomeB, Home
+     CurrentX := WindowMarginLeft
+     CurrentY += RowMargin + ButtonHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadHomeP, %A_ScriptDir%\Layer1\Word_TemplatePL_60x60.png
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadHomeB, Home
      
-     Gui, Layer1:Add, Picture, x92 y149 w60 h60 gNumpadUpP, %A_ScriptDir%\Layer1\Word_TemplateEN_60x60.png
-     Gui, Layer1:Add, Button, x92 y209 w60 h60 gNumpadUpB, Up
+     CurrentX += PictureWidth + ColumnMargin
+     CurrentY -= PictureHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadUpP, %A_ScriptDir%\Layer1\Word_TemplateEN_60x60.png
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadUpB, Up
      
-     Gui, Layer1:Add, Picture, x172 y149 w60 h60 gNumpadPgUpP, %A_ScriptDir%\Layer1\Default_60x60.png
-     Gui, Layer1:Add, Button, x172 y209 w60 h60 gNumpadPgUpB, PgUp
+     CurrentX += PictureWidth + ColumnMargin
+     CurrentY -= PictureHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadPgUpP, %A_ScriptDir%\Layer1\Default_60x60.png
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadPgUpB, PgUp
      
-     Gui, Layer1:Add, Picture, x252 y149 w60 h200 gNumPadAddP, %A_ScriptDir%\Layer1\Back_60x200.png
-     Gui, Layer1:Add, Button, x252 y349 w60 h60 gNumPadAddB, +
-     
+     CurrentX += PictureWidth + ColumnMargin
+     CurrentY -= PictureHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeightLong% gNumPadAddP, %A_ScriptDir%\Layer1\Back_60x200.png
+     CurrentY += PictureHeightLong
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumPadAddB, +
+     CurrentY -= PictureHeightLong 
+
      ;~ 3rd row
-     Gui, Layer1:Add, Picture, x12 y289 w60 h60 gNumpadLeftP, %A_ScriptDir%\Layer1\Default_60x60.png
-     Gui, Layer1:Add, Button, x12 y349 w60 h60 gNumpadLeftB, Left
-     Gui, Layer1:Add, Picture, x92 y289 w60 h60 gNumpadBlankP, %A_ScriptDir%\Layer1\Default_60x60.png
-     Gui, Layer1:Add, Button, x92 y349 w60 h60 gNumpadBlankB, Blank
-     Gui, Layer1:Add, Picture, x172 y289 w60 h60 gNumpadRightP, %A_ScriptDir%\Layer1\Default_60x60.png
-     Gui, Layer1:Add, Button, x172 y349 w60 h60 gNumpadRightB, Right
+     CurrentX := WindowMarginLeft
+     CurrentY += RowMargin + PictureHeight + ButtonHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadLeftP, %A_ScriptDir%\Layer1\Default_60x60.png
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadLeftB, Left
+
+     CurrentX += PictureWidth + ColumnMargin
+     CurrentY -= PictureHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadBlankP, %A_ScriptDir%\Layer1\Default_60x60.png
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadBlankB, Blank
+
+     CurrentX += PictureWidth + ColumnMargin
+     CurrentY -= PictureHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadRightP, %A_ScriptDir%\Layer1\Default_60x60.png
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadRightB, Right
      
      ;~ 4th row
-     Gui, Layer1:Add, Picture, x12 y429 w60 h60 gNumpadEndP, %A_ScriptDir%\Layer1\Default_60x60.png
-     Gui, Layer1:Add, Button, x12 y489 w60 h60 gNumpadEndB, End
-     Gui, Layer1:Add, Picture, x92 y429 w60 h60 gNumpadDownP, %A_ScriptDir%\Layer1\Default_60x60.png
-     Gui, Layer1:Add, Button, x92 y489 w60 h60 gNumpadDownB, Down
-     Gui, Layer1:Add, Picture, x172 y429 w60 h60 gNumpadPgDnP, %A_ScriptDir%\Layer1\Default_60x60.png
-     Gui, Layer1:Add, Button, x172 y489 w60 h60 gNumpadPgDnB, PgDn
+     CurrentX := WindowMarginLeft
+     CurrentY += RowMargin + ButtonHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadEndP, %A_ScriptDir%\Layer1\Default_60x60.png
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadEndB, End
      
-     Gui, Layer1:Add, Picture, x252 y429 w60 h200 gNumpadEnterP, %A_ScriptDir%\Layer1\Forward_60x200.png 
-     Gui, Layer1:Add, Button, x252 y629 w60 h60 gNumpadEnterB, Enter
+     CurrentX += PictureWidth + ColumnMargin
+     CurrentY -= PictureHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDownP, %A_ScriptDir%\Layer1\Default_60x60.png
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadDownB, Down
+     
+     CurrentX += PictureWidth + ColumnMargin
+     CurrentY -= PictureHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadPgDnP, %A_ScriptDir%\Layer1\Default_60x60.png
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadPgDnB, PgDn
+     
+     CurrentX += PictureWidth + ColumnMargin
+     CurrentY -= PictureHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeightLong% gNumpadEnterP, %A_ScriptDir%\Layer1\Default_60x60.png
+     CurrentY += PictureHeightLong
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadEnterB, Enter
+     CurrentY -= PictureHeightLong
      
      ;~ 5th row
-     Gui, Layer1:Add, Picture, x12 y569 w140 h60 gNumpadInsP, C:\temp1\Obrazki\JustifyLeftFromSVG_60x60.png
-     Gui, Layer1:Add, Button, x12 y629 w140 h60 gNumpadInsB, Ins
-     Gui, Layer1:Add, Picture, x172 y569 w60 h60 gNumpadDelP, %A_ScriptDir%\Layer1\Default_60x60.png
-     Gui, Layer1:Add, Button, x172 y629 w60 h60 gNumpadDelB, Del
+     CurrentX := WindowMarginLeft
+     CurrentY += RowMargin + PictureHeight + ButtonHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidthLong% h%PictureHeight% gNumpadInsP, %A_ScriptDir%\Layer1\Default_60x60.png
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidthLong% h%ButtonHeight% gNumpadInsB, Ins
      
-     ; Generated using SmartGUI Creator for SciTE
-     ;~ Gui, Layer1:Show, w326 h703, Flow
+     CurrentX += PictureWidthLong + ColumnMargin
+     CurrentY -= PictureHeight
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDelP, %A_ScriptDir%\Layer1\Default_60x60.png
+     CurrentY += PictureHeight
+     Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadDelB, Del
+
+     CurrentX := WindowMarginLeft
+     CurrentY += RowMargin + ButtonHeight
+     Gui, Layer1:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl
+
      Gui, Layer1:Hide
+     Gui, Layer1:Font, ,     
+}

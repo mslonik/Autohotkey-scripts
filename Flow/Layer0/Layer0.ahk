@@ -1,4 +1,15 @@
-Layer0:
+F_Layer0()
+{
+     global WindowMarginLeft, WindowMarginTop 
+     global ColumnMargin, RowMargin 
+     global PictureWidth, PictureHeight 
+     global ButtonHeight 
+     global PictureHeightLong 
+     global PictureWidthLong 
+     global ButtonWidth, PictureWidth
+     global ButtonWidthLong 
+          
+          
      ;~ Gui,  +AlwaysOnTop +ToolWindow +Border +E0x08000000 +LastFound
      Gui, Layer0:Margin, %WindowMarginLeft%, %WindowMarginTop%
      Gui, Layer0:Font, cBlack s12 bold, Calibri
@@ -13,7 +24,6 @@ Layer0:
      
      CurrentX += ColumnMargin + PictureWidth
      CurrentY -= PictureHeight
-     ;~ CurrentY -= ButtonHeight
      Gui, Layer0:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDivP, %A_ScriptDir%\Layer0\KeePass_60x60.png 
      CurrentY += PictureHeight
      Gui, Layer0:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadDivB, /
@@ -120,3 +130,4 @@ Layer0:
 
      Gui, Layer0:Hide
      Gui, Layer0:Font, ,
+}
