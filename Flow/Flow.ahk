@@ -9,13 +9,14 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 
 global ApplicationName := "O T A G L E"
 
-global LastLayer
 global BaseLayer := 0
 global Word_BaseLayer := 1
 global Word_BBLayer := 2
 global Word_TemplateStyles1 := 3
 global Word_TemplateStyles2 := 4
 global NumLock_Layer := 5
+
+global LastLayer := BaseLayer
 
 global TouchScreenWidth := 600 ; onfiguration parameter
 global TouchScreenHeight := 1024 ; onfiguration parameter
@@ -42,17 +43,17 @@ global WhichSound := 0 ; to play different sounds upon key presses
 #Include %A_ScriptDir%\Layer2\Layer2.ahk
 #Include %A_ScriptDir%\Layer3\Layer3.ahk
 #Include %A_ScriptDir%\Layer4\Layer4.ahk
-;~ #Include %A_ScriptDir%\Layer5\Layer5.ahk
+#Include %A_ScriptDir%\Layer5\Layer5.ahk
 
 F_Layer0()
 F_Layer1()
 F_Layer2()
 F_Layer3()
 F_Layer4()
+F_Layer5()
 
 F_FindTouchScreen()
 
-LastLayer := BaseLayer
 F_NumLockLayer(GetKeyState("NumLock", "T"))
 
 ; - - - - - - - - - - END OF INITIALIZATION - - - - - - - - - - - - - - -
@@ -68,8 +69,6 @@ NumLockB:
      F_NumLockLayer(GetKeyState("NumLock", "T"))
 return
 
-;~ Numpad 
-#Include %A_ScriptDir%\Layer5\Numlock.ahk
 
 ;~ 1st row
 NumpadDiv::
@@ -283,8 +282,9 @@ if (V_NumLockState == 0) ; Show
      Gui, %TempVarLayer%:Hide
      LastLayer := BaseLayer     
      TempVarLayer := "Layer" . LastLayer
-     Gui, %TempVarLayer%:Show, , %ApplicationName%
-     WinMove, %ApplicationName%, , DefaultX, DefaultY     
+     ;~ Gui, %TempVarLayer%:Show, , %ApplicationName%
+     ;~ WinMove, %ApplicationName%, , DefaultX, DefaultY     
+     Gui, % TempVarLayer ":Show", % "x"DefaultX "y"DefaultY, % ApplicationName 
      }
 else 
      {
@@ -292,8 +292,9 @@ else
      Gui, %TempVarLayer%:Hide
      LastLayer := NumLock_Layer     
      TempVarLayer := "Layer" . LastLayer
-     Gui, %TempVarLayer%:Show, , %ApplicationName%
-     WinMove, %ApplicationName%, , DefaultX, DefaultY
+     ;~ Gui, %TempVarLayer%:Show, , %ApplicationName%
+     ;~ WinMove, %ApplicationName%, , DefaultX, DefaultY
+     Gui, % TempVarLayer ":Show", % "x"DefaultX "y"DefaultY, % ApplicationName 
      }
 }
 
@@ -301,15 +302,17 @@ else
 
 MoveToLayer(WhichLayer)
 {
-     global LastLayer, ApplicationName
+     ;~ global LastLayer, ApplicationName
+     global LastLayer, ApplicationName, DefaultX, DefaultY
      
      TempVarLayer := "Layer" . LastLayer
-     WinGetPos, X, Y, , , %ApplicationName% ; amount of parameters matters...
+     ;~ WinGetPos, X, Y, , , %ApplicationName% ; amount of parameters matters...
      Gui, %TempVarLayer%:Hide
      LastLayer := WhichLayer
      TempVarLayer := "Layer" . LastLayer
      ;~ Gui, %TempVarLayer%:Show, x%X% y%Y%, %ApplicationName% ; it works
-     Gui, % TempVarLayer ":Show", % "x"X "y"Y, % ApplicationName ; it works as well, alternative solution to above line
+     ;~ Gui, % TempVarLayer ":Show", % "x"X "y"Y, % ApplicationName ; it works as well, alternative solution to above line
+     Gui, % TempVarLayer ":Show", % "x"DefaultX "y"DefaultY, % ApplicationName 
 }
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -365,3 +368,4 @@ return
 
 #Include %A_ScriptDir%\Layer1\SetTemplate.ahk
 #Include %A_ScriptDir%\Layer3\TemplateStyle.ahk
+#Include %A_ScriptDir%\Layer5\Numlock.ahk ; Numpad hostrings

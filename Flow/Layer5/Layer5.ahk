@@ -1,4 +1,14 @@
-Layer5:
+F_Layer5()
+{
+     global WindowMarginLeft, WindowMarginTop 
+     global ColumnMargin, RowMargin 
+     global PictureWidth, PictureHeight 
+     global ButtonHeight 
+     global PictureHeightLong 
+     global PictureWidthLong 
+     global ButtonWidth, PictureWidth
+     global ButtonWidthLong 
+          
      Gui, Layer5:Margin, %WindowMarginLeft%, %WindowMarginTop%
      Gui, Layer5:Font, cBlack s12 bold, Calibri
 
@@ -119,3 +129,4 @@ Layer5:
 
      Gui, Layer5:Hide
      Gui, Layer5:Font, ,
+}
