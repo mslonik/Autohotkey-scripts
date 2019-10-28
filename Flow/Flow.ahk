@@ -420,7 +420,13 @@ F_FindTouchScreen()
                {
                DefaultX := MonitorBoundingCoordinatesLeft - 4 ; to do: determine why I need -4
                DefaultY := MonitorBoundingCoordinatesTop     
-               }     
+               }
+          else
+               {
+               DefaultX := 0
+               DefaultY := 0
+               }
+               
           }     
 }
 
