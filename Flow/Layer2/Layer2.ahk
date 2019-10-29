@@ -23,7 +23,7 @@ F_Layer2()
 
      CurrentX += ColumnMargin + PictureWidth
      CurrentY -= PictureHeight
-     Gui, Layer2:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDivP, %A_ScriptDir%\Layer2\BB01_60x60.png  
+     Gui, Layer2:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDivP, %A_ScriptDir%\Layer2\Word_BB_Mona_130x130.png  
      CurrentY += PictureHeight
      Gui, Layer2:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadDivB, /
      
@@ -125,7 +125,11 @@ F_Layer2()
      
      CurrentX := WindowMarginLeft
      CurrentY += RowMargin + ButtonHeight
-     Gui, Layer2:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl
+     Gui, Layer2:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, 
+     (
+     Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl`n
+     Layer name: Layer2 (Word_BBLayer)`t Subject: example Building Blocks (BB)
+     )
 
      Gui, Layer2:Hide
      Gui, Layer2:Font, ,

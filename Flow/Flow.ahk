@@ -97,17 +97,23 @@ NumpadDivB:
           MoveToLayer(Word_TemplateStyles1)
           ActivateWord()
           }
+     else if (LastLayer == Word_BBLayer)
+          {
+          F_SoundPlay()
+          ActivateWord()          
+          BB_Insert("Mona")
+          }
      else if (LastLayer == Word_TemplateStyles1)
           {
           F_SoundPlay()
-          TemplateStyle("Normalny ms", "Normalny ms")
-          ActivateWord()
+          ActivateWord()          
+          TemplateStyle("Normal", "Normal")
           }
      else if (LastLayer == Word_TemplateStyles2)
           {
           F_SoundPlay()
-          TemplateStyle("Tabela ms", "Tabela ms")
           ActivateWord()
+          TemplateStyle("Table modified", "Table modified")
           }    
 return
 
@@ -123,19 +129,20 @@ NumpadMultB:
      else if (LastLayer == Word_BaseLayer)
           {
           F_SoundPlay()
+          ActivateWord()
           MoveToLayer(Word_BBLayer)
           }
      else if (LastLayer == Word_TemplateStyles1)
           {
           F_SoundPlay()
-          TemplateStyle("Normalny pomiedzy ms", "Normalny pomiedzy ms")
-          ActivateWord()     
+          ActivateWord()
+          TemplateStyle("Normal between", "Normal between")
           }     
      else if (LastLayer == Word_TemplateStyles2)
           {
           F_SoundPlay()
-          TemplateStyle("Podpis tabeli ms", "Podpis tabeli ms")
-          ActivateWord()
+          ActivateWord()     
+          TemplateStyle("Table legend", "Table legend")
           }    
 return
 
@@ -145,14 +152,14 @@ NumpadSubB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
           F_SoundPlay()
-          TemplateStyle("Nag³ówek 1 ms", "Nag³ówek 1 ms")     
           ActivateWord()
+          TemplateStyle("Heading 1", "Heading 1")     
           }     
      else if (LastLayer == Word_TemplateStyles2)
           {
           F_SoundPlay()
-          TemplateStyle("Tabela bez krawêdzi ms", "Tabela bez krawêdzi ms")
           ActivateWord()
+          TemplateStyle("Table modfied without grid", "Table modfied without grid")
           }    
 return
 
@@ -163,35 +170,37 @@ NumpadHomeB:
      if (LastLayer == Word_BaseLayer)
           {
           F_SoundPlay()
-          SetTemplate("PL", "Do³¹cz domyœlny szablon dokumentu PL")    
+          ActivateWord()          
+          SetTemplate("EN", "Attach the Example Template to this document")
           }     
      else if (LastLayer ==  Word_TemplateStyles1)
           {
           F_SoundPlay()
-          TemplateStyle("Nag³ówek 2 ms")     
           ActivateWord()
+          TemplateStyle("Heading 2")     
           }
      else if (LastLayer == Word_TemplateStyles2)
           {
           F_SoundPlay()
-          TemplateStyle("Tabela tekst ms", "Tabela tekst ms")
           ActivateWord()
+          TemplateStyle("Text in table", "Text in table")
           }    
 return
 
 NumpadUp::
 NumpadUpP:
 NumpadUpB:
-     if (LastLayer == Word_BaseLayer)
+     ;~ if (LastLayer == Word_BaseLayer)
+          ;~ {
+          ;~ F_SoundPlay()
+          ;~ SetTemplate("EN", "Do³¹cz domyœlny szablon dokumentu EN")     
+          ;~ }
+     ;~ else if (LastLayer ==  Word_TemplateStyles1)
+     if (LastLayer ==  Word_TemplateStyles1)
           {
           F_SoundPlay()
-          SetTemplate("EN", "Do³¹cz domyœlny szablon dokumentu EN")     
-          }
-     else if (LastLayer ==  Word_TemplateStyles1)
-          {
-          F_SoundPlay()
-          TemplateStyle("Nag³ówek 3 ms")     
           ActivateWord()
+          TemplateStyle("Heading 3")     
           }          
 return
 
@@ -201,8 +210,8 @@ NumpadPgUpB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
           F_SoundPlay()
-          TemplateStyle("Nag³ówek 4 ms")     
           ActivateWord()
+          TemplateStyle("Heading 4")     
           }          
 return          
 
@@ -247,8 +256,8 @@ NumpadLeftB:
           else if (LastLayer ==  Word_TemplateStyles1)
           {
           F_SoundPlay()
-          TemplateStyle("Nag³ówek 5 ms")
           ActivateWord()
+          TemplateStyle("Heading 5")
           }          
 return
 
@@ -264,8 +273,8 @@ NumpadBlankB:
      else if (LastLayer ==  Word_TemplateStyles1)
           {
           F_SoundPlay()
-          TemplateStyle("Nag³ówek 6 ms")
           ActivateWord()
+          TemplateStyle("Heading 6")
           }          
 return
 
@@ -275,8 +284,8 @@ NumpadRightB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
           F_SoundPlay()
-          TemplateStyle("Nag³ówek 7 ms")     
           ActivateWord()
+          TemplateStyle("Heading 7")     
           }          
 return
 
@@ -287,8 +296,8 @@ NumpadEndB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
           F_SoundPlay()
-          TemplateStyle("Nag³ówek 8 ms")     
           ActivateWord()
+          TemplateStyle("Heading 8")     
           }          
 return
 
@@ -320,8 +329,8 @@ NumpadInsB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
           F_SoundPlay()
-          TemplateStyle("Linia przerwy ms")     
           ActivateWord()
+          TemplateStyle("Small line")     
           }          
 return
 
@@ -331,8 +340,8 @@ NumpadDelB:
      if (LastLayer ==  Word_TemplateStyles1)
           {
           F_SoundPlay()
-          TemplateStyle("Ukryty ms")     
           ActivateWord()
+          TemplateStyle("Hidden special")     
           }          
 return
 
@@ -442,5 +451,6 @@ return
 #Include %A_ScriptDir%\Layer1\SetTemplate.ahk
 #Include %A_ScriptDir%\Layer1\StrikeThroughText.ahk
 #Include %A_ScriptDir%\Layer1\HideSelectedText.ahk
+#Include %A_ScriptDir%\Layer2\BB_Insert.ahk 
 #Include %A_ScriptDir%\Layer3\TemplateStyle.ahk
 #Include %A_ScriptDir%\Layer5\Numlock.ahk ; Numpad hostrings

@@ -126,7 +126,11 @@ F_Layer0()
      
      CurrentX := WindowMarginLeft
      CurrentY += RowMargin + ButtonHeight
-     Gui, Layer0:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl
+     Gui, Layer0:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, 
+     (
+     Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl`n
+     Layer name: Layer0 (BaseLayer)`t Subject: start of different applications.
+     )
 
      Gui, Layer0:Hide
      Gui, Layer0:Font, ,

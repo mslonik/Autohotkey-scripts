@@ -125,7 +125,11 @@ F_Layer5()
      
      CurrentX := WindowMarginLeft
      CurrentY += RowMargin + ButtonHeight
-     Gui, Layer5:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl
+     Gui, Layer5:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation,
+     (
+     Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl`n
+     Layer name: Layer5 (NumLock_Layer)`t Subject: Numeric key pad.
+     )
 
      Gui, Layer5:Hide
      Gui, Layer5:Font, ,

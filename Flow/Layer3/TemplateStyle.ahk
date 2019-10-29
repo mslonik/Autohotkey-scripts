@@ -1,22 +1,23 @@
 TemplateStyle(StyleName := "", AdditionalText := "")
 	{
 	oWord := ""
-	OurTemplateEN := "C:\AHK\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
-	OurTemplatePL := "C:\AHK\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
+	OurTemplateEN := A_ScriptDir . "\ExampleWordTeplate\ExampleWordTeplate.dotm"
+	;~ OurTemplatePL := "C:\AHK\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
 
 	tooltip,  %AdditionalText%
 	SetTimer, SwitchOffTooltip, -5000
 
 	oWord := ComObjActive("Word.Application")
-	;~ SoundBeep, 750, 500 ; to fajnie dzia³a
-	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
-		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
+	;~ SoundBeep, 750, 500 
+	if  ( oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
+	;~ if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
+		;~ and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
 		{
 		;~ MsgBox, % oWord.ActiveDocument.AttachedTemplate.FullName
-		MsgBox, 16, Próba wywo³ania stylu z szablonu, 
+		MsgBox, 16, You try to run style from from within a template set, 
 		( Join
-		 Próbujesz wywo³aæ styl przypisany do szablonu, ale szablon nie zosta³ jeszcze do³¹czony do tego pliku. 
- Najpierw dolacz szablon, a nastêpnie wywo³aj ponownie tê funkcjê.
+		 You try to apply style from a template, but this template is not yet attached to current document. 
+At first please attach a template, then press this button again.		 
 		)
 		oWord := "" ; Clear global COM objects when done with them
 		return

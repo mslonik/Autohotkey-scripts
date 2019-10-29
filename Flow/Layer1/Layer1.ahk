@@ -42,13 +42,13 @@ F_Layer1()
      ;~ 2nd row
      CurrentX := WindowMarginLeft
      CurrentY += RowMargin + ButtonHeight
-     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadHomeP, %A_ScriptDir%\Layer1\Word_TemplatePL_60x60.png
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadHomeP, %A_ScriptDir%\Layer1\Word_AttachTemplateEN_130x130.png
      CurrentY += PictureHeight
      Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadHomeB, Home
      
      CurrentX += PictureWidth + ColumnMargin
      CurrentY -= PictureHeight
-     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadUpP, %A_ScriptDir%\Layer1\Word_TemplateEN_60x60.png
+     Gui, Layer1:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadUpP, %A_ScriptDir%\Layer1\Default_60x60.png
      CurrentY += PictureHeight
      Gui, Layer1:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadUpB, Up
      
@@ -125,7 +125,11 @@ F_Layer1()
 
      CurrentX := WindowMarginLeft
      CurrentY += RowMargin + ButtonHeight
-     Gui, Layer1:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl
+     Gui, Layer1:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, 
+     (
+     Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl`n
+     Layer name: Layer1 (Word_BaseLayer)`t Subject: main component of T E M P L A T E
+     )
 
      Gui, Layer1:Hide
      Gui, Layer1:Font, ,     
