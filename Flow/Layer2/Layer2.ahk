@@ -23,19 +23,19 @@ F_Layer2()
 
      CurrentX += ColumnMargin + PictureWidth
      CurrentY -= PictureHeight
-     Gui, Layer2:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDivP, %A_ScriptDir%\Layer2\Word_BB_Mona_130x130.png  
+     Gui, Layer2:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDivP, %A_ScriptDir%\Layer2\Word_BB_Mona_130x130.png   
      CurrentY += PictureHeight
      Gui, Layer2:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadDivB, /
      
      CurrentX += ColumnMargin + PictureWidth
      CurrentY -= PictureHeight
-     Gui, Layer2:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadMultP, %A_ScriptDir%\Layer2\BB02_60x60.png  
+     Gui, Layer2:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadMultP, %A_ScriptDir%\Layer2\Word_BB_Table1_130x130.png 
      CurrentY += PictureHeight
      Gui, Layer2:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadMultB, *
      
      CurrentX += ColumnMargin + PictureWidth
      CurrentY -= PictureHeight
-     Gui, Layer2:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadSubP, %A_ScriptDir%\Layer2\BB03_60x60.png 
+     Gui, Layer2:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadSubP, %A_ScriptDir%\Layer2\Word_BB_HeaderDissertation_130x130.png 
      CurrentY += PictureHeight
      Gui, Layer2:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadSubB, -
      

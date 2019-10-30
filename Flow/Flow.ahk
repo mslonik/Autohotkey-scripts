@@ -24,15 +24,6 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 
 global ApplicationName := "O T A G L E"
 
-global BaseLayer := 0
-global Word_BaseLayer := 1
-global Word_BBLayer := 2
-global Word_TemplateStyles1 := 3
-global Word_TemplateStyles2 := 4
-global NumLock_Layer := 5
-
-global LastLayer := BaseLayer
-
 global TouchScreenWidth := 600 ; onfiguration parameter
 global TouchScreenHeight := 1024 ; onfiguration parameter
 
@@ -53,12 +44,23 @@ global AuxiliaryTextHeight := TouchScreenHeight - WindowHeight - 2 * WindowMargi
      
 global WhichSound := 0 ; to play different sounds upon key presses
 
+global BaseLayer := 0
+global Word_BaseLayer := 1
+global Word_BBLayer := 2
+global Word_TemplateStyles1 := 3
+global Word_TemplateStyles2 := 4
+global NumLock_Layer := 5
+global Macro_Layer := 6
+
+global LastLayer := BaseLayer
+
 #Include %A_ScriptDir%\Layer0\Layer0.ahk
 #Include %A_ScriptDir%\Layer1\Layer1.ahk
 #Include %A_ScriptDir%\Layer2\Layer2.ahk
 #Include %A_ScriptDir%\Layer3\Layer3.ahk
 #Include %A_ScriptDir%\Layer4\Layer4.ahk
 #Include %A_ScriptDir%\Layer5\Layer5.ahk
+#Include %A_ScriptDir%\Layer6\Layer6.ahk
 
 F_Layer0()
 F_Layer1()
@@ -66,10 +68,12 @@ F_Layer2()
 F_Layer3()
 F_Layer4()
 F_Layer5()
+F_Layer6()
 
 F_FindTouchScreen()
 
 F_NumLockLayer(GetKeyState("NumLock", "T"))
+
 
 ; - - - - - - - - - - END OF INITIALIZATION - - - - - - - - - - - - - - -
 
@@ -115,6 +119,12 @@ NumpadDivB:
           ActivateWord()
           TemplateStyle("Table modified", "Table modified")
           }    
+     else if (LastLayer == Macro_Layer)
+          {
+          F_SoundPlay()
+          ActivateWord()
+          VBA_RunMacro("RedTypeface")
+          }    
 return
 
 NumpadMult::
@@ -132,6 +142,12 @@ NumpadMultB:
           ActivateWord()
           MoveToLayer(Word_BBLayer)
           }
+     else if (LastLayer == Word_BBLayer)
+          {
+          F_SoundPlay()
+          ActivateWord()
+          BB_Insert("Table Example")
+          }     
      else if (LastLayer == Word_TemplateStyles1)
           {
           F_SoundPlay()
@@ -144,12 +160,30 @@ NumpadMultB:
           ActivateWord()     
           TemplateStyle("Table legend", "Table legend")
           }    
+     else if (LastLayer == Macro_Layer)
+          {
+          F_SoundPlay()
+          ActivateWord()     
+          VBA_RunMacro("TextBorder")
+          }    
 return
 
 NumpadSub::
 NumpadSubP:
 NumpadSubB:
-     if (LastLayer ==  Word_TemplateStyles1)
+     if (LastLayer == Word_BaseLayer)
+          {
+          F_SoundPlay()
+          MoveToLayer(Macro_Layer)
+          ActivateWord()
+          }
+     else if (LastLayer == Word_BBLayer)
+          {
+          F_SoundPlay()
+          ActivateWord()
+          BB_Insert("Dissertation")
+          }     
+     else if (LastLayer ==  Word_TemplateStyles1)
           {
           F_SoundPlay()
           ActivateWord()
@@ -160,6 +194,12 @@ NumpadSubB:
           F_SoundPlay()
           ActivateWord()
           TemplateStyle("Table modfied without grid", "Table modfied without grid")
+          }    
+     else if (LastLayer == Macro_Layer)
+          {
+          F_SoundPlay()
+          ActivateWord()
+          VBA_RunMacro("TableAutofitToTextBorder")
           }    
 return
 
@@ -190,12 +230,6 @@ return
 NumpadUp::
 NumpadUpP:
 NumpadUpB:
-     ;~ if (LastLayer == Word_BaseLayer)
-          ;~ {
-          ;~ F_SoundPlay()
-          ;~ SetTemplate("EN", "Do³¹cz domyœlny szablon dokumentu EN")     
-          ;~ }
-     ;~ else if (LastLayer ==  Word_TemplateStyles1)
      if (LastLayer ==  Word_TemplateStyles1)
           {
           F_SoundPlay()
@@ -239,6 +273,12 @@ NumPadAddB:
           {
           F_SoundPlay()
           MoveToLayer(Word_TemplateStyles1)
+          ActivateWord()
+          }     
+     else if (LastLayer == Macro_Layer)
+          {
+          F_SoundPlay()
+          MoveToLayer(Word_BaseLayer)
           ActivateWord()
           }     
 return
@@ -454,3 +494,4 @@ return
 #Include %A_ScriptDir%\Layer2\BB_Insert.ahk 
 #Include %A_ScriptDir%\Layer3\TemplateStyle.ahk
 #Include %A_ScriptDir%\Layer5\Numlock.ahk ; Numpad hostrings
+#Include %A_ScriptDir%\Layer6\VBA_RunMacro.ahk 
