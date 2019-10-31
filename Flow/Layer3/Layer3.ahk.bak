@@ -129,7 +129,7 @@ F_Layer3()
      Gui, Layer3:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation,
      (
      Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl`n
-     Layer name: Layer3 (Word_TemplateStyles1)`t Subject of layer: the 1st screen of Styles.
+     Layer name: Layer3 (Word_TemplateStyles1)`t Subject: 1st screen of Styles.
      )
 
      Gui, Layer3:Hide

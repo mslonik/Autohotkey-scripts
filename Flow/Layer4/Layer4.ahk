@@ -129,7 +129,7 @@ F_Layer4()
      Gui, Layer4:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation,
      (
      Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl`n
-     Layer name: Layer4 (Word_TemplateStyles2)`t Subject: 2nd screen of Styles.
+Layer name: Layer4 (Word_TemplateStyles2)`t Subject: 2nd screen of Styles.
      )
 
      Gui, Layer4:Hide

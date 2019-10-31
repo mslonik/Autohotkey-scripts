@@ -128,7 +128,7 @@ F_Layer2()
      Gui, Layer2:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, 
      (
      Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl`n
-     Layer name: Layer2 (Word_BBLayer)`t Subject: example Building Blocks (BB)
+Layer name: Layer2 (Word_BBLayer)`t Subject: example Building Blocks (BB)
      )
 
      Gui, Layer2:Hide

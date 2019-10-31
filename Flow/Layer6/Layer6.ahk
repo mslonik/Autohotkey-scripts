@@ -128,7 +128,7 @@ F_Layer6()
      Gui, Layer6:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, 
      (
      Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl`n
-     Layer name: Layer6 (Macro_Layer)`t Subject: example macros
+Layer name: Layer6 (Macro_Layer)`t Subject: example macros
      )
 
      Gui, Layer6:Hide

@@ -128,7 +128,7 @@ F_Layer1()
      Gui, Layer1:Add, Text, x%CurrentX% y%CurrentY% w%AuxiliaryTextWidth% h%AuxiliaryTextHeight% cGreen gAuxiliaryInformation, 
      (
      Auxiliary information`nMore information about %ApplicationName% available there: http://mslonik.pl`n
-     Layer name: Layer1 (Word_BaseLayer)`t Subject of layer: main component of T E M P L A T E
+     Layer name: Layer1 (Word_BaseLayer)`t Subject: main component of T E M P L A T E
      )
 
      Gui, Layer1:Hide

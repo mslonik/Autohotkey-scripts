@@ -29,13 +29,3 @@ At first please attach a template, then press this button again.
 		return
 		}
 	}
-
-/*
-Sub Macro1()
-'
-' Macro1 Macro
-'
-'
-    Application.Run MacroName:="czerwonaCzcionka"
-End Sub
-*/

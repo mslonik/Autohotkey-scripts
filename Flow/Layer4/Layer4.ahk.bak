@@ -24,26 +24,26 @@ F_Layer4()
      
      CurrentX += ColumnMargin + PictureWidth
      CurrentY -= PictureHeight
-     Gui, Layer4:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDivP, %A_ScriptDir%\Layer4\Word_Tabela_60x60.png
+     Gui, Layer4:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadDivP, %A_ScriptDir%\Layer4\Word_TableModified_130x130.png 
      CurrentY += PictureHeight
      Gui, Layer4:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadDivB, /
      
      CurrentX += ColumnMargin + PictureWidth
      CurrentY -= PictureHeight
-     Gui, Layer4:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadMultP, %A_ScriptDir%\Layer4\Word_PodpisTabeli_60x60.png   
+     Gui, Layer4:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadMultP, %A_ScriptDir%\Layer4\Word_TableLegend_130x130.png 
      CurrentY += PictureHeight
      Gui, Layer4:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadMultB, *
      
      CurrentX += ColumnMargin + PictureWidth
      CurrentY -= PictureHeight
-     Gui, Layer4:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadSubP, %A_ScriptDir%\Layer4\Word_TabelaBezKrawedzi_60x60.png
+     Gui, Layer4:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadSubP, %A_ScriptDir%\Layer4\Word_TableModifiedWithoutGrid_130x130.png 
      CurrentY += PictureHeight
      Gui, Layer4:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadSubB, -
      
      ;~ 2nd row
      CurrentX := WindowMarginLeft
      CurrentY += RowMargin + ButtonHeight
-     Gui, Layer4:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadHomeP, %A_ScriptDir%\Layer4\Word_TabelaTekst_60x60.png
+     Gui, Layer4:Add, Picture, x%CurrentX% y%CurrentY% w%PictureWidth% h%PictureHeight% gNumpadHomeP, %A_ScriptDir%\Layer4\Word_TextInTable_130x130.png 
      CurrentY += PictureHeight
      Gui, Layer4:Add, Button, x%CurrentX% y%CurrentY% w%ButtonWidth% h%ButtonHeight% gNumpadHomeB, Home
      

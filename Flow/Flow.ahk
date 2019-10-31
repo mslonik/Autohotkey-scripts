@@ -95,7 +95,12 @@ return
 NumpadDiv::
 NumpadDivP:
 NumpadDivB:
-     if (LastLayer == Word_BaseLayer)
+     if (LastLayer == BaseLayer)
+          {
+          F_SoundPlay()
+          RunOrActivateKeePass()
+          }
+     else if (LastLayer == Word_BaseLayer)
           {
           F_SoundPlay()
           MoveToLayer(Word_TemplateStyles1)
@@ -171,7 +176,12 @@ return
 NumpadSub::
 NumpadSubP:
 NumpadSubB:
-     if (LastLayer == Word_BaseLayer)
+     if (LastLayer == BaseLayer)
+          {
+          F_SoundPlay()
+          RunOrActivateTotalCommander()
+          }
+     else if (LastLayer == Word_BaseLayer)
           {
           F_SoundPlay()
           MoveToLayer(Macro_Layer)
@@ -386,6 +396,7 @@ NumpadDelB:
 return
 
 AuxiliaryInformation:
+     Run, http://mslonik.pl
 return
 
 Layer0GuiClose:
@@ -479,7 +490,7 @@ F_FindTouchScreen()
           }     
 }
 
-; - - - - - - - - LABELS - - - - - - - - - - - - - - - 
+;- - - - - - - - - - - - - - - - - - - LABELS - - - - - - - - - - - - - - - 
 
 SwitchOffTooltip:
 	ToolTip ,
@@ -488,6 +499,8 @@ return
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 #Include %A_ScriptDir%\Layer0\RunOrActivateWord.ahk
+#Include %A_ScriptDir%\Layer0\RunOrActivateKeePass.ahk
+#Include %A_ScriptDir%\Layer0\RunOrActivateTotalCommander.ahk
 #Include %A_ScriptDir%\Layer1\SetTemplate.ahk
 #Include %A_ScriptDir%\Layer1\StrikeThroughText.ahk
 #Include %A_ScriptDir%\Layer1\HideSelectedText.ahk
