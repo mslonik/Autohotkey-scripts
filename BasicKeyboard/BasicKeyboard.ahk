@@ -113,10 +113,10 @@ return
 
 :*:ohm::{U+00A0}{U+2126}
 :*:kohm::{U+00A0}k{U+2126}
-:*:mikro::{U+00A0}{U+00b5}
+::mikro::{U+00A0}{U+00b5}
 :*:kv::{U+00A0}kV
 :*:mamp::{U+00A0}mA
-:*:kamp::{U+00A0}kA
+::kamp::{U+00A0}kA
 
 :*:+-::{U+00B1}
 :*:-+::{U+00B1}
@@ -157,13 +157,14 @@ return
 :*:uniac::UniAC
 :*:unias::UniAS
 :*:unirc::UniRC
-:*:wsu::wheel sensor unit
+::wsu::wheel sensor unit
 :*:azc::AZC
 ::mag::MAG
 ::asm::ASM
 ::acm::ACM
+::aim::AIM
 ::cok::COK
-:*:adm::ADM
+::adm::ADM
 
 :*:anszua::AnSzuA
 :*:unibl::UniBL
@@ -215,7 +216,7 @@ return
 :*:tabela`t::| | |{Enter}
 
 ; ------------------ Section of first or second names with local diacritics ------------------------
-:*:rene::Ren{U+00E9}            ; Rene 
+::rene::Ren{U+00E9}            ; Rene 
 :*:guenther::G{U+00FC}nther     ; Gunther 
 :*:pek::P{U+00E9}k	            ; Pek
 :*:stuhn::St{U+00FC}hn				; Man
@@ -258,8 +259,8 @@ F14:: ; switching between tabs of Chrome; author: Taran VH
 		}
 return
 
-F15::
-return
+;~ F15:: ; Reserved for CopyQ
+;~ return
 
 ;~ https://autohotkey.com/board/topic/116740-switch-between-one-window-of-each-different-applications/
 
