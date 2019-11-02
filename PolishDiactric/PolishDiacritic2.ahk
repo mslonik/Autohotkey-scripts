@@ -37,145 +37,158 @@ LControl & RAlt:: ; AltGr
     MsgBox, 64, AHK: Alt Gr was pressed, AltGr toggles "Suspend" mode of PolishDiactric script. `n Currently mode is %StateOfSuspend%, so Diactrics are %Diactrics%
     return
 
+#Hotstring b0 ? * c ; Changes hotstring options or ending characters.
+; b0 Automatic backspacing is not done to erase the abbreviation you type.
+; ?  The hotstring will be triggered even when it is inside another word.
+; *  An ending character is not required to trigger the hotstring.
+; c  When you type an abbreviation, it must exactly match the case defined in the script.
 
 ;~ The order in which hotstrings are defined determines their precedence with respect to each other. In other words, if more than one hotstring matches something you type, only the one listed first in the script will take effect. 
 
-;~ ORDINARY_DIACRIC_LETTERS:
-:zb0?*c:aaa::
+;~ ORDINARY_DIACRIC_LETTERS: π Ê Í ≥ Ò Û ú ü ø
+
+; π
+:z:aaa::
     Send, {BackSpace 2}aa
     Tooltip,
 return
 
-:b0?*c:aa::
+::aa::
     Send, {BackSpace 2}{U+0105}
     Tooltip, Double?, % A_CaretX, % A_CaretY-20
 return
 
-:b0?*c:a::
+::a::
     Tooltip, Diactric?, % A_CaretX, % A_CaretY-20
 return
 
-:zb0?*c:eee::
-    Send, {BackSpace 2}ee
-    Tooltip,
-return
-
-:b0?*c:ee::
-        Send, {BackSpace 2}{U+0119}
-        Tooltip, Double?, % A_CaretX, % A_CaretY-20
-return
-
-:b0?*c:e::
-    Tooltip, Diactric?, % A_CaretX, % A_CaretY-20
-return
-
-
-:zb0?*c:sss::
-    Send, {BackSpace 2}ss
-    Tooltip,
-return
-
-:b0?*c:ss::
-        Send, {BackSpace 2}{U+015B}
-        Tooltip, Double?, % A_CaretX,% A_CaretY-20
-return
-
-:b0?*c:s::
-    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
-return
-
-
-:zb0?*c:ccc::
+; Ê
+:z:ccc::
     Send, {BackSpace 2}cc
     Tooltip,
 return
 
-:b0?*c:cc::
+::cc::
         Send, {BackSpace 2}{U+0107}
         Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:c::
+::c::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-
-:zb0?*c:zzz::
-    Send, {BackSpace 2}zz
+; Í
+:z:eee::
+    Send, {BackSpace 2}ee
     Tooltip,
 return
 
-:b0?*c:zz::
-        Send, {BackSpace 2}{U+017C}
-        Tooltip, Double?, % A_CaretX,% A_CaretY-20
+::ee::
+        Send, {BackSpace 2}{U+0119}
+        Tooltip, Double?, % A_CaretX, % A_CaretY-20
 return
 
-:b0?*c:z::
-    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
+::e::
+    Tooltip, Diactric?, % A_CaretX, % A_CaretY-20
 return
 
-
-:zb0?*c:xxx::
-    Send, {BackSpace 2}xx
-    Tooltip,
-return
-
-:b0?*c:xx::
-        Send, {BackSpace 2}{U+017A}
-        Tooltip, Double?, % A_CaretX,% A_CaretY-20
-return
-
-:b0?*c:x::
-    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
-return
-
-
-:zb0?*c:nnn::
-    Send, {BackSpace 2}nn
-    Tooltip,
-return
-
-:b0?*c:nn::
-        Send, {BackSpace 2}{U+0144}
-        Tooltip, Double?, % A_CaretX,% A_CaretY-20
-return
-
-:b0?*c:n::
-    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
-return
-
-
-:zb0?*c:ooo::
-    Send, {BackSpace 2}oo
-    Tooltip,
-return
-
-:b0?*c:oo::
-        Send, {BackSpace 2}{U+00F3}
-        Tooltip, Double?, % A_CaretX,% A_CaretY-20
-return
-
-:b0?*c:o::
-    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
-return
-
-
-:zb0?*c:lll::
+; ≥
+:z:lll::
     Send, {BackSpace 2}ll
     Tooltip,
 return
 
-:b0?*c:ll::
+::ll::
         Send, {BackSpace 2}{U+0142}
         Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:l::
+::l::
+    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
+return
+
+; Ò
+:z:nnn::
+    Send, {BackSpace 2}nn
+    Tooltip,
+return
+
+::nn::
+        Send, {BackSpace 2}{U+0144}
+        Tooltip, Double?, % A_CaretX,% A_CaretY-20
+return
+
+::n::
+    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
+return
+
+; Û
+:z:ooo::
+    Send, {BackSpace 2}oo
+    Tooltip,
+return
+
+::oo::
+        Send, {BackSpace 2}{U+00F3}
+        Tooltip, Double?, % A_CaretX,% A_CaretY-20
+return
+
+::o::
+    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
+return
+
+; ú
+:z:sss::
+    Send, {BackSpace 2}ss
+    Tooltip,
+return
+
+::ss::
+        Send, {BackSpace 2}{U+015B}
+        Tooltip, Double?, % A_CaretX,% A_CaretY-20
+return
+
+::s::
+    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
+return
+
+; ü
+:z:xxx::
+    Send, {BackSpace 2}xx
+    Tooltip,
+return
+
+::xx::
+        Send, {BackSpace 2}{U+017A}
+        Tooltip, Double?, % A_CaretX,% A_CaretY-20
+return
+
+::x::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
 
-;~ CAPITAL_DIACTRIC_LETTERS:
+; ø
+:z:zzz::
+    Send, {BackSpace 2}zz
+    Tooltip,
+return
+
+::zz::
+        Send, {BackSpace 2}{U+017C}
+        Tooltip, Double?, % A_CaretX,% A_CaretY-20
+return
+
+::z::
+    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
+return
+
+
+
+
+;~ CAPITAL_DIACTRIC_LETTERS: • ∆   £ — ” å è Ø
+
+; •
 :zb0?*c:AAA::
     Send, {BackSpace 2}AA
     Tooltip,
@@ -190,36 +203,7 @@ return
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-:zb0?*c:EEE::
-    Send, {BackSpace 2}EE
-    Tooltip,
-return
-
-:b0?*c:EE::
-        Send, {BackSpace 2}{U+0118}
-        Tooltip, Double?, % A_CaretX,% A_CaretY-20
-return
-
-:b0?*c:E::
-    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
-return
-
-
-:zb0?*c:SSS::
-    Send, {BackSpace 2}SS
-    Tooltip,
-return
-
-:b0?*c:SS::
-        Send, {BackSpace 2}{U+015A}
-        Tooltip, Double?, % A_CaretX,% A_CaretY-20
-return
-
-:b0?*c:S::
-    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
-return
-
-
+; ∆
 :zb0?*c:CCC::
     Send, {BackSpace 2}CC
     Tooltip,
@@ -234,37 +218,38 @@ return
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-
-:zb0?*c:ZZZ::
-    Send, {BackSpace 2}zz
+;  
+:zb0?*c:EEE::
+    Send, {BackSpace 2}EE
     Tooltip,
 return
 
-:b0?*c:ZZ::
-        Send, {BackSpace 2}{U+017B}
+:b0?*c:EE::
+        Send, {BackSpace 2}{U+0118}
         Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:Z::
+:b0?*c:E::
+    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
+return
+
+; £
+:zb0?*c:LLL::
+    Send, {BackSpace 2}LL
+    Tooltip,
+return
+
+:b0?*c:LL::
+    Send, {BackSpace 2}{U+0141}
+    Tooltip, Double?, % A_CaretX,% A_CaretY-20
+return
+
+:b0?*c:L::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
 
-:zb0?*c:XXX::
-    Send, {BackSpace 2}XX
-    Tooltip,
-return
-
-:b0?*c:XX::
-        Send, {BackSpace 2}{U+0179}
-        Tooltip, Double?, % A_CaretX,% A_CaretY-20
-return
-
-:b0?*c:X::
-    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
-return
-
-
+; —
 :zb0?*c:NNN::
     Send, {BackSpace 2}NN
     Tooltip,
@@ -280,6 +265,7 @@ return
 return
 
 
+; ”
 :zb0?*c:OOO::
     Send, {BackSpace 2}OO
     Tooltip,
@@ -294,21 +280,52 @@ return
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-
-:zb0?*c:LLL::
-    Send, {BackSpace 2}LL
+; å
+:zb0?*c:SSS::
+    Send, {BackSpace 2}SS
     Tooltip,
 return
 
-:b0?*c:LL::
-    Send, {BackSpace 2}{U+0141}
-    Tooltip, Double?, % A_CaretX,% A_CaretY-20
+:b0?*c:SS::
+        Send, {BackSpace 2}{U+015A}
+        Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:L::
+:b0?*c:S::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
+
+; è
+:zb0?*c:XXX::
+    Send, {BackSpace 2}XX
+    Tooltip,
+return
+
+:b0?*c:XX::
+        Send, {BackSpace 2}{U+0179}
+        Tooltip, Double?, % A_CaretX,% A_CaretY-20
+return
+
+:b0?*c:X::
+    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
+return
+
+
+; Ø
+:zb0?*c:ZZZ::
+    Send, {BackSpace 2}zz
+    Tooltip,
+return
+
+:b0?*c:ZZ::
+        Send, {BackSpace 2}{U+017B}
+        Tooltip, Double?, % A_CaretX,% A_CaretY-20
+return
+
+:b0?*c:Z::
+    Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
+return
 
 
 ;~ THE_REST:
