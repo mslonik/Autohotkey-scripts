@@ -3,10 +3,9 @@ Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Mimic Elgato stream deck solution with some cheap hardware from China.
 Description: Put a virtual numeric keypad on the screen.
 Name:        otagle <- anagram of elgato or just "flow"
-License:     GNU GPL v.3
+License:     GNU GPL v.3 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 To do - software:
-     - CurrentLayer - display value at the bottom of app
      - Turn on / off sound
      - Configuration file
      - Menu
