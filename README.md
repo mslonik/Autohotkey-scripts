@@ -1,11 +1,23 @@
 # Autohotkey-scripts
-Autohotkey (AHK) scripts written for various purposes by mslonik
+Autohotkey (AHK) scripts written for various purposes by mslonik. My web page: http://mslonik.pl.
 
 ## MicrosoftWord_MacroKeyboard
 
 ## NumpadMouse
 
 ## Otagle
+Description available at AHK forum: https://www.autohotkey.com/boards/viewtopic.php?t=69690
+YouTube video dedicated to this solution: https://youtu.be/5zKbTOXBqEs
+
+This is a proof of the following concept: free (as in freedom) solution analogue to commercially available “elgato stream deck” (https://www.elgato.com/en/gaming/stream-deck).
+
+The components:
+* Hardware:
+  * LCD combined with a touchscreen designed for Raspberry Pi, resolution: 1024 x 600 pixels.
+      * Acrylic frame with nice brackets.
+* Software:
+  * Installed Autohotkey (AHK) language interpreter.
+    * Script called OTAGLE as anagram to “elgato” (etymology: “a cat” in Spanish).
 
 ## PolishDiactric
 Enable input of diacritic / diactric letters (https://en.wikipedia.org/wiki/Diacritic)  without touching of AltGr (right Alt key). 
@@ -37,6 +49,7 @@ The "PolishDiactric" contains the following 4 scripts. It's recommended to use b
   - e -> e
   - ee -> ę
   - eee -> ee
+  Information about this particular script at AHK forum: https://www.autohotkey.com/boards/viewtopic.php?t=67840
 
 * PolishDiacritic3.ahk <- variant of above, but instead of hotstrings attempt to carry on with input buffers
   - e -> e
