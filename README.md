@@ -14,51 +14,7 @@ It supports up to five mouse buttons and the turning of the
 mouse wheel.  It also features customizable movement speed,
 acceleration, and "axis inversion".
 
-o----------------------------------------------------------------------------------------o
-| Using Keyboard Numpad as a Mouse                                                       |
-(----------------------------------------------------------------------------------------)
-| ver. 1.0 by deguix  / A Script file for AutoHotkey 1.0.22+                             |
-|                    --------------------------------------------------------------------|
-|                                                                                        |
-| This script is an example of use of AutoHotkey. It uses the remapping of numpad keys   |
-| of a keyboard to transform it into a mouse. Some features are the acceleration which   |
-| enables you to increase the mouse movement when holding a key for a long time, and the |
-| rotation which makes the numpad mouse to "turn". I.e. NumpadDown as NumpadUp and       |
-| vice-versa. See the list of keys used below:                                           |
-|                                                                                        |
-|----------------------------------------------------------------------------------------|
-| Keys                  | Description                                                    |
-|----------------------------------------------------------------------------------------|
-| ScrollLock (toggle on)| Activates numpad mouse mode.                                   |
-|-----------------------|----------------------------------------------------------------|
-| Numpad0               | Left mouse button click.                                       |
-| Numpad5               | Middle mouse button click.                                     |
-| NumpadDot             | Right mouse button click.                                      |
-| NumpadDiv/NumpadMult  | X1/X2 mouse button click. (Win 2k+)                            |
-| NumpadSub/NumpadAdd   | Moves up/down the mouse wheel.                                 |
-|                       |                                                                |
-|-----------------------|----------------------------------------------------------------|
-| NumLock (toggled off) | Activates mouse movement mode.                                 |
-|-----------------------|----------------------------------------------------------------|
-| NumpadEnd/Down/PgDn/  | Mouse movement.                                                |
-| /Left/Right/Home/Up/  |                                                                |
-| /PgUp                 |                                                                |
-|                       |                                                                |
-|-----------------------|----------------------------------------------------------------|
-| NumLock (toggled on)  | Activates mouse speed adj. mode.                               |
-|-----------------------|----------------------------------------------------------------|
-| Numpad7/Numpad1       | Inc./dec. acceleration per button press.                       |
-| Numpad8/Numpad2       | Inc./dec. initial speed per button press.                      |
-| Numpad9/Numpad3       | Inc./dec. maximum speed per button press.                      |
-| !Numpad7/^Numpad1     | Inc./dec. wheel acceleration per button press*.                |
-| !Numpad8/^Numpad2     | Inc./dec. wheel initial speed per button press*.               |
-| !Numpad9/^Numpad3     | Inc./dec. wheel maximum speed per button press*.               |
-| Numpad4/Numpad6       | Inc./dec. rotation angle to right in degrees. (i.e. 180° =     |
-|                       | = inversed controls).                                          |
-|----------------------------------------------------------------------------------------|
-| * = These options are affected by the mouse wheel speed    |
-| adjusted on Control Panel. If you don't have a mouse with  |
-| wheel, the default is 3 +/- lines per option button press. |
+<pre>
 o------------------------------------------------------------o
 | Change log                                                 |
 |------------------------------------------------------------|
@@ -80,6 +36,7 @@ o------------------------------------------------------------o
 |                       | cursor within active window area.  |
 |                       | Optimized saving of parameters     |
 o------------------------------------------------------------o
+</pre>
 
 Information available at AHK forum: https://www.autohotkey.com/boards/viewtopic.php?t=68050
 
