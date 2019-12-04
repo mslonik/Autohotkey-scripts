@@ -15,11 +15,8 @@ mouse wheel.  It also features customizable movement speed,
 acceleration, and "axis inversion".
 
 o----------------------------------------------------------------------------------------o
-
-|Using Keyboard Numpad as a Mouse                                                        |
-
+| Using Keyboard Numpad as a Mouse                                                       |
 (----------------------------------------------------------------------------------------)
-
 | ver. 1.0 by deguix  / A Script file for AutoHotkey 1.0.22+                             |
 |                    --------------------------------------------------------------------|
 |                                                                                        |
