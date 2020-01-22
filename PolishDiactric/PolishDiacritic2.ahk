@@ -1,7 +1,7 @@
 ;~              I N T R O D U C T I O N
-;~ Simple script for Polisch diacritic marks (https://en.wikipedia.org/wiki/Diacritic): π, Í, ú, Ê, ø, ü, Ò, Û, ≥.
+;~ Simple script for Polisch diacritic marks (https://en.wikipedia.org/wiki/Diacritic): ƒÖ, ƒô, ≈õ, ƒá, ≈º, ≈∫, ≈Ñ, √≥, ≈Ç.
 ;~ Instead of usage of AltGr (right alt, see https://en.wikipedia.org/wiki/AltGr_key#Polish for further details):
-;~ * double press a key corresponding to specific diacritic key, e.g. ee converts into Í
+;~ * double press a key corresponding to specific diacritic key, e.g. ee converts into ƒô
 ;~ * AltGr suspend run of this script (switches to default behaviour of keyboard
 ;~ * special sequence for double letters within words: <letter><letter><letter>, e.g. zaaawansowany converts into zaawansowany
 ;~ 
@@ -9,19 +9,20 @@
 ;~ a. "programmers keyboard" and Polish diactric marks combined with old ANSI keyboards 101 keys (without Windows key and context key) where AltGr is unergonomically shifted to the right side of keyboard,
 ;~ b. all other "programmers keyboard" when one doesn't want to press AltGr.
 ;~
-;~ Author: Maciej S≥ojewski, 2019-08-04 
+;~ Author: Maciej S≈Çojewski, 2019-08-04 
 ;~
 ;~ Base for all actions are "Hotstrings".
 
 #SingleInstance,Force ; Determines whether a script is allowed to run again when it is already running. Force: Skips the dialog box and replaces the old instance automatically, which is similar in effect to the Reload command.
 
-ApplicationName := "Polish Diactrics"
+ApplicationName := "Polish Diactrics 2"
 global flaga := 0
 
 Menu, Tray, Icon, imageres.dll, 123     ; this line will turn the H icon into a small red a letter-looking thing.
 Gosub, TRAYMENU ; Jumps to the specified label and continues execution until Return is encountered
 
 ; Pressing of AltGr toggles Suspend mode: disables or enables all or selected hotkeys and hotstrings.
+/*
 LControl & RAlt:: ; AltGr
     Suspend ; Assign the toggle-suspend function to a hotkey. The built-in variable A_IsSuspended contains 1 if the script is suspended and 0 otherwise.
     if (A_IsSuspended = 0)
@@ -36,18 +37,22 @@ LControl & RAlt:: ; AltGr
         }    
     MsgBox, 64, AHK: Alt Gr was pressed, AltGr toggles "Suspend" mode of PolishDiactric script. `n Currently mode is %StateOfSuspend%, so Diactrics are %Diactrics%
     return
-
-#Hotstring b0 ? * c ; Changes hotstring options or ending characters.
-; b0 Automatic backspacing is not done to erase the abbreviation you type.
-; ?  The hotstring will be triggered even when it is inside another word.
-; *  An ending character is not required to trigger the hotstring.
-; c  When you type an abbreviation, it must exactly match the case defined in the script.
+*/
 
 ;~ The order in which hotstrings are defined determines their precedence with respect to each other. In other words, if more than one hotstring matches something you type, only the one listed first in the script will take effect. 
 
-;~ ORDINARY_DIACRIC_LETTERS: π Ê Í ≥ Ò Û ú ü ø
+#Hotstring c b0 ? *
 
-; π
+;~ ORDINARY_DIACRIC_LETTERS:
+; a - ƒÖ
+; c - ƒá
+; e - ƒô
+; l - ≈Ç
+; o - √≥
+; s - ≈õ
+; x - ≈∫
+; z - ≈º
+
 :z:aaa::
     Send, {BackSpace 2}aa
     Tooltip,
@@ -62,7 +67,6 @@ return
     Tooltip, Diactric?, % A_CaretX, % A_CaretY-20
 return
 
-; Ê
 :z:ccc::
     Send, {BackSpace 2}cc
     Tooltip,
@@ -77,7 +81,7 @@ return
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-; Í
+
 :z:eee::
     Send, {BackSpace 2}ee
     Tooltip,
@@ -92,7 +96,7 @@ return
     Tooltip, Diactric?, % A_CaretX, % A_CaretY-20
 return
 
-; ≥
+
 :z:lll::
     Send, {BackSpace 2}ll
     Tooltip,
@@ -107,7 +111,7 @@ return
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-; Ò
+
 :z:nnn::
     Send, {BackSpace 2}nn
     Tooltip,
@@ -122,7 +126,7 @@ return
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-; Û
+
 :z:ooo::
     Send, {BackSpace 2}oo
     Tooltip,
@@ -137,7 +141,7 @@ return
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-; ú
+
 :z:sss::
     Send, {BackSpace 2}ss
     Tooltip,
@@ -152,7 +156,7 @@ return
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-; ü
+
 :z:xxx::
     Send, {BackSpace 2}xx
     Tooltip,
@@ -167,8 +171,6 @@ return
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-
-; ø
 :z:zzz::
     Send, {BackSpace 2}zz
     Tooltip,
@@ -184,146 +186,147 @@ return
 return
 
 
+;~ CAPITAL_DIACTRIC_LETTERS:
+; A - ƒÑ
+; C - ƒÜ
+; E - ƒò
+; L - ≈Å
+; O - √ì
+; S - ≈ö
+; X - ≈π
+; Z - ≈ª
 
-
-;~ CAPITAL_DIACTRIC_LETTERS: • ∆   £ — ” å è Ø
-
-; •
-:zb0?*c:AAA::
+:z:AAA::
     Send, {BackSpace 2}AA
     Tooltip,
 return
 
-:b0?*c:AA::
+::AA::
         Send, {BackSpace 2}{U+0104}
         Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:A::
+::A::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-; ∆
-:zb0?*c:CCC::
+:z:CCC::
     Send, {BackSpace 2}CC
     Tooltip,
 return
 
-:b0?*c:CC::
+::CC::
         Send, {BackSpace 2}{U+0106}
         Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:C::
+::C::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-;  
-:zb0?*c:EEE::
+
+:z:EEE::
     Send, {BackSpace 2}EE
     Tooltip,
 return
 
-:b0?*c:EE::
+::EE::
         Send, {BackSpace 2}{U+0118}
         Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:E::
+::E::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-; £
-:zb0?*c:LLL::
+
+:z:LLL::
     Send, {BackSpace 2}LL
     Tooltip,
 return
 
-:b0?*c:LL::
+::LL::
     Send, {BackSpace 2}{U+0141}
     Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:L::
+::L::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
 
-; —
-:zb0?*c:NNN::
+
+:z:NNN::
     Send, {BackSpace 2}NN
     Tooltip,
 return
 
-:b0?*c:NN::
+::NN::
         Send, {BackSpace 2}{U+0143}
         Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:N::
+::N::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
 
-; ”
-:zb0?*c:OOO::
+:z:OOO::
     Send, {BackSpace 2}OO
     Tooltip,
 return
 
-:b0?*c:OO::
+::OO::
         Send, {BackSpace 2}{U+00D3}
         Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:O::
+::O::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
-; å
-:zb0?*c:SSS::
+
+:z:SSS::
     Send, {BackSpace 2}SS
     Tooltip,
 return
 
-:b0?*c:SS::
+::SS::
         Send, {BackSpace 2}{U+015A}
         Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:S::
+::S::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
 
-; è
-:zb0?*c:XXX::
+:z:XXX::
     Send, {BackSpace 2}XX
     Tooltip,
 return
 
-:b0?*c:XX::
+::XX::
         Send, {BackSpace 2}{U+0179}
         Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:X::
+::X::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
 
-; Ø
-:zb0?*c:ZZZ::
-    Send, {BackSpace 2}zz
+:z:ZZZ::
+    Send, {BackSpace 2}ZZ
     Tooltip,
 return
 
-:b0?*c:ZZ::
+::ZZ::
         Send, {BackSpace 2}{U+017B}
         Tooltip, Double?, % A_CaretX,% A_CaretY-20
 return
 
-:b0?*c:Z::
+::Z::
     Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
 return
 
@@ -424,10 +427,6 @@ return
     ToolTip,, % A_CaretX, % A_CaretY-20
 return
 
-;~ ~BackSpace::
-    ;~ Hotstring("Reset")
-;~ return
-
 TRAYMENU:
     Menu, Tray, Add, %ApplicationName% ABOUT, ABOUT
     Menu, Tray, Default, %ApplicationName% ABOUT ; Default: Changes the menu's default item to be the specified menu item and makes its font bold.
@@ -445,13 +444,13 @@ ABOUT:
     Gui, MyAbout: Font, CBlue Underline 
     Gui, MyAbout: Add, Text, x+1, https://en.wikipedia.org/wiki/Diacritic
     Gui, MyAbout: Font
-    Gui, MyAbout: Add, Text, x+1, ): π, Í, ú, Ê, ø, ü, Ò, Û, ≥.
+    Gui, MyAbout: Add, Text, x+1, ): ƒÖ, ƒô, ≈õ, ƒá, ≈º, ≈∫, ≈Ñ, √≥, ≈Ç.
     Gui, MyAbout: Add, Text, xm, Instead of usage of AltGr (right alt`, see 
     Gui, MyAbout: Font, CBlue Underline 
     Gui, MyAbout: Add, Text, x+2, https://en.wikipedia.org/wiki/AltGr_key#Polish 
     Gui, MyAbout: Font
     Gui, MyAbout: Add, Text, x+2, for further details):
-    Gui, MyAbout: Add, Text, xm+20, * double press a key corresponding to specific diacritic key`, e.g. ee converts into Í
+    Gui, MyAbout: Add, Text, xm+20, * double press a key corresponding to specific diacritic key`, e.g. ee converts into ƒô
     Gui, MyAbout: Add, Text, xm+20, * AltGr suspend run of this script (switches to default behaviour of keyboard
     Gui, MyAbout: Add, Text, xm+20, * special sequence for double letters within words: <letter><letter><letter>`, e.g. zaaawansowany converts into zaawansowany
 
