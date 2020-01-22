@@ -45,10 +45,6 @@ Media_Play_Pause:: ; run Paint (Microsoft Windows operating system tool)
 	Run, %A_WinDir%\system32\mspaint.exe
 return
 
-+^k:: ; run Kee Pass application (password manager)
-	Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 
-return
-
 ^Volume_Up:: ; Reboot
 	Shutdown, 2
 return
@@ -60,6 +56,17 @@ return
 +^F1:: ; Suspend: 
 	DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0)
 return
+
+; These are dedicated to ThinkPad T480 (notebook) keyboard
+Ralt::AppsKey ; redirects AltGr -> context menu
+
+
+; These are valid for any keyboard
++^k:: ; run Kee Pass application (password manager)
+	Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 
+return
+
+
 
 ; - - - - - - - - END OF KEYBOARD HOTKEYS SECTION - - - - - - - - - - - - - - - - - - - - - 
 
@@ -107,6 +114,8 @@ return
 :*:axmu::AXM{Space}/{Space}AXM^=R^={Space}/{Space}AXM^=IO^=
 :*:axmp::AXM,{Space}AXM^=R^=,{Space}AXM^=IO^=
 :*:nout::{U+223C}OUT
+:*:ihd1::I^=HD1^=
+:*:ihd2::I^=HD2^=
 
 :*:dsat::dSAT
 :*:asdek::ASDEK
@@ -154,10 +163,56 @@ return
 
 ::sie::Siershahn
 
-:*:uniac::UniAC
-:*:unias::UniAS
+:b0*:uniac::
+	Send, {BackSpace 5}UniAC `
+return
+
+:zb0*:uniac2::
+	Send, {BackSpace 7}UniAC[2] `
+return
+
+:zb0*:uniac1::
+	Send, {BackSpace 7}UniAC[1] `
+return
+
+:zb0*:uniacx::
+	Send, {BackSpace 7}UniAC[x] `
+return
+
+:zb0*:unias1p::
+	Send, {BackSpace 10}UniAS[1{+}] `
+return
+
+:zb0*:unias2i::
+	Send, {BackSpace 10}UniAS[2i] `
+return
+
+:b0*:unias1::
+	Send, {BackSpace 7}UniAS[1] `
+return
+
+:b0*:unias2::
+	Send, {BackSpace 7}UniAS[2] `
+return
+
+:b0*:uniasx::
+	Send, {BackSpace 7}UniAS[x] `
+return
+
+:b0*:unias::
+	Send, {BackSpace 5}UniAS `
+return
+
 :*:unirc::UniRC
-::wsu::wheel sensor unit
+
+:b0*:wsu::
+	Send, {BackSpace 3}WSU `
+return
+
+:zb0*:wsuu::
+	Send, {BackSpace 5}wheel sensor unit
+return
+
 :*:azc::AZC
 ::mag::MAG
 ::asm::ASM
@@ -175,7 +230,7 @@ return
 ::mtbf::MTBF
 ::mttr::MTTR
 ::pm::PM
-:*:sil::SIL
+::sil::SIL
 :*:pcb::PCB
 :*:dtr::DTR
 ::dp::DPiZ
@@ -203,23 +258,47 @@ return
 :*:hwd::HWD
 :*:emc::EMC
 :*:phoenix::PHOENIX
+:*:mb.::MB
 :*:gotcha::GOTCHA
 :*:mds::MDS
 :*:tuv::T{U+00DC}V
 ::sud::S{U+00DC}D
 :*:gmbh::GmbH
+:*:hart::HART
+:*:pesel::PESEL
+:*:utk::UTK
+:*:bait::BAiT
+:*:uic60::UIC60
+:*:s49::S49
+:*:iscala::iSCALA
+:*:erp::ERP
+:*:sap::SAP
 
-:*:tilde::{U+223C}
-:*:ddelta::{U+2206}
+:*:tilde::
+MSWordSetFont("Cambria Math", "U+223C") ;
+return
+:*:deltaa::{U+2206}
 :*:--::{U+2500}
 
 :*:tabela`t::| | |{Enter}
 
+:*:d]::  ; This hotstring replaces "d]" with the current date and time via the commands below.
+	FormatTime, CurrentDateTime,, yyyy-MM-dd  ; It will look like 2020-01-21 
+	SendInput %CurrentDateTime%
+return
+
+:*:t]::
+	FormatTime, CurrentDateTime,, Time
+	SendInput %CurrentDateTime%
+return
+
 ; ------------------ Section of first or second names with local diacritics ------------------------
-::rene::Ren{U+00E9}            ; Rene 
-:*:guenther::G{U+00FC}nther     ; Gunther 
-:*:pek::P{U+00E9}k	            ; Pek
-:*:stuhn::St{U+00FC}hn				; Man
+::rene::Ren{U+00E9}				; Rene 
+:*:guenther::G{U+00FC}nther		; Guenther 
+:*:pek::P{U+00E9}k				; Pek
+:*:stuhn::St{U+00FC}hn			; Man
+:*:joerg::J{U+00F6}rg			; Joerg
+:*:jorg::J{U+00F6}rg			; Joerg
 
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
 ; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
@@ -302,5 +381,18 @@ XButton2:: ; switching between Chrome browser tabs; author: Taran VH
 		WinActivate ahk_class Chrome_WidgetWin_1
 		}
 return
+
+MSWordSetFont(FontName,key) {
+   IfWinNotActive, ahk_class OpusApp
+	{
+	Send {%key%}
+   return
+	}
+   oWord := ComObjActive("Word.Application")
+   OldFont := oWord.Selection.Font.Name
+   oWord.Selection.Font.Name := FontName
+   Send {%key%}
+   oWord.Selection.Font.Name := OldFont
+}
 
 ; ----------------- END OF ADDITIONAL I/O DEVICES SECTION ------------------------
