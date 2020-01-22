@@ -1,4 +1,4 @@
-;~ Ta wersja powsta³a z QMK_F24_macro_keyboard.ahk 
+;~ Ta wersja powstaÅ‚a z QMK_F24_macro_keyboard.ahk 
 ;~ WHERE TO LOOK FOR HELP:
 ;~ Taran VH: 					https://youtu.be/GZEoss4XIgc
 ;~ Taran Github: 				https://github.com/TaranVH/2nd-keyboard/
@@ -14,8 +14,7 @@
 ;~ This version is suited to Asian keyboard layout, 101 keys (Base: 71, Navigation: 13, NumPad: 17).
 
 ;~ ZADANIA DO ZREALIZOWANIA:
-;~ - zmiana kolejnoœci obiektow graficznych - ShapeRange.ZOrder
-;~ - okienko do wstawiania etykiet (SEQ) np. Tab. / Tabela, Rys. / Rysunek itd.
+;~ - zmiana kolejnoÅ›ci obiektow graficznych - ShapeRange.ZOrder
 ;~ - zarejestruj makro
 
 SetWorkingDir, c:\Users\v523580\AutoHotKeyScripts\ ; Changes the script's current working directory.
@@ -49,7 +48,7 @@ global OutputPDFfilePath := "C:\temp1\"
 global AutosaveFilePath := "C:\temp1\KopiaZapasowaPlikowWord\"
 global cursorPosition := ""
 global varhf := 0
-;--------------- Flagi do okienek z odsy³aczami ----------------
+;--------------- Flagi do okienek z odsyÅ‚aczami ----------------
 global flag_text := 0
 global flag_number := 0
 global flag_enum := 0
@@ -64,17 +63,21 @@ global size := 0
 global size_org := 0
 global table := []
 global interval := 600000
-;--------------- Zmienne do prze³¹czania okienek ---------------
+;--------------- Zmienne do przeÅ‚Ä…czania okienek ---------------
 global cntWnd := 0
 global cntWnd2 := 0
 global id := []
 global order := []
 ;---------------------------------------------------------------
-
+global flag_lab := 0
+global flag_lab2 := 0
+global flag_ti := 0
+global flag_ti2 := 0
+global CaptionList := []
 ; --------------- KONIEC SEKCJI ZMIENNYCH GLOBALNYCH ----------------------
 
 SetTimer, AutoSave, % interval
-MsgBox,48,Uwaga!, Uruchomiona jest funkcja autozapisu, która co 10 minut tworzy kopie zapasowe dokumentów aktywnych w programie Microsoft Word. Aby wy³¹czyæ tê funkcjê, naciœnij kombinacjê klawiszy Ctrl+LewyAlt+Q.
+MsgBox,48,Uwaga!, Uruchomiona jest funkcja autozapisu, ktÃ³ra co 10 minut tworzy kopie zapasowe dokumentÃ³w aktywnych w programie Microsoft Word. Aby wyÅ‚Ä…czyÄ‡ tÄ™ funkcjÄ™, naciÅ›nij kombinacjÄ™ klawiszy Ctrl+LewyAlt+Q.
 
 ;;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++;;
 ;;+++++++++++++++++ BEGIN SECOND KEYBOARD F24 ASSIGNMENTS +++++++++++++++++++++;;
@@ -87,7 +90,7 @@ F24:: return 					; this line is mandatory for proper functionality
 
 ;;------------------------1st ROW OF KEYS (13)--------------------------;;
 
-escape:: SetTemplate("PL", "Do³¹cz domyœlny szablon dokumentu PL") 
+escape:: SetTemplate("PL", "DoÅ‚Ä…cz domyÅ›lny szablon dokumentu PL") 
 return	
 
 F1:: BB_Insert("Strona ozdobna", "you pressed the function key")
@@ -99,16 +102,16 @@ return
 F3:: BB_Insert("Lista zmian", "you pressed the function key")
 return	
 
-F4:: BB_Insert("Spis treœci", "you pressed the function key")
+F4:: BB_Insert("Spis treÅ›ci", "you pressed the function key")
 return	
 
 F5:: BB_Insert("Spis tabel", "you pressed the function key")
 return	
 
-F6:: BB_Insert("Spis rysunków", "you pressed the function key")
+F6:: BB_Insert("Spis rysunkÃ³w", "you pressed the function key")
 return	
 
-F7:: BB_Insert("Spis oznaczeñ graficznych", "you pressed the function key")
+F7:: BB_Insert("Spis oznaczeÅ„ graficznych", "you pressed the function key")
 return	
 
 F8:: BB_Insert("tabela", "you pressed the function key")
@@ -120,16 +123,16 @@ return
 F10:: BB_Insert("Tabela informacja", "you pressed the function key")
 return	
 
-F11:: BB_Insert("Zastrze¿enie", "you pressed the function key")
+F11:: BB_Insert("ZastrzeÅ¼enie", "you pressed the function key")
 return	
 
-F12:: BB_Insert("Pierwsza strona zwyk³a", "you pressed the function key")
+F12:: BB_Insert("Pierwsza strona zwykÅ‚a", "you pressed the function key")
 return	
 	
 
 ;;------------------------2nd ROW (15)--------------------------;;
 
-`:: SetTemplate("EN", "Do³¹cz domyœlny szablon dokumentu EN")
+`:: SetTemplate("EN", "DoÅ‚Ä…cz domyÅ›lny szablon dokumentu EN")
 return	
 
 1:: TemplateStyle("Normalny ms")
@@ -166,7 +169,7 @@ return
 InsertRef("bookmark")
 return	
 
--:: ; rozpocznij numerowanie listy od pocz¹tku (VBA: RestartNumbering)
+-:: ; rozpocznij numerowanie listy od poczÄ…tku (VBA: RestartNumbering)
 	;~ https://docs.microsoft.com/en-us/office/vba/api/word.listformat.cancontinuepreviouslist
 	;~ https://docs.microsoft.com/en-us/office/vba/api/word.listformat
 	TemplateStyle("Wypunktowanie ms")
@@ -175,42 +178,42 @@ return
 =:: WatermarkDRAFT("Wstawia znak wodny DRAFT wszystkich sekcji dokumentu")
 return	
 
-\:: BB_Insert("Nag³ówek zwyk³y", "BB: Nag³ówek zwyk³y")
+\:: BB_Insert("NagÅ‚Ã³wek zwykÅ‚y", "BB: NagÅ‚Ã³wek zwykÅ‚y")
 return	
 
-Backspace:: BB_Insert("Stopka zwyk³a", "BB: Stopka zwyk³a")
+Backspace:: BB_Insert("Stopka zwykÅ‚a", "BB: Stopka zwykÅ‚a")
 return	
 
 ;;------------------------3rd ROW (13)--------------------------;;
 
-tab:: ChangeZoom("Zmieñ powiêkszenie")
+tab:: ChangeZoom("ZmieÅ„ powiÄ™kszenie")
 return	
 
-q:: NavigationPaneVisibility("W³¹cz / wy³¹cz Navigation pane")
+q:: NavigationPaneVisibility("WÅ‚Ä…cz / wyÅ‚Ä…cz Navigation pane")
 return	
 
-w:: ToggleStylePane("W³¹cz / wy³¹cz Style pane")
+w:: ToggleStylePane("WÅ‚Ä…cz / wyÅ‚Ä…cz Style pane")
 return	
 
-e:: ShowClipboard("W³¹cz podgl¹d schowka") 
+e:: ShowClipboard("WÅ‚Ä…cz podglÄ…d schowka") 
 return	
 
-r:: ToggleFormattingPane("poka¿ ukryj Panel formatowanie")
+r:: ToggleFormattingPane("pokaÅ¼ ukryj Panel formatowanie")
 return	
 
-t:: ToggleRuler("Poka¿ / ukryj linijkê")
+t:: ToggleRuler("PokaÅ¼ / ukryj linijkÄ™")
 return	
 
 y:: ParagraphLinesKeepTogether("Akapit: Zachowaj wiersze razem")
 return	
 
-u:: ParagraphPageBreakBefore("Akapit: Podzia³ strony przed")
+u:: ParagraphPageBreakBefore("Akapit: PodziaÅ‚ strony przed")
 return
 
-i:: ParagraphFormatKeepWithNext("Akapit: Razem z nastêpnym")
+i:: ParagraphFormatKeepWithNext("Akapit: Razem z nastÄ™pnym")
 return	
 
-o:: DeleteInterline("Usuñ interliniê")
+o:: DeleteInterline("UsuÅ„ interliniÄ™")
 return
 
 p:: ChangeLanguage()
@@ -224,16 +227,16 @@ return
 
 ;;------------------------4th ROW (13)--------------------------;;
 
-F20:: AlignTableToPageBorder("CapsLock -to-> SC06B-F20, wyrównaj tabele do granicy tekstu na stronie") ; wyrównaj tabele do granicy tekstu na stronie pionowej, standardowe marginesy voestalpine, wyœrodkuj tabelê
+F20:: AlignTableToPageBorder("CapsLock -to-> SC06B-F20, wyrÃ³wnaj tabele do granicy tekstu na stronie") ; wyrÃ³wnaj tabele do granicy tekstu na stronie pionowej, standardowe marginesy voestalpine, wyÅ›rodkuj tabelÄ™
 return	
 
-a::	MarkAllTableCells("Zaznacz ca³¹ tabelê")
+a::	MarkAllTableCells("Zaznacz caÅ‚Ä… tabelÄ™")
 return	
 
 s:: TemplateStyle("Normalny w tabeli ms")
 return	
 
-d:: TemplateStyle("Tabela bez krawêdzi ms") 
+d:: TemplateStyle("Tabela bez krawÄ™dzi ms") 
 return	
 
 f:: TemplateStyle("Wypunktowanie w tabeli ms")
@@ -242,35 +245,39 @@ f:: TemplateStyle("Wypunktowanie w tabeli ms")
 g:: TemplateStyle("tabela ms") 
 return	
 
-h:: DeleteTableRow("Usuñ wiersz tabeli")
+h:: DeleteTableRow("UsuÅ„ wiersz tabeli")
 return	
 
-j:: DeleteTableColumn("Usuñ kolumnê tabeli")
+j:: DeleteTableColumn("UsuÅ„ kolumnÄ™ tabeli")
 return	
 
-k:: MergeTableCells("po³¹cz zaznaczone komórki tabeli")
+k:: MergeTableCells("poÅ‚Ä…cz zaznaczone komÃ³rki tabeli")
 return	
 
-l:: SeparateTableCell2xRow1xColumn("Podziel zaznaczon¹ komórkê tabeli: 2x wiersze, 1x kolumna")
+l:: SeparateTableCell2xRow1xColumn("Podziel zaznaczonÄ… komÃ³rkÄ™ tabeli: 2x wiersze, 1x kolumna")
 return	
 
 `;:: 
 	;~ for the (semicolon) note that the ` is necessary as an escape character -- and that the syntax highlighting might get it wrong.
-	SeparateTableCell1xRow2xColumn("Podziel zaznaczon¹ komórkê tabeli: 1x wiersz, 2x kolumna")
+	SeparateTableCell1xRow2xColumn("Podziel zaznaczonÄ… komÃ³rkÄ™ tabeli: 1x wiersz, 2x kolumna")
 return	
 
 ':: 
-TableCellColorVoestalpine("Kolor voestalpine wype³nienia komórki tabeli") ; kolor wype³nienia komórki tabeli 0 | 130 | 180
-;~ TableBorderOff("Wy³¹cz okreœlone ramki")
+TableCellColorVoestalpine("Kolor voestalpine wypeÅ‚nienia komÃ³rki tabeli") ; kolor wypeÅ‚nienia komÃ³rki tabeli 0 | 130 | 180
+;~ TableBorderOff("WyÅ‚Ä…cz okreÅ›lone ramki")
 return	
 
-Enter:: TableRowsAllowBreakAcrossPages("Zezwalaj na dzielenie wierszy tabeli miêdzy stronami")
+Enter:: TableRowsAllowBreakAcrossPages("Zezwalaj na dzielenie wierszy tabeli miÄ™dzy stronami")
 return	
 
 ;;------------------------5th ROW (12)--------------------------;;
 
-SC070:: GoToPreviousComment("PrzejdŸ do wczeœniejszego komentarza") ; LShift
-return	
+SC070:: GoToPreviousComment("PrzejdÅº do wczeÅ›niejszego komentarza") ; LShift
+return
+
+SC056:: ; Left Backslash
+Source("Wpisz ÅºrÃ³dÅ‚o tekstem ukrytym")
+return
 
 z:: VersionAndAdjustation(OriginalOrFinal := "Original", AdditionalText := "")
 return	
@@ -278,34 +285,34 @@ return
 x:: VersionAndAdjustation(OriginalOrFinal := "Final", AdditionalText := "")
 return	
 
-;~ to mo¿e byæ prze³¹cznik PL/EN
+;~ to moÅ¼e byÄ‡ przeÅ‚Ä…cznik PL/EN
 c:: 
-	DeleteCurrentComment("usuñ komentarz")
+	DeleteCurrentComment("usuÅ„ komentarz")
 return	
 
 v:: 
-	REpeatTableHeader("Powtórz wiersze nag³ówka")
+	REpeatTableHeader("PowtÃ³rz wiersze nagÅ‚Ã³wka")
 return	
 
-b:: AlignTableCellConntentToMiddle("Wyrównanie treœci komórki do œrodka i do œrodka w pionie")
+b:: AlignTableCellConntentToMiddle("WyrÃ³wnanie treÅ›ci komÃ³rki do Å›rodka i do Å›rodka w pionie")
 return	
 
-n:: AlignTableCellConntentToLeft("Wyrównanie treœci komórki do lewej i do œrodka w pionie")	
+n:: AlignTableCellConntentToLeft("WyrÃ³wnanie treÅ›ci komÃ³rki do lewej i do Å›rodka w pionie")	
 return	
 
-m:: InsertColumnToTheRight("Wstaw kolumnê tabeli z prawej") ; wstaw kolumnê tabeli z prawej
+m:: InsertColumnToTheRight("Wstaw kolumnÄ™ tabeli z prawej") ; wstaw kolumnÄ™ tabeli z prawej
 return	
 
-,:: InsertTableRowAbove("Tabela: Wstaw 1x wiersz powy¿ej") ; tabela: Wstaw wiersz powy¿ej
+,:: InsertTableRowAbove("Tabela: Wstaw 1x wiersz powyÅ¼ej") ; tabela: Wstaw wiersz powyÅ¼ej
 return	
 
-.:: InsertTableRowBelow("Tabela: Wstaw 1x wiersz poni¿ej") ; tabela: Wstaw wiersz poni¿ej
+.:: InsertTableRowBelow("Tabela: Wstaw 1x wiersz poniÅ¼ej") ; tabela: Wstaw wiersz poniÅ¼ej
 return	
 
-/:: InsertColumnToTheLeft("Wstaw kolumnê tabeli z lewej") ; wstaw kolumnê tabeli z lewej 
+/:: InsertColumnToTheLeft("Wstaw kolumnÄ™ tabeli z lewej") ; wstaw kolumnÄ™ tabeli z lewej 
 return	
 
-SC07D:: GoToNextComment("PrzejdŸ do póŸniejszego komentarza") ; RShift
+SC07D:: GoToNextComment("PrzejdÅº do pÃ³Åºniejszego komentarza") ; RShift
 return	
 
 
@@ -316,16 +323,16 @@ SC071 up:: PreviousChangeOrComment("LCtrl: Poprzednia zmiana lub komentarz")
 return	
 
 ;; The following assignment MUST use the UP stroke - the down stroke doesn't appear for some reason. LAlt
-SC073 up:: RejectChange("LAlt: Odrzuæ zmianê")
+SC073 up:: RejectChange("LAlt: OdrzuÄ‡ zmianÄ™")
 return
 
-space:: EditComment("Wchodzi w dymek komentarza i umo¿liwia edycjê")
+space:: EditComment("Wchodzi w dymek komentarza i umoÅ¼liwia edycjÄ™")
 return	
 
-SC077:: AcceptChange("RAlt: Zaakceptuj zmianê") ; RAlt
+SC077:: AcceptChange("RAlt: Zaakceptuj zmianÄ™") ; RAlt
 return
 
-SC07B:: NextChangeOrComment("RCtrl: Nastêpna zmiana lub komentarz") ; RCtrl
+SC07B:: NextChangeOrComment("RCtrl: NastÄ™pna zmiana lub komentarz") ; RCtrl
 return	
 
 ;~ Nie mam takich klawiszy na klawiaturze mechanicznej:
@@ -343,40 +350,41 @@ ScrollLock::
 	FormatObjectPane()
 return	
 
-SC07E:: ToggleSelectionAndVisibilityPane("W³¹cz wy³¹cz okienko podgl¹du elementów graficznych")
+SC07E:: ToggleSelectionAndVisibilityPane("WÅ‚Ä…cz wyÅ‚Ä…cz okienko podglÄ…du elementÃ³w graficznych")
 return	
 
 Insert:: Group("Zgrupuj obiekty graficzne")
 return	
 
-Home:: RotateRight90("Obróæ obiekt o 90 stopni w prawo")
+Home:: RotateRight90("ObrÃ³Ä‡ obiekt o 90 stopni w prawo")
 return	
 
-PgUp:: FlipVertically("Przerzuæ w pionie")
+PgUp:: FlipVertically("PrzerzuÄ‡ w pionie")
 return	
 
 Delete:: Ungroup("Rozgrupuj obiekty graficzne")
 return	
 
-End:: RotateLeft90("Obróæ obiekt o 90 stopni w lewo")
+End:: RotateLeft90("ObrÃ³Ä‡ obiekt o 90 stopni w lewo")
 return	
 
-up:: MoveVectorObject(Direction := "Up", "obiekt rysunkowy w górê")
+up:: MoveVectorObject(Direction := "Up", "obiekt rysunkowy w gÃ³rÄ™")
 return	
 
-down:: MoveVectorObject(Direction := "Down", "obiekt rysunkowy w dó³")
+down:: MoveVectorObject(Direction := "Down", "obiekt rysunkowy w dÃ³Å‚")
 return	
 
-left:: MoveVectorObject(Direction := "Left", "obiekt rysunkowy w dó³")
+left:: StartWithOddOrEvenPage()
 return	
 
-right:: MoveVectorObject(Direction := "Right", "obiekt rysunkowy w dó³")
+right:: MoveVectorObject(Direction := "Right", "obiekt rysunkowy w dÃ³Å‚")
 return	
 
 ;;================= NUMPAD SECTION (17)================================================;;
 
 SC05C:: ; NumLock
 	Base("NUMLOCK")
+	Captions()
 return
 
 ;;=========== THE NUMPAD WITH NUMLOCK ON (at primary keyboard) ==============;;
@@ -449,15 +457,15 @@ return
 
 
 NumpadLeft::
-Base("W³¹cz nag³ówek/stopkê")
+Base("WÅ‚Ä…cz nagÅ‚Ã³wek/stopkÄ™")
 if (varhf = 1)
 	Footer()
 else
 	Header()
 return
-	;~ wejœcie
+	;~ wejÅ›cie
 	;~ ActiveWindow.ActivePane.View.SeekView = wdSeekCurrentPageHeader
-	;~ wyjœcie
+	;~ wyjÅ›cie
     ;~ ActiveWindow.ActivePane.View.SeekView = wdSeekMainDocument
 
 
@@ -475,7 +483,7 @@ NumpadRight::
 return	
 
 NumpadEnd:: 
-ShowHiddenText("W³¹cz/wy³¹cz tekst ukryty")
+ShowHiddenText("WÅ‚Ä…cz/wyÅ‚Ä…cz tekst ukryty")
 return	
 
 NumpadDown:: 
@@ -525,7 +533,7 @@ return
 
 #if ; this line will end the F24 secondary keyboard assignments.
 ;;============== END OF ALL Microsoft Word KEYBOARD KEYS =============================;;
-#if (getKeyState("F24", "P")) ; Rozwi¹zanie, ¿eby poprawnie otwiera³y i zamyka³y siê okna z nag³ówkami
+#if (getKeyState("F24", "P")) ; RozwiÄ…zanie, Å¼eby poprawnie otwieraÅ‚y i zamykaÅ‚y siÄ™ okna z nagÅ‚Ã³wkami
 F24:: return
 
 7:: ; Dedicated window: Enter no. of header
@@ -542,6 +550,11 @@ return
 
 0:: ; Dedicated window: Enter text of Bookmark
 InsertRef("bookmark")
+return
+
+SC05C:: ; NumLock
+	Base("NUMLOCK")
+	Captions()
 return
 
 #if
@@ -638,53 +651,7 @@ return
 
 +^h:: ; Shift + Ctrl + H - hide text; there is dedicated style to do that
 	
-	;~ try
-		;~ {
-		;~ TemplateStyle("Ukryty ms")
-		;~ }
-		;~ catch e
-		;~ {
-		;~ MsgBox, 48, Zostanie ukryty tekst bez zastosowania dedykowanego stylu z szablonu.
-		
-		;~ }
-		
-	oWord := ComObjActive("Word.Application")
-	;~ trzeba zrobiæ tak: odczytaæ, który (nr) paragrafu jest zaznaczony i wtedy sprawdziæ jego styl: https://word.tips.net/T000824_Determining_a_Paragraphs_Style_in_VBA.html
-	;~ trzeba te¿ sprawdziæ za pomoc¹ edytora makr, czy poni¿sze przyk³ady przypadkiem nie dzia³aj¹ w czystym VBA
-	;~ google: microsoft word vba read a style of selection property
-	
-	CurrentStyle := oWord.ActiveDocument.Paragraphs(2).Style ; to nie dzia³a
-	;~ CurrentStyle := ""
-	;~ CurrentStyle := oWord.ActiveDocument.Selection.Style ; to nie dzia³a
-	;~ CurrentStyle := oWord.Selection.Style ; to nie dzia³a
-	;~ CurrentStyle := oWord.Selection.ParagraphFormat.Style ; to nie dzia³a
-	;~ CurrentStyle := oWord.Selection.Range.Style ; to nie dzia³a
-	;~ CurrentStyle := oWord.Selection.Characters ; to nie dzia³a
-	;~ CurrentStyle := oWord.Selection.Text ; to dzia³a
-	;~ SelectionVar1 := oWord.Selection.Type ; to dzia³a
-	;~ SelectionVar2 := oWord.Selection.Information(2) ; to dzia³a
-	;~ SelectionVar3 := oWord.Selection.Flags ; to dzia³a
-	;~ CurrentStyle := oWord.Selection.Paragraphs.Style ; to nie dzia³a
-	;~ CurrentStyle := oWord.Selection.Information(21) ; to dzia³a, zwraca stan CapsLock
-	;~ CurrentStyle := oWord.Selection.Font.Name ; to dzia³a, zwraca nazwê fontu
-	;~ oWord.Selection.Style ; to nie dzia³a
-	;~ CurrentStyle := oWord.ActiveDocument.ActiveWindow.Selection.Style ; to nie dzia³a
-	;~ CurrentStyle := oWord.Selection.Text.Style ; to nie dzia³a
-	;~ CurrentStyle := "Fiko³ek"
-	;~ MsgBox, % SelectionVar1 . " " . SelectionVar2 . " " . SelectionVar3
-	MsgBox, % CurrentStyle
-	;~ MsgBox, % oWord.Selection.Style ; to nie dzia³a
-	;~ oWord.Selection.Style := "Ukryty ms"
-	;~ MsgBox, %CurrentStyle%
-	oWord := "" ; Clear global COM objects when done with them
-	
-;~ Selection.MoveRight Unit:=wdWord, Count:=5, Extend:=wdExtend
-    ;~ With Selection.Font
-        ;~ .Hidden = True
-    ;~ End With
-
-	;~ oWord.Selection.Style := StyleName
-	;~ oWord := "" ; Clear global COM objects when done with them
+	HideSelectedText()
 
 return
 
@@ -711,7 +678,7 @@ return
 
 ;~ #IfWinActive ahk_class OpusApp 
 ^p::
-	MsgBox, 48, Zanim wydrukujesz..., 1. Wykonaj makro`, które wstawi tward¹ spacjê po etykietach tabel i rysunków.`n2. Odœwierz zawartoœæ ca³ego dokumentu (Ctrl + F9).`n3. Zamieñ wszystkie odsy³acze na ³¹cza.`n4. Ponownie odœwierz zawartoœæ ca³ego dokumentu (Ctrl + F9).`n5. Poszukaj s³owa "B³¹d".
+	MsgBox, 48, Zanim wydrukujesz..., 1. Wykonaj makro`, ktÃ³re wstawi twardÄ… spacjÄ™ po etykietach tabel i rysunkÃ³w.`n2. OdÅ›wieÅ¼ zawartoÅ›Ä‡ caÅ‚ego dokumentu (Ctrl + F9).`n3. ZamieÅ„ wszystkie odsyÅ‚acze na Å‚Ä…cza.`n4. Ponownie odÅ›wieÅ¼ zawartoÅ›Ä‡ caÅ‚ego dokumentu (Ctrl + F9).`n5. Poszukaj sÅ‚owa "BÅ‚Ä…d".
 	Send, ^{p down}{p up}
 return 
 ;~ #IfWinActive
@@ -720,11 +687,11 @@ return
 F12::
 	MsgBox, 48, Zanim wydrukujesz..., 
 ( Join	
-1. Wykonaj makro, które wstawi tward¹ spacjê po etykietach tabel i rysunków.`n
-2. Odœwierz zawartoœæ ca³ego dokumentu (Ctrl + F9).`n
-3. Zamieñ wszystkie odsy³acze na ³¹cza.`n
-4. Ponownie odœwierz zawartoœæ ca³ego dokumentu (Ctrl + F9).`n
-5. Poszukaj s³owa "B³¹d".
+1. Wykonaj makro, ktÃ³re wstawi twardÄ… spacjÄ™ po etykietach tabel i rysunkÃ³w.`n
+2. OdÅ›wierz zawartoÅ›Ä‡ caÅ‚ego dokumentu (Ctrl + F9).`n
+3. ZamieÅ„ wszystkie odsyÅ‚acze na Å‚Ä…cza.`n
+4. Ponownie odÅ›wierz zawartoÅ›Ä‡ caÅ‚ego dokumentu (Ctrl + F9).`n
+5. Poszukaj sÅ‚owa "BÅ‚Ä…d".
 )
 	Send, {F12 down}{F12 up}
 return 
@@ -740,13 +707,13 @@ return
 if (flag_as = 0)
 {
 	SetTimer, AutoSave, Off
-	MsgBox, Autozapis zosta³ wy³¹czony!
+	MsgBox, Autozapis zostaÅ‚ wyÅ‚Ä…czony!
 	flag_as := 1
 }
 else if (flag_as = 1)
 {
 	SetTimer, AutoSave, On
-	MsgBox, Autozapis zosta³ ponownie w³¹czony!
+	MsgBox, Autozapis zostaÅ‚ ponownie wÅ‚Ä…czony!
 	flag_as := 0
 }
 return
@@ -759,18 +726,60 @@ return
 ; ----------------------- SEKCJA FUNKCJI -----------------------------------------------------
 ; --------------------------------------------------------------------------------------------
 
+HideSelectedText() ; 2019-10-22 2019-11-08
+	{
+	global oWord
+	global  WordTrue, WordFalse
+
+	oWord := ComObjActive("Word.Application")
+	OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
+	if (OurTemplate = OurTemplateEN || OurTemplate = OurTemplatePL)
+	{
+		nazStyl := oWord.Selection.Style.NameLocal
+		if (nazStyl = "Ukryty ms")
+			Send, ^{Space}
+		else
+		{
+			language := oWord.Selection.Range.LanguageID
+			oWord.Selection.Paragraphs(1).Range.LanguageID := language
+			TemplateStyle("Ukryty ms")
+		}
+	}
+	else
+	{
+		StateOfHidden := oWord.Selection.Font.Hidden
+		oWord.Selection.Font.Hidden := WordTrue
+		If (StateOfHidden == WordFalse)
+		{
+			oWord.Selection.Font.Hidden := WordTrue	
+			}
+		else
+		{
+			oWord.Selection.Font.Hidden := WordFalse
+		}
+	}
+	
+	oWord := "" ; Clear global COM objects when done with them
+	}
+
+; -----------------------------------------------------------------------------------------------------------------------------
+
 ToggleApplyStylesPane() ; 2019-10-03
 	{
 	global oWord
+	global  WordTrue, WordFalse	
+	
 	oWord := ComObjActive("Word.Application")
 	ApplyStylesTaskPane := oWord.CommandBars("Apply styles").Visible
-	If (ApplyStylesTaskPane = -1)
-		oWord.CommandBars("Apply styles").Visible := 0
-	Else If (ApplyStylesTaskPane = 0)
-		oWord.Application.TaskPanes(17).Visible := -1
+	If (ApplyStylesTaskPane = WordFalse)
+		oWord.Application.TaskPanes(17).Visible := WordTrue
+	Else If (ApplyStylesTaskPane = WordTrue)
+		oWord.CommandBars("Apply styles").Visible := WordFalse
+		
 	oWord := ""
 	}
 
+; -----------------------------------------------------------------------------------------------------------------------------
 
 DeleteLineOfText() ; 2019-10-03
 	{
@@ -784,11 +793,21 @@ DeleteLineOfText() ; 2019-10-03
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-StrikeThroughText() ; 2019-10-03
+StrikeThroughText() ; 2019-10-03 2019-11-08
 	{
 	global oWord
+	global  WordTrue, WordFalse	
+
 	oWord := ComObjActive("Word.Application")
-	oWord.Selection.Font.StrikeThrough := wdToggle := 9999998 
+	StateOfStrikeThrough := oWord.Selection.Font.StrikeThrough ; := wdToggle := 9999998 
+	if (StateOfStrikeThrough == WordFalse)
+		{
+		oWord.Selection.Font.StrikeThrough := wdToggle := 9999998
+		}
+	else
+		{
+		oWord.Selection.Font.StrikeThrough := 0
+		}
 	oWord :=  "" ; Clear global COM objects when done with them
 	}
 
@@ -815,10 +834,10 @@ BB_Insert(Name_BB, AdditionalText)
 	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
 		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
 		{
-		MsgBox, 16, Próba wywo³ania stylu z szablonu, 
+		MsgBox, 16, PrÃ³ba wywoÅ‚ania stylu z szablonu, 
 		( Join
-		 Próbujesz wstawiæ blok konstrukcyjny przypisany do szablonu, ale szablon nie zosta³ jeszcze do³¹czony do tego pliku. 
- Najpierw do³¹cz szablon, a nastêpnie wywo³aj ponownie tê funkcjê.
+		 PrÃ³bujesz wstawiÄ‡ blok konstrukcyjny przypisany do szablonu, ale szablon nie zostaÅ‚ jeszcze doÅ‚Ä…czony do tego pliku. 
+ Najpierw doÅ‚Ä…cz szablon, a nastÄ™pnie wywoÅ‚aj ponownie tÄ™ funkcjÄ™.
 		)
 		}
 	else
@@ -837,15 +856,15 @@ TemplateStyle(StyleName)
 	
 	Base(StyleName)
 	oWord := ComObjActive("Word.Application")
-	;~ SoundBeep, 750, 500 ; to fajnie dzia³a
+	;~ SoundBeep, 750, 500 ; to fajnie dziaÅ‚a
 	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
 		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
 		{
 		;~ MsgBox, % oWord.ActiveDocument.AttachedTemplate.FullName
-		MsgBox, 16, Próba wywo³ania stylu z szablonu, 
+		MsgBox, 16, PrÃ³ba wywoÅ‚ania stylu z szablonu, 
 		( Join
-		 Próbujesz wywo³aæ styl przypisany do szablonu, ale szablon nie zosta³ jeszcze do³¹czony do tego pliku. 
- Najpierw dolacz szablon, a nastêpnie wywo³aj ponownie tê funkcjê.
+		 PrÃ³bujesz wywoÅ‚aÄ‡ styl przypisany do szablonu, ale szablon nie zostaÅ‚ jeszcze doÅ‚Ä…czony do tego pliku. 
+ Najpierw dolacz szablon, a nastÄ™pnie wywoÅ‚aj ponownie tÄ™ funkcjÄ™.
 		)
 		oWord := "" ; Clear global COM objects when done with them
 		return
@@ -1008,7 +1027,7 @@ PrintToPdf(AdditionalText := "")
 	Send, {y}
 	Send, {3}
 	Send, {c}
-	;~ MsgBox, 64, Zapisa³em .pdf, % "Zapisa³em .pdf:`n" OutputFileName
+	;~ MsgBox, 64, ZapisaÅ‚em .pdf, % "ZapisaÅ‚em .pdf:`n" OutputFileName
 	oWord := ""
 	}
 
@@ -1028,7 +1047,7 @@ ShowClipboard(AdditionalText := "")
 
 WatermarkDRAFT(AdditionalText := "")
 ;~ https://autohotkey.com/board/topic/115939-how-to-insert-a-watermark-into-an-open-word-doc-via-com/ 
-;~ dzia³a równie Ÿle, co makro napisane przez AG -> krzywo wstawia napis w kolejnych sekcjach, ale to ju¿ temat na osobne dociekania
+;~ dziaÅ‚a rÃ³wnie Åºle, co makro napisane przez AG -> krzywo wstawia napis w kolejnych sekcjach, ale to juÅ¼ temat na osobne dociekania
 	{
 	global oWord, WordFalse, WordTrue
 	
@@ -1046,7 +1065,7 @@ WatermarkDRAFT(AdditionalText := "")
 		oWord.Selection.ShapeRange.Fill.Visible := WordTrue
 		oWord.Selection.ShapeRange.Fill.Solid
 		oWord.Selection.ShapeRange.Fill.ForeColor := 0xD9D9D9 ; .RGB(217, 217, 217)
-		oWord.Selection.ShapeRange.Fill.Transparency := 0,5 ; niestety tu musi byæ przecinek zamiast kropki, inaczej nie dzia³a. W¹tek na forum: https://www.autohotkey.com/boards/viewtopic.php?f=76&t=63129&p=270001#p270001
+		oWord.Selection.ShapeRange.Fill.Transparency := 0,5 ; niestety tu musi byÄ‡ przecinek zamiast kropki, inaczej nie dziaÅ‚a. WÄ…tek na forum: https://www.autohotkey.com/boards/viewtopic.php?f=76&t=63129&p=270001#p270001
 		oWord.Selection.ShapeRange.Rotation := 315
 		oWord.Selection.ShapeRange.LockAspectRatio := WordTrue
 		oWord.Selection.ShapeRange.Height.CentimetersToPoints(8.62)
@@ -1054,7 +1073,7 @@ WatermarkDRAFT(AdditionalText := "")
 		oWord.Selection.ShapeRange.WrapFormat.AllowOverlap := WordTrue
 		oWord.Selection.ShapeRange.WrapFormat.Side := wdWrapNone := 3
 		oWord.Selection.ShapeRange.WrapFormat.Type := 3
-		oWord.Selection.ShapeRange.RelativeHorizontalPosition := wdRelativeVerticalPositionMargin := 0
+		oWord.Selection.ShapeRange.RelativeHorizontalPosition := wdRelativeHorizontalPositionMargin := 0
 		oWord.Selection.ShapeRange.RelativeVerticalPosition := wdRelativeVerticalPositionMargin := 0
 		oWord.Selection.ShapeRange.Left := wdShapeCenter := -999995 
 		oWord.Selection.ShapeRange.Top := wdShapeCenter := -999995
@@ -1076,14 +1095,14 @@ SetTemplate(PLorEN := "", AdditionalText := "")
 		{
 		if (oWord.ActiveDocument.AttachedTemplate.FullName = OurTemplatePL)	
 			{
-			MsgBox, 64, Ju¿ ustawi³eœ szablon, % "Ju¿ wczeœniej zosta³ wybrany szablon " oWord.ActiveDocument.AttachedTemplate.FullName
+			MsgBox, 64, JuÅ¼ ustawiÅ‚eÅ› szablon, % "JuÅ¼ wczeÅ›niej zostaÅ‚ wybrany szablon " oWord.ActiveDocument.AttachedTemplate.FullName
 			}
 		else
 			{
 			oWord.ActiveDocument.AttachedTemplate := OurTemplatePL
 			oWord.ActiveDocument.UpdateStylesOnOpen := WordTrue
 			oWord.ActiveDocument.UpdateStyles
-			MsgBox, 64, Informacja, % "Do³¹czono szablon!`n Do³¹czono domyslny szablon dokumentu: `n" oWord.ActiveDocument.AttachedTemplate.FullName, 5
+			MsgBox, 64, Informacja, % "DoÅ‚Ä…czono szablon!`n DoÅ‚Ä…czono domyslny szablon dokumentu: `n" oWord.ActiveDocument.AttachedTemplate.FullName, 5
 			oWord := "" ; Clear global COM objects when done with them
 			OurTemplate := OurTemplatePL
 			}	
@@ -1092,14 +1111,14 @@ SetTemplate(PLorEN := "", AdditionalText := "")
 		{
 		if (oWord.ActiveDocument.AttachedTemplate.FullName = OurTemplateEN)		
 			{
-			MsgBox, 64, Ju¿ ustawi³eœ szablon, % "Ju¿ wczeœniej zosta³ wybrany szablon " oWord.ActiveDocument.AttachedTemplate.FullName	
+			MsgBox, 64, JuÅ¼ ustawiÅ‚eÅ› szablon, % "JuÅ¼ wczeÅ›niej zostaÅ‚ wybrany szablon " oWord.ActiveDocument.AttachedTemplate.FullName	
 			}
 		else
 			{
 			oWord.ActiveDocument.AttachedTemplate := OurTemplateEN
 			oWord.ActiveDocument.UpdateStylesOnOpen := WordTrue
 			oWord.ActiveDocument.UpdateStyles
-			MsgBox, 64, Informacja, % "Do³¹czono szablon!`n Do³¹czono domyslny szablon dokumentu: `n" oWord.ActiveDocument.AttachedTemplate.FullName, 5
+			MsgBox, 64, Informacja, % "DoÅ‚Ä…czono szablon!`n DoÅ‚Ä…czono domyslny szablon dokumentu: `n" oWord.ActiveDocument.AttachedTemplate.FullName, 5
 			oWord := "" ; Clear global COM objects when done with them
 			OurTemplate := OurTemplateEN
 			}	
@@ -1111,10 +1130,11 @@ SetTemplate(PLorEN := "", AdditionalText := "")
 ChangeZoom(AdditionalText := "")
 	{
 	global oWord
-	static ZoomValue := 100
+	static ZoomValue
 	
 	Base(AdditionalText)
 	oWord := ComObjActive("Word.Application")
+	ZoomValue := oWord.ActiveWindow.ActivePane.View.Zoom.Percentage
 	if (ZoomValue = 100) 
 		{
 		ZoomValue := 200
@@ -1158,21 +1178,24 @@ ToggleStylePane(AdditionalText := "")
 	
 	Base(AdditionalText)
 	oWord := ComObjActive("Word.Application")
-	StateOfStylesPane := oWord.Application.TaskPanes(wdTaskPaneApplyStyles := 0).Visible
+	StateOfStylesPane := oWord.CommandBars.ExecuteMso("Format Object").Visible
+	;StateOfStylesPane := oWord.Application.TaskPanes(wdTaskPaneApplyStyles := 0).Visible
 	if (StateOfStylesPane = WordTrue)
 		{
-		oWord.Application.TaskPanes(wdTaskPaneApplyStyles := 0).Visible := WordFalse
+		oWord.CommandBars("Format Object").Visible := WordFalse
+		;oWord.Application.TaskPanes(wdTaskPaneApplyStyles := 0).Visible := WordFalse
 		}
 	else
 		{
-		oWord.Application.TaskPanes(wdTaskPaneApplyStyles := 0).Visible := WordTrue
+		oWord.CommandBars("Format Object").Visible := WordTrue
+		;oWord.Application.TaskPanes(wdTaskPaneApplyStyles := 0).Visible := WordTrue
 		}	
 	oWord := "" ; Clear global COM objects when done with them
 	}
 	
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-DeleteCurrentComment(AdditionalText := "") ; usuñ aktualnie wybrany komentarz
+DeleteCurrentComment(AdditionalText := "") ; usuÅ„ aktualnie wybrany komentarz
 	{
 	global 
 	local e
@@ -1188,13 +1211,13 @@ DeleteCurrentComment(AdditionalText := "") ; usuñ aktualnie wybrany komentarz
 		}
 		catch e
 		{
-		MsgBox, 48, Usuwanie komentarza, By usunaæ komentarz musisz go najpierw wyedytowaæ (Edytuj komentarz).
+		MsgBox, 48, Usuwanie komentarza, By usunaÄ‡ komentarz musisz go najpierw wyedytowaÄ‡ (Edytuj komentarz).
 		}
 	}
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-InsertColumnToTheRight(AdditionalText := "") ; wstaw kolumnê tabeli z prawej
+InsertColumnToTheRight(AdditionalText := "") ; wstaw kolumnÄ™ tabeli z prawej
 	{
 	global oWord	
 		
@@ -1206,7 +1229,7 @@ InsertColumnToTheRight(AdditionalText := "") ; wstaw kolumnê tabeli z prawej
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-InsertColumnToTheLeft(AdditionalText := "") ; wstaw kolumnê tabeli z lewej
+InsertColumnToTheLeft(AdditionalText := "") ; wstaw kolumnÄ™ tabeli z lewej
 	{
 	global oWord	
 		
@@ -1218,7 +1241,7 @@ InsertColumnToTheLeft(AdditionalText := "") ; wstaw kolumnê tabeli z lewej
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-AlignTableCellConntentToMiddle(AdditionalText := "") ; Wyrównanie treœci komórki do œrodka i do œrodka w pionie
+AlignTableCellConntentToMiddle(AdditionalText := "") ; WyrÃ³wnanie treÅ›ci komÃ³rki do Å›rodka i do Å›rodka w pionie
 	{
 	global oWord	
 		
@@ -1232,7 +1255,7 @@ AlignTableCellConntentToMiddle(AdditionalText := "") ; Wyrównanie treœci komórki
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-AlignTableCellConntentToLeft(AdditionalText := "") ; Wyrównanie treœci komórki do lewej i do œrodka w pionie
+AlignTableCellConntentToLeft(AdditionalText := "") ; WyrÃ³wnanie treÅ›ci komÃ³rki do lewej i do Å›rodka w pionie
 	{
 	global oWord	
 		
@@ -1274,7 +1297,7 @@ VersionAndAdjustation(OriginalOrFinal, AdditionalText := "")
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-InsertTableRowAbove(AdditionalText := "") ; tabela: Wstaw wiersz powy¿ej
+InsertTableRowAbove(AdditionalText := "") ; tabela: Wstaw wiersz powyÅ¼ej
 	{
 	global oWord	
 		
@@ -1286,7 +1309,7 @@ InsertTableRowAbove(AdditionalText := "") ; tabela: Wstaw wiersz powy¿ej
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-InsertTableRowBelow(AdditionalText := "") ; tabela: Wstaw wiersz powy¿ej
+InsertTableRowBelow(AdditionalText := "") ; tabela: Wstaw wiersz powyÅ¼ej
 	{
 	global oWord	
 		
@@ -1298,7 +1321,7 @@ InsertTableRowBelow(AdditionalText := "") ; tabela: Wstaw wiersz powy¿ej
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-GoToPreviousComment(AdditionalText := "") ; PrzejdŸ do wczeœniejszego komentarza
+GoToPreviousComment(AdditionalText := "") ; PrzejdÅº do wczeÅ›niejszego komentarza
 	{
 	global oWord	
 		
@@ -1311,7 +1334,7 @@ GoToPreviousComment(AdditionalText := "") ; PrzejdŸ do wczeœniejszego komentarza
 	
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-GoToNextComment(AdditionalText := "") ; PrzejdŸ do kolejnego komentarza
+GoToNextComment(AdditionalText := "") ; PrzejdÅº do kolejnego komentarza
 	{
 	global oWord	
 		
@@ -1324,7 +1347,7 @@ GoToNextComment(AdditionalText := "") ; PrzejdŸ do kolejnego komentarza
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-DeleteTableRow(AdditionalText := "") ; Usuñ wiersz tabeli
+DeleteTableRow(AdditionalText := "") ; UsuÅ„ wiersz tabeli
 	{
 	global oWord	
 		
@@ -1336,7 +1359,7 @@ DeleteTableRow(AdditionalText := "") ; Usuñ wiersz tabeli
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-DeleteTableColumn(AdditionalText := "") ; Usuñ kolumnê tabeli
+DeleteTableColumn(AdditionalText := "") ; UsuÅ„ kolumnÄ™ tabeli
 	{
 	global oWord	
 		
@@ -1348,7 +1371,7 @@ DeleteTableColumn(AdditionalText := "") ; Usuñ kolumnê tabeli
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-MoveVectorObject(Direction, AdditionalText := "") ; przemieœæ obiekt rysunkowy we wskazanym kierunku o 25 px
+MoveVectorObject(Direction, AdditionalText := "") ; przemieÅ›Ä‡ obiekt rysunkowy we wskazanym kierunku o 25 px
 	{
 	global oWord	
 		
@@ -1375,7 +1398,7 @@ MoveVectorObject(Direction, AdditionalText := "") ; przemieœæ obiekt rysunkowy w
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-MarkAllTableCells(AdditionalText := "") ; zaznacz ca³¹ tabelê
+MarkAllTableCells(AdditionalText := "") ; zaznacz caÅ‚Ä… tabelÄ™
 	{
 	global oWord	
 		
@@ -1387,7 +1410,7 @@ MarkAllTableCells(AdditionalText := "") ; zaznacz ca³¹ tabelê
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-MergeTableCells(AdditionalText := "") ; po³¹cz zaznaczone komórki tabeli
+MergeTableCells(AdditionalText := "") ; poÅ‚Ä…cz zaznaczone komÃ³rki tabeli
 	{
 	global oWord	
 		
@@ -1399,7 +1422,7 @@ MergeTableCells(AdditionalText := "") ; po³¹cz zaznaczone komórki tabeli
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-SeparateTableCell2xRow1xColumn(AdditionalText := "") ; Podziel zaznaczon¹ komórkê tabeli: 2x wiersze, 1x kolumna
+SeparateTableCell2xRow1xColumn(AdditionalText := "") ; Podziel zaznaczonÄ… komÃ³rkÄ™ tabeli: 2x wiersze, 1x kolumna
 	{
 	global oWord	
 		
@@ -1412,7 +1435,7 @@ SeparateTableCell2xRow1xColumn(AdditionalText := "") ; Podziel zaznaczon¹ komórk
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-SeparateTableCell1xRow2xColumn(AdditionalText := "") ; Podziel zaznaczon¹ komórkê tabeli: 1x wiersz, 2x kolumna
+SeparateTableCell1xRow2xColumn(AdditionalText := "") ; Podziel zaznaczonÄ… komÃ³rkÄ™ tabeli: 1x wiersz, 2x kolumna
 	{
 	global oWord	
 		
@@ -1424,7 +1447,7 @@ SeparateTableCell1xRow2xColumn(AdditionalText := "") ; Podziel zaznaczon¹ komórk
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-ToggleFormattingPane(AdditionalText := "") ; prze³¹cz "Panel formatowanie"
+ToggleFormattingPane(AdditionalText := "") ; przeÅ‚Ä…cz "Panel formatowanie"
 	{
 	global oWord, WordTrue, WordFalse
 		
@@ -1444,7 +1467,7 @@ ToggleFormattingPane(AdditionalText := "") ; prze³¹cz "Panel formatowanie"
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-ToggleRuler(AdditionalText := "") ; prze³¹cz linijkê
+ToggleRuler(AdditionalText := "") ; przeÅ‚Ä…cz linijkÄ™
 	{
 	global oWord, WordTrue, WordFalse
 		
@@ -1485,7 +1508,7 @@ ParagraphLinesKeepTogether(AdditionalText := "") ; Akapit: Zachowaj wiersze raze
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-ParagraphPageBreakBefore(AdditionalText := "") ; Akapit: Podzia³ strony przed
+ParagraphPageBreakBefore(AdditionalText := "") ; Akapit: PodziaÅ‚ strony przed
 	{
 	global oWord, WordTrue, WordFalse
 		
@@ -1506,7 +1529,7 @@ ParagraphPageBreakBefore(AdditionalText := "") ; Akapit: Podzia³ strony przed
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-ParagraphFormatKeepWithNext(AdditionalText := "") ; Akapit: Razem z nastêpnym
+ParagraphFormatKeepWithNext(AdditionalText := "") ; Akapit: Razem z nastÄ™pnym
 	{
 	global oWord, WordTrue, WordFalse
 		
@@ -1543,7 +1566,7 @@ TableBorderOff(AdditionalText := "") ; na potrzeby raportu z weryfikacji
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-TableCellColorVoestalpine(AdditionalText := "") ; kolor wype³nienia komórki tabeli 0 | 130 | 180
+TableCellColorVoestalpine(AdditionalText := "") ; kolor wypeÅ‚nienia komÃ³rki tabeli 0 | 130 | 180
 	{
 	global oWord
 		
@@ -1555,7 +1578,7 @@ TableCellColorVoestalpine(AdditionalText := "") ; kolor wype³nienia komórki tabe
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-TableRowsAllowBreakAcrossPages(AdditionalText := "") ; zezwalaj na dzielenie wierszy miêdzy stronami
+TableRowsAllowBreakAcrossPages(AdditionalText := "") ; zezwalaj na dzielenie wierszy miÄ™dzy stronami
 	{
 	global oWord, WordTrue, WordFalse
 		
@@ -1575,25 +1598,25 @@ TableRowsAllowBreakAcrossPages(AdditionalText := "") ; zezwalaj na dzielenie wie
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-RejectChange(AdditionalText := "") ; odrzuæ zmianê
+RejectChange(AdditionalText := "") ; odrzuÄ‡ zmianÄ™
 	{
 	global oWord
 	
 	Base(AdditionalText)	
 	oWord := ComObjActive("Word.Application")
-	oWord.Selection.Range.Revisions.RejectAll ; Odrzuæ zmianê
+	oWord.Selection.Range.Revisions.RejectAll ; OdrzuÄ‡ zmianÄ™
 	oWord := "" ; Clear global COM objects when done with them
 	}
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-AcceptChange(AdditionalText := "") ; zaakceptuj zmianê
+AcceptChange(AdditionalText := "") ; zaakceptuj zmianÄ™
 	{
 	global oWord
 
 	Base(AdditionalText)
 	oWord := ComObjActive("Word.Application")
-	oWord.Selection.Range.Revisions.AcceptAll ; Zaakceptuj zmianê
+	oWord.Selection.Range.Revisions.AcceptAll ; Zaakceptuj zmianÄ™
 	oWord := "" ; Clear global COM objects when done with them
 	}
 
@@ -1614,21 +1637,21 @@ EditComment(AdditionalText := "") ; edytuj komentarz
 	}
 	catch e
 	{
-		MsgBox, 48,, Aby edytowaæ komentarz, musisz umieœciæ kursor w obrêbie tekstu, którego komentarz dotyczy.
+		MsgBox, 48,, Aby edytowaÄ‡ komentarz, musisz umieÅ›ciÄ‡ kursor w obrÄ™bie tekstu, ktÃ³rego komentarz dotyczy.
 	}
 	oWord := ""
 	}
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-ToggleSelectionAndVisibilityPane(AdditionalText := "") ; w³¹cz / wy³¹cz panel edycji obiektów graficznych
+ToggleSelectionAndVisibilityPane(AdditionalText := "") ; wÅ‚Ä…cz / wyÅ‚Ä…cz panel edycji obiektÃ³w graficznych
 	{
 	global oWord, WordTrue, WordFalse
 ;~ https://docs.microsoft.com/en-us/office/vba/api/word.global.commandbars
 ;~ http://www.vbaexpress.com/forum/forumdisplay.php?20-Word-Help
 ;~ https://wordribbon.tips.net/T008342_Using_the_Selection_and_Visibility_Pane.html
 ;~ https://docs.microsoft.com/pl-pl/office/vba/api/office.commandbar.enabled
-;~ z nieznanych przyczyn to nie dzia³a za pierwszym razem - przed pierwszym wyœwietleniem "Selection and Visibility" pane. Pierwsze wyœwietlenie trzeba zrobiæ rêcznie.
+;~ z nieznanych przyczyn to nie dziaÅ‚a za pierwszym razem - przed pierwszym wyÅ›wietleniem "Selection and Visibility" pane. Pierwsze wyÅ›wietlenie trzeba zrobiÄ‡ rÄ™cznie.
 	Base(AdditionalText)
 	oWord := ComObjActive("Word.Application")
 	
@@ -1646,7 +1669,7 @@ ToggleSelectionAndVisibilityPane(AdditionalText := "") ; w³¹cz / wy³¹cz panel ed
 	
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-NextChangeOrComment(AdditionalText := "") ; nastêpna zmiana lub komentarz
+NextChangeOrComment(AdditionalText := "") ; nastÄ™pna zmiana lub komentarz
 ;~ by Jakub Masiak
 {
 	global oWord
@@ -1691,7 +1714,7 @@ AlignTableToPageBorder(AdditionalText := "")
 }
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-DeleteInterline(AdditionalText := "") ; usuwa interliniê u góry strony (przerwê poprzedzaj¹c¹ ustawia na zero pkt; przywrócenie domyœlnego formatowania akapitu: Ctrl + q)
+DeleteInterline(AdditionalText := "") ; usuwa interliniÄ™ u gÃ³ry strony (przerwÄ™ poprzedzajÄ…cÄ… ustawia na zero pkt; przywrÃ³cenie domyÅ›lnego formatowania akapitu: Ctrl + q)
 ;~ by Jakub Masiak
 {
 	global oWord
@@ -1711,7 +1734,7 @@ DeleteInterline(AdditionalText := "") ; usuwa interliniê u góry strony (przerwê 
 }
 ; -----------------------------------------------------------------------------------------------------------------------------
 
-RepeatTableHeader(AdditionalText := "") ; powtórz wiersz nag³ówka tabeli
+RepeatTableHeader(AdditionalText := "") ; powtÃ³rz wiersz nagÅ‚Ã³wka tabeli
 ;~ by Jakub Masiak
 {
 	global oWord
@@ -1755,7 +1778,7 @@ ChangeLanguage(AdditionalText := "")
 	}
 
 ; -----------------------------------------------------------------------------------------------------------------------------
-DisplayGridLines(AdditionalText := "") ; w³¹cz / wy³¹cz linie siatki
+DisplayGridLines(AdditionalText := "") ; wÅ‚Ä…cz / wyÅ‚Ä…cz linie siatki
 ;~ by Jakub Masiak
 {
 	global oWord	
@@ -1840,6 +1863,35 @@ ShowHiddenText(AdditionalText := "")
 	oWord := ""
 	return
 }
+
+; -----------------------------------------------------------------------------------------------------------------------------
+Source(AdditionalText := "")
+;~ by Jakub Masiak
+{
+	global oWord, OurTemplate, OurTemplateEN
+	Base(AdditionalText)
+	oWord := ComObjActive("Word.Application")
+	OurTemplate := oWord.ActiveDocument.AttachedTemplate
+	Send, ^+h
+	if (OurTemplate = OurTemplateEN)
+		Send, Source: 
+	else
+		Send, Å¹rÃ³dÅ‚o: 
+	oWord := ""
+	return
+}
+; -----------------------------------------------------------------------------------------------------------------------------
+StartWithOddOrEvenPage()
+	{
+	global oWord
+	oWord := ComObjActive("Word.Application")
+	state := oWord.ActiveDocument.PageSetup.SectionStart
+	if (state != 3)
+		oWord.ActiveDocument.PageSetup.SectionStart := 3
+	else
+		oWord.ActiveDocument.PageSetup.SectionStart := 4
+	oWord :=  "" ; Clear global COM objects when done with them
+	}
 ; -----------------------------------------------------------------------------------------------------------------------------
 InsertRef(fname)
 ;~ by Jakub Masiak
@@ -1884,9 +1936,9 @@ InsertRef(fname)
 		if (ins = 0)
 			type := "elementu listy numerowanej"
 		else if (ins = 1)
-			type := "nag³ówka"
+			type := "nagÅ‚Ã³wka"
 		else if (ins = 2)
-			type := "zak³adki"
+			type := "zakÅ‚adki"
 		References(ins, out, name, flag_%fname%, title, type)
 		cntWnd := cntWnd + 1
 		order[no] := cntWnd - 1
@@ -1931,9 +1983,9 @@ InsertRef(fname)
 		if (ins = 0)
 			type := "elementu listy numerowanej"
 		else if (ins = 1)
-			type := "nag³ówka"
+			type := "nagÅ‚Ã³wka"
 		else if (ins = 2)
-			type := "zak³adki"
+			type := "zakÅ‚adki"
 		WinGetPos, X%name%, Y%name%, W%name%, H%name%, Wstaw %title% %type%
 		Gui, %name%:Destroy
 		cntWnd := cntWnd - 1
@@ -1951,7 +2003,7 @@ References(ins, out, name, ByRef flag, title, type) ; ins: 0 - Numbered Item, 1 
 ;~ by Jakub Masiak
 {
 	local vMyListBox
-	static oWord
+	static oWord, Hlb, Wlb, e, Mon, MonTop, MonRight, MonLeft, MonBottom, Var, N
 	try{
 		oWord := ComObjActive("Word.Application")
 	}
@@ -2000,13 +2052,13 @@ MyListBox:
 		return
 			
 OK:
-	IfWinActive, Wstaw tekst nag³ówka
+	IfWinActive, Wstaw tekst nagÅ‚Ã³wka
 		name := "a"
-	IfWinActive, Wstaw numer nag³ówka
+	IfWinActive, Wstaw numer nagÅ‚Ã³wka
 		name := "b"
 	IfWinActive, Wstaw numer elementu listy numerowanej
 		name := "c"
-	IfWinActive, Wstaw tekst zak³adki
+	IfWinActive, Wstaw tekst zakÅ‚adki
 		name := "d"
 	try
 	{
@@ -2107,3 +2159,210 @@ InitAutosaveFilePath(path)
 		FileCreateDir, % path
 	return true
 }
+
+Labels()
+{
+	global flag_lab, flag_lab2, H, W, X, Y, MyListBox2, LabelList
+	static oWord, Hlb, Wlb, e, Mon, MonTop, MonRight, MonLeft, MonBottom, Var, N
+	if (flag_lab = 1)
+	{
+		WinGetPos, X, Y, W, H, Etykiety
+		Gui, lab:Destroy
+		flag_lab := 0
+		
+	}
+	else
+	{
+		flag_lab := 1
+		try{
+			oWord := ComObjActive("Word.Application")
+		}
+		catch e
+		{	
+			flag_lab := 0
+			return
+		}
+		N := 2
+		SysGet, Mon, MonitorWorkArea, %N%
+		Var := 12
+		if (flag_lab2 = 0)
+		{
+			Y := MonTop +0.05*Var
+			W := (MonRight - MonLeft)/Var
+			X := MonRight- 14*Var
+			H := (MonBottom - (MonTop + 5*Var/2))/(Var/2)
+			flag_lab2 := 1
+		}
+		else
+		{
+			H := H-39
+			W := W-16
+		}
+		Hlb := H -  Var
+		Wlb := W - 2 * Var
+		Gui, lab:New, +Resize -MinimizeBox -MaximizeBox
+		Gui, Add, ListBox, H%Hlb% W%Wlb% vMyListBox2 gMyListBox2 +AltSubmit
+		LabelList := ["Rysunek", "Rys.", "Figure", "Fig.", "Tabela", "Table", "Tab.", "RÃ³wnanie"] ;do nawiasu moÅ¼na dopisywaÄ‡ kolejne podpisy; podpisy dotyczÄ…ce rysunkÃ³w powinny siÄ™ znajdowaÄ‡ po wczeÅ›niejszych podpisach dotyczÄ…cych rysunkÃ³w; naleÅ¼y zaktualizowaÄ‡ rÃ³wnieÅ¼ wartoÅ›Ä‡ poniÅ¼ej
+		Loop, % LabelList.MaxIndex()
+		{
+			GuiControl,, MyListBox2, % LabelList[A_Index]
+		}
+		Gui, lab:Add, Button, Hidden Default gOK2,OK
+		Gui, lab:Show,X%X% Y%Y% H%H% W%W%, Etykiety
+	}
+	return
+		
+MyListBox2:
+
+if (A_GuiEvent != "DoubleClick")
+		return
+			
+OK2:
+	Gui, Submit, Nohide
+	if(MyListBox2 > 0 and MyListBox2 <= LabelList.MaxIndex())
+	{
+		var := LabelList[MyListBox2]
+		try 
+		{
+			oWord.CaptionLabels.Add(var)
+			
+		}
+		if (MyListBox2 <= 4) ;4 to iloÅ›Ä‡ podpisÃ³w dotyczÄ…cych rysunkÃ³w; jeÅ›li zwiÄ™kszona zostanie ich iloÅ›Ä‡, naleÅ¼y zaktualizowaÄ‡ tÄ™ wartoÅ›Ä‡
+		{
+			oWord.Selection.InsertCaption(var,,1)
+			TemplateStyle("Podpis pod rysunkiem ms")
+		}
+		else if (MyListBox2 > 4) && (MyListBox2 <= MyListBox2.MaxIndex() - 1)
+		{
+			oWord.Selection.InsertCaption(var,,0)
+			TemplateStyle("Legenda,Podpis tabeli ms")
+		}
+		else
+		{
+			oWord.Selection.InsertCaption(var,,1)
+		}
+	}
+	return
+}
+labGuiEscape:
+labGuiClose:
+	WinGetPos, X, Y, W, H, Etykiety
+	Gui, lab:Destroy
+	flag_lab := 0
+return
+
+Captions()
+{
+	global flag_ti, flag_ti2, H, W, X, Y, MyListBox3, CaptionList, fl, myLabels, Index
+	static oWord, Hti, Wti, e, Mon, MonTop, MonRight, MonLeft, MonBottom, Var, N
+	if (flag_ti = 1)
+	{
+		WinGetPos, X, Y, W, H, Podpisy
+		Gui, ti:Destroy
+		flag_ti := 0
+		
+	}
+	else if (flag_ti = 0)
+	{
+		flag_ti := 1
+		try{
+			oWord := ComObjActive("Word.Application")
+		}
+		catch e
+		{	
+			flag_ti := 0
+			return
+		}
+		N := 2
+		SysGet, Mon, MonitorWorkArea, %N%
+		Var := 12
+		if (flag_ti2 = 0)
+		{
+			Y := MonTop +0.05*Var
+			W := (MonRight - MonLeft)/(0.75*Var)
+			X := MonRight- 18.5*Var
+			H := (MonBottom - (MonTop + 5*Var/2))/(Var/2)
+			flag_ti2 := 1
+		}
+		else
+		{
+			H := H-39
+			W := W-16
+		}
+		Hti := H -  Var
+		Wti := W - 2 * Var
+		Gui, ti:New, +Resize -MinimizeBox -MaximizeBox
+		Gui, Add, ListBox, H%Hti% W%Wti% vMyListBox3 gMyListBox3 +AltSubmit
+		cnt := oWord.CaptionLabels.Count
+		Loop, % cnt
+		{
+			CaptionList[A_Index] := oWord.CaptionLabels(A_Index).Name
+		}
+		Loop, % CaptionList.MaxIndex()
+		{
+			GuiControl,, MyListBox3, % CaptionList[A_Index]
+		}
+		Gui, ti:Add, Button, Hidden Default gOK3,OK
+		Gui, ti:Show,X%X% Y%Y% H%H% W%W%, Podpisy
+		fl := 0
+	}
+	return
+		
+MyListBox3:
+
+if (A_GuiEvent != "DoubleClick")
+	return
+			
+OK3:
+	Gui, Submit, Nohide
+	if (fl = 0)
+	{	
+		if(MyListBox3 > 0 and MyListBox3 <= CaptionList.MaxIndex())
+		{
+			var := CaptionList[MyListBox3]
+			myLabels := oWord.ActiveDocument.GetCrossReferenceItems(var)
+			GuiControl, , MyListBox3, |
+			Loop, % myLabels.MaxIndex()
+			{
+				GuiControl,, MyListBox3, % myLabels[A_Index]
+			}
+			fl := 1
+		}
+		return
+	}
+	
+	if (fl = 1)
+	{
+		if(MyListBox3 > 0 and MyListBox3 <= myLabels.MaxIndex())
+		{
+			var2 := myLabels[MyListBox3]
+			Index := MyListBox3
+			oWord.Selection.InsertCrossReference(var, 3, Index, 1, 0, 0, " ")
+			
+		}
+	}
+	
+	return
+				
+
+}
+	
+tiGuiEscape:
+	if(fl = 1)
+	{
+		GuiControl, , MyListBox3, |
+		Loop, % CaptionList.MaxIndex()
+		{
+			GuiControl,, MyListBox3, % CaptionList[A_Index]
+		}
+		fl := 0
+	
+	return	
+	}
+	else 
+	
+tiGuiClose:
+	WinGetPos, X, Y, W, H, Podpisy
+	Gui, ti:Destroy
+	flag_ti := 0
+return
