@@ -43,15 +43,16 @@ LControl & RAlt:: ; AltGr
 
 #Hotstring c b0 ? *
 
-;~ ORDINARY_DIACRIC_LETTERS:
-; a - ą
-; c - ć
-; e - ę
-; l - ł
-; o - ó
-; s - ś
-; x - ź
-; z - ż
+;~ ORDINARY_DIACRIC POLISH LETTERS:
+; a - ą {U+0105}
+; c - ć {U+0107}
+; e - ę {U+0119}
+; l - ł {U+0142}
+; n - ń {U+0144}
+; o - ó {U+00F3}
+; s - ś {U+015B}
+; x - ź {U+017A}
+; z - ż {U+017C}
 
 :z:aaa::
     Send, {BackSpace 2}aa
@@ -186,15 +187,16 @@ return
 return
 
 
-;~ CAPITAL_DIACTRIC_LETTERS:
-; A - Ą
-; C - Ć
-; E - Ę
-; L - Ł
-; O - Ó
-; S - Ś
-; X - Ź
-; Z - Ż
+;~ CAPITAL DIACTRIC POLISH LETTERS:
+; A - Ą {U+0104}
+; C - Ć {U+0106}
+; E - Ę {U+0118}
+; L - Ł {U+0141}
+; N - Ń {U+0143}
+; O - Ó {U+00D3}
+; S - Ś {U+015A}
+; X - Ź {U+0179}
+; Z - Ż {U+017B}
 
 :z:AAA::
     Send, {BackSpace 2}AA
