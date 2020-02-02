@@ -16,10 +16,12 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 ;~ WordFalse := 0
 ; --------------- END OF GLOBAL VARIABLES SECTION ----------------------
 
+; - - - - - - - - - - - Set of default web pages - - - - - - - - - - - - - - - - - 
+;~ Run, https://solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx ; voestalpine Signaling Siershahn, Cooperation Platform Sopot
 
 
-; ---------------- SECTION OF KEYBOARD HOTKEYS -----------------------------
-; These are valid only for "Logitech Internet 350 Keyboard" and alike.
+; ---------------- SECTION OF KEYBOARD HOTKEYS ---------------------------------------------------------------------------------------
+; These are valid only for "Logitech Internet 350 Keyboard" and alike with so called multimedia keys
 
 Launch_Media:: ; run Microsoft Word application - a note, the very first multimedia key from a left 
 	tooltip, [%A_thishotKey%] Run text processor Microsoft Word  
@@ -57,24 +59,14 @@ return
 	DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0)
 return
 
-; These are dedicated to ThinkPad T480 (notebook) keyboard
-Ralt::AppsKey ; redirects AltGr -> context menu
-
-
 ; These are valid for any keyboard
 +^k:: ; run Kee Pass application (password manager)
 	Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 
 return
-
-
-
 ; - - - - - - - - END OF KEYBOARD HOTKEYS SECTION - - - - - - - - - - - - - - - - - - - - - 
 
 
-
-
 ; ---------- SECTION OF NUMERIC KEYBOARD HOTKEYS - NUMLOCK == ON -----------------------------------------------
-
 ; ---------- SECTION OF NUMERIC KEYBOARD HOTKEYS - NUMLOCK == OFF ---------------------------------------------
 
 
@@ -89,63 +81,49 @@ return
 ; ---------------------- KEYS REMAPPING -----------------------------------
 ;~ https://support.microsoft.com/pl-pl/help/4488540/how-to-take-and-annotate-screenshots-on-windows-10
 PrintScreen::#+s ; Windows + Shift + s
+; These are dedicated to ThinkPad T480 (notebook) keyboard
+Ralt::AppsKey ; redirects AltGr -> context menu
 
 ; ---------------------- HOTSTRINGS -----------------------------------
+
+; ────────────────────── Personal: Ctrl + Shift F9 ──────────────────────────
 :*:dd::Dzie{U+0144} dobry,{Enter}
 :*:p ms::Pozdrawia ms
-:C:M::Maciej
-:C:S::S{U+0142}ojewski
+:C:M.::Maciej
+:C:S.::S{U+0142}ojewski
 :C:tel::{+}48 601 403 775
 :*:ms.::Maciej S{U+0142}ojewski
-;~ :*:m@::maciej.slojewski@mslonik.pl
-:*:ms@2::
-	tmp := StrLen("maciej.slojewski@voestalpine.com") - 3
-	Send, {BackSpace %tmp%}maciej.slojewski@mslonik.pl
+:*:m@2::
+	tmp := StrLen("voestalpine.com") - 2
+	;~ tmp := StrLen("voestalpine.com")
+	MsgBox, % tmp
+	Send, {BackSpace %tmp%}mslonik.pl
+	;~ Send, {BackSpace 15}mslonik.pl
 return
-:*b0:ms@::
-	Send, {BackSpace 3}maciej.slojewski@voestalpine.com
+
+:*b0:m@::
+	Send, {BackSpace 2}maciej.slojewski@voestalpine.com
 return
+
 :*:zws::Z wyrazami szacunku`, Maciej S{U+0142}ojewski
 :*:kr`t::Kind regards`, Maciej S{U+0142}ojewski
 
-:*:axm`t::AXM
+^+F9::
+MsgBox, 64, Hotstrings: Personal, dd	→  Dzień dobry`,`np ms	→ Pozdrawia ms`nM.	→ Maciej `nS.	→ Słojewski`ntel	→ +48 601 403 775 `nms.	→ Maciej Słojewski`nms@2	→ maciej.slojewski@mslonik.pl`nms@	→ maciej.slojewski@voestalpine.com`nzws	→ Z wyrazami szacunku`, Maciej Słojewski`nkr<tab>	→ Kind regards`, Maciej
+return
+
+; ──────────────────────── voestalpine: Ctrl + Shift + F10 ──────────────────────
+:b0*:axm::
+	Send, {BackSpace 3}AXM
+return
+
 :*:axmr::AXM^=R^=
 :*:axmio::AXM^=IO^=
-:*:axmu::AXM{Space}/{Space}AXM^=R^={Space}/{Space}AXM^=IO^=
+:*:axma::AXM{Space}/{Space}AXM^=R^={Space}/{Space}AXM^=IO^=
 :*:axmp::AXM,{Space}AXM^=R^=,{Space}AXM^=IO^=
 :*:nout::{U+223C}OUT
 :*:ihd1::I^=HD1^=
 :*:ihd2::I^=HD2^=
-
-:*:dsat::dSAT
-:*:asdek::ASDEK
-
-:*:ohm::{U+00A0}{U+2126}
-:*:kohm::{U+00A0}k{U+2126}
-::mikro::{U+00A0}{U+00b5}
-:*:kv::{U+00A0}kV
-:*:mamp::{U+00A0}mA
-::kamp::{U+00A0}kA
-
-:*:+-::{U+00B1}
-:*:-+::{U+00B1}
-:*:plusminus::{U+00B1}
-:*:minusplus::{U+00B1}
-
-:*:oddo::{U+00F7}
-
-:*:kropkam::{U+00B7}
-:*:mkropka::{U+00B7}
-
-:*:>=::{U+2265}
-:*:większyrówny::{U+2265}
-:*:wiekszyrowny::{U+2265}
-:*:<=::{U+2264}
-:*:mniejszyrówny::{U+2264}
-:*:mniejszyrowny::{U+2264}
-
-:*:mminus::{U+2212}
-:*:stopc::{U+00B0}
 
 :b0o:vo::
 	Send, estalpine
@@ -157,134 +135,308 @@ return
 	Send, {Backspace 1}{Space}Sp. z o.o.
 return
 
-:*b0:voesi::
+:z*b0:voesi::
 	Send, {Backspace 17}Siershahn
 return
 
 ::sie::Siershahn
+:*:so.::Sopot
 
 :b0*:uniac::
-	Send, {BackSpace 5}UniAC `
+	Send, {BackSpace 5}UniAC
 return
 
-:zb0*:uniac2::
-	Send, {BackSpace 7}UniAC[2] `
+:b0*:uniac2::
+	Send, {BackSpace 6}UniAC[2]
 return
 
-:zb0*:uniac1::
-	Send, {BackSpace 7}UniAC[1] `
+:b0*:uniac1::
+	Send, {BackSpace 6}UniAC[1]
 return
 
-:zb0*:uniacx::
-	Send, {BackSpace 7}UniAC[x] `
+:b0*:uniacx::
+	Send, {BackSpace 6}UniAC[x]
 return
 
-:zb0*:unias1p::
-	Send, {BackSpace 10}UniAS[1{+}] `
+:b0*:unias1p::
+	Send, {BackSpace 9}UniAS[1{+}]
 return
 
-:zb0*:unias2i::
-	Send, {BackSpace 10}UniAS[2i] `
+:b0*:unias2i::
+	Send, {BackSpace 9}UniAS[2i]
 return
 
 :b0*:unias1::
-	Send, {BackSpace 7}UniAS[1] `
+	Send, {BackSpace 6}UniAS[1]
 return
 
 :b0*:unias2::
-	Send, {BackSpace 7}UniAS[2] `
+	Send, {BackSpace 6}UniAS[2]
 return
 
 :b0*:uniasx::
-	Send, {BackSpace 7}UniAS[x] `
+	Send, {BackSpace 6}UniAS[x]
 return
 
 :b0*:unias::
-	Send, {BackSpace 5}UniAS `
+	Send, {BackSpace 5}UniAS
 return
 
-:*:unirc::UniRC
-
-:b0*:wsu::
-	Send, {BackSpace 3}WSU `
-return
-
-:zb0*:wsuu::
-	Send, {BackSpace 5}wheel sensor unit
-return
+:*:unirc.::Uni(versal wheel sensor) R(ail) C(lamp)
+::unirc::UniRC
 
 :*:azc::AZC
-::mag::MAG
-::asm::ASM
-::acm::ACM
-::aim::AIM
+:*:mag.::MAG
+:*:asm::ASM
+:*:acm::ACM
+:*:aim::AIM
+:*:cok.::czujnik obecności koła
 ::cok::COK
-::adm::ADM
+:*:wsu.::wheel sensor unit
+::wsu::WSU
+:*:adm::ADM
 
 :*:anszua::AnSzuA
 :*:unibl::UniBL
 
+:*:dsat.::detekcja Stanów Awaryjnych Taboru
+::dsat::dSAT
+:*:asdek.::Automatyczny System Detekcji E Kół
+::asdek::ASDEK
+
+:*:nip.::584-025-39-29
+:*:adres.::Jana z Kolna 26c, 81-859 Sopot, Polska
+:*:addres2.::Jana z Kolna 26c, 81-859 Sopot, Poland
+
+^+F10::
+	MsgBox, 64, Hotstrings: voestalpine, 
+(
+axm	→ AXM
+axmr	→ AXMR (in MS Word: R in subscript)
+axmio	→ AXMIO (in MS Word: IO in subscript)
+axma	→ AXM / AXMR / AXMIO (in MS Word: subscripts)
+axmp	→ AXM`, AXMR`, AXMIO (in MS Word: subscripts)
+nou	→ ∼OUT
+ihd1	→ IHD1 (in MS Word: HD1 subscripts)
+ihd2	→ IHD2 (in MS Word: HD2 subscripts)
+
+vo	→ voestalpine
+voe	→ voestalpine Signaling Sopot
+voes	→ voestalpine Signaling Sopot Sp. z o.o.
+voesi	→ voestalpine Signaling Siershahn
+sie	→ Siershahn
+
+uniac	→ UniAC
+uniac2	→ UniAC[2]
+uniac1	→ UniAC[1]
+uniacx	→ UniAC[x]
+unias1p	→ UniAS[1+]
+unias2i	→ UniAS[2i]
+unias1	→ UniAS[1]
+unias2	→ UniAS[2]
+uniasx	→ UniAS[x]
+unias	→ UniAS
+unirc	→ UniRC
+wsu.	→ wheel sensor unit
+wsu	→ WSU
+
+azc	→ AZC
+mag	→ MAG
+asm	→ ASM
+acm	→ ACM
+aim	→ AIM
+cok	→ COK
+adm	→ ADM
+
+anszua	→ AnSzuA
+unibl	→ UniBL
+dsat	→ dSAT
+asdek	→ ASDEK
+)
+return
+
+; ───────────────────────── Physics, Mathematics and Other Symbols: Ctrl + Shift + F11 ───────────────────────────
+:*:ohm::{U+00A0}{U+2126}	; electric resistance
+:*:kohm::{U+00A0}k{U+2126}	; electric resistance
+::mikro::{U+00A0}{U+00b5}	
+:*:kv::{U+00A0}kV
+:*:mamp::{U+00A0}mA
+::kamp::{U+00A0}kA
+
+:*:+-::{U+00B1}
+:*:-+::{U+00B1}
+:*:plusminus::{U+00B1}
+:*:minusplus::{U+00B1}
+
+:*:oddo::{U+00F7}			; from to
+
+:*:kropkam::{U+00B7} 		; multiplication in a form of small dot
+:*:mkropka::{U+00B7}
+
+:*:>=::{U+2265}				; greater than
+:*:większyrówny::{U+2265}	; greater than
+:*:wiekszyrowny::{U+2265}	; greater than
+:*:<=::{U+2264} 			; less equal than
+:*:mniejszyrówny::{U+2264} 	; less equal than
+:*:mniejszyrowny::{U+2264} 	; less equal than
+:*:~~::{U+2248}				; approximately
+:*:/=::{U+2260} 			; not equal
+:*:mminus::{U+2212}			; longer version of dash
+:*:stopc::{U+00B0} 			; symbol of degree
+:*:deg.::{U+00B0}			; symbol of degree
+
+:b0*:<-::					; arrow to the left
+	Send, {Backspace 2}{U+2190}	
+return
+
+:*:^|::{U+2191}				; arrow up
+:*:|^::{U+2193}				; arrow down
+:z*:<->::{U+2194}			; bi directional arrow
+
+:b0*:->::					; arrow to the right
+	Send, {Backspace 2}{U+2192}
+return
+
+:*:alpha.::{03B1}			; Greek small letter alpha
+:*:beta.::{03B2}			; Greek small letter beta
+:*:gamma.::{03B3}			; Greek small letter gamma
+:*:epsilon.::{03B5}			; Greek small letter epsilon
+:*:theta.::{03B8}			; Greek small letter theta
+:*:lambda.::{03BB}			; Greek small letter lambda
+:*:pi.::{03C0}				; Greek small letter pi
+:*:omega.::{03C9}			; Greek small letter omega
+:*:delta.::{U+2206}			; Greek capital letter delta
+
+:*:--::{U+2500}				; double dash
+:*:euro.::{U+20AC}			; euro currency
+
+
+^+F11::
+	MsgBox, 64, Hotstrings: Physics & Mathematics, ohm	→  Ω`nkohm	→  kΩ`nmikro	→  µ `nkv	→  kV`nmamp	→  mA`nkamp	→  kA `n`n+-	→ ±	or: -+	→ ±	or: plusminus	→ ±	or minusplus	±`noddo	→ ÷`nkropkam	→ ·	or: mkropka	→ ·`n>=	→ ≥	or: większyrówny	→ ≥	or: wiekszyrowny	→ ≥`n<=	→ ≤	or: mniejszyrówny	→ ≤	or: mniejszyrowny	→ ≤`n~~	→ ≈`n/=	→ ≠`nmminus	→ ─`nstopc	→ °	or: deg*	→ °`n`n<-	→ ←`n^|	→ ↑`n|^	→ ↓`n<->	→↔`n->	→ →`n`ndeltaa	→ ∆`n--	→ ─`n
+return
+
+; ───────────────────────────────────── Abbreviations: Ctrl + Shift + F12 ────────────────────
+:*:ram.::Reliability, Availability, Maintainability
 :o:ram::RAM
-:*:rams::RAMS
-:*:qrams::QRAMS
+:*:rams.::Reliability, Availability, Maintainability and Safety
+:o:rams::RAMS
+:*:qrams.::Quality, Reliability, Availability, Maintainability, Safety
+::qrams::QRAMS
+:*:mtbf.::Mean Time Between Failures
 ::mtbf::MTBF
+:*:mttr.::Mean Time To Restore
 ::mttr::MTTR
 ::pm::PM
+:*:sil.::Safety Integrity Level
 ::sil::SIL
-:*:pcb::PCB
-:*:dtr::DTR
+:*:pcb.::Printed Circuit Board
+::pcb::PCB
+:*:dtr.::Dokumentacja Techniczno-Ruchowa
+::dtr::DTR
+:*:dp.::Dział Produkcji i Zaopatrzenia
 ::dp::DPiZ
-:*:dpiz::DPiZ
+:*:dpiz.::Dział Produkcji i Zaopatrzenia
+::dpiz::DPiZ
+:*:du.::Dział Usług i Realizacji
 ::du::DUiR
-:*:duir::DUiR
+:*:duir.::Dział Usług i Realizacji
+::duir::DUiR
 ::dr::DR
-:*:wtwio::WTWiO
-:*:pkp::PKP
-:*:plk::PLK
-:*:ups::UPS
-:*:usb::USB
+:*:wtwio.::Warunki Techniczne Wytwarzania i Odbioru
+::wtwio::WTWiO
+:*:pkp.::Polskie Koleje Państwowe
+::pkp::PKP
+:*:plk.::Polskie Linie Kolejowe
+::plk::PLK
+:*:ups.::Uninterruptable Power Supply
+::ups::UPS
+:*:usb.::Universal Serial Bus
+::usb::USB
+:*:bhp.::Bezpieczeństwo i Higiena Pracy
+::bhp::BHP
+:*:iris.::International Railway Industry Standard for the evaluation of railway management systems
+::iris::IRIS
+:*:tsi.::Technical Specifications for Interoperability
+::tsi::TSI
+:*:faq.::Frequently Asked Questions
+::faq::FAQ
+:*:ahk.::AutoHotkey
+::ahk::AHK
+:b0*?z:.ahk::
+:*:vba.::Visiual Basic for Applications
+::vba::VBA
+:*:hdmi.::High-Definition Multimedia Interface
+::hdmi::HDMI
+:*:hbd.::Hot-Box Detector
+::hbd::HBD
+:*:hwd.::Hot-Wheel Detector
+::hwd::HWD
+:*:emc.::Electro-Magnetic Compatibility
+::emc::EMC
+:*:mb.::Multi Beam
+::mb::MB
+:*:mds.::Modular Diagnostic System
+::mds::MDS
+:*:tuv.::German: Technischer {U+00DC}berwachungsverein, English: Technical Inspection Association
+::tuv::T{U+00DC}V
+::sud::S{U+00DC}D
+:*:gmbh.::German: Gesellschaft mit beschränkter Haftung, English: company with limited liability
+::gmbh::GmbH
+:*:hart.::Highway Addressable Remote Transducer Protocol
+::hart::HART
+:*:pesel.::Powszechny Elektroniczny System Ewidencji Ludności
+::pesel::PESEL
+:*:utk.::Urząd Transportu Kolejowego
+::utk::UTK
+:*:bait.::Biuro Automatyki i Telekomunikacji
+::bait::BAiT
+:*:erp.::Enterprise Resource Planning
+::erp::ERP
+:*:c2ms.::Component Content Management System `
+::c2ms::CCMS
+:*:lc2.::Life Cycle Cost `
+::lc2::LLC
+:*:obb.::German: {U+00D6}sterreichische Bundesbahnen, English: Austrian Federal Railways
+::obb::{U+00D6}BB
+:*:sbb.::German: Schweizerische Bundesbahnen, English: Swiss Federal Railways
+::sbb::SBB
+:*:ceo.::Chief Executive Officer
+::ceo::CEO
+
+:*:ik.::Instytut Kolejnictwa
+::ik::IK
+:*:hds.::Hardware Design Specification
+::hds::HDS
+:*:has::Hardware Architecture Specification
+::has::HAS
+
+^+F12::
+	MsgBox, 64, Hotstrings: Abbreviations, ram.	→ Reliability`, Availability`, Maintainability`nram	→ RAM`nrams.	→ Reliability`, Availability`, Maintainability and Safety`nrams:	→ RAMS`nqrams.	→ Quality`, Reliability`, Availability`, Maintainability`, Safety`nqrams	→ QRAMS`nmtbf.	→ Mean Time Between Failures`nmtbf	→ MTBF`nmttr.	→ Mean Time To Restore`nmttr	→ MTTR`nsil.	→ Safety Integrity Level`nsil	→ SIL`npcb.	→ Printed Circuit Board`npcb	→ PCB`ndtr.	→ Dokumentacja Techniczno-Ruchowa`ndtr	→ DTR`ndp.	→ Dział Produkcji i Zaopatrzenia`ndp	→ DPiZ`ndpiz.	→ Dział Produkcji i Zaopatrzenia`ndpiz	→ DPiZ`ndu.	→ Dział Usług i Realizacji`ndu	→ DUiR`nduir.	→ Dział Usług i Realizacji`nduir	→ DUiR`ndr	→ DR`nwtwio.	→ Warunki Techniczne Wytwarzania i Odbioru`nwtwio	→ WTWiO`npkp.	→ Polskie Koleje Państwowe`npkp	→ PKP`nplk.	→ Polskie Linie Kolejowe`nplk	→ PLK`nups.	→ Uninterruptable Power Supply`nups	→ UPS`nusb.	→ Universal Serial Bus`nusb	→ USB`nbhp.	→ Bezpieczeństwo i Higiena Pracy`nbhp	→ BHP`niris.	→ International Railway Industry Standard for the evaluation of railway management systems`niris	→ IRIS`ntsi.	→ Technical Specifications for Interoperability`ntsi	→ TSI`nfaq.	→ Frequently Asked Questions`nfaq	→ FAQ`nahk.	→ AutoHotkey`nahk	→ AHK`nvba.	→ Visiual Basic for Applications`nvba	→ VBA`nhdmi.	→ High-Definition Multimedia Interface`nhdmi	→ HDMI`nhbd.	→ Hot-Box Detector`nhbd	→ HBD`nhwd.	→ Hot-Wheel Detector`nhwd	→ HWD`nemc.	→ Electro-Magnetic Compatibility`nemc	→ EMC`nmb.	→ Multi Beam`nmb	→ MB`nmds.	→ Modular Diagnostic System`nmds	→ MDS`ntuv.	→ German: Technischer {U+00DC}berwachungsverein`, English: Technical Inspection Association`ntuv	→ T{U+00DC}V`nsud	→ S{U+00DC}D`ngmbh.	→ German: Gesellschaft mit beschränkter Haftung`, English: company with limited liability`ngmbh	→ GmbH`nhart.	→ Highway Addressable Remote Transducer Protocol`nhart	→ HART`npesel.	→ Powszechny Elektroniczny System Ewidencji Ludności`npesel	→ PESEL`nutk.	→ Urząd Transportu Kolejowego`nutk	→ UTK`nbait.	→ Biuro Automatyki i Telekomunikacji`nbait	→ BAiT`nerp.	→ Enterprise Resource Planning`nerp	→ ERP`nc2ms.	→ Component Content Management System ``nc2ms	→ CCMS`nlc2.	→ Life Cycle Cost ``nlc2	→ LLC`nobb.	→ German: {U+00D6}sterreichische Bundesbahnen`, English: Austrian Federal Railways`nobb	→ {U+00D6}BB`nsbb.	→  German: Schweizerische Bundesbahnen`, English: Swiss Federal Railways`nsbb	→ SBB
+return
+
+; - - - - - - - - - - - - - Section Capital Letters - - - - - - - - - - - - - - - - - - - - - - - 
+:*:svn::SVN
+:*:sap::SAP
+:*:easm.::EASM
 :*:qnx::QNX
 :*:rs232::RS232
 :*:rs485::RS485
-:*:bhp::BHP
-:*:svn::SVN
-:*:iris::IRIS
-:*:tsi::TSI
-:*:faq::FAQ
-:*:ahk::AHK
-:*:vba::VBA
-:*:hdmi::HDMI
-:*:hbd::HBD
-:*:hwd::HWD
-:*:emc::EMC
-:*:phoenix::PHOENIX
-:*:mb.::MB
-:*:gotcha::GOTCHA
-:*:mds::MDS
-:*:tuv::T{U+00DC}V
-::sud::S{U+00DC}D
-:*:gmbh::GmbH
-:*:hart::HART
-:*:pesel::PESEL
-:*:utk::UTK
-:*:bait::BAiT
 :*:uic60::UIC60
 :*:s49::S49
 :*:iscala::iSCALA
-:*:erp::ERP
-:*:sap::SAP
+:*:gotcha::GOTCHA
+:*:phoenix::PHOENIX
 
-:*:tilde::
-MSWordSetFont("Cambria Math", "U+223C") ;
-return
-:*:deltaa::{U+2206}
-:*:--::{U+2500}
+; - - - - - - - - - - - - - Section Date & Time - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-:*:tabela`t::| | |{Enter}
-
-:*:d]::  ; This hotstring replaces "d]" with the current date and time via the commands below.
+:*b0:d]::  ; This hotstring replaces "d]" with the current date and time via the commands below.
 	FormatTime, CurrentDateTime,, yyyy-MM-dd  ; It will look like 2020-01-21 
-	SendInput %CurrentDateTime%
+	SendInput, {Backspace 2}%CurrentDateTime%
+return
+
+:*z:d]]::	; This hotstring is suitable for TC (Total Commander) only
+	FormatTime, CurrentDateTime,, yyyyMMdd_
+	SendInput, {Backspace 8}%CurrentDateTime%
 return
 
 :*:t]::
@@ -295,10 +447,71 @@ return
 ; ------------------ Section of first or second names with local diacritics ------------------------
 ::rene::Ren{U+00E9}				; Rene 
 :*:guenther::G{U+00FC}nther		; Guenther 
-:*:pek::P{U+00E9}k				; Pek
-:*:stuhn::St{U+00FC}hn			; Man
 :*:joerg::J{U+00F6}rg			; Joerg
 :*:jorg::J{U+00F6}rg			; Joerg
+
+; - - - - - - - - - - - - - - - - Function Keys redirection - - - - - - - - - - - - - - - - - - - -
+; This is a way to get rid of top row of function keys.
+:*:esc.::{Esc} 
+:*:f1.::{F1}
+:*:f2.::{F2}
+:*:f3.::{F3}
+:*:f4.::{F4}
+:*:f5.::{F5}
+:*:f6.::{F6}
+:*:f7.::{F7}
+:*:f8.::{F8}
+:*:f9.::{F9}
+:*:f10.::{F10}
+:*:f11.::{F11}
+:*:f12.::{F12}
+
+; - - - - - - - - - - - - - - - - Emoticons - - - - - - - - - - - - - - - - - - - - - - - -
+;~ https://unicode-table.com/en/
+:*::)::{U+1F642} :-) ` 		; smiling face U+1F642
+:*::-)::{U+1F642} :-) `		; smiling face U+1F642
+:*::(::{U+1F641} :-( ` 		; frowning face U+1F641
+:*::-(::{U+1F641} :-( `		; frowning face U+1F641
+:*:;)::{U+1F609} ;-( ` 		; winking face U+1F609
+:*:;-)::{U+1F609} ;-( `		; winking face U+1F609
+:*::|::{U+1F610} :-| ` 		; neutral face U+1F610
+:*::-|::{U+1F610} :-| `		; neutral face U+1F610
+:*::-/::{U+1F615} :-/ `		; confused face U+1F615
+:*::/::{U+1F615} :-/ `		; confused face U+1F615
+:*::D::{U+1F600} :-D `		; grinning face U+1F600
+:*::-D::{U+1F600} :-D `		; grinning face U+1F600
+:*:cat.::{U+1F408}			; cat
+
+; - - - - - - - - - - - - - - - - - - Full titles of technical standards - - - - - - - - - 
+; to be completed...
+; EN-50126-01
+; EN-50126-02
+:b0*:EN 50126.::{BackSpace}{:}2010 Railway applications – The specification and demonstration of reliability, availability, maintainability and safety (RAMS) – Part 1: Generic RAMS Process.
+:b0*:EN 50128.::{BackSpace}{:}2011 Railway applications – Communication, signalling and processing systems – Software for railway control and protection system.
+:b0*:EN 50129.::{BackSpace}{:}2003 Railway applications Communication, signalling and processing systems – Safety related electronic systems for signalling.
+:b0*:EN 50159.::{BackSpace}{:}2010 Railway applications - Communication, signalling and processing systems - safety-related communication in transmission systems.
+
+:*:2008/57.::Dyrektywa Parlamentu Europejskiego i Rady 2008/57/WE z dnia 17 czerwca 2008 r. w sprawie interoperacyjności systemu kolei we Wspólnocie.
+:*:2009/131.::Dyrektywa Komisji 2009/131/WE z dnia 16 października 2009 r. zmieniająca załącznik VII do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjności systemu kolei we Wspólnocie.
+:*:2011/18.::Dyrektywa Komisji 2011/18/UE z dnia 1 marca 2011 r. zmieniająca załączniki II, V i VI do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjności systemu kolei we Wspólnocie.
+:*:2013/9.::Dyrektywa Komisji 2013/9/UE z dnia 11 marca 2013 r. zmieniająca załącznik III do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjności systemu kolei we Wspólnocie.
+:*:2014/106.::Dyrektywa Komisji 2014/106/UE z dnia 5 grudnia 2014 r. zmieniająca załącznik V i VI do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjności systemu kolei we Wspólnocie.
+:*:2016/919.::Rozporządzenie Komisji (UE) 2016/919 z dnia 27 maja 2016 r. w sprawie technicznej specyfikacji interoperacyjności w zakresie podsystemów „Sterowanie” systemu kolei w Unii Europejskiej zmienione Rozporządzeniem wykonawczym Komisji (UE) 2019/776 z dnia 16 maja 2019 r. zmieniającym rozporządzenia Komisji (UE) nr 321/2013, (UE) nr 1299/2014, (UE) nr 1301/2014, (UE) nr 1302/2014 i (UE) nr 1303/2014, rozporządzenie Komisji (UE) 2016/919 oraz decyzję wykonawczą Komisji 2011/665/UE w odniesieniu do stosowania do dyrektywy Parlamentu Europejskiego i Rady (UE) 2016/797 oraz realizacji celów szczegółowych określonych w decyzji delegowanej Komisji (UE) 2017/1474.
+:*:2010/713.::Decyzja Komisji 2010/713/UE z dnia 9 listopada 2010 r. w sprawie modułów procedur oceny zgodności, przydatności do stosowania i weryfikacji WE stosowanych w technicznych specyfikacjach interoperacyjności przyjętych na mocy dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE.
+:*:033281.::ERA/ERTMS/033281 Interfaces between CCS trackside and other subsystems, Rev. 4.0.
+
+; - - - - - - - - - - Autocorrection section - - - - - - - - - - - - - - - - - - - - - - 
+:*:polska::Polska
+:*:poland::Poland
+:*:polish::Polish
+:*:english::English
+:*:german::German
+:*:germany::Germany
+
+:*:fyi.::For your information
+:*:asap.::as soon as possible
+:*:afaik.::as far as I know
+:*:btw.::by the way
 
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
 ; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
@@ -381,18 +594,4 @@ XButton2:: ; switching between Chrome browser tabs; author: Taran VH
 		WinActivate ahk_class Chrome_WidgetWin_1
 		}
 return
-
-MSWordSetFont(FontName,key) {
-   IfWinNotActive, ahk_class OpusApp
-	{
-	Send {%key%}
-   return
-	}
-   oWord := ComObjActive("Word.Application")
-   OldFont := oWord.Selection.Font.Name
-   oWord.Selection.Font.Name := FontName
-   Send {%key%}
-   oWord.Selection.Font.Name := OldFont
-}
-
 ; ----------------- END OF ADDITIONAL I/O DEVICES SECTION ------------------------
