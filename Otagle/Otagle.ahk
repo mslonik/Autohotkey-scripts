@@ -437,7 +437,13 @@ MoveToLayer(WhichLayer)
      TempVarLayer := "Layer" . LastLayer
      ;~ Gui, %TempVarLayer%:Show, x%X% y%Y%, %ApplicationName% ; it works
      ;~ Gui, % TempVarLayer ":Show", % "x"X "y"Y, % ApplicationName ; it works as well, alternative solution to above line
-     Gui, % TempVarLayer ":Show", % "x"DefaultX "y"DefaultY, % ApplicationName 
+     ;~ Gui, % TempVarLayer ":Show", % "x"DefaultX "y"DefaultY, % ApplicationName 
+     Gui, % TempVarLayer ":Show", % "x"DefaultX "y"DefaultY "Maximize", % ApplicationName 
+     ;~ Gui, % TempVarLayer ":Show", Maximize, % ApplicationName 
+     ;~ WinTitle = A
+     ;~ SysGet, Display_, Monitor, 4
+     ;~ WinGetPos,,, WinW, WinH, % WinTitle
+     ;~ WinMove, % WinTitle,, % Floor( (Display_Right/2)-(WinW/2) ), % Floor( (Display_Bottom/2)-(WinH/2) )
 }
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -477,7 +483,8 @@ F_FindTouchScreen()
           MonitorHeight := Abs(MonitorBoundingCoordinatesTop - MonitorBoundingCoordinatesBottom)
           if (MonitorWidth == TouchScreenWidth && MonitorHeight == TouchScreenHeight)
                {
-               DefaultX := MonitorBoundingCoordinatesLeft - 4 ; to do: determine why I need -4
+               ;~ DefaultX := MonitorBoundingCoordinatesLeft - 4 ; to do: determine why I need -4
+               DefaultX := MonitorBoundingCoordinatesLeft 
                DefaultY := MonitorBoundingCoordinatesTop     
                }
           else

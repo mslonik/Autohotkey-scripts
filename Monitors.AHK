@@ -14,37 +14,64 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 SysGet, HowManyMonitors,       MonitorCount
 SysGet, WhichIsPrimary,        MonitorPrimary
 
-Gui, GetDisplayCoordinates:Font, bold
-Gui, GetDisplayCoordinates:Add, Text, , Step 1 out of 3:
-Gui, GetDisplayCoordinates:Font
-Gui, GetDisplayCoordinates:Add, Text, , Specify Display No.
+Gui, WizardStep0_Intro: Font, bold
+Gui, WizardStep0_Intro: Add, Text, w500, Introduction
+Gui, WizardStep0_Intro: Font, 
+Gui, WizardStep0_Intro: Add, Text, w500, When there is no otagle.ini file or on purspose User decided to change crucial application settings, this wizard appears. User is asked to answer 3 sets of questions related to settings of display.
+Gui, WizardStep0_Intro: Add, Text, w500, Step 1: `t`tChoose a display where GUI of OTAGLE is located.
+Gui, WizardStep0_Intro: Add, Text, w500, Step 2: `t`tCheck display orientation, set scaling to 1.
+Gui, WizardStep0_Intro: Add, Text, w500, Step 3: `t`tAdjust number of keys visible on the screen (rows and columns).
+Gui, WizardStep0_Intro: Add, Button, Default x+-350 y+20 w80 gToStep1, &Next
+Gui, WizardStep0_Intro: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
+Gui, WizardStep0_Intro: Show, , O T A G L E Display Wizard
+return 
+
+
+ToStep1:
+Gui, WizardStep0_Intro: Destroy
+Gui, WizardStep1_GetDisplayCoordinates: Font, bold
+Gui, WizardStep1_GetDisplayCoordinates: Add, Text, w500, Step 1 out of 3: `t`tChoose a display where GUI of OTAGLE is located.
+Gui, WizardStep1_GetDisplayCoordinates: Font
+Gui, WizardStep1_GetDisplayCoordinates: Add, Text, w500, Specify one out of the available Display No.
 
 Loop, % HowManyMonitors
      {
      if (A_Index = 1 && A_Index = WhichIsPrimary)
           {
-          Gui, GetDisplayCoordinates:Add, Radio, AltSubmit vDisplayRadioGroup Checked, % "Display #" . A_Index
+          Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, y+30 AltSubmit vDisplayRadioGroup Checked, % "Display #" . A_Index
           }
      else if (A_Index = 1)
           {
-          Gui, GetDisplayCoordinates:Add, Radio, AltSubmit vDisplayRadioGroup, % "Display #" . A_Index
+          Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, y+30 AltSubmit vDisplayRadioGroup, % "Display #" . A_Index
           }
      else if (A_Index = WhichIsPrimary)
           {
-          Gui, GetDisplayCoordinates:Add, Radio, AltSubmit Checked, % "Display #" . A_Index
+          Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, AltSubmit Checked, % "Display #" . A_Index
           }
      else
           {
-          Gui, GetDisplayCoordinates:Add, Radio, AltSubmit, % "Display #" . A_Index
+          Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, AltSubmit, % "Display #" . A_Index
           }
      }     
-Gui, GetDisplayCoordinates:Add, Button, gCheckDisplayNumbering, CheckDisplayNumbering
-Gui, GetDisplayCoordinates:Add, Button, gButtonNext1out3, Next
-Gui, GetDisplayCoordinates:Show, w300, O T A G L E Configurator
-
+Gui, WizardStep1_GetDisplayCoordinates: Add, Button, Default x+25 y+20 gCheckDisplayNumbering, &CheckDisplayNumbering
+Gui, WizardStep1_GetDisplayCoordinates: Add, Button, x+30 w80 gToStep2, &Next
+Gui, WizardStep1_GetDisplayCoordinates: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
+Gui, WizardStep1_GetDisplayCoordinates: Show, , O T A G L E Display Wizard
 return
 
-; ---------------------------------------------------------------------
+ToStep2:
+Gui, WizardStep1_GetDisplayCoordinates: Destroy
+Gui, WizardStep2_GetDisplayCoordinates: Font, bold
+Gui, WizardStep2_GetDisplayCoordinates: Add, Text, w500, Step 2: `t`tCheck display orientation, set scaling to 1.
+Gui, WizardStep2_GetDisplayCoordinates: Font
+SysGet, ,, % DisplayRadioGroup
+return
+
+ExitDisplayConfigurationWizard:
+Gui, WizardStep0_Intro: Destroy
+ExitApp
+
+; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
 
 F_ShowDisplayNumbers()
 
@@ -78,7 +105,8 @@ F_ShowDisplayNumbers()
 return
 }
 
-; ---------------------------------------------------------------------
+; ------------------------------- SECTION OF LABELS --------------------------------------
+
 
 DestroyGuis:
      Loop, %HowManyMonitors%
@@ -94,6 +122,6 @@ CheckDisplayNumbering:
 return
 
 ButtonNext1out3:
-     Gui, GetDisplayCoordinates:Submit, NoHide
+     Gui, WizardStep1_GetDisplayCoordinates:Submit, NoHide
      MsgBox, % DisplayRadioGroup
 return

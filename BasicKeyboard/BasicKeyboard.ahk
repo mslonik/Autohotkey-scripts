@@ -1,4 +1,4 @@
-/*
+﻿/*
 Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
@@ -55,11 +55,11 @@ return
 	Shutdown, 1 + 8
 return
 
+; These are valid for any keyboard
 +^F1:: ; Suspend: 
 	DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0)
 return
 
-; These are valid for any keyboard
 +^k:: ; run Kee Pass application (password manager)
 	Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 
 return
@@ -86,37 +86,37 @@ Ralt::AppsKey ; redirects AltGr -> context menu
 
 ; ---------------------- HOTSTRINGS -----------------------------------
 
-; ────────────────────── Personal: Ctrl + Shift F9 ──────────────────────────
+; - - - - - - - - - - - - - - - - - - - - -  Hotstrings: Personal: Ctrl + Shift F9 - - - - - - - - - - - - - - - - - - - - - - - - -
 :*:dd::Dzie{U+0144} dobry,{Enter}
 :*:p ms::Pozdrawia ms
 :C:M.::Maciej
 :C:S.::S{U+0142}ojewski
 :C:tel::{+}48 601 403 775
 :*:ms.::Maciej S{U+0142}ojewski
-:*:m@2::
-	tmp := StrLen("voestalpine.com") - 2
-	;~ tmp := StrLen("voestalpine.com")
-	MsgBox, % tmp
-	Send, {BackSpace %tmp%}mslonik.pl
-	;~ Send, {BackSpace 15}mslonik.pl
-return
-
-:*b0:m@::
-	Send, {BackSpace 2}maciej.slojewski@voestalpine.com
-return
+:b0*x:m@2::SendInput, {BackSpace 16}mslonik.pl
+:*b0x:m@::SendInput, {BackSpace 2}maciej.slojewski@voestalpine.com
 
 :*:zws::Z wyrazami szacunku`, Maciej S{U+0142}ojewski
 :*:kr`t::Kind regards`, Maciej S{U+0142}ojewski
 
 ^+F9::
-MsgBox, 64, Hotstrings: Personal, dd	→  Dzień dobry`,`np ms	→ Pozdrawia ms`nM.	→ Maciej `nS.	→ Słojewski`ntel	→ +48 601 403 775 `nms.	→ Maciej Słojewski`nms@2	→ maciej.slojewski@mslonik.pl`nms@	→ maciej.slojewski@voestalpine.com`nzws	→ Z wyrazami szacunku`, Maciej Słojewski`nkr<tab>	→ Kind regards`, Maciej
+MsgBox, 64, Hotstrings: Personal, 
+(
+dd	→  Dzień dobry`,
+p ms	→ Pozdrawia ms
+M.	→ Maciej
+S.	→ Słojewski
+tel	→ +48 601 403 775
+ms.	→ Maciej Słojewski
+m@2	→ maciej.slojewski@mslonik.pl
+m@	→ maciej.slojewski@voestalpine.com
+zws	→ Z wyrazami szacunku`, Maciej Słojewski
+kr<tab>	→ Kind regards`, Maciej
+)
 return
 
-; ──────────────────────── voestalpine: Ctrl + Shift + F10 ──────────────────────
-:b0*:axm::
-	Send, {BackSpace 3}AXM
-return
-
+; - - - - - - - - - - - - - - - - - - - - - Hotstrings: voestalpine: Ctrl + Shift + F10 - - - - - - - - - - - - - - - - - - - - - - - - -
+:b0*x:axm::SendInput, {BackSpace 3}AXM
 :*:axmr::AXM^=R^=
 :*:axmio::AXM^=IO^=
 :*:axma::AXM{Space}/{Space}AXM^=R^={Space}/{Space}AXM^=IO^=
@@ -125,62 +125,25 @@ return
 :*:ihd1::I^=HD1^=
 :*:ihd2::I^=HD2^=
 
-:b0o:vo::
-	Send, estalpine
-return
-:*b0:voe::
-	Send, stalpine Signaling Sopot
-return
-:*b0:voes::
-	Send, {Backspace 1}{Space}Sp. z o.o.
-return
-
-:z*b0:voesi::
-	Send, {Backspace 17}Siershahn
-return
+:b0ox:vo::SendInput, estalpine
+:*b0x:voe::SendInput, stalpine Signaling Sopot
+:*b0x:voes::SendInput, {Backspace 1}{Space}Sp. z o.o.
+:z*b0x:voesi::SendInput, {Backspace 17}Siershahn
 
 ::sie::Siershahn
 :*:so.::Sopot
 
-:b0*:uniac::
-	Send, {BackSpace 5}UniAC
-return
+:b0*x:uniac::SendInput, {BackSpace 5}UniAC
+:b0*x:uniac2::SendInput, {BackSpace 6}UniAC[2]
+:b0*x:uniac1::SendInput, {BackSpace 6}UniAC[1]
+:b0*x:uniacx::SendInput, {BackSpace 6}UniAC[x]
 
-:b0*:uniac2::
-	Send, {BackSpace 6}UniAC[2]
-return
-
-:b0*:uniac1::
-	Send, {BackSpace 6}UniAC[1]
-return
-
-:b0*:uniacx::
-	Send, {BackSpace 6}UniAC[x]
-return
-
-:b0*:unias1p::
-	Send, {BackSpace 9}UniAS[1{+}]
-return
-
-:b0*:unias2i::
-	Send, {BackSpace 9}UniAS[2i]
-return
-
-:b0*:unias1::
-	Send, {BackSpace 6}UniAS[1]
-return
-
-:b0*:unias2::
-	Send, {BackSpace 6}UniAS[2]
-return
-
-:b0*:uniasx::
-	Send, {BackSpace 6}UniAS[x]
-return
-
-:b0*:unias::
-	Send, {BackSpace 5}UniAS
-return
+:b0*x:unias1p::Send, {BackSpace 9}UniAS[1{+}]
+:b0*x:unias2i::SendInput, {BackSpace 9}UniAS[2i]
+:b0*x:unias1::SendInput, {BackSpace 6}UniAS[1]
+:b0*x:unias2::SendInput, {BackSpace 6}UniAS[2]
+:b0*x:uniasx::SendInput, {BackSpace 6}UniAS[x]
+:b0*x:unias::SendInput, {BackSpace 5}UniAS
 
 :*:unirc.::Uni(versal wheel sensor) R(ail) C(lamp)
 ::unirc::UniRC
@@ -198,11 +161,31 @@ return
 
 :*:anszua::AnSzuA
 :*:unibl::UniBL
-
 :*:dsat.::detekcja Stanów Awaryjnych Taboru
 ::dsat::dSAT
 :*:asdek.::Automatyczny System Detekcji E Kół
 ::asdek::ASDEK
+:*:gotcha::GOTCHA
+:*:phoenix::PHOENIX
+::pm::PM
+:*:dp.::Dział Produkcji i Zaopatrzenia
+::dp::DPiZ
+:*:dpiz.::Dział Produkcji i Zaopatrzenia
+::dpiz::DPiZ
+:*:du.::Dział Usług i Realizacji
+::du::DUiR
+:*:duir.::Dział Usług i Realizacji
+::duir::DUiR
+:*:dr.::Dział Rozwoju
+::dr::DR
+:*:hbd.::Hot-Box Detector
+::hbd::HBD
+:*:hwd.::Hot-Wheel Detector
+::hwd::HWD
+:*:mb.::Multi Beam
+::mb::MB
+:*:mds.::Modular Diagnostic System
+::mds::MDS
 
 :*:nip.::584-025-39-29
 :*:adres.::Jana z Kolna 26c, 81-859 Sopot, Polska
@@ -211,7 +194,7 @@ return
 ^+F10::
 	MsgBox, 64, Hotstrings: voestalpine, 
 (
-axm	→ AXM
+axm →   AXM
 axmr	→ AXMR (in MS Word: R in subscript)
 axmio	→ AXMIO (in MS Word: IO in subscript)
 axma	→ AXM / AXMR / AXMIO (in MS Word: subscripts)
@@ -248,14 +231,41 @@ aim	→ AIM
 cok	→ COK
 adm	→ ADM
 
-anszua	→ AnSzuA
-unibl	→ UniBL
-dsat	→ dSAT
-asdek	→ ASDEK
+:*:anszua::AnSzuA
+:*:unibl::UniBL
+:*:dsat.::detekcja Stanów Awaryjnych Taboru
+::dsat::dSAT
+:*:asdek.::Automatyczny System Detekcji E Kół
+::asdek::ASDEK
+:*:gotcha::GOTCHA
+:*:phoenix::PHOENIX
+::pm::PM
+:*:dp.::Dział Produkcji i Zaopatrzenia
+::dp::DPiZ
+:*:dpiz.::Dział Produkcji i Zaopatrzenia
+::dpiz::DPiZ
+:*:du.::Dział Usług i Realizacji
+::du::DUiR
+:*:duir.::Dział Usług i Realizacji
+::duir::DUiR
+:*:dr.::Dział Rozwoju
+::dr::DR
+:*:hbd.::Hot-Box Detector
+::hbd::HBD
+:*:hwd.::Hot-Wheel Detector
+::hwd::HWD
+:*:mb.::Multi Beam
+::mb::MB
+:*:mds.::Modular Diagnostic System
+::mds::MDS
+
+:*:nip.::584-025-39-29
+:*:adres.::Jana z Kolna 26c, 81-859 Sopot, Polska
+:*:addres2.::Jana z Kolna 26c, 81-859 Sopot, Poland
 )
 return
 
-; ───────────────────────── Physics, Mathematics and Other Symbols: Ctrl + Shift + F11 ───────────────────────────
+; - - - - - - - - - - - - - - - - - - - - -  Physics, Mathematics and Other Symbols: Ctrl + Shift + F11 - - - - - - - - - - - - - - - - - - - - - - - - -
 :*:ohm::{U+00A0}{U+2126}	; electric resistance
 :*:kohm::{U+00A0}k{U+2126}	; electric resistance
 ::mikro::{U+00A0}{U+00b5}	
@@ -285,26 +295,20 @@ return
 :*:stopc::{U+00B0} 			; symbol of degree
 :*:deg.::{U+00B0}			; symbol of degree
 
-:b0*:<-::					; arrow to the left
-	Send, {Backspace 2}{U+2190}	
-return
-
+:b0*x:<-::SendInput, {Backspace 2}{U+2190}		; arrow to the left
 :*:^|::{U+2191}				; arrow up
 :*:|^::{U+2193}				; arrow down
 :z*:<->::{U+2194}			; bi directional arrow
+:b0*x:->::SendInput, {Backspace 2}{U+2192}		; arrow to the right
 
-:b0*:->::					; arrow to the right
-	Send, {Backspace 2}{U+2192}
-return
-
-:*:alpha.::{03B1}			; Greek small letter alpha
-:*:beta.::{03B2}			; Greek small letter beta
-:*:gamma.::{03B3}			; Greek small letter gamma
-:*:epsilon.::{03B5}			; Greek small letter epsilon
-:*:theta.::{03B8}			; Greek small letter theta
-:*:lambda.::{03BB}			; Greek small letter lambda
-:*:pi.::{03C0}				; Greek small letter pi
-:*:omega.::{03C9}			; Greek small letter omega
+:*:alpha.::{U+03B1}			; Greek small letter alpha
+:*:beta.::{U+03B2}			; Greek small letter beta
+:*:gamma.::{U+03B3}			; Greek small letter gamma
+:*:epsilon.::{U+03B5}			; Greek small letter epsilon
+:*:theta.::{U+03B8}			; Greek small letter theta
+:*:lambda.::{U+03BB}			; Greek small letter lambda
+:*:pi.::{U+03C0}				; Greek small letter pi
+:*:omega.::{U+03C9}			; Greek small letter omega
 :*:delta.::{U+2206}			; Greek capital letter delta
 
 :*:--::{U+2500}				; double dash
@@ -312,7 +316,44 @@ return
 
 
 ^+F11::
-	MsgBox, 64, Hotstrings: Physics & Mathematics, ohm	→  Ω`nkohm	→  kΩ`nmikro	→  µ `nkv	→  kV`nmamp	→  mA`nkamp	→  kA `n`n+-	→ ±	or: -+	→ ±	or: plusminus	→ ±	or minusplus	±`noddo	→ ÷`nkropkam	→ ·	or: mkropka	→ ·`n>=	→ ≥	or: większyrówny	→ ≥	or: wiekszyrowny	→ ≥`n<=	→ ≤	or: mniejszyrówny	→ ≤	or: mniejszyrowny	→ ≤`n~~	→ ≈`n/=	→ ≠`nmminus	→ ─`nstopc	→ °	or: deg*	→ °`n`n<-	→ ←`n^|	→ ↑`n|^	→ ↓`n<->	→↔`n->	→ →`n`ndeltaa	→ ∆`n--	→ ─`n
+	MsgBox, 64, Hotstrings: Physics & Mathematics, 
+(
+ohm	→  Ω
+kohm	→  kΩ
+mikro	→  µ
+kv	→  kV
+mamp	→  mA
+kamp	→  kA
+
++-	→ ±	or: -+	→ ±	or: plusminus	→ ±	or minusplus	±
+oddo	→ ÷
+kropkam	→ ·	or: mkropka	→ ·
+>=	→ ≥	or: większyrówny	→ ≥	or: wiekszyrowny	→ ≥
+<=	→ ≤	or: mniejszyrówny	→ ≤	or: mniejszyrowny	→ ≤
+~~	→ ≈
+/=	→ ≠
+mminus	→ ─
+stopc	→ °	or: deg*	→ °
+
+<-	→ ←
+^|	→ ↑
+|^	→ ↓
+<->	→↔
+->	→ →`
+
+alpha.	→ α			
+beta.	→ β
+gamma.	→ γ
+epsilon.	→ ε
+theta.	→ θ
+lambda.	→ λ
+pi.	→ π
+omega.	→ ω
+delta.	→ ∆
+
+--	→ ─
+euro.	→ €
+)
 return
 
 ; ───────────────────────────────────── Abbreviations: Ctrl + Shift + F12 ────────────────────
@@ -326,22 +367,12 @@ return
 ::mtbf::MTBF
 :*:mttr.::Mean Time To Restore
 ::mttr::MTTR
-::pm::PM
 :*:sil.::Safety Integrity Level
 ::sil::SIL
 :*:pcb.::Printed Circuit Board
 ::pcb::PCB
 :*:dtr.::Dokumentacja Techniczno-Ruchowa
 ::dtr::DTR
-:*:dp.::Dział Produkcji i Zaopatrzenia
-::dp::DPiZ
-:*:dpiz.::Dział Produkcji i Zaopatrzenia
-::dpiz::DPiZ
-:*:du.::Dział Usług i Realizacji
-::du::DUiR
-:*:duir.::Dział Usług i Realizacji
-::duir::DUiR
-::dr::DR
 :*:wtwio.::Warunki Techniczne Wytwarzania i Odbioru
 ::wtwio::WTWiO
 :*:pkp.::Polskie Koleje Państwowe
@@ -367,16 +398,8 @@ return
 ::vba::VBA
 :*:hdmi.::High-Definition Multimedia Interface
 ::hdmi::HDMI
-:*:hbd.::Hot-Box Detector
-::hbd::HBD
-:*:hwd.::Hot-Wheel Detector
-::hwd::HWD
 :*:emc.::Electro-Magnetic Compatibility
 ::emc::EMC
-:*:mb.::Multi Beam
-::mb::MB
-:*:mds.::Modular Diagnostic System
-::mds::MDS
 :*:tuv.::German: Technischer {U+00DC}berwachungsverein, English: Technical Inspection Association
 ::tuv::T{U+00DC}V
 ::sud::S{U+00DC}D
@@ -424,8 +447,6 @@ return
 :*:uic60::UIC60
 :*:s49::S49
 :*:iscala::iSCALA
-:*:gotcha::GOTCHA
-:*:phoenix::PHOENIX
 
 ; - - - - - - - - - - - - - Section Date & Time - - - - - - - - - - - - - - - - - - - - - - - - - 
 
