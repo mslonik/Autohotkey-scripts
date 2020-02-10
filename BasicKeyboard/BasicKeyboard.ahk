@@ -1,4 +1,4 @@
-﻿/*
+/*
 Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
@@ -14,13 +14,14 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 ; --------------- SECTION OF GLOBAL VARIABLES -----------------------------
 ;~ WordTrue := -1
 ;~ WordFalse := 0
+MyHotstring := ""
 ; --------------- END OF GLOBAL VARIABLES SECTION ----------------------
 
 ; - - - - - - - - - - - Set of default web pages - - - - - - - - - - - - - - - - - 
 ;~ Run, https://solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx ; voestalpine Signaling Siershahn, Cooperation Platform Sopot
 
 
-; ---------------- SECTION OF KEYBOARD HOTKEYS ---------------------------------------------------------------------------------------
+; ---------------- SECTION OF HOTKEYS ---------------------------------------------------------------------------------------
 ; These are valid only for "Logitech Internet 350 Keyboard" and alike with so called multimedia keys
 
 Launch_Media:: ; run Microsoft Word application - a note, the very first multimedia key from a left 
@@ -56,20 +57,40 @@ return
 return
 
 ; These are valid for any keyboard
-+^F1:: ; Suspend: 
-	DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0)
++^F1::DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0) ; Suspend: 
++^k::Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 	 ; run Kee Pass application (password manager)
+^#F8::WinSet, AlwaysOnTop, toggle, A ; Ctrl + Windows + F8, toggle always on top
+
+;~ +^s::
+	;~ Suspend, Toggle
+	;~ ToolTip, Suspend toggle, % A_CaretX, % A_CaretY-20
+	;~ SetTimer, TurnOffTooltip, -5000
+;~ return
+
+;~ Alt + Backspace as in MS Word: rolls back last Autocorrect action
+$!BackSpace::
+	if (MyHotstring && (A_ThisHotkey != A_PriorHotkey))
+		{
+		;~ MsgBox, % "MyHotstring: " . MyHotstring . " A_ThisHotkey: " . A_ThisHotkey . " A_PriorHotkey: " . A_PriorHotkey
+		Send, % "{BackSpace " . StrLen(MyHotstring) . "}" . SubStr(A_PriorHotkey, InStr(A_PriorHotkey, ":", CaseSensitive := false, StartingPos := 1, Occurrence := 2) + 1)
+		}
+	else
+		{
+		ToolTip, Nothing to replace, % A_CaretX, % A_CaretY-20
+		;~ MsgBox, % "ELSE MyHotstring: " . MyHotstring . " A_ThisHotkey: " . A_ThisHotkey . " A_PriorHotkey: " . A_PriorHotkey		
+		SetTimer, TurnOffTooltip, -5000
+		Send, {Alt Down}{BackSpace}{Alt Up}
+		}
 return
 
-+^k:: ; run Kee Pass application (password manager)
-	Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 
-return
+;~ pl: spacja nierozdzielająca; en: Non-breaking space; the same shortcut is used by default in MS Word
++^Space::Send, {U+00A0}
+
 ; - - - - - - - - END OF KEYBOARD HOTKEYS SECTION - - - - - - - - - - - - - - - - - - - - - 
 
 
 ; ---------- SECTION OF NUMERIC KEYBOARD HOTKEYS - NUMLOCK == ON -----------------------------------------------
 ; ---------- SECTION OF NUMERIC KEYBOARD HOTKEYS - NUMLOCK == OFF ---------------------------------------------
-
-
 
 
 ; ---------------------- SECTION OF LABELS ------------------------------------
@@ -83,29 +104,88 @@ return
 PrintScreen::#+s ; Windows + Shift + s
 ; These are dedicated to ThinkPad T480 (notebook) keyboard
 Ralt::AppsKey ; redirects AltGr -> context menu
+;~ Ralt & q::@ ; for René 
+
+; - - - - - - - - - - - - - - - - Function Keys redirection - - - - - - - - - - - - - - - - - - - -
+; This is a way to get rid of top row of keyboard function keys.
+:*:esc.::{Esc} 
+:*:f1.::{F1}
+:*:f2.::{F2}
+:*:f3.::{F3}
+:*:f4.::{F4}
+:*:f5.::{F5}
+:*:f6.::{F6}
+:*:f7.::{F7}
+:*:f8.::{F8}
+:*:f9.::{F9}
+:*:f10.::{F10}
+:*:f11.::{F11}
+:*:f12.::{F12}
 
 ; ---------------------- HOTSTRINGS -----------------------------------
 
 ; - - - - - - - - - - - - - - - - - - - - -  Hotstrings: Personal: Ctrl + Shift F9 - - - - - - - - - - - - - - - - - - - - - - - - -
-:*:dd::Dzie{U+0144} dobry,{Enter}
-:*:p ms::Pozdrawia ms
-:C:M.::Maciej
-:C:S.::S{U+0142}ojewski
-:C:tel::{+}48 601 403 775
-:*:ms.::Maciej S{U+0142}ojewski
-:b0*x:m@2::SendInput, {BackSpace 16}mslonik.pl
-:*b0x:m@::SendInput, {BackSpace 2}maciej.slojewski@voestalpine.com
+:*:dd::
+	MyHotstring := "Dzień dobry,{Enter}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
 
-:*:zws::Z wyrazami szacunku`, Maciej S{U+0142}ojewski
-:*:kr`t::Kind regards`, Maciej S{U+0142}ojewski
+:*:p ms::
+	MyHotstring := "Pozdrawia ms"
+	Send, %MyHotstring%
+return
+
+:*:m.::
+	MyHotstring := "Maciej"
+	Send, %MyHotstring%
+return
+
+:*:s.::
+	MyHotstring := "Słojewski"
+	Send, %MyHotstring%
+return
+
+:C:tel::
+	MyHotstring := "{+}48 601 403 775"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:ms.::
+	MyHotstring := "Maciej Słojewski"
+	Send, %MyHotstring%
+return
+
+:b0*x:m@2::
+	MyHotstring := "{BackSpace 16}mslonik.pl"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*b0x:m@::
+	MyHotstring := "{BackSpace 2}maciej.slojewski@voestalpine.com"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:zws::
+	MyHotstring := "Z wyrazami szacunku`, Maciej Słojewski"
+	Send, %MyHotstring%
+return
+
+:*:kr`t::
+	MyHotstring := "Kind regards`, Maciej Słojewski"
+	Send, %MyHotstring%
+return
 
 ^+F9::
 MsgBox, 64, Hotstrings: Personal, 
 (
 dd	→  Dzień dobry`,
 p ms	→ Pozdrawia ms
-M.	→ Maciej
-S.	→ Słojewski
+m.	→ Maciej
+s.	→ Słojewski
 tel	→ +48 601 403 775
 ms.	→ Maciej Słojewski
 m@2	→ maciej.slojewski@mslonik.pl
@@ -116,76 +196,669 @@ kr<tab>	→ Kind regards`, Maciej
 return
 
 ; - - - - - - - - - - - - - - - - - - - - - Hotstrings: voestalpine: Ctrl + Shift + F10 - - - - - - - - - - - - - - - - - - - - - - - - -
-:b0*x:axm::SendInput, {BackSpace 3}AXM
-:*:axmr::AXM^=R^=
-:*:axmio::AXM^=IO^=
-:*:axma::AXM{Space}/{Space}AXM^=R^={Space}/{Space}AXM^=IO^=
-:*:axmp::AXM,{Space}AXM^=R^=,{Space}AXM^=IO^=
-:*:nout::{U+223C}OUT
-:*:ihd1::I^=HD1^=
-:*:ihd2::I^=HD2^=
+:*:axmpl.::
+	MyHotstring := "moduł uniwersalny"
+	Send, %MyHotstring%
+return
 
-:b0ox:vo::SendInput, estalpine
-:*b0x:voe::SendInput, stalpine Signaling Sopot
-:*b0x:voes::SendInput, {Backspace 1}{Space}Sp. z o.o.
-:z*b0x:voesi::SendInput, {Backspace 17}Siershahn
+:*:axmen.::
+	MyHotstring := "universal module"
+	Send, %MyHotstring%
+return
 
-::sie::Siershahn
-:*:so.::Sopot
+:b0*x:axm::
+	MyHotstring := "{BackSpace 3}AXM"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)		
+return
 
-:b0*x:uniac::SendInput, {BackSpace 5}UniAC
-:b0*x:uniac2::SendInput, {BackSpace 6}UniAC[2]
-:b0*x:uniac1::SendInput, {BackSpace 6}UniAC[1]
-:b0*x:uniacx::SendInput, {BackSpace 6}UniAC[x]
 
-:b0*x:unias1p::Send, {BackSpace 9}UniAS[1{+}]
-:b0*x:unias2i::SendInput, {BackSpace 9}UniAS[2i]
-:b0*x:unias1::SendInput, {BackSpace 6}UniAS[1]
-:b0*x:unias2::SendInput, {BackSpace 6}UniAS[2]
-:b0*x:uniasx::SendInput, {BackSpace 6}UniAS[x]
-:b0*x:unias::SendInput, {BackSpace 5}UniAS
+:*:axmrpl.::
+	MyHotstring := "moduł uniwersalny z wyjściami przekaźnikowymi"
+	Send, %MyHotstring%
+return
 
-:*:unirc.::Uni(versal wheel sensor) R(ail) C(lamp)
-::unirc::UniRC
+:*:axmren.::
+	MyHotstring := "universal module with relay outputs"
+	Send, %MyHotstring%
+return
 
-:*:azc::AZC
-:*:mag.::MAG
-:*:asm::ASM
-:*:acm::ACM
-:*:aim::AIM
-:*:cok.::czujnik obecności koła
-::cok::COK
-:*:wsu.::wheel sensor unit
-::wsu::WSU
-:*:adm::ADM
+::axmr::
+	MyHotstring := "AXM^=R^="
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\^=", Replacement := "", MyHotStringLength := "", Limit := 2, StartingPosition := 1)
+return
 
-:*:anszua::AnSzuA
-:*:unibl::UniBL
-:*:dsat.::detekcja Stanów Awaryjnych Taboru
-::dsat::dSAT
-:*:asdek.::Automatyczny System Detekcji E Kół
-::asdek::ASDEK
+
+:*:axmiopl.::
+	MyHotstring := "moduł uniwersalny z wejściami i wyjściami binarnymi"
+	Send, %MyHotstring%
+return
+
+:*:axmioen.::
+	MyHotstring := "universal module with binary inputs and outputs"
+	Send, %MyHotstring%
+return
+
+::axmio::
+	MyHotstring := "AXM^=IO^="
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\^=", Replacement := "", MyHotStringLength := "", Limit := 2, StartingPosition := 1)	
+return
+
+
+:*:axma::
+	MyHotstring := "AXM{Space}/{Space}AXM^=R^={Space}/{Space}AXM^=IO^="
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{Space\}", Replacement := " `", MyHotStringLength := "", Limit := 4, StartingPosition := 1)
+	MyHotstring := RegExReplace(MyHotstring, "s)\^=", Replacement := "", MyHotStringLength := "", Limit := 4, StartingPosition := 1)	
+return
+
+:b0*x:axmp.::
+	MyHotstring := "{BackSpace 5}AXM,{Space}AXM^=R^=,{Space}AXM^=IO^="
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*5\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
+	MyHotstring := RegExReplace(MyHotstring, "s)\{Space\}", Replacement := " `", MyHotStringLength := "", Limit := 2, StartingPosition := 1)
+	MyHotstring := RegExReplace(MyHotstring, "s)\^=", Replacement := "", MyHotStringLength := "", Limit := 4, StartingPosition := 1)		
+return
+
+:*:nout::
+	MyHotstring := "{U+223C}OUT"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)	
+return
+
+
+:*:cok.::
+	MyHotstring := "czujnik koła"
+	Send, %MyHotstring%
+return
+
+::cok::
+	MyHotstring := "COK"
+	Send, %MyHotstring%
+return
+
+:*:wsu.::
+	MyHotstring := "wheel sensor unit"
+	Send, %MyHotstring%
+return
+
+::wsu::
+	MyHotstring := "WSU"
+	Send, %MyHotstring%
+return
+
+
+:*:ihd1::
+	MyHotstring := "I^=HD1^="
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\^=", Replacement := "", MyHotStringLength := "", Limit := 2, StartingPosition := 1)
+return
+
+:*:ihd2::
+	MyHotstring := "I^=HD2^="
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\^=", Replacement := "", MyHotStringLength := "", Limit := 2, StartingPosition := 1)	
+return
+
+
+:*:hd1en.::
+	MyHotstring := "HD1 (the 1st head of wheel sensor)"
+	Send, %MyHotstring%
+return
+
+:*:hd2en.::
+	MyHotstring := "HD2 (the 2nd head of wheel sensor)"
+	Send, %MyHotstring%
+return
+
+:*:hd1pl.::
+	MyHotstring := "HD1 (pierwsza głowica czujnika koła)"
+	Send, %MyHotstring%
+return
+
+:*:hd2pl.::
+	MyHotstring := "HD2 (druga głowica czujnika koła)"
+	Send, %MyHotstring%
+return
+
+
+:*:uniacpl.::
+	MyHotstring := "(uniwersalny) system liczenia osi"
+	Send, %MyHotstring%
+return
+
+:*:uniacen.::
+	MyHotstring := "(universal) axle counting system"
+	Send, %MyHotstring%
+return
+
+:b0*x:uniac::
+	MyHotstring := "{BackSpace 5}UniAC"
+	Send, %MyHotstring%
+return
+
+
+:*:uniac2pl.::
+	MyHotstring := "(uniwersalny) system liczenia osi drugiej generacji"
+	Send, %MyHotstring%
+return
+
+:*:uniac2en.::
+	MyHotstring := "(universal) axle counting system of 2nd generation"
+	Send, %MyHotstring%
+return
+
+:b0x:uniac2::
+	MyHotstring := "{BackSpace 7}UniAC[2]"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)			
+return
+
+
+:*:uniac1pl.::
+	MyHotstring := "(uniwersalny) system liczenia osi pierwszej generacji"
+	Send, %MyHotstring%
+return
+
+:*:uniac1en.::
+	MyHotstring := "(universal) axle counting system of 1st generation"
+	Send, %MyHotstring%
+return
+
+:b0x:uniac1::
+	MyHotstring := "{BackSpace 7}UniAC[1]"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)			
+return
+
+
+:*:uniacxpl.::
+	MyHotstring := "rodzina uniwersalnych systemów liczenia osi"
+	Send, %MyHotstring%
+return
+
+:*:uniacxen.::
+	MyHotstring := "family of universal axle counting system"
+	Send, %MyHotstring%
+return
+
+:b0x:uniacx::
+	MyHotstring := "{BackSpace 7}UniAC[x]"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)			
+return
+
+
+:*:unias1ppl.::
+	MyHotstring := "(uniwersalny) czujnik koła typu UniAS[1{+}]"
+	Send, %MyHotstring%
+	MyHotstring := StrReplace(MyHotstring, "{" , "")
+	MyHotstring := StrReplace(MyHotstring, "}" , "")	
+return
+
+:*:unias1pen.::
+	MyHotstring := "(universal) UniAS[1{+}] type wheel sensor"
+	Send, %MyHotstring%
+	MyHotstring := StrReplace(MyHotstring, "{" , "")
+	MyHotstring := StrReplace(MyHotstring, "}" , "")	
+return
+
+:b0x:unias1p::
+	MyHotstring := "{BackSpace 8}UniAS[1{+}]"
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*8\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
+	MyHotstring := StrReplace(MyHotstring, "{" , "")
+	MyHotstring := StrReplace(MyHotstring, "}" , "")	
+return
+
+
+:*:unias2ipl.::
+	MyHotstring := "(uniwersalny) czujnik koła typu UniAS[2i]"
+	Send, %MyHotstring%
+return
+
+:*:unias2ien.::
+	MyHotstring := "(universal) UniAS[2i] type wheel sensor"
+	Send, %MyHotstring%
+return
+
+:b0x:unias2i::
+	MyHotstring := "{BackSpace 8}UniAS[2i]"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+
+:*:unias1pl.::
+	MyHotstring := "(uniwersalny) czujnik koła typu UniAS[1]"
+	Send, %MyHotstring%
+return
+
+:*:unias1en.::
+	MyHotstring := "(universal) UniAS[1] type wheel sensor"
+	Send, %MyHotstring%
+return
+
+:b0x:unias1::
+	MyHotstring := "{BackSpace 7}UniAS[1]"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+
+:*:unias2pl.::
+	MyHotstring := "(uniwersalny) czujnik koła typu UniAS[2]"
+	Send, %MyHotstring%
+return
+
+:*:unias2en.::
+	MyHotstring := "(universal) UniAS[2] type wheel sensor"
+	Send, %MyHotstring%
+return
+
+:b0x:unias2::
+	MyHotstring := "{BackSpace 7}UniAS[2]"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+
+:*:uniasxpl.::
+	MyHotstring := "rodzina (uniwersalnych) czujników osi"
+	Send, %MyHotstring%
+return
+
+:*:uniasxen.::
+	MyHotstring := "(universal) wheel sensor family"
+	Send, %MyHotstring%
+return
+
+:b0x:uniasx::
+	MyHotstring := "{BackSpace 7}UniAS[x]"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+
+:*:uniaspl.::
+	MyHotstring := "(uniwersalny) czujnik koła"
+	Send, %MyHotstring%
+return
+
+:*:uniasen.::
+	MyHotstring := "(universal) wheel sensor"
+	Send, %MyHotstring%
+return
+
+:b0x:unias::
+	MyHotstring := "{BackSpace 6}UniAS"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+
+:*:unircpl.::
+	MyHotstring := "(uniwersalny) uchwyt czujnika koła"
+	Send, %MyHotstring%
+return
+
+:*:unircen.::
+	MyHotstring := "(universal) wheel sensor rail clamp"
+	Send, %MyHotstring%
+return
+
+::unirc::
+	MyHotstring := "UniRC"
+	Send, %MyHotstring%
+return
+
+
+:*:azcpl.::
+	MyHotstring := "moduł ochrony przeciwprzepięciowej dedykowany dla rodziny czujników osi UniAS[x]"
+	Send, %MyHotstring%
+return
+
+:*:azcen.::
+	MyHotstring := "surge protection module dedicated for UniAS[x] wheel sensor family"
+	Send, %MyHotstring%
+return
+
+::azc::
+	MyHotstring := "AZC"
+	Send, %MyHotstring%
+return
+
+
+:*:magpl.::
+	MyHotstring := "magistrala"
+	Send, %MyHotstring%
+return
+
+:*:magen.::
+	MyHotstring := "backplane"
+	Send, %MyHotstring%
+return
+
+:b0x:mag::
+	MyHotstring := "{BackSpace 4}MAG"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+
+:*:magsacpl.::
+	MyHotstring := "zespolony moduł diagnostyczny i zasilający"
+	Send, %MyHotstring%
+return
+
+:*:magsacen.::
+	MyHotstring := "combined diagnostic and voltage supply module"
+	Send, %MyHotstring%
+return
+
+::magsac::
+	MyHotstring := "MAG_SAC (MAG_SUP {+} MAG_ADM)"
+	Send, %MyHotstring%
+	MyHotstring := StrReplace(MyHotstring, "{" , "")
+	MyHotstring := StrReplace(MyHotstring, "}" , "")	
+return
+
+::magsak::
+	MyHotstring := "MAG_SAC (MAG_SUP {+} MAG_ADM)"
+	Send, %MyHotstring%
+	MyHotstring := StrReplace(MyHotstring, "{" , "")
+	MyHotstring := StrReplace(MyHotstring, "}" , "")	
+return
+
+
+:*:magsuppl.::
+	MyHotstring := "moduł zasilający"
+	Send, %MyHotstring%
+return
+
+:*:magsupen.::
+	MyHotstring := "voltage supply module"
+	Send, %MyHotstring%
+return
+
+::magsup::
+	MyHotstring := "MAG_SUP"
+	Send, %MyHotstring%
+return
+
+
+:*:magadmen.::
+	MyHotstring := "basic diagnostic module"
+	Send, %MyHotstring%
+return
+
+:*:magadmpl.::
+	MyHotstring := "moduł podstawowej diagnostyki"
+	Send, %MyHotstring%
+return
+
+::magadm::
+	MyHotstring := "MAG_ADM"
+	Send, %MyHotstring%
+return
+
+
+:*:admpl.::
+	MyHotstring := "moduł rozszerzonej diagnostyki"
+	Send, %MyHotstring%
+return
+
+:*:admen.::
+	MyHotstring := "extended diagnostics module"
+	Send, %MyHotstring%
+return
+
+::adm::
+	MyHotstring := "ADM"
+	Send, %MyHotstring%
+return
+
+
+:*:asmpl.::
+	MyHotstring := "moduł oceniający"
+	Send, %MyHotstring%
+return
+
+:*:asmen.::
+	MyHotstring := "evaluation module"
+	Send, %MyHotstring%
+return
+
+::asm::
+	MyHotstring := "ASM"
+	Send, %MyHotstring%
+return
+
+
+:*:acmpl.::
+	MyHotstring := "moduł liczący"
+	Send, %MyHotstring%
+return
+
+:*:acmen.::
+	MyHotstring := "counting module"
+	Send, %MyHotstring%
+return
+
+::acm::
+	MyHotstring := "ACM"
+	Send, %MyHotstring%
+return
+
+
+:*:aimpl.::
+	MyHotstring := "moduł wejść / wyjść"
+	Send, %MyHotstring%
+return
+
+:*:aimen.::
+	MyHotstring := "inputs and outputs module"
+	Send, %MyHotstring%
+return
+
+::aim::
+	MyHotstring := "AIM"
+	Send, %MyHotstring%
+return
+
+
+:*:anszuapl.::
+	MyHotstring := "system zarządzania usługami"
+	Send, %MyHotstring%
+return
+
+::anszua::
+	MyHotstring := "AnSzuA"
+	Send, %MyHotstring%
+return
+
+
+:*:uniblpl.::
+	MyHotstring := "system (uniwersalnej) blokady liniowej"
+	Send, %MyHotstring%
+return
+
+:*:uniblen.::
+	MyHotstring := ""
+	Send, %MyHotstring%
+return
+
+::unibl::
+	MyHotstring := "UniBL"
+	Send, %MyHotstring%
+return
+
+
+:*:dsat.::
+	MyHotstring := "detekcja Stanów Awaryjnych Taboru"
+	Send, %MyHotstring%
+return
+
+::dsat::
+	MyHotstring := "dSAT"
+	Send, %MyHotstring%
+return
+
+
+:*:asdek.::
+	MyHotstring := "automatyczny system detekcji i eksploatacji kół pojazdów kolejowych"
+	Send, %MyHotstring%
+return
+
+::asdek::
+	MyHotstring := "ASDEK"
+	Send, %MyHotstring%
+return
+
+
+:*:s2d.::
+	MyHotstring := "szlakowy system diagnostyki"
+	Send, %MyHotstring%
+return
+
+::s2d::
+	MyHotstring := "SSD"
+	Send, %MyHotstring%
+return
+
+
 :*:gotcha::GOTCHA
 :*:phoenix::PHOENIX
 ::pm::PM
-:*:dp.::Dział Produkcji i Zaopatrzenia
-::dp::DPiZ
-:*:dpiz.::Dział Produkcji i Zaopatrzenia
-::dpiz::DPiZ
-:*:du.::Dział Usług i Realizacji
-::du::DUiR
-:*:duir.::Dział Usług i Realizacji
-::duir::DUiR
-:*:dr.::Dział Rozwoju
-::dr::DR
-:*:hbd.::Hot-Box Detector
-::hbd::HBD
-:*:hwd.::Hot-Wheel Detector
-::hwd::HWD
-:*:mb.::Multi Beam
-::mb::MB
-:*:mds.::Modular Diagnostic System
-::mds::MDS
+
+:*:dp.::
+	MyHotstring := "Dział Produkcji i Zaopatrzenia"
+	Send, %MyHotstring%
+return
+
+::dp::
+	MyHotstring := "DPiZ"
+	Send, %MyHotstring%
+return
+
+:*:dpiz.::
+	MyHotstring := "Dział Produkcji i Zaopatrzenia"
+	Send, %MyHotstring%
+return
+
+::dpiz::
+	MyHotstring := "DPiZ"
+	Send, %MyHotstring%
+return
+
+
+:*:du.::
+	MyHotstring := "Dział Usług i Realizacji"
+	Send, %MyHotstring%
+return
+
+::du::
+	MyHotstring := "DUiR"
+	Send, %MyHotstring%
+return
+
+:*:duir.::
+	MyHotstring := "Dział Usług i Realizacji"
+	Send, %MyHotstring%
+return
+
+::duir::
+	MyHotstring := "DUiR"
+	Send, %MyHotstring%
+return
+
+
+:*:dr.::
+	MyHotstring := "Dział Rozwoju"
+	Send, %MyHotstring%
+return
+
+::dr::
+	MyHotstring := "DR"
+	Send, %MyHotstring%
+return
+
+
+:*:wim.::
+	MyHotstring := "Weighing in Motion"
+	Send, %MyHotstring%
+return
+
+::wim::
+	MyHotstring := "WIM"
+	Send, %MyHotstring%
+return
+
+:*:wdd.::
+	MyHotstring := "Wheel Defect Detection"
+	Send, %MyHotstring%
+return
+
+::wdd::
+	MyHotstring := "WDD"
+	Send, %MyHotstring%
+return
+
+:*:hbd.::
+	MyHotstring := "Hot-Box Detector"
+	Send, %MyHotstring%
+return
+
+::hbd::
+	MyHotstring := "HBD"
+	Send, %MyHotstring%
+return
+
+:*:hwd.::
+	MyHotstring := "Hot-Wheel Detector"
+	Send, %MyHotstring%
+return
+
+::hwd::
+	MyHotstring := "HWD"
+	Send, %MyHotstring%
+return
+
+:*:mb.::
+	MyHotstring := "Multi Beam"
+	Send, %MyHotstring%
+return
+
+::mb::
+	MyHotstring := "MB"
+	Send, %MyHotstring%
+return
+
+:*:mds.::
+	MyHotstring := "Modular Diagnostic System"
+	Send, %MyHotstring%
+return
+
+::mds::
+	MyHotstring := "MDS"
+	Send, %MyHotstring%
+return
+
+:b0ox:vo::Send, estalpine
+:*b0x:voe::Send, stalpine Signaling Sopot
+:*b0x:voes::Send, {Backspace 1}{Space}Sp. z o.o.
+:z*b0x:voesi::Send, {Backspace 17}Siershahn
+
+:*:si.::
+	MyHotstring := "Siershahn"
+	Send, %MyHotstring%
+return
+
+:*:so.::
+	MyHotstring := "Sopot"
+	Send, %MyHotstring%
+return
 
 :*:nip.::584-025-39-29
 :*:adres.::Jana z Kolna 26c, 81-859 Sopot, Polska
@@ -194,136 +867,331 @@ return
 ^+F10::
 	MsgBox, 64, Hotstrings: voestalpine, 
 (
-axm →   AXM
-axmr	→ AXMR (in MS Word: R in subscript)
-axmio	→ AXMIO (in MS Word: IO in subscript)
-axma	→ AXM / AXMR / AXMIO (in MS Word: subscripts)
-axmp	→ AXM`, AXMR`, AXMIO (in MS Word: subscripts)
-nou	→ ∼OUT
-ihd1	→ IHD1 (in MS Word: HD1 subscripts)
-ihd2	→ IHD2 (in MS Word: HD2 subscripts)
+axm	→ AXM						axmpl.	→ moduł uniwersalny					axmen.	→ universal module
+axmr	→ AXM^=R^= (in MS Word: with subscript R)		axmrpl.	→ moduł uniwersalny z wyjściami przekaźnikowymi		axmren.	→ universal module with relay outputs
+axmio	→ AXM^=IO^= (in MS Word: with subscript R)		axmiopl.	→ moduł uniwersalny z wejściami i wyjściami binarnymi		axmioen. → universal module with binary inputs and outputs
 
-vo	→ voestalpine
-voe	→ voestalpine Signaling Sopot
-voes	→ voestalpine Signaling Sopot Sp. z o.o.
-voesi	→ voestalpine Signaling Siershahn
-sie	→ Siershahn
+axma	→ AXM / AXM^=R^= / AXM^=IO^= (in MS Word: with subscripts)		axmp.	→ AXM, AXM^=R^=, AXM^=IO^= (in MS Word: with subscripts)
 
-uniac	→ UniAC
-uniac2	→ UniAC[2]
-uniac1	→ UniAC[1]
-uniacx	→ UniAC[x]
-unias1p	→ UniAS[1+]
-unias2i	→ UniAS[2i]
-unias1	→ UniAS[1]
-unias2	→ UniAS[2]
-uniasx	→ UniAS[x]
-unias	→ UniAS
-unirc	→ UniRC
-wsu.	→ wheel sensor unit
-wsu	→ WSU
+nout	→ {U+223C}OUT
 
-azc	→ AZC
-mag	→ MAG
-asm	→ ASM
-acm	→ ACM
-aim	→ AIM
-cok	→ COK
-adm	→ ADM
+cok	→ COK			cok.	→ czujnik koła				wsu	→ WSU			wsu.	→ wheel sensor unit
 
-:*:anszua::AnSzuA
-:*:unibl::UniBL
-:*:dsat.::detekcja Stanów Awaryjnych Taboru
-::dsat::dSAT
-:*:asdek.::Automatyczny System Detekcji E Kół
-::asdek::ASDEK
-:*:gotcha::GOTCHA
-:*:phoenix::PHOENIX
-::pm::PM
-:*:dp.::Dział Produkcji i Zaopatrzenia
-::dp::DPiZ
-:*:dpiz.::Dział Produkcji i Zaopatrzenia
-::dpiz::DPiZ
-:*:du.::Dział Usług i Realizacji
-::du::DUiR
-:*:duir.::Dział Usług i Realizacji
-::duir::DUiR
-:*:dr.::Dział Rozwoju
-::dr::DR
-:*:hbd.::Hot-Box Detector
-::hbd::HBD
-:*:hwd.::Hot-Wheel Detector
-::hwd::HWD
-:*:mb.::Multi Beam
-::mb::MB
-:*:mds.::Modular Diagnostic System
-::mds::MDS
+ihd1	→ I^=HD1^= (in MS Word: with buscripts)		ihd2	→ I^=HD2^= (in MS Word: with buscripts)
+hd1en.	→ HD1 (the 1st head of wheel sensor)		hd2en.	→ HD2 (the 2nd head of wheel sensor)
+hd1pl.	→ HD1 (pierwsza głowica czujnika koła)		hd2pl.	→ HD2 (druga głowica czujnika koła)
 
-:*:nip.::584-025-39-29
-:*:adres.::Jana z Kolna 26c, 81-859 Sopot, Polska
-:*:addres2.::Jana z Kolna 26c, 81-859 Sopot, Poland
+uniac	→ UniAC					uniacpl.	→ (uniwersalny) system liczenia osi				uniacen.	→ (universal) axle counting system
+uniac2	→ UniAC[2]				uniac2pl.	→ (uniwersalny) system liczenia osi drugiej generacji		uniac2en.	→ (universal) axle counting system of 2nd generation
+uniac1	→ UniAC[1]				uniac1pl.	→ (uniwersalny) system liczenia osi pierwszej generacji		uniac1en.	→ (universal) axle counting system of 1st generation
+uniacx	→ UniAC[x]				uniacxpl.	→ rodzina uniwersalnych systemów liczenia osi		uniacxen.	→ family of universal axle counting system
+
+unias1p	→ UniAS[1+]				unias1ppl.	→ (uniwersalny) czujnik koła typu UniAS[1{+}]		unias1pen.	→ (universal) UniAS[1{+}] type wheel sensor
+unias2i	→ UniAS[2i]				unias2ipl.	→ (uniwersalny) czujnik koła typu UniAS[2i]		unias2ien.	→ (universal) UniAS[2i] type wheel sensor
+unias1	→ UniAS[1]				unias1pl.		→ (uniwersalny) czujnik koła typu UniAS[1]		unias1en.	→ (universal) UniAS[1] type wheel sensor
+unias2	→ UniAS[2]				unias2pl.		→ (uniwersalny) czujnik koła typu UniAS[2]		unias2en.	→ (universal) UniAS[2] type wheel sensor
+uniasx	→ UniAS[x]				uniasxpl.		→ rodzina (uniwersalnych) czujników osi		uniasxen.	→ (universal) wheel sensor family
+unias	→ UniAS					uniaspl.		→ (uniwersalny) czujnik koła			uniasen.	→ (universal) wheel sensor
+
+unirc	→ UniRC				unircpl.	→ (uniwersalny) uchwyt czujnika koła		unircen.	→ (universal) wheel sensor rail clamp
+
+azc	→ AZC				azcpl.	→ moduł ochrony przeciwprzepięciowej dedykowany dla rodziny czujników osi UniAS[x]		azcen.	→ surge protection module dedicated for UniAS[x] wheel sensor family
+mag	→ MAG				magpl.	→ magistrala		magen.	→ backplane
+magsacpl.	→ zespolony moduł diagnostyczny i zasilający		magsacen.	→ combined diagnostic and voltage supply module
+magsac	→ MAG_SAC (MAG_SUP {+} MAG_ADM)		magsak	→ MAG_SAC (MAG_SUP {+} MAG_ADM)
+magsup	→ MAG_SUP				magsuppl.	→ moduł zasilający		magsupen.	→ voltage supply module
+magadm	→ MAG_ADM				magadmen.	→ basic diagnostic module		magadmpl.	→ moduł podstawowej diagnostyki
+adm	→ ADM				admpl.	→ moduł rozszerzonej diagnostyki		admen.	→ extended diagnostics module
+
+asm	→ ASM				asmpl.	→ moduł oceniający		asmen.	→ evaluation module
+acm	→ ACM				acmpl.	→ moduł liczący			acmen.	→ counting module
+aim	→ AIM				aimpl.	→ moduł wejść / wyjść		aimen.	→ inputs and outputs module
+
+:*:anszuapl.::system zarządzania usługami
+::anszua::AnSzuA
+
+unibl	→ UniBL				uniblpl.	→ system (uniwersalnej) blokady liniowej
+
+dsat	→ dSAT				dsat.	→ detekcja Stanów Awaryjnych Taboru
+asdek	→ ASDEK				asdek.	→ automatyczny system detekcji i eksploatacji kół pojazdów kolejowych
+s2d	→ SSD				s2d.	→ szlakowy system diagnostyki
+
+gotcha	→ GOTCHA
+phoenix	→ PHOENIX
+pm	→ PM
+
+dp.	→ Dział Produkcji i Zaopatrzenia				dpiz.	→ Dział Produkcji i Zaopatrzenia
+dp	→ DPiZ							dpiz	→ DPiZ
+du.	→ Dział Usług i Realizacji					duir.	→ Dział Usług i Realizacji
+duir	→ DUiR							du	 → DUiR
+dr	→ DR							dr.	→ Dział Rozwoju
+
+wim.		→ Weighing in Motion				wim		→ WIM		
+wdd		→ WDD						wdd.		→ Wheel Defect Detection
+hbd		→ HBD						hbd.		→ Hot-Box Detector
+hwd		→ HWD						hwd.		→ Hot-Wheel Detector
+mb		→ MB						mb.		→ Multi Beam
+mds		→ MDS						mds.		→ Modular Diagnostic System
+
+vo		→ voestalpine					voe		→ voestalpine Signaling Sopot
+voes		→ voestalpine Signaling Sopot Sp. z o.o.		voesi		→ voestalpine Signaling Siershahn
+
+sie		→ Siershahn					so.		→ Sopot
+
+nip.		→ 584-025-39-29
+adres.		→ Jana z Kolna 26c, 81-859 Sopot, Polska		addres2.		→ Jana z Kolna 26c, 81-859 Sopot, Poland
 )
 return
 
 ; - - - - - - - - - - - - - - - - - - - - -  Physics, Mathematics and Other Symbols: Ctrl + Shift + F11 - - - - - - - - - - - - - - - - - - - - - - - - -
-:*:ohm::{U+00A0}{U+2126}	; electric resistance
-:*:kohm::{U+00A0}k{U+2126}	; electric resistance
-::mikro::{U+00A0}{U+00b5}	
-:*:kv::{U+00A0}kV
-:*:mamp::{U+00A0}mA
-::kamp::{U+00A0}kA
+:*:ohm::	; electric resistance
+	MyHotstring := "{U+2126}"
+	;~ MsgBox, % "{U+2126}: " . Chr(0x2126) . " Długość: " . StrLen(MyHotstring) . " A_ThisHotkey: " . A_ThisHotkey . " A_PriorHotkey: " . A_PriorHotkey
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)	
+return
 
-:*:+-::{U+00B1}
-:*:-+::{U+00B1}
-:*:plusminus::{U+00B1}
-:*:minusplus::{U+00B1}
+:*:kohm::	; electric resistance
+	MyHotstring := "k{U+2126}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
+return
 
-:*:oddo::{U+00F7}			; from to
+:*:kv::
+	MyHotstring := "kV"
+	Send, %MyHotstring%
+return
 
-:*:kropkam::{U+00B7} 		; multiplication in a form of small dot
-:*:mkropka::{U+00B7}
+:*:mamp::
+	MyHotstring := "mA"
+	Send, %MyHotstring%
+return
 
-:*:>=::{U+2265}				; greater than
-:*:większyrówny::{U+2265}	; greater than
-:*:wiekszyrowny::{U+2265}	; greater than
-:*:<=::{U+2264} 			; less equal than
-:*:mniejszyrówny::{U+2264} 	; less equal than
-:*:mniejszyrowny::{U+2264} 	; less equal than
-:*:~~::{U+2248}				; approximately
-:*:/=::{U+2260} 			; not equal
-:*:mminus::{U+2212}			; longer version of dash
-:*:stopc::{U+00B0} 			; symbol of degree
-:*:deg.::{U+00B0}			; symbol of degree
+::kamp::
+	MyHotstring := "kA"
+	Send, %MyHotstring%
+return
 
-:b0*x:<-::SendInput, {Backspace 2}{U+2190}		; arrow to the left
-:*:^|::{U+2191}				; arrow up
-:*:|^::{U+2193}				; arrow down
-:z*:<->::{U+2194}			; bi directional arrow
-:b0*x:->::SendInput, {Backspace 2}{U+2192}		; arrow to the right
+:*:+-::
+	MyHotstring := "{U+00B1}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
 
-:*:alpha.::{U+03B1}			; Greek small letter alpha
-:*:beta.::{U+03B2}			; Greek small letter beta
-:*:gamma.::{U+03B3}			; Greek small letter gamma
-:*:epsilon.::{U+03B5}			; Greek small letter epsilon
-:*:theta.::{U+03B8}			; Greek small letter theta
-:*:lambda.::{U+03BB}			; Greek small letter lambda
-:*:pi.::{U+03C0}				; Greek small letter pi
-:*:omega.::{U+03C9}			; Greek small letter omega
-:*:delta.::{U+2206}			; Greek capital letter delta
+:*:-+::
+	MyHotstring := "{U+00B1}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
 
-:*:--::{U+2500}				; double dash
-:*:euro.::{U+20AC}			; euro currency
+:*:plusminus::
+	MyHotstring := "{U+00B1}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
 
+:*:minusplus::
+	MyHotstring := "{U+00B1}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:oddo::			; from to
+	MyHotstring := "{U+00F7}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:kropkam:: 		; multiplication in a form of small dot
+	MyHotstring := "{U+00B7}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:mkropka::
+	MyHotstring := "{U+00B7}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:>=::				; greater than
+	MyHotstring := "{U+2265}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:większyrówny::	; greater than
+	MyHotstring := "{U+2265}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:wiekszyrowny::	; greater than
+	MyHotstring := "{U+2265}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:<=:: 			; less equal than
+	MyHotstring := "{U+2264}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:mniejszyrówny:: 	; less equal than
+	MyHotstring := "{U+2264}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:mniejszyrowny:: 	; less equal than
+	MyHotstring := "{U+2264}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:~~::				; approximately
+	MyHotstring := "{U+2248}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:/=:: 			; not equal
+	MyHotstring := "{U+2260}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:mminus::			; longer version of dash
+	MyHotstring := "{U+2212}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:stopc:: 			; symbol of degree
+	MyHotstring := "{U+00B0}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:deg.::			; symbol of degree
+	MyHotstring := "{U+00B0}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+;~ :b0*x:<-::Send, {Backspace 2}{U+2190}		; arrow to the left
+:b0*x:<-::		; arrow to the left
+	MyHotstring := "{Backspace 2}{U+2190}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := " `", MyHotStringLength := "", Limit := 2, StartingPosition := 1)				
+return
+
+:*:^|::				; arrow up
+	MyHotstring := "{U+2191}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:|^::				; arrow down
+	MyHotstring := "{U+2193}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:z*:<->::			; bi directional arrow
+	MyHotstring := "{U+2194}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:b0*x:->:: 		; arrow to the right
+	MyHotstring := "{Backspace 2}{U+2192}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := " `", MyHotStringLength := "", Limit := 2, StartingPosition := 1)				
+return
+
+
+:*:alpha.::			; Greek small letter alpha
+	MyHotstring := "{U+03B1}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:beta.::			; Greek small letter beta
+	MyHotstring := "{U+03B2}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:gamma.::			; Greek small letter gamma
+	MyHotstring := "{U+03B3}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:epsilon.::			; Greek small letter epsilon
+	MyHotstring := "{U+03B5}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:theta.::			; Greek small letter theta
+	MyHotstring := "{U+03B8}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:micro.::			; Greek small letter theta
+	MyHotstring := "{U+00b5}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:lambda.::			; Greek small letter lambda
+	MyHotstring := "{U+03BB}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:pi.::				; Greek small letter pi
+	MyHotstring := "{U+03C0}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:omega.::			; Greek small letter omega
+	MyHotstring := "{U+03C9}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:delta.::			; Greek capital letter delta
+	MyHotstring := "{U+2206}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+
+:*:--::				; double dash
+	MyHotstring := "{U+2500}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
+:*:euro.::			; euro currency
+	MyHotstring := "{U+20AC}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
 
 ^+F11::
 	MsgBox, 64, Hotstrings: Physics & Mathematics, 
 (
-ohm	→  Ω
-kohm	→  kΩ
+ohm	→  Ω				kohm	→  kΩ
 mikro	→  µ
 kv	→  kV
-mamp	→  mA
-kamp	→  kA
+mamp	→  mA			kamp	→  kA
 
 +-	→ ±	or: -+	→ ±	or: plusminus	→ ±	or minusplus	±
 oddo	→ ÷
@@ -333,7 +1201,7 @@ kropkam	→ ·	or: mkropka	→ ·
 ~~	→ ≈
 /=	→ ≠
 mminus	→ ─
-stopc	→ °	or: deg*	→ °
+stopc	→ °	or: deg.	→ °
 
 <-	→ ←
 ^|	→ ↑
@@ -357,151 +1225,638 @@ euro.	→ €
 return
 
 ; ───────────────────────────────────── Abbreviations: Ctrl + Shift + F12 ────────────────────
-:*:ram.::Reliability, Availability, Maintainability
-:o:ram::RAM
-:*:rams.::Reliability, Availability, Maintainability and Safety
-:o:rams::RAMS
-:*:qrams.::Quality, Reliability, Availability, Maintainability, Safety
-::qrams::QRAMS
-:*:mtbf.::Mean Time Between Failures
-::mtbf::MTBF
-:*:mttr.::Mean Time To Restore
-::mttr::MTTR
-:*:sil.::Safety Integrity Level
-::sil::SIL
-:*:pcb.::Printed Circuit Board
-::pcb::PCB
-:*:dtr.::Dokumentacja Techniczno-Ruchowa
-::dtr::DTR
-:*:wtwio.::Warunki Techniczne Wytwarzania i Odbioru
-::wtwio::WTWiO
-:*:pkp.::Polskie Koleje Państwowe
-::pkp::PKP
-:*:plk.::Polskie Linie Kolejowe
-::plk::PLK
-:*:ups.::Uninterruptable Power Supply
-::ups::UPS
-:*:usb.::Universal Serial Bus
-::usb::USB
-:*:bhp.::Bezpieczeństwo i Higiena Pracy
-::bhp::BHP
-:*:iris.::International Railway Industry Standard for the evaluation of railway management systems
-::iris::IRIS
-:*:tsi.::Technical Specifications for Interoperability
-::tsi::TSI
-:*:faq.::Frequently Asked Questions
-::faq::FAQ
-:*:ahk.::AutoHotkey
-::ahk::AHK
-:b0*?z:.ahk::
-:*:vba.::Visiual Basic for Applications
-::vba::VBA
-:*:hdmi.::High-Definition Multimedia Interface
-::hdmi::HDMI
-:*:emc.::Electro-Magnetic Compatibility
-::emc::EMC
-:*:tuv.::German: Technischer {U+00DC}berwachungsverein, English: Technical Inspection Association
-::tuv::T{U+00DC}V
-::sud::S{U+00DC}D
-:*:gmbh.::German: Gesellschaft mit beschränkter Haftung, English: company with limited liability
-::gmbh::GmbH
-:*:hart.::Highway Addressable Remote Transducer Protocol
-::hart::HART
-:*:pesel.::Powszechny Elektroniczny System Ewidencji Ludności
-::pesel::PESEL
-:*:utk.::Urząd Transportu Kolejowego
-::utk::UTK
-:*:bait.::Biuro Automatyki i Telekomunikacji
-::bait::BAiT
-:*:erp.::Enterprise Resource Planning
-::erp::ERP
-:*:c2ms.::Component Content Management System `
-::c2ms::CCMS
-:*:lc2.::Life Cycle Cost `
-::lc2::LLC
-:*:obb.::German: {U+00D6}sterreichische Bundesbahnen, English: Austrian Federal Railways
-::obb::{U+00D6}BB
-:*:sbb.::German: Schweizerische Bundesbahnen, English: Swiss Federal Railways
-::sbb::SBB
-:*:ceo.::Chief Executive Officer
-::ceo::CEO
+:*:ram.::
+	MyHotstring := "Reliability, Availability, Maintainability `"
+	Send, %MyHotstring%
+return
 
-:*:ik.::Instytut Kolejnictwa
-::ik::IK
-:*:hds.::Hardware Design Specification
-::hds::HDS
-:*:has::Hardware Architecture Specification
-::has::HAS
+:o:ram::
+	MyHotstring := "RAM `"
+	Send, %MyHotstring%
+return
+
+:*:rams.::
+	MyHotstring := "Reliability, Availability, Maintainability and Safety `"
+	Send, %MyHotstring%
+return
+
+:o:rams::
+	MyHotstring := "RAMS `"
+	Send, %MyHotstring%
+return
+
+:*:qrams.::
+	MyHotstring := "Quality, Reliability, Availability, Maintainability, Safety `"
+	Send, %MyHotstring%
+return
+
+::qrams::
+	MyHotstring := "QRAMS `"
+	Send, %MyHotstring%
+return
+
+:*:mtbf.::
+	MyHotstring := "Mean Time Between Failures `"
+	Send, %MyHotstring%
+return
+
+::mtbf::
+	MyHotstring := "MTBF `"
+	Send, %MyHotstring%
+return
+
+:*:mttr.::
+	MyHotstring := "Mean Time To Restore `"
+	Send, %MyHotstring%
+return
+
+::mttr::
+	MyHotstring := "MTTR `"
+	Send, %MyHotstring%
+return
+
+:*:sil.::
+	MyHotstring := "Safety Integrity Level `"
+	Send, %MyHotstring%
+return
+
+::sil::
+	MyHotstring := "SIL `"
+	Send, %MyHotstring%
+return
+
+:*:pcb.::
+	MyHotstring := "Printed Circuit Board `"
+	Send, %MyHotstring%
+return
+
+::pcb::
+	MyHotstring := "PCB `"
+	Send, %MyHotstring%
+return
+
+:*:ups.::
+	MyHotstring := "Uninterruptable Power Supply `"
+	Send, %MyHotstring%
+return
+
+::ups::
+	MyHotstring := "UPS `"
+	Send, %MyHotstring%
+return
+
+:*:usb.::
+	MyHotstring := "Universal Serial Bus `"
+	Send, %MyHotstring%
+return
+
+::usb::
+	MyHotstring := "USB `"
+	Send, %MyHotstring%
+return
+
+:*:iris.::
+	MyHotstring := "International Railway Industry Standard for the evaluation of railway management systems `"
+	Send, %MyHotstring%
+return
+
+::iris::
+	MyHotstring := "IRIS `"
+	Send, %MyHotstring%
+return
+
+:*:tsi.::
+	MyHotstring := "Technical Specifications for Interoperability `"
+	Send, %MyHotstring%
+return
+
+::tsi::
+	MyHotstring := "TSI `"
+	Send, %MyHotstring%
+return
+
+:*:faq.::
+	MyHotstring := "Frequently Asked Questions `"
+	Send, %MyHotstring%
+return
+
+::faq::
+	MyHotstring := "FAQ `"
+	Send, %MyHotstring%
+return
+
+:*:ahk.::
+	MyHotstring := "AutoHotkey `"
+	Send, %MyHotstring%
+return
+
+::ahk::
+	MyHotstring := "AHK `"
+	Send, %MyHotstring%
+return
+
+:b0*?z:.ahk::
+
+:*:vba.::
+	MyHotstring := "Visiual Basic for Applications `"
+	Send, %MyHotstring%
+return
+
+::vba::
+	MyHotstring := "VBA `"
+	Send, %MyHotstring%
+return
+
+:*:hdmi.::
+	MyHotstring := "High-Definition Multimedia Interface `"
+	Send, %MyHotstring%
+return
+
+::hdmi::
+	MyHotstring := "HDMI `"
+	Send, %MyHotstring%
+return
+
+:*:emc.::
+	MyHotstring := "Electro-Magnetic Compatibility `"
+	Send, %MyHotstring%
+return
+
+::emc::
+	MyHotstring := "EMC `"
+	Send, %MyHotstring%
+return
+
+:*:hart.::
+	MyHotstring := "Highway Addressable Remote Transducer Protocol `"
+	Send, %MyHotstring%
+return
+
+::hart::
+	MyHotstring := "HART `"
+	Send, %MyHotstring%
+return
+
+:*:erp.::
+	MyHotstring := "Enterprise Resource Planning `"
+	Send, %MyHotstring%
+return
+
+::erp::
+	MyHotstring := "ERP `"
+	Send, %MyHotstring%
+return
+
+:*:c2ms.::
+	MyHotstring := "Component Content Management System `"
+	Send, %MyHotstring%
+return
+
+::c2ms::
+	MyHotstring := "CCMS `"
+	Send, %MyHotstring%
+return
+
+:*:lc2.::
+	MyHotstring := "Life Cycle Cost `"
+	Send, %MyHotstring%
+return
+
+::lc2::
+	MyHotstring := "LLC `"
+	Send, %MyHotstring%
+return
+
+:*:ceo.::
+	MyHotstring := "Chief Executive Officer `"
+	Send, %MyHotstring%
+return
+
+::ceo::
+	MyHotstring := "CEO `"
+	Send, %MyHotstring%
+return
+
+:*:hds.::
+	MyHotstring := "Hardware Design Specification `"
+	Send, %MyHotstring%
+return
+
+::hds::
+	MyHotstring := "HDS '"
+	Send, %MyHotstring%
+return
+
+:*:has.::
+	MyHotstring := "Hardware Architecture Specification `"
+	Send, %MyHotstring%
+return
+
+::has::
+	MyHotstring := "HAS `" ; conflict with English
+	Send, %MyHotstring%
+return
+
+:*:kpi.::
+	MyHotstring := "Key Performance Indicator `"
+	Send, %MyHotstring%
+return
+
+::kpi::
+	MyHotstring := "KPI `"
+	Send, %MyHotstring%
+return
+
+:*:gui.::
+	MyHotstring := "Graphical User Interface `"
+	Send, %MyHotstring%
+return
+
+::gui::
+	MyHotstring := "GUI `"
+	Send, %MyHotstring%
+return
+
+:*:etcs::
+	MyHotstring := "European Train Control System `"
+	Send, %MyHotstring%
+return
+
+::etcs::
+	MyHotstring := "ETCS `"
+	Send, %MyHotstring%
+return
+
+:*:ertms.::
+	MyHotstring := "European Rail Traffic Management System `"
+	Send, %MyHotstring%
+return
+
+::ertms::
+	MyHotstring := "ERTMS `"
+	Send, %MyHotstring%
+return
+
+:*:era.::
+	MyHotstring := "European Railway Agency `"
+	Send, %MyHotstring%
+return
+
+::era::
+	MyHotstring := "ERA `"
+	Send, %MyHotstring%
+return
+
+:*:fai.::
+	MyHotstring := "First Article Inspection `"
+	Send, %MyHotstring%
+return
+
+::fai::
+	MyHotstring := "FAI `"
+	Send, %MyHotstring%
+return
+
+:*:thr.::
+	MyHotstring := "Tolerable Hazard Rate `"
+	Send, %MyHotstring%
+return
+
+::thr::
+	MyHotstring := "THR `"
+	Send, %MyHotstring%
+return
+
+:*:dita.::
+	MyHotstring := "Darwin Information Typing Architecture `"
+	Send, %MyHotstring%
+return
+
+::dita::
+	MyHotstring := "DITA `"
+	Send, %MyHotstring%
+return
+
+:*:bom.::
+	MyHotstring := "Bill of Materials `"
+	Send, %MyHotstring%
+return
+
+::bom::
+	MyHotstring := "BOM `"
+	Send, %MyHotstring%
+return
+
+; - - - - - - - - - - - - Polish section - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+:*:dtr.::
+	MyHotstring := "Dokumentacja Techniczno-Ruchowa `"
+	Send, %MyHotstring%
+return
+
+::dtr::
+	MyHotstring := "DTR `"
+	Send, %MyHotstring%
+return
+
+:*:wtwio.::
+	MyHotstring := "Warunki Techniczne Wytwarzania i Odbioru `"
+	Send, %MyHotstring%
+return
+
+::wtwio::
+	MyHotstring := "WTWiO `"
+	Send, %MyHotstring%
+return
+
+:*:pkp.::
+	MyHotstring := "Polskie Koleje Państwowe `"
+	Send, %MyHotstring%
+return
+
+::pkp::
+	MyHotstring := "PKP `"
+	Send, %MyHotstring%
+return
+
+:*:plk.::
+	MyHotstring := "Polskie Linie Kolejowe `"
+	Send, %MyHotstring%
+return
+
+::plk::
+	MyHotstring := "PLK `"
+	Send, %MyHotstring%
+return
+
+:*:ik.::
+	MyHotstring := "Instytut Kolejnictwa `"
+	Send, %MyHotstring%
+return
+
+::ik::
+	MyHotstring := "IK `"
+	Send, %MyHotstring%
+return
+
+:*:pesel.::
+	MyHotstring := "Powszechny Elektroniczny System Ewidencji Ludności `"
+	Send, %MyHotstring%
+return
+
+::pesel::
+	MyHotstring := "PESEL `"
+	Send, %MyHotstring%
+return
+
+:*:utk.::Urząd Transportu Kolejowego
+	MyHotstring := ""
+	Send, %MyHotstring%
+return
+
+::utk::
+	MyHotstring := "UTK `"
+	Send, %MyHotstring%
+return
+
+:*:bait.::
+	MyHotstring := "Biuro Automatyki i Telekomunikacji `"
+	Send, %MyHotstring%
+return
+
+::bait::
+	MyHotstring := "BAiT `"
+	Send, %MyHotstring%
+return
+
+:*:bhp.::
+	MyHotstring := "Bezpieczeństwo i Higiena Pracy `"
+	Send, %MyHotstring%
+return
+
+::bhp::
+	MyHotstring := "BHP `"
+	Send, %MyHotstring%
+return
+
+:*:srk.::
+	MyHotstring := "(urządzenia) sterowania ruchem kolejowym `"
+	Send, %MyHotstring%
+return
+
+:*:ersat.::
+	MyHotstring := "Elektroniczny Rejestr Stanów Awaryjnych Taboru `"
+	Send, %MyHotstring%
+return
+
+::ersat::
+	MyHotstring := "ERSAT `"
+	Send, %MyHotstring%
+return
+
+; - - - - - - - - - - German section - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+:*:tuv.::
+	MyHotstring := "German: Technischer {U+00DC}berwachungsverein, English: Technical Inspection Association `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+::tuv::
+	MyHotstring := "T{U+00DC}V `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+::sud::
+	MyHotstring := "S{U+00DC}D `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+
+:*:gmbh.::
+	MyHotstring := "German: Gesellschaft mit beschränkter Haftung, English: company with limited liability `"
+	Send, %MyHotstring%
+return
+
+::gmbh::
+	MyHotstring := "GmbH `"
+	Send, %MyHotstring%
+return
+
+:*:obb.::
+	MyHotstring := "German: {U+00D6}sterreichische Bundesbahnen, English: Austrian Federal Railways `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)		
+return
+
+::obb::
+	MyHotstring := "{U+00D6}BB `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)			
+return
+
+:*:sbb.::
+	MyHotstring := "German: Schweizerische Bundesbahnen, English: Swiss Federal Railways `"
+	Send, %MyHotstring%
+return
+
+::sbb::
+	MyHotstring := "SBB `"
+	Send, %MyHotstring%
+return
 
 ^+F12::
 	MsgBox, 64, Hotstrings: Abbreviations, ram.	→ Reliability`, Availability`, Maintainability`nram	→ RAM`nrams.	→ Reliability`, Availability`, Maintainability and Safety`nrams:	→ RAMS`nqrams.	→ Quality`, Reliability`, Availability`, Maintainability`, Safety`nqrams	→ QRAMS`nmtbf.	→ Mean Time Between Failures`nmtbf	→ MTBF`nmttr.	→ Mean Time To Restore`nmttr	→ MTTR`nsil.	→ Safety Integrity Level`nsil	→ SIL`npcb.	→ Printed Circuit Board`npcb	→ PCB`ndtr.	→ Dokumentacja Techniczno-Ruchowa`ndtr	→ DTR`ndp.	→ Dział Produkcji i Zaopatrzenia`ndp	→ DPiZ`ndpiz.	→ Dział Produkcji i Zaopatrzenia`ndpiz	→ DPiZ`ndu.	→ Dział Usług i Realizacji`ndu	→ DUiR`nduir.	→ Dział Usług i Realizacji`nduir	→ DUiR`ndr	→ DR`nwtwio.	→ Warunki Techniczne Wytwarzania i Odbioru`nwtwio	→ WTWiO`npkp.	→ Polskie Koleje Państwowe`npkp	→ PKP`nplk.	→ Polskie Linie Kolejowe`nplk	→ PLK`nups.	→ Uninterruptable Power Supply`nups	→ UPS`nusb.	→ Universal Serial Bus`nusb	→ USB`nbhp.	→ Bezpieczeństwo i Higiena Pracy`nbhp	→ BHP`niris.	→ International Railway Industry Standard for the evaluation of railway management systems`niris	→ IRIS`ntsi.	→ Technical Specifications for Interoperability`ntsi	→ TSI`nfaq.	→ Frequently Asked Questions`nfaq	→ FAQ`nahk.	→ AutoHotkey`nahk	→ AHK`nvba.	→ Visiual Basic for Applications`nvba	→ VBA`nhdmi.	→ High-Definition Multimedia Interface`nhdmi	→ HDMI`nhbd.	→ Hot-Box Detector`nhbd	→ HBD`nhwd.	→ Hot-Wheel Detector`nhwd	→ HWD`nemc.	→ Electro-Magnetic Compatibility`nemc	→ EMC`nmb.	→ Multi Beam`nmb	→ MB`nmds.	→ Modular Diagnostic System`nmds	→ MDS`ntuv.	→ German: Technischer {U+00DC}berwachungsverein`, English: Technical Inspection Association`ntuv	→ T{U+00DC}V`nsud	→ S{U+00DC}D`ngmbh.	→ German: Gesellschaft mit beschränkter Haftung`, English: company with limited liability`ngmbh	→ GmbH`nhart.	→ Highway Addressable Remote Transducer Protocol`nhart	→ HART`npesel.	→ Powszechny Elektroniczny System Ewidencji Ludności`npesel	→ PESEL`nutk.	→ Urząd Transportu Kolejowego`nutk	→ UTK`nbait.	→ Biuro Automatyki i Telekomunikacji`nbait	→ BAiT`nerp.	→ Enterprise Resource Planning`nerp	→ ERP`nc2ms.	→ Component Content Management System ``nc2ms	→ CCMS`nlc2.	→ Life Cycle Cost ``nlc2	→ LLC`nobb.	→ German: {U+00D6}sterreichische Bundesbahnen`, English: Austrian Federal Railways`nobb	→ {U+00D6}BB`nsbb.	→  German: Schweizerische Bundesbahnen`, English: Swiss Federal Railways`nsbb	→ SBB
 return
 
-; - - - - - - - - - - - - - Section Capital Letters - - - - - - - - - - - - - - - - - - - - - - - 
-:*:svn::SVN
-:*:sap::SAP
-:*:easm.::EASM
-:*:qnx::QNX
-:*:rs232::RS232
-:*:rs485::RS485
-:*:uic60::UIC60
-:*:s49::S49
-:*:iscala::iSCALA
-
 ; - - - - - - - - - - - - - Section Date & Time - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 :*b0:d]::  ; This hotstring replaces "d]" with the current date and time via the commands below.
 	FormatTime, CurrentDateTime,, yyyy-MM-dd  ; It will look like 2020-01-21 
-	SendInput, {Backspace 2}%CurrentDateTime%
+	Send, {Backspace 2}%CurrentDateTime%
 return
 
 :*z:d]]::	; This hotstring is suitable for TC (Total Commander) only
 	FormatTime, CurrentDateTime,, yyyyMMdd_
-	SendInput, {Backspace 8}%CurrentDateTime%
+	Send, {Backspace 8}%CurrentDateTime%
 return
 
 :*:t]::
 	FormatTime, CurrentDateTime,, Time
-	SendInput %CurrentDateTime%
+	Send %CurrentDateTime%
 return
 
 ; ------------------ Section of first or second names with local diacritics ------------------------
-::rene::Ren{U+00E9}				; Rene 
-:*:guenther::G{U+00FC}nther		; Guenther 
-:*:joerg::J{U+00F6}rg			; Joerg
-:*:jorg::J{U+00F6}rg			; Joerg
+:*:rene::				; Rene 
+	MyHotstring := "Ren{U+00E9} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
 
-; - - - - - - - - - - - - - - - - Function Keys redirection - - - - - - - - - - - - - - - - - - - -
-; This is a way to get rid of top row of function keys.
-:*:esc.::{Esc} 
-:*:f1.::{F1}
-:*:f2.::{F2}
-:*:f3.::{F3}
-:*:f4.::{F4}
-:*:f5.::{F5}
-:*:f6.::{F6}
-:*:f7.::{F7}
-:*:f8.::{F8}
-:*:f9.::{F9}
-:*:f10.::{F10}
-:*:f11.::{F11}
-:*:f12.::{F12}
+:*:guenther::		; Guenther 
+	MyHotstring := "G{U+00FC}nther `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*:stuhn::			; Man
+	MyHotstring := "St{U+00FC}hn `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*:joerg::			; Joerg
+	MyHotstring := "J{U+00F6}rg `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*:jorg::			; Joerg
+	MyHotstring := "J{U+00F6}rg `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*:soren::			; Soren
+	MyHotstring := "S{U+00F8}ren `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
 
 ; - - - - - - - - - - - - - - - - Emoticons - - - - - - - - - - - - - - - - - - - - - - - -
 ;~ https://unicode-table.com/en/
-:*::)::{U+1F642} :-) ` 		; smiling face U+1F642
-:*::-)::{U+1F642} :-) `		; smiling face U+1F642
-:*::(::{U+1F641} :-( ` 		; frowning face U+1F641
-:*::-(::{U+1F641} :-( `		; frowning face U+1F641
-:*:;)::{U+1F609} ;-( ` 		; winking face U+1F609
-:*:;-)::{U+1F609} ;-( `		; winking face U+1F609
-:*::|::{U+1F610} :-| ` 		; neutral face U+1F610
-:*::-|::{U+1F610} :-| `		; neutral face U+1F610
-:*::-/::{U+1F615} :-/ `		; confused face U+1F615
-:*::/::{U+1F615} :-/ `		; confused face U+1F615
-:*::D::{U+1F600} :-D `		; grinning face U+1F600
-:*::-D::{U+1F600} :-D `		; grinning face U+1F600
-:*:cat.::{U+1F408}			; cat
+:*::).:: 		; smiling face U+1F642 :)
+	MyHotstring := "{U+1F642} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*::-).::		; smiling face U+1F642 :-)
+	MyHotstring := "{U+1F642} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*::(.:: 		; frowning face U+1F641 :(
+	MyHotstring := "{U+1F641} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*::-(.::		; frowning face U+1F641 :-(
+	MyHotstring := "{U+1F641} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*:;).:: 		; winking face U+1F609 ;)
+	MyHotstring := "{U+1F609} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*:;-).::		; winking face U+1F609 ;-)
+	MyHotstring := "{U+1F609} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*::|.:: 		; neutral face U+1F610 :|
+	MyHotstring := "{U+1F610} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*::-|.::		; neutral face U+1F610 :-|
+	MyHotstring := "{U+1F610} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*::-/.::		; confused face U+1F615 :-/
+	MyHotstring := "{U+1F615} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*::/.::			; confused face U+1F615 :/
+	MyHotstring := "{U+1F615} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*::D.::			; grinning face U+1F600 :D
+	MyHotstring := "{U+1F600} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*::-D.::		; grinning face U+1F600 :-D
+	MyHotstring := "{U+1F600} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*::*::			; flushed face U+1F633 :-*
+	MyHotstring := "{U+1F633} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*::-*::		; flushed face U+1F633 :-*
+	MyHotstring := "{U+1F633} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*:cat.::			; cat
+	MyHotstring := "{U+1F408} `"
+	Send, % MyHotstring
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
+	;~ MsgBox, % "MyHotstring: " . MyHotstring . " Długość: " . StrLen(MyHotstring) . " A_ThisHotkey: " . A_ThisHotkey . " A_PriorHotkey: " . A_PriorHotkey
+return
+
+
 
 ; - - - - - - - - - - - - - - - - - - Full titles of technical standards - - - - - - - - - 
 ; to be completed...
@@ -533,6 +1888,19 @@ return
 :*:asap.::as soon as possible
 :*:afaik.::as far as I know
 :*:btw.::by the way
+:*?:email::e-mail
+
+; - - - - - - - - - - - - - Section Capital Letters - - - - - - - - - - - - - - - - - - - - - - - 
+:*:svn::SVN
+:*:sap::SAP
+:*:easm.::EASM
+:*:qnx::QNX
+:*:rs232::RS232
+:*:rs485::RS485
+:*:uic60::UIC60
+:*:s49::S49
+:*:iscala::iSCALA
+:*:ditaexchange::DitaExchange
 
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
 ; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
