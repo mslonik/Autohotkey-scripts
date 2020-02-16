@@ -40,40 +40,30 @@ Menu, Tray, Icon, imageres.dll, 123     ; this line will turn the H icon into a 
 
 
 #Hotstring c b0 ? * 
-MyHotString("a", "{U+0105}")
 
-MyHotString(_string, _stringUnicode)
+
+MyHotString(_string, _stringUnicode, _BeepFrequency, _BeepDuration, _WhatTooltip)
     {
-    ;~ TripleArg1 := ""
-    ;~ TripleArg2 := ""
-    ;~ DoubleArg1 := ""
-    ;~ DoubleArg2 := ""
-    
-    ;~ TrippleArg1 := ":zx:" . _string . _string . _string
-    ;~ TrippleArg2 := "{BackSpace 2}" . _string . _string
-    ;~ Send1 := func("MySend").bind(TrippleArg2)
-    ;~ Send1 := func("MySend").bind("{BackSpace 2}" . _string . _string)
-    ;~ Hotstring(TrippleArg1, Send1, "On")
-    ;~ Hotstring(":zx:" . _string . _string . _string, Send1, "On")
-
-    Hotstring(":zx:" . _string . _string . _string, func("MySend").bind("{BackSpace 2}" . _string . _string), "On")
-    
-    ;~ DoubleArg1 := ":x:" . _string . _string
-    ;~ DoubleArg2 := "{BackSpace 2}" . _stringUnicode
-    ;~ MsgBox, % DoubleArg1 . " " . DoubleArg2    
-    ;~ Send2 := func("MySend").bind(DoubleArg2)
-    ;~ Send2 := func("MySend").bind("{BackSpace 2}" . _stringUnicode)
-    ;~ Hotstring(":x:" . _string . _string, Send2, "On")
-
-    Hotstring(":x:" . _string . _string, func("MySend").bind("{BackSpace 2}" . _stringUnicode), "On")
+    Hotstring(":zx:" . _string . _string . _string, func("MySend").bind("{BackSpace 2}" . _string . _string, _BeepFrequency, _BeepDuration, _WhatTooltip))
+    Hotstring(":x:" . _string . _string, func("MySend").bind("{BackSpace 2}" . _stringUnicode, _BeepFrequency, _BeepDuration, _WhatTooltip))
+    Hotstring(":x:" . _string, func("PrimaryLetter").bind(_BeepFrequency, _BeepDuration, _WhatTooltip))
     }
 
-MySend(_string)
+MySend(_string, _BeepFrequency, _BeepDuration, _WhatTooltip)
     {
     Send % _string
+    SoundBeep, % _BeepFrequency, % _BeepDuration
+    Tooltip, % _WhatTooltip
     }  
 
-DiactricArray := []
+PrimaryLetter(_BeepFrequency, _BeepDuration, _IfTooltip)
+    {
+    SoundBeep, % _BeepFrequency, % _BeepDuration
+    if (_IfTooltip = "yes")
+        Tooltip, Diactric?, % A_CaretX, % A_CaretY-20
+    }
+
+;~ DiactricArray := []
 DiactricSectionCounter := 0
 
 Loop, Read, % A_ScriptDir . "\Polish.ini"
@@ -83,39 +73,39 @@ Loop, Read, % A_ScriptDir . "\Polish.ini"
         DiactricSectionCounter++
         }
     }
-;~ MsgBox, % DiactricSectionCounter
+MsgBox, % DiactricSectionCounter
 Loop, %DiactricSectionCounter%
     {
-    IniRead, OutputVar_BaseKey, % A_ScriptDir . "\Polish.ini", % "Diactric" . A_Index, BaseKey
-    IniRead, OutputVar_Diactric, % A_ScriptDir . "\Polish.ini", % "Diactric" . A_Index, Diactric
-    IniRead, OutputVar_Tooltip, % A_ScriptDir . "\Polish.ini", % "Diactric" . A_Index, Tooltip
-    IniRead, OutputVar_SoundBeep_Frequency, % A_ScriptDir . "\Polish.ini", % "Diactric" . A_Index, SoundBeep_Frequency
-    IniRead, OutputVar_SoundBeep_Duration, % A_ScriptDir . "\Polish.ini", % "Diactric" . A_Index, SoundBeep_Duration
+    IniRead, _BaseKey, % A_ScriptDir . "\Polish.ini", % "Diactric" . A_Index, BaseKey
+    IniRead, _Diactric, % A_ScriptDir . "\Polish.ini", % "Diactric" . A_Index, Diactric
+    IniRead, _Tooltip, % A_ScriptDir . "\Polish.ini", % "Diactric" . A_Index, Tooltip
+    IniRead, _SoundBeep_Frequency, % A_ScriptDir . "\Polish.ini", % "Diactric" . A_Index, SoundBeep_Frequency
+    IniRead, _SoundBeep_Duration, % A_ScriptDir . "\Polish.ini", % "Diactric" . A_Index, SoundBeep_Duration
     
-    DiactricArray.Push(A_Index, OutputVar_BaseKey, OutputVar_Diactric, OutputVar_Tooltip, OutputVar_SoundBeep_Frequency, OutputVar_SoundBeep_Duration)
+    ;~ DiactricArray.Push(A_Index, OutputVar_BaseKey, OutputVar_Diactric, OutputVar_Tooltip, OutputVar_SoundBeep_Frequency, OutputVar_SoundBeep_Duration)
+    
+    MyHotString(_BaseKey, _Diactric, _SoundBeep_Frequency, _SoundBeep_Duration, _Tooltip)
     }
 
 
-:z:aaa::
-    Send, {BackSpace 2}aa
-    SoundBeep, 250, 150
-    Tooltip,
-    ;~ if (!arg[1]) Tooltip,
-    ;~ if (!arg[2]) Beep(arg)
-return
 
-::aa::
-    Send, {BackSpace 2}{U+0105}
-    SoundBeep, 350, 150
-    Tooltip, Double?, % A_CaretX, % A_CaretY-20
-    ;~ if (!arg[1]) Tooltip, Double?, % A_CaretX, % A_CaretY-20
-    ;~ if (!arg[2]) Beep(arg)
-return
 
-::a::
-    SoundBeep, 450, 150
-    Tooltip, Diactric?, % A_CaretX, % A_CaretY-20
-return
+;~ :z:aaa::
+    ;~ Send, {BackSpace 2}aa
+    ;~ SoundBeep, 250, 150
+    ;~ Tooltip,
+;~ return
+
+;~ ::aa::
+    ;~ Send, {BackSpace 2}{U+0105}
+    ;~ SoundBeep, 350, 150
+    ;~ Tooltip, Double?, % A_CaretX, % A_CaretY-20
+;~ return
+
+;~ ::a::
+    ;~ SoundBeep, 450, 150
+    ;~ Tooltip, Diactric?, % A_CaretX, % A_CaretY-20
+;~ return
 
 ;~ :z:ccc::
     ;~ Send, {BackSpace 2}cc
