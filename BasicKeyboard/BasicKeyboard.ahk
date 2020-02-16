@@ -15,6 +15,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 ;~ WordTrue := -1
 ;~ WordFalse := 0
 MyHotstring := ""
+TildeCounter := 0
 ; --------------- END OF GLOBAL VARIABLES SECTION ----------------------
 
 ; - - - - - - - - - - - Set of default web pages - - - - - - - - - - - - - - - - - 
@@ -67,24 +68,66 @@ return
 	;~ SetTimer, TurnOffTooltip, -5000
 ;~ return
 
-;~ Alt + Backspace as in MS Word: rolls back last Autocorrect action
-$!BackSpace::
+
+^z::			;~ Ctrl + z as in MS Word: Undo
+$!BackSpace:: 	;~ Alt + Backspace as in MS Word: rolls back last Autocorrect action
 	if (MyHotstring && (A_ThisHotkey != A_PriorHotkey))
 		{
 		;~ MsgBox, % "MyHotstring: " . MyHotstring . " A_ThisHotkey: " . A_ThisHotkey . " A_PriorHotkey: " . A_PriorHotkey
+		ToolTip, Undo the last hotstring., % A_CaretX, % A_CaretY-20
 		Send, % "{BackSpace " . StrLen(MyHotstring) . "}" . SubStr(A_PriorHotkey, InStr(A_PriorHotkey, ":", CaseSensitive := false, StartingPos := 1, Occurrence := 2) + 1)
+		SetTimer, TurnOffTooltip, -5000
+		MyHotstring := ""
 		}
 	else
 		{
-		ToolTip, Nothing to replace, % A_CaretX, % A_CaretY-20
+		ToolTip,
+		;~ ToolTip, Nothing to replace, % A_CaretX, % A_CaretY-20
 		;~ MsgBox, % "ELSE MyHotstring: " . MyHotstring . " A_ThisHotkey: " . A_ThisHotkey . " A_PriorHotkey: " . A_PriorHotkey		
-		SetTimer, TurnOffTooltip, -5000
-		Send, {Alt Down}{BackSpace}{Alt Up}
+		;~ SetTimer, TurnOffTooltip, -5000
+		Send, !{BackSpace}
 		}
 return
 
 ;~ pl: spacja nierozdzielająca; en: Non-breaking space; the same shortcut is used by default in MS Word
 +^Space::Send, {U+00A0}
+
+;~ $~::
+	;~ Send, {U+007E}
+	;~ VarTemp1++
+	;~ If ((A_ThisHotkey = A_PriorHotkey) && Mod(VarTemp1, 2))
+		;~ {
+		;~ Send, {Backspace 2}{U+2248}
+		;~ }
+	;~ Send, ~
+;~ return
+
+;~ :*:~~::
+	;~ Send, {U+2248}
+;~ return
+
+$~::Send, {U+007E}~ ; works for tilde if it is set as a dead key, e.g. in Polish keyboard layout; tilde blocker
+
+;~ :*:~::
+	;~ Send, {U+007E}~ ; works for tilde if it is set as a dead key, e.g. in Polish keyboard layout; tilde blocker
+	;~ Hotstring("Reset")
+;~ return
+
+;~ $~::
+	;~ TildeCounter++
+	;~ if (TildeCounter = 2)
+		;~ {
+		;~ MyHotstring := "{U+2248}"
+		;~ Send, %MyHotstring%
+		;~ Hotstring("Reset")
+		;~ MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+		;~ TildeCounter := 0
+		;~ }
+	;~ else
+		;~ {
+		;~ Send, {U+007E}~ ; works for tilde if it is set as a dead key, e.g. in Polish keyboard layout; tilde blocker
+		;~ }
+;~ return
 
 ; - - - - - - - - END OF KEYBOARD HOTKEYS SECTION - - - - - - - - - - - - - - - - - - - - - 
 
@@ -126,7 +169,7 @@ Ralt::AppsKey ; redirects AltGr -> context menu
 
 ; - - - - - - - - - - - - - - - - - - - - -  Hotstrings: Personal: Ctrl + Shift F9 - - - - - - - - - - - - - - - - - - - - - - - - -
 :*:dd::
-	MyHotstring := "Dzień dobry,{Enter}"
+	MyHotstring := "Dzień dobry,{Shift Down}{Enter 2}{Shift Up}"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
 return
@@ -157,13 +200,13 @@ return
 	Send, %MyHotstring%
 return
 
-:b0*x:m@2::
+:b0*:m@2::
 	MyHotstring := "{BackSpace 16}mslonik.pl"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
 return
 
-:*b0x:m@::
+:*b0:m@::
 	MyHotstring := "{BackSpace 2}maciej.slojewski@voestalpine.com"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
@@ -176,6 +219,11 @@ return
 
 :*:kr`t::
 	MyHotstring := "Kind regards`, Maciej Słojewski"
+	Send, %MyHotstring%
+return
+
+:*:dw.::
+	MyHotstring := "Do wiadomości.{Enter 2}Pozdrawia ms"
 	Send, %MyHotstring%
 return
 
@@ -214,12 +262,12 @@ return
 
 
 :*:axmrpl.::
-	MyHotstring := "moduł uniwersalny z wyjściami przekaźnikowymi"
+	MyHotstring := "moduł uniwersalny rozszerzony o wyjścia przekaźnikowe"
 	Send, %MyHotstring%
 return
 
 :*:axmren.::
-	MyHotstring := "universal module with relay outputs"
+	MyHotstring := "universal module extended with relay outputs"
 	Send, %MyHotstring%
 return
 
@@ -231,12 +279,12 @@ return
 
 
 :*:axmiopl.::
-	MyHotstring := "moduł uniwersalny z wejściami i wyjściami binarnymi"
+	MyHotstring := "moduł uniwersalny rozszerzony o wejścia i wyjścia binarne"
 	Send, %MyHotstring%
 return
 
 :*:axmioen.::
-	MyHotstring := "universal module with binary inputs and outputs"
+	MyHotstring := "universal module extended with binary inputs and outputs"
 	Send, %MyHotstring%
 return
 
@@ -474,7 +522,7 @@ return
 	Send, %MyHotstring%
 return
 
-:b0x:uniasx::
+:b0:uniasx::
 	MyHotstring := "{BackSpace 7}UniAS[x]"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
@@ -540,7 +588,7 @@ return
 	Send, %MyHotstring%
 return
 
-:b0x:mag::
+:b0:mag::
 	MyHotstring := "{BackSpace 4}MAG"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
@@ -548,24 +596,30 @@ return
 
 
 :*:magsacpl.::
-	MyHotstring := "zespolony moduł diagnostyczny i zasilający"
+	MyHotstring := "zintegrowany moduł diagnostyczny, komunikacyjny i zasilający"
 	Send, %MyHotstring%
 return
 
 :*:magsacen.::
-	MyHotstring := "combined diagnostic and voltage supply module"
+	MyHotstring := "integrated diagnostic, communication and voltage supply module"
 	Send, %MyHotstring%
 return
 
+:*:header.::
+	MyHotstring := "integrated diagnostic, communication and voltage supply module"
+	Send, %MyHotstring%
+return
+
+
 ::magsac::
-	MyHotstring := "MAG_SAC (MAG_SUP {+} MAG_ADM)"
+	MyHotstring := "MAG_SAC (MAGSUP {+} MAG_ADM {+} MAG_COM)"
 	Send, %MyHotstring%
 	MyHotstring := StrReplace(MyHotstring, "{" , "")
 	MyHotstring := StrReplace(MyHotstring, "}" , "")	
 return
 
 ::magsak::
-	MyHotstring := "MAG_SAC (MAG_SUP {+} MAG_ADM)"
+	MyHotstring := "MAG_SAC (MAGSUP {+} MAG_ADM {+} MAG_COM)"
 	Send, %MyHotstring%
 	MyHotstring := StrReplace(MyHotstring, "{" , "")
 	MyHotstring := StrReplace(MyHotstring, "}" , "")	
@@ -618,6 +672,24 @@ return
 	MyHotstring := "ADM"
 	Send, %MyHotstring%
 return
+
+
+:*:mrupl.::
+	MyHotstring := "moduł rozszerzonej diagnostyki"
+	Send, %MyHotstring%
+return
+
+:*:mruen.::
+	MyHotstring := "module rack unit"
+	Send, %MyHotstring%
+return
+
+::mru::
+	MyHotstring := "MRU"
+	Send, %MyHotstring%
+return
+
+
 
 
 :*:asmpl.::
@@ -845,10 +917,27 @@ return
 	Send, %MyHotstring%
 return
 
-:b0ox:vo::Send, estalpine
-:*b0x:voe::Send, stalpine Signaling Sopot
-:*b0x:voes::Send, {Backspace 1}{Space}Sp. z o.o.
-:z*b0x:voesi::Send, {Backspace 17}Siershahn
+:b0o:vo::
+	MyHotstring := "estalpine"
+	Send, %MyHotstring%
+return
+
+:*b0:voe::
+	MyHotstring := "stalpine Signaling Sopot"
+	Send, %MyHotstring%
+return
+
+:*b0:voes::
+	MyHotstring := "{BackSpace} Sp. z o.o."
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
+return
+
+:z*b0:voesi::
+	MyHotstring := "{Backspace 17}Siershahn"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
+return
 
 :*:si.::
 	MyHotstring := "Siershahn"
@@ -860,9 +949,20 @@ return
 	Send, %MyHotstring%
 return
 
-:*:nip.::584-025-39-29
-:*:adres.::Jana z Kolna 26c, 81-859 Sopot, Polska
-:*:addres2.::Jana z Kolna 26c, 81-859 Sopot, Poland
+:*:nipv.::
+	MyHotstring := "584-025-39-29"
+	Send, %MyHotstring%
+return
+
+:*:adres.::
+	MyHotstring := "Jana z Kolna 26c, 81-859 Sopot, Polska"
+	Send, %MyHotstring%
+return
+
+:*:addres2.::
+	MyHotstring := "Jana z Kolna 26c, 81-859 Sopot, Poland"
+	Send, %MyHotstring%
+return
 
 ^+F10::
 	MsgBox, 64, Hotstrings: voestalpine, 
@@ -1055,6 +1155,7 @@ return
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
 return
+
 
 :*:/=:: 			; not equal
 	MyHotstring := "{U+2260}"
@@ -1356,6 +1457,7 @@ return
 return
 
 :b0*?z:.ahk::
+return
 
 :*:vba.::
 	MyHotstring := "Visiual Basic for Applications `"
@@ -1547,6 +1649,68 @@ return
 	Send, %MyHotstring%
 return
 
+:*:ip.::
+	MyHotstring := "Ingress Protection code"
+	Send, %MyHotstring%
+return
+
+::ip::
+	MyHotstring := "IP"
+	Send, %MyHotstring%
+return
+
+:*:lop.::
+	MyHotstring := "List of Open Points"
+	Send, %MyHotstring%
+return
+
+::lop::
+	MyHotstring := "LoP"
+	Send, %MyHotstring%
+return
+
+:*:srac.::
+	MyHotstring := "Safety Related Application Condition"
+	Send, %MyHotstring%
+return
+
+::srac::
+	MyHotstring := "SRAC"
+	Send, %MyHotstring%
+return
+
+:*:ga.::
+	MyHotstring := "Generic Application"
+	Send, %MyHotstring%
+return
+
+::ga::
+	MyHotstring := "GA"
+	Send, %MyHotstring%
+return
+
+:*:sa.::
+	MyHotstring := "Specific Application"
+	Send, %MyHotstring%
+return
+
+::ga::
+	MyHotstring := "SA"
+	Send, %MyHotstring%
+return
+
+:*:fat.::
+	MyHotstring := "Factory Acceptance Test"
+	Send, %MyHotstring%
+return
+
+::fat::
+	MyHotstring := "FAT"
+	Send, %MyHotstring%
+return
+
+
+
 ; - - - - - - - - - - - - Polish section - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 :*:dtr.::
 	MyHotstring := "Dokumentacja Techniczno-Ruchowa `"
@@ -1643,6 +1807,16 @@ return
 	Send, %MyHotstring%
 return
 
+:*:nip.::
+	MyHotstring := "Numer Identyfikacji Podatkowej"
+	Send, %MyHotstring%
+return
+
+::nip::
+	MyHotstring := "NIP"
+	Send, %MyHotstring%
+return
+
 :*:ersat.::
 	MyHotstring := "Elektroniczny Rejestr Stanów Awaryjnych Taboru `"
 	Send, %MyHotstring%
@@ -1652,6 +1826,7 @@ return
 	MyHotstring := "ERSAT `"
 	Send, %MyHotstring%
 return
+
 
 ; - - - - - - - - - - German section - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 :*:tuv.::
@@ -1739,6 +1914,12 @@ return
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
+:*:pek::				; Pek
+	MyHotstring := "P{U+00E9}k `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
 :*:stuhn::			; Man
 	MyHotstring := "St{U+00FC}hn `"
 	Send, %MyHotstring%
@@ -1762,6 +1943,9 @@ return
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
+
+
+
 
 ; - - - - - - - - - - - - - - - - Emoticons - - - - - - - - - - - - - - - - - - - - - - - -
 ;~ https://unicode-table.com/en/
@@ -1837,17 +2021,30 @@ return
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
-:*::*::			; flushed face U+1F633 :-*
+:*::*.::			; flushed face U+1F633 :-*
 	MyHotstring := "{U+1F633} `"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
-:*::-*::		; flushed face U+1F633 :-*
+:*::-*.::		; flushed face U+1F633 :-*
 	MyHotstring := "{U+1F633} `"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
+
+:*::p::			; Face with Stuck-Out Tongue and Winking Eye Emoji U+1F61C :p
+	MyHotstring := "{U+1F61C} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*::-p.::		; Face with Stuck-Out Tongue and Winking Eye Emoji U+1F61C :-p
+	MyHotstring := "{U+1F61C} `"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
 
 :*:cat.::			; cat
 	MyHotstring := "{U+1F408} `"
@@ -1901,6 +2098,9 @@ return
 :*:s49::S49
 :*:iscala::iSCALA
 :*:ditaexchange::DitaExchange
+:*:pma::PMA
+:*:dokt::DokT (Dokumentacja Techniczna)
+:*:dokr::DokR (Dokumentacja Robocza)
 
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
 ; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
