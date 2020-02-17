@@ -1,19 +1,15 @@
-;~              I N T R O D U C T I O N
-;~ Simple script for Polisch diacritic marks (https://en.wikipedia.org/wiki/Diacritic): ą, ę, ś, ć, ż, ź, ń, ó, ł.
-;~ Instead of usage of AltGr (right alt, see https://en.wikipedia.org/wiki/AltGr_key#Polish for further details):
-;~ * double press a key corresponding to specific diacritic key, e.g. ee converts into ę
-;~ * AltGr suspend run of this script (switches to default behaviour of keyboard
-;~ * special sequence for double letters within words: <letter><letter><letter>, e.g. zaaawansowany converts into zaawansowany
-;~ 
-;~ WHY:
-;~ a. "programmers keyboard" and Polish diactric marks combined with old ANSI keyboards 101 keys (without Windows key and context key) where AltGr is unergonomically shifted to the right side of keyboard,
-;~ b. all other "programmers keyboard" when one doesn't want to press AltGr.
-;~
-;~ Author: Maciej Słojewski, 2019-08-04 
-;~
-;~ Base for all actions are "Hotstrings".
+/*
+Author:      Maciej Słojewski, mslonik, http://mslonik.pl
+Purpose:     Facilitate normal operation for company desktop.
+Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
+License:     GNU GPL v.3
+*/
 
-#SingleInstance,Force ; Determines whether a script is allowed to run again when it is already running. Force: Skips the dialog box and replaces the old instance automatically, which is similar in effect to the Reload command.
+#NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
+#Warn  							; Enable warnings to assist with detecting common errors.
+SendMode Input  				; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
+#SingleInstance force 			; only one instance of this script may run at a time!
 
 ApplicationName := "Polish Diactrics 5"
 ;~ global flaga := 0
@@ -21,26 +17,9 @@ ApplicationName := "Polish Diactrics 5"
 Menu, Tray, Icon, imageres.dll, 123     ; this line will turn the H icon into a small red a letter-looking thing.
 ;~ Gosub, TRAYMENU ; Jumps to the specified label and continues execution until Return is encountered
 
-; Pressing of AltGr toggles Suspend mode: disables or enables all or selected hotkeys and hotstrings.
-
 ;~ The order in which hotstrings are defined determines their precedence with respect to each other. In other words, if more than one hotstring matches something you type, only the one listed first in the script will take effect. 
 
 #Hotstring c b0 ? *
-
-;~ ORDINARY_DIACRIC POLISH LETTERS:
-; a - ą {U+0105}
-; c - ć {U+0107}
-; e - ę {U+0119}
-; l - ł {U+0142}
-; n - ń {U+0144}
-; o - ó {U+00F3}
-; s - ś {U+015B}
-; x - ź {U+017A}
-; z - ż {U+017C}
-
-
-#Hotstring c b0 ? * 
-
 
 MyHotString(_string, _stringUnicode, _BeepFrequency, _BeepDuration, _WhatTooltip)
     {
@@ -63,9 +42,16 @@ PrimaryLetter(_BeepFrequency, _BeepDuration, _IfTooltip)
         Tooltip, Diactric?, % A_CaretX, % A_CaretY-20
     }
 
-;~ DiactricArray := []
-DiactricSectionCounter := 0
+;~ read global variables from .ini file
+IniRead, _Language, % A_ScriptDir . "\Polish.ini", Global, Language
+IniRead, _AmericanLayout, % A_ScriptDir . "\Polish.ini", Global, AmericanLayout
+IniRead, _AllTooltips, % A_ScriptDir . "\Polish.ini", Global, AllTooltips
+IniRead, _AllBeeps, % A_ScriptDir . "\Polish.ini", Global, AllBeeps
+IniRead, _DiactricWord, % A_ScriptDir . "\Polish.ini", Global, DiactricWord
+IniRead, _DoubleWord, % A_ScriptDir . "\Polish.ini", Global, DoubleWord
 
+;~ determine how many [Diactric] sections are in .ini file
+DiactricSectionCounter := 0
 Loop, Read, % A_ScriptDir . "\Polish.ini"
     {
     if (InStr(A_LoopReadLine, "[Diactric"))
@@ -73,7 +59,9 @@ Loop, Read, % A_ScriptDir . "\Polish.ini"
         DiactricSectionCounter++
         }
     }
-MsgBox, % DiactricSectionCounter
+;~ MsgBox, % DiactricSectionCounter
+
+;~ read all the rest of configuration parameters from .ini file and create hotstrings
 Loop, %DiactricSectionCounter%
     {
     IniRead, _BaseKey, % A_ScriptDir . "\Polish.ini", % "Diactric" . A_Index, BaseKey
@@ -508,3 +496,14 @@ MyOK:
 MyAboutGuiClose: ; Launched when the window is closed by pressing its X button in the title bar
     Gui, MyAbout: Destroy
 return
+
+;~ ORDINARY_DIACRIC POLISH LETTERS:
+; a - ą {U+0105}
+; c - ć {U+0107}
+; e - ę {U+0119}
+; l - ł {U+0142}
+; n - ń {U+0144}
+; o - ó {U+00F3}
+; s - ś {U+015B}
+; x - ź {U+017A}
+; z - ż {U+017C}
