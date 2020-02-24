@@ -1,7 +1,7 @@
 ;~              I N T R O D U C T I O N
-;~ Simple script for Polisch diacritic marks (https://en.wikipedia.org/wiki/Diacritic): Ä…, Ä™, Ĺ›, Ä‡, ĹĽ, Ĺş, Ĺ„, Ăł, Ĺ‚.
+;~ Simple script for Polish diacritic letters (https://en.wikipedia.org/wiki/Diacritic).
 ;~ Instead of usage of AltGr (right alt, see https://en.wikipedia.org/wiki/AltGr_key#Polish for further details):
-;~ * double press a key corresponding to specific diacritic key, e.g. ee converts into Ä™
+;~ * double press a key corresponding to specific diacritic key, e.g. ee converts into ę
 ;~ * AltGr suspend run of this script (switches to default behaviour of keyboard
 ;~ * special sequence for double letters within words: <letter><letter><letter>, e.g. zaaawansowany converts into zaawansowany
 ;~ 
@@ -36,55 +36,6 @@ Menu, Tray, Icon, imageres.dll, 123     ; this line will turn the H icon into a 
 
 #Hotstring c b0 ? * 
 
-DoubleLetter(_BaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration)
-    {
-    global _AllBeeps
-    
-    Send, {BackSpace 2}%_BaseKey%%_BaseKey%
-    if (_AllBeeps = "on")
-        SoundBeep, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration
-    Tooltip,
-    ;~ return
-    }
-
-
-DiactricLetter(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip)
-    {
-    global _AllBeeps, _AllTooltips
-    
-    Send, {BackSpace 2}%_Diactric%
-    if (_AllBeeps = "on")
-        SoundBeep, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration
-    if ((_AllTooltips = "on") && (_Tooltip = "on") )
-        {
-        Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
-        }
-    else
-        {
-        Tooltip,
-        }
-    ;~ return
-    }
-        
-
-SingleLetter(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip)
-    {
-    global _AllBeeps, _AllTooltips
-    
-    if (_AllBeeps = "on")
-        SoundBeep, _BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration
-    if ((_AllTooltips = "on") && (_Tooltip = "on") )
-        {
-        Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
-        }
-    else
-        {
-        Tooltip,
-        }
-    ;~ return
-    }
-
-
 ;~ read global variables from .ini file
 IniRead, _Language,                         % A_ScriptDir . "\Polish.ini", Global, Language
 IniRead, _AmericanLayout,                   % A_ScriptDir . "\Polish.ini", Global, AmericanLayout
@@ -103,6 +54,9 @@ Loop, Read, % A_ScriptDir . "\Polish.ini"
         }
     }
 
+; Set dynamic hotkeys for all keys of 60% keyboard, ANSI layout
+F_AllKeyboardKeys()
+
 ;~ read all the rest of configuration parameters from .ini file and create hotstrings
 Loop, %DiactricSectionCounter%
     {
@@ -119,114 +73,162 @@ Loop, %DiactricSectionCounter%
     IniRead, _Double_SoundBeep_Duration,    % A_ScriptDir . "\Polish.ini", % "Diactric" . A_Index, Double_SoundBeep_Duration
 
     ;~ MyHotString(_BaseKey, _Diactric, _SoundBeep_Frequency, _SoundBeep_Duration, _Tooltip)
-    Hotstring(":zx:" . _BaseKey . _BaseKey . _BaseKey,  func("DoubleLetter").bind(_BaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration))
-    Hotstring(":x:" . _BaseKey . _BaseKey,              func("DiactricLetter").bind(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip))
-    Hotstring(":x:" . _BaseKey,                         func("SingleLetter").bind(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip))
+    Hotstring(":zx:" . _BaseKey . _BaseKey . _BaseKey,              func("DoubleLetter").bind(_BaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration))
+    Hotstring(":x:" . _BaseKey . _BaseKey,                          func("DiactricLetter").bind(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip))
+    Hotstring(":x:" . _BaseKey,                                     func("SingleLetter").bind(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip))
     StringUpper, _CapitalKey, _BaseKey
     Hotstring(":zx:" . _CapitalKey . _CapitalKey . _CapitalKey,     func("DoubleLetter").bind(_CapitalKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration))
     Hotstring(":x:" . _CapitalKey . _CapitalKey,                    func("DiactricLetter").bind(_ShiftDiactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip))
     Hotstring(":x:" . _CapitalKey,                                  func("SingleLetter").bind(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip))
     }
 
-/*
-;~ THE_REST:
-~+`::
-~+1::
-~+2::
-~+3::
-~+4::
-~+5::
-~+6::
-~+7::
-~+8::
-~+9::
-~+0::
-~+-::
-~+=::
-~+q::
-~+w::
-~+r::
-~+t::
-~+y::
-~+u::
-~+i::
-~+p::
-~+[::
-~+]::
-~+\::
-~+d::
-~+f::
-~+g::
-~+h::
-~+j::
-~+k::
-~+;::
-~+'::
-~+v::
-~+b::
-~+m::
-~+,::
-~+.::
-~+/::
-~`::
-~1::
-~2::
-~3::
-~4::
-~5::
-~6::
-~7::
-~8::
-~9::
-~0::
-~-::
-~=::
-~q::
-~w::
-~r::
-~t::
-~y::
-~u::
-~i::
-~p::
-~[::
-~]::
-~\::
-~d::
-~f::
-~g::
-~h::
-~j::
-~k::
-~;::
-~'::
-~v::
-~b::
-~m::
-~,::
-~.::
-~/::
-~Space::
-~Tab::
-~Enter::
-~Escape::
-~Delete::
-~Insert::
-~Home::
-~End::
-~PgUp::
-~PgDn::
-~Up::
-~Down::
-~Left::
-~Right::
-~BackSpace::
-    Hotstring("Reset")
-    ToolTip,, % A_CaretX, % A_CaretY-20
+
+ ;~ - - - - - - - - - - - - - - - - - - - - - - SECTION OF FUNCTIONS - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+DoubleLetter(_BaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration)
+    {
+    global _AllBeeps
+    
+    Send, {BackSpace 2}%_BaseKey%%_BaseKey%
+    if (_AllBeeps = "on")
+        SoundBeep, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration
+    Tooltip,
+    ;~ return
+    }
+
+;~ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+DiactricLetter(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip)
+    {
+    global _AllBeeps, _AllTooltips
+    
+    Send, {BackSpace 2}%_Diactric%
+    if (_AllBeeps = "on")
+        SoundBeep, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration
+    if ((_AllTooltips = "on") && (_Tooltip = "on") )
+        {
+        Tooltip, Double?, % A_CaretX,% A_CaretY-20
+        }
+    else
+        {
+        Tooltip,
+        }
+    ;~ return
+    }
+    
+;~ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -        
+
+SingleLetter(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip)
+    {
+    global _AllBeeps, _AllTooltips
+    
+    if (_AllBeeps = "on")
+        SoundBeep, _BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration
+    if ((_AllTooltips = "on") && (_Tooltip = "on") )
+        {
+        Tooltip, Diactric?, % A_CaretX,% A_CaretY-20
+        }
+    else
+        {
+        Tooltip,
+        }
+    ;~ return
+    }
+
+;~ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+F_AllKeyboardKeys()
+{
+;~ row #1
+Hotkey, ~Esc,       SwitchOffTooltip, On
+Hotkey, ~F1,        SwitchOffTooltip, On
+Hotkey, ~F2,        SwitchOffTooltip, On
+Hotkey, ~F3,        SwitchOffTooltip, On
+Hotkey, ~F4,        SwitchOffTooltip, On
+Hotkey, ~F5,        SwitchOffTooltip, On
+Hotkey, ~F6,        SwitchOffTooltip, On
+Hotkey, ~F7,        SwitchOffTooltip, On
+Hotkey, ~F8,        SwitchOffTooltip, On
+Hotkey, ~F9,        SwitchOffTooltip, On
+Hotkey, ~F10,       SwitchOffTooltip, On
+Hotkey, ~F11,       SwitchOffTooltip, On
+Hotkey, ~F12,       SwitchOffTooltip, On
+
+;~ row #2:
+Hotkey, ~``,        SwitchOffTooltip, On
+Hotkey, ~1,         SwitchOffTooltip, On
+Hotkey, ~2,         SwitchOffTooltip, On
+Hotkey, ~3,         SwitchOffTooltip, On
+Hotkey, ~4,         SwitchOffTooltip, On
+Hotkey, ~5,         SwitchOffTooltip, On
+Hotkey, ~6,         SwitchOffTooltip, On
+Hotkey, ~7,         SwitchOffTooltip, On
+Hotkey, ~8,         SwitchOffTooltip, On
+Hotkey, ~9,         SwitchOffTooltip, On
+Hotkey, ~0,         SwitchOffTooltip, On
+Hotkey, ~-,         SwitchOffTooltip, On
+Hotkey, ~=,         SwitchOffTooltip, On
+Hotkey, ~BS,        SwitchOffTooltip, On
+
+;~ row #3
+Hotkey, ~Tab,       SwitchOffTooltip, On
+Hotkey, ~q,         SwitchOffTooltip, On
+Hotkey, ~w,         SwitchOffTooltip, On
+Hotkey, ~e,         SwitchOffTooltip, On
+Hotkey, ~r,         SwitchOffTooltip, On
+Hotkey, ~t,         SwitchOffTooltip, On
+Hotkey, ~y,         SwitchOffTooltip, On
+Hotkey, ~u,         SwitchOffTooltip, On
+Hotkey, ~i,         SwitchOffTooltip, On
+Hotkey, ~o,         SwitchOffTooltip, On
+Hotkey, ~[,         SwitchOffTooltip, On
+Hotkey, ~],         SwitchOffTooltip, On
+Hotkey, ~\,         SwitchOffTooltip, On
+
+;~ row #4
+Hotkey, ~CapsLock,  SwitchOffTooltip, On
+Hotkey, ~a,         SwitchOffTooltip, On
+Hotkey, ~s,         SwitchOffTooltip, On
+Hotkey, ~d,         SwitchOffTooltip, On
+Hotkey, ~f,         SwitchOffTooltip, On
+Hotkey, ~g,         SwitchOffTooltip, On
+Hotkey, ~h,         SwitchOffTooltip, On
+Hotkey, ~j,         SwitchOffTooltip, On
+Hotkey, ~k,         SwitchOffTooltip, On
+Hotkey, ~l,         SwitchOffTooltip, On
+Hotkey, ~;,         SwitchOffTooltip, On
+Hotkey, ~',         SwitchOffTooltip, On
+Hotkey, ~Enter,     SwitchOffTooltip, On
+
+;~ row #5
+Hotkey, ~Shift,     SwitchOffTooltip, On
+Hotkey, ~z,         SwitchOffTooltip, On
+Hotkey, ~x,         SwitchOffTooltip, On
+Hotkey, ~c,         SwitchOffTooltip, On
+Hotkey, ~v,         SwitchOffTooltip, On
+Hotkey, ~b,         SwitchOffTooltip, On
+Hotkey, ~n,         SwitchOffTooltip, On
+Hotkey, ~m,         SwitchOffTooltip, On
+Hotkey, ~`,,        SwitchOffTooltip, On
+Hotkey, ~.,         SwitchOffTooltip, On
+Hotkey, ~/,         SwitchOffTooltip, On
+
+;~ row #6
+Hotkey, ~Control,   SwitchOffTooltip, On
+Hotkey, ~Lwin,      SwitchOffTooltip, On
+Hotkey, ~Alt,       SwitchOffTooltip, On
+Hotkey, ~Space,     SwitchOffTooltip, On
+Hotkey, ~RWin,      SwitchOffTooltip, On
+Hotkey, ~AppsKey,   SwitchOffTooltip, On
+}
+
+ ;~ - - - - - - - - - - - - - - - - - - - - - - SECTION OF LABELS - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+SwitchOffTooltip:
+    ;~ ToolTip, Carramba
+    ToolTip,
 return
-*/
-ToolTip,
-return
+
 
 TRAYMENU:
     Menu, Tray, Add, %ApplicationName% ABOUT, ABOUT
