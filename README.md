@@ -76,22 +76,7 @@ b. all other "programmers keyboard" when one doesn't want to press AltGr.
 The "PolishDiactric" contains the following 4 scripts. It's recommended to use by default PolishDiacritic2.ahk only. The other scripts are left for educational purposes mainly.
 
 * PolishDiacritic1.ahk <- the 1st attempt to fulfill above requirements; 
-  - e -> e
-  - ee -> ę
-  - e  e -> ee
-
-* PolishDiacritic2.ahk
-  - e -> e
-  - ee -> ę
-  - eee -> ee
+* PolishDiacritic2.ahk ← stable and currently in use
   Information about this particular script at AHK forum: https://www.autohotkey.com/boards/viewtopic.php?t=67840
-
 * PolishDiacritic3.ahk <- variant of above, but instead of hotstrings attempt to carry on with input buffers
-  - e -> e
-  - ee -> ę
-  - eee -> ee
-
 * PolishDiacritic4.ahk <- variant of above, attempt to apply arrays; not finished.
-  - e -> e
-  - ee -> ę
-  - eee -> ee
