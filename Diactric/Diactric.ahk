@@ -9,13 +9,9 @@
 ;~ a. "programmers keyboard" layout and diactric with old ANSI 101 keys keyboard, where AltGr is unergonomically shifted to the right side of keyboard is cumbersome and decrease touch typing speed,
 ;~ b. all other "programmers keyboard" when one doesn't want to press AltGr or use just one hand to press all letters of alphabet.
 ;~
-;~ Author: Maciej Słojewski, 2020-02-26
+;~ Author: Maciej Słojewski, 2020-02-27
 ;~
 ;~ Base for all actions are "Hotstrings" generated dynamically (hotstring function).
-;~ To do:
-;~ 1. Menu and help.
-;~ 2. Change of codepage.
-
 
 #NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn  							; Enable warnings to assist with detecting common errors.
@@ -23,15 +19,16 @@ SendMode Input  				; Recommended for new scripts due to its superior speed and 
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #SingleInstance force 			; only one instance of this script may run at a time!
 
-ApplicationName := "Diactric"
+;~ - - - - - - - - - - Global Variables - - - - - - - - - - -
+ApplicationName     := "Diactric"
+English_USA 		:= 0x0409   ; see AutoHotkey help: Language Codes
+;~ - - - - - - - - - - End of Global Variables - - - - - - - - - - -
 
 Menu, Tray, Icon, imageres.dll, 123     ; this line will turn the H icon into a small red a letter-looking thing.
-;~ Gosub, TRAYMENU ; Jumps to the specified label and continues execution until Return is encountered
+Gosub, TRAYMENU                         ; Jumps to the specified label and continues execution until Return is encountered
 
 ProcessInputArgs()
 #Hotstring c b0 ? * 
-F_AllKeyboardKeys()     ; Set dynamic hotkeys for all keys of 60% keyboard, ANSI layout
-
 
 ;~ read global variables from .ini file
 IniRead, _AmericanLayout,                   % A_ScriptDir . "\" . A_Args[1], Global, AmericanLayout
@@ -39,6 +36,12 @@ IniRead, _AllTooltips,                      % A_ScriptDir . "\" . A_Args[1], Glo
 IniRead, _AllBeeps,                         % A_ScriptDir . "\" . A_Args[1], Global, AllBeeps
 IniRead, _DiactricWord,                     % A_ScriptDir . "\" . A_Args[1], Global, DiactricWord
 IniRead, _DoubleWord,                       % A_ScriptDir . "\" . A_Args[1], Global, DoubleWord
+
+;~ switch to AmericanLayout (neutral)?
+if (_AmericanLayout = "yes")
+    SetDefaultKeyboard(English_USA)
+if (_AllTooltips = "yes")
+    F_AllKeyboardKeys()     ; Set dynamic hotkeys for all keys of 60% keyboard, ANSI layout    
 
 ;~ determine how many [Diactric] sections are in .ini file
 DiactricSectionCounter := 0
@@ -78,6 +81,9 @@ Loop, %DiactricSectionCounter%
     Hotstring(":x:"  . _ShiftBaseKey,                                 func("SingleLetter").bind(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip))
     }
 
+~BackSpace:: ; this line prevent the following sequence from triggering: ao → aoo → aó → aó{Backspace} → a → ao → ó
+    Hotstring("Reset")
+return
 
  ;~ - - - - - - - - - - - - - - - - - - - - - - SECTION OF FUNCTIONS - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
@@ -223,7 +229,7 @@ Hotkey, ~AppsKey,   SwitchOffTooltip, On
 
 ProcessInputArgs()
 {
-global A_Args
+global A_Args, ApplicationName
 
 if (A_Args.Length() = 0)
     {
@@ -277,6 +283,25 @@ else if (A_Args.Length() = 1)
     }
 }    
 
+;~ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;~ https://docs.microsoft.com/pl-pl/windows/win32/api/winuser/nf-winuser-systemparametersinfoa?redirectedfrom=MSDN
+SetDefaultKeyboard(LocaleID)
+{
+	static SPI_SETDEFAULTINPUTLANG := 0x005A, SPIF_SENDWININICHANGE := 2
+	WM_INPUTLANGCHANGEREQUEST := 0x50
+	
+	Language := DllCall("LoadKeyboardLayout", "Str", Format("{:08x}", LocaleID), "Int", 0)
+	VarSetCapacity(binaryLocaleID, 4, 0)
+	NumPut(LocaleID, binaryLocaleID)
+	DllCall("SystemParametersInfo", UINT, SPI_SETDEFAULTINPUTLANG, UINT, 0, UPTR, &binaryLocaleID, UINT, SPIF_SENDWININICHANGE)
+	
+	WinGet, windows, List
+	Loop % windows
+		{
+		PostMessage WM_INPUTLANGCHANGEREQUEST, 0, % Language, , % "ahk_id " windows%A_Index%
+		}
+}
+
 
  ;~ - - - - - - - - - - - - - - - - - - - - - - SECTION OF LABELS - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
@@ -299,18 +324,17 @@ ABOUT:
     Gui, MyAbout: Font, Bold
     Gui, MyAbout: Add, Text, , %ApplicationName% v.1.0 by mslonik
     Gui, MyAbout: Font
-    Gui, MyAbout: Add, Text, xm, Simple script for Polisch diacritic marks (
+    Gui, MyAbout: Add, Text, xm, Simple script for configured set of diacritic marks (
     Gui, MyAbout: Font, CBlue Underline 
     Gui, MyAbout: Add, Text, x+1, https://en.wikipedia.org/wiki/Diacritic
     Gui, MyAbout: Font
-    Gui, MyAbout: Add, Text, x+1, ): Ä…, Ä™, Ĺ›, Ä‡, ĹĽ, Ĺş, Ĺ„, Ăł, Ĺ‚.
-    Gui, MyAbout: Add, Text, xm, Instead of usage of AltGr (right alt`, see 
+    Gui, MyAbout: Add, Text, x+1, ) e.g.: ą, ć, ę, ł, ś, ź, ż, ó, ń etc.
+    Gui, MyAbout: Add, Text, xm, Instead of using AltGr key (the right Alt`, see 
     Gui, MyAbout: Font, CBlue Underline 
-    Gui, MyAbout: Add, Text, x+2, https://en.wikipedia.org/wiki/AltGr_key#Polish 
+    Gui, MyAbout: Add, Text, x+2, https://en.wikipedia.org/wiki/AltGr_key 
     Gui, MyAbout: Font
     Gui, MyAbout: Add, Text, x+2, for further details):
-    Gui, MyAbout: Add, Text, xm+20, * double press a key corresponding to specific diacritic key`, e.g. ee converts into Ä™
-    Gui, MyAbout: Add, Text, xm+20, * AltGr suspend run of this script (switches to default behaviour of keyboard
+    Gui, MyAbout: Add, Text, xm+20, * double press a key corresponding to specific diacritic key`, e.g. ee converts into ę
     Gui, MyAbout: Add, Text, xm+20, * special sequence for double letters within words: <letter><letter><letter>`, e.g. zaaawansowany converts into zaawansowany
 
     Gui, MyAbout: Add, Button, Default Hidden w100 gMyOK Center vOkButtonVariabl hwndOkButtonHandle, &OK
