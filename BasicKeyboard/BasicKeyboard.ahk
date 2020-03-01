@@ -273,6 +273,11 @@ return
 	MhHotstring := MyHotstring1 . MyHotstring2
 return
 
+:*:v.::
+	MyHotstring := "V523580"
+	Send, {Text}%MyHotstring%
+return
+
 ^+F9::
 MsgBox, 64, Hotstrings: Personal, 
 (
