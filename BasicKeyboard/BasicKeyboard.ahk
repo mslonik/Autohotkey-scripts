@@ -15,11 +15,43 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 ;~ WordTrue := -1
 ;~ WordFalse := 0
 MyHotstring := ""
-TildeCounter := 0
+;~ TildeCounter := 0
 ; --------------- END OF GLOBAL VARIABLES SECTION ----------------------
 
 ; - - - - - - - - - - - Set of default web pages - - - - - - - - - - - - - - - - - 
 ;~ Run, https://solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx ; voestalpine Signaling Siershahn, Cooperation Platform Sopot
+
+
+;~ #IfTimeout 2000 ; Set the timeout to 10 ms.
+;~ #if (A_ComputerName = "2277NB010" && A_UserName = "V523580") ; Maciej Słojewski only
+#if (A_ComputerName = "fik" && A_UserName = "V523580") ; Maciej Słojewski only
+;~ beginning of a section specific to Maciej Słojewski
+
+
+;~ Currently, all special Alt-tab actions must be assigned directly to a hotkey as in the examples above (i.e. they cannot be used as though they were commands). They are not affected by #IfWin or #If.
+;~ MButton::AltTabMenu
+;~ WheelDown::AltTab
+;~ WheelUp::ShiftAltTab
+
+
+; ---------------------- KEYS REMAPPING -----------------------------------
+	Ralt::AppsKey ; redirects AltGr -> context menu
+	PrintScreen::#+s ; Windows + Shift + s https://support.microsoft.com/pl-pl/help/4488540/how-to-take-and-annotate-screenshots-on-windows-10
+; - - - - - - - - - - - - - - - - Function Keys redirection - - - - - - - - - - - - - - - - - - - -
+; This is a way to get rid of top row of keyboard function keys.
+	:*:esc.::{Esc} 
+	:*:f1.::{F1}
+	:*:f2.::{F2}
+	:*:f3.::{F3}
+	:*:f4.::{F4}
+	:*:f5.::{F5}
+	:*:f6.::{F6}
+	:*:f7.::{F7}
+	:*:f8.::{F8}
+	:*:f9.::{F9}
+	:*:f10.::{F10}
+	:*:f11.::{F11}
+	:*:f12.::{F12}
 
 
 ; ---------------- SECTION OF HOTKEYS ---------------------------------------------------------------------------------------
@@ -62,11 +94,7 @@ return
 +^k::Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 	 ; run Kee Pass application (password manager)
 ^#F8::WinSet, AlwaysOnTop, toggle, A ; Ctrl + Windows + F8, toggle always on top
 
-;~ +^s::
-	;~ Suspend, Toggle
-	;~ ToolTip, Suspend toggle, % A_CaretX, % A_CaretY-20
-	;~ SetTimer, TurnOffTooltip, -5000
-;~ return
+#if		; end of section dedicated to Maciej Słojewski
 
 
 ^z::			;~ Ctrl + z as in MS Word: Undo
@@ -92,42 +120,6 @@ return
 ;~ pl: spacja nierozdzielająca; en: Non-breaking space; the same shortcut is used by default in MS Word
 +^Space::Send, {U+00A0}
 
-;~ $~::
-	;~ Send, {U+007E}
-	;~ VarTemp1++
-	;~ If ((A_ThisHotkey = A_PriorHotkey) && Mod(VarTemp1, 2))
-		;~ {
-		;~ Send, {Backspace 2}{U+2248}
-		;~ }
-	;~ Send, ~
-;~ return
-
-;~ :*:~~::
-	;~ Send, {U+2248}
-;~ return
-
-$~::Send, {U+007E}~ ; works for tilde if it is set as a dead key, e.g. in Polish keyboard layout; tilde blocker
-
-;~ :*:~::
-	;~ Send, {U+007E}~ ; works for tilde if it is set as a dead key, e.g. in Polish keyboard layout; tilde blocker
-	;~ Hotstring("Reset")
-;~ return
-
-;~ $~::
-	;~ TildeCounter++
-	;~ if (TildeCounter = 2)
-		;~ {
-		;~ MyHotstring := "{U+2248}"
-		;~ Send, %MyHotstring%
-		;~ Hotstring("Reset")
-		;~ MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
-		;~ TildeCounter := 0
-		;~ }
-	;~ else
-		;~ {
-		;~ Send, {U+007E}~ ; works for tilde if it is set as a dead key, e.g. in Polish keyboard layout; tilde blocker
-		;~ }
-;~ return
 
 ; - - - - - - - - END OF KEYBOARD HOTKEYS SECTION - - - - - - - - - - - - - - - - - - - - - 
 
@@ -136,42 +128,13 @@ $~::Send, {U+007E}~ ; works for tilde if it is set as a dead key, e.g. in Polish
 ; ---------- SECTION OF NUMERIC KEYBOARD HOTKEYS - NUMLOCK == OFF ---------------------------------------------
 
 
-; ---------------------- SECTION OF LABELS ------------------------------------
-
-TurnOffTooltip:
-	ToolTip ,
-return
-
-; ---------------------- KEYS REMAPPING -----------------------------------
-;~ https://support.microsoft.com/pl-pl/help/4488540/how-to-take-and-annotate-screenshots-on-windows-10
-PrintScreen::#+s ; Windows + Shift + s
-; These are dedicated to ThinkPad T480 (notebook) keyboard
-Ralt::AppsKey ; redirects AltGr -> context menu
-;~ Ralt & q::@ ; for René 
-
-; - - - - - - - - - - - - - - - - Function Keys redirection - - - - - - - - - - - - - - - - - - - -
-; This is a way to get rid of top row of keyboard function keys.
-:*:esc.::{Esc} 
-:*:f1.::{F1}
-:*:f2.::{F2}
-:*:f3.::{F3}
-:*:f4.::{F4}
-:*:f5.::{F5}
-:*:f6.::{F6}
-:*:f7.::{F7}
-:*:f8.::{F8}
-:*:f9.::{F9}
-:*:f10.::{F10}
-:*:f11.::{F11}
-:*:f12.::{F12}
-
 ; ---------------------- HOTSTRINGS -----------------------------------
 
 ; - - - - - - - - - - - - - - - - - - - - -  Hotstrings: Personal: Ctrl + Shift F9 - - - - - - - - - - - - - - - - - - - - - - - - -
 :*:dd::
-	MyHotstring := "Dzień dobry,{Shift Down}{Enter 2}{Shift Up}"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+	MyHotstring := "Dzień dobry`,"
+	Send, {Text}%MyHotstring%
+	Send, {Shift Down}{Enter 2}{Shift Up}
 return
 
 :*:p ms::
@@ -186,7 +149,7 @@ return
 
 :*:s.::
 	MyHotstring := "Słojewski"
-	Send, %MyHotstring%
+	Send, {Text}%MyHotstring%
 return
 
 :C:tel::
@@ -197,7 +160,7 @@ return
 
 :*:ms.::
 	MyHotstring := "Maciej Słojewski"
-	Send, %MyHotstring%
+	Send, {Text}%MyHotstring%
 return
 
 :b0*:m@2::
@@ -214,17 +177,21 @@ return
 
 :*:zws::
 	MyHotstring := "Z wyrazami szacunku`, Maciej Słojewski"
-	Send, %MyHotstring%
+	Send, {Text}%MyHotstring%
 return
 
 :*:kr`t::
 	MyHotstring := "Kind regards`, Maciej Słojewski"
-	Send, %MyHotstring%
+	Send, {Text}%MyHotstring%
 return
 
 :*:dw.::
-	MyHotstring := "Do wiadomości.{Enter 2}Pozdrawia ms"
-	Send, %MyHotstring%
+	MyHotstring1 := "Do wiadomości."
+	Send, {Text}%MyHotstring1%
+	Send, {Enter 2}
+	MyHotstring2 := "Pozdrawia ms"
+	Send, %MyHotstring2%
+	MhHotstring := MyHotstring1 . MyHotstring2
 return
 
 ^+F9::
@@ -453,8 +420,9 @@ return
 	MyHotstring := StrReplace(MyHotstring, "}" , "")	
 return
 
-:b0x:unias1p::
+:b0:unias1p::
 	MyHotstring := "{BackSpace 8}UniAS[1{+}]"
+	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{.*8\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
 	MyHotstring := StrReplace(MyHotstring, "{" , "")
 	MyHotstring := StrReplace(MyHotstring, "}" , "")	
@@ -689,9 +657,6 @@ return
 	Send, %MyHotstring%
 return
 
-
-
-
 :*:asmpl.::
 	MyHotstring := "moduł oceniający"
 	Send, %MyHotstring%
@@ -738,6 +703,23 @@ return
 	MyHotstring := "AIM"
 	Send, %MyHotstring%
 return
+
+
+:*:abmpl.::
+	MyHotstring := "kaseta"
+	Send, %MyHotstring%
+return
+
+:*:abmen.::
+	MyHotstring := "module rack"
+	Send, %MyHotstring%
+return
+
+::abm::
+	MyHotstring := "ABM"
+	Send, %MyHotstring%
+return
+
 
 
 :*:anszuapl.::
@@ -949,6 +931,12 @@ return
 	Send, %MyHotstring%
 return
 
+:*:sai.::
+	MyHotstring := "Sainerholz"
+	Send, %MyHotstring%
+return
+
+
 :*:nipv.::
 	MyHotstring := "584-025-39-29"
 	Send, %MyHotstring%
@@ -1156,6 +1144,12 @@ return
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
 return
 
+:*:approx.::				; approximately
+	MyHotstring := "{U+2248}"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+return
+
 
 :*:/=:: 			; not equal
 	MyHotstring := "{U+2260}"
@@ -1327,132 +1321,132 @@ return
 
 ; ───────────────────────────────────── Abbreviations: Ctrl + Shift + F12 ────────────────────
 :*:ram.::
-	MyHotstring := "Reliability, Availability, Maintainability `"
+	MyHotstring := "Reliability, Availability, Maintainability"
 	Send, %MyHotstring%
 return
 
 :o:ram::
-	MyHotstring := "RAM `"
+	MyHotstring := "RAM"
 	Send, %MyHotstring%
 return
 
 :*:rams.::
-	MyHotstring := "Reliability, Availability, Maintainability and Safety `"
+	MyHotstring := "Reliability, Availability, Maintainability and Safety"
 	Send, %MyHotstring%
 return
 
 :o:rams::
-	MyHotstring := "RAMS `"
+	MyHotstring := "RAMS"
 	Send, %MyHotstring%
 return
 
 :*:qrams.::
-	MyHotstring := "Quality, Reliability, Availability, Maintainability, Safety `"
+	MyHotstring := "Quality, Reliability, Availability, Maintainability, Safety"
 	Send, %MyHotstring%
 return
 
 ::qrams::
-	MyHotstring := "QRAMS `"
+	MyHotstring := "QRAMS"
 	Send, %MyHotstring%
 return
 
 :*:mtbf.::
-	MyHotstring := "Mean Time Between Failures `"
+	MyHotstring := "Mean Time Between Failures"
 	Send, %MyHotstring%
 return
 
 ::mtbf::
-	MyHotstring := "MTBF `"
+	MyHotstring := "MTBF"
 	Send, %MyHotstring%
 return
 
 :*:mttr.::
-	MyHotstring := "Mean Time To Restore `"
+	MyHotstring := "Mean Time To Restore"
 	Send, %MyHotstring%
 return
 
 ::mttr::
-	MyHotstring := "MTTR `"
+	MyHotstring := "MTTR"
 	Send, %MyHotstring%
 return
 
 :*:sil.::
-	MyHotstring := "Safety Integrity Level `"
+	MyHotstring := "Safety Integrity Level"
 	Send, %MyHotstring%
 return
 
 ::sil::
-	MyHotstring := "SIL `"
+	MyHotstring := "SIL"
 	Send, %MyHotstring%
 return
 
 :*:pcb.::
-	MyHotstring := "Printed Circuit Board `"
+	MyHotstring := "Printed Circuit Board"
 	Send, %MyHotstring%
 return
 
 ::pcb::
-	MyHotstring := "PCB `"
+	MyHotstring := "PCB"
 	Send, %MyHotstring%
 return
 
 :*:ups.::
-	MyHotstring := "Uninterruptable Power Supply `"
+	MyHotstring := "Uninterruptable Power Supply"
 	Send, %MyHotstring%
 return
 
 ::ups::
-	MyHotstring := "UPS `"
+	MyHotstring := "UPS"
 	Send, %MyHotstring%
 return
 
 :*:usb.::
-	MyHotstring := "Universal Serial Bus `"
+	MyHotstring := "Universal Serial Bus"
 	Send, %MyHotstring%
 return
 
 ::usb::
-	MyHotstring := "USB `"
+	MyHotstring := "USB"
 	Send, %MyHotstring%
 return
 
 :*:iris.::
-	MyHotstring := "International Railway Industry Standard for the evaluation of railway management systems `"
+	MyHotstring := "International Railway Industry Standard for the evaluation of railway management systems"
 	Send, %MyHotstring%
 return
 
 ::iris::
-	MyHotstring := "IRIS `"
+	MyHotstring := "IRIS"
 	Send, %MyHotstring%
 return
 
 :*:tsi.::
-	MyHotstring := "Technical Specifications for Interoperability `"
+	MyHotstring := "Technical Specifications for Interoperability"
 	Send, %MyHotstring%
 return
 
 ::tsi::
-	MyHotstring := "TSI `"
+	MyHotstring := "TSI"
 	Send, %MyHotstring%
 return
 
 :*:faq.::
-	MyHotstring := "Frequently Asked Questions `"
+	MyHotstring := "Frequently Asked Questions"
 	Send, %MyHotstring%
 return
 
 ::faq::
-	MyHotstring := "FAQ `"
+	MyHotstring := "FAQ"
 	Send, %MyHotstring%
 return
 
 :*:ahk.::
-	MyHotstring := "AutoHotkey `"
+	MyHotstring := "AutoHotkey"
 	Send, %MyHotstring%
 return
 
 ::ahk::
-	MyHotstring := "AHK `"
+	MyHotstring := "AHK"
 	Send, %MyHotstring%
 return
 
@@ -1460,192 +1454,192 @@ return
 return
 
 :*:vba.::
-	MyHotstring := "Visiual Basic for Applications `"
+	MyHotstring := "Visiual Basic for Applications"
 	Send, %MyHotstring%
 return
 
 ::vba::
-	MyHotstring := "VBA `"
+	MyHotstring := "VBA"
 	Send, %MyHotstring%
 return
 
 :*:hdmi.::
-	MyHotstring := "High-Definition Multimedia Interface `"
+	MyHotstring := "High-Definition Multimedia Interface"
 	Send, %MyHotstring%
 return
 
 ::hdmi::
-	MyHotstring := "HDMI `"
+	MyHotstring := "HDMI"
 	Send, %MyHotstring%
 return
 
 :*:emc.::
-	MyHotstring := "Electro-Magnetic Compatibility `"
+	MyHotstring := "Electro-Magnetic Compatibility"
 	Send, %MyHotstring%
 return
 
 ::emc::
-	MyHotstring := "EMC `"
+	MyHotstring := "EMC"
 	Send, %MyHotstring%
 return
 
 :*:hart.::
-	MyHotstring := "Highway Addressable Remote Transducer Protocol `"
+	MyHotstring := "Highway Addressable Remote Transducer Protocol"
 	Send, %MyHotstring%
 return
 
 ::hart::
-	MyHotstring := "HART `"
+	MyHotstring := "HART"
 	Send, %MyHotstring%
 return
 
 :*:erp.::
-	MyHotstring := "Enterprise Resource Planning `"
+	MyHotstring := "Enterprise Resource Planning"
 	Send, %MyHotstring%
 return
 
 ::erp::
-	MyHotstring := "ERP `"
+	MyHotstring := "ERP"
 	Send, %MyHotstring%
 return
 
 :*:c2ms.::
-	MyHotstring := "Component Content Management System `"
+	MyHotstring := "Component Content Management System"
 	Send, %MyHotstring%
 return
 
 ::c2ms::
-	MyHotstring := "CCMS `"
+	MyHotstring := "CCMS"
 	Send, %MyHotstring%
 return
 
 :*:lc2.::
-	MyHotstring := "Life Cycle Cost `"
+	MyHotstring := "Life Cycle Cost"
 	Send, %MyHotstring%
 return
 
 ::lc2::
-	MyHotstring := "LLC `"
+	MyHotstring := "LLC"
 	Send, %MyHotstring%
 return
 
 :*:ceo.::
-	MyHotstring := "Chief Executive Officer `"
+	MyHotstring := "Chief Executive Officer"
 	Send, %MyHotstring%
 return
 
 ::ceo::
-	MyHotstring := "CEO `"
+	MyHotstring := "CEO"
 	Send, %MyHotstring%
 return
 
 :*:hds.::
-	MyHotstring := "Hardware Design Specification `"
+	MyHotstring := "Hardware Design Specification"
 	Send, %MyHotstring%
 return
 
 ::hds::
-	MyHotstring := "HDS '"
+	MyHotstring := "HDS"
 	Send, %MyHotstring%
 return
 
 :*:has.::
-	MyHotstring := "Hardware Architecture Specification `"
+	MyHotstring := "Hardware Architecture Specification"
 	Send, %MyHotstring%
 return
 
 ::has::
-	MyHotstring := "HAS `" ; conflict with English
+	MyHotstring := "HAS" ; conflict with English
 	Send, %MyHotstring%
 return
 
 :*:kpi.::
-	MyHotstring := "Key Performance Indicator `"
+	MyHotstring := "Key Performance Indicator"
 	Send, %MyHotstring%
 return
 
 ::kpi::
-	MyHotstring := "KPI `"
+	MyHotstring := "KPI"
 	Send, %MyHotstring%
 return
 
 :*:gui.::
-	MyHotstring := "Graphical User Interface `"
+	MyHotstring := "Graphical User Interface"
 	Send, %MyHotstring%
 return
 
 ::gui::
-	MyHotstring := "GUI `"
+	MyHotstring := "GUI"
 	Send, %MyHotstring%
 return
 
 :*:etcs::
-	MyHotstring := "European Train Control System `"
+	MyHotstring := "European Train Control System"
 	Send, %MyHotstring%
 return
 
 ::etcs::
-	MyHotstring := "ETCS `"
+	MyHotstring := "ETCS"
 	Send, %MyHotstring%
 return
 
 :*:ertms.::
-	MyHotstring := "European Rail Traffic Management System `"
+	MyHotstring := "European Rail Traffic Management System"
 	Send, %MyHotstring%
 return
 
 ::ertms::
-	MyHotstring := "ERTMS `"
+	MyHotstring := "ERTMS"
 	Send, %MyHotstring%
 return
 
 :*:era.::
-	MyHotstring := "European Railway Agency `"
+	MyHotstring := "European Railway Agency"
 	Send, %MyHotstring%
 return
 
 ::era::
-	MyHotstring := "ERA `"
+	MyHotstring := "ERA"
 	Send, %MyHotstring%
 return
 
 :*:fai.::
-	MyHotstring := "First Article Inspection `"
+	MyHotstring := "First Article Inspection"
 	Send, %MyHotstring%
 return
 
 ::fai::
-	MyHotstring := "FAI `"
+	MyHotstring := "FAI"
 	Send, %MyHotstring%
 return
 
 :*:thr.::
-	MyHotstring := "Tolerable Hazard Rate `"
+	MyHotstring := "Tolerable Hazard Rate"
 	Send, %MyHotstring%
 return
 
 ::thr::
-	MyHotstring := "THR `"
+	MyHotstring := "THR"
 	Send, %MyHotstring%
 return
 
 :*:dita.::
-	MyHotstring := "Darwin Information Typing Architecture `"
+	MyHotstring := "Darwin Information Typing Architecture"
 	Send, %MyHotstring%
 return
 
 ::dita::
-	MyHotstring := "DITA `"
+	MyHotstring := "DITA"
 	Send, %MyHotstring%
 return
 
 :*:bom.::
-	MyHotstring := "Bill of Materials `"
+	MyHotstring := "Bill of Materials"
 	Send, %MyHotstring%
 return
 
 ::bom::
-	MyHotstring := "BOM `"
+	MyHotstring := "BOM"
 	Send, %MyHotstring%
 return
 
@@ -1709,6 +1703,62 @@ return
 	Send, %MyHotstring%
 return
 
+:*:nda.::
+	MyHotstring := "Non-Disclosure Agreement"
+	Send, %MyHotstring%
+return
+
+::nda::
+	MyHotstring := "NDA"
+	Send, %MyHotstring%
+return
+
+:*:sla.::
+	MyHotstring := "Service-Level Agreement"
+	Send, %MyHotstring%
+return
+
+::sla::
+	MyHotstring := "SLA"
+	Send, %MyHotstring%
+return
+
+:*:tffr.::
+	MyHotstring := "Tolerable Functional Failure Rate"
+	Send, %MyHotstring%
+return
+
+::tffr::
+	MyHotstring := "TFFR"
+	Send, %MyHotstring%
+return
+
+:*:hpir.::
+	MyHotstring := "Hardware Prototype Implementation Report"
+	Send, %MyHotstring%
+return
+
+::hpir::
+	MyHotstring := "HPIR"
+	Send, %MyHotstring%
+return
+
+::cps::
+	MyHotstring := "Cooperation Platform Sopot (https://solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx)"
+	Send, %MyHotstring%
+	
+return
+
+:*:rnd.::
+	MyHotstring := "Research & Development"
+	Send, %MyHotstring%
+return
+
+
+::rnd::
+	MyHotstring := "R&D"
+	Send, %MyHotstring%
+return
 
 
 ; - - - - - - - - - - - - Polish section - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1772,38 +1822,38 @@ return
 	Send, %MyHotstring%
 return
 
-:*:utk.::Urząd Transportu Kolejowego
-	MyHotstring := ""
+:*:utk.::
+	MyHotstring := "Urząd Transportu Kolejowego"
 	Send, %MyHotstring%
 return
 
 ::utk::
-	MyHotstring := "UTK `"
+	MyHotstring := "UTK"
 	Send, %MyHotstring%
 return
 
 :*:bait.::
-	MyHotstring := "Biuro Automatyki i Telekomunikacji `"
+	MyHotstring := "Biuro Automatyki i Telekomunikacji"
 	Send, %MyHotstring%
 return
 
 ::bait::
-	MyHotstring := "BAiT `"
+	MyHotstring := "BAiT"
 	Send, %MyHotstring%
 return
 
 :*:bhp.::
-	MyHotstring := "Bezpieczeństwo i Higiena Pracy `"
+	MyHotstring := "Bezpieczeństwo i Higiena Pracy"
 	Send, %MyHotstring%
 return
 
 ::bhp::
-	MyHotstring := "BHP `"
+	MyHotstring := "BHP"
 	Send, %MyHotstring%
 return
 
 :*:srk.::
-	MyHotstring := "(urządzenia) sterowania ruchem kolejowym `"
+	MyHotstring := "(urządzenia) sterowania ruchem kolejowym"
 	Send, %MyHotstring%
 return
 
@@ -1818,12 +1868,12 @@ return
 return
 
 :*:ersat.::
-	MyHotstring := "Elektroniczny Rejestr Stanów Awaryjnych Taboru `"
+	MyHotstring := "Elektroniczny Rejestr Stanów Awaryjnych Taboru"
 	Send, %MyHotstring%
 return
 
 ::ersat::
-	MyHotstring := "ERSAT `"
+	MyHotstring := "ERSAT"
 	Send, %MyHotstring%
 return
 
@@ -1871,14 +1921,15 @@ return
 return
 
 :*:sbb.::
-	MyHotstring := "German: Schweizerische Bundesbahnen, English: Swiss Federal Railways `"
+	MyHotstring := "German: Schweizerische Bundesbahnen, English: Swiss Federal Railways"
 	Send, %MyHotstring%
 return
 
 ::sbb::
-	MyHotstring := "SBB `"
+	MyHotstring := "SBB"
 	Send, %MyHotstring%
 return
+
 
 ^+F12::
 	MsgBox, 64, Hotstrings: Abbreviations, ram.	→ Reliability`, Availability`, Maintainability`nram	→ RAM`nrams.	→ Reliability`, Availability`, Maintainability and Safety`nrams:	→ RAMS`nqrams.	→ Quality`, Reliability`, Availability`, Maintainability`, Safety`nqrams	→ QRAMS`nmtbf.	→ Mean Time Between Failures`nmtbf	→ MTBF`nmttr.	→ Mean Time To Restore`nmttr	→ MTTR`nsil.	→ Safety Integrity Level`nsil	→ SIL`npcb.	→ Printed Circuit Board`npcb	→ PCB`ndtr.	→ Dokumentacja Techniczno-Ruchowa`ndtr	→ DTR`ndp.	→ Dział Produkcji i Zaopatrzenia`ndp	→ DPiZ`ndpiz.	→ Dział Produkcji i Zaopatrzenia`ndpiz	→ DPiZ`ndu.	→ Dział Usług i Realizacji`ndu	→ DUiR`nduir.	→ Dział Usług i Realizacji`nduir	→ DUiR`ndr	→ DR`nwtwio.	→ Warunki Techniczne Wytwarzania i Odbioru`nwtwio	→ WTWiO`npkp.	→ Polskie Koleje Państwowe`npkp	→ PKP`nplk.	→ Polskie Linie Kolejowe`nplk	→ PLK`nups.	→ Uninterruptable Power Supply`nups	→ UPS`nusb.	→ Universal Serial Bus`nusb	→ USB`nbhp.	→ Bezpieczeństwo i Higiena Pracy`nbhp	→ BHP`niris.	→ International Railway Industry Standard for the evaluation of railway management systems`niris	→ IRIS`ntsi.	→ Technical Specifications for Interoperability`ntsi	→ TSI`nfaq.	→ Frequently Asked Questions`nfaq	→ FAQ`nahk.	→ AutoHotkey`nahk	→ AHK`nvba.	→ Visiual Basic for Applications`nvba	→ VBA`nhdmi.	→ High-Definition Multimedia Interface`nhdmi	→ HDMI`nhbd.	→ Hot-Box Detector`nhbd	→ HBD`nhwd.	→ Hot-Wheel Detector`nhwd	→ HWD`nemc.	→ Electro-Magnetic Compatibility`nemc	→ EMC`nmb.	→ Multi Beam`nmb	→ MB`nmds.	→ Modular Diagnostic System`nmds	→ MDS`ntuv.	→ German: Technischer {U+00DC}berwachungsverein`, English: Technical Inspection Association`ntuv	→ T{U+00DC}V`nsud	→ S{U+00DC}D`ngmbh.	→ German: Gesellschaft mit beschränkter Haftung`, English: company with limited liability`ngmbh	→ GmbH`nhart.	→ Highway Addressable Remote Transducer Protocol`nhart	→ HART`npesel.	→ Powszechny Elektroniczny System Ewidencji Ludności`npesel	→ PESEL`nutk.	→ Urząd Transportu Kolejowego`nutk	→ UTK`nbait.	→ Biuro Automatyki i Telekomunikacji`nbait	→ BAiT`nerp.	→ Enterprise Resource Planning`nerp	→ ERP`nc2ms.	→ Component Content Management System ``nc2ms	→ CCMS`nlc2.	→ Life Cycle Cost ``nlc2	→ LLC`nobb.	→ German: {U+00D6}sterreichische Bundesbahnen`, English: Austrian Federal Railways`nobb	→ {U+00D6}BB`nsbb.	→  German: Schweizerische Bundesbahnen`, English: Swiss Federal Railways`nsbb	→ SBB
@@ -1903,47 +1954,180 @@ return
 
 ; ------------------ Section of first or second names with local diacritics ------------------------
 :*:rene::				; Rene 
-	MyHotstring := "Ren{U+00E9} `"
+	MyHotstring := "Ren{U+00E9}"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
 :*:guenther::		; Guenther 
-	MyHotstring := "G{U+00FC}nther `"
+	MyHotstring := "G{U+00FC}nther"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
 :*:pek::				; Pek
-	MyHotstring := "P{U+00E9}k `"
+	MyHotstring := "P{U+00E9}k"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
 :*:stuhn::			; Man
-	MyHotstring := "St{U+00FC}hn `"
+	MyHotstring := "St{U+00FC}hn"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
 :*:joerg::			; Joerg
-	MyHotstring := "J{U+00F6}rg `"
+	MyHotstring := "J{U+00F6}rg"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
 :*:jorg::			; Joerg
-	MyHotstring := "J{U+00F6}rg `"
+	MyHotstring := "J{U+00F6}rg"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
 :*:soren::			; Soren
-	MyHotstring := "S{U+00F8}ren `"
+	MyHotstring := "S{U+00F8}ren"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
+
+:*:js.::
+	MyHotstring := "Jarosław Stec"
+	Send, %MyHotstring%
+return
+
+:*:masz.::
+	MyHotstring := "Maciej Szczepański"
+	Send, %MyHotstring%
+return
+
+:*:mib.::
+	MyHotstring := "Michał Bigus"
+	Send, %MyHotstring%
+return
+
+:*:pw.::
+	MyHotstring := "Przemysław Wołoszyk"
+	Send, %MyHotstring%
+return
+
+:*:ag.::
+	MyHotstring := "Ariadna Grzona"
+	Send, %MyHotstring%
+return
+
+:*:gl.::
+	MyHotstring := "G{U+00FC}nther Lehner"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*:rb.::
+	MyHotstring := "Ren{U+00E9} Berger"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*:jm.::							; x - ź {U+017A}
+	MyHotstring := "Jan Mironkiewicz"
+	Send, %MyHotstring%
+return
+
+:*:nb.::					; z - ż {U+017C}
+	MyHotstring := "Natalia Budzińska"
+	Send, %MyHotstring%
+return
+
+:*:mo.::
+	MyHotstring := "Mariusz Ossowski"
+	Send, %MyHotstring%
+return
+
+:*:pp.::
+	MyHotstring := "Piotr P{U+00E9}k"
+	Send, %MyHotstring%
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+return
+
+:*:fb.::
+	MyHotstring := "Filip Bisztyga"
+	Send, %MyHotstring%
+return
+
+:*:sm.::
+	MyHotstring := "Sebastian Meyer"
+	Send, %MyHotstring%
+return
+
+:*:pl.::
+	MyHotstring := "Przemysław Latarski"
+	Send, %MyHotstring%
+return
+
+:*:pk.::
+	MyHotstring := "Paweł Kopacz"
+	Send, %MyHotstring%
+return
+
+:*:jd.::
+	MyHotstring := "Joanna Damrat"
+	Send, %MyHotstring%
+return
+
+:*:rg.::
+	MyHotstring := "Rafał Golicki"
+	Send, %MyHotstring%
+return
+
+:*:kw.::
+	MyHotstring := "Kamil Wilkanowski"
+	Send, %MyHotstring%
+return
+
+:*:mg.::
+	MyHotstring := "Michalina Gołąbek"
+	Send, %MyHotstring%
+return
+
+:*:zk.::
+	MyHotstring := "Zbigniew Kosiak"
+	Send, %MyHotstring%
+return
+
+:*:km.::
+	MyHotstring := "Krzysztof Michalak"
+	Send, %MyHotstring%
+return
+
+:*:ks.::
+	MyHotstring := "Krystian Stasiński"
+	Send, %MyHotstring%
+return
+
+:*:tw.::
+	MyHotstring := "Trąbki Wielkie"
+	Send, %MyHotstring%
+return
+
+:*:aw.::
+	MyHotstring := "Agata Wilary"
+	Send, %MyHotstring%
+return
+
+:*:mn.::
+	MyHotstring := "Marta Nibus"
+	Send, %MyHotstring%
+return
+
+:*:je.::
+	MyHotstring := "J{U+00F6}rg Engers"
+	Send, %MyHotstring%
+return
 
 
 
@@ -2080,12 +2264,17 @@ return
 :*:english::English
 :*:german::German
 :*:germany::Germany
+:*:a la::{U+00E0} la
+:*:a propos::{U+00E0} propos
+:*:apropos::{U+00E0} propos
 
 :*:fyi.::For your information
 :*:asap.::as soon as possible
 :*:afaik.::as far as I know
 :*:btw.::by the way
 :*?:email::e-mail
+:*:sharepoint::Sharepoint
+:*:sp.::Sharepoint
 
 ; - - - - - - - - - - - - - Section Capital Letters - - - - - - - - - - - - - - - - - - - - - - - 
 :*:svn::SVN
@@ -2101,6 +2290,13 @@ return
 :*:pma::PMA
 :*:dokt::DokT (Dokumentacja Techniczna)
 :*:dokr::DokR (Dokumentacja Robocza)
+
+;~ #if (A_ComputerName = "2277NB010" && A_UserName = "V523580") ; Maciej Słojewski only
+;~ #if (A_ComputerName = "fik" && A_UserName = "V523580") ; Maciej Słojewski only
+;~ beginning of a section specific to Maciej Słojewski
+
+;~ #if (A_ComputerName = "2277NB010" && A_UserName = "V523580") ; Maciej Słojewski only
+#if (A_ComputerName = "fik")
 
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
 ; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
@@ -2148,9 +2344,9 @@ return
 ; computer mouse: OPTO 325 (PS/2 interface and PS/2 to USB adapter): 3 (top) + 2 (side) buttons, 2x wheels, but only one is recognizable by AHK.
 
 ; Make the mouse wheel perform alt-tabbing
-MButton::AltTabMenu
-WheelDown::AltTab
-WheelUp::ShiftAltTab
+;~ MButton::AltTabMenu
+;~ WheelDown::AltTab
+;~ WheelUp::ShiftAltTab
 
 ; Left side button XButton1
 XButton1:: ; switching between Chrome browser tabs; author: Taran VH
@@ -2184,3 +2380,10 @@ XButton2:: ; switching between Chrome browser tabs; author: Taran VH
 		}
 return
 ; ----------------- END OF ADDITIONAL I/O DEVICES SECTION ------------------------
+#if ; end of Maciej Słojewski
+
+; ---------------------- SECTION OF LABELS ------------------------------------
+
+TurnOffTooltip:
+	ToolTip ,
+return
