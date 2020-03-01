@@ -1,4 +1,4 @@
-/*
+﻿/*
 Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
@@ -14,27 +14,26 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 ; --------------- SECTION OF GLOBAL VARIABLES -----------------------------
 ;~ WordTrue := -1
 ;~ WordFalse := 0
-MyHotstring := ""
-;~ TildeCounter := 0
+MyHotstring 		:= ""
+English_USA 		:= 0x0409   ; see AutoHotkey help: Language Codes
 ; --------------- END OF GLOBAL VARIABLES SECTION ----------------------
 
 ; - - - - - - - - - - - Set of default web pages - - - - - - - - - - - - - - - - - 
 ;~ Run, https://solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx ; voestalpine Signaling Siershahn, Cooperation Platform Sopot
 
+; - - - - - - - - - - - SECTION DEDICATED TO  Maciej Słojewski's specific hardware AND PREFERENCES - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - -
 
-;~ #IfTimeout 2000 ; Set the timeout to 10 ms.
-;~ #if (A_ComputerName = "2277NB010" && A_UserName = "V523580") ; Maciej Słojewski only
-#if (A_ComputerName = "fik" && A_UserName = "V523580") ; Maciej Słojewski only
-;~ beginning of a section specific to Maciej Słojewski
+if (A_ComputerName = "2277NB010" && A_UserName = "V523580") 
+	SetDefaultKeyboard(English_USA)
 
+#if (A_ComputerName = "2277NB010" && A_UserName = "V523580") ; Maciej Słojewski only
+;~ #if (A_ComputerName = "fik" && A_UserName = "V523580") ; Maciej Słojewski only
 
 ;~ Currently, all special Alt-tab actions must be assigned directly to a hotkey as in the examples above (i.e. they cannot be used as though they were commands). They are not affected by #IfWin or #If.
 ;~ MButton::AltTabMenu
 ;~ WheelDown::AltTab
 ;~ WheelUp::ShiftAltTab
 
-
-; ---------------------- KEYS REMAPPING -----------------------------------
 	Ralt::AppsKey ; redirects AltGr -> context menu
 	PrintScreen::#+s ; Windows + Shift + s https://support.microsoft.com/pl-pl/help/4488540/how-to-take-and-annotate-screenshots-on-windows-10
 ; - - - - - - - - - - - - - - - - Function Keys redirection - - - - - - - - - - - - - - - - - - - -
@@ -53,8 +52,6 @@ MyHotstring := ""
 	:*:f11.::{F11}
 	:*:f12.::{F12}
 
-
-; ---------------- SECTION OF HOTKEYS ---------------------------------------------------------------------------------------
 ; These are valid only for "Logitech Internet 350 Keyboard" and alike with so called multimedia keys
 
 Launch_Media:: ; run Microsoft Word application - a note, the very first multimedia key from a left 
@@ -94,7 +91,91 @@ return
 +^k::Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 	 ; run Kee Pass application (password manager)
 ^#F8::WinSet, AlwaysOnTop, toggle, A ; Ctrl + Windows + F8, toggle always on top
 
+
+; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
+; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
+
+F13:: ; switching beetween windows of Word; author: Taran VH
+	Process, Exist, WINWORD.EXE
+	if (ErrorLevel = 0)
+		{
+        Run, WINWORD.EXE
+		}
+     else
+        {
+        GroupAdd, taranwords, ahk_class OpusApp
+        if (WinActive("ahk_class OpusApp"))
+			{
+            GroupActivate, taranwords, r
+			} 
+        else
+			{
+            WinActivate ahk_class OpusApp
+			}
+        }
+return
+
+F14:: ; switching between tabs of Chrome; author: Taran VH
+	if !WinExist("ahk_class Chrome_WidgetWin_1")
+		{
+		Run, chrome.exe
+		}
+	if WinActive("ahk_class Chrome_WidgetWin_1")
+		{
+		Send, ^{Tab}
+		}
+	else
+		{
+		WinActivate ahk_class Chrome_WidgetWin_1
+		}
+return
+
+;~ F15:: ; Reserved for CopyQ
+;~ return
+
+;~ https://autohotkey.com/board/topic/116740-switch-between-one-window-of-each-different-applications/
+
+; computer mouse: OPTO 325 (PS/2 interface and PS/2 to USB adapter): 3 (top) + 2 (side) buttons, 2x wheels, but only one is recognizable by AHK.
+
+; Make the mouse wheel perform alt-tabbing: this one doesn't work with #if condition
+;~ MButton::AltTabMenu
+;~ WheelDown::AltTab
+;~ WheelUp::ShiftAltTab
+
+; Left side button XButton1
+XButton1:: ; switching between Chrome browser tabs; author: Taran VH
+	if !WinExist("ahk_class Chrome_WidgetWin_1")
+		{
+		Run, chrome.exe
+		}
+	if WinActive("ahk_class Chrome_WidgetWin_1")
+		{
+		Send, ^+{Tab}
+		}
+	else
+		{
+		WinActivate ahk_class Chrome_WidgetWin_1
+		}
+return
+
+; Right side button XButton2
+XButton2:: ; switching between Chrome browser tabs; author: Taran VH
+	if !WinExist("ahk_class Chrome_WidgetWin_1")
+		{
+		Run, chrome.exe
+		}
+	if WinActive("ahk_class Chrome_WidgetWin_1")
+		{
+		Send, ^{Tab}
+		}
+	else
+		{
+		WinActivate ahk_class Chrome_WidgetWin_1
+		}
+return
+; ----------------- END OF ADDITIONAL I/O DEVICES SECTION ------------------------
 #if		; end of section dedicated to Maciej Słojewski
+; - - - - - - - - - - - END OF SECTION DEDICATED TO  Maciej Słojewski's specific hardware - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - -
 
 
 ^z::			;~ Ctrl + z as in MS Word: Undo
@@ -124,8 +205,6 @@ return
 ; - - - - - - - - END OF KEYBOARD HOTKEYS SECTION - - - - - - - - - - - - - - - - - - - - - 
 
 
-; ---------- SECTION OF NUMERIC KEYBOARD HOTKEYS - NUMLOCK == ON -----------------------------------------------
-; ---------- SECTION OF NUMERIC KEYBOARD HOTKEYS - NUMLOCK == OFF ---------------------------------------------
 
 
 ; ---------------------- HOTSTRINGS -----------------------------------
@@ -724,7 +803,7 @@ return
 
 :*:anszuapl.::
 	MyHotstring := "system zarządzania usługami"
-	Send, %MyHotstring%
+	Send, {Text}%MyHotstring%
 return
 
 ::anszua::
@@ -751,7 +830,7 @@ return
 
 :*:dsat.::
 	MyHotstring := "detekcja Stanów Awaryjnych Taboru"
-	Send, %MyHotstring%
+	Send, {Text}%MyHotstring%
 return
 
 ::dsat::
@@ -762,7 +841,7 @@ return
 
 :*:asdek.::
 	MyHotstring := "automatyczny system detekcji i eksploatacji kół pojazdów kolejowych"
-	Send, %MyHotstring%
+	Send, {Text}%MyHotstring%
 return
 
 ::asdek::
@@ -788,7 +867,7 @@ return
 
 :*:dp.::
 	MyHotstring := "Dział Produkcji i Zaopatrzenia"
-	Send, %MyHotstring%
+	Send, {Text}%MyHotstring%
 return
 
 ::dp::
@@ -798,7 +877,7 @@ return
 
 :*:dpiz.::
 	MyHotstring := "Dział Produkcji i Zaopatrzenia"
-	Send, %MyHotstring%
+	Send, {Text}%MyHotstring%
 return
 
 ::dpiz::
@@ -951,6 +1030,34 @@ return
 	MyHotstring := "Jana z Kolna 26c, 81-859 Sopot, Poland"
 	Send, %MyHotstring%
 return
+
+:*:hpir.::
+	MyHotstring := "Hardware Prototype Implementation Report"
+	Send, %MyHotstring%
+return
+
+::hpir::
+	MyHotstring := "HPIR"
+	Send, %MyHotstring%
+return
+
+::cps::
+	MyHotstring := "Cooperation Platform Sopot (https://solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx)"
+	Send, %MyHotstring%
+	
+return
+
+:*:rnd.::
+	MyHotstring := "Research & Development"
+	Send, %MyHotstring%
+return
+
+
+::rnd::
+	MyHotstring := "R&D"
+	Send, %MyHotstring%
+return
+
 
 ^+F10::
 	MsgBox, 64, Hotstrings: voestalpine, 
@@ -1350,6 +1457,17 @@ return
 	Send, %MyHotstring%
 return
 
+:*:mdt.::
+	MyHotstring := "Mean Down Time"
+	Send, %MyHotstring%
+return
+
+::mdt::
+	MyHotstring := "MDT"
+	Send, %MyHotstring%
+return
+
+
 :*:mtbf.::
 	MyHotstring := "Mean Time Between Failures"
 	Send, %MyHotstring%
@@ -1367,6 +1485,36 @@ return
 
 ::mttr::
 	MyHotstring := "MTTR"
+	Send, %MyHotstring%
+return
+
+:*:mtbm.::
+	MyHotstring := "Mean Time Between Maintainances"
+	Send, %MyHotstring%
+return
+
+::mtbm::
+	MyHotstring := "MTBM"
+	Send, %MyHotstring%
+return
+
+:*:mttf.::
+	MyHotstring := "Mean Time To Failure"
+	Send, %MyHotstring%
+return
+
+::mttf::
+	MyHotstring := "MTTF"
+	Send, %MyHotstring%
+return
+
+:*:mut.::
+	MyHotstring := "Mean Up Time"
+	Send, %MyHotstring%
+return
+
+::mut::
+	MyHotstring := "MUT"
 	Send, %MyHotstring%
 return
 
@@ -1733,30 +1881,83 @@ return
 	Send, %MyHotstring%
 return
 
-:*:hpir.::
-	MyHotstring := "Hardware Prototype Implementation Report"
+::cop.::
+	MyHotstring := "Code of Practice"
 	Send, %MyHotstring%
 return
 
-::hpir::
-	MyHotstring := "HPIR"
+:*:cop::
+	MyHotstring := "COP"
 	Send, %MyHotstring%
 return
 
-::cps::
-	MyHotstring := "Cooperation Platform Sopot (https://solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx)"
-	Send, %MyHotstring%
-	
-return
-
-:*:rnd.::
-	MyHotstring := "Research & Development"
+::cots.::
+	MyHotstring := "Commercial Off-The-Shelf"
 	Send, %MyHotstring%
 return
 
+:*:cots::
+	MyHotstring := "COTS"
+	Send, %MyHotstring%
+return
 
-::rnd::
-	MyHotstring := "R&D"
+::emi.::
+	MyHotstring := "Electromagnetic Interference"
+	Send, %MyHotstring%
+return
+
+:*:emi::
+	MyHotstring := "EMI"
+	Send, %MyHotstring%
+return
+
+::fracas.::
+	MyHotstring := "Failure Reporting Analysis and Corrective Action System"
+	Send, %MyHotstring%
+return
+
+:*:fracas::
+	MyHotstring := "FRACAS"
+	Send, %MyHotstring%
+return
+
+::fmea.::
+	MyHotstring := "Failure Mode and Effects Analysis"
+	Send, %MyHotstring%
+return
+
+:*:fmea::
+	MyHotstring := "FMEA"
+	Send, %MyHotstring%
+return
+
+::fmeca.::
+	MyHotstring := "Failure Mode, Effects and Criticality Analysis"
+	Send, %MyHotstring%
+return
+
+:*:fmeca::
+	MyHotstring := "FMECA"
+	Send, %MyHotstring%
+return
+
+::fta.::
+	MyHotstring := "Fault Tree Analysis"
+	Send, %MyHotstring%
+return
+
+:*:fta::
+	MyHotstring := "FTA"
+	Send, %MyHotstring%
+return
+
+::lad.::
+	MyHotstring := "Logistic and Administrative Delay"
+	Send, %MyHotstring%
+return
+
+:*:lad::
+	MyHotstring := "LAD"
 	Send, %MyHotstring%
 return
 
@@ -1971,12 +2172,6 @@ return
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
-:*:stuhn::			; Man
-	MyHotstring := "St{U+00FC}hn"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
-
 :*:joerg::			; Joerg
 	MyHotstring := "J{U+00F6}rg"
 	Send, %MyHotstring%
@@ -1993,140 +2188,6 @@ return
 	MyHotstring := "S{U+00F8}ren"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
-
-
-:*:js.::
-	MyHotstring := "Jarosław Stec"
-	Send, %MyHotstring%
-return
-
-:*:masz.::
-	MyHotstring := "Maciej Szczepański"
-	Send, %MyHotstring%
-return
-
-:*:mib.::
-	MyHotstring := "Michał Bigus"
-	Send, %MyHotstring%
-return
-
-:*:pw.::
-	MyHotstring := "Przemysław Wołoszyk"
-	Send, %MyHotstring%
-return
-
-:*:ag.::
-	MyHotstring := "Ariadna Grzona"
-	Send, %MyHotstring%
-return
-
-:*:gl.::
-	MyHotstring := "G{U+00FC}nther Lehner"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
-
-:*:rb.::
-	MyHotstring := "Ren{U+00E9} Berger"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
-
-:*:jm.::							; x - ź {U+017A}
-	MyHotstring := "Jan Mironkiewicz"
-	Send, %MyHotstring%
-return
-
-:*:nb.::					; z - ż {U+017C}
-	MyHotstring := "Natalia Budzińska"
-	Send, %MyHotstring%
-return
-
-:*:mo.::
-	MyHotstring := "Mariusz Ossowski"
-	Send, %MyHotstring%
-return
-
-:*:pp.::
-	MyHotstring := "Piotr P{U+00E9}k"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
-
-:*:fb.::
-	MyHotstring := "Filip Bisztyga"
-	Send, %MyHotstring%
-return
-
-:*:sm.::
-	MyHotstring := "Sebastian Meyer"
-	Send, %MyHotstring%
-return
-
-:*:pl.::
-	MyHotstring := "Przemysław Latarski"
-	Send, %MyHotstring%
-return
-
-:*:pk.::
-	MyHotstring := "Paweł Kopacz"
-	Send, %MyHotstring%
-return
-
-:*:jd.::
-	MyHotstring := "Joanna Damrat"
-	Send, %MyHotstring%
-return
-
-:*:rg.::
-	MyHotstring := "Rafał Golicki"
-	Send, %MyHotstring%
-return
-
-:*:kw.::
-	MyHotstring := "Kamil Wilkanowski"
-	Send, %MyHotstring%
-return
-
-:*:mg.::
-	MyHotstring := "Michalina Gołąbek"
-	Send, %MyHotstring%
-return
-
-:*:zk.::
-	MyHotstring := "Zbigniew Kosiak"
-	Send, %MyHotstring%
-return
-
-:*:km.::
-	MyHotstring := "Krzysztof Michalak"
-	Send, %MyHotstring%
-return
-
-:*:ks.::
-	MyHotstring := "Krystian Stasiński"
-	Send, %MyHotstring%
-return
-
-:*:tw.::
-	MyHotstring := "Trąbki Wielkie"
-	Send, %MyHotstring%
-return
-
-:*:aw.::
-	MyHotstring := "Agata Wilary"
-	Send, %MyHotstring%
-return
-
-:*:mn.::
-	MyHotstring := "Marta Nibus"
-	Send, %MyHotstring%
-return
-
-:*:je.::
-	MyHotstring := "J{U+00F6}rg Engers"
-	Send, %MyHotstring%
 return
 
 
@@ -2291,96 +2352,26 @@ return
 :*:dokt::DokT (Dokumentacja Techniczna)
 :*:dokr::DokR (Dokumentacja Robocza)
 
-;~ #if (A_ComputerName = "2277NB010" && A_UserName = "V523580") ; Maciej Słojewski only
-;~ #if (A_ComputerName = "fik" && A_UserName = "V523580") ; Maciej Słojewski only
-;~ beginning of a section specific to Maciej Słojewski
 
-;~ #if (A_ComputerName = "2277NB010" && A_UserName = "V523580") ; Maciej Słojewski only
-#if (A_ComputerName = "fik")
+; - - - - - - - - - - - - SECTION OF FUNCTIONS  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+;~ https://docs.microsoft.com/pl-pl/windows/win32/api/winuser/nf-winuser-systemparametersinfoa?redirectedfrom=MSDN
+SetDefaultKeyboard(LocaleID)
+{
+	static SPI_SETDEFAULTINPUTLANG := 0x005A, SPIF_SENDWININICHANGE := 2
+	WM_INPUTLANGCHANGEREQUEST := 0x50
+	
+	Language := DllCall("LoadKeyboardLayout", "Str", Format("{:08x}", LocaleID), "Int", 0)
+	VarSetCapacity(binaryLocaleID, 4, 0)
+	NumPut(LocaleID, binaryLocaleID)
+	DllCall("SystemParametersInfo", UINT, SPI_SETDEFAULTINPUTLANG, UINT, 0, UPTR, &binaryLocaleID, UINT, SPIF_SENDWININICHANGE)
+	
+	WinGet, windows, List
+	Loop % windows
+		{
+		PostMessage WM_INPUTLANGCHANGEREQUEST, 0, % Language, , % "ahk_id " windows%A_Index%
+		}
+}
 
-; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
-; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
-
-F13:: ; switching beetween windows of Word; author: Taran VH
-	Process, Exist, WINWORD.EXE
-	if (ErrorLevel = 0)
-		{
-        Run, WINWORD.EXE
-		}
-     else
-        {
-        GroupAdd, taranwords, ahk_class OpusApp
-        if (WinActive("ahk_class OpusApp"))
-			{
-            GroupActivate, taranwords, r
-			} 
-        else
-			{
-            WinActivate ahk_class OpusApp
-			}
-        }
-return
-
-F14:: ; switching between tabs of Chrome; author: Taran VH
-	if !WinExist("ahk_class Chrome_WidgetWin_1")
-		{
-		Run, chrome.exe
-		}
-	if WinActive("ahk_class Chrome_WidgetWin_1")
-		{
-		Send, ^{Tab}
-		}
-	else
-		{
-		WinActivate ahk_class Chrome_WidgetWin_1
-		}
-return
-
-;~ F15:: ; Reserved for CopyQ
-;~ return
-
-;~ https://autohotkey.com/board/topic/116740-switch-between-one-window-of-each-different-applications/
-
-; computer mouse: OPTO 325 (PS/2 interface and PS/2 to USB adapter): 3 (top) + 2 (side) buttons, 2x wheels, but only one is recognizable by AHK.
-
-; Make the mouse wheel perform alt-tabbing
-;~ MButton::AltTabMenu
-;~ WheelDown::AltTab
-;~ WheelUp::ShiftAltTab
-
-; Left side button XButton1
-XButton1:: ; switching between Chrome browser tabs; author: Taran VH
-	if !WinExist("ahk_class Chrome_WidgetWin_1")
-		{
-		Run, chrome.exe
-		}
-	if WinActive("ahk_class Chrome_WidgetWin_1")
-		{
-		Send, ^+{Tab}
-		}
-	else
-		{
-		WinActivate ahk_class Chrome_WidgetWin_1
-		}
-return
-
-; Right side button XButton2
-XButton2:: ; switching between Chrome browser tabs; author: Taran VH
-	if !WinExist("ahk_class Chrome_WidgetWin_1")
-		{
-		Run, chrome.exe
-		}
-	if WinActive("ahk_class Chrome_WidgetWin_1")
-		{
-		Send, ^{Tab}
-		}
-	else
-		{
-		WinActivate ahk_class Chrome_WidgetWin_1
-		}
-return
-; ----------------- END OF ADDITIONAL I/O DEVICES SECTION ------------------------
-#if ; end of Maciej Słojewski
 
 ; ---------------------- SECTION OF LABELS ------------------------------------
 
