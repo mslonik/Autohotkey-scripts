@@ -40,7 +40,7 @@ IniRead, _DoubleWord,                       % A_ScriptDir . "\" . A_Args[1], Glo
 ;~ switch to AmericanLayout (neutral)?
 if (_AmericanLayout = "yes")
     SetDefaultKeyboard(English_USA)
-if (_AllTooltips = "yes")
+if (_AllTooltips = "on")
     F_AllKeyboardKeys()     ; Set dynamic hotkeys for all keys of 60% keyboard, ANSI layout    
 
 ;~ determine how many [Diactric] sections are in .ini file
@@ -73,8 +73,8 @@ Loop, %DiactricSectionCounter%
 
     ;~ MyHotString(_BaseKey, _Diactric, _SoundBeep_Frequency, _SoundBeep_Duration, _Tooltip)
     Hotstring(":zx:" . _BaseKey . _BaseKey . _BaseKey,                func("DoubleLetter").bind(_BaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration))
-    Hotstring(":x:" . _BaseKey . _BaseKey,                            func("DiactricLetter").bind(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip))
-    Hotstring(":x:" . _BaseKey,                                       func("SingleLetter").bind(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip))
+    Hotstring(":x:"  . _BaseKey . _BaseKey,                           func("DiactricLetter").bind(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip))
+    Hotstring(":x:"  . _BaseKey,                                      func("SingleLetter").bind(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip))
 
     Hotstring(":zx:" . _ShiftBaseKey . _ShiftBaseKey . _ShiftBaseKey, func("DoubleLetter").bind(_ShiftBaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration))
     Hotstring(":x:"  . _ShiftBaseKey . _ShiftBaseKey,                 func("DiactricLetter").bind(_ShiftDiactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip))
@@ -92,7 +92,7 @@ DoubleLetter(_BaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration)
     global _AllBeeps
     
     ;~ MsgBox, %_BaseKey%
-    Send, {text}`b`b%_BaseKey%%_BaseKey%
+    Send, {Raw}`b`b%_BaseKey%%_BaseKey%
     if (_AllBeeps = "on")
         SoundBeep, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration
     Tooltip,
@@ -119,7 +119,7 @@ DiactricLetter(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Dur
     ;~ return
     }
     
-;~ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -        
+;~ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 SingleLetter(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip)
     {
@@ -275,7 +275,7 @@ Double_SoundBeep_Duration = 150 ; The duration of the sound, in milliseconds
 else if (A_Args.Length() = 1)
     {
     IniRead, _Language,                         % A_ScriptDir . "\" . A_Args[1], Global, Language
-    MsgBox, 64, Diactric.ahk, % "Input argument: " . A_Args[1] . " Found language: " . _Language
+    MsgBox, 64, Diactric.ahk, % "Input argument: " . A_Args[1] . ". Found language: " . _Language
     }
 else if (A_Args.Length() = 1)
     {
@@ -312,12 +312,17 @@ return
 
 
 TRAYMENU:
-    Menu, Tray, Add, %ApplicationName% ABOUT, ABOUT
-    Menu, Tray, Default, %ApplicationName% ABOUT ; Default: Changes the menu's default item to be the specified menu item and makes its font bold.
+    Menu, Tray, Add, %ApplicationName%.ahk ABOUT, ABOUT
+    Menu, Tray, Add, % ".ini file: " . A_Args[1], _iniFile
+    ;~ Menu, Tray, Add, .ini file: %1%, _iniFile
+    Menu, Tray, Default, %ApplicationName%.ahk ABOUT ; Default: Changes the menu's default item to be the specified menu item and makes its font bold.
     Menu, Tray, Add ; To add a menu separator line, omit all three parameters. To put your menu items on top of the standard menu items (after adding your own menu items) run Menu, Tray, NoStandard followed by Menu, Tray, Standard.
     Menu, Tray, NoStandard
     Menu, Tray, Standard
     Menu, Tray, Tip, %ApplicationName% ; Changes the tray icon's tooltip.
+return
+
+_iniFile:
 return
 
 ABOUT:
