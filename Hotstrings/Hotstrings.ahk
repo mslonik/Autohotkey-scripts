@@ -1,4 +1,4 @@
-﻿/*
+/*
 Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
@@ -213,6 +213,8 @@ return
 :*:dd::
 	MyHotstring := "Dzień dobry`,"
 	Send, {Text}%MyHotstring%
+	;~ Send, %MyHotstring%
+	;~ MsgBox, % "Are the strings Unicode? " . A_IsUnicode . " File encoding: " . A_FileEncoding . " Language: " . A_Language
 	Send, {Shift Down}{Enter 2}{Shift Up}
 return
 
@@ -1046,20 +1048,30 @@ return
 	Send, %MyHotstring%
 return
 
-::cps::
-	MyHotstring := "Cooperation Platform Sopot (https://solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx)"
-	Send, %MyHotstring%
-	
-return
-
 :*:rnd.::
 	MyHotstring := "Research & Development"
 	Send, %MyHotstring%
 return
 
-
 ::rnd::
 	MyHotstring := "R&D"
+	Send, %MyHotstring%
+return
+
+;~ - - - - - - - - - - - - - - - - - - - - links url urls - - - - - - -  - - - - - - - - -
+
+::cps::
+	MyHotstring := "Cooperation Platform Sopot (https://solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx)"
+	Send, %MyHotstring%
+return
+
+::muk::
+	MyHotstring := "MDS Upgrade Kit (https://solidsystemteamwork.voestalpine.root.local/Processes/custprojects/780MDSUpgradeKit/SitePages/Home.aspx)"
+	Send, %MyHotstring%
+return
+
+::sps::
+	MyHotstring := """Documentation Sharepoint Sopot"" (https://team.voestalpine.net/site/4077/default.aspx)"
 	Send, %MyHotstring%
 return
 
@@ -1797,7 +1809,7 @@ return
 return
 
 :*:ip.::
-	MyHotstring := "Ingress Protection code"
+	MyHotstring := "IP Code, Ingress Protection code (https://en.wikipedia.org/wiki/IP_Code	)"
 	Send, %MyHotstring%
 return
 
@@ -1969,62 +1981,62 @@ return
 
 ; - - - - - - - - - - - - Polish section - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 :*:dtr.::
-	MyHotstring := "Dokumentacja Techniczno-Ruchowa `"
+	MyHotstring := "Dokumentacja Techniczno-Ruchowa"
 	Send, %MyHotstring%
 return
 
 ::dtr::
-	MyHotstring := "DTR `"
+	MyHotstring := "DTR"
 	Send, %MyHotstring%
 return
 
 :*:wtwio.::
-	MyHotstring := "Warunki Techniczne Wytwarzania i Odbioru `"
+	MyHotstring := "Warunki Techniczne Wytwarzania i Odbioru"
 	Send, %MyHotstring%
 return
 
 ::wtwio::
-	MyHotstring := "WTWiO `"
+	MyHotstring := "WTWiO"
 	Send, %MyHotstring%
 return
 
 :*:pkp.::
-	MyHotstring := "Polskie Koleje Państwowe `"
+	MyHotstring := "Polskie Koleje Państwowe"
 	Send, %MyHotstring%
 return
 
 ::pkp::
-	MyHotstring := "PKP `"
+	MyHotstring := "PKP"
 	Send, %MyHotstring%
 return
 
 :*:plk.::
-	MyHotstring := "Polskie Linie Kolejowe `"
+	MyHotstring := "Polskie Linie Kolejowe"
 	Send, %MyHotstring%
 return
 
 ::plk::
-	MyHotstring := "PLK `"
+	MyHotstring := "PLK"
 	Send, %MyHotstring%
 return
 
 :*:ik.::
-	MyHotstring := "Instytut Kolejnictwa `"
+	MyHotstring := "Instytut Kolejnictwa"
 	Send, %MyHotstring%
 return
 
 ::ik::
-	MyHotstring := "IK `"
+	MyHotstring := "IK"
 	Send, %MyHotstring%
 return
 
 :*:pesel.::
-	MyHotstring := "Powszechny Elektroniczny System Ewidencji Ludności `"
+	MyHotstring := "Powszechny Elektroniczny System Ewidencji Ludności"
 	Send, %MyHotstring%
 return
 
 ::pesel::
-	MyHotstring := "PESEL `"
+	MyHotstring := "PESEL"
 	Send, %MyHotstring%
 return
 
@@ -2159,43 +2171,7 @@ return
 return
 
 ; ------------------ Section of first or second names with local diacritics ------------------------
-:*:rene::				; Rene 
-	MyHotstring := "Ren{U+00E9}"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
-
-:*:guenther::		; Guenther 
-	MyHotstring := "G{U+00FC}nther"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
-
-:*:pek::				; Pek
-	MyHotstring := "P{U+00E9}k"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
-
-:*:joerg::			; Joerg
-	MyHotstring := "J{U+00F6}rg"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
-
-:*:jorg::			; Joerg
-	MyHotstring := "J{U+00F6}rg"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
-
-:*:soren::			; Soren
-	MyHotstring := "S{U+00F8}ren"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
-
-
+#Include FirstAndSecondNames.ahk
 
 ; - - - - - - - - - - - - - - - - Emoticons - - - - - - - - - - - - - - - - - - - - - - - -
 ;~ https://unicode-table.com/en/
@@ -2306,13 +2282,29 @@ return
 
 
 ; - - - - - - - - - - - - - - - - - - Full titles of technical standards - - - - - - - - - 
-; to be completed...
-; EN-50126-01
-; EN-50126-02
-:b0*:EN 50126.::{BackSpace}{:}2010 Railway applications – The specification and demonstration of reliability, availability, maintainability and safety (RAMS) – Part 1: Generic RAMS Process.
-:b0*:EN 50128.::{BackSpace}{:}2011 Railway applications – Communication, signalling and processing systems – Software for railway control and protection system.
-:b0*:EN 50129.::{BackSpace}{:}2003 Railway applications Communication, signalling and processing systems – Safety related electronic systems for signalling.
-:b0*:EN 50159.::{BackSpace}{:}2010 Railway applications - Communication, signalling and processing systems - safety-related communication in transmission systems.
+:*:en50126-1.::
+	Send, {Text}EN 50126-1:2017 Railway applications - The specification and demonstration of reliability, availability, maintainability and safety (RAMS) - Part 1: Generic RAMS Process.
+return
+
+:*:en50126-2.::
+	Send, {Text}EN 50126-2:2017 Railway applications - The specification and demonstration of reliability, availability, maintainability and safety (RAMS) - Part 2: Systems Approach to Safety.
+return
+
+:*:en50128.::
+	Send, {Text}EN 50128:2011 Railway applications – Communication, signalling and processing systems – Software for railway control and protection system.
+return
+
+:*:en50129.::
+	Send, {Text}EN 50129:2018 Railway applications - Communication, signalling and processing systems – Safety related electronic systems for signalling.
+return
+
+:*:en50159.::
+	Send, {Text}EN 50159:2010 Railway applications - Communication, signalling and processing systems - Safety-related communication in transmission systems.
+return
+
+:*:irisnorm::
+	Send, {Text}ISO/TS 22163:2017(E) Railway applications - Quality management system - Business management system requirements for rail organizations: ISO 9001:2015 and particular requirements for application in the rail sector
+return
 
 :*:2008/57.::Dyrektywa Parlamentu Europejskiego i Rady 2008/57/WE z dnia 17 czerwca 2008 r. w sprawie interoperacyjności systemu kolei we Wspólnocie.
 :*:2009/131.::Dyrektywa Komisji 2009/131/WE z dnia 16 października 2009 r. zmieniająca załącznik VII do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjności systemu kolei we Wspólnocie.
