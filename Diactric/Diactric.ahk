@@ -53,25 +53,48 @@ Loop, Read, % A_ScriptDir . "\" . A_Args[1]
         }
     }
 
+;~ MsgBox, % "DiactricSectionCounter: " . DiactricSectionCounter
 ;~ read all the rest of configuration parameters from .ini file and create hotstrings
+
+;~ Initialization of parameters
+BaseKey        = ""
+ShiftBaseKey   = ""
+Diactric       = ""
+ShiftDiactric  = ""
+Tooltip        = ""
+
 Loop, %DiactricSectionCounter%
     {
     IniRead, _BaseKey,                      % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, BaseKey
     IniRead, _ShiftBaseKey,                 % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, ShiftBaseKey
+    if (_ShiftBaseKey = "")
+        {
+        MsgBox, 16, %ApplicationName%.ahk, % "Warning!`nConfiguration file (" . A_Args[1] . ")`, section: " . A_Index . ", parameter name: ShiftBaseKey is empty. This could cause application malfunction. Application will now exit. Correct the " . A_Args[1] . " file in specified place and try again."
+        ExitApp, 0
+        }
     IniRead, _Diactric,                     % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Diactric
     IniRead, _ShiftDiactric,                % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, ShiftDiactric
     IniRead, _Tooltip,                      % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Tooltip
     
     ;~ MsgBox, % _BaseKey . " " . _Diactric . " " . _ShiftDiactric . " "
-
     IniRead, _BaseKey_SoundBeep_Frequency,  % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, BaseKey_SoundBeep_Frequency
+    ;~ MsgBox, %_BaseKey_SoundBeep_Frequency%
     IniRead, _BaseKey_SoundBeep_Duration,   % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, BaseKey_SoundBeep_Duration
+    ;~ MsgBox, %_BaseKey_SoundBeep_Duration%
     IniRead, _Diactric_SoundBeep_Frequency, % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Diactric_SoundBeep_Frequency
+    ;~ MsgBox, %_Diactric_SoundBeep_Frequency%
     IniRead, _Diactric_SoundBeep_Duration,  % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Diactric_SoundBeep_Duration
+    ;~ MsgBox, %_Diactric_SoundBeep_Duration%
     IniRead, _Double_SoundBeep_Frequency,   % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Double_SoundBeep_Frequency
+    ;~ MsgBox, %_Double_SoundBeep_Frequency%
     IniRead, _Double_SoundBeep_Duration,    % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Double_SoundBeep_Duration
+    ;~ MsgBox, %_Double_SoundBeep_Duration%
 
-    ;~ MyHotString(_BaseKey, _Diactric, _SoundBeep_Frequency, _SoundBeep_Duration, _Tooltip)
+    ;~ MsgBox, % _BaseKey . " " . _Diactric . " " . _Diactric_SoundBeep_Frequency . " "  _Diactric_SoundBeep_Duration . " " . _Tooltip
+    ;~ MsgBox, % A_Index
+    ;~ if (A_Index = 6)
+        ;~ MsgBox, Po raz 6
+    
     Hotstring(":zx:" . _BaseKey . _BaseKey . _BaseKey,                func("DoubleLetter").bind(_BaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration))
     Hotstring(":x:"  . _BaseKey . _BaseKey,                           func("DiactricLetter").bind(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip))
     Hotstring(":x:"  . _BaseKey,                                      func("SingleLetter").bind(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip))
@@ -81,7 +104,8 @@ Loop, %DiactricSectionCounter%
     Hotstring(":x:"  . _ShiftBaseKey,                                 func("SingleLetter").bind(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip))
     }
 
-~BackSpace:: ; this line prevent the following sequence from triggering: ao → aoo → aó → aó{Backspace} → a → ao → ó
+~BackSpace:: ; this line prevent the following sequence from triggering: ao › aoo › aó › aó{Backspace} › a › ao › ó
+    ;~ MsgBox, Backspace
     Hotstring("Reset")
 return
 
@@ -105,6 +129,7 @@ DiactricLetter(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Dur
     {
     global _AllBeeps, _AllTooltips, _DoubleWord
     
+    ;~ MsgBox, % _Diactric
     Send, {BackSpace 2}%_Diactric%
     if (_AllBeeps = "on")
         SoundBeep, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration
@@ -275,9 +300,9 @@ Double_SoundBeep_Duration = 150 ; The duration of the sound, in milliseconds
 else if (A_Args.Length() = 1)
     {
     IniRead, _Language,                         % A_ScriptDir . "\" . A_Args[1], Global, Language
-    MsgBox, 64, Diactric.ahk, % "Input argument: " . A_Args[1] . ". Found language: " . _Language
+    MsgBox, 64, Diactric.ahk, % "Input argument: " . A_Args[1] . ". Found language: " . _Language . "."
     }
-else if (A_Args.Length() = 1)
+else if (A_Args.Length() > 1)
     {
     MsgBox, 48, Diactric.ahk, % "Too many input arguments: " . A_Args.Length() . ". Expected just one, *.ini." 
     }
