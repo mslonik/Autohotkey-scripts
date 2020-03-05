@@ -1,3 +1,9 @@
+/*
+Author:      Maciej Słojewski, mslonik, http://mslonik.pl
+Purpose:     Facilitate normal operation for company desktop.
+Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
+License:     GNU GPL v.3
+*/
 ;                 I N T R O D U C T I O N
 ;~ Simple script used to get diacritic letters (https://en.wikipedia.org/wiki/Diacritic) without usage of AltGr key (right alt, see https://en.wikipedia.org/wiki/AltGr_key#Polish for further details):
 ;~ * double press a key configured to correspond to diacritic key, e.g. in Polish ee converts into ę
@@ -20,7 +26,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #SingleInstance force 			; only one instance of this script may run at a time!
 
 ;~ - - - - - - - - - - Global Variables - - - - - - - - - - -
-ApplicationName     := "Diactric"
+ApplicationName     := "Diacritic"
 English_USA 		:= 0x0409   ; see AutoHotkey help: Language Codes
 ;~ - - - - - - - - - - End of Global Variables - - - - - - - - - - -
 
