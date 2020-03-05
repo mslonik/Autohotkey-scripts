@@ -9,7 +9,6 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 
 global oOutlook
 global ClipSaved, ClipVar
-
 #IfWinActive ahk_exe OUTLOOK.EXE
 
 F6::
@@ -29,7 +28,7 @@ return
 return
 
 ^+h::
-	TemplateStyle("Ukryty ms")
+	HiddenStyle()
 return
 
 ^r::
@@ -81,14 +80,15 @@ AddAttachments()
 			{
 				fullpath = %path%\%A_LoopField%
 				myAttachments.Add(fullpath)
-				ClipVar := % Clipboard . " `n" . fullpath
+				ClipVar := % Clipboard . "<br>" . fullpath
 				Clipboard := ClipVar
 			}
 		}
 		ClipVar := Clipboard
-		mailText := myItem.Body
-		mailText = %ClipVar%%mailText%
-		myItem.Body := mailText
+		HText := myItem.HTMLBody
+		AText = <HTML><BODY><font face="calibri" size="2" color="red">%ClipVar%</font></BODY></HTML>
+		HText = %AText%%HText%
+		myItem.HTMLBody := HText
 	}
 	oOutlook := ""
 	Clipboard := ClipSaved
@@ -108,14 +108,14 @@ SaveAttachments()
 		myItem := myInspector.CurrentItem
 		myAttachments := myItem.Attachments
 		
-		MsgBox, 4, ,Czy chcesz zapisa桩 usunڦ zaӹczniki?
+		MsgBox, 4, ,Czy chcesz zapisać i usunąć załączniki?
 		IfMsgBox No
 			return	
 		
 		cnt := myAttachments.Count
 		if (cnt < 1)
 		{
-			MsgBox, Brak zaӹcznik󷠷 wiadomoݣi.
+			MsgBox, Brak załączników w wiadomości.
 			return
 		}
 		i := cnt
@@ -123,7 +123,7 @@ SaveAttachments()
 		while (i > 0)
 		{
 			AttachmentName := myAttachments.Item(i).FileName
-			path := "C:\temp1\Zaӹczniki\"
+			path := "C:\temp1\Załączniki\"
 			if !FileExist(path)
 				FileCreateDir, % path
 			path = %path%%AttachmentName%
@@ -143,23 +143,17 @@ SaveAttachments()
 			}
 			k := k+1
 		}
-		ClipVar = % Clipboard . "`n" . "Attachments saved in location C:\temp1\Zaӹczniki."
+		ClipVar = % Clipboard . "<br>" . "Attachments saved in location C:\temp1\Załączniki." . "<br>"
 		Clipboard := ClipVar
 
 		ClipVar := Clipboard
 		try
 			myInspector.CommandBars.ExecuteMso("EditMessage")
-
-		;oDoc := myInspector.WordEditor
-		;oSel := oDoc.Windows(1).Selection
-		;Send, {PgUp}{Enter}{PgUp}
-		;oSel.Font.Name := "Calibri"
-		;oSel.Font.Italic := -1
-		;oSel.Font.Color := 0x0000ff
 		
-		mailText := myItem.Body
-		mailText = % ClipVar . "`n" . mailText
-		myItem.Body := mailText
+		HText := myItem.HTMLBody
+		AText = <HTML><BODY><font face="calibri" size="2" color="red">%ClipVar%</font></BODY></HTML>
+		HText = %AText%%HText%
+		myItem.HTMLBody := HText
 		
 		j := cnt
 		while(j > 0)
@@ -168,6 +162,7 @@ SaveAttachments()
 			j := j-1
 		}
 		myItem.Save
+		myItem.Close(0)
 	}
 	oOutlook := ""
 	Clipboard := ClipSaved
@@ -188,7 +183,7 @@ DeleteAttachments()
 		myAttachments := myItem.Attachments
 		i := 1
 		
-		MsgBox, 4, ,Czy chcesz usunڦ zaӹczniki?
+		MsgBox, 4, ,Czy chcesz usunąć załączniki?
 		IfMsgBox No
 			return	
 		
@@ -196,7 +191,7 @@ DeleteAttachments()
 		
 		if (cnt < 1)
 		{
-			MsgBox, Brak zaӹcznik󷠷 wiadomoݣi.
+			MsgBox, Brak załączników w wiadomości.
 			return
 		}
 		
@@ -219,17 +214,10 @@ DeleteAttachments()
 		try
 			myInspector.CommandBars.ExecuteMso("EditMessage")
 
-		;oDoc := myInspector.WordEditor
-		;oSel := oDoc.Windows(1).Selection
-		;Send, {PgUp}{Enter}{PgUp}
-		;oSel.Font.Name := "Calibri"
-		;oSel.Font.Italic := -1
-		;oSel.Font.Color := 0x0000ff
-		
-
-		mailText := myItem.Body
-		mailText = % ClipVar . "`n" . mailText
-		myItem.Body := mailText
+		HText := myItem.HTMLBody
+		AText = <HTML><BODY><font face="calibri" size="2" color="red">%ClipVar%</font></BODY></HTML>
+		HText = %AText%%HText%
+		myItem.HTMLBody := HText
 		
 		j := cnt
 		while(j > 0)
@@ -238,6 +226,7 @@ DeleteAttachments()
 			j := j-1
 		}
 		myItem.Save
+		myItem.Close(0)
 	}
 	oOutlook := ""
 	Clipboard := ClipSaved
@@ -270,8 +259,32 @@ NewMessageForm()
 	oOutlook := ComObjActive("Outlook.Application")
 	myItem := oOutlook.CreateItemFromTemplate("S:\OrgDR\Praktykanci\JakubMasiak\20200220_Outlook\TQ-S437-SzablonOutlook.oft")
 	myItem.Display
-	MsgBox, Wiadomoݦ wywoԡna zostaԡ na podstawie szablonu TQ-S437-SzablonOutlook.oft
+	MsgBox, Wiadomość wywołana została na podstawie szablonu TQ-S437-SzablonOutlook.oft
 	oOutlook := ""
+}
+
+HiddenStyle()
+{
+	global oOutlook
+	
+	oOutlook := ComObjActive("Outlook.Application")
+	myInspector := oOutlook.Application.ActiveInspector
+	VarType := ComObjType(myInspector, "Name")
+	
+	if (VarType = "_Inspector")
+	{
+		try
+				myInspector.CommandBars.ExecuteMso("EditMessage")
+		oDoc := myInspector.WordEditor
+		oSel := oDoc.Windows(1).Selection
+		StyleVar := oSel.Style.NameLocal
+		if (StyleVar != "Ukryty ms")
+			TemplateStyle("Ukryty ms")
+		else
+			TemplateStyle("Odkryty ms")
+	}
+	oOutlook := ""
+	return
 }
 
 TemplateStyle(StyleName)
@@ -294,10 +307,10 @@ TemplateStyle(StyleName)
 		}
 		catch
 		{
-			MsgBox, 16, Pr󢡠wywoԡnia stylu z szablonu, 
+			MsgBox, 16, Próba wywołania stylu z szablonu, 
 		( Join
-		 Aby wywoԡ桳tyl, wiadomoݦ musi by桵tworzona na podstawie szablonu "TQ-S437-SzablonOutlook.oft". 
- W tym celu utw󲺠now٠wiadomoݦ korzystajڣ ze skr󴳷 klawiszowych.
+		 Aby wywołać styl, wiadomość musi być utworzona na podstawie szablonu "TQ-S437-SzablonOutlook.oft". 
+ W tym celu utwórz nową wiadomość korzystając ze skrótów klawiszowych.
 		)
 		}
 	}
@@ -315,10 +328,16 @@ ReplyForm()
 	if (VarType != "")
 	{
 		myItem := myInspector.CurrentItem.Reply
-		myTemplate.Recipients.Add(myItem.Recipients.Item(1).Address)
+		HText := myItem.HTMLBody
+		myTemplate.To := myItem.To
+		myTemplate.CC := myItem.CC
+		myTemplate.Subject := myItem.Subject
 		myTemplate.Recipients.ResolveAll
-		MsgBox, Wiadomoݦ wywoԡna zostaԡ na podstawie szablonu TQ-S437-SzablonOutlook.oft
-		myItem.Display
+		MsgBox, Wiadomość wywołana została na podstawie szablonu TQ-S437-SzablonOutlook.oft
+		TText := myTemplate.HTMLBody
+		myTemplate.Display
+		myTemplate.HTMLBody := TText
+		myTemplate.HTMLBody := HText
 	}
 	else
 		Send, ^r
@@ -335,10 +354,16 @@ ReplyAllForm()
 	if (VarType != "")
 	{
 		myItem := myInspector.CurrentItem.ReplyAll
-		myTemplate.Recipients.Add(myItem.Recipients.Item(1).Address)
+		HText := myItem.HTMLBody
+		myTemplate.To := myItem.To
+		myTemplate.CC := myItem.CC
+		myTemplate.Subject := myItem.Subject
 		myTemplate.Recipients.ResolveAll
-		MsgBox, Wiadomoݦ wywoԡna zostaԡ na podstawie szablonu TQ-S437-SzablonOutlook.oft
-		myItem.Display
+		MsgBox, Wiadomość wywołana została na podstawie szablonu TQ-S437-SzablonOutlook.oft
+		TText := myTemplate.HTMLBody
+		myTemplate.Display
+		myTemplate.HTMLBody := TText
+		myTemplate.HTMLBody := HText
 	}
 	else
 		Send, ^+r
@@ -355,9 +380,16 @@ ForwardForm()
 	if (VarType != "")
 	{
 		myItem := myInspector.CurrentItem.Forward
+		HText := myItem.HTMLBody
+		myTemplate.To := myItem.To
+		myTemplate.CC := myItem.CC
+		myTemplate.Subject := myItem.Subject
 		myTemplate.Recipients.ResolveAll
-		MsgBox, Wiadomoݦ wywoԡna zostaԡ na podstawie szablonu TQ-S437-SzablonOutlook.oft
-		myItem.Display
+		MsgBox, Wiadomość wywołana została na podstawie szablonu TQ-S437-SzablonOutlook.oft
+		TText := myTemplate.HTMLBody
+		myTemplate.Display
+		myTemplate.HTMLBody := TText
+		myTemplate.HTMLBody := HText
 	}
 	else
 		Send, ^f
