@@ -2171,7 +2171,7 @@ return
 return
 
 ; ------------------ Section of first or second names with local diacritics ------------------------
-#Include FirstAndSecondNames.ahk
+#Include *i FirstAndSecondNames.ahk
 
 ; - - - - - - - - - - - - - - - - Emoticons - - - - - - - - - - - - - - - - - - - - - - - -
 ;~ https://unicode-table.com/en/
