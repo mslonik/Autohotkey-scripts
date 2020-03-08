@@ -1,4 +1,4 @@
-/*
+﻿/*
 Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
@@ -23,17 +23,19 @@ English_USA 		:= 0x0409   ; see AutoHotkey help: Language Codes
 
 ; - - - - - - - - - - - SECTION DEDICATED TO  Maciej Słojewski's specific hardware AND PREFERENCES - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - -
 
-if (A_ComputerName = "2277NB010" && A_UserName = "V523580") 
+; Maciej Słojewski only; home-office or office
+if (	((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580"))
+	|| 	((A_ComputerName = "NOTEBOOK-GUCEK") && (A_UserName = "maciej")))
+	{
 	SetDefaultKeyboard(English_USA)
+	MsgBox, Keyboard style: English_USA
+	}
 
-#if (A_ComputerName = "2277NB010" && A_UserName = "V523580") ; Maciej Słojewski only
-;~ #if (A_ComputerName = "fik" && A_UserName = "V523580") ; Maciej Słojewski only
+; Maciej Słojewski only; home-office or office
+#if (	((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580"))
+	|| 	((A_ComputerName = "NOTEBOOK-GUCEK") && (A_UserName = "maciej")))
 
-;~ Currently, all special Alt-tab actions must be assigned directly to a hotkey as in the examples above (i.e. they cannot be used as though they were commands). They are not affected by #IfWin or #If.
-;~ MButton::AltTabMenu
-;~ WheelDown::AltTab
-;~ WheelUp::ShiftAltTab
-
+; - - - - - - - - - - - - - - - - General keys redicrection - - - - - - - - - - - - - - - - - - - - 
 	Ralt::AppsKey ; redirects AltGr -> context menu
 	PrintScreen::#+s ; Windows + Shift + s https://support.microsoft.com/pl-pl/help/4488540/how-to-take-and-annotate-screenshots-on-windows-10
 ; - - - - - - - - - - - - - - - - Function Keys redirection - - - - - - - - - - - - - - - - - - - -
@@ -130,11 +132,10 @@ F14:: ; switching between tabs of Chrome; author: Taran VH
 		}
 return
 
-;~ F15:: ; Reserved for CopyQ
-;~ return
+F15:: ; Reserved for CopyQ
+return
 
 ;~ https://autohotkey.com/board/topic/116740-switch-between-one-window-of-each-different-applications/
-
 ; computer mouse: OPTO 325 (PS/2 interface and PS/2 to USB adapter): 3 (top) + 2 (side) buttons, 2x wheels, but only one is recognizable by AHK.
 
 ; Make the mouse wheel perform alt-tabbing: this one doesn't work with #if condition
@@ -208,6 +209,11 @@ return
 
 
 ; ---------------------- HOTSTRINGS -----------------------------------
+;~ The general hotstring rules:
+;~ 1. Automatic changing small letters to capital letters: just press ending character (e.g. <Enter> or <Space> or <(>).
+;~ 2. Automatic expansion of abbreviation: after small letters just press a <.>.
+;~ 2.1. If expansion contain double letters, use that letter and <2>. E.g. <c2ms> expands to <CCMS> and <c2ms.> expands to <Component Content Management System>.
+;~ 3. Each hotstrings can be undone upon pressing of usual shotcuts: <Ctrl + z> or <Ctrl + BackSpace>.
 
 ; - - - - - - - - - - - - - - - - - - - - -  Hotstrings: Personal: Ctrl + Shift F9 - - - - - - - - - - - - - - - - - - - - - - - - -
 :*:dd::
