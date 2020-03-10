@@ -29,6 +29,7 @@ if (	((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580"))
 	{
 	SetDefaultKeyboard(English_USA)
 	MsgBox, Keyboard style: English_USA
+	CapitalizeFirstLetters()
 	}
 
 ; Maciej Słojewski only; home-office or office
@@ -2375,6 +2376,21 @@ SetDefaultKeyboard(LocaleID)
 		}
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+;~ https://jacks-autohotkey-blog.com/2020/03/09/auto-capitalize-the-first-letter-of-sentences/#more-41175
+CapitalizeFirstLetters()
+{
+	Loop, 26 
+		Hotstring(":C?*:. " . Chr(A_Index + 96),". " . Chr(A_Index + 64))
+	Loop, 26 
+		Hotstring(":CR?*:! " . Chr(A_Index + 96),"! " . Chr(A_Index + 64))
+	Loop, 26 
+		Hotstring(":C?*:? " . Chr(A_Index + 96),"? " . Chr(A_Index + 64))
+	Loop, 26 
+		Hotstring(":C?*:`n" . Chr(A_Index + 96),"`n" . Chr(A_Index + 64))
+return
+}
 
 ; ---------------------- SECTION OF LABELS ------------------------------------
 
