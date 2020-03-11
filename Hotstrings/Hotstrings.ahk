@@ -1,4 +1,4 @@
-﻿/*
+/*
 Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
@@ -22,6 +22,24 @@ English_USA 		:= 0x0409   ; see AutoHotkey help: Language Codes
 ;~ Run, https://solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx ; voestalpine Signaling Siershahn, Cooperation Platform Sopot
 
 ; - - - - - - - - - - - SECTION DEDICATED TO  Maciej Słojewski's specific hardware AND PREFERENCES - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - -
+
+; Maciej Słojewski only; office only
+if ((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580"))
+	{
+	Tabs := Checking()
+	FindWebsite("Tłumacz Google", "chrome.exe translate.google.com", Tabs)
+	FindWebsite("LinkedIn", "chrome.exe linkedin.com/feed", Tabs)
+	FindWebsite("Poczta", "chrome.exe poczta.onet.pl", Tabs)
+	FindWebsite("METEO.PL","chrome.exe meteo.pl", Tabs)
+	FindWebsite("Prognoza pogody dla Polski - pogodynka.pl","chrome.exe pogodynka.pl/polska/radary", Tabs)
+	FindWebsite("Document.GetCrossReferenceItems","chrome.exe https://docs.microsoft.com/en-us/office/vba/api/word.document.getcrossreferenceitems", Tabs)
+	FindWebsite("WhatsApp","chrome.exe web.whatsapp.com", Tabs)
+	FindWebsite("myTeamsites - Home", "chrome.exe team.voestalpine.net/SitePages/Home.aspx", Tabs)
+	FindWebsite("Pulpit", "chrome.exe helpdesk.tens.pl/helpdesk", Tabs)
+	FindWebsite("Exact Synergy Enterprise","chrome.exe portal-signaling-sopot.voestalpine.net/synergy/docs/Portal.aspx", Tabs)
+	FindWebsite("Cooperation Platform Sopot","chrome.exe solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx", Tabs)
+	FindWebsite("MDS Upgrade Kit","chrome.exe solidsystemteamwork.voestalpine.root.local/Processes/custprojects/780MDSUpgradeKit/SitePages/Home.aspx",Tabs)
+	}
 
 ; Maciej Słojewski only; home-office or office
 if (	((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580"))
@@ -1975,6 +1993,36 @@ return
 	Send, %MyHotstring%
 return
 
+::rap.::	; source: EN-50126-1, chapter 6.3 (Risk assessment).
+	MyHotstring := "Risk Acceptance Principle"
+	Send, %MyHotstring%
+return
+
+:*:rap::	; source: EN-50126-1, chapter 6.3 (Risk assessment).
+	MyHotstring := "RAP"
+	Send, %MyHotstring%
+return
+
+::rac.::	; source: EN-50126-1, chapter 6.3 (Risk assessment).
+	MyHotstring := "Risk Acceptance Criteria"
+	Send, %MyHotstring%
+return
+
+:*:rac::	; source: EN-50126-1, chapter 6.3 (Risk assessment).
+	MyHotstring := "RAC"
+	Send, %MyHotstring%
+return
+
+::ere.::	; source: EN-50126-1, chapter 6.3 (Risk assessment).
+	MyHotstring := "Explicit Risk Estimation"
+	Send, %MyHotstring%
+return
+
+:*:ere::	; source: EN-50126-1, chapter 6.3 (Risk assessment).
+	MyHotstring := "ERE"
+	Send, %MyHotstring%
+return
+
 ::lad.::
 	MyHotstring := "Logistic and Administrative Delay"
 	Send, %MyHotstring%
@@ -1982,6 +2030,26 @@ return
 
 :*:lad::
 	MyHotstring := "LAD"
+	Send, %MyHotstring%
+return
+
+::vat.::
+	MyHotstring := "Value Added Tax"
+	Send, %MyHotstring%
+return
+
+:*:vat::
+	MyHotstring := "VAT"
+	Send, %MyHotstring%
+return
+
+::ncr.::
+	MyHotstring := "Non Conformance Report"
+	Send, %MyHotstring%
+return
+
+:*:ncr::
+	MyHotstring := "NCR"
 	Send, %MyHotstring%
 return
 
@@ -2111,13 +2179,13 @@ return
 return
 
 ::tuv::
-	MyHotstring := "T{U+00DC}V `"
+	MyHotstring := "T{U+00DC}V"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
 ::sud::
-	MyHotstring := "S{U+00DC}D `"
+	MyHotstring := "S{U+00DC}D"
 	Send, %MyHotstring%
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
@@ -2278,17 +2346,31 @@ return
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
-
 :*:cat.::			; cat
-	MyHotstring := "{U+1F408} `"
+	MyHotstring := "{U+1F408}"
 	Send, % MyHotstring
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
 	;~ MsgBox, % "MyHotstring: " . MyHotstring . " Długość: " . StrLen(MyHotstring) . " A_ThisHotkey: " . A_ThisHotkey . " A_PriorHotkey: " . A_PriorHotkey
 return
 
+:*:heart.::			; heart
+	MyHotstring := "{U+2661}"
+	Send, % MyHotstring
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
+return
+
+:*:<3.::			; heart
+	MyHotstring := "{U+2661}"
+	Send, % MyHotstring
+	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
+return
 
 
 ; - - - - - - - - - - - - - - - - - - Full titles of technical standards - - - - - - - - - 
+:*:en50126old.::
+	Send, {Text}EN 50126:1999 Railway applications – The specification and demonstration of Reliability, Availability, Maintainability and Safety (RAMS).
+return
+
 :*:en50126-1.::
 	Send, {Text}EN 50126-1:2017 Railway applications - The specification and demonstration of reliability, availability, maintainability and safety (RAMS) - Part 1: Generic RAMS Process.
 return
@@ -2305,8 +2387,16 @@ return
 	Send, {Text}EN 50129:2018 Railway applications - Communication, signalling and processing systems – Safety related electronic systems for signalling.
 return
 
+:*:en50129old.::
+	Send, {Text}EN 50129:2003 E Railway applications – Communication, signaling and processing systems – Safety related electronic systems for signaling.
+return
+
 :*:en50159.::
 	Send, {Text}EN 50159:2010 Railway applications - Communication, signalling and processing systems - Safety-related communication in transmission systems.
+return
+
+:*:iso2ld::
+	Send, {Text}EN ISO 9001:2008 Quality management systems – Requirements.
 return
 
 :*:irisnorm::
@@ -2397,3 +2487,46 @@ return
 TurnOffTooltip:
 	ToolTip ,
 return
+
+;---------------------- CHROME AUTOSTART --------------------------------------
+Checking()
+{
+	local Tabs
+	BlockInput, on
+	IfWinExist, ahk_exe chrome.exe
+		WinActivate ahk_exe chrome.exe
+	else
+	{
+		Run, chrome.exe
+		sleep, 500
+	}
+	sleep, 500
+	WinGetActiveTitle, StartingTab
+	Tabs = %StartingTab%
+	Loop
+	{
+		Send, {Control down}{Tab}{Control up}
+		Sleep, 100
+		WinGetActiveTitle, CurrentTab
+		if (CurrentTab == StartingTab)
+			break
+		else 
+			Tabs = %Tabs% '
+		Tabs = %Tabs% %CurrentTab%
+	}
+	BlockInput, off
+	return Tabs
+}
+
+FindWebsite(title, address, tabs)
+{
+	loop, parse, Tabs, ',
+	{
+		if (InStr(A_LoopField, title) != 0)
+		{
+			return
+		}
+	}
+	Run, %address%
+	return
+}
