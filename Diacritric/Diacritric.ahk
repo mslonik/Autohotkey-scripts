@@ -40,7 +40,7 @@ ProcessInputArgs()
 IniRead, _AmericanLayout,                   % A_ScriptDir . "\" . A_Args[1], Global, AmericanLayout
 IniRead, _AllTooltips,                      % A_ScriptDir . "\" . A_Args[1], Global, AllTooltips
 IniRead, _AllBeeps,                         % A_ScriptDir . "\" . A_Args[1], Global, AllBeeps
-IniRead, _DiacriticWord,                     % A_ScriptDir . "\" . A_Args[1], Global, DiacriticWord
+IniRead, _DiacriticWord,                    % A_ScriptDir . "\" . A_Args[1], Global, DiacriticWord
 IniRead, _DoubleWord,                       % A_ScriptDir . "\" . A_Args[1], Global, DoubleWord
 
 ;~ switch to AmericanLayout (neutral)?

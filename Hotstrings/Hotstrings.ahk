@@ -1,4 +1,4 @@
-/*
+﻿/*
 Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
@@ -47,6 +47,17 @@ if (	((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580"))
 	{
 	SetDefaultKeyboard(English_USA)
 	MsgBox, Keyboard style: English_USA
+	Hotstring(":*x:en50126-1.", func("ViaClipboard").bind("EN 50126-1:2017 Railway applications - The specification and demonstration of reliability, availability, maintainability and safety (RAMS) - Part 1: Generic RAMS Process."))
+	Hotstring(":*x:kr`t", 		func("ViaClipboard").bind("Kind regards`, Maciej Słojewski"))
+	Hotstring(":x:tuv",			func("ViaClipboard").bind("T" . Chr(0x00DC) . "V"))
+	Hotstring(":c:tel.",		func("ViaClipboard").bind("+48 601 403 775"))
+
+;~ :C:tel::
+	;~ MyHotstring := "{+}48 601 403 775"
+	;~ Send, %MyHotstring%
+	;~ MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+;~ return
+
 	CapitalizeFirstLetters()
 	}
 
@@ -116,42 +127,18 @@ return
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
 ; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
 
-F13:: ; switching beetween windows of Word; author: Taran VH
-	Process, Exist, WINWORD.EXE
-	if (ErrorLevel = 0)
-		{
-        Run, WINWORD.EXE
-		}
-     else
-        {
-        GroupAdd, taranwords, ahk_class OpusApp
-        if (WinActive("ahk_class OpusApp"))
-			{
-            GroupActivate, taranwords, r
-			} 
-        else
-			{
-            WinActivate ahk_class OpusApp
-			}
-        }
+F13:: 
 return
 
-F14:: ; switching between tabs of Chrome; author: Taran VH
-	if !WinExist("ahk_class Chrome_WidgetWin_1")
-		{
-		Run, chrome.exe
-		}
-	if WinActive("ahk_class Chrome_WidgetWin_1")
-		{
-		Send, ^{Tab}
-		}
-	else
-		{
-		WinActivate ahk_class Chrome_WidgetWin_1
-		}
+F14:: ; reset of AutoHotkey string recognizer
+	;~ Send, {Left}{Right}
+	Hotstring("Reset")
+	Tooltip, [%A_ThisHotkey%] reset of AutoHotkey string recognizer
+	SetTimer, TurnOffTooltip, -2000
 return
 
-F15:: ; Reserved for CopyQ
+;~ edit c:\Users\macie\AppData\Roaming\copyq\copyq.ini and set the following parameter: show-log=f15
+~F15:: ; Reserved for CopyQ
 return
 
 ;~ https://autohotkey.com/board/topic/116740-switch-between-one-window-of-each-different-applications/
@@ -258,11 +245,11 @@ return
 	Send, {Text}%MyHotstring%
 return
 
-:C:tel::
-	MyHotstring := "{+}48 601 403 775"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
-return
+;~ :C:tel::
+	;~ MyHotstring := "{+}48 601 403 775"
+	;~ Send, %MyHotstring%
+	;~ MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
+;~ return
 
 :*:ms.::
 	MyHotstring := "Maciej Słojewski"
@@ -283,11 +270,6 @@ return
 
 :*:zws::
 	MyHotstring := "Z wyrazami szacunku`, Maciej Słojewski"
-	Send, {Text}%MyHotstring%
-return
-
-:*:kr`t::
-	MyHotstring := "Kind regards`, Maciej Słojewski"
 	Send, {Text}%MyHotstring%
 return
 
@@ -2178,11 +2160,11 @@ return
 	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
 return
 
-::tuv::
-	MyHotstring := "T{U+00DC}V"
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
+;~ ::tuv::
+	;~ MyHotstring := "T{U+00DC}V"
+	;~ Send, %MyHotstring%
+	;~ MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
+;~ return
 
 ::sud::
 	MyHotstring := "S{U+00DC}D"
@@ -2371,10 +2353,6 @@ return
 	Send, {Text}EN 50126:1999 Railway applications – The specification and demonstration of Reliability, Availability, Maintainability and Safety (RAMS).
 return
 
-:*:en50126-1.::
-	Send, {Text}EN 50126-1:2017 Railway applications - The specification and demonstration of reliability, availability, maintainability and safety (RAMS) - Part 1: Generic RAMS Process.
-return
-
 :*:en50126-2.::
 	Send, {Text}EN 50126-2:2017 Railway applications - The specification and demonstration of reliability, availability, maintainability and safety (RAMS) - Part 2: Systems Approach to Safety.
 return
@@ -2447,6 +2425,7 @@ return
 :*:dokr::DokR (Dokumentacja Robocza)
 
 
+
 ; - - - - - - - - - - - - SECTION OF FUNCTIONS  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ;~ https://docs.microsoft.com/pl-pl/windows/win32/api/winuser/nf-winuser-systemparametersinfoa?redirectedfrom=MSDN
 SetDefaultKeyboard(LocaleID)
@@ -2472,13 +2451,13 @@ SetDefaultKeyboard(LocaleID)
 CapitalizeFirstLetters()
 {
 	Loop, 26 
-		Hotstring(":C?*:. " . Chr(A_Index + 96),". " . Chr(A_Index + 64))
+		Hotstring(":C?*:. " . Chr(A_Index + 96),	". " . Chr(A_Index + 64))
 	Loop, 26 
-		Hotstring(":CR?*:! " . Chr(A_Index + 96),"! " . Chr(A_Index + 64))
+		Hotstring(":CR?*:! " . Chr(A_Index + 96),	"! " . Chr(A_Index + 64))
 	Loop, 26 
-		Hotstring(":C?*:? " . Chr(A_Index + 96),"? " . Chr(A_Index + 64))
+		Hotstring(":C?*:? " . Chr(A_Index + 96),	"? " . Chr(A_Index + 64))
 	Loop, 26 
-		Hotstring(":C?*:`n" . Chr(A_Index + 96),"`n" . Chr(A_Index + 64))
+		Hotstring(":C?*:`n" . Chr(A_Index + 96),	"`n" . Chr(A_Index + 64))
 return
 }
 
@@ -2529,4 +2508,16 @@ FindWebsite(title, address, tabs)
 	}
 	Run, %address%
 	return
+}
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ViaClipboard(ReplacementString)
+{
+	global MyHotstring
+	;~ ReplacementString := % ReplacementString
+	ClipboardBackup := ClipboardAll, Clipboard := ReplacementString
+	Send, ^v
+	Sleep, 55 ; this sleep is required surprisingly
+	Clipboard := ClipboardBackup, ClipboardBackup := "", MyHotstring := ReplacementString
 }
