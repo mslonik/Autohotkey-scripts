@@ -12,6 +12,21 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ;~ SM_YVIRTUALSCREEN := 77
      DisplayRadioGroup := 0
      WindowWizardTitle := "O T A G L E Display Wizard"
+     ButtonWidth            := 80
+     ButtonHeight           := 80
+     ButtonHorizontalMargin := 20
+     ButtonVerticalMargin   := 20
+     
+     ;~ WizardStep1_Width := 0
+     ;~ WizardStep1_Height := 0
+     ;~ MonitorBoundingCoordinates_ :=
+     ;~ MonitorBoundingCoordinates_Left    := 0
+     ;~ MonitorBoundingCoordinates_Right   := 0
+     ;~ MonitorBoundingCoordinates_Top     := 0
+     ;~ MonitorBoundingCoordinates_Bottom  := 0
+
+
+;~ Goto, ToStep2
 
 Gui, WizardStep0_Intro: Font, bold
 Gui, WizardStep0_Intro: Add, Text, w500, Introduction
@@ -48,7 +63,6 @@ ToStep1:
      Gui, WizardStep1_GetDisplayCoordinates: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
      Gui, WizardStep1_GetDisplayCoordinates: Show, , % WindowWizardTitle
      WinGetPos, , , WizardStep1_Width, WizardStep1_Height, A
-     ;~ MsgBox, % "Width: " . WizardStep1_Width . " Height: " . WizardStep1_Height
 return
 
 ExitDisplayConfigurationWizard:
@@ -57,9 +71,8 @@ ExitApp
 
 WizardStep1_Radio:
      Gui, WizardStep1_GetDisplayCoordinates: Submit, NoHide
-     ;~ MsgBox, % "vDisplayRadioGroup: " . DisplayRadioGroup
      Gui, WizardStep1_GetDisplayCoordinates: Destroy
-     SysGet, MonitorBoundingCoordinates_, Monitor, %DisplayRadioGroup%
+     SysGet, MonitorBoundingCoordinates_, Monitor, % DisplayRadioGroup
      Gui, WizardStep1_GetDisplayCoordinates: Font, bold
      Gui, WizardStep1_GetDisplayCoordinates: Add, Text, w500, Step 1 out of 3: `t`tChoose a display where GUI of OTAGLE is located.
      Gui, WizardStep1_GetDisplayCoordinates: Font
@@ -81,26 +94,86 @@ return
 
 
 ToStep2:
-     SysGet, MonitorBoundingCoordinates_, Monitor, %DisplayRadioGroup%
-     ;~ MsgBox, % DisplayRadioGroup
+     SysGet, MonitorBoundingCoordinates_, Monitor, % DisplayRadioGroup
      Gui, WizardStep1_GetDisplayCoordinates: Destroy
      Gui, WizardStep2_GetDisplayCoordinates: Font, bold
      Gui, WizardStep2_GetDisplayCoordinates: Add, Text, w500, Step 2: `t`tDisplay Width and Height in pixels.
      Gui, WizardStep2_GetDisplayCoordinates: Font
+     WizardStep2_Width := Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right)
+     WizardStep2_Height := Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) 
      Gui, WizardStep2_GetDisplayCoordinates: Add, Text, y+20
-     , % "Monitor: " . DisplayRadioGroup . " Width: " . Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) 
-     . " Height: " . Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom)
+          , % "Monitor: " . DisplayRadioGroup . " Width: " .  WizardStep2_Width 
+          . " Height: " . WizardStep2_Height . " Suggested size of key: 80x80 px. Gap size: 20x20 px."
+     WizardStep2_AmountOfKeysHorizontally := (WizardStep2_Width - 20) // (80 + 20)
+     WizardStep2_MarginHorizontally := WizardStep2_Width - (WizardStep2_AmountOfKeysHorizontally * 20 + WizardStep2_AmountOfKeysHorizontally * 80 + 20)
+     WizardStep2_AmountOfKeysVertically := (WizardStep2_Height - 20) // (80 + 20)
+     WizardStep2_MarginVertically := WizardStep2_Height - (WizardStep2_AmountOfKeysVertically * 20 + WizardStep2_AmountOfKeysVertically * 80 + 20)
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Text, y+20, % "Number of keys horizontally: " . WizardStep2_AmountOfKeysHorizontally . " and margin: " . WizardStep2_MarginHorizontally
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Text, y+20, % "Number of keys vertically: " . WizardStep2_AmountOfKeysVertically . " and margin: " . WizardStep2_MarginVertically
      Gui, WizardStep2_GetDisplayCoordinates: Add, Button, Default x50 y+20 w80 gToStep3, &Next
      Gui, WizardStep2_GetDisplayCoordinates: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
      Gui, WizardStep2_GetDisplayCoordinates: Show
-     , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardStep1_Width / 2) 
-       . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardStep1_Height / 2), % WindowWizardTitle
+     , % "x" . MonitorBoundingCoordinates_Left + (WizardStep2_Width / 2) - (WizardStep1_Width / 2) 
+       . "y" . MonitorBoundingCoordinates_Top + (WizardStep2_Height / 2) - (WizardStep1_Height / 2), % WindowWizardTitle
 return
 
 
 ToStep3:
+     SysGet, MonitorBoundingCoordinates_, Monitor, % DisplayRadioGroup
+     Gui, WizardStep2_GetDisplayCoordinates: Destroy
+     Gui, WizardStep3_PlotMatrixOfButtons: Margin, % ButtonHorizontalMargin, % ButtonVerticalMargin
 
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "xm"  . " ym"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_1
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_2
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_3
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_4
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_5
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_6
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_7
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_8
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_9
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_10
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_11
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_12
+
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m"                       . " w" . ButtonWidth . " h" . ButtonHeight, 2_1
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_2
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_3
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_4
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_5
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_6
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_7
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_8
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_9
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_10
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_11
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_12
+
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m"                       . " w" . ButtonWidth . " h" . ButtonHeight, 3_1
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_2
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_3
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_4
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_5
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_6
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_7
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_8
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_9
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_10
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_11
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_12
+
+
+     Gui, WizardStep3_PlotMatrixOfButtons: Show
+     , % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
 return
+
+     ;~ ButtonWidth            := 80
+     ;~ ButtonHeight           := 80
+     ;~ ButtonHorizontalMargin := 20
+     ;~ ButtonVerticalMargin   := 20
+
+     ;~ ButtonHorizontalMargin := 20
+     ;~ ButtonVerticalMargin   := 20
 
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
 
