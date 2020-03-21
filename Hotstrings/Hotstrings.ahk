@@ -1,4 +1,4 @@
-/*
+﻿/*
 Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
@@ -10,11 +10,29 @@ License:     GNU GPL v.3
 SendMode Input  				; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #SingleInstance force 			; only one instance of this script may run at a time!
-; #MenuMaskKey vkFF
+
+; ---------------------- HOTSTRINGS -----------------------------------
+;~ The general hotstring rules:
+;~ 1. Automatic changing small letters to capital letters: just press ending character (e.g. <Enter> or <Space> or <(>).
+;~ 2. Automatic expansion of abbreviation: after small letters just press a <.>.
+;~ 2.1. If expansion contain double letters, use that letter and <2>. E.g. <c2ms> expands to <CCMS> and <c2ms.> expands to <Component Content Management System>.
+;~ 3. Each hotstrings can be undone upon pressing of usual shotcuts: <Ctrl + z> or <Ctrl + BackSpace>.
+
+#Include *i	PersonalHotstrings.ahk 		; Personal Hotstrings Ctrl+Shift+F9
+#Include *i voestalpineHotstrings.ahk 	; Hotstrings: voestalpine: Ctrl + Shift + F10 
+#Include *i PhysicsHotstrings.ahk 		; Physics, Mathematics and Other Symbols: Ctrl + Shift + F11
+#Include *i Abbreviations.ahk 			; Abbreviations: Ctrl + Shift + F12
+#Include *i PolishHotstrings.ahk 		; Polish section
+#Include *i GermanHotstrings.ahk 		; German section
+#Include *i TimeHotstrings.ahk 			; Section Date & Time
+#Include *i FirstAndSecondNames.ahk 	; Section of first or second names with local diacritics
+#Include *i EmojiHotstrings.ahk 		; Emoji & Emoticons
+#Include *i TechnicalHotstrings.ahk 	; Full titles of technical standards
+#Include *i AutocorrectionHotstrings.ahk ; Autocorrection section
+#Include *i CapitalLetters.ahk 			; Section Capital Letters
 
 ; --------------- SECTION OF GLOBAL VARIABLES -----------------------------
-;~ WordTrue := -1
-;~ WordFalse := 0
+WindowTransparency	:= 0
 MyHotstring 		:= ""
 English_USA 		:= 0x0409   ; see AutoHotkey help: Language Codes
 ; --------------- END OF GLOBAL VARIABLES SECTION ----------------------
@@ -44,10 +62,12 @@ if ((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580"))
 if (	((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580"))
 	|| 	((A_ComputerName = "NOTEBOOK-GUCEK") && (A_UserName = "maciej")))
 	{
-	CapitalizeFirstLetters()
+	;~ CapitalizeFirstLetters() only context dependent.
 	SetDefaultKeyboard(English_USA)
 	MsgBox, Keyboard style: English_USA
 	}
+	
+
 
 ; Maciej Słojewski only; home-office or office
 #if (	((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580"))
@@ -61,9 +81,9 @@ if (	((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580"))
 		Send,{Ctrl Down}{LAlt Down}{Tab}{Ctrl Up}{Lalt Up}
 	return
 
-	+F3 Up:: ; Shift + F3
-		ForceCapitalize()
-	return
+	; +F3 Up:: ; Shift + F3 ; zmienić na wywołanie kontekstowe #IfWinActive WhatsApp
+	;	 ForceCapitalize()
+	 ;return
 
 	PrintScreen::#+s ; Windows + Shift + s https://support.microsoft.com/pl-pl/help/4488540/how-to-take-and-annotate-screenshots-on-windows-10
 ; - - - - - - - - - - - - - - - - Function Keys redirection - - - - - - - - - - - - - - - - - - - -
@@ -119,32 +139,69 @@ return
 ; These are valid for any keyboard
 +^F1::DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0) ; Suspend: 
 +^k::Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 	 ; run Kee Pass application (password manager)
-^#F8::WinSet, AlwaysOnTop, toggle, A ; Ctrl + Windows + F8, toggle always on top
+
+^#F8:: 			; Ctrl + Windows + F8, toggle window parameter always on top
+	WinSet, AlwaysOnTop, toggle, A 
+	ToolTip, This window atribut "Always on Top" is toggled ;, % A_CaretX, % A_CaretY - 20
+	SetTimer, TurnOffTooltip, -2000
+return
+
+^#F9::			; Ctrl + Windows + F9, toggle window transparency
+	if (WindowTransparency = 0)
+		{
+		WinSet, Transparent, 125, A
+		WindowTransparency := 1
+		ToolTip, This window atribut Transparency was changed to semi-transparent ;, % A_CaretX, % A_CaretY - 20
+		SetTimer, TurnOffTooltip, -2000
+		return
+		}
+	else
+		{
+		WinSet, Transparent, 255, A
+		WindowTransparency := 0
+		ToolTip, This window atribut Transparency was changed to opaque ;, % A_CaretX, % A_CaretY - 20
+		SetTimer, TurnOffTooltip, -2000
+		return
+		}
 
 
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
 ; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
 
-F13:: ; reserved for capital letter switcher (Shift + F3 in Word)
+F13:: ; not used
+	SoundBeep, 1000, 200 ; freq = 50, duration = 200 ms
 return
 
 F14:: ; reset of AutoHotkey string recognizer
 	;~ Send, {Left}{Right}
 	Hotstring("Reset")
-	ToolTip, [%A_thishotKey%] reset of AutoHotkey string recognizer
+	SoundBeep, 1500, 200 ; freq = 100, duration = 200 ms
+	ToolTip, [%A_thishotKey%] reset of AutoHotkey string recognizer, % A_CaretX, % A_CaretY - 20
 	SetTimer, TurnOffTooltip, -2000
 return
 
 ~F15:: ; Reserved for CopyQ
+	SoundBeep, 2000, 200 ; freq = 500, duration = 200 ms
 return
 
-;~ https://autohotkey.com/board/topic/116740-switch-between-one-window-of-each-different-applications/
 ; computer mouse: OPTO 325 (PS/2 interface and PS/2 to USB adapter): 3 (top) + 2 (side) buttons, 2x wheels, but only one is recognizable by AHK.
 
 ; Make the mouse wheel perform alt-tabbing: this one doesn't work with #if condition
 ;~ MButton::AltTabMenu
 ;~ WheelDown::AltTab
 ;~ WheelUp::ShiftAltTab
+
+;~ Www.computeredge.com/AutoHotkey/Downloads/ChangeVolume.ahk
+#If MouseIsOver("ahk_class Shell_TrayWnd")
+	WheelUp::Send {Volume_up}
+	WheelDown::Send {Volume_down}
+#If
+
+MouseIsOver(WinTitle)
+{
+	MouseGetPos,,, Win
+	return WinExist(WinTitle . " ahk_id " . Win)
+}
 
 ; Left side button XButton1
 XButton1:: ; switching between Chrome browser tabs; author: Taran VH
@@ -187,7 +244,7 @@ $!BackSpace:: 	;~ Alt + Backspace as in MS Word: rolls back last Autocorrect act
 	if (MyHotstring && (A_ThisHotkey != A_PriorHotkey))
 		{
 		;~ MsgBox, % "MyHotstring: " . MyHotstring . " A_ThisHotkey: " . A_ThisHotkey . " A_PriorHotkey: " . A_PriorHotkey
-		ToolTip, Undo the last hotstring., % A_CaretX, % A_CaretY-20
+		ToolTip, Undo the last hotstring., % A_CaretX, % A_CaretY - 20
 		Send, % "{BackSpace " . StrLen(MyHotstring) . "}" . SubStr(A_PriorHotkey, InStr(A_PriorHotkey, ":", CaseSensitive := false, StartingPos := 1, Occurrence := 2) + 1)
 		SetTimer, TurnOffTooltip, -5000
 		MyHotstring := ""
@@ -195,9 +252,6 @@ $!BackSpace:: 	;~ Alt + Backspace as in MS Word: rolls back last Autocorrect act
 	else
 		{
 		ToolTip,
-		;~ ToolTip, Nothing to replace, % A_CaretX, % A_CaretY-20
-		;~ MsgBox, % "ELSE MyHotstring: " . MyHotstring . " A_ThisHotkey: " . A_ThisHotkey . " A_PriorHotkey: " . A_PriorHotkey		
-		;~ SetTimer, TurnOffTooltip, -5000
 		Send, !{BackSpace}
 		}
 return
@@ -209,40 +263,30 @@ return
 ; - - - - - - - - END OF KEYBOARD HOTKEYS SECTION - - - - - - - - - - - - - - - - - - - - - 
 
 
-
-
-; ---------------------- HOTSTRINGS -----------------------------------
-;~ The general hotstring rules:
-;~ 1. Automatic changing small letters to capital letters: just press ending character (e.g. <Enter> or <Space> or <(>).
-;~ 2. Automatic expansion of abbreviation: after small letters just press a <.>.
-;~ 2.1. If expansion contain double letters, use that letter and <2>. E.g. <c2ms> expands to <CCMS> and <c2ms.> expands to <Component Content Management System>.
-;~ 3. Each hotstrings can be undone upon pressing of usual shotcuts: <Ctrl + z> or <Ctrl + BackSpace>.
-
-#Include *i	PersonalHotstrings.ahk 		; Personal Hotstrings Ctrl+Shift+F9
-#Include *i voestalpineHotstrings.ahk 	; Hotstrings: voestalpine: Ctrl + Shift + F10 
-#Include *i PhysicsHotstrings.ahk 		; Physics, Mathematics and Other Symbols: Ctrl + Shift + F11
-#Include *i Abbreviations.ahk 			; Abbreviations: Ctrl + Shift + F12
-#Include *i PolishHotstrings.ahk 		; Polish section
-#Include *i GermanHotstrings.ahk 		; German section
-#Include *i TimeHotstrings.ahk 			; Section Date & Time
-#Include *i FirstAndSecondNames.ahk 	; Section of first or second names with local diacritics
-#Include *i EmojiHotstrings.ahk 		; Emoji & Emoticons
-#Include *i TechnicalHotstrings.ahk 	; Full titles of technical standards
-#Include *i AutocorrectionHotstrings.ahk ; Autocorrection section
-#Include *i CapitalLetters.ahk 			; Section Capital Letters
-
 ; - - - - - - - - - - - - SECTION OF FUNCTIONS  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-HotstringFun(text, par, textvar)
+ViaClipboard(ReplacementString)
 {
-	global MyHotstring, Replacement, MyHotStringLength, Limit, StartingPosition
-	MyHotstring := text
-	if (textvar = 1)
-	{
-		MyHotstring := "{Text}"MyHotstring
-	}
-	Send, %MyHotstring%
-	MyHotstring := RegExReplace(MyHotstring, "s)\{U\+.*\}", Replacement := " `", MyHotStringLength := "", Limit := par, StartingPosition := 1)
+	global MyHotstring
+	
+	ClipboardBackup := ClipboardAll
+	Clipboard := ReplacementString
+	Send, ^v
+	Sleep, 200 ; this sleep is required surprisingly
+	Clipboard := ClipboardBackup
+	ClipboardBackup := ""
+	MyHotstring := ReplacementString
+	Hotstring("Reset")
 }
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+NormalWay(ReplacementString)
+{
+	global MyHotstring
+	
+	Send, %ReplacementString%
+	MyHotstring := SubStr(A_ThisHotkey, InStr(A_ThisHotkey, ":", false, 1, 2) + 1)
+	;Hotstring("Reset")
+}
+
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ;~ https://docs.microsoft.com/pl-pl/windows/win32/api/winuser/nf-winuser-systemparametersinfoa?redirectedfrom=MSDN
 SetDefaultKeyboard(LocaleID)
@@ -267,14 +311,13 @@ SetDefaultKeyboard(LocaleID)
 ;~ https://jacks-autohotkey-blog.com/2020/03/09/auto-capitalize-the-first-letter-of-sentences/#more-41175
 CapitalizeFirstLetters()
 {
-	Loop, 26 
-		Hotstring(":C?*:. " . 	Chr(A_Index + 96),". " . 	Chr(A_Index + 64))
-	Loop, 26 
-		Hotstring(":CR?*:! " . 	Chr(A_Index + 96),"! " . 	Chr(A_Index + 64))
-	Loop, 26 
-		Hotstring(":C?*:? " . 	Chr(A_Index + 96),"? " . 	Chr(A_Index + 64))
-	Loop, 26 
-		Hotstring(":C?*:`n" . 	Chr(A_Index + 96),"`n" . 	Chr(A_Index + 64))
+	Loop, 26 ; 26 ← number of letters in alphabet
+		{
+		Hotstring(":C?*:. " . 	Chr(A_Index + 96),	". " . 	Chr(A_Index + 64))
+		Hotstring(":CR?*:! " . 	Chr(A_Index + 96),	"! " . 	Chr(A_Index + 64))
+		Hotstring(":C?*:? " . 	Chr(A_Index + 96),	"? " . 	Chr(A_Index + 64))
+		Hotstring(":C?*:`n" . 	Chr(A_Index + 96),	"`n" . 	Chr(A_Index + 64))
+		}
 return
 }
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

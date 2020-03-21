@@ -1,641 +1,146 @@
-:X*:axmpl.::
-	HotstringFun("modu≥ uniwersalny", 0, 1)
-return
-
-:X*:axmen.::
-	HotstringFun("universal module", 0, 0)
-return
-
-:Xb0*x:axm::
-	HotstringFun("{BackSpace 3}AXM", 1, 0)	
-return
-
-
-:X*:axmrpl.::
-	HotstringFun("modu≥ uniwersalny rozszerzony o wyjúcia przekaünikowe", 0, 1)
-return
-
-:X*:axmren.::
-	HotstringFun("universal module extended with relay outputs", 0, 0)
-return
-
-:X:axmr::
-	HotstringFun("AXM^=R^=", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\^=", Replacement := "", MyHotStringLength := "", Limit := 2, StartingPosition := 1)	
-return
-
-
-:X*:axmiopl.::
-	HotstringFun("modu≥ uniwersalny rozszerzony o wejúcia i wyjúcia binarne", 0, 1)
-return
-
-:X*:axmioen.::
-	HotstringFun("universal module extended with binary inputs and outputs", 0, 0)
-return
-
-:X:axmio::
-	HotstringFun("AXM^=IO^=", 0, 0)	
-	MyHotstring := RegExReplace(MyHotstring, "s)\^=", Replacement := "", MyHotStringLength := "", Limit := 2, StartingPosition := 1)	
-return
-
-
-:X*:axma::
-	HotstringFun("AXM{Space}/{Space}AXM^=R^={Space}/{Space}AXM^=IO^=", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{Space\}", Replacement := " `", MyHotStringLength := "", Limit := 4, StartingPosition := 1)
-	MyHotstring := RegExReplace(MyHotstring, "s)\^=", Replacement := "", MyHotStringLength := "", Limit := 4, StartingPosition := 1)	
-return
-
-:Xb0*x:axmp.::
-	HotstringFun("{BackSpace 5}AXM,{Space}AXM^=R^=,{Space}AXM^=IO^=", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*5\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{Space\}", Replacement := " `", MyHotStringLength := "", Limit := 2, StartingPosition := 1)
-	MyHotstring := RegExReplace(MyHotstring, "s)\^=", Replacement := "", MyHotStringLength := "", Limit := 4, StartingPosition := 1)		
-return
-
-:X*:nout::
-	HotstringFun("{U+223C}OUT", 1, 0)
-return
-
-
-:X*:cok.::
-	HotstringFun("czujnik ko≥a", 0, 1)
-return
-
-:X:cok::
-	HotstringFun("COK", 0, 0)
-return
-
-:X*:wsu.::
-	HotstringFun("wheel sensor unit", 0, 0)
-return
-
-:X:wsu::
-	HotstringFun("WSU", 0, 0)
-return
-
-
-:X*:ihd1::
-	HotstringFun("I^=HD1^=", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\^=", Replacement := "", MyHotStringLength := "", Limit := 2, StartingPosition := 1)
-return
-
-:X*:ihd2::
-	HotstringFun("I^=HD2^=", 0, 0)
-MyHotstring := RegExReplace(MyHotstring, "s)\^=", Replacement := "", MyHotStringLength := "", Limit := 2, StartingPosition := 1)	
-return
-
-
-:X*:hd1en.::
-	HotstringFun("HD1 (the 1st head of wheel sensor)", 0, 0)
-return
-
-:X*:hd2en.::
-	HotstringFun("HD2 (the 2nd head of wheel sensor)", 0, 0)
-return
-
-:X*:hd1pl.::
-	HotstringFun("HD1 (pierwsza g≥owica czujnika ko≥a)", 0, 1)
-return
-
-:X*:hd2pl.::
-	HotstringFun("HD2 (druga g≥owica czujnika ko≥a)", 0, 1)
-return
-
-
-:X*:uniacpl.::
-	HotstringFun("(uniwersalny) system liczenia osi", 0, 0)
-return
-
-:X*:uniacen.::
-	HotstringFun("(universal) axle counting system", 0, 0)
-return
-
-:Xb0*x:uniac::
-	HotstringFun("{BackSpace 5}UniAC", 0, 0)
-return
-
-
-:X*:uniac2pl.::
-	HotstringFun("(uniwersalny) system liczenia osi drugiej generacji", 0, 0)
-return
-
-:X*:uniac2en.::
-	HotstringFun("(universal) axle counting system of 2nd generation", 0, 0)
-return
-
-:Xb0x:uniac2::
-	HotstringFun("{BackSpace 7}UniAC[2]", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)			
-return
-
-
-:X*:uniac1pl.::
-	HotstringFun("(uniwersalny) system liczenia osi pierwszej generacji", 0, 0)
-return
-
-:X*:uniac1en.::
-	HotstringFun("(universal) axle counting system of 1st generation", 0, 0)
-return
-
-:Xb0x:uniac1::
-	HotstringFun("{BackSpace 7}UniAC[1]", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)			
-return
-
-
-:X*:uniacxpl.::
-	HotstringFun("rodzina uniwersalnych systemÛw liczenia osi", 0, 1)
-return
-
-:X*:uniacxen.::
-	HotstringFun("family of universal axle counting system", 0, 0)
-return
-
-:Xb0x:uniacx::
-	HotstringFun("{BackSpace 7}UniAC[x]", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)			
-return
-
-
-:X*:unias1ppl.::
-	HotstringFun("(uniwersalny) czujnik ko≥a typu UniAS[1{+}]", 0, 1)
-	MyHotstring := StrReplace(MyHotstring, "{" , "")
-	MyHotstring := StrReplace(MyHotstring, "}" , "")	
-return
-
-:X*:unias1pen.::
-	HotstringFun("(universal) UniAS[1{+}] type wheel sensor"
-, 0, 0)
-	MyHotstring := StrReplace(MyHotstring, "{" , "")
-	MyHotstring := StrReplace(MyHotstring, "}" , "")	
-return
-
-:Xb0:unias1p::
-	HotstringFun("{BackSpace 8}UniAS[1{+}]", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*8\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
-	MyHotstring := StrReplace(MyHotstring, "{" , "")
-	MyHotstring := StrReplace(MyHotstring, "}" , "")	
-return
-
-
-:X*:unias2ipl.::
-	HotstringFun("(uniwersalny) czujnik ko≥a typu UniAS[2i]", 0, 1)
-return
-
-:X*:unias2ien.::
-	HotstringFun("(universal) UniAS[2i] type wheel sensor", 0, 0)
-return
-
-:Xb0x:unias2i::
-	HotstringFun("{BackSpace 8}UniAS[2i]", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
-return
-
-
-:X*:unias1pl.::
-	HotstringFun("(uniwersalny) czujnik ko≥a typu UniAS[1]", 0, 1)
-return
-
-:X*:unias1en.::
-	HotstringFun("(universal) UniAS[1] type wheel sensor", 0, 0)
-return
-
-:Xb0x:unias1::
-	HotstringFun("{BackSpace 7}UniAS[1]", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
-return
-
-
-:X*:unias2pl.::
-	HotstringFun("(uniwersalny) czujnik ko≥a typu UniAS[2]", 0, 1)
-return
-
-:X*:unias2en.::
-	HotstringFun("(universal) UniAS[2] type wheel sensor", 0, 0)
-return
-
-:Xb0x:unias2::
-	HotstringFun("{BackSpace 7}UniAS[2]", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
-return
-
-
-:X*:uniasxpl.::
-	HotstringFun("rodzina (uniwersalnych) czujnikÛw osi", 0, 1)
-return
-
-:X*:uniasxen.::
-	HotstringFun("(universal) wheel sensor family", 0, 1)
-return
-
-:Xb0:uniasx::
-	HotstringFun("{BackSpace 7}UniAS[x]", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
-return
-
-
-:X*:uniaspl.::
-	HotstringFun("(uniwersalny) czujnik ko≥a", 0, 1)
-return
-
-:X*:uniasen.::
-	HotstringFun("(universal) wheel sensor", 0, 0)
-return
-
-:Xb0x:unias::
-	HotstringFun("{BackSpace 6}UniAS", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)				
-return
-
-
-:X*:unircpl.::
-	HotstringFun("(uniwersalny) uchwyt czujnika ko≥a", 0, 1)
-return
-
-:X*:unircen.::
-	HotstringFun("(universal) wheel sensor rail clamp", 0, 0)
-return
-
-:X:unirc::
-	HotstringFun("UniRC", 0, 0)
-return
-
-
-:X*:azcpl.::
-	HotstringFun("modu≥ ochrony przeciwprzepiÍciowej dedykowany dla rodziny czujnikÛw osi UniAS[x]", 0, 1)
-return
-
-:X*:azcen.::
-	HotstringFun("surge protection module dedicated for UniAS[x] wheel sensor family", 0, 0)
-return
-
-:X:azc::
-	HotstringFun("AZC", 0, 0)
-return
-
-
-:X*:magpl.::
-	HotstringFun("magistrala", 0, 0)
-return
-
-:X*:magen.::
-	HotstringFun("backplane", 0, 0)
-return
-
-:Xb0:mag::
-	HotstringFun("{BackSpace 4}MAG", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)					
-return
-
-
-:X*:magsacpl.::
-	HotstringFun("zintegrowany modu≥ diagnostyczny, komunikacyjny i zasilajπcy", 0, 1)
-return
-
-:X*:magsacen.::
-	HotstringFun("integrated diagnostic, communication and voltage supply module", 0, 0)
-return
-
-:X*:header.::
-	HotstringFun("integrated diagnostic, communication and voltage supply module", 0, 0)
-return
-
-
-:X:magsac::
-	HotstringFun("MAG_SAC (MAGSUP {+} MAG_ADM {+} MAG_COM)", 0, 0)
-	MyHotstring := StrReplace(MyHotstring, "{" , "")
-	MyHotstring := StrReplace(MyHotstring, "}" , "")	
-return
-
-:X:magsak::
-	HotstringFun("MAG_SAC (MAGSUP {+} MAG_ADM {+} MAG_COM)", 0, 0)
-	MyHotstring := StrReplace(MyHotstring, "{" , "")
-	MyHotstring := StrReplace(MyHotstring, "}" , "")	
-return
-
-
-:X*:magsuppl.::
-	HotstringFun("modu≥ zasilajπcy", 0, 1)
-return
-
-:X*:magsupen.::
-	HotstringFun("voltage supply module", 0, 0)
-return
-
-:X:magsup::
-	HotstringFun("MAG_SUP", 0, 0)
-return
-
-
-:X*:magadmen.::
-	HotstringFun("basic diagnostic module", 0, 0)
-return
-
-:X*:magadmpl.::
-	HotstringFun("modu≥ podstawowej diagnostyki", 0, 1)
-return
-
-:X:magadm::
-	HotstringFun("MAG_ADM", 0, 0)
-return
-
-
-:X*:admpl.::
-	HotstringFun("modu≥ rozszerzonej diagnostyki", 0, 1)
-return
-
-:X*:admen.::
-	HotstringFun("extended diagnostics module", 0, 0)
-return
-
-:X:adm::
-	HotstringFun("ADM", 0, 0)
-return
-
-
-:X*:mrupl.::
-	HotstringFun("modu≥ rozszerzonej diagnostyki", 0, 1)
-return
-
-:X*:mruen.::
-	HotstringFun("module rack unit", 0, 0)
-return
-
-:X:mru::
-	HotstringFun("MRU", 0, 0)
-return
-
-:X*:asmpl.::
-	HotstringFun("modu≥ oceniajπcy", 0, 1)
-return
-
-:X*:asmen.::
-	HotstringFun("evaluation module", 0, 0)
-return
-
-:X:asm::
-	HotstringFun("ASM", 0, 0)
-return
-
-
-:X*:acmpl.::
-	HotstringFun("modu≥ liczπcy", 0, 1)
-return
-
-:X*:acmen.::
-	HotstringFun("counting module", 0, 0)
-return
-
-:X:acm::
-	HotstringFun("ACM", 0, 0)
-return
-
-
-:X*:aimpl.::
-	HotstringFun("modu≥ wejúÊ / wyjúÊ", 0, 1)
-return
-
-:X*:aimen.::
-	HotstringFun("inputs and outputs module", 0, 0)
-return
-
-:X:aim::
-	HotstringFun("AIM", 0, 0)
-return
-
-
-:X*:abmpl.::
-	HotstringFun("kaseta", 0, 0)
-return
-
-:X*:abmen.::
-	HotstringFun("module rack", 0, 0)
-return
-
-:X:abm::
-	HotstringFun("ABM", 0, 0)
-return
-
-:X*:anszuapl.::
-	HotstringFun("system zarzπdzania us≥ugami", 0, 1)
-return
-
-:X:anszua::
-	HotstringFun("AnSzuA", 0, 0)
-return
-
-
-:X*:uniblpl.::
-	HotstringFun("system (uniwersalnej) blokady liniowej", 0, 0)
-return
-
-:X*:uniblen.::
-	HotstringFun("", 0, 0)
-return
-
-:X:unibl::
-	HotstringFun("UniBL", 0, 0)
-return
-
-
-:X*:dsat.::
-	HotstringFun("detekcja StanÛw Awaryjnych Taboru", 0, 1)
-return
-
-:X:dsat::
-	HotstringFun("dSAT", 0, 0)
-return
-
-
-:X*:asdek.::
-	HotstringFun("automatyczny system detekcji i eksploatacji kÛ≥ pojazdÛw kolejowych", 0, 1)
-return
-
-:X:asdek::
-	HotstringFun("ASDEK", 0, 0)
-return
-
-
-:X*:s2d.::
-	HotstringFun("szlakowy system diagnostyki", 0, 0)
-return
-
-:X:s2d::
-	HotstringFun("SSD", 0, 0)
-return
-
-:X*:gotcha::
-	HotstringFun("GOTCHA", 0, 0)
-return
-
-:X*:phoenix::
-	HotstringFun("PHOENIX", 0, 0)
-return
-
-:X:pm::
-	HotstringFun("PM", 0, 0)
-return
-
-:X*:dp.::
-	HotstringFun("Dzia≥ Produkcji i Zaopatrzenia", 0, 1)
-return
-
-:X:dp::
-	HotstringFun("DPiZ", 0, 0)
-return
-
-:X*:dpiz.::
-	HotstringFun("Dzia≥ Produkcji i Zaopatrzenia", 0, 1)
-return
-
-:X:dpiz::
-	HotstringFun("DPiZ", 0, 0)
-return
-
-
-:X*:du.::
-	HotstringFun("Dzia≥ Us≥ug i Realizacji", 0, 1)
-return
-
-:X:du::
-	HotstringFun("DUiR", 0, 0)
-return
-
-:X*:duir.::
-	HotstringFun("Dzia≥ Us≥ug i Realizacji", 0, 1)
-return
-
-:X:duir::
-	HotstringFun("DUiR", 0, 0)
-return
-
-
-:X*:dr.::
-	HotstringFun("Dzia≥ Rozwoju", 0, 1)
-return
-
-:X:dr::
-	HotstringFun("DR", 0, 0)
-return
-
-
-:X*:wim.::
-	HotstringFun("Weighing in Motion", 0, 0)
-return
-
-:X:wim::
-	HotstringFun("WIM", 0, 0)
-return
-
-:X*:wdd.::
-	HotstringFun("Wheel Defect Detection", 0, 0)
-return
-
-:X:wdd::
-	HotstringFun("WDD", 0, 0)
-return
-
-:X*:hbd.::
-	HotstringFun("Hot-Box Detector", 0, 0)
-return
-
-:X:hbd::
-	HotstringFun("HBD", 0, 0)
-return
-
-:X*:hwd.::
-	HotstringFun("Hot-Wheel Detector", 0, 0)
-return
-
-:X:hwd::
-	HotstringFun("HWD", 0, 0)
-return
-
-:X*:mb.::
-	HotstringFun("Multi Beam", 0, 0)
-return
-
-:X:mb::
-	HotstringFun("MB", 0, 0)
-return
-
-:X*:mds.::
-	HotstringFun("Modular Diagnostic System", 0, 0)
-return
-
-:X:mds::
-	HotstringFun("MDS", 0, 0)
-return
-
-:Xb0o:vo::
-	HotstringFun("estalpine", 0, 0)
-return
-
-:*b0:voe::
-	HotstringFun("stalpine Signaling Sopot", 0, 0)
-return
-
-:*b0:voes::
-	HotstringFun("{BackSpace} Sp. z o.o.", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
-return
-
-:z*b0:voesi::
-	HotstringFun("{Backspace 17}Siershahn", 0, 0)
-	MyHotstring := RegExReplace(MyHotstring, "s)\{.*\}", Replacement := "", MyHotStringLength := "", Limit := 1, StartingPosition := 1)
-return
-
-:X*:si.::
-	HotstringFun("Siershahn", 0, 0)
-return
-
-:X*:so.::
-	HotstringFun("Sopot", 0, 0)
-return
-
-:X*:sai.::
-	HotstringFun("Sainerholz", 0, 0)
-return
-
-
-:X*:nipv.::
-	HotstringFun("584-025-39-29", 0, 0)
-return
-
-:X*:adres.::
-	HotstringFun("Jana z Kolna 26c, 81-859 Sopot, Polska", 0, 0)
-return
-
-:X*:addres2.::
-	HotstringFun("Jana z Kolna 26c, 81-859 Sopot, Poland", 0, 0)
-return
-
-:X*:hpir.::
-	HotstringFun("Hardware Prototype Implementation Report", 0, 0)
-return
-
-:X:hpir::
-	HotstringFun("HPIR", 0, 0)
-return
-
-:X*:rnd.::
-	HotstringFun("Research & Development", 0, 0)
-return
-
-:X:rnd::
-	HotstringFun("R&D", 0, 0)
-return
-
-;~ - - - - - - - - - - - - - - - - - - - - links url urls - - - - - - -  - - - - - - - - -
-
-:X:cps::
-	HotstringFun("Cooperation Platform Sopot (https://solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx)", 0, 0)
-return
-
-:X:muk::
-	HotstringFun("MDS Upgrade Kit (https://solidsystemteamwork.voestalpine.root.local/Processes/custprojects/780MDSUpgradeKit/SitePages/Home.aspx)", 0, 0)
-return
-
-:X:sps::
-	HotstringFun("""Documentation Sharepoint Sopot"" (https://team.voestalpine.net/site/4077/default.aspx)", 0, 0)
-return
+ÔªøHotstring(":*:axmpl.",				func("ViaClipboard").bind("modu≈Ç uniwersalny"))
+Hotstring(":*:axmen.",				func("ViaClipboard").bind("universal module"))
+Hotstring(":b0*:axm",				func("NormalWay").bind("{BackSpace 3}AXM"))
+Hotstring(":*:axmrpl.",			func("ViaClipboard").bind("modu≈Ç uniwersalny rozszerzony o wyj≈õcia przeka≈∫nikowe"))
+Hotstring(":*:axmren.",			func("ViaClipboard").bind("universal module extended with relay outputs"))
+Hotstring(":*:axmr",				func("NormalWay").bind("AXM^=R^="))
+Hotstring(":*:axmiopl.",			func("ViaClipboard").bind("modu≈Ç uniwersalny rozszerzony o wej≈õcia i wyj≈õcia binarne"))
+Hotstring(":*:axmioen.",			func("ViaClipboard").bind("universal module extended with binary inputs and outputs"))
+Hotstring(":*:axmio",				func("NormalWay").bind("AXM^=IO^="))	
+Hotstring(":*:axma",				func("NormalWay").bind("AXM{Space}/{Space}AXM^=R^={Space}/{Space}AXM^=IO^="))
+Hotstring(":b0*x:axmp.",			func("NormalWay").bind("{BackSpace 5}AXM,{Space}AXM^=R^=,{Space}AXM^=IO^="))
+Hotstring(":*:nout",				func("ViaClipboard").bind("~OUT"))
+Hotstring(":*:cok.",				func("ViaClipboard").bind("czujnik ko≈Ça"))
+Hotstring(":*b0:cok",				func("NormalWay").bind("{Backspace 3}COK"))
+Hotstring(":*:wsu.",				func("ViaClipboard").bind("wheel sensor unit"))
+Hotstring(":*b0:wsu",				func("NormalWay").bind("{Backspace 3}WSU"))
+Hotstring(":*:ihd1",				func("NormalWay").bind("I^=HD1^="))
+Hotstring(":*:ihd2",				func("NormalWay").bind("I^=HD2^="))
+Hotstring(":*:hd1en.",				func("ViaClipboard").bind("HD1 (the 1st head of wheel sensor)"))
+Hotstring(":*:hd2en.",				func("ViaClipboard").bind("HD2 (the 2nd head of wheel sensor)"))
+Hotstring(":*:hd1pl.",				func("ViaClipboard").bind("HD1 (pierwsza g≈Çowica czujnika ko≈Ça)"))
+Hotstring(":*:hd2pl.",				func("ViaClipboard").bind("HD2 (druga g≈Çowica czujnika ko≈Ça)"))
+Hotstring(":*:uniacpl.",			func("ViaClipboard").bind("(uniwersalny) system liczenia osi"))
+Hotstring(":*:uniacen.",			func("ViaClipboard").bind("(universal) axle counting system"))
+Hotstring(":b0*:uniac",			func("NormalWay").bind("{BackSpace 5}UniAC"))
+Hotstring(":*:uniac2pl.",			func("ViaClipboard").bind("(uniwersalny) system liczenia osi drugiej generacji"))
+Hotstring(":*:uniac2en.",			func("ViaClipboard").bind("(universal) axle counting system of 2nd generation"))
+Hotstring(":b0*:uniac2",			func("NormalWay").bind("{BackSpace 6}UniAC[2]"))
+Hotstring(":*:uniac1pl.",			func("ViaClipboard").bind("(uniwersalny) system liczenia osi pierwszej generacji"))
+Hotstring(":*:uniac1en.",			func("ViaClipboard").bind("(universal) axle counting system of 1st generation"))
+Hotstring(":b0*:uniac1",			func("NormalWay").bind("{BackSpace 6}UniAC[1]"))
+Hotstring(":*:uniacxpl.",			func("ViaClipboard").bind("rodzina uniwersalnych system√≥w liczenia osi"))
+Hotstring(":*:uniacxen.",			func("ViaClipboard").bind("family of universal axle counting system"))
+Hotstring(":b0*:uniacx",			func("NormalWay").bind("{BackSpace 6}UniAC[x]"))
+Hotstring(":*:unias1ppl.",			func("NormalWay").bind("{BackSpace 2}(uniwersalny) czujnik ko≈Ça typu UniAS[1{+}]"))
+Hotstring(":*:unias1pen.",			func("ViaClipboard").bind("(universal) UniAS[1{+}] type wheel sensor"))
+Hotstring(":b0*:unias1p",			func("NormalWay").bind("{BackSpace 9}UniAS[1{+}]"))
+Hotstring(":*:unias2ipl.",			func("ViaClipboard").bind("(uniwersalny) czujnik ko≈Ça typu UniAS[2i]"))
+Hotstring(":*:unias2ien.",			func("ViaClipboard").bind("(universal) UniAS[2i] type wheel sensor"))
+Hotstring(":b0*:unias2i",			func("NormalWay").bind("{BackSpace 9}UniAS[2i]"))
+Hotstring(":*:unias1pl.",			func("ViaClipboard").bind("(uniwersalny) czujnik ko≈Ça typu UniAS[1]"))
+Hotstring(":*:unias1en.",			func("ViaClipboard").bind("(universal) UniAS[1] type wheel sensor"))
+Hotstring(":b0*:unias1",			func("NormalWay").bind("{BackSpace 6}UniAS[1]"))
+Hotstring(":*:unias2pl.",			func("ViaClipboard").bind("(uniwersalny) czujnik ko≈Ça typu UniAS[2]"))
+Hotstring(":*:unias2en.",			func("ViaClipboard").bind("(universal) UniAS[2] type wheel sensor"))
+Hotstring(":b0*:unias2",			func("NormalWay").bind("{BackSpace 6}UniAS[2]"))
+Hotstring(":*:uniasxpl.",			func("ViaClipboard").bind("rodzina (uniwersalnych) czujnik√≥w osi"))
+Hotstring(":*:uniasxen.",			func("ViaClipboard").bind("(universal) wheel sensor family"))
+Hotstring(":b0*:uniasx",			func("NormalWay").bind("{BackSpace 6}UniAS[x]"))		
+Hotstring(":*:uniaspl.",			func("ViaClipboard").bind("(uniwersalny) czujnik ko≈Ça"))
+Hotstring(":*:uniasen.",			func("ViaClipboard").bind("(universal) wheel sensor"))
+Hotstring(":b0*:unias",			func("NormalWay").bind("{BackSpace 5}UniAS"))
+Hotstring(":*:unircpl.",			func("ViaClipboard").bind("(uniwersalny) uchwyt czujnika ko≈Ça"))
+Hotstring(":*:unircen.",			func("ViaClipboard").bind("(universal) wheel sensor rail clamp"))
+Hotstring(":*b0:unirc",			func("NormalWay").bind("{Backspace 5}UniRC"))
+Hotstring(":*:azcpl.",				func("ViaClipboard").bind("modu≈Ç ochrony przeciwprzepiƒôciowej dedykowany dla rodziny czujnik√≥w osi UniAS[x]"))
+Hotstring(":*:azcen.",				func("ViaClipboard").bind("surge protection module dedicated for UniAS[x] wheel sensor family"))
+Hotstring(":*b0:azc",				func("NormalWay").bind("{Backspace 3}AZC"))
+Hotstring(":*:magpl.",				func("ViaClipboard").bind("magistrala"))
+Hotstring(":*:magen.",				func("ViaClipboard").bind("backplane"))
+Hotstring(":b0*:mag",				func("NormalWay").bind("{Backspace 3}MAG"))
+Hotstring(":b0*:magsacpl.",			func("NormalWay").bind("{BackSpace 37}zintegrowany modu≈Ç diagnostyczny, komunikacyjny i zasilajƒÖcy"))
+Hotstring(":b0*:magsacen.",			func("NormalWay").bind("{BackSpace 37}integrated diagnostic, communication and voltage supply module"))
+Hotstring(":*:header.",			func("ViaClipboard").bind("integrated diagnostic, communication and voltage supply module"))
+Hotstring(":*b0:magsac",			func("NormalWay").bind("{Backspace 6}MAG_SAC (MAGSUP + MAG_ADM + MAG_COM)"))
+Hotstring(":*b0:magsak",			func("NormalWay").bind("{Backspace 6}MAG_SAC (MAGSUP + MAG_ADM + MAG_COM)"))
+Hotstring(":*:magsuppl.",			func("ViaClipboard").bind("modu≈Ç zasilajƒÖcy"))
+Hotstring(":*:magsupen.",			func("ViaClipboard").bind("voltage supply module"))
+Hotstring(":*b0:magsup",			func("NormalWay").bind("{Backspace 3}MAG_SUP"))
+Hotstring(":*:magadmen.",			func("ViaClipboard").bind("basic diagnostic module"))
+Hotstring(":*:magadmpl.",			func("ViaClipboard").bind("modu≈Ç podstawowej diagnostyki"))
+Hotstring(":*b0:magadm",			func("NormalWay").bind("{Backspace 3}MAG_ADM"))
+Hotstring(":*:admpl.",				func("ViaClipboard").bind("modu≈Ç rozszerzonej diagnostyki"))
+Hotstring(":*:admen.",				func("ViaClipboard").bind("extended diagnostics module"))
+Hotstring(":*b0:adm",				func("NormalWay").bind("{Backspace 3}ADM"))
+Hotstring(":*:mrupl.",				func("ViaClipboard").bind("modu≈Ç rozszerzonej diagnostyki"))
+Hotstring(":*:mruen.",				func("ViaClipboard").bind("module rack unit"))
+Hotstring(":*b0:mru",				func("NormalWay").bind("{Backspace 3}MRU"))
+Hotstring(":*:asmpl.",				func("ViaClipboard").bind("modu≈Ç oceniajƒÖcy"))
+Hotstring(":*:asmen.",				func("ViaClipboard").bind("evaluation module"))
+Hotstring(":*b0:asm",				func("NormalWay").bind("{Backspace 3}ASM"))
+Hotstring(":*:acmpl.",				func("ViaClipboard").bind("modu≈Ç liczƒÖcy"))
+Hotstring(":*:acmen.",				func("ViaClipboard").bind("counting module"))
+Hotstring(":*b0:acm",				func("NormalWay").bind("{Backspace 3}ACM"))
+Hotstring(":*:aimpl.",				func("ViaClipboard").bind("modu≈Ç wej≈õƒá wyj≈õƒá"))
+Hotstring(":*:aimen.",				func("ViaClipboard").bind("inputs and outputs module"))
+Hotstring(":*b0:aim",				func("NormalWay").bind("{Backspace 3}AIM"))
+Hotstring(":*:abmpl.",				func("ViaClipboard").bind("kaseta"))
+Hotstring(":*:abmen.",				func("ViaClipboard").bind("module rack"))
+Hotstring(":*b0:abm",				func("NormalWay").bind("{Backspace 3}ABM"))
+Hotstring(":*:anszuapl.",			func("ViaClipboard").bind("system zarzƒÖdzania us≈Çugami"))
+Hotstring(":*b0:anszua",			func("NormalWay").bind("{Backspace 6}AnSzuA"))
+Hotstring(":*:uniblpl.",			func("ViaClipboard").bind("system (uniwersalnej) blokady liniowej"))
+Hotstring(":*:uniblen.",			func("ViaClipboard").bind("UniBL"))
+Hotstring(":*b0:unibl",			func("NormalWay").bind("{Backspace 5}UniBL"))
+Hotstring(":*:dsat.",				func("ViaClipboard").bind("detekcja Stan√≥waryjnych Taboru"))
+Hotstring(":*b0:dsat",				func("NormalWay").bind("{Backspace 4}dSAT"))
+Hotstring(":*:asdek.",				func("ViaClipboard").bind("automatyczny system detekcji i eksploatacji k√≥≈Ç pojazd√≥w kolejowych"))
+Hotstring(":*b0:asdek",			func("NormalWay").bind("{Backspace 5}ASDEK"))
+Hotstring(":*:s2d.",				func("ViaClipboard").bind("szlakowy system diagnostyki"))
+Hotstring(":*b0:s2d",				func("NormalWay").bind("{Backspace 3}SSD"))
+Hotstring(":*:gotcha",				func("ViaClipboard").bind("GOTCHA"))
+Hotstring(":*:phoenix",			func("ViaClipboard").bind("PHOENIX"))
+Hotstring(":*b0:pm",				func("NormalWay").bind("{Backspace 2}PM"))
+Hotstring(":*:dp.",				func("ViaClipboard").bind("Dzia≈Ç Produkcji i Zaopatrzenia"))
+Hotstring(":*b0:dp",				func("NormalWay").bind("{Backspace 2}DPiZ"))
+Hotstring(":*:dpiz.",				func("ViaClipboard").bind("Dzia≈Ç Produkcji i Zaopatrzenia"))
+Hotstring(":*b0:dpiz",				func("NormalWay").bind("{Backspace 4}DPiZ"))
+Hotstring(":*:du.",				func("ViaClipboard").bind("Dzia≈Ç Us≈Çug i Realizacji"))
+Hotstring(":*b0:du",				func("NormalWay").bind("{Backspace 2}DUiR"))
+Hotstring(":*:duir.",				func("ViaClipboard").bind("Dzia≈Ç Us≈Çug i Realizacji"))
+Hotstring(":*b0:duir",				func("NormalWay").bind("{Backspace 6}DUiR"))
+Hotstring(":*:dr.",				func("ViaClipboard").bind("Dzia≈Ç Rozwoju"))
+Hotstring(":*b0:dr",				func("NormalWay").bind("{Backspace 2}DR"))
+Hotstring(":*:wim.",				func("ViaClipboard").bind("Weighing in Motion"))
+Hotstring(":*b0:wim",				func("NormalWay").bind("{Backspace 3}WIM"))
+Hotstring(":*:wdd.",				func("ViaClipboard").bind("Wheel Defect Detection"))
+Hotstring(":*b0:wdd",				func("NormalWay").bind("{Backspace 3}WDD"))
+Hotstring(":*:hbd.",				func("ViaClipboard").bind("Hot-Box Detector"))
+Hotstring(":*b0:hbd",				func("NormalWay").bind("{Backspace 3}HBD"))
+Hotstring(":*:hwd.",				func("ViaClipboard").bind("Hot-Wheel Detector"))
+Hotstring(":*b0:hwd",				func("NormalWay").bind("{Backspace 3}HWD"))
+Hotstring(":*:mb.",				func("ViaClipboard").bind("Multi Beam"))
+Hotstring(":*b0:mb",				func("NormalWay").bind("{Backspace 2}MB"))
+Hotstring(":*:mds.",				func("ViaClipboard").bind("modu≈Çlar Diagnostic System"))
+Hotstring(":*b0:mds",				func("NormalWay").bind("{Backspace 3}MDS"))
+Hotstring(":b0o:vo",				func("ViaClipboard").bind("estalpine"))
+Hotstring(":*b0:voe",				func("ViaClipboard").bind("stalpine Signaling Sopot"))
+Hotstring("::voes",				func("NormalWay").bind("{BackSpace} Sp. z o.o."))
+Hotstring(":z*b0:voesi",			func("NormalWay").bind("{Backspace 17}Siershahn"))
+Hotstring(":*:si.",				func("ViaClipboard").bind("Siershahn"))
+Hotstring(":*:so.",				func("ViaClipboard").bind("Sopot"))
+Hotstring(":*:sai.",				func("ViaClipboard").bind("Sainerholz"))
+Hotstring(":*:nipv.",				func("ViaClipboard").bind("584-025-39-29"))
+Hotstring(":*:adres.",				func("ViaClipboard").bind("Jana z Kolna 26c, 81-859 Sopot, Polska"))
+Hotstring(":*:addres2.",			func("ViaClipboard").bind("Jana z Kolna 26c, 81-859 Sopot, Poland"))
+Hotstring(":*:hpir.",				func("ViaClipboard").bind("Hardware Prototype Implementation Report"))
+Hotstring(":*b0:hpir",				func("NormalWay").bind("{Backspace 4}HPIR"))
+Hotstring(":*:rnd.",				func("ViaClipboard").bind("Research & Development"))
+Hotstring(":*b0:rnd",				func("NormalWay").bind("{Backspace 3}R&D"))
+Hotstring(":*b0:cps",				func("NormalWay").bind("{Backspace 3}Cooperation Platform Sopot (https://solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx)"))
+Hotstring(":*:muk",				func("ViaClipboard").bind("MDS Upgrade Kit (https://solidsystemteamwork.voestalpine.root.local/Processes/custprojects/780MDSUpgradeKit/SitePages/Home.aspx)"))
+Hotstring(":*b0:sps",				func("NormalWay").bind("{Backspace 3}Documentation Sharepoint Sopot"" (https://team.voestalpine.net/site/4077/default.aspx)"))
+Hotstring(":*:bbt.",				func("ViaClipboard").bind("Bearing and Brake Temperature"))
+Hotstring(":*b0:bbt",				func("NormalWay").bind("{Backspace 3}BBT"))
+Hotstring(":B0*:unirc", func("NormalWay").bind("{BackSpace 5}UniRC"))

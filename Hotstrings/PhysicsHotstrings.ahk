@@ -1,167 +1,41 @@
-:X*:ohm::	; electric resistance
-	HotstringFun("{U+2126}", 1, 0)
-return
-
-:X*:kohm::	; electric resistance
-	HotstringFun("k{U+2126}", 1, 0)
-return
-
-:X*:kv::
-	HotstringFun("kV", 0, 0)
-return
-
-:X*:mamp::
-	HotstringFun("mA", 0, 0)
-return
-
-:X:kamp::
-	HotstringFun("kA", 0, 0)
-return
-
-:X*:+-::
-	HotstringFun("{U+00B1}", 1, 0)
-return
-
-:X*:-+::
-	HotstringFun("{U+00B1}", 1, 0)
-return
-
-:X*:plusminus::
-	HotstringFun("{U+00B1}", 1, 0)
-return
-
-:X*:minusplus::
-	HotstringFun("{U+00B1}", 1, 0)				
-return
-
-:X*:oddo::			; from to
-	HotstringFun("{U+00F7}", 1, 0)
-return
-
-:X*:kropkam:: 		; multiplication in a form of small dot
-	HotstringFun("{U+00B7}", 1, 0)
-return
-
-:X*:mkropka::
-	HotstringFun("{U+00B7}", 1, 0)
-return
-
-:X*:>=::				; greater than
-	HotstringFun("{U+2265}", 1, 0)
-return
-
-:X*:wi�kszyr�wny::	; greater than
-	HotstringFun("{U+2265}", 1, 0)
-return
-
-:X*:wiekszyrowny::	; greater than
-	HotstringFun("{U+2265}", 1, 0)
-return
-
-:X*:<=:: 			; less equal than
-	HotstringFun("{U+2264}", 1, 0)		
-return
-
-:X*:mniejszyr�wny:: 	; less equal than
-	HotstringFun("{U+2264}", 1, 0)
-return
-
-:X*:mniejszyrowny:: 	; less equal than
-	HotstringFun("{U+2264}", 1, 0)	
-return
-
-:X*:~~::				; approximately
-	HotstringFun("{U+2248}", 1, 0)
-return
-
-:X*:approx.::				; approximately
-	HotstringFun("{U+2248}", 1, 0)
-return
-
-
-:X*:/=:: 			; not equal
-	HotstringFun("{U+2260}", 1, 0)
-return
-
-:X*:mminus::			; longer version of dash
-	HotstringFun("{U+2212}", 1, 0)	
-return
-
-:X*:stopc:: 			; symbol of degree
-	HotstringFun("{U+00B0}", 1, 0)
-return
-
-:X*:deg.::			; symbol of degree
-	HotstringFun("{U+00B0}", 1, 0)			
-return
-
-;~ :b0*x:<-::Send, {Backspace 2}{U+2190}		; arrow to the left
-:Xb0*x:<-::		; arrow to the left
-	HotstringFun("{Backspace 2}{U+2190}", 1, 0)
-return
-
-:X*:^|::				; arrow up
-	HotstringFun("{U+2191}", 1, 0)
-return
-
-:X*:|^::				; arrow down
-	HotstringFun("{U+2193}", 1, 0)
-return
-
-:Xz*:<->::			; bi directional arrow
-	HotstringFun("{U+2194}", 1, 0)
-return
-
-:Xb0*x:->:: 		; arrow to the right
-	HotstringFun("{Backspace 2}{U+2192}", 1, 0)
-return
-
-
-:X*:alpha.::			; Greek small letter alpha
-	HotstringFun("{U+03B1}", 1, 0)
-return
-
-:X*:beta.::			; Greek small letter beta
-	HotstringFun("{U+03B2}", 1, 0)
-return
-
-:X*:gamma.::			; Greek small letter gamma
-	HotstringFun("{U+03B3}", 1, 0)
-return
-
-:X*:epsilon.::			; Greek small letter epsilon
-	HotstringFun("{U+03B5}", 1, 0)
-return
-
-:X*:theta.::			; Greek small letter theta
-	HotstringFun("{U+03B8}", 1, 0)
-return
-
-:X*:micro.::			; Greek small letter theta
-	HotstringFun("{U+00b5}", 1, 0)
-return
-
-:X*:lambda.::			; Greek small letter lambda
-	HotstringFun("{U+03BB}", 1, 0)
-return
-
-:X*:pi.::				; Greek small letter pi
-	HotstringFun("{U+03C0}", 1, 0)		
-return
-
-:X*:omega.::			; Greek small letter omega
-	HotstringFun("{U+03C9}", 1, 0)
-return
-
-:X*:delta.::			; Greek capital letter delta
-	HotstringFun("{U+2206}", 1, 0)
-return
-
-
-:X*:--::				; double dash
-	HotstringFun("{U+2500}", 1, 0)
-return
-
-:X*:euro.::			; euro currency
-	HotstringFun("{U+20AC}", 1, 0)
-return
+﻿Hotstring(":*:ohm",				func("ViaClipboard").bind("Ω"))
+Hotstring(":*:kohm",			func("ViaClipboard").bind("kΩ"))
+Hotstring(":*:kv",				func("ViaClipboard").bind("kV"))
+Hotstring(":*:mamp",			func("ViaClipboard").bind("mA"))
+Hotstring(":*:kamp",			func("ViaClipboard").bind("kA"))
+Hotstring(":*:+-",				func("ViaClipboard").bind("±"))
+Hotstring(":*:-+",				func("ViaClipboard").bind("±"))
+Hotstring(":*:plusminus",		func("ViaClipboard").bind("±"))
+Hotstring(":*:minusplus",		func("ViaClipboard").bind("±"))				
+Hotstring(":*:oddo",			func("ViaClipboard").bind("÷"))
+Hotstring(":*:kropkam",			func("ViaClipboard").bind("·"))
+Hotstring(":*:mkropka",			func("ViaClipboard").bind("·"))
+Hotstring(":*:>=",				func("ViaClipboard").bind("≥"))
+Hotstring(":*:większyrówny",	func("ViaClipboard").bind("≥"))
+Hotstring(":*:wiekszyrowny",	func("ViaClipboard").bind("≥"))
+Hotstring(":*:<=",				func("ViaClipboard").bind("≤"))		
+Hotstring(":*:mniejszyrówny",	func("ViaClipboard").bind("≤"))
+Hotstring(":*:mniejszyrowny",	func("ViaClipboard").bind("≤"))
+Hotstring(":*:~~",				func("ViaClipboard").bind("≈"))
+Hotstring(":*:approx.",			func("ViaClipboard").bind("≈"))
+Hotstring(":*:/=",				func("ViaClipboard").bind("≠"))
+Hotstring(":*:mminus",			func("ViaClipboard").bind("−"))
+Hotstring(":*:stopc",			func("ViaClipboard").bind("°"))
+Hotstring(":*:deg.",			func("ViaClipboard").bind("°"))
+Hotstring(":b0*x:<-",			func("NormalWay").bind("{Backspace 2}←"))
+Hotstring(":*:^|",				func("ViaClipboard").bind("↑"))
+Hotstring(":*:|^",				func("ViaClipboard").bind("↓"))
+Hotstring(":z*:<->",			func("ViaClipboard").bind("↔"))
+Hotstring(":b0*x:->",			func("NormalWay").bind("{Backspace 2}→"))
+Hotstring(":*:alpha.",			func("ViaClipboard").bind("α"))
+Hotstring(":*:beta.",			func("ViaClipboard").bind("β"))
+Hotstring(":*:gamma.",			func("ViaClipboard").bind("γ"))
+Hotstring(":*:epsilon.",		func("ViaClipboard").bind("ε"))
+Hotstring(":*:theta.",			func("ViaClipboard").bind("θ"))
+Hotstring(":*:micro.",			func("ViaClipboard").bind("µ"))
+Hotstring(":*:lambda.",			func("ViaClipboard").bind("λ"))
+Hotstring(":*:pi.",				func("ViaClipboard").bind("π"))
+Hotstring(":*:omega.",			func("ViaClipboard").bind("ω"))
+Hotstring(":*:delta.",			func("ViaClipboard").bind("∆"))
+Hotstring(":*:--",				func("ViaClipboard").bind("─"))
+Hotstring(":*:euro.",			func("ViaClipboard").bind("€"))

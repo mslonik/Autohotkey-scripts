@@ -1,39 +1,14 @@
-:X*:svn::
-	HotstringFun("SVN", 0, 0)
-return
-:X*:sap::
-	HotstringFun("SAP", 0, 0)
-return
-:X*:easm.::
-	HotstringFun("EASM", 0, 0)
-return
-:X*:qnx::
-	HotstringFun("QNX", 0, 0)
-return
-:X*:rs232::
-	HotstringFun("RS232", 0, 0)
-return
-:X*:rs485::
-	HotstringFun("RS485", 0, 0)
-return
-:X*:uic60::
-	HotstringFun("UIC60", 0, 0)
-return
-:X*:s49::
-	HotstringFun("S49", 0, 0)
-return
-:X*:iscala::
-	HotstringFun("iSCALA", 0, 0)
-return
-:X*:ditaexchange::
-	HotstringFun("DitaExchange", 0, 0)
-return
-:X*:pma::
-	HotstringFun("PMAN", 0, 0)
-return
-:X*:dokt::
-	HotstringFun("DokT (Dokumentacja Techniczna)", 0, 0)
-return
-:X*:dokr::
-	HotstringFun("DokR (Dokumentacja Robocza)", 0, 0)
-return
+﻿Hotstring(":*:svn",				func("ViaClipboard").bind("SVN"))
+Hotstring(":*:sap",				func("ViaClipboard").bind("SAP"))
+Hotstring(":*:easm.",			func("ViaClipboard").bind("EASM"))
+Hotstring(":*:qnx",				func("ViaClipboard").bind("QNX"))
+Hotstring(":*:rs232",			func("ViaClipboard").bind("RS232"))
+Hotstring(":*:rs485",			func("ViaClipboard").bind("RS485"))
+Hotstring(":*:uic60",			func("ViaClipboard").bind("UIC60"))
+Hotstring(":*:s49",				func("ViaClipboard").bind("S49"))
+Hotstring(":*:iscala",			func("ViaClipboard").bind("iSCALA"))
+Hotstring(":*:ditaexchange",	func("ViaClipboard").bind("DitaExchange"))
+Hotstring(":*:pma",				func("ViaClipboard").bind("PMAN"))
+Hotstring(":*:dokt",			func("ViaClipboard").bind("DokT (Dokumentacja Techniczna)"))
+Hotstring(":*:dokr",			func("ViaClipboard").bind("DokR (Dokumentacja Robocza)"))
+Hotstring(":*:easm",			func("ViaClipboard").bind("EASM"))

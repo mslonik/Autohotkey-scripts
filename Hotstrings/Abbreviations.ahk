@@ -1,476 +1,118 @@
-:X*:ram.::
-	HotstringFun("Reliability, Availability, Maintainability", 0, 0)
-return
-
-:Xo:ram::
-	HotstringFun("RAM", 0, 0)
-return
-
-:X*:rams.::
-	HotstringFun("Reliability, Availability, Maintainability and Safety", 0, 0)
-return
-
-:Xo:rams::
-	HotstringFun("RAMS", 0, 0)
-return
-
-:X*:qrams.::
-	HotstringFun("Quality, Reliability, Availability, Maintainability, Safety", 0, 0)
-return
-
-:X:qrams::
-	HotstringFun("QRAMS", 0, 0)
-return
-
-:X*:mdt.::
-	HotstringFun("Mean Down Time", 0, 0)
-return
-
-:X:mdt::
-	HotstringFun("MDT", 0, 0)
-return
-
-
-:X*:mtbf.::
-	HotstringFun("Mean Time Between Failures", 0, 0)
-return
-
-:X:mtbf::
-	HotstringFun("MTBF", 0, 0)
-return
-
-:X*:mttr.::
-	HotstringFun("Mean Time To Restore", 0, 0)
-return
-
-:X:mttr::
-	HotstringFun("MTTR", 0, 0)
-return
-
-:X*:mtbm.::
-	HotstringFun("Mean Time Between Maintainances", 0, 0)
-return
-
-:X:mtbm::
-	HotstringFun("MTBM", 0, 0)
-return
-
-:X*:mttf.::
-	HotstringFun("Mean Time To Failure", 0, 0)
-return
-
-:X:mttf::
-	HotstringFun("MTTF", 0, 0)
-return
-
-:X*:mut.::
-	HotstringFun("Mean Up Time", 0, 0)
-return
-
-:X:mut::
-	HotstringFun("MUT", 0, 0)
-return
-
-:X*:sil.::
-	HotstringFun("Safety Integrity Level", 0, 0)
-return
-
-:X:sil::
-	HotstringFun("SIL", 0, 0)
-return
-
-:X*:pcb.::
-	HotstringFun("Printed Circuit Board", 0, 0)
-return
-
-:X:pcb::
-	HotstringFun("PCB", 0, 0)
-return
-
-:X*:ups.::
-	HotstringFun("Uninterruptable Power Supply", 0, 0)
-return
-
-:X:ups::
-	HotstringFun("UPS", 0, 0)
-return
-
-:X*:usb.::
-	HotstringFun("Universal Serial Bus", 0, 0)
-return
-
-:X:usb::
-	HotstringFun("USB", 0, 0)
-return
-
-:X*:iris.::
-	HotstringFun("International Railway Industry Standard for the evaluation of railway management systems", 0, 0)
-return
-
-:X:iris::
-	HotstringFun("IRIS", 0, 0)
-return
-
-:X*:tsi.::
-	HotstringFun("Technical Specifications for Interoperability", 0, 0)
-return
-
-:X:tsi::
-	HotstringFun("TSI", 0, 0)
-return
-
-:X*:faq.::
-	HotstringFun("Frequently Asked Questions", 0, 0)
-return
-
-:X:faq::
-	HotstringFun("FAQ", 0, 0)
-return
-
-:X*:ahk.::
-	HotstringFun("AutoHotkey", 0, 0)
-return
-
-:X:ahk::
-	HotstringFun("AHK", 0, 0)
-return
-
-:b0*?z:.ahk::
-return
-
-:X*:vba.::
-	HotstringFun("Visiual Basic for Applications", 0, 0)
-return
-
-:X:vba::
-	HotstringFun("VBA", 0, 0)
-return
-
-:X*:hdmi.::
-	HotstringFun("High-Definition Multimedia Interface", 0, 0)
-return
-
-:X:hdmi::
-	HotstringFun("HDMI", 0, 0)
-return
-
-:X*:emc.::
-	HotstringFun("Electro-Magnetic Compatibility", 0, 0)
-return
-
-:X:emc::
-	HotstringFun("EMC", 0, 0)
-	
-return
-
-:X*:hart.::
-	HotstringFun("Highway Addressable Remote Transducer Protocol", 0, 0)
-return
-
-:X:hart::
-	HotstringFun("HART", 0, 0)
-return
-
-:X*:erp.::
-	HotstringFun("Enterprise Resource Planning", 0, 0)
-return
-
-:X:erp::
-	HotstringFun("ERP", 0, 0)
-return
-
-:X*:c2ms.::
-	HotstringFun("Component Content Management System", 0, 0)
-return
-
-:X:c2ms::
-	HotstringFun("CCMS", 0, 0)
-return
-
-:X*:lc2.::
-	HotstringFun("Life Cycle Cost", 0, 0)
-return
-
-:X:lc2::
-	HotstringFun("LLC", 0, 0)
-return
-
-:X*:ceo.::
-	HotstringFun("Chief Executive Officer", 0, 0)
-return
-
-:X:ceo::
-	HotstringFun("CEO", 0, 0)
-return
-
-:X*:hds.::
-	HotstringFun("Hardware Design Specification", 0, 0)
-return
-
-:X:hds::
-	HotstringFun("HDS", 0, 0)
-return
-
-:X*:has.::
-	HotstringFun("Hardware Architecture Specification", 0, 0)
-return
-
-:X:has::
-	HotstringFun("HAS", 0, 0) ; conflict with English
-return
-
-:X*:kpi.::
-	HotstringFun("Key Performance Indicator", 0, 0)
-return
-
-:X:kpi::
-	HotstringFun("KPI", 0, 0)
-return
-
-:X*:gui.::
-	HotstringFun("Graphical User Interface", 0, 0)
-return
-
-:X:gui::
-	HotstringFun("GUI", 0, 0)
-return
-
-:X*:etcs::
-	HotstringFun("European Train Control System", 0, 0)
-return
-
-:X:etcs::
-	HotstringFun("ETCS", 0, 0)
-return
-
-:X*:ertms.::
-	HotstringFun("European Rail Traffic Management System", 0, 0)
-return
-
-:X:ertms::
-	HotstringFun("ERTMS", 0, 0)
-return
-
-:X*:era.::
-	HotstringFun("European Railway Agency", 0, 0)
-return
-
-:X:era::
-	HotstringFun("ERA", 0, 0)
-return
-
-:X*:fai.::
-	HotstringFun("First Article Inspection", 0, 0)
-return
-
-:X:fai::
-	HotstringFun("FAI", 0, 0)
-return
-
-:X*:thr.::
-	HotstringFun("Tolerable Hazard Rate", 0, 0)
-return
-
-:X:thr::
-	HotstringFun("THR", 0, 0)
-return
-
-:X*:dita.::
-	HotstringFun("Darwin Information Typing Architecture", 0, 0)
-return
-
-:X:dita::
-	HotstringFun("DITA", 0, 0)
-return
-
-:X*:bom.::
-	HotstringFun("Bill of Materials", 0, 0)
-return
-
-:X:bom::
-	HotstringFun("BOM", 0, 0)
-return
-
-:X*:ip.::
-	HotstringFun("IP Code, Ingress Protection code (https://en.wikipedia.org/wiki/IP_Code	)", 0, 0)
-return
-
-:X:ip::
-	HotstringFun("IP", 0, 0)
-return
-
-:X*:lop.::
-	HotstringFun("List of Open Points", 0, 0)
-return
-
-:X:lop::
-	HotstringFun("LoP", 0, 0)
-return
-
-:X*:srac.::
-	HotstringFun("Safety Related Application Condition", 0, 0)
-return
-
-:X:srac::
-	HotstringFun("SRAC", 0, 0)
-return
-
-:X*:ga.::
-	HotstringFun("Generic Application", 0, 0)
-return
-
-:X:ga::
-	HotstringFun("GA", 0, 0)
-return
-
-:X*:sa.::
-	HotstringFun("Specific Application", 0, 0)
-return
-
-:X:ga::
-	HotstringFun("SA", 0, 0)
-return
-
-:X*:fat.::
-	HotstringFun("Factory Acceptance Test", 0, 0)
-return
-
-:X:fat::
-	HotstringFun("FAT", 0, 0)
-return
-
-:X*:nda.::
-	HotstringFun("Non-Disclosure Agreement", 0, 0)
-return
-
-:X:nda::
-	HotstringFun("NDA", 0, 0)
-return
-
-:X*:sla.::
-	HotstringFun("Service-Level Agreement", 0, 0)
-return
-
-:X:sla::
-	HotstringFun("SLA", 0, 0)
-return
-
-:X*:tffr.::
-	HotstringFun("Tolerable Functional Failure Rate", 0, 0)
-return
-
-:X:tffr::
-	HotstringFun("TFFR", 0, 0)
-return
-
-:X*:cop.::
-	HotstringFun("Code of Practice", 0, 0)
-return
-
-:X:cop::
-	HotstringFun("COP", 0, 0)
-return
-
-:X*:cots.::
-	HotstringFun("Commercial Off-The-Shelf", 0, 0)
-return
-
-:X:cots::
-	HotstringFun("COTS", 0, 0)
-return
-
-:X*:emi.::
-	HotstringFun("Electromagnetic Interference", 0, 0)
-return
-
-:X:emi::
-	HotstringFun("EMI", 0, 0)
-return
-
-:X*:fracas.::
-	HotstringFun("Failure Reporting Analysis and Corrective Action System", 0, 0)
-return
-
-:X:fracas::
-	HotstringFun("FRACAS", 0, 0)
-return
-
-:X*:fmea.::
-	HotstringFun("Failure Mode and Effects Analysis", 0, 0)
-return
-
-:X:fmea::
-	HotstringFun("FMEA", 0, 0)
-return
-
-:X*:fmeca.::
-	HotstringFun("Failure Mode, Effects and Criticality Analysis", 0, 0)
-return
-
-:X:fmeca::
-	HotstringFun("FMECA", 0, 0)
-return
-
-:X*:fta.::
-	HotstringFun("Fault Tree Analysis", 0, 0)
-return
-
-:X:fta::
-	HotstringFun("FTA", 0, 0)
-return
-
-:X*:rap.::	; source: EN-50126-1, chapter 6.3 (Risk assessment).
-	HotstringFun("Risk Acceptance Principle", 0, 0)
-return
-
-:X:rap::	; source: EN-50126-1, chapter 6.3 (Risk assessment).
-	HotstringFun("RAP", 0, 0)
-return
-
-:X*:rac.::	; source: EN-50126-1, chapter 6.3 (Risk assessment).
-	HotstringFun("Risk Acceptance Criteria", 0, 0)
-return
-
-:X:rac::	; source: EN-50126-1, chapter 6.3 (Risk assessment).
-	HotstringFun("RAC", 0, 0)
-return
-
-:X*:ere.::	; source: EN-50126-1, chapter 6.3 (Risk assessment).
-	HotstringFun("Explicit Risk Estimation", 0, 0)
-return
-
-:X:ere::	; source: EN-50126-1, chapter 6.3 (Risk assessment).
-	HotstringFun("ERE", 0, 0)
-return
-
-:X*:lad.::
-	HotstringFun("Logistic and Administrative Delay", 0, 0)
-return
-
-:X:lad::
-	HotstringFun("LAD", 0, 0)
-return
-
-:X*:vat.::
-	HotstringFun("Value Added Tax", 0, 0)
-return
-
-:X:vat::
-	HotstringFun("VAT", 0, 0)
-return
-
-:X*:ncr.::
-	HotstringFun("Non Conformance Report", 0, 0)
-return
-
-:X:ncr::
-	HotstringFun("NCR", 0, 0)
-return
-
-:X*:ic.::
-	HotstringFun("Interoperability Constituent", 0, 0)
-return
-
-:X:ic::
-	HotstringFun("IC", 0, 0)
-return
+﻿Hotstring(":*:ram.",			func("ViaClipboard").bind("Reliability, Availability, Maintainability"))
+Hotstring(":b0*:ram",			func("NormalWay").bind("{Backspace 3}RAM"))
+Hotstring(":*:rams.",			func("ViaClipboard").bind("Reliability, Availability, Maintainability and Safety"))
+Hotstring(":b0*:rams",			func("NormalWay").bind("{Backspace 4}RAMS"))
+Hotstring(":*:qrams.",			func("ViaClipboard").bind("Quality, Reliability, Availability, Maintainability, Safety"))
+Hotstring(":b0*:qrams",			func("NormalWay").bind("{Backspace 5}QRAMS"))
+Hotstring(":*:mdt.",			func("ViaClipboard").bind("Mean Down Time"))
+Hotstring(":b0*:mdt",			func("NormalWay").bind("{Backspace 3}MDT"))
+Hotstring(":*:mtbf.",			func("ViaClipboard").bind("Mean Time Between Failures"))
+Hotstring(":b0*:mtbf",			func("NormalWay").bind("{Backspace 4}MTBF"))
+Hotstring(":*:mttr.",			func("ViaClipboard").bind("Mean Time To Restore"))
+Hotstring(":b0*:mttr",			func("NormalWay").bind("{Backspace 4}MTTR"))
+Hotstring(":*:mtbm.",			func("ViaClipboard").bind("Mean Time Between Maintainances"))
+Hotstring(":b0*:mtbm",			func("NormalWay").bind("{Backspace 4}MTBM"))
+Hotstring(":*:mttf.",			func("ViaClipboard").bind("Mean Time To Failure"))
+Hotstring(":b0*:mttf",			func("NormalWay").bind("{Backspace 4}MTTF"))
+Hotstring(":*:mut.",			func("ViaClipboard").bind("Mean Up Time"))
+Hotstring(":b0*:mut",			func("NormalWay").bind("{Backspace 3}MUT"))
+Hotstring(":*:sil.",			func("ViaClipboard").bind("Safety Integrity Level"))
+Hotstring(":b0*:sil",			func("NormalWay").bind("{Backspace 3}SIL"))
+Hotstring(":*:pcb.",			func("ViaClipboard").bind("Printed Circuit Board"))
+Hotstring(":b0*:pcb",			func("NormalWay").bind("{Backspace 3}PCB"))
+Hotstring(":*:ups.",			func("ViaClipboard").bind("Uninterruptable Power Supply"))
+Hotstring(":b0*:ups",			func("NormalWay").bind("{Backspace 3}UPS"))
+Hotstring(":*:usb.",			func("ViaClipboard").bind("Universal Serial Bus"))
+Hotstring(":b0*:usb",			func("NormalWay").bind("{Backspace 3}USB"))
+Hotstring(":*:iris.",			func("ViaClipboard").bind("International Railway Industry Standard for the evaluation of railway management systems"))
+Hotstring(":b0*:iris",			func("NormalWay").bind("{Backspace 4}IRIS"))
+Hotstring(":*:tsi.",			func("ViaClipboard").bind("Technical Specifications for Interoperability"))
+Hotstring(":b0*:tsi",			func("NormalWay").bind("{Backspace 3}TSI"))
+Hotstring(":*:faq.",			func("ViaClipboard").bind("Frequently Asked Questions"))
+Hotstring(":b0*:faq",			func("NormalWay").bind("{Backspace 3}FAQ"))
+Hotstring(":*:ahk.",			func("ViaClipboard").bind("AutoHotkey"))
+Hotstring(":b0*:ahk",			func("NormalWay").bind("{Backspace 3}AHK"))
+Hotstring(":*:vba.",			func("ViaClipboard").bind("Visual Basic for Applications"))
+Hotstring(":b0*:vba",			func("NormalWay").bind("{Backspace 3}VBA"))
+Hotstring(":*:hdmi.",			func("ViaClipboard").bind("High-Definition Multimedia Interface"))
+Hotstring(":b0*:hdmi",			func("NormalWay").bind("{Backspace 4}HDMI"))
+Hotstring(":*:emc.",			func("ViaClipboard").bind("Electro-Magnetic Compatibility"))
+Hotstring(":b0*:emc",			func("NormalWay").bind("{Backspace 3}EMC"))
+Hotstring(":*:hart.",			func("ViaClipboard").bind("Highway Addressable Remote Transducer Protocol"))
+Hotstring(":b0*:hart",			func("NormalWay").bind("{Backspace 4}HART"))
+Hotstring(":*:erp.",			func("ViaClipboard").bind("Enterprise Resource Planning"))
+Hotstring(":b0*:erp",			func("NormalWay").bind("{Backspace 3}ERP"))
+Hotstring(":*:c2ms.",			func("ViaClipboard").bind("Component Content Management System"))
+Hotstring(":b0*:c2ms",			func("NormalWay").bind("{Backspace 4}CCMS"))
+Hotstring(":*:lc2.",			func("ViaClipboard").bind("Life Cycle Cost"))
+Hotstring(":b0*:lc2",			func("NormalWay").bind("{Backspace 3}LLC"))
+Hotstring(":*:ceo.",			func("ViaClipboard").bind("Chief Executive Officer"))
+Hotstring(":b0*:ceo",			func("NormalWay").bind("{Backspace 3}CEO"))
+Hotstring(":*:hds.",			func("ViaClipboard").bind("Hardware Design Specification"))
+Hotstring(":b0*:hds",			func("NormalWay").bind("{Backspace 3}HDS"))
+Hotstring(":*:has.",			func("ViaClipboard").bind("Hardware Architecture Specification"))
+Hotstring(":b0*:has",			func("NormalWay").bind("{Backspace 3}HAS"))
+Hotstring(":*:kpi.",			func("ViaClipboard").bind("Key Performance Indicator"))
+Hotstring(":b0*:kpi",			func("NormalWay").bind("{Backspace 3}KPI"))
+Hotstring(":*:gui.",			func("ViaClipboard").bind("Graphical User Interface"))
+Hotstring(":b0*:gui",			func("NormalWay").bind("{Backspace 3}GUI"))
+Hotstring(":*:etcs",			func("ViaClipboard").bind("European Train Control System"))
+Hotstring(":b0*:etcs",			func("NormalWay").bind("{Backspace 4}ETCS"))
+Hotstring(":*:ertms.",			func("ViaClipboard").bind("European Rail Traffic Management System"))
+Hotstring(":b0*:ertms",			func("NormalWay").bind("{Backspace 5}ERTMS"))
+Hotstring(":*:era.",			func("ViaClipboard").bind("European Railway Agency"))
+Hotstring(":b0*:era",			func("NormalWay").bind("{Backspace 3}ERA"))
+Hotstring(":*:fai.",			func("ViaClipboard").bind("First Article Inspection"))
+Hotstring(":b0*:fai",			func("NormalWay").bind("{Backspace 3}FAI"))
+Hotstring(":*:thr.",			func("ViaClipboard").bind("Tolerable Hazard Rate"))
+Hotstring(":b0*:thr",			func("NormalWay").bind("{Backspace 3}THR"))
+Hotstring(":*:dita.",			func("ViaClipboard").bind("Darwin Information Typing Architecture"))
+Hotstring(":b0*:dita",			func("NormalWay").bind("{Backspace 4}DITA"))
+Hotstring(":*:bom.",			func("ViaClipboard").bind("Bill of Materials"))
+Hotstring(":b0*:bom",			func("NormalWay").bind("{Backspace 3}BOM"))
+Hotstring(":*:ip.",				func("ViaClipboard").bind("IP Code, Ingress Protection code (https://en.wikipedia.org/wiki/IP_Code	)"))
+Hotstring(":b0*:ip",			func("NormalWay").bind("{Backspace 2}IP"))
+Hotstring(":*:lop.",			func("ViaClipboard").bind("List of Open Points"))
+Hotstring(":b0*:lop",			func("NormalWay").bind("{Backspace 3}LoP"))
+Hotstring(":*:srac.",			func("ViaClipboard").bind("Safety Related Application Condition"))
+Hotstring(":b0*:srac",			func("NormalWay").bind("{Backspace 4}SRAC"))
+Hotstring(":*:ga.",				func("ViaClipboard").bind("Generic Application"))
+Hotstring(":b0*:ga",			func("NormalWay").bind("{Backspace 2}GA"))
+Hotstring(":*:sa.",				func("ViaClipboard").bind("Specific Application"))
+Hotstring(":b0*:sa",			func("NormalWay").bind("{Backspace 2}SA"))
+Hotstring(":*:fat.",			func("ViaClipboard").bind("Factory Acceptance Test"))
+Hotstring(":b0*:fat",			func("NormalWay").bind("{Backspace 3}FAT"))
+Hotstring(":*:nda.",			func("ViaClipboard").bind("Non-Disclosure Agreement"))
+Hotstring(":b0*:nda",			func("NormalWay").bind("{Backspace 3}NDA"))
+Hotstring(":*:sla.",			func("ViaClipboard").bind("Service-Level Agreement"))
+Hotstring(":b0*:sla",			func("NormalWay").bind("{Backspace 3}SLA"))
+Hotstring(":*:tffr.",			func("ViaClipboard").bind("Tolerable Functional Failure Rate"))
+Hotstring(":b0*:tffr",			func("NormalWay").bind("{Backspace 4}TFFR"))
+Hotstring(":*:cop.",			func("ViaClipboard").bind("Code of Practice"))
+Hotstring(":b0*:cop",			func("NormalWay").bind("{Backspace 3}COP"))
+Hotstring(":*:cots.",			func("ViaClipboard").bind("Commercial Off-The-Shelf"))
+Hotstring(":b0*:cots",			func("NormalWay").bind("{Backspace 4}COTS"))
+Hotstring(":*:emi.",			func("ViaClipboard").bind("Electromagnetic Interference"))
+Hotstring(":b0*:emi",			func("NormalWay").bind("{Backspace 3}EMI"))
+Hotstring(":*:fracas.",			func("ViaClipboard").bind("Failure Reporting Analysis and Corrective Action System"))
+Hotstring(":b0*:fracas",		func("NormalWay").bind("{Backspace 6}FRACAS"))
+Hotstring(":*:fmea.",			func("ViaClipboard").bind("Failure Mode and Effects Analysis"))
+Hotstring(":b0*:fmea",			func("NormalWay").bind("{Backspace 4}FMEA"))
+Hotstring(":*:fmeca.",			func("ViaClipboard").bind("Failure Mode, Effects and Criticality Analysis"))
+Hotstring(":b0*:fmeca",			func("NormalWay").bind("{Backspace 5}FMECA"))
+Hotstring(":*:fta.",			func("ViaClipboard").bind("Fault Tree Analysis"))
+Hotstring(":b0*:fta",			func("NormalWay").bind("{Backspace 3}FTA"))
+Hotstring(":*:rap.",			func("ViaClipboard").bind("Risk Acceptance Principle"))
+Hotstring(":b0*:rap",			func("NormalWay").bind("{Backspace 3}RAP"))
+Hotstring(":*:rac.",			func("ViaClipboard").bind("Risk Acceptance Criteria"))
+Hotstring(":b0*:rac",			func("NormalWay").bind("{Backspace 3}RAC"))
+Hotstring(":*:ere.",			func("ViaClipboard").bind("Explicit Risk Estimation"))
+Hotstring(":b0*:ere",			func("NormalWay").bind("{Backspace 3}ERE"))
+Hotstring(":*:lad.",			func("ViaClipboard").bind("Logistic and Administrative Delay"))
+Hotstring(":b0*:lad",			func("NormalWay").bind("{Backspace 3}LAD"))
+Hotstring(":*:vat.",			func("ViaClipboard").bind("Value Added Tax"))
+Hotstring(":b0*:vat",			func("NormalWay").bind("{Backspace 3}VAT"))
+Hotstring(":*:ncr.",			func("ViaClipboard").bind("Non Conformance Report"))
+Hotstring(":b0*:ncr",			func("NormalWay").bind("{Backspace 3}NCR"))
+Hotstring(":*:ic.",				func("ViaClipboard").bind("Interoperability Constituent"))
+Hotstring(":b0*:ic",			func("NormalWay").bind("{Backspace 2}IC"))

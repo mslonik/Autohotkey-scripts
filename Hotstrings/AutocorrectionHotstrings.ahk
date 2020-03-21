@@ -1,49 +1,16 @@
-:X*:polska::
-	HotstringFun("Polska", 0, 0)
-return
-:X*:poland::
-	HotstringFun("Poland", 0, 0)
-return
-:X*:polish::
-	HotstringFun("Polish", 0, 0)
-return
-:X*:english::
-	HotstringFun("English", 0, 0)
-return
-:X*:german::
-	HotstringFun("German", 0, 0)
-return
-:X*:germany::
-	HotstringFun("Germany", 0, 0)
-return
-:X*:a la::
-	HotstringFun("{U+00E0} la", 1, 0)
-return
-:X*:a propos::
-	HotstringFun("{U+00E0} propos", 1, 0)
-return
-:X*:apropos::
-	HotstringFun("{U+00E0} propos", 1, 0)
-return
-
-:X*:fyi.::
-	HotstringFun("For your information", 0, 0)
-return
-:X*:asap.::
-	HotstringFun("as soon as possible", 0, 0)
-return
-:X*:afaik.::
-	HotstringFun("as far as I know", 0, 0)
-return
-:X*:btw.::
-	HotstringFun("by the way", 0, 0)
-return
-:X*?:email::
-	HotstringFun("e-mail", 0, 0)
-return
-:X*:sharepoint::
-	HotstringFun("Sharepoint", 0, 0)
-return
-:X*:sp.::
-	HotstringFun("Sharepoint", 0, 0)
-return
+﻿Hotstring(":*:polska",			func("ViaClipboard").bind("Polska"))
+Hotstring(":*:poland",			func("ViaClipboard").bind("Poland"))
+Hotstring(":*:polish",			func("ViaClipboard").bind("Polish"))
+Hotstring(":*:english",			func("ViaClipboard").bind("English"))
+Hotstring(":*:german",			func("ViaClipboard").bind("German"))
+Hotstring(":*:germany",			func("ViaClipboard").bind("Germany"))
+Hotstring(":*:a la",			func("ViaClipboard").bind("à la"))
+Hotstring(":*:a propos",		func("ViaClipboard").bind("à propos"))
+Hotstring(":*:apropos",			func("ViaClipboard").bind("à propos"))
+Hotstring(":*:fyi.",			func("ViaClipboard").bind("For your information"))
+Hotstring(":*:asap.",			func("ViaClipboard").bind("as soon as possible"))
+Hotstring(":*:afaik.",			func("ViaClipboard").bind("as far as I know"))
+Hotstring(":*:btw.",			func("ViaClipboard").bind("by the way"))
+Hotstring(":b0*?:email",		func("NormalWay").bind("{Backspace 5}e-mail"))
+Hotstring(":*:sharepoint",		func("ViaClipboard").bind("Sharepoint"))
+Hotstring(":*:sp.",				func("ViaClipboard").bind("Sharepoint"))

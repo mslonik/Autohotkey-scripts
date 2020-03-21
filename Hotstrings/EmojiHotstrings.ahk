@@ -1,84 +1,48 @@
-;~ https://unicode-table.com/en/
-:X*::).:: 		; smiling face U+1F642 :)
-	HotstringFun("{U+1F642} `", 1, 0)		
-return
-
-:X*::-).::		; smiling face U+1F642 :-)
-	HotstringFun("{U+1F642} `", 1, 0)
-return
-
-:X*::(.:: 		; frowning face U+1F641 :(
-	HotstringFun("{U+1F641} `", 1, 0)
-return
-
-:X*::-(.::		; frowning face U+1F641 :-(
-	HotstringFun("{U+1F641} `", 1, 0)
-return
-
-:X*:;).:: 		; winking face U+1F609 ;)
-	HotstringFun("{U+1F609} `", 1, 0)
-return
-
-:X*:;-).::		; winking face U+1F609 ;-)
-	HotstringFun("{U+1F609} `", 1, 0)
-return
-
-:X*::|.:: 		; neutral face U+1F610 :|
-	HotstringFun("{U+1F610} `", 1, 0)
-return
-
-:X*::-|.::		; neutral face U+1F610 :-|
-	HotstringFun("{U+1F610} `", 1, 0)
-return
-
-:X*::-/.::		; confused face U+1F615 :-/
-	HotstringFun("{U+1F615} `", 1, 0)
-return
-
-:X*::/.::			; confused face U+1F615 :/
-	HotstringFun("{U+1F615} `", 1, 0)				
-return
-
-:X*::D.::			; grinning face U+1F600 :D
-	HotstringFun("{U+1F600} `", 1, 0)
-return
-
-:X*::-D.::		; grinning face U+1F600 :-D
-	HotstringFun("{U+1F600} `", 1, 0)
-return
-
-:X*::X*.::			; flushed face U+1F633 :-*
-	HotstringFun("{U+1F633} `", 1, 0)
-return
-
-:X*::-*.::		; flushed face U+1F633 :-*
-	HotstringFun("{U+1F633} `", 1, 0)
-return
-
-:X*::p::			; Face with Stuck-Out Tongue and Winking Eye Emoji U+1F61C :p
-	HotstringFun("{U+1F61C} `", 1, 0)
-return
-
-:X*::-p.::		; Face with Stuck-Out Tongue and Winking Eye Emoji U+1F61C :-p
-	HotstringFun("{U+1F61C} `", 1, 0)
-return
-
-:X*:cat.::			; cat
-	HotstringFun("{U+1F408}", 1, 0)
-return
-
-:X*:heart.::			; heart
-	HotstringFun("{U+2661}", 1, 0)
-return
-
-:X*:<3.::			; heart
-	HotstringFun("{U+2661}", 1, 0)
-return
-
-:X*:ok.::			; thumbs up sign emoji
-	HotstringFun("{U+1F44D}", 1, 0)
-return
-
-:X*:nok.::			; Thumbs Down Sign Emoji
-	HotstringFun("{U+1F44E}", 1, 0)
-return
+﻿Hotstring(":*::)",				func("ViaClipboard").bind("🙂"))
+Hotstring(":*::-)",				func("ViaClipboard").bind("🙂"))
+Hotstring(":*::(",				func("ViaClipboard").bind("🙁"))
+Hotstring(":*::-(",				func("ViaClipboard").bind("🙁"))
+Hotstring(":*:;)",				func("ViaClipboard").bind("😉"))
+Hotstring(":*:;-)",				func("ViaClipboard").bind("😉"))
+Hotstring(":*::|",				func("ViaClipboard").bind("😐"))
+Hotstring(":*::-|",				func("ViaClipboard").bind("😐"))
+Hotstring(":*::-/",				func("ViaClipboard").bind("😕"))
+Hotstring(":*::/",				func("ViaClipboard").bind("😕"))
+Hotstring(":*::D",				func("ViaClipboard").bind("😀"))
+Hotstring(":*::-D",				func("ViaClipboard").bind("😀"))
+Hotstring(":*::*",				func("ViaClipboard").bind("😳"))
+Hotstring(":*::-*",				func("ViaClipboard").bind("😳"))
+Hotstring(":*::p",				func("ViaClipboard").bind("😜"))
+Hotstring(":*::-p",				func("ViaClipboard").bind("😜"))
+Hotstring(":*:cat.",			func("ViaClipboard").bind("🐈"))
+Hotstring(":*:heart.",			func("NormalWay").bind("❤"))
+Hotstring(":*:<3.",				func("ViaClipboard").bind("♡"))
+Hotstring(":*:ok.",				func("ViaClipboard").bind("👍"))
+Hotstring(":*:nok.",			func("ViaClipboard").bind("👎"))
+Hotstring(":*:warning.", func("ViaClipboard").bind("⚠"))
+Hotstring(":*:stop.", func("NormalWay").bind("🛇"))
+Hotstring(":*:train.", func("NormalWay").bind("🚅"))
+Hotstring(":*:chat.", func("NormalWay").bind("🗪"))
+Hotstring(":*:files.", func("NormalWay").bind("🗂"))
+Hotstring(":*:keyboard.", func("NormalWay").bind("🖮"))
+Hotstring(":*:mouse.", func("NormalWay").bind("🖱"))
+Hotstring(":*:notebo2k", func("NormalWay").bind("💻"))
+Hotstring(":*:pc.", func("NormalWay").bind("🖥"))
+Hotstring(":*:printer.", func("NormalWay").bind("🖨"))
+Hotstring(":*:ad2res2.", func("NormalWay").bind("✉"))
+Hotstring(":*:bicycle.", func("NormalWay").bind("🚲"))
+Hotstring(":*:cow.", func("NormalWay").bind("🐄"))
+Hotstring(":*:elephant.", func("NormalWay").bind("🐘"))
+Hotstring(":*:fax.", func("NormalWay").bind("🖷"))
+Hotstring(":*:flower.", func("NormalWay").bind("🌷"))
+Hotstring(":*:fullsun.", func("NormalWay").bind("☀"))
+Hotstring(":*:handup.", func("NormalWay").bind("✋"))
+Hotstring(":*:network.", func("NormalWay").bind("🖧"))
+Hotstring(":*:phone.", func("NormalWay").bind("☏"))
+Hotstring(":*:run2er.", func("NormalWay").bind("🏃"))
+Hotstring(":*:box.", func("NormalWay").bind("☐"))
+Hotstring(":*:checknok.", func("NormalWay").bind("❎"))
+Hotstring(":*:checkok.", func("NormalWay").bind("☑"))
+Hotstring(":*:email.", func("NormalWay").bind("{BackSpace}📧"))
+Hotstring(":*:recycle.", func("NormalWay").bind("♻"))
+Hotstring(":*:tiger.", func("NormalWay").bind("🐅"))

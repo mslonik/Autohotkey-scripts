@@ -1,18 +1,9 @@
-:X*:tuv.::HotstringFun("German: Technischer {U+00DC}berwachungsverein, English: Technical Inspection Association `", 1, 0)
-return
-:X:tuv::HotstringFun("T{U+00DC}V", 1, 0)
-return
-:X:sud::HotstringFun("S{U+00DC}D", 1, 0)
-return
-:X*:gmbh.::HotstringFun("German: Gesellschaft mit beschr�nkter Haftung, English: company with limited liability `", 0, 0)
-return
-:X:gmbh::HotstringFun("GmbH `", 0, 0)
-return
-:X*:obb.::HotstringFun("German: {U+00D6}sterreichische Bundesbahnen, English: Austrian Federal Railways `", 1, 0)
-return
-:X:obb::HotstringFun("{U+00D6}BB `", 1, 0)
-return
-:X*:sbb.::HotstringFun("German: Schweizerische Bundesbahnen, English: Swiss Federal Railways", 1, 0)
-return
-:X:sbb::HotstringFun("SBB", 1, 0)
-return
+﻿Hotstring(":*:tuv.",		func("ViaClipboard").bind("German: Technischer Überwachungsverein, English: Technical Inspection Association ` "))
+Hotstring("::tuv",			func("ViaClipboard").bind("TÜV"))
+Hotstring("::sud",			func("ViaClipboard").bind("SÜD"))
+Hotstring(":*:gmbh.",		func("ViaClipboard").bind("German: Gesellschaft mit beschränkter Haftung, English: company with limited liability ` "))
+Hotstring("::gmbh",			func("ViaClipboard").bind("GmbH ` "))
+Hotstring(":*:obb.",		func("ViaClipboard").bind("German: Österreichische Bundesbahnen, English: Austrian Federal Railways ` "))
+Hotstring("::obb",			func("ViaClipboard").bind("ÖBB ` "))
+Hotstring(":*:sbb.",		func("ViaClipboard").bind("German: Schweizerische Bundesbahnen, English: Swiss Federal Railways"))
+Hotstring("::sbb",			func("ViaClipboard").bind("SBB"))

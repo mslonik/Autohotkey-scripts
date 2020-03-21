@@ -1,68 +1,23 @@
-:X*:dtr.::HotstringFun("Dokumentacja Techniczno-Ruchowa", 0, 0)
-return
-
-:X:dtr::HotstringFun("DTR", 0, 0)
-return
-
-:X*:wtwio.::HotstringFun("Warunki Techniczne Wytwarzania i Odbioru", 0, 0)
-return
-
-:X:wtwio::HotstringFun("WTWiO", 0, 0)
-return
-
-:X*:pkp.::HotstringFun("Polskie Koleje Pañstwowe", 0, 1)
-return
-
-:X:pkp::HotstringFun("PKP", 0, 0)
-return
-
-:X*:plk.::HotstringFun("Polskie Linie Kolejowe", 0, 0)
-return
-
-:X:plk::HotstringFun("PLK", 0, 0)
-return
-
-:X*:ik.::HotstringFun("Instytut Kolejnictwa", 0, 0)
-return
-
-:X:ik::HotstringFun("IK", 0, 0)
-return
-
-:X*:pesel.::HotstringFun("Powszechny Elektroniczny System Ewidencji Ludnoœci", 0, 1)
-return
-
-:X:pesel::HotstringFun("PESEL", 0, 0)
-return
-
-:X*:utk.::HotstringFun("Urz¹d Transportu Kolejowego", 0, 1)
-return
-
-:X:utk::HotstringFun("UTK", 0, 0)
-return
-
-:X*:bait.::HotstringFun("Biuro Automatyki i Telekomunikacji", 0, 0)
-return
-
-:X:bait::HotstringFun("BAiT", 0, 0)
-return
-
-:X*:bhp.::HotstringFun("Bezpieczeñstwo i Higiena Pracy", 0, 1)
-return
-
-:X:bhp::HotstringFun("BHP", 0, 0)
-return
-
-:X*:srk.::HotstringFun( "(urz¹dzenia) sterowania ruchem kolejowym", 0, 1)
-return
-
-:X*:nip.::HotstringFun("Numer Identyfikacji Podatkowej", 0, 0)
-return
-
-:X:nip::HotstringFun("NIP", 0, 0)
-return
-
-:X*:ersat.::HotstringFun("Elektroniczny Rejestr Stanów Awaryjnych Taboru", 0, 1)
-return
-
-:X:ersat::HotstringFun("ERSAT", 0, 0)
-return
+ï»¿Hotstring(":*:dtr.",			func("ViaClipboard").bind("Dokumentacja Techniczno-Ruchowa"))
+Hotstring("::dtr",				func("ViaClipboard").bind("DTR"))
+Hotstring(":*:wtwio.",			func("ViaClipboard").bind("Warunki Techniczne Wytwarzania i Odbioru"))
+Hotstring("::wtwio",			func("ViaClipboard").bind("WTWiO"))
+Hotstring(":*:pkp.",			func("ViaClipboard").bind("Polskie Koleje PaÅ„stwowe"))
+Hotstring("::pkp",				func("ViaClipboard").bind("PKP"))
+Hotstring(":*:plk.",			func("ViaClipboard").bind("Polskie Linie Kolejowe"))
+Hotstring("::plk",				func("ViaClipboard").bind("PLK"))
+Hotstring(":*:ik.",				func("ViaClipboard").bind("Instytut Kolejnictwa"))
+Hotstring("::ik",				func("ViaClipboard").bind("IK"))
+Hotstring(":*:pesel.",			func("ViaClipboard").bind("Powszechny Elektroniczny System Ewidencji LudnoÅ›ci"))
+Hotstring("::pesel",			func("ViaClipboard").bind("PESEL"))
+Hotstring(":*:utk.",			func("ViaClipboard").bind("UrzÄ…d Transportu Kolejowego"))
+Hotstring("::utk",				func("ViaClipboard").bind("UTK"))
+Hotstring(":*:bait.",			func("ViaClipboard").bind("Biuro Automatyki i Telekomunikacji"))
+Hotstring("::bait",				func("ViaClipboard").bind("BAiT"))
+Hotstring(":*:bhp.",			func("ViaClipboard").bind("BezpieczeÅ„stwo i Higiena Pracy"))
+Hotstring("::bhp",				func("ViaClipboard").bind("BHP"))
+Hotstring(":*:srk.",			func("ViaClipboard").bind( "(urzÄ…dzenia) sterowania ruchem kolejowym"))
+Hotstring(":*:nip.",			func("ViaClipboard").bind("Numer Identyfikacji Podatkowej"))
+Hotstring("::nip",				func("ViaClipboard").bind("NIP"))
+Hotstring(":*:ersat.",			func("ViaClipboard").bind("Elektroniczny Rejestr StanÃ³w Awaryjnych Taboru"))
+Hotstring("::ersat",			func("ViaClipboard").bind("ERSAT"))

@@ -1,60 +1,17 @@
-:X*:en50126old.::
-	HotstringFun("EN 50126:1999 Railway applications ñ The specification and demonstration of Reliability, Availability, Maintainability and Safety (RAMS).", 0, 1)
-return
-
-:X*:en50126-1.::
-	HotstringFun("EN 50126-1:2017 Railway applications - The specification and demonstration of reliability, availability, maintainability and safety (RAMS) - Part 1: Generic RAMS Process.", 0, 1)
-return
-
-:X*:en50126-2.::
-	HotstringFun("EN 50126-2:2017 Railway applications - The specification and demonstration of reliability, availability, maintainability and safety (RAMS) - Part 2: Systems Approach to Safety.", 0, 1)
-return
-
-:X*:en50128.::
-	HotstringFun("EN 50128:2011 Railway applications ñ Communication, signalling and processing systems ñ Software for railway control and protection system.", 0, 1)
-return
-
-:X*:en50129.::
-	HotstringFun("EN 50129:2018 Railway applications - Communication, signalling and processing systems ñ Safety related electronic systems for signalling.", 0, 1)
-return
-
-:X*:en50129old.::
-	HotstringFun("EN 50129:2003 E Railway applications ñ Communication, signaling and processing systems ñ Safety related electronic systems for signaling.", 0, 1)
-return
-
-:X*:en50159.::
-	HotstringFun("EN 50159:2010 Railway applications - Communication, signalling and processing systems - Safety-related communication in transmission systems.", 0, 1)
-return
-
-:X*:iso2ld::
-	HotstringFun("EN ISO 9001:2008 Quality management systems ñ Requirements.", 0, 1)
-return
-
-:X*:irisnorm::
-	HotstringFun("ISO/TS 22163:2017(E) Railway applications - Quality management system - Business management system requirements for rail organizations: ISO 9001:2015 and particular requirements for application in the rail sector", 0, 1)
-return
-
-:X*:2008/57.::
-	HotstringFun("Dyrektywa Parlamentu Europejskiego i Rady 2008/57/WE z dnia 17 czerwca 2008 r. w sprawie interoperacyjnoúci systemu kolei we WspÛlnocie.", 0, 1)
-return
-:X*:2009/131.::
-	HotstringFun("Dyrektywa Komisji 2009/131/WE z dnia 16 paüdziernika 2009 r. zmieniajπca za≥πcznik VII do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjnoúci systemu kolei we WspÛlnocie.", 0, 1)
-return
-:X*:2011/18.::
-	HotstringFun("Dyrektywa Komisji 2011/18/UE z dnia 1 marca 2011 r. zmieniajπca za≥πczniki II, V i VI do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjnoúci systemu kolei we WspÛlnocie.", 0, 1)
-return
-:X*:2013/9.::
-	HotstringFun("Dyrektywa Komisji 2013/9/UE z dnia 11 marca 2013 r. zmieniajπca za≥πcznik III do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjnoúci systemu kolei we WspÛlnocie.", 0, 1)
-return
-:X*:2014/106.::
-	HotstringFun("Dyrektywa Komisji 2014/106/UE z dnia 5 grudnia 2014 r. zmieniajπca za≥πcznik V i VI do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjnoúci systemu kolei we WspÛlnocie.", 0, 1)
-return
-:X*:2016/919.::
-	HotstringFun("Rozporzπdzenie Komisji (UE) 2016/919 z dnia 27 maja 2016 r. w sprawie technicznej specyfikacji interoperacyjnoúci w zakresie podsystemÛw ÑSterowanieî systemu kolei w Unii Europejskiej zmienione Rozporzπdzeniem wykonawczym Komisji (UE) 2019/776 z dnia 16 maja 2019 r. zmieniajπcym rozporzπdzenia Komisji (UE) nr 321/2013, (UE) nr 1299/2014, (UE) nr 1301/2014, (UE) nr 1302/2014 i (UE) nr 1303/2014, rozporzπdzenie Komisji (UE) 2016/919 oraz decyzjÍ wykonawczπ Komisji 2011/665/UE w odniesieniu do stosowania do dyrektywy Parlamentu Europejskiego i Rady (UE) 2016/797 oraz realizacji celÛw szczegÛ≥owych okreúlonych w decyzji delegowanej Komisji (UE) 2017/1474.", 0, 1)
-return
-:X*:2010/713.::
-	HotstringFun("Decyzja Komisji 2010/713/UE z dnia 9 listopada 2010 r. w sprawie modu≥Ûw procedur oceny zgodnoúci, przydatnoúci do stosowania i weryfikacji WE stosowanych w technicznych specyfikacjach interoperacyjnoúci przyjÍtych na mocy dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE.", 0, 1)
-return
-:X*:033281.::
-	HotstringFun("ERA/ERTMS/033281 Interfaces between CCS trackside and other subsystems, Rev. 4.0.", 0, 1)
-return
+ÔªøHotstring(":*:en50126old.",			func("ViaClipboard").bind("EN 50126:1999 Railway applications - The specification and demonstration of Reliability, Availability, Maintainability and Safety (RAMS)."))
+Hotstring(":*:en50126-1.",			func("ViaClipboard").bind("EN 50126-1:2017 Railway applications - The specification and demonstration of reliability, availability, maintainability and safety (RAMS) - Part 1: Generic RAMS Process."))
+Hotstring(":*:en50126-2.",			func("ViaClipboard").bind("EN 50126-2:2017 Railway applications - The specification and demonstration of reliability, availability, maintainability and safety (RAMS) - Part 2: Systems Approach to Safety."))
+Hotstring(":*:en50128.",			func("ViaClipboard").bind("EN 50128:2011 Railway applications - Communication, signalling and processing systems - Software for railway control and protection system."))
+Hotstring(":*:en50129.",			func("ViaClipboard").bind("EN 50129:2018 Railway applications - Communication, signalling and processing systems - Safety related electronic systems for signalling."))
+Hotstring(":*:en50129old.",			func("ViaClipboard").bind("EN 50129:2003 E Railway applications - Communication, signaling and processing systems - Safety related electronic systems for signaling."))
+Hotstring(":*:en50159.",			func("ViaClipboard").bind("EN 50159:2010 Railway applications - Communication, signalling and processing systems - Safety-related communication in transmission systems."))
+Hotstring(":*:iso2ld",				func("ViaClipboard").bind("EN ISO 9001:2008 Quality management systems - Requirements."))
+Hotstring(":*:irisnorm",			func("ViaClipboard").bind("ISO/TS 22163:2017(E) Railway applications - Quality management system - Business management system requirements for rail organizations: ISO 9001:2015 and particular requirements for application in the rail sector"))
+Hotstring(":*:2008/57.",			func("ViaClipboard").bind("Dyrektywa Parlamentu Europejskiego i Rady 2008/57/WE z dnia 17 czerwca 2008 r. w sprawie interoperacyjno≈õci systemu kolei we Wsp√≥lnocie."))
+Hotstring(":*:2009/131.",			func("ViaClipboard").bind("Dyrektywa Komisji 2009/131/WE z dnia 16 pa≈∫dziernika 2009 r. zmieniajƒÖca za≈ÇƒÖcznik VII do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjno≈õci systemu kolei we Wsp√≥lnocie."))
+Hotstring(":*:2011/18.",			func("ViaClipboard").bind("Dyrektywa Komisji 2011/18/UE z dnia 1 marca 2011 r. zmieniajƒÖca za≈ÇƒÖczniki II, V i VI do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjno≈õci systemu kolei we Wsp√≥lnocie."))
+Hotstring(":*:2013/9.",				func("ViaClipboard").bind("Dyrektywa Komisji 2013/9/UE z dnia 11 marca 2013 r. zmieniajƒÖca za≈ÇƒÖcznik III do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjno≈õci systemu kolei we Wsp√≥lnocie."))
+Hotstring(":*:2014/106.",			func("ViaClipboard").bind("Dyrektywa Komisji 2014/106/UE z dnia 5 grudnia 2014 r. zmieniajƒÖca za≈ÇƒÖcznik V i VI do dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE w sprawie interoperacyjno≈õci systemu kolei we Wsp√≥lnocie."))
+Hotstring(":*:2016/919.",			func("ViaClipboard").bind("RozporzƒÖdzenie Komisji (UE) 2016/919 z dnia 27 maja 2016 r. w sprawie technicznej specyfikacji interoperacyjno≈õci w zakresie podsystem√≥w ‚ÄûSterowanie‚Äù systemu kolei w Unii Europejskiej zmienione RozporzƒÖdzeniem wykonawczym Komisji (UE) 2019/776 z dnia 16 maja 2019 r. zmieniajƒÖcym rozporzƒÖdzenia Komisji (UE) nr 321/2013, (UE) nr 1299/2014, (UE) nr 1301/2014, (UE) nr 1302/2014 i (UE) nr 1303/2014, rozporzƒÖdzenie Komisji (UE) 2016/919 oraz decyzjƒô wykonawczƒÖ Komisji 2011/665/UE w odniesieniu do stosowania do dyrektywy Parlamentu Europejskiego i Rady (UE) 2016/797 oraz realizacji cel√≥w szczeg√≥≈Çowych okre≈õlonych w decyzji delegowanej Komisji (UE) 2017/1474."))
+Hotstring(":*:2010/713.",			func("ViaClipboard").bind("Decyzja Komisji 2010/713/UE z dnia 9 listopada 2010 r. w sprawie modu≈Ç√≥w procedur oceny zgodno≈õci, przydatno≈õci do stosowania i weryfikacji WE stosowanych w technicznych specyfikacjach interoperacyjno≈õci przyjƒôtych na mocy dyrektywy Parlamentu Europejskiego i Rady 2008/57/WE."))
+Hotstring(":*:033281.",				func("ViaClipboard").bind("ERA/ERTMS/033281 Interfaces between CCS trackside and other subsystems, Rev. 4.0."))
