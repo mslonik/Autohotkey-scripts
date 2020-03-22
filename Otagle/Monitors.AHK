@@ -5,12 +5,12 @@ SendMode Input  				; Recommended for new scripts due to its superior speed and 
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #Persistent
 
-     DisplayRadioGroup := 0
-     WindowWizardTitle := "O T A G L E Display Wizard"
+     DisplayRadioGroup      := 0
+     WindowWizardTitle      := "O T A G L E Display Wizard"
      ButtonWidth            := 80
      ButtonHeight           := 80
-     ButtonHorizontalMargin := 10
-     ButtonVerticalMargin   := 10
+     ButtonHorizontalGap    := 10
+     ButtonVerticalGap      := 10
      
 ;~ Goto, ToStep2
 
@@ -21,7 +21,7 @@ Gui, WizardStep0_Intro: Add, Text, w500, When there is no otagle.ini file or on 
 Gui, WizardStep0_Intro: Add, Text, w500, Step 1: `t`tChoose a display where GUI of OTAGLE is located.
 Gui, WizardStep0_Intro: Add, Text, w500, Step 2: `t`tCheck display orientation, set scaling to 1.
 Gui, WizardStep0_Intro: Add, Text, w500, Step 3: `t`tAdjust number of keys visible on the screen (rows and columns).
-Gui, WizardStep0_Intro: Add, Button, Default x+-350 y+20 w80 gToStep1, &Next
+Gui, WizardStep0_Intro: Add, Button, Default xm+50 w80 gToStep1, &Next
 Gui, WizardStep0_Intro: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
 Gui, WizardStep0_Intro: Show, , % WindowWizardTitle
 return 
@@ -40,9 +40,9 @@ ToStep1:
      Loop, % HowManyMonitors
           {
           if (A_Index = WhichIsPrimary)
-               Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, gWizardStep1_Radio AltSubmit vDisplayRadioGroup Checked, % "Display #" . A_Index
+               Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, gWizardStep1_Radio AltSubmit vDisplayRadioGroup Checked, % "Monitor #" . A_Index
           else
-               Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, gWizardStep1_Radio AltSubmit, % "Display #" . A_Index
+               Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, gWizardStep1_Radio AltSubmit, % "Monitor #" . A_Index
           }     
      Gui, WizardStep1_GetDisplayCoordinates: Add, Button, Default x+25 y+20 gCheckDisplayNumbering, &CheckDisplayNumbering
      Gui, WizardStep1_GetDisplayCoordinates: Add, Button, x+30 w80 gToStep2, &Next
@@ -56,9 +56,12 @@ ExitDisplayConfigurationWizard:
 ExitApp
 
 WizardStep1_Radio:
+     MsgBox, Jestem w radiopętli
      Gui, WizardStep1_GetDisplayCoordinates: Submit, NoHide
      Gui, WizardStep1_GetDisplayCoordinates: Destroy
+
      SysGet, MonitorBoundingCoordinates_, Monitor, % DisplayRadioGroup
+     
      Gui, WizardStep1_GetDisplayCoordinates: Font, bold
      Gui, WizardStep1_GetDisplayCoordinates: Add, Text, w500, Step 1 out of 3: `t`tChoose a display where GUI of OTAGLE is located.
      Gui, WizardStep1_GetDisplayCoordinates: Font
@@ -66,38 +69,50 @@ WizardStep1_Radio:
      Loop, % HowManyMonitors
           {
           if (A_Index = DisplayRadioGroup)
-               Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, gWizardStep1_Radio AltSubmit vDisplayRadioGroup Checked, % "Display #" . A_Index
+               Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, gWizardStep1_Radio AltSubmit vDisplayRadioGroup Checked, % "Monitor #" . A_Index
           else
-               Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, gWizardStep1_Radio AltSubmit, % "Display #" . A_Index
+               Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, gWizardStep1_Radio AltSubmit, % "Monitor #" . A_Index
           }
      Gui, WizardStep1_GetDisplayCoordinates: Add, Button, Default x+25 y+20 gCheckDisplayNumbering, &CheckDisplayNumbering
      Gui, WizardStep1_GetDisplayCoordinates: Add, Button, x+30 w80 gToStep2, &Next
      Gui, WizardStep1_GetDisplayCoordinates: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
+     
      Gui, WizardStep1_GetDisplayCoordinates: Show
      , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardStep1_Width / 2) 
        . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardStep1_Height / 2), % WindowWizardTitle
+     WinGetPos, , , WizardStep1_Width, WizardStep1_Height, A
 return
 
 
 ToStep2:
-     SysGet, MonitorBoundingCoordinates_, Monitor, % DisplayRadioGroup
+     Gui, WizardStep1_GetDisplayCoordinates: Submit, NoHide
+     ;~ SysGet, MonitorBoundingCoordinates_, Monitor, % DisplayRadioGroup
      Gui, WizardStep1_GetDisplayCoordinates: Destroy
+     
+     CalculateButtonsAndGaps()
      Gui, WizardStep2_GetDisplayCoordinates: Font, bold
-     Gui, WizardStep2_GetDisplayCoordinates: Add, Text, w500, Step 2: `t`tDisplay Width and Height in pixels.
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Text, , Step 2: `t`tDisplay Width and Height in pixels.
      Gui, WizardStep2_GetDisplayCoordinates: Font
-     WizardStep2_Width := Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right)
-     WizardStep2_Height := Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) 
+     ;~ WizardStep2_Width := Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right)
+     ;~ WizardStep2_Height := Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) 
      Gui, WizardStep2_GetDisplayCoordinates: Add, Text, y+20
           , % "Monitor: " . DisplayRadioGroup . " Width: " .  WizardStep2_Width 
-          . " Height: " . WizardStep2_Height . " Suggested size of key: 80x80 px. Gap size: 20x20 px."
-     WizardStep2_AmountOfKeysHorizontally := (WizardStep2_Width -  ButtonHorizontalMargin) // ( ButtonWidth + ButtonHorizontalMargin)
-     WizardStep2_MarginHorizontally := WizardStep2_Width - (WizardStep2_AmountOfKeysHorizontally * ButtonHorizontalMargin + WizardStep2_AmountOfKeysHorizontally * ButtonWidth + ButtonHorizontalMargin)
-     WizardStep2_AmountOfKeysVertically := (WizardStep2_Height - ButtonVerticalMargin) // (ButtonHeight + ButtonVerticalMargin)
-     WizardStep2_MarginVertically := WizardStep2_Height - (WizardStep2_AmountOfKeysVertically * ButtonVerticalMargin + WizardStep2_AmountOfKeysVertically * ButtonHeight + ButtonVerticalMargin)
-     Gui, WizardStep2_GetDisplayCoordinates: Add, Text, y+20, % "Number of keys horizontally: " . WizardStep2_AmountOfKeysHorizontally . " and margin: " . WizardStep2_MarginHorizontally
-     Gui, WizardStep2_GetDisplayCoordinates: Add, Text, y+20, % "Number of keys vertically: " . WizardStep2_AmountOfKeysVertically . " and margin: " . WizardStep2_MarginVertically
-     Gui, WizardStep2_GetDisplayCoordinates: Add, Button, Default x50 y+20 w80 gToStep3, &Next
+          . " Height: " . WizardStep2_Height . " Suggested size of key: 80x80 px and gap size: 20x20 px."
+          
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Text, xm, % "Number of keys horizontally: " . WizardStep2_AmountOfKeysHorizontally . " and not used margin at the left side: " . WizardStep2_MarginHorizontally
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Text, xm, % "Number of keys vertically: " . WizardStep2_AmountOfKeysVertically . " and not used margin at the bottom side: " . WizardStep2_MarginVertically
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Text, xm, Specify key size width: `
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Edit, x+m yp r1 vKeySizeWidth w50, % ButtonWidth
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Text, x+m yp, Specify key size height: `
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Edit, x+m yp r1 vKeySizeHeight w50, % ButtonHeight
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Text, xm, Specify horizontal gap between buttons: `
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Edit, x+m yp r1 vGapSizeWidth w50, % ButtonHorizontalGap
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Text, x+m yp, Specify vertical gap between buttons: `
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Edit, x+m yp r1 vGapSizeHeight w50, % ButtonVerticalGap
+
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Button, Default x50 y+20 w80 gToStep3, &Test
      Gui, WizardStep2_GetDisplayCoordinates: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
+     Gui, WizardStep2_GetDisplayCoordinates: Add, Button, x+30 w80 gSaveDisplayConfigurationWizard, &Save Config
      Gui, WizardStep2_GetDisplayCoordinates: Show
      , % "x" . MonitorBoundingCoordinates_Left + (WizardStep2_Width / 2) - (WizardStep1_Width / 2) 
        . "y" . MonitorBoundingCoordinates_Top + (WizardStep2_Height / 2) - (WizardStep1_Height / 2), % WindowWizardTitle
@@ -106,9 +121,12 @@ return
 
 ToStep3:
      SysGet, MonitorBoundingCoordinates_, Monitor, % DisplayRadioGroup
+     Gui, WizardStep2_GetDisplayCoordinates: Submit, NoHide
+     ;~ MsgBox, % "KeySizeWidth: " . KeySizeWidth . " KeySizeHeight: " . KeySizeHeight . " KeySizeWidth: " . GapSizeWidth . " KeySizeHeight: " . GapSizeHeight
+     ButtonWidth := KeySizeWidth, ButtonHeight := KeySizeHeight, ButtonHorizontalGap := GapSizeWidth, ButtonVerticalGap := GapSizeHeight
      Gui, WizardStep2_GetDisplayCoordinates: Destroy
-     Gui, WizardStep3_PlotMatrixOfButtons: Margin, % ButtonHorizontalMargin, % ButtonVerticalMargin
-
+     
+     Gui, WizardStep3_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
 
      Loop, % WizardStep2_AmountOfKeysVertically
           {
@@ -116,26 +134,23 @@ ToStep3:
           Loop, % WizardStep2_AmountOfKeysHorizontally
                {
                if (A_Index = 1)
-                    {
                     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m"                       . " w" . ButtonWidth . " h" . ButtonHeight, % ExternalLoopIndex . "_" . A_Index
-                    ;~ MsgBox, Raz
-                    }
                else ; (A_Index > 1)
-                    {
                     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, % ExternalLoopIndex . "_" . A_Index
-                    ;~ MsgBox, Ponad raz
-                    }
                }
           }
 
      Gui, WizardStep3_PlotMatrixOfButtons: Show
      , % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
+     MsgBox, Press any key to continue
+     Gui, WizardStep3_PlotMatrixOfButtons: Destroy
+     GoTo, ToStep2
 return
 
      ;~ ButtonWidth            := 80
      ;~ ButtonHeight           := 80
-     ;~ ButtonHorizontalMargin := 20
-     ;~ ButtonVerticalMargin   := 20
+     ;~ ButtonHorizontalGap := 20
+     ;~ ButtonVerticalGap   := 20
 
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
 
@@ -167,7 +182,29 @@ F_ShowDisplayNumbers()
 return
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+CalculateButtonsAndGaps()     
+     {
+     global WizardStep2_Width, WizardStep2_Height, WizardStep2_AmountOfKeysHorizontally, WizardStep2_MarginHorizontally, WizardStep2_AmountOfKeysVertically, WizardStep2_MarginVertically
+     global MonitorBoundingCoordinates_, MonitorBoundingCoordinates_Bottom, MonitorBoundingCoordinates_Left, MonitorBoundingCoordinates_Right, MonitorBoundingCoordinates_Top
+     global DisplayRadioGroup, ButtonWidth, ButtonHeight, ButtonHorizontalGap, ButtonVerticalGap
+     
+     SysGet, MonitorBoundingCoordinates_, Monitor, % DisplayRadioGroup
+     WizardStep2_Width := Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right)
+     WizardStep2_Height := Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) 
+     WizardStep2_AmountOfKeysHorizontally := (WizardStep2_Width -  ButtonHorizontalGap) // ( ButtonWidth + ButtonHorizontalGap)
+     WizardStep2_MarginHorizontally := WizardStep2_Width - (WizardStep2_AmountOfKeysHorizontally * ButtonHorizontalGap + WizardStep2_AmountOfKeysHorizontally * ButtonWidth + ButtonHorizontalGap)
+     WizardStep2_AmountOfKeysVertically := (WizardStep2_Height - ButtonVerticalGap) // (ButtonHeight + ButtonVerticalGap)
+     WizardStep2_MarginVertically := WizardStep2_Height - (WizardStep2_AmountOfKeysVertically * ButtonVerticalGap + WizardStep2_AmountOfKeysVertically * ButtonHeight + ButtonVerticalGap)
+     }
+
+
 ; ------------------------------- SECTION OF LABELS --------------------------------------
+
+SaveDisplayConfigurationWizard:
+
+return
 
 
 DestroyGuis:
