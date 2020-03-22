@@ -104,10 +104,10 @@ ToStep2:
      Gui, WizardStep2_GetDisplayCoordinates: Add, Text, y+20
           , % "Monitor: " . DisplayRadioGroup . " Width: " .  WizardStep2_Width 
           . " Height: " . WizardStep2_Height . " Suggested size of key: 80x80 px. Gap size: 20x20 px."
-     WizardStep2_AmountOfKeysHorizontally := (WizardStep2_Width - 20) // (80 + 20)
-     WizardStep2_MarginHorizontally := WizardStep2_Width - (WizardStep2_AmountOfKeysHorizontally * 20 + WizardStep2_AmountOfKeysHorizontally * 80 + 20)
-     WizardStep2_AmountOfKeysVertically := (WizardStep2_Height - 20) // (80 + 20)
-     WizardStep2_MarginVertically := WizardStep2_Height - (WizardStep2_AmountOfKeysVertically * 20 + WizardStep2_AmountOfKeysVertically * 80 + 20)
+     WizardStep2_AmountOfKeysHorizontally := (WizardStep2_Width -  ButtonHorizontalMargin) // ( ButtonWidth + ButtonHorizontalMargin)
+     WizardStep2_MarginHorizontally := WizardStep2_Width - (WizardStep2_AmountOfKeysHorizontally * ButtonHorizontalMargin + WizardStep2_AmountOfKeysHorizontally * ButtonWidth + ButtonHorizontalMargin)
+     WizardStep2_AmountOfKeysVertically := (WizardStep2_Height - ButtonVerticalMargin) // (ButtonHeight + ButtonVerticalMargin)
+     WizardStep2_MarginVertically := WizardStep2_Height - (WizardStep2_AmountOfKeysVertically * ButtonVerticalMargin + WizardStep2_AmountOfKeysVertically * ButtonHeight + ButtonVerticalMargin)
      Gui, WizardStep2_GetDisplayCoordinates: Add, Text, y+20, % "Number of keys horizontally: " . WizardStep2_AmountOfKeysHorizontally . " and margin: " . WizardStep2_MarginHorizontally
      Gui, WizardStep2_GetDisplayCoordinates: Add, Text, y+20, % "Number of keys vertically: " . WizardStep2_AmountOfKeysVertically . " and margin: " . WizardStep2_MarginVertically
      Gui, WizardStep2_GetDisplayCoordinates: Add, Button, Default x50 y+20 w80 gToStep3, &Next
@@ -123,7 +123,11 @@ ToStep3:
      Gui, WizardStep2_GetDisplayCoordinates: Destroy
      Gui, WizardStep3_PlotMatrixOfButtons: Margin, % ButtonHorizontalMargin, % ButtonVerticalMargin
 
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "xm"  . " ym"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_1
+     Loop, WizardStep2_AmountOfKeysHorizontally
+          
+     return
+
+     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m"                       . " w" . ButtonWidth . " h" . ButtonHeight, 1_1
      Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_2
      Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_3
      Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_4
@@ -172,9 +176,6 @@ return
      ;~ ButtonHorizontalMargin := 20
      ;~ ButtonVerticalMargin   := 20
 
-     ;~ ButtonHorizontalMargin := 20
-     ;~ ButtonVerticalMargin   := 20
-
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
 
 F_ShowDisplayNumbers()
@@ -185,12 +186,6 @@ F_ShowDisplayNumbers()
      global MonitorBoundingCoordinates_
      global MonitorBoundingCoordinates_Left, MonitorBoundingCoordinates_Right, MonitorBoundingCoordinates_Top, MonitorBoundingCoordinates_Bottom
 
-
-	 ;~ SysGet, WhichIsPrimary,        MonitorPrimary
-     ;~ SysGet, VirtualScreenWidth,    % SM_CXVIRTUALSCREEN
-     ;~ SysGet, VirtualScreenHeight,   % SM_CYVIRTUALSCREEN
-     ;~ SysGet, VirtualScreenTop,      % SM_XVIRTUALSCREEN
-     ;~ SysGet, VirtualScreenLeft,     % SM_YVIRTUALSCREEN
 
      Loop, %HowManyMonitors%
           {
