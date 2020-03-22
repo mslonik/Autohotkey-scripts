@@ -24,70 +24,84 @@ Gui, WizardStep0_Intro: Add, Text, w500, Step 3: `t`tAdjust number of keys visib
 Gui, WizardStep0_Intro: Add, Button, Default xm+50 w80 gToStep1, &Next
 Gui, WizardStep0_Intro: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
 Gui, WizardStep0_Intro: Show, , % WindowWizardTitle
+WinGetPos, , , WizardWindow_Width, WizardWindow_Height, A
 return 
 
 
 ToStep1:
      Gui, WizardStep0_Intro: Destroy
-     Gui, WizardStep1_GetDisplayCoordinates: Font, bold
-     Gui, WizardStep1_GetDisplayCoordinates: Add, Text, w500, Step 1 out of 3: `t`tChoose a display where GUI of OTAGLE is located.
-     Gui, WizardStep1_GetDisplayCoordinates: Font
-     Gui, WizardStep1_GetDisplayCoordinates: Add, Text, w500, Specify one out of the available Display No.
+     Gui, WizardWindow_GetDisplayCoordinates: Submit, NoHide
+     Gui, WizardWindow_GetDisplayCoordinates: Destroy
+     MsgBox, % DisplayRadioGroup
+     
+     Gui, WizardWindow_GetDisplayCoordinates: Font, bold
+     Gui, WizardWindow_GetDisplayCoordinates: Add, Text, w500, Step 1 out of 3: `t`tChoose a display where GUI of OTAGLE is located.
+     Gui, WizardWindow_GetDisplayCoordinates: Font
+     Gui, WizardWindow_GetDisplayCoordinates: Add, Text, w500, Specify one out of the available Display No.
 
      SysGet, HowManyMonitors,       MonitorCount
      SysGet, WhichIsPrimary,        MonitorPrimary
+     SysGet, MonitorBoundingCoordinates_, Monitor, % DisplayRadioGroup
+     
+     if (DisplayRadioGroup = 0) 
+          DisplayRadioGroup := WhichIsPrimary
      
      Loop, % HowManyMonitors
           {
-          if (A_Index = WhichIsPrimary)
-               Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, gWizardStep1_Radio AltSubmit vDisplayRadioGroup Checked, % "Monitor #" . A_Index
+          ;~ if (A_Index = WhichIsPrimary)
+          if (A_Index = DisplayRadioGroup)
+               ;~ Gui, WizardWindow_GetDisplayCoordinates: Add, Radio, gWizardWindow_Radio AltSubmit vDisplayRadioGroup Checked, % "Monitor #" . A_Index
+               Gui, WizardWindow_GetDisplayCoordinates: Add, Radio, gToStep1 AltSubmit vDisplayRadioGroup Checked, % "Monitor #" . A_Index
           else
-               Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, gWizardStep1_Radio AltSubmit, % "Monitor #" . A_Index
+               ;~ Gui, WizardWindow_GetDisplayCoordinates: Add, Radio, gWizardWindow_Radio AltSubmit, % "Monitor #" . A_Index
+               Gui, WizardWindow_GetDisplayCoordinates: Add, Radio, gToStep1 AltSubmit, % "Monitor #" . A_Index
           }     
-     Gui, WizardStep1_GetDisplayCoordinates: Add, Button, Default x+25 y+20 gCheckDisplayNumbering, &CheckDisplayNumbering
-     Gui, WizardStep1_GetDisplayCoordinates: Add, Button, x+30 w80 gToStep2, &Next
-     Gui, WizardStep1_GetDisplayCoordinates: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
-     Gui, WizardStep1_GetDisplayCoordinates: Show, , % WindowWizardTitle
-     WinGetPos, , , WizardStep1_Width, WizardStep1_Height, A
+     Gui, WizardWindow_GetDisplayCoordinates: Add, Button, Default x+25 y+20 gCheckDisplayNumbering, &CheckDisplayNumbering
+     Gui, WizardWindow_GetDisplayCoordinates: Add, Button, x+30 w80 gToStep2, &Next
+     Gui, WizardWindow_GetDisplayCoordinates: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
+     ;~ Gui, WizardWindow_GetDisplayCoordinates: Show, , % WindowWizardTitle
+     Gui, WizardWindow_GetDisplayCoordinates: Show
+     , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
+       . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
+     WinGetPos, , , WizardWindow_Width, WizardWindow_Height, A
 return
 
 ExitDisplayConfigurationWizard:
      Gui, WizardStep0_Intro: Destroy
 ExitApp
 
-WizardStep1_Radio:
-     MsgBox, Jestem w radiopętli
-     Gui, WizardStep1_GetDisplayCoordinates: Submit, NoHide
-     Gui, WizardStep1_GetDisplayCoordinates: Destroy
+;~ WizardWindow_Radio:
+     ;~ Gui, WizardWindow_GetDisplayCoordinates: Submit, NoHide
+     ;~ Gui, WizardWindow_GetDisplayCoordinates: Destroy
 
-     SysGet, MonitorBoundingCoordinates_, Monitor, % DisplayRadioGroup
+     ;~ SysGet, MonitorBoundingCoordinates_, Monitor, % DisplayRadioGroup
      
-     Gui, WizardStep1_GetDisplayCoordinates: Font, bold
-     Gui, WizardStep1_GetDisplayCoordinates: Add, Text, w500, Step 1 out of 3: `t`tChoose a display where GUI of OTAGLE is located.
-     Gui, WizardStep1_GetDisplayCoordinates: Font
-     Gui, WizardStep1_GetDisplayCoordinates: Add, Text, w500, Specify one out of the available Display No.
-     Loop, % HowManyMonitors
-          {
-          if (A_Index = DisplayRadioGroup)
-               Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, gWizardStep1_Radio AltSubmit vDisplayRadioGroup Checked, % "Monitor #" . A_Index
-          else
-               Gui, WizardStep1_GetDisplayCoordinates: Add, Radio, gWizardStep1_Radio AltSubmit, % "Monitor #" . A_Index
-          }
-     Gui, WizardStep1_GetDisplayCoordinates: Add, Button, Default x+25 y+20 gCheckDisplayNumbering, &CheckDisplayNumbering
-     Gui, WizardStep1_GetDisplayCoordinates: Add, Button, x+30 w80 gToStep2, &Next
-     Gui, WizardStep1_GetDisplayCoordinates: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
+     ;~ Gui, WizardWindow_GetDisplayCoordinates: Font, bold
+     ;~ Gui, WizardWindow_GetDisplayCoordinates: Add, Text, w500, Step 1 out of 3: `t`tChoose a display where GUI of OTAGLE is located.
+     ;~ Gui, WizardWindow_GetDisplayCoordinates: Font
+     ;~ Gui, WizardWindow_GetDisplayCoordinates: Add, Text, w500, Specify one out of the available Display No.
+     ;~ Loop, % HowManyMonitors
+          ;~ {
+          ;~ if (A_Index = DisplayRadioGroup)
+               ;~ Gui, WizardWindow_GetDisplayCoordinates: Add, Radio, gWizardWindow_Radio AltSubmit vDisplayRadioGroup Checked, % "Monitor #" . A_Index
+          ;~ else
+               ;~ Gui, WizardWindow_GetDisplayCoordinates: Add, Radio, gWizardWindow_Radio AltSubmit, % "Monitor #" . A_Index
+          ;~ }
+     ;~ Gui, WizardWindow_GetDisplayCoordinates: Add, Button, Default x+25 y+20 gCheckDisplayNumbering, &CheckDisplayNumbering
+     ;~ Gui, WizardWindow_GetDisplayCoordinates: Add, Button, x+30 w80 gToStep2, &Next
+     ;~ Gui, WizardWindow_GetDisplayCoordinates: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
      
-     Gui, WizardStep1_GetDisplayCoordinates: Show
-     , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardStep1_Width / 2) 
-       . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardStep1_Height / 2), % WindowWizardTitle
-     WinGetPos, , , WizardStep1_Width, WizardStep1_Height, A
-return
+     ;~ Gui, WizardWindow_GetDisplayCoordinates: Show
+     ;~ , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
+       ;~ . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
+     ;~ WinGetPos, , , WizardWindow_Width, WizardWindow_Height, A
+;~ return
 
 
 ToStep2:
-     Gui, WizardStep1_GetDisplayCoordinates: Submit, NoHide
+     Gui, WizardWindow_GetDisplayCoordinates: Submit, NoHide
      ;~ SysGet, MonitorBoundingCoordinates_, Monitor, % DisplayRadioGroup
-     Gui, WizardStep1_GetDisplayCoordinates: Destroy
+     Gui, WizardWindow_GetDisplayCoordinates: Destroy
      
      CalculateButtonsAndGaps()
      Gui, WizardStep2_GetDisplayCoordinates: Font, bold
@@ -114,8 +128,8 @@ ToStep2:
      Gui, WizardStep2_GetDisplayCoordinates: Add, Button, x+30 w80 gExitDisplayConfigurationWizard, &Cancel
      Gui, WizardStep2_GetDisplayCoordinates: Add, Button, x+30 w80 gSaveDisplayConfigurationWizard, &Save Config
      Gui, WizardStep2_GetDisplayCoordinates: Show
-     , % "x" . MonitorBoundingCoordinates_Left + (WizardStep2_Width / 2) - (WizardStep1_Width / 2) 
-       . "y" . MonitorBoundingCoordinates_Top + (WizardStep2_Height / 2) - (WizardStep1_Height / 2), % WindowWizardTitle
+     , % "x" . MonitorBoundingCoordinates_Left + (WizardStep2_Width / 2) - (WizardWindow_Width / 2) 
+       . "y" . MonitorBoundingCoordinates_Top + (WizardStep2_Height / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
 return
 
 
@@ -221,6 +235,6 @@ CheckDisplayNumbering:
 return
 
 ButtonNext1out3:
-     Gui, WizardStep1_GetDisplayCoordinates:Submit, NoHide
+     Gui, WizardWindow_GetDisplayCoordinates:Submit, NoHide
      MsgBox, % DisplayRadioGroup
 return
