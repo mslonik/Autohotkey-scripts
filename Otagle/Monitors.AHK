@@ -5,27 +5,13 @@ SendMode Input  				; Recommended for new scripts due to its superior speed and 
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #Persistent
 
-     ; constants
-     ;~ SM_CXVIRTUALSCREEN := 78
-     ;~ SM_CYVIRTUALSCREEN := 79
-     ;~ SM_XVIRTUALSCREEN := 76
-     ;~ SM_YVIRTUALSCREEN := 77
      DisplayRadioGroup := 0
      WindowWizardTitle := "O T A G L E Display Wizard"
      ButtonWidth            := 80
      ButtonHeight           := 80
-     ButtonHorizontalMargin := 20
-     ButtonVerticalMargin   := 20
+     ButtonHorizontalMargin := 10
+     ButtonVerticalMargin   := 10
      
-     ;~ WizardStep1_Width := 0
-     ;~ WizardStep1_Height := 0
-     ;~ MonitorBoundingCoordinates_ :=
-     ;~ MonitorBoundingCoordinates_Left    := 0
-     ;~ MonitorBoundingCoordinates_Right   := 0
-     ;~ MonitorBoundingCoordinates_Top     := 0
-     ;~ MonitorBoundingCoordinates_Bottom  := 0
-
-
 ;~ Goto, ToStep2
 
 Gui, WizardStep0_Intro: Font, bold
@@ -123,49 +109,24 @@ ToStep3:
      Gui, WizardStep2_GetDisplayCoordinates: Destroy
      Gui, WizardStep3_PlotMatrixOfButtons: Margin, % ButtonHorizontalMargin, % ButtonVerticalMargin
 
-     Loop, WizardStep2_AmountOfKeysHorizontally
-          
-     return
 
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m"                       . " w" . ButtonWidth . " h" . ButtonHeight, 1_1
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_2
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_3
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_4
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_5
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_6
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_7
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_8
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_9
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_10
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_11
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 1_12
-
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m"                       . " w" . ButtonWidth . " h" . ButtonHeight, 2_1
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_2
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_3
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_4
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_5
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_6
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_7
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_8
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_9
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_10
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_11
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 2_12
-
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m"                       . " w" . ButtonWidth . " h" . ButtonHeight, 3_1
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_2
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_3
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_4
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_5
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_6
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_7
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_8
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_9
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_10
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_11
-     Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, 3_12
-
+     Loop, % WizardStep2_AmountOfKeysVertically
+          {
+          ExternalLoopIndex := A_Index
+          Loop, % WizardStep2_AmountOfKeysHorizontally
+               {
+               if (A_Index = 1)
+                    {
+                    Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m"                       . " w" . ButtonWidth . " h" . ButtonHeight, % ExternalLoopIndex . "_" . A_Index
+                    ;~ MsgBox, Raz
+                    }
+               else ; (A_Index > 1)
+                    {
+                    Gui, WizardStep3_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, % ExternalLoopIndex . "_" . A_Index
+                    ;~ MsgBox, Ponad raz
+                    }
+               }
+          }
 
      Gui, WizardStep3_PlotMatrixOfButtons: Show
      , % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
