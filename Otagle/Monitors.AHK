@@ -168,7 +168,7 @@ PlotButtons:
      
      CalculateButtonsAndGaps()
      Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
-     PlotButtonsAndGaps()
+     AddButtonsAndGaps()
      Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
      MsgBox, 0,  % WindowWizardTitle, Press any key to continue to go back: test new configuration again or save it.
      Gui, Wizard_PlotMatrixOfButtons: Submit ; Hide
@@ -182,10 +182,21 @@ SaveConfigurationWizard:
      IniWrite, % ButtonHorizontalGap,     % A_ScriptDir . "\Config.ini", Main, ButtonHorizontalGap
      IniWrite, % ButtonVerticalGap,       % A_ScriptDir . "\Config.ini", Main, ButtonVerticalGap
 
-     MsgBox, 0, % WindowWizardTitle, % "Configuration saved to the file :" . A_ScriptDir . "\Config.ini"
-     ;~ Gui, Wizard_AmountAndSizeOfButtons: Destroy
-     ;~ Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gSaveConfigurationWizard, &Save Config
-     ;~ GuiControl, Hide, SaveConfigHwnd
+     MsgBox, 0, % WindowWizardTitle, % "Configuration saved to the file :`n" . A_ScriptDir . "\Config.ini"
+     
+     ; tutaj trzeba zrobić zapisanie guzików
+     Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
+     if (WinExist())
+          {
+          SavePositionOfButtons()     
+          }
+     else
+          {
+          CalculateButtonsAndGaps()
+          AddButtonsAndGaps()
+          SavePositionOfButtons()
+          }
+     
      GuiControl, Disable, % SaveConfigHwnd
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gWizardStep3, C&ontinue
 return
@@ -200,7 +211,7 @@ WizardStep3:
           {
           CalculateButtonsAndGaps()
           Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
-          PlotButtonsAndGaps()
+          AddButtonsAndGaps()
           Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
           }
           
@@ -234,10 +245,29 @@ ExitApp
 
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
 
-PlotButtonsAndGaps()
+SavePositionOfButtons()
      {
-     global WizardStep2_AmountOfKeysHorizontally, WizardStep2_AmountOfKeysVertically
-     global ButtonHeight, ButtonWidth
+     global ; Assume-global mode
+     local ExternalLoopIndex, Guzior := 0
+     ;~ global WizardStep2_AmountOfKeysVertically, WizardStep2_AmountOfKeysHorizontally
+     
+     Loop, % WizardStep2_AmountOfKeysVertically
+          {
+          ExternalLoopIndex := A_Index
+          Loop, % WizardStep2_AmountOfKeysHorizontally
+               {
+               GuiControlGet, Guzior, Pos, % ExternalLoopIndex . "_" . A_Index . "hwnd"
+               IniWrite, % Guzior, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index
+               }
+          }
+     }
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+AddButtonsAndGaps()
+     {
+     global ; Assume-global mode
+     ;~ global WizardStep2_AmountOfKeysHorizontally, WizardStep2_AmountOfKeysVertically
+     ;~ global ButtonHeight, ButtonWidth
+     GuziorX := 0 , GuziorY := 0, GuziorW := 0, GuziorH := 0
      
      Loop, % WizardStep2_AmountOfKeysVertically
           {
@@ -245,58 +275,27 @@ PlotButtonsAndGaps()
           Loop, % WizardStep2_AmountOfKeysHorizontally
                {
                if (A_Index = 1)
-                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m" . " w" . ButtonWidth . " h" . ButtonHeight, % ExternalLoopIndex . "_" . A_Index
+                    {
+                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m" . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd", % ExternalLoopIndex . "_" . A_Index
+                    ;~ MsgBox, % "hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd`n" ExternalLoopIndex . "_" . A_Index . "hwnd"
+                    GuiControlGet, Guzior, Pos, %(% ExternalLoopIndex . "_" . A_Index . "hwnd")
+                    ;~ GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd ; to działa
+                    ;~ GuiControlGet, Guzior, Pos, %1_1hwnd%
+                    MsgBox, % "Guzior x: " . GuziorX . " Guzior y: " . GuziorY . " GuziorWidth: " . GuziorW . " GuziorHeight: " . GuziorH
+                    }
                else ; (A_Index > 1)
-                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"  . " w" . ButtonWidth . " h" . ButtonHeight, % ExternalLoopIndex . "_" . A_Index
+                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"  . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd", % ExternalLoopIndex . "_" . A_Index
+                    ;~ global ExternalLoopIndex . "_" . A_Index . "hwnd"
                }
           }
      }
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
-;~ ProcessInputArgs()
-;~ {
-;~ global A_Args, ApplicationName
-
-;~ if (A_Args.Length() = 0)
-    ;~ {
-    ;~ IfExist, *.ini
-        ;~ {
-        ;~ MsgBox, 16, %A_ScriptName%, At least one *.ini file found in directory `n`n%A_WorkingDir%`n`n but current script (%A_ScriptName%) was run without any arguments. `n`nOne argument`, the name of .ini file`, is obligatory. Therefore script will now exit.
-        ;~ ExitApp, 0
-        ;~ }
-    ;~ IfNotExist, *.ini
-        ;~ MsgBox, 308, %A_ScriptName%, No input arguments found and no *.ini files found in directory`n %A_ScriptDir%`n`nExpected at least a single *.ini file.`n`nDo you want to run %WindowWizardTitle% which will help you tocreate Config.ini ? `n`n
-    ;~ IfMsgBox, No
-        ;~ ExitApp, 0
-    ;~ IfMsgBox, Yes
-        ;~ Goto  Wizard_Intro
-    ;~ }
-;~ else if (A_Args.Length() = 1)
-     ;~ {
-     ;~ IniRead, ButtonWidth,                % A_ScriptDir . "\" . A_Args[1], Main, ButtonWidth
-     ;~ IniRead, ButtonHeight,               % A_ScriptDir . "\" . A_Args[1], Main, ButtonHeight
-     ;~ IniRead, ButtonHorizontalGap,        % A_ScriptDir . "\" . A_Args[1], Main, ButtonHorizontalGap
-     ;~ IniRead, ButtonVerticalGap,          % A_ScriptDir . "\" . A_Args[1], Main, ButtonVerticalGap
-     
-     ;~ MsgBox, % "ButtonWidth: " . ButtonWidth . "`n"
-               ;~ . "ButtonHeight: " . ButtonHeight . "`n"
-               ;~ . "ButtonHorizontalGap: " . ButtonHorizontalGap . "`n"
-               ;~ . "ButtonVerticalGap: " . ButtonVerticalGap
-     ;~ }
-;~ else if (A_Args.Length() > 1)
-    ;~ {
-    ;~ MsgBox, 48, Diacritic.ahk, % "Too many input arguments: " . A_Args.Length() . ". Expected just one, *.ini." 
-    ;~ }
-;~ }    
-
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 F_ShowMonitorNumbers()
 
 {
      global HowManyMonitors, WhichIsPrimary
-     global SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN
+     ;~ global SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN
      global MonitorBoundingCoordinates_
      global MonitorBoundingCoordinates_Left, MonitorBoundingCoordinates_Right, MonitorBoundingCoordinates_Top, MonitorBoundingCoordinates_Bottom
 
