@@ -176,15 +176,21 @@ PlotButtons:
 return
 
 SaveConfigurationWizard:
+
+     ; tutaj trzeba zrobić zapisanie guzików
+     if (CalculateVariable = 0)
+          {
+          MsgBox, 0, % WindowWizardTitle, Press Calculate button at first.
+          return
+          }
+
      IniWrite, % MonitorRadioGroup,       % A_ScriptDir . "\Config.ini", Main, WhichMonitor
      IniWrite, % ButtonWidth,             % A_ScriptDir . "\Config.ini", Main, ButtonWidth
      IniWrite, % ButtonHeight,            % A_ScriptDir . "\Config.ini", Main, ButtonHeight
      IniWrite, % ButtonHorizontalGap,     % A_ScriptDir . "\Config.ini", Main, ButtonHorizontalGap
      IniWrite, % ButtonVerticalGap,       % A_ScriptDir . "\Config.ini", Main, ButtonVerticalGap
 
-     MsgBox, 0, % WindowWizardTitle, % "Configuration saved to the file :`n" . A_ScriptDir . "\Config.ini"
-     
-     ; tutaj trzeba zrobić zapisanie guzików
+
      Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
      if (WinExist())
           {
@@ -196,7 +202,9 @@ SaveConfigurationWizard:
           AddButtonsAndGaps()
           SavePositionOfButtons()
           }
-     
+
+     MsgBox, 0, % WindowWizardTitle, % "Configuration saved to the file :`n" . A_ScriptDir . "\Config.ini"
+
      GuiControl, Disable, % SaveConfigHwnd
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gWizardStep3, C&ontinue
 return
@@ -206,7 +214,7 @@ WizardStep3:
      
      Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
      if (WinExist())
-          Gui, Wizard_PlotMatrixOfButtons: Show
+          Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
      else
           {
           CalculateButtonsAndGaps()
@@ -250,14 +258,19 @@ SavePositionOfButtons()
      global ; Assume-global mode
      local ExternalLoopIndex, Guzior := 0
      ;~ global WizardStep2_AmountOfKeysVertically, WizardStep2_AmountOfKeysHorizontally
+     local GuziorX := 0, GuziorY := 0, GuziorW := 0, GuziorH := 0
      
      Loop, % WizardStep2_AmountOfKeysVertically
           {
           ExternalLoopIndex := A_Index
           Loop, % WizardStep2_AmountOfKeysHorizontally
                {
-               GuiControlGet, Guzior, Pos, % ExternalLoopIndex . "_" . A_Index . "hwnd"
-               IniWrite, % Guzior, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index
+               ;~ MsgBox, Tu jestem
+               GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd
+               IniWrite, % GuziorX, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_X"
+               IniWrite, % GuziorY, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Y"
+               IniWrite, % GuziorW, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_W"
+               IniWrite, % GuziorH, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_H"
                }
           }
      }
@@ -267,7 +280,7 @@ AddButtonsAndGaps()
      global ; Assume-global mode
      ;~ global WizardStep2_AmountOfKeysHorizontally, WizardStep2_AmountOfKeysVertically
      ;~ global ButtonHeight, ButtonWidth
-     GuziorX := 0 , GuziorY := 0, GuziorW := 0, GuziorH := 0
+     ;~ GuziorX := 0 , GuziorY := 0, GuziorW := 0, GuziorH := 0
      
      Loop, % WizardStep2_AmountOfKeysVertically
           {
@@ -277,15 +290,11 @@ AddButtonsAndGaps()
                if (A_Index = 1)
                     {
                     Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m" . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd", % ExternalLoopIndex . "_" . A_Index
-                    ;~ MsgBox, % "hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd`n" ExternalLoopIndex . "_" . A_Index . "hwnd"
-                    GuiControlGet, Guzior, Pos, %(% ExternalLoopIndex . "_" . A_Index . "hwnd")
                     ;~ GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd ; to działa
-                    ;~ GuiControlGet, Guzior, Pos, %1_1hwnd%
-                    MsgBox, % "Guzior x: " . GuziorX . " Guzior y: " . GuziorY . " GuziorWidth: " . GuziorW . " GuziorHeight: " . GuziorH
+                    ;~ MsgBox, % "Guzior x: " . GuziorX . " Guzior y: " . GuziorY . " GuziorWidth: " . GuziorW . " GuziorHeight: " . GuziorH
                     }
                else ; (A_Index > 1)
                     Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"  . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd", % ExternalLoopIndex . "_" . A_Index
-                    ;~ global ExternalLoopIndex . "_" . A_Index . "hwnd"
                }
           }
      }
