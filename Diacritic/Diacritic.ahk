@@ -266,11 +266,11 @@ if (A_Args.Length() = 0)
     {
     IfExist, *.ini
         {
-        MsgBox, 16, %ApplicationName%.ahk, At least one *.ini file found in directory %A_WorkingDir%`n but current script (%ApplicationName%.ahk) was run without any arguments. One argument`, the name of .ini file`, is obligatory. Therefore script will now exit.
+        MsgBox, 16, %A_ScriptName%, At least one *.ini file found in directory %A_WorkingDir%`n but current script (%A_ScriptName%) was run without any arguments. One argument`, the name of .ini file`, is obligatory. Therefore script will now exit.
         ExitApp, 0
         }
     IfNotExist, *.ini
-        MsgBox, 308, %ApplicationName%.ahk, No input arguments found and no *.ini files found in directory %A_WorkingDir%. Expected a single *.ini file. Do you want to create Default.ini configuration template? Script will exit after the default configuration file Default%ApplicationName%ConfigFile.ini is created.
+        MsgBox, 308, %A_ScriptName%, No input arguments found and no *.ini files found in directory %A_ScriptDir%. Expected a single *.ini file. Do you want to create Default.ini configuration template? Script will exit after the default configuration .ini file is created.
     IfMsgBox, No
         ExitApp, 0
     IfMsgBox, Yes
@@ -311,6 +311,7 @@ else if (A_Args.Length() = 1)
 else if (A_Args.Length() > 1)
     {
     MsgBox, 48, Diacritic.ahk, % "Too many input arguments: " . A_Args.Length() . ". Expected just one, *.ini." 
+    ExitApp, 0
     }
 }    
 

@@ -1,4 +1,11 @@
-﻿#NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
+﻿/*
+Author:      Maciej Słojewski, mslonik, http://mslonik.pl
+Purpose:     Facilitate normal operation for company desktop.
+Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
+License:     GNU GPL v.3
+*/
+
+#NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn  							; Enable warnings to assist with detecting common errors.
 SendMode Input  				; Recommended for new scripts due to its superior speed and reliability.
 #SingleInstance, Force
@@ -12,13 +19,53 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ButtonHorizontalGap    := 10
      ButtonVerticalGap      := 10
      CalculateVariable      := 0
+
+;~ - - - - - - - - - - - - - - - - - - - - ProcessInputArgs() - - - - - - - - - - - - - - - - - - - -
+
+if (A_Args.Length() = 0)
+    {
+    IfExist, *.ini
+        {
+        MsgBox, 16, %A_ScriptName%, At least one *.ini file found in directory `n`n%A_WorkingDir%`n`n but current script (%A_ScriptName%) was run without any arguments.`n`nOne argument`
+              , the name of .ini file`, is obligatory. Therefore script will now exit.
+        ExitApp, 0
+        }
+    IfNotExist, *.ini
+        MsgBox, 308, %A_ScriptName%, No input arguments found and no *.ini files found in directory`n %A_ScriptDir%`n`nExpected at least a single *.ini file
+               .`n`nDo you want to run %WindowWizardTitle% which will help you tocreate Config.ini ? `n`n
+    IfMsgBox, No
+        ExitApp, 0
+    IfMsgBox, Yes
+        Goto  Wizard_Intro
+    }
+else if (A_Args.Length() = 1)
+     {
+     IniRead, MonitorRadioGroup,          % A_ScriptDir . "\Config.ini", Main, WhichMonitor
+     IniRead, ButtonWidth,                % A_ScriptDir . "\Config.ini", Main, ButtonWidth
+     IniRead, ButtonHeight,               % A_ScriptDir . "\Config.ini", Main, ButtonHeight
+     IniRead, ButtonHorizontalGap,        % A_ScriptDir . "\Config.ini", Main, ButtonHorizontalGap
+     IniRead, ButtonVerticalGap,          % A_ScriptDir . "\Config.ini", Main, ButtonVerticalGap
      
+     MsgBox, 0, % WindowWizardTitle
+            ,%   "WhichMonitor:`t`t`t" .         MonitorRadioGroup . "`n"
+               . "ButtonWidth:`t`t`t" .          ButtonWidth . "`n"
+               . "ButtonHeight:`t`t`t" .         ButtonHeight . "`n"
+               . "ButtonHorizontalGap:`t`t" .    ButtonHorizontalGap . "`n"
+               . "ButtonVerticalGap:`t`t" .      ButtonVerticalGap
+     }
+else if (A_Args.Length() > 1)
+    {
+    MsgBox, 48, Diacritic.ahk, % "Too many input arguments: " . A_Args.Length() . ". Expected just one, *.ini." 
+    ExitApp, 0
+    }
+
+
 Wizard_Intro:
      Gui, Wizard_Intro: Font, bold
      Gui, Wizard_Intro: Add, Text, w500, Introduction
      Gui, Wizard_Intro: Font, 
      Gui, Wizard_Intro: Add, Text, w500, When there is no otagle.ini file or on purspose User decided to change crucial application settings, this wizard appears. User is asked to answer 3 questions related to settings of monitor.
-     Gui, Wizard_Intro: Add, Text, w500, Step 1: `t`tChoose a monitor where GUI of OTAGLE is located.
+     Gui, Wizard_Intro: Add, Text, w500, Step 1: `t`tChoose a monitor where GUI of OTAGLE will be located.
      Gui, Wizard_Intro: Add, Text, w500, Step 2: `t`tCheck monitor size, specify amount and size of buttons.
      Gui, Wizard_Intro: Add, Text, w500, Step 3: `t`tPlot on the screen matrix of buttons.
      Gui, Wizard_Intro: Add, Button, % "Default xm+" . 500//3 . " w80 gWizardStep1", &Next
@@ -79,13 +126,21 @@ WizardStep2:
           . "`tMonitor height: " . Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) . " Suggested size of key: 80x80 px and gap size: 20x20 px."
           
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, xm, Specify key size width: `
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 vButtonWidth w25, % ButtonWidth
+     ;~ Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 vButtonWidth w25, % ButtonWidth
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 w50
+     Gui, Wizard_AmountAndSizeOfButtons: Add, UpDown, vButtonWidth Range1-300, % ButtonWidth
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, x+m yp, Specify key size height: `
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 vButtonHeight w25, % ButtonHeight
+     ;~ Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 vButtonHeight w25, % ButtonHeight
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 w50
+     Gui, Wizard_AmountAndSizeOfButtons: Add, UpDown, vButtonHeight Range1-300, % ButtonHeight
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, xm, Specify horizontal gap between buttons: `
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 vButtonHorizontalGap w25, % ButtonHorizontalGap
+     ;~ Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 vButtonHorizontalGap w25, % ButtonHorizontalGap
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 w50
+     Gui, Wizard_AmountAndSizeOfButtons: Add, UpDown, vButtonHorizontalGap Range0-300, % ButtonHorizontalGap
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, x+m yp, Specify vertical gap between buttons: `
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 vButtonVerticalGap w25, % ButtonVerticalGap
+     ;~ Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 vButtonVerticalGap w25, % ButtonVerticalGap
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 w50
+     Gui, Wizard_AmountAndSizeOfButtons: Add, UpDown, vButtonVerticalGap Range0-300, % ButtonVerticalGap
      
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, xm Default w80 gBCalculate, C&alculate 
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, xm, % "Number of keys horizontally in px: " . (CalculateVariable ? WizardStep2_AmountOfKeysHorizontally : "") 
@@ -132,13 +187,20 @@ ToStep3:
 
      Gui, Wizard_PlotMatrixOfButtons: Show
           , % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
-     MsgBox, Press any key to continue
+     MsgBox, 0,  % WindowWizardTitle, Press any key to continue to go back: test new configuration again or save it.
      Gui, Wizard_PlotMatrixOfButtons: Destroy
      GoTo, WizardStep2
 return
 
 SaveConfigurationWizard:
+     IniWrite, % MonitorRadioGroup,       % A_ScriptDir . "\Config.ini", Main, WhichMonitor
+     IniWrite, % ButtonWidth,             % A_ScriptDir . "\Config.ini", Main, ButtonWidth
+     IniWrite, % ButtonHeight,            % A_ScriptDir . "\Config.ini", Main, ButtonHeight
+     IniWrite, % ButtonHorizontalGap,     % A_ScriptDir . "\Config.ini", Main, ButtonHorizontalGap
+     IniWrite, % ButtonVerticalGap,       % A_ScriptDir . "\Config.ini", Main, ButtonVerticalGap
 
+     MsgBox, 0, % WindowWizardTitle, % "Configuration saved to the file :" . A_ScriptDir . "\Config.ini"
+     Gui, Wizard_AmountAndSizeOfButtons: Destroy
 return
 
 CheckMonitorNumbering:
@@ -160,6 +222,44 @@ ExitApp
 
 
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
+
+;~ ProcessInputArgs()
+;~ {
+;~ global A_Args, ApplicationName
+
+;~ if (A_Args.Length() = 0)
+    ;~ {
+    ;~ IfExist, *.ini
+        ;~ {
+        ;~ MsgBox, 16, %A_ScriptName%, At least one *.ini file found in directory `n`n%A_WorkingDir%`n`n but current script (%A_ScriptName%) was run without any arguments. `n`nOne argument`, the name of .ini file`, is obligatory. Therefore script will now exit.
+        ;~ ExitApp, 0
+        ;~ }
+    ;~ IfNotExist, *.ini
+        ;~ MsgBox, 308, %A_ScriptName%, No input arguments found and no *.ini files found in directory`n %A_ScriptDir%`n`nExpected at least a single *.ini file.`n`nDo you want to run %WindowWizardTitle% which will help you tocreate Config.ini ? `n`n
+    ;~ IfMsgBox, No
+        ;~ ExitApp, 0
+    ;~ IfMsgBox, Yes
+        ;~ Goto  Wizard_Intro
+    ;~ }
+;~ else if (A_Args.Length() = 1)
+     ;~ {
+     ;~ IniRead, ButtonWidth,                % A_ScriptDir . "\" . A_Args[1], Main, ButtonWidth
+     ;~ IniRead, ButtonHeight,               % A_ScriptDir . "\" . A_Args[1], Main, ButtonHeight
+     ;~ IniRead, ButtonHorizontalGap,        % A_ScriptDir . "\" . A_Args[1], Main, ButtonHorizontalGap
+     ;~ IniRead, ButtonVerticalGap,          % A_ScriptDir . "\" . A_Args[1], Main, ButtonVerticalGap
+     
+     ;~ MsgBox, % "ButtonWidth: " . ButtonWidth . "`n"
+               ;~ . "ButtonHeight: " . ButtonHeight . "`n"
+               ;~ . "ButtonHorizontalGap: " . ButtonHorizontalGap . "`n"
+               ;~ . "ButtonVerticalGap: " . ButtonVerticalGap
+     ;~ }
+;~ else if (A_Args.Length() > 1)
+    ;~ {
+    ;~ MsgBox, 48, Diacritic.ahk, % "Too many input arguments: " . A_Args.Length() . ". Expected just one, *.ini." 
+    ;~ }
+;~ }    
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 F_ShowMonitorNumbers()
 
