@@ -114,7 +114,7 @@ return
 
 WizardStep2:
      Gui, Wizard_WhereGUI: Destroy
-     
+     ;~ MsgBox, Tu jestem
      Gui, Wizard_AmountAndSizeOfButtons: Font, bold
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, , Step 2: `t`tCheck monitor size, specify amount and size of buttons.
      Gui, Wizard_AmountAndSizeOfButtons: Font
@@ -126,19 +126,15 @@ WizardStep2:
           . "`tMonitor height: " . Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) . " Suggested size of key: 80x80 px and gap size: 20x20 px."
           
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, xm, Specify key size width: `
-     ;~ Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 vButtonWidth w25, % ButtonWidth
      Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 w50
      Gui, Wizard_AmountAndSizeOfButtons: Add, UpDown, vButtonWidth Range1-300, % ButtonWidth
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, x+m yp, Specify key size height: `
-     ;~ Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 vButtonHeight w25, % ButtonHeight
      Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 w50
      Gui, Wizard_AmountAndSizeOfButtons: Add, UpDown, vButtonHeight Range1-300, % ButtonHeight
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, xm, Specify horizontal gap between buttons: `
-     ;~ Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 vButtonHorizontalGap w25, % ButtonHorizontalGap
      Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 w50
      Gui, Wizard_AmountAndSizeOfButtons: Add, UpDown, vButtonHorizontalGap Range0-300, % ButtonHorizontalGap
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, x+m yp, Specify vertical gap between buttons: `
-     ;~ Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 vButtonVerticalGap w25, % ButtonVerticalGap
      Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 w50
      Gui, Wizard_AmountAndSizeOfButtons: Add, UpDown, vButtonVerticalGap Range0-300, % ButtonVerticalGap
      
@@ -148,10 +144,10 @@ WizardStep2:
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, xm, % "Number of keys vertically in px: " . (CalculateVariable ? WizardStep2_AmountOfKeysVertically : "") 
           . " and not used margin at the bottom side in px: " . (CalculateVariable ? WizardStep2_MarginVertically : "")
 
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x50 y+20 w80 gToStep3, &Test
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x50 y+20 w80 gPlotButtons, &Test
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gWizardStep1, &Back
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gExitWizard, &Cancel
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gSaveConfigurationWizard, &Save Config
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gSaveConfigurationWizard hwndSaveConfigHwnd, &Save Config
      SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
      Gui, Wizard_AmountAndSizeOfButtons: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
@@ -166,29 +162,16 @@ BCalculate:
      Goto, WizardStep2
 return
 
-ToStep3:
+PlotButtons:
      Gui, Wizard_AmountAndSizeOfButtons: Submit, NoHide
      Gui, Wizard_AmountAndSizeOfButtons: Destroy
      
      CalculateButtonsAndGaps()
      Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
-
-     Loop, % WizardStep2_AmountOfKeysVertically
-          {
-          ExternalLoopIndex := A_Index
-          Loop, % WizardStep2_AmountOfKeysHorizontally
-               {
-               if (A_Index = 1)
-                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m"                       . " w" . ButtonWidth . " h" . ButtonHeight, % ExternalLoopIndex . "_" . A_Index
-               else ; (A_Index > 1)
-                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"                        . " w" . ButtonWidth . " h" . ButtonHeight, % ExternalLoopIndex . "_" . A_Index
-               }
-          }
-
-     Gui, Wizard_PlotMatrixOfButtons: Show
-          , % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
+     PlotButtonsAndGaps()
+     Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
      MsgBox, 0,  % WindowWizardTitle, Press any key to continue to go back: test new configuration again or save it.
-     Gui, Wizard_PlotMatrixOfButtons: Destroy
+     Gui, Wizard_PlotMatrixOfButtons: Submit ; Hide
      GoTo, WizardStep2
 return
 
@@ -200,7 +183,35 @@ SaveConfigurationWizard:
      IniWrite, % ButtonVerticalGap,       % A_ScriptDir . "\Config.ini", Main, ButtonVerticalGap
 
      MsgBox, 0, % WindowWizardTitle, % "Configuration saved to the file :" . A_ScriptDir . "\Config.ini"
+     ;~ Gui, Wizard_AmountAndSizeOfButtons: Destroy
+     ;~ Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gSaveConfigurationWizard, &Save Config
+     ;~ GuiControl, Hide, SaveConfigHwnd
+     GuiControl, Disable, % SaveConfigHwnd
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gWizardStep3, C&ontinue
+return
+
+WizardStep3:
      Gui, Wizard_AmountAndSizeOfButtons: Destroy
+     
+     Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
+     if (WinExist())
+          Gui, Wizard_PlotMatrixOfButtons: Show
+     else
+          {
+          CalculateButtonsAndGaps()
+          Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
+          PlotButtonsAndGaps()
+          Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
+          }
+          
+     Gui, Wizard_ConfigureFunctions: Font, bold
+     Gui, Wizard_ConfigureFunctions: Add, Text, , Step 3: `t`tAssociate functions with buttons.
+     Gui, Wizard_ConfigureFunctions: Font
+     Gui, Wizard_ConfigureFunctions: Add, Text, , Click any of the buttons in second window and associate a function to it.
+
+     Gui, Wizard_ConfigureFunctions: Show
+          , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
+          . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
 return
 
 CheckMonitorNumbering:
@@ -222,6 +233,26 @@ ExitApp
 
 
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
+
+PlotButtonsAndGaps()
+     {
+     global WizardStep2_AmountOfKeysHorizontally, WizardStep2_AmountOfKeysVertically
+     global ButtonHeight, ButtonWidth
+     
+     Loop, % WizardStep2_AmountOfKeysVertically
+          {
+          ExternalLoopIndex := A_Index
+          Loop, % WizardStep2_AmountOfKeysHorizontally
+               {
+               if (A_Index = 1)
+                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m" . " w" . ButtonWidth . " h" . ButtonHeight, % ExternalLoopIndex . "_" . A_Index
+               else ; (A_Index > 1)
+                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"  . " w" . ButtonWidth . " h" . ButtonHeight, % ExternalLoopIndex . "_" . A_Index
+               }
+          }
+     }
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 ;~ ProcessInputArgs()
 ;~ {
