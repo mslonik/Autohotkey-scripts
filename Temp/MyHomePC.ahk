@@ -16,8 +16,6 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 ;~ - - - - - - - - - - End of Global Variables - - - - - - - - - - -
 
 +^t:: ; Trigger the main function
-    MsgBox, % "A_ComputerName: " . A_ComputerName . ". A_UserName: " . A_UserName . "."
-    CapitalizeFirstLetters()
 return
 
  ;~ - - - - - - - - - - - - - - - - - - - - - - SECTION OF FUNCTIONS - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -29,23 +27,34 @@ return
 ;~ - - - - - - - - - - - - - - - - - - - - - - - - SPECIAL HOTKEYS - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 +^r::
-    Reload
-    Sleep 1000 ; If successful, the reload will close this instance during the Sleep, so the line below will never be reached.
-    MsgBox, 4,, The script could not be reloaded. Would you like to open it for editing?
-    IfMsgBox, Yes, Edit
+
+Gui, Add, Button, gA1 xm ym w80 h80 hwndButtonA1hwnd, One
+Gui, Add, Button, gA2 x+m yp w80 h80, Two
+;~ F1=c:\Users\macie\Documents\GitHub\Autohotkey-scripts\Otagle\Default_80x80.png
+;~ Gui, Add, Button, gA1 x0 y0 w80 h80 BackgroundTrans
+;~ Gui, Add, Picture, gA1 x0 y0 w80 h-1 +0x4000000 AltSubmit, %f1%
+;~ Gui, Show,, My GUI
+
+Gui, Show,, My Gui
 return
 
-+^e::Edit
+A1:
+;~ Gui,1:submit,nohide
+	MsgBox, Clicked button One
+; do something
+return
 
-CapitalizeFirstLetters()
-{
-	Loop, 26 
-		Hotstring(":C?*:. " . Chr(A_Index + 96),". " . Chr(A_Index + 64))
-	Loop, 26 
-		Hotstring(":CR?*:! " . Chr(A_Index + 96),"! " . Chr(A_Index + 64))
-	Loop, 26 
-		Hotstring(":C?*:? " . Chr(A_Index + 96),"? " . Chr(A_Index + 64))
-	Loop, 26 
-		Hotstring(":C?*:`n" . Chr(A_Index + 96),"`n" . Chr(A_Index + 64))
+A2:
+	GuiControl, Hide, % ButtonA1hwnd
+	MsgBox, Hidden button One
+	Gui, Show,, My Gui
+return
+
+guiclose:
+exitapp
+
+return
+
++^e:: ; Edit
+
 Return
-}
