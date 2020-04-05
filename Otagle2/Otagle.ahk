@@ -176,8 +176,6 @@ PlotButtons:
 return
 
 SaveConfigurationWizard:
-
-     ; tutaj trzeba zrobić zapisanie guzików
      if (CalculateVariable = 0)
           {
           MsgBox, 0, % WindowWizardTitle, Press Calculate button at first.
@@ -240,6 +238,26 @@ WizardStep3:
           , % WindowWizardTitle
 return
 
+ButtonPressed:
+     ;~ MsgBox, % "A_GuiControl: " . A_GuiControl
+     Gui, Wizard_ConfigureFunctions: Submit, Hide
+     Gui, Wizard_ChoosePicture: Add, ListView, r20 w500 gChoosePicture grid, Folder|File Name
+     Loop, %A_MyDocuments%\*.*
+          LV_Add("", A_LoopFileName, A_LoopFileSizeKB)
+     
+     LV_ModifyCol()
+     LV_ModifyCol(2, "Integer")
+     Gui, Wizard_ChoosePicture: Show
+return
+
+ChoosePicture:
+     if (A_GuiEvent = "DoubleClick")
+          {
+          LV_GetText(RowText, A_EventInfo)
+          ToolTip You double-clicked row number %A_EventInfo%. Text: "%RowText%"
+          }
+return
+
 CheckMonitorNumbering:
      F_ShowMonitorNumbers()
      SetTimer, DestroyGuis, -3000     
@@ -253,9 +271,9 @@ DestroyGuis:
      Gui, Font ; restore the font to the system's default GUI typeface, zize and color.
 return
 
-
+GuiClose:
 ExitWizard:
-ExitApp
+     ExitApp
 
 
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
@@ -292,7 +310,7 @@ F_ReadConfig_ini()
                ;~ . "ButtonY`t`t`t" . ButtonY . "`n"
                ;~ . "ButtonW`t`t`t" . ButtonW . "`n"
                ;~ . "ButtonH`t`t`t" . ButtonH . "`n"
-               Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd", % ExternalLoopIndex . "_" . A_Index
+               Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd" . " gButtonPressed", % ExternalLoopIndex . "_" . A_Index
                }
           }
           SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
@@ -333,7 +351,6 @@ F_AddButtonsAndGaps()
      global ; Assume-global mode
      ;~ global WizardStep2_AmountOfKeysHorizontally, WizardStep2_AmountOfKeysVertically
      ;~ global ButtonHeight, ButtonWidth
-     ;~ GuziorX := 0 , GuziorY := 0, GuziorW := 0, GuziorH := 0
      
      Loop, % WizardStep2_AmountOfKeysVertically
           {
@@ -342,12 +359,10 @@ F_AddButtonsAndGaps()
                {
                if (A_Index = 1)
                     {
-                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m" . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd", % ExternalLoopIndex . "_" . A_Index
-                    ;~ GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd ; to działa
-                    ;~ MsgBox, % "Guzior x: " . GuziorX . " Guzior y: " . GuziorY . " GuziorWidth: " . GuziorW . " GuziorHeight: " . GuziorH
+                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m" . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd"  . " gButtonPressed", % ExternalLoopIndex . "_" . A_Index
                     }
                else ; (A_Index > 1)
-                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"  . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd", % ExternalLoopIndex . "_" . A_Index
+                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"  . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd" . " gButtonPressed", % ExternalLoopIndex . "_" . A_Index
                }
           }
      }
@@ -357,11 +372,6 @@ F_ShowMonitorNumbers()
 
 {
      global
-     ;~ global HowManyMonitors, WhichIsPrimary
-     ;~ global SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN
-     ;~ global MonitorBoundingCoordinates_
-     ;~ global MonitorBoundingCoordinates_Left, MonitorBoundingCoordinates_Right, MonitorBoundingCoordinates_Top, MonitorBoundingCoordinates_Bottom
-
 
      Loop, %HowManyMonitors%
           {
