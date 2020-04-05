@@ -44,40 +44,7 @@ if (A_Args.Length() = 0)
     }
 else if (A_Args.Length() = 1)
      {
-     IniRead, MonitorRadioGroup,          % A_ScriptDir . "\Config.ini", Main, WhichMonitor
-     IniRead, ButtonWidth,                % A_ScriptDir . "\Config.ini", Main, ButtonWidth
-     IniRead, ButtonHeight,               % A_ScriptDir . "\Config.ini", Main, ButtonHeight
-     IniRead, ButtonHorizontalGap,        % A_ScriptDir . "\Config.ini", Main, ButtonHorizontalGap
-     IniRead, ButtonVerticalGap,          % A_ScriptDir . "\Config.ini", Main, ButtonVerticalGap
-     
-     IniRead, WizardStep2_AmountOfKeysHorizontally, % A_ScriptDir . "\Config.ini", Layer1, Amount of keys horizontally
-     IniRead, WizardStep2_AmountOfKeysVertically,   % A_ScriptDir . "\Config.ini", Layer1, Amount of keys vertically
-
-     Loop, % WizardStep2_AmountOfKeysVertically
-          {
-          ExternalLoopIndex := A_Index
-          Loop, % WizardStep2_AmountOfKeysHorizontally
-               {
-               ;~ GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd
-               IniRead, ButtonX, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_X"
-               IniRead, ButtonY, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Y"
-               IniRead, ButtonW, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_W"
-               IniRead, ButtonH, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_H"
-          ;~ MsgBox, 0, % WindowWizardTitle
-               ;~ , % "WizardStep2_AmountOfKeysHorizontally: " . WizardStep2_AmountOfKeysHorizontally .    "`n"
-               ;~ . "WizardStep2_AmountOfKeysVertically: "     . WizardStep2_AmountOfKeysVertically .      "`n"
-               ;~ . "ExternalLoopIndex:`t"                     . ExternalLoopIndex .                       "`n"
-               ;~ . "A_Index:`t`t`t"                           . A_Index .                                 "`n"
-               ;~ . "ButtonX`t`t`t" . ButtonX . "`n"
-               ;~ . "ButtonY`t`t`t" . ButtonY . "`n"
-               ;~ . "ButtonW`t`t`t" . ButtonW . "`n"
-               ;~ . "ButtonH`t`t`t" . ButtonH . "`n"
-               Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd", % ExternalLoopIndex . "_" . A_Index
-               }
-          }
-          SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
-          Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", O T A G L E: Layer 1
-
+     F_ReadConfig_ini()
      return
      }
 else if (A_Args.Length() > 1)
@@ -279,6 +246,46 @@ ExitApp
 
 
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
+
+F_ReadConfig_ini()
+     {
+     global
+     
+     IniRead, MonitorRadioGroup,          % A_ScriptDir . "\Config.ini", Main, WhichMonitor
+     IniRead, ButtonWidth,                % A_ScriptDir . "\Config.ini", Main, ButtonWidth
+     IniRead, ButtonHeight,               % A_ScriptDir . "\Config.ini", Main, ButtonHeight
+     IniRead, ButtonHorizontalGap,        % A_ScriptDir . "\Config.ini", Main, ButtonHorizontalGap
+     IniRead, ButtonVerticalGap,          % A_ScriptDir . "\Config.ini", Main, ButtonVerticalGap
+     
+     IniRead, WizardStep2_AmountOfKeysHorizontally, % A_ScriptDir . "\Config.ini", Layer1, Amount of keys horizontally
+     IniRead, WizardStep2_AmountOfKeysVertically,   % A_ScriptDir . "\Config.ini", Layer1, Amount of keys vertically
+
+     Loop, % WizardStep2_AmountOfKeysVertically
+          {
+          ExternalLoopIndex := A_Index
+          Loop, % WizardStep2_AmountOfKeysHorizontally
+               {
+               ;~ GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd
+               IniRead, ButtonX, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_X"
+               IniRead, ButtonY, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Y"
+               IniRead, ButtonW, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_W"
+               IniRead, ButtonH, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_H"
+          ;~ MsgBox, 0, % WindowWizardTitle
+               ;~ , % "WizardStep2_AmountOfKeysHorizontally: " . WizardStep2_AmountOfKeysHorizontally .    "`n"
+               ;~ . "WizardStep2_AmountOfKeysVertically: "     . WizardStep2_AmountOfKeysVertically .      "`n"
+               ;~ . "ExternalLoopIndex:`t"                     . ExternalLoopIndex .                       "`n"
+               ;~ . "A_Index:`t`t`t"                           . A_Index .                                 "`n"
+               ;~ . "ButtonX`t`t`t" . ButtonX . "`n"
+               ;~ . "ButtonY`t`t`t" . ButtonY . "`n"
+               ;~ . "ButtonW`t`t`t" . ButtonW . "`n"
+               ;~ . "ButtonH`t`t`t" . ButtonH . "`n"
+               Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd", % ExternalLoopIndex . "_" . A_Index
+               }
+          }
+          SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
+          Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", O T A G L E: Layer 1
+     }
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 SavePositionOfButtons()
      {
