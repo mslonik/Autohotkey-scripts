@@ -24,6 +24,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      MonitorBoundingCoordinates_Top        := 0
      MonitorBoundingCoordinates_Bottom     := 0
 
+DetectHiddenWindows, On ; Caution!
 ;~ - - - - - - - - - - - - - - - - - - - - ProcessInputArgs() - - - - - - - - - - - - - - - - - - - -
 
 if (A_Args.Length() = 0)
@@ -35,8 +36,8 @@ if (A_Args.Length() = 0)
         ExitApp, 0
         }
     IfNotExist, *.ini
-        MsgBox, 308, %A_ScriptName%, No input arguments found and no *.ini files found in directory`n %A_ScriptDir%`n`nExpected at least a single *.ini file
-               .`n`nDo you want to run %WindowWizardTitle% which will help you tocreate Config.ini ? `n`n
+        MsgBox, 4, %A_ScriptName%, No input arguments found and no *.ini files found in directory`n %A_ScriptDir%`n`nExpected at least a single *.ini file
+               .`n`nDo you want to run %WindowWizardTitle% which will help you to create Config.ini ? `n`n
     IfMsgBox, No
         ExitApp, 0
     IfMsgBox, Yes
@@ -144,8 +145,13 @@ WizardStep2:
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gSaveConfigurationWizard hwndSaveConfigHwnd, &Save Config
      SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
      Gui, Wizard_AmountAndSizeOfButtons: Show
+          , % "hide" . " x" . MonitorBoundingCoordinates_Left 
+          . " y" . MonitorBoundingCoordinates_Top
+          , HiddenAttempt
+     WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
+     Gui, Wizard_AmountAndSizeOfButtons: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
-          . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
+          . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
 return
 
 BCalculate:
@@ -162,7 +168,7 @@ PlotButtons:
      
      CalculateButtonsAndGaps()
      Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
-     AddButtonsAndGaps()
+     F_AddButtonsAndGaps()
      Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
      MsgBox, 0,  % WindowWizardTitle, Press any key to continue to go back: test new configuration again or save it.
      Gui, Wizard_PlotMatrixOfButtons: Submit ; Hide
@@ -188,13 +194,13 @@ SaveConfigurationWizard:
      Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
      if (WinExist())
           {
-          SavePositionOfButtons()     
+          F_SavePositionOfButtons()     
           }
      else
           {
           CalculateButtonsAndGaps()
-          AddButtonsAndGaps()
-          SavePositionOfButtons()
+          F_AddButtonsAndGaps()
+          F_SavePositionOfButtons()
           }
 
      MsgBox, 0, % WindowWizardTitle, % "Configuration saved to the file :`n" . A_ScriptDir . "\Config.ini"
@@ -213,7 +219,7 @@ WizardStep3:
           {
           CalculateButtonsAndGaps()
           Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
-          AddButtonsAndGaps()
+          F_AddButtonsAndGaps()
           Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
           }
           
@@ -223,8 +229,15 @@ WizardStep3:
      Gui, Wizard_ConfigureFunctions: Add, Text, , Click any of the buttons in second window and associate a function to it.
 
      Gui, Wizard_ConfigureFunctions: Show
+          , % "hide" . " x" . MonitorBoundingCoordinates_Left 
+          . " y" . MonitorBoundingCoordinates_Top
+          , HiddenAttempt
+     WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
+     ;~ MsgBox, 0, % "WizardWindow_Width:`t" . WizardWindow_Width . "`nWizardWindow_Height:`t" . WizardWindow_Height
+     Gui, Wizard_ConfigureFunctions: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
-          . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
+          . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
+          , % WindowWizardTitle
 return
 
 CheckMonitorNumbering:
@@ -287,12 +300,14 @@ F_ReadConfig_ini()
      }
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-SavePositionOfButtons()
+F_SavePositionOfButtons()
      {
      global ; Assume-global mode
      local ExternalLoopIndex, Guzior := 0
      ;~ global WizardStep2_AmountOfKeysVertically, WizardStep2_AmountOfKeysHorizontally
      local GuziorX := 0, GuziorY := 0, GuziorW := 0, GuziorH := 0
+     local PictureFilePath := ""
+     local ButtonScript := ""
      
      IniWrite, % WizardStep2_AmountOfKeysHorizontally, % A_ScriptDir . "\Config.ini", Layer1, Amount of keys horizontally
      IniWrite, % WizardStep2_AmountOfKeysVertically, % A_ScriptDir . "\Config.ini", Layer1, Amount of keys vertically
@@ -303,15 +318,17 @@ SavePositionOfButtons()
                {
                ;~ MsgBox, Tu jestem
                GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd
-               IniWrite, % GuziorX, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_X"
-               IniWrite, % GuziorY, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Y"
-               IniWrite, % GuziorW, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_W"
-               IniWrite, % GuziorH, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_H"
+               IniWrite, % GuziorX,         % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_X"
+               IniWrite, % GuziorY,         % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Y"
+               IniWrite, % GuziorW,         % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_W"
+               IniWrite, % GuziorH,         % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_H"
+               IniWrite, % PictureFilePath, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Picture"
+               IniWrite, % ButtonScript,    % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Action"
                }
           }
      }
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-AddButtonsAndGaps()
+F_AddButtonsAndGaps()
      {
      global ; Assume-global mode
      ;~ global WizardStep2_AmountOfKeysHorizontally, WizardStep2_AmountOfKeysVertically
