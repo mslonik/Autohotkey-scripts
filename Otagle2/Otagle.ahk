@@ -19,6 +19,10 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ButtonHorizontalGap    := 10
      ButtonVerticalGap      := 10
      CalculateVariable      := 0
+     MonitorBoundingCoordinates_Left       := 0
+     MonitorBoundingCoordinates_Right      := 0
+     MonitorBoundingCoordinates_Top        := 0
+     MonitorBoundingCoordinates_Bottom     := 0
 
 ;~ - - - - - - - - - - - - - - - - - - - - ProcessInputArgs() - - - - - - - - - - - - - - - - - - - -
 
@@ -46,12 +50,35 @@ else if (A_Args.Length() = 1)
      IniRead, ButtonHorizontalGap,        % A_ScriptDir . "\Config.ini", Main, ButtonHorizontalGap
      IniRead, ButtonVerticalGap,          % A_ScriptDir . "\Config.ini", Main, ButtonVerticalGap
      
-     MsgBox, 0, % WindowWizardTitle
-            ,%   "WhichMonitor:`t`t`t" .         MonitorRadioGroup . "`n"
-               . "ButtonWidth:`t`t`t" .          ButtonWidth . "`n"
-               . "ButtonHeight:`t`t`t" .         ButtonHeight . "`n"
-               . "ButtonHorizontalGap:`t`t" .    ButtonHorizontalGap . "`n"
-               . "ButtonVerticalGap:`t`t" .      ButtonVerticalGap
+     IniRead, WizardStep2_AmountOfKeysHorizontally, % A_ScriptDir . "\Config.ini", Layer1, Amount of keys horizontally
+     IniRead, WizardStep2_AmountOfKeysVertically,   % A_ScriptDir . "\Config.ini", Layer1, Amount of keys vertically
+
+     Loop, % WizardStep2_AmountOfKeysVertically
+          {
+          ExternalLoopIndex := A_Index
+          Loop, % WizardStep2_AmountOfKeysHorizontally
+               {
+               ;~ GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd
+               IniRead, ButtonX, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_X"
+               IniRead, ButtonY, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Y"
+               IniRead, ButtonW, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_W"
+               IniRead, ButtonH, % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_H"
+          ;~ MsgBox, 0, % WindowWizardTitle
+               ;~ , % "WizardStep2_AmountOfKeysHorizontally: " . WizardStep2_AmountOfKeysHorizontally .    "`n"
+               ;~ . "WizardStep2_AmountOfKeysVertically: "     . WizardStep2_AmountOfKeysVertically .      "`n"
+               ;~ . "ExternalLoopIndex:`t"                     . ExternalLoopIndex .                       "`n"
+               ;~ . "A_Index:`t`t`t"                           . A_Index .                                 "`n"
+               ;~ . "ButtonX`t`t`t" . ButtonX . "`n"
+               ;~ . "ButtonY`t`t`t" . ButtonY . "`n"
+               ;~ . "ButtonW`t`t`t" . ButtonW . "`n"
+               ;~ . "ButtonH`t`t`t" . ButtonH . "`n"
+               Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd", % ExternalLoopIndex . "_" . A_Index
+               }
+          }
+          SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
+          Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", O T A G L E: Layer 1
+
+     return
      }
 else if (A_Args.Length() > 1)
     {
@@ -260,6 +287,8 @@ SavePositionOfButtons()
      ;~ global WizardStep2_AmountOfKeysVertically, WizardStep2_AmountOfKeysHorizontally
      local GuziorX := 0, GuziorY := 0, GuziorW := 0, GuziorH := 0
      
+     IniWrite, % WizardStep2_AmountOfKeysHorizontally, % A_ScriptDir . "\Config.ini", Layer1, Amount of keys horizontally
+     IniWrite, % WizardStep2_AmountOfKeysVertically, % A_ScriptDir . "\Config.ini", Layer1, Amount of keys vertically
      Loop, % WizardStep2_AmountOfKeysVertically
           {
           ExternalLoopIndex := A_Index
@@ -303,10 +332,11 @@ AddButtonsAndGaps()
 F_ShowMonitorNumbers()
 
 {
-     global HowManyMonitors, WhichIsPrimary
+     global
+     ;~ global HowManyMonitors, WhichIsPrimary
      ;~ global SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN
-     global MonitorBoundingCoordinates_
-     global MonitorBoundingCoordinates_Left, MonitorBoundingCoordinates_Right, MonitorBoundingCoordinates_Top, MonitorBoundingCoordinates_Bottom
+     ;~ global MonitorBoundingCoordinates_
+     ;~ global MonitorBoundingCoordinates_Left, MonitorBoundingCoordinates_Right, MonitorBoundingCoordinates_Top, MonitorBoundingCoordinates_Bottom
 
 
      Loop, %HowManyMonitors%
