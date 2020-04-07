@@ -51,6 +51,7 @@ WindowTransparency	:= 0
 MyHotstring 		:= ""
 English_USA 		:= 0x0409   ; see AutoHotkey help: Language Codes
 SelectedRow := 0
+delay := 200
 ; --------------- END OF GLOBAL VARIABLES SECTION ----------------------
 if(PrevSec)
 	gosub HotstringAutoExec
@@ -282,12 +283,22 @@ return
 ; - - - - - - - - - - - - SECTION OF FUNCTIONS  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ViaClipboard(ReplacementString)
 {
-	global MyHotstring
+	global MyHotstring, oWord, delay
 	
 	ClipboardBackup := ClipboardAll
 	Clipboard := ReplacementString
-	Send, ^v
-	Sleep, 200 ; this sleep is required surprisingly
+	ClipWait
+	ifWinActive,, "Microsoft Word"
+	{
+		oWord := ComObjActive("Word.Application")
+		oWord.Selection.Paste
+		oWord := ""
+	}
+	else
+	{
+		Send, ^v
+	}
+	Sleep, %delay% ; this sleep is required surprisingly
 	Clipboard := ClipboardBackup
 	ClipboardBackup := ""
 	MyHotstring := ReplacementString
@@ -527,10 +538,11 @@ Gui, Hotstring:New, +Resize
 Gui, Hotstring:Font, s14 cBlue Bold , Calibri
 Gui, Hotstring:Add, Text, Section vText1 , Enter Hotstring
 Gui, Hotstring:Font, s12 cBlack Norm
-Gui, Hotstring:Add, Edit, w100 vNewString ys, 
-
+Gui, Hotstring:Add, Edit, w100 vNewString ys,
+Gui, Hotstring:Add, Slider, ys vMySlider gmySlider Range100-1000 ToolTipBottom Buddy1999, %delay%
+Gui, Hotstring:Add, Text,yp+30 x285 vDelayText , Hotstring delay %delay% ms
 Gui, Hotstring:Font, s14 cBlue Bold
-Gui, Hotstring:Add, Text,  xs vText2, Enter Replacement Text 
+Gui, Hotstring:Add, Text,  xs yp+5 vText2, Enter Replacement Text 
 Gui, Hotstring:Font, s12 cBlack Norm
 Gui, Hotstring:Add, Edit, w500 vTextInsert xs
 Gui, Hotstring:Add, Edit, w500 vStringCombo xs gViewString ReadOnly,
@@ -594,6 +606,14 @@ if (PrevSec != "")
 	}
 }
 Return
+
+MySlider:
+	delay := MySlider
+	if (delay = 1000)
+		GuiControl,,DelayText, Hotstring delay 1 s
+	else
+		GuiControl,,DelayText, Hotstring delay %delay% ms
+return
 
 About:
 Gui, MyAbout: Font, Bold
@@ -958,7 +978,7 @@ If !(SelectedRow := LV_GetNext()) {
 }
 LV_GetText(Options, SelectedRow, 1)
 LV_GetText(NewString, SelectedRow, 2)
-Options := SubStr(Options, 2, StrLen(Options)-2)
+;Options := SubStr(Options, 2, StrLen(Options)-2)
 LV_GetText(Fun, SelectedRow, 3)
 if (Fun = "A")
 {
@@ -969,7 +989,7 @@ else
   SendFun := "ViaClipboard"
 }
 LV_GetText(TextInsert, SelectedRow, 5)
-TextInsert := SubStr(TextInsert, 2, StrLen(TextInsert)-2)
+;TextInsert := SubStr(TextInsert, 2, StrLen(TextInsert)-2)
 LV_GetText(OnOff, SelectedRow, 4)
 Hotstring(":"Options ":" NewString,func(SendFun).bind(TextInsert),OnOff)
 HotString := % "Hotstring("":" . Options . ":" . NewString . """, func(""" . SendFun . """).bind(""" . TextInsert . """), """ . OnOff . """)"
@@ -999,8 +1019,10 @@ LV_Delete()
     {str1 := StrSplit(SectionList[A_Index], """")
     strh := StrSplit(str1[2], ":")
     strop := SubStr(str1[2], 1, StrLen(str1[2])-StrLen(strh[3]))
+	strop := SubStr(strop, 2, StrLen(strop) -2 )
     str2 := StrSplit(SectionList[A_Index], "bind(")  
-    str2 := SubStr(str2[2], 1, StrLen(str2[2])-8) 
+    str2 := SubStr(str2[2], 1, StrLen(str2[2])-8)
+	str2 := SubStr(str2, 2, StrLen(str2) - 2)
     if InStr(SectionList[A_Index], "ViaClipboard")
     {
 		LV_Add("",strop, strh[3], "C" ,"On",str2)
@@ -1015,8 +1037,10 @@ LV_Delete()
     str1 := StrSplit(SectionList[A_Index], """")
     strh := StrSplit(str1[2], ":")
     strop := SubStr(str1[2], 1, StrLen(str1[2])-StrLen(strh[3]))
+	strop := SubStr(strop, 2, StrLen(strop) -2 )
     str2 := StrSplit(SectionList[A_Index], "bind(")  
     str2 := SubStr(str2[2], 1, StrLen(str2[2])-9) 
+	str2 := SubStr(str2, 2, StrLen(str2) - 2)
      if InStr(SectionList[A_Index], "ViaClipboard")
     {
       LV_Add("",strop, strh[3], "C" , "Off",str2)
