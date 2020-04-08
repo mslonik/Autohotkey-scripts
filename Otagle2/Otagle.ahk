@@ -12,21 +12,31 @@ SendMode Input  				; Recommended for new scripts due to its superior speed and 
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #Persistent
 
-     MonitorRadioGroup      := 0
-     WindowWizardTitle      := "O T A G L E Configuration Wizard"
-     ButtonWidth            := 80
-     ButtonHeight           := 80
-     ButtonHorizontalGap    := 10
-     ButtonVerticalGap      := 10
-     CalculateVariable      := 0
-     MonitorBoundingCoordinates_Left       := 0
-     MonitorBoundingCoordinates_Right      := 0
-     MonitorBoundingCoordinates_Top        := 0
-     MonitorBoundingCoordinates_Bottom     := 0
+     MonitorRadioGroup                      := 3 ; 0
+     WindowWizardTitle                      := "O T A G L E Configuration Wizard"
+     ButtonWidth                            := 300 ; 80
+     ButtonHeight                           := 300 ; 80
+     ButtonHorizontalGap                    := 10
+     ButtonVerticalGap                      := 10
+     CalculateVariable                      := 0
+     MonitorBoundingCoordinates_Left        := 0
+     MonitorBoundingCoordinates_Right       := 0
+     MonitorBoundingCoordinates_Top         := 0
+     MonitorBoundingCoordinates_Bottom      := 0
+     PictureSelected                        := 0
+     ScriptSelected                         := 0
+     ReadButtonPosX                         := 0
+     ReadButtonPosY                         := 0
+     ReadButtonPosW                         := 0
+     ReadButtonPosH                         := 0
+
+; Temp:
+WizardStep2_AmountOfKeysHorizontally := 6
+WizardStep2_AmountOfKeysVertically   := 3
 
 DetectHiddenWindows, On ; Caution!
 ;~ - - - - - - - - - - - - - - - - - - - - ProcessInputArgs() - - - - - - - - - - - - - - - - - - - -
-
+/*
 if (A_Args.Length() = 0)
     {
     IfExist, *.ini
@@ -109,7 +119,6 @@ return
 
 WizardStep2:
      Gui, Wizard_WhereGUI: Destroy
-     ;~ MsgBox, Tu jestem
      Gui, Wizard_AmountAndSizeOfButtons: Font, bold
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, , Step 2: `t`tCheck monitor size, specify amount and size of buttons.
      Gui, Wizard_AmountAndSizeOfButtons: Font
@@ -206,16 +215,17 @@ SaveConfigurationWizard:
      GuiControl, Disable, % SaveConfigHwnd
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gWizardStep3, C&ontinue
 return
+*/
 
 WizardStep3:
-     Gui, Wizard_AmountAndSizeOfButtons: Destroy
+     ;~ Gui, Wizard_AmountAndSizeOfButtons: Destroy
      
      Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
      if (WinExist())
           Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
      else
           {
-          CalculateButtonsAndGaps()
+          ;~ CalculateButtonsAndGaps()
           Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
           F_AddButtonsAndGaps()
           Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle
@@ -224,7 +234,7 @@ WizardStep3:
      Gui, Wizard_ConfigureFunctions: Font, bold
      Gui, Wizard_ConfigureFunctions: Add, Text, , Step 3: `t`tAssociate functions with buttons.
      Gui, Wizard_ConfigureFunctions: Font
-     Gui, Wizard_ConfigureFunctions: Add, Text, , Click any of the buttons in second window and associate a function to it.
+     Gui, Wizard_ConfigureFunctions: Add, Text, , Click any of the buttons in second window and associate a picture and function to it.
 
      Gui, Wizard_ConfigureFunctions: Show
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
@@ -232,6 +242,9 @@ WizardStep3:
           , HiddenAttempt
      WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
      ;~ MsgBox, 0, % "WizardWindow_Width:`t" . WizardWindow_Width . "`nWizardWindow_Height:`t" . WizardWindow_Height
+     
+     ; Tu jestem. Muszę jeszcze wymusić wartości dla wartości granicznych monitora i chyba będzie dobrze.
+     
      Gui, Wizard_ConfigureFunctions: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
           . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
@@ -239,24 +252,47 @@ WizardStep3:
 return
 
 ButtonPressed:
-     ;~ MsgBox, % "A_GuiControl: " . A_GuiControl
-     Gui, Wizard_ConfigureFunctions: Submit, Hide
-     Gui, Wizard_ChoosePicture: Add, ListView, r20 w500 gChoosePicture grid, Folder|File Name
-     Loop, %A_MyDocuments%\*.*
-          LV_Add("", A_LoopFileName, A_LoopFileSizeKB)
-     
-     LV_ModifyCol()
-     LV_ModifyCol(2, "Integer")
-     Gui, Wizard_ChoosePicture: Show
+     Gui,               Wizard_ConfigureFunctions: Show, Hide
+     Gui,               Wizard_PlotMatrixOfButtons: +OwnDialogs
+     GuiControlGet,     ReadButtonPos, Wizard_PlotMatrixOfButtons: Pos, % A_GuiControl
+     FileSelectFile,    SelectedFile, 3, %A_ScriptDir%, Select a picture file, Picture (*.png; *.jpg)
+     if (SelectedFile = "")
+          {
+          MsgBox,   No picture file was selected.
+          Gui,      Wizard_ConfigureFunctions: Show
+          }
+     else
+          {
+          ;~ MsgBox,   The chosen button A_GuiControl: %A_GuiControl%`nThe chosen script file:`n%SelectedFile%`nThe X coordinate is %ReadButtonPosX%. The Y coordinate is %ReadButtonPosY%. The width is %ReadButtonPosW%. The height is %ReadButtonPosH%.
+          ;~ Gui,      Wizard_ConfigureFunctions: Show
+          PictureSelected := 1
+          }
+     ;~ FileSelectFile, SelectedFile, 3, %A_ScriptDir%, Select an .ahk script file, AHK script (*.ahk)
+     ;~ if (SelectedFile = "")
+          ;~ {
+          ;~ MsgBox,   No script file was selected.
+          Gui,      Wizard_ConfigureFunctions: Show
+          ;~ }
+     ;~ else
+          ;~ {
+          ;~ MsgBox,   The chosen button A_GuiControl: %A_GuiControl%`nThe chosen script file:`n%SelectedFile%
+          ;~ ScriptSelected := 1
+          ;~ }
+     if (PictureSelected)
+          {
+          PictureSelected := 0
+          GuiControl, Wizard_PlotMatrixOfButtons: Hide, % A_GuiControl
+          Gui, Wizard_PlotMatrixOfButtons: Add, Picture, % "x" . ReadButtonPosX . " y" . ReadButtonPosY . " w" . ReadButtonPosW . " h-1", % SelectedFile
+          Gui, Wizard_PlotMatrixOfButtons: Show
+          MsgBox, Tu jestem!
+          }
+     if (ScriptSelected)
+          {
+          ScriptSelected := 0
+          }
+     Gui,      Wizard_ConfigureFunctions: Show
 return
 
-ChoosePicture:
-     if (A_GuiEvent = "DoubleClick")
-          {
-          LV_GetText(RowText, A_EventInfo)
-          ToolTip You double-clicked row number %A_EventInfo%. Text: "%RowText%"
-          }
-return
 
 CheckMonitorNumbering:
      F_ShowMonitorNumbers()
