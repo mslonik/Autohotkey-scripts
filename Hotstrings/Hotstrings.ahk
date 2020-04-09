@@ -261,6 +261,7 @@ return
 $!BackSpace:: 	;~ Alt + Backspace as in MS Word: rolls back last Autocorrect action
 	if (MyHotstring && (A_ThisHotkey != A_PriorHotkey))
 		{
+			
 		;~ MsgBox, % "MyHotstring: " . MyHotstring . " A_ThisHotkey: " . A_ThisHotkey . " A_PriorHotkey: " . A_PriorHotkey
 		ToolTip, Undo the last hotstring., % A_CaretX, % A_CaretY - 20
 		Send, % "{BackSpace " . StrLen(MyHotstring) . "}" . SubStr(A_PriorHotkey, InStr(A_PriorHotkey, ":", CaseSensitive := false, StartingPos := 1, Occurrence := 2) + 1)
@@ -321,8 +322,9 @@ NormalWay(ReplacementString)
 	{
 		Send, {LCtrl up}
 	}
+	
 	MyHotstring := SubStr(A_ThisHotkey, InStr(A_ThisHotkey, ":", false, 1, 2) + 1)
-	;Hotstring("Reset")
+	;Hotstring("Reset") 
 }
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -557,7 +559,7 @@ Gui, Hotstring:Add, CheckBox, vInsideWord gCapsCheck  xp+255 yp+0, Inside Word (
 Gui, Hotstring:Add, CheckBox, vNoEndChar gCapsCheck  xp-255 yp+20, No End Char (O)
 Gui, Hotstring:Add, CheckBox, vRaw gCapsCheck  xp+255 yp+0, Raw Text Mode (T)
 Gui, Hotstring:Add, CheckBox, vExecute gCapsCheck  xp-255 yp+20, Labels/Functions (X)
-Gui, Hotstring:Add, CheckBox, vDisHS gCapsCheck xp+255 yp+0, Hotstring Disabled
+Gui, Hotstring:Add, CheckBox, vDisHS gCapsCheck xp+255 yp+0, Disable
 Gui, Hotstring:Add, CheckBox, vByClip gCapsCheck  xp-255 yp+20, Clipboard Hotstring
 
 Gui, Hotstring:Font, Bold
@@ -586,15 +588,14 @@ Gui, Hotstring:Add, ListView, LV0x1 0x4 yp+25 xp h510 w500 vHSList, Options|Hots
 
 
 
-
 ShowHotstrings:
 
 if ((PrevW != "") and (PrevH != ""))
 {
-	Gui, Hotstring:Show, W%PrevW% H%PrevH% X%PrevX% Y%PrevY%, Instant Hotstrings
+	Gui, Hotstring:Show, W%PrevW% H%PrevH% X%PrevX% Y%PrevY%,Hotstrings Edition
 }
 else	
-Gui, Hotstring:Show, , Instant Hotstrings
+Gui, Hotstring:Show, ,Hotstrings Edition
 if (PrevSec != "")
 {
 	GuiControl, Choose, ComboBox1, %PrevSec%
@@ -888,28 +889,82 @@ ControlGet, Items, Line,1, Edit3
 Loop, Parse, Items, `n
 {
 	i := 0
+	mfl := 0
 	InHotString := A_LoopField
 	divString := StrSplit(InHotString,":")
 	divString2:= StrSplit(divString[3], """")
 	string := ":"divString2[1]""""
+	if InStr(string, ".")
+	{
+		modstring := ":"SubStr(divString2[1],1,StrLen(divString2[1])-1)""""
+		modfl := 0
+	}
+	else
+	{
+		modstring := string := ":"divString2[1]"."""
+		modfl := 1
+	}
+	InHotString := StrReplace(InHotString, "func", "`t`t`tfunc")
 	OutputFile =% A_ScriptDir . "\Categories\temp.ahk"
 	InputFile = % A_ScriptDir . "\Categories\" . SaveFile . ".ahk"
 	Loop, Read, %InputFile%, %OutputFile%
 	{
-		if InStr( A_LoopReadLine, string)
-		{
-			FileAppend, %InHotString%`r`n, %OutputFile%, UTF-8
-			i := 1 
-		}
-		else
-			FileAppend, %A_LoopReadLine%`r`n, %OutputFile%, UTF-8
+		if InStr( A_LoopReadLine, modstring)
+			mfl := 1
 	}
-	if i = 0
-		FileAppend, %InHotString%`r`n, %OutputFile%, UTF-8
+	if mfl = 0
+	{
+		Loop, Read, %InputFile%, %OutputFile%
+		{
+			if InStr( A_LoopReadLine, string)
+			{
+				FileAppend, %InHotString%`r`n, %OutputFile%, UTF-8
+				i := 1 
+			}
+			else
+				FileAppend, %A_LoopReadLine%`r`n, %OutputFile%, UTF-8
+		}
+		if i = 0
+			FileAppend, %InHotString%`r`n, %OutputFile%, UTF-8
+	}
+	else if modfl = 1
+	{
+		Loop, Read, %InputFile%, %OutputFile%
+		{
+			if InStr( A_LoopReadLine, modstring)
+			{
+				FileAppend, %A_LoopReadLine%`r`n, %OutputFile%, UTF-8
+				FileAppend, %InHotString%`r`n, %OutputFile%, UTF-8
+				
+			}
+			else if InStr( A_LoopReadLine, string)
+			{
+			}
+			else
+				FileAppend, %A_LoopReadLine%`r`n, %OutputFile%, UTF-8
+		}
+	}
+	else if modfl = 0
+	{
+		Loop, Read, %InputFile%, %OutputFile%
+		{
+			if InStr( A_LoopReadLine, modstring)
+			{
+				FileAppend, %InHotString%`r`n, %OutputFile%, UTF-8
+				FileAppend, %A_LoopReadLine%`r`n, %OutputFile%, UTF-8
+				
+			}
+			else if InStr( A_LoopReadLine, string)
+			{
+			}
+			else
+				FileAppend, %A_LoopReadLine%`r`n, %OutputFile%, UTF-8
+		}
+	}
 	FileMove, %OutputFile%, %InputFile%, 1
 }
 MsgBox Hotstrings added to the %SaveFile%.ahk file!
-WinGetPos, PrevX, PrevY , , , Instant Hotstrings
+WinGetPos, PrevX, PrevY , , ,Hotstrings Edition
 Run, AutoHotkey.exe Hotstrings.ahk EditHotstring %SectionCombo% %PrevW% %PrevH% %PrevX% %PrevY% %SelectedRow%
 Return
 
@@ -1002,6 +1057,7 @@ return
 SectionChoose:
 Gui, Hotstring:Submit, NoHide
 Gui, Hotstring:+OwnDialogs
+
 GuiControl, Enable, Edit
 
 if InStr(StringCombo, "Hotstring")
@@ -1053,6 +1109,13 @@ LV_Delete()
    LV_ModifyCol(2, "Sort")
    
   }
+  LV_ModifyCol(5, "Auto")
+SendMessage, 4125, 4, 0, SysListView321
+wid := ErrorLevel
+if (wid < ColWid)
+{
+ LV_ModifyCol(5, ColWid)
+}
 Return
 
 HotstringGuiSize:
@@ -1073,18 +1136,25 @@ LV_ModifyCol(2,"Center")
 LV_ModifyCol(3,"Center")
 LV_ModifyCol(4,"Center")
 
+WinGetPos, PrevX, PrevY , , ,Hotstrings Edition
 PrevW := A_GuiWidth
 PrevH := A_GuiHeight
 
 NewHeight := LV_Height+(A_GuiHeight-IniH)
 NewWidth := LV_Width+(A_GuiWidth-IniW)
 ColWid := NewWidth-270
+LV_ModifyCol(5, "Auto")
+SendMessage, 4125, 4, 0, SysListView321
+wid := ErrorLevel
+if (wid < ColWid)
+{
  LV_ModifyCol(5, ColWid)
+}
  GuiControl, Move, HSList, W%NewWidth% H%NewHeight%
 
 return
 
 HotstringGuiEscape:
 HotstringGuiClose:
-WinGetPos, PrevX, PrevY , , , Instant Hotstrings
+WinGetPos, PrevX, PrevY , , ,Hotstrings Edition
 Gui, Hotstring:Destroy
