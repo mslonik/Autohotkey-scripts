@@ -45,3 +45,7 @@ Hotstring(":*:pkb.", 			func("ViaClipboard").bind("Produkt Narodowy Brutto"), "O
 Hotstring(":B0*:pkb", 			func("NormalWay").bind("{Backspace 3}PKB"), "On")
 Hotstring(":*:siwz.", 			func("ViaClipboard").bind("Specyfikacja Istotnych Warunków Zamówienia"), "On")
 Hotstring(":B0*:siwz", 			func("NormalWay").bind("{BackSpace 4}SIWZ"), "On")
+Hotstring(":*:oem.", 			func("ViaClipboard").bind("Original Equipment Manufacturer"), "On")
+Hotstring(":B0*:oem", 			func("NormalWay").bind("{BackSpace 3}OEM"), "On")
+Hotstring(":*:ems.", 			func("ViaClipboard").bind("Electronics Manufacturing Services"), "On")
+Hotstring(":B0*:ems", 			func("NormalWay").bind("{BackSpace 3}EMS"), "On")
