@@ -234,7 +234,7 @@ WizardStep3:
      Gui, Wizard_ConfigureFunctions: Font, bold
      Gui, Wizard_ConfigureFunctions: Add, Text, , Step 3: `t`tAssociate functions with buttons.
      Gui, Wizard_ConfigureFunctions: Font
-     Gui, Wizard_ConfigureFunctions: Add, Text, , Click any of the buttons in second window and associate a picture and function to it.
+     Gui, Wizard_ConfigureFunctions: Add, Text, , Click any of the buttons in the second window and associate a picture and function to it.
 
      Gui, Wizard_ConfigureFunctions: Show
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
@@ -244,6 +244,7 @@ WizardStep3:
      ;~ MsgBox, 0, % "WizardWindow_Width:`t" . WizardWindow_Width . "`nWizardWindow_Height:`t" . WizardWindow_Height
      
      ; Tu jestem. Muszę jeszcze wymusić wartości dla wartości granicznych monitora i chyba będzie dobrze.
+     SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
      
      Gui, Wizard_ConfigureFunctions: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
@@ -265,34 +266,48 @@ ButtonPressed:
           {
           ;~ MsgBox,   The chosen button A_GuiControl: %A_GuiControl%`nThe chosen script file:`n%SelectedFile%`nThe X coordinate is %ReadButtonPosX%. The Y coordinate is %ReadButtonPosY%. The width is %ReadButtonPosW%. The height is %ReadButtonPosH%.
           ;~ Gui,      Wizard_ConfigureFunctions: Show
-          PictureSelected := 1
+          ;~ PictureSelected := 1
+          ;~ PictureSelected := 0
+          GuiControl, Wizard_PlotMatrixOfButtons: Hide, % A_GuiControl ; Hide the button
+          ;~ Gui, Wizard_PlotMatrixOfButtons: Add, Picture, % "x" . ReadButtonPosX . " y" . ReadButtonPosY . " w" . ReadButtonPosW . " h-1" . " +0x4000000" . " gLpicture", % SelectedFile
+          Gui, Wizard_PlotMatrixOfButtons: Add, Picture, % "x" . ReadButtonPosX . " y" . ReadButtonPosY . " w" . ReadButtonPosW . " h-1", % SelectedFile ; Add the selected picture instead of button
+          ;~ MsgBox, Tu jestem!
+          ;~ Gui, Wizard_PlotMatrixOfButtons: Show ; ← no longer needed
+          IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . A_GuiControl . "_Picture" ; Save the picture into config file
+          FileSelectFile, SelectedFile, 3, %A_ScriptDir%, Select an .ahk script file, AHK script (*.ahk)
+          if (SelectedFile = "")
+               {
+               MsgBox,   No picture file was selected.
+               Gui,      Wizard_ConfigureFunctions: Show
+               }
+          else
+               {
+               IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", Layer1, % "Button_" . A_GuiControl . "_Action" ; Save the picture into config file
+               }
           }
-     ;~ FileSelectFile, SelectedFile, 3, %A_ScriptDir%, Select an .ahk script file, AHK script (*.ahk)
      ;~ if (SelectedFile = "")
           ;~ {
           ;~ MsgBox,   No script file was selected.
-          Gui,      Wizard_ConfigureFunctions: Show
+          ;~ Gui,      Wizard_ConfigureFunctions: Show
           ;~ }
      ;~ else
           ;~ {
           ;~ MsgBox,   The chosen button A_GuiControl: %A_GuiControl%`nThe chosen script file:`n%SelectedFile%
           ;~ ScriptSelected := 1
           ;~ }
-     if (PictureSelected)
-          {
-          PictureSelected := 0
-          GuiControl, Wizard_PlotMatrixOfButtons: Hide, % A_GuiControl
-          Gui, Wizard_PlotMatrixOfButtons: Add, Picture, % "x" . ReadButtonPosX . " y" . ReadButtonPosY . " w" . ReadButtonPosW . " h-1", % SelectedFile
-          Gui, Wizard_PlotMatrixOfButtons: Show
-          MsgBox, Tu jestem!
-          }
-     if (ScriptSelected)
-          {
-          ScriptSelected := 0
-          }
+     ;~ if (PictureSelected)
+          ;~ {
+          ;~ }
+     ;~ if (ScriptSelected)
+          ;~ {
+          ;~ ScriptSelected := 0
+          ;~ }
      Gui,      Wizard_ConfigureFunctions: Show
 return
 
+Lpicture:
+
+return
 
 CheckMonitorNumbering:
      F_ShowMonitorNumbers()
