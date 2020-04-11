@@ -153,7 +153,8 @@ WizardStep2:
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x50 y+20 w80 gPlotButtons, &Test
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gWizardStep1, &Back
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gExitWizard, &Cancel
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gSaveConfigurationWizard hwndSaveConfigHwnd, &Save Config
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, xm w80 gSaveConfigurationWizard hwndSaveConfigHwnd, &Save Config
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Progress, x+m w350 h25 cGreen vProgressBarVar, 0
      SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
      Gui, Wizard_AmountAndSizeOfButtons: Show
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
@@ -201,6 +202,7 @@ SaveConfigurationWizard:
 
 
      Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
+     ;~ Gui, Wizard_AmountAndSizeOfButtons: Add, Progress, w400 h25 cGreen vProgressBarVar, 0
      if (WinExist())
           {
           F_SavePositionOfButtons()     
@@ -215,7 +217,7 @@ SaveConfigurationWizard:
      MsgBox, 0, % WindowWizardTitle, % "Configuration saved to the file :`n" . A_ScriptDir . "\Config.ini"
 
      GuiControl, Disable, % SaveConfigHwnd
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gWizardStep3, C&ontinue
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+m w80 gWizardStep3, C&ontinue
 return
 
 
@@ -370,6 +372,10 @@ F_SavePositionOfButtons()
      
      IniWrite, % WizardStep2_AmountOfKeysHorizontally,  % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of keys horizontally
      IniWrite, % WizardStep2_AmountOfKeysVertically,    % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of keys vertically
+     
+     ProgressBarVarMax := WizardStep2_AmountOfKeysVertically * WizardStep2_AmountOfKeysHorizontally * 6 ; 6 ← 6x IniWrite in internal loop
+     ProgressBarTemp := 0
+     
      Loop, % WizardStep2_AmountOfKeysVertically
           {
           ExternalLoopIndex := A_Index
@@ -378,11 +384,17 @@ F_SavePositionOfButtons()
                ;~ MsgBox, Tu jestem
                GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd
                IniWrite, % GuziorX,         % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_X"
+               GuiControl, Wizard_AmountAndSizeOfButtons:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                IniWrite, % GuziorY,         % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Y"
+               GuiControl, Wizard_AmountAndSizeOfButtons:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                IniWrite, % GuziorW,         % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_W"
+               GuiControl, Wizard_AmountAndSizeOfButtons:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                IniWrite, % GuziorH,         % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_H"
+               GuiControl, Wizard_AmountAndSizeOfButtons:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                IniWrite, % PictureFilePath, % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Picture"
+               GuiControl, Wizard_AmountAndSizeOfButtons:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                IniWrite, % ButtonScript,    % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Action"
+               GuiControl, Wizard_AmountAndSizeOfButtons:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                }
           }
      }
