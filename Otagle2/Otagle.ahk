@@ -12,7 +12,6 @@ SendMode Input  				; Recommended for new scripts due to its superior speed and 
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #Persistent
 
-     
      CurrentLayer                           := 1
      MonitorRadioGroup                      := 3 ; 0
      WindowWizardTitle                      := "O T A G L E Configuration Wizard"
@@ -154,7 +153,7 @@ WizardStep2:
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gWizardStep1, &Back
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gExitWizard, &Cancel
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, xm w80 gSaveConfigurationWizard hwndSaveConfigHwnd, &Save Config
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Progress, x+m w350 h25 cGreen vProgressBarVar, 0
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Progress, x+m w350 h25 cGreen vProgressBarVar BackgroundC9C9C9, 0
      SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
      Gui, Wizard_AmountAndSizeOfButtons: Show
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
@@ -163,7 +162,8 @@ WizardStep2:
      WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
      Gui, Wizard_AmountAndSizeOfButtons: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
-          . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle . " Layer " . CurrentLayer
+          . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2)
+          , % WindowWizardTitle . " Layer " . CurrentLayer
 return
 
 BCalculate:
@@ -175,14 +175,15 @@ BCalculate:
 return
 
 PlotButtons:
-     Gui, Wizard_AmountAndSizeOfButtons: Submit, NoHide
-     Gui, Wizard_AmountAndSizeOfButtons: Destroy
+     Gui, Wizard_AmountAndSizeOfButtons:    Submit, NoHide
+     Gui, Wizard_AmountAndSizeOfButtons:    Destroy
+     Gui, Wizard_PlotMatrixOfButtons:       Destroy
      
      CalculateButtonsAndGaps()
      Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
-     F_AddButtonsAndGaps()
+     F_AddButtonsAndGaps("Disable")
      Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer 
-     MsgBox, 0,  % WindowWizardTitle, Press any key to continue to go back: test new configuration again or save it.
+     MsgBox, 4096,  % WindowWizardTitle, Press OK button to continue to go back: test new configuration again or save it.
      Gui, Wizard_PlotMatrixOfButtons: Submit ; Hide
      GoTo, WizardStep2
 return
@@ -210,7 +211,7 @@ SaveConfigurationWizard:
      else
           {
           CalculateButtonsAndGaps()
-          F_AddButtonsAndGaps()
+          F_AddButtonsAndGaps("Disable")
           F_SavePositionOfButtons()
           }
 
@@ -232,7 +233,7 @@ WizardStep3:
           {
           ;~ CalculateButtonsAndGaps()
           Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
-          F_AddButtonsAndGaps()
+          F_AddButtonsAndGaps("Enable")
           Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer
           }
           
@@ -331,8 +332,8 @@ F_ReadConfig_ini()
      IniRead, ButtonHorizontalGap,        % A_ScriptDir . "\Config.ini", Main, ButtonHorizontalGap
      IniRead, ButtonVerticalGap,          % A_ScriptDir . "\Config.ini", Main, ButtonVerticalGap
      
-     IniRead, WizardStep2_AmountOfKeysHorizontally, % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of keys horizontally
-     IniRead, WizardStep2_AmountOfKeysVertically,   % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of keys vertically
+     IniRead, WizardStep2_AmountOfKeysHorizontally, % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons horizontally
+     IniRead, WizardStep2_AmountOfKeysVertically,   % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons vertically
 
      Loop, % WizardStep2_AmountOfKeysVertically
           {
@@ -370,8 +371,8 @@ F_SavePositionOfButtons()
      local PictureFilePath := ""
      local ButtonScript := ""
      
-     IniWrite, % WizardStep2_AmountOfKeysHorizontally,  % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of keys horizontally
-     IniWrite, % WizardStep2_AmountOfKeysVertically,    % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of keys vertically
+     IniWrite, % WizardStep2_AmountOfKeysHorizontally,  % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons horizontally
+     IniWrite, % WizardStep2_AmountOfKeysVertically,    % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons vertically
      
      ProgressBarVarMax := WizardStep2_AmountOfKeysVertically * WizardStep2_AmountOfKeysHorizontally * 6 ; 6 ← 6x IniWrite in internal loop
      ProgressBarTemp := 0
@@ -399,7 +400,7 @@ F_SavePositionOfButtons()
           }
      }
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-F_AddButtonsAndGaps()
+F_AddButtonsAndGaps(IfEnable)
      {
      global ; Assume-global mode
      ;~ global WizardStep2_AmountOfKeysHorizontally, WizardStep2_AmountOfKeysVertically
@@ -413,9 +414,17 @@ F_AddButtonsAndGaps()
                if (A_Index = 1)
                     {
                     Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m" . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd"  . " gButtonPressed", % ExternalLoopIndex . "_" . A_Index
+                    if (IfEnable = "Disable")
+                         GuiControl, Wizard_PlotMatrixOfButtons: Disable, % %ExternalLoopIndex%_%A_Index%hwnd
+                    else if (IfEnable = "Enable")
+                         GuiControl, Wizard_PlotMatrixOfButtons: Enable, % %ExternalLoopIndex%_%A_Index%hwnd
                     }
                else ; (A_Index > 1)
                     Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"  . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd" . " gButtonPressed", % ExternalLoopIndex . "_" . A_Index
+                    if (IfEnable = "Disable")
+                         GuiControl, Wizard_PlotMatrixOfButtons: Disable, % %ExternalLoopIndex%_%A_Index%hwnd
+                    else if (IfEnable = "Enable")
+                         GuiControl, Wizard_PlotMatrixOfButtons: Enable, % %ExternalLoopIndex%_%A_Index%hwnd
                }
           }
      }
