@@ -13,10 +13,13 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #Persistent
 
      CurrentLayer                           := 1
-     MonitorRadioGroup                      := 3 ; 0
+     ;~ MonitorRadioGroup                      := 3 ; 0
+     MonitorRadioGroup                      := 0
      WindowWizardTitle                      := "O T A G L E Configuration Wizard"
-     ButtonWidth                            := 300 ; 80
-     ButtonHeight                           := 300 ; 80
+     ;~ ButtonWidth                            := 300 ; 80
+     ButtonWidth                            := 80
+     ;~ ButtonHeight                           := 300 ; 80
+     ButtonHeight                           := 80
      ButtonHorizontalGap                    := 10
      ButtonVerticalGap                      := 10
      CalculateVariable                      := 0
@@ -32,8 +35,8 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ReadButtonPosH                         := 0
 
 ; Temp:
-WizardStep2_AmountOfKeysHorizontally := 6
-WizardStep2_AmountOfKeysVertically   := 3
+;~ WizardStep2_AmountOfKeysHorizontally := 6
+;~ WizardStep2_AmountOfKeysVertically   := 3
 
 DetectHiddenWindows, On ; Caution!
 ;~ - - - - - - - - - - - - - - - - - - - - ProcessInputArgs() - - - - - - - - - - - - - - - - - - - -
@@ -57,6 +60,13 @@ if (A_Args.Length() = 0)
 else if (A_Args.Length() = 1)
      {
      F_ReadConfig_ini()
+     SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
+     ;~ MsgBox, 4, ,Switch between layers
+     ;~ IfMsgBox, No
+          Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % "O T A G L E: Layer " . CurrentLayer
+     ;~ IfMsgBox, Yes
+          ;~ Gui, Layer2: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", O T A G L E: Layer 2
+     ;~ MsgBox, Narysowane!
      return
      }
 else if (A_Args.Length() > 1)
@@ -149,10 +159,16 @@ WizardStep2:
      Gui, Wizard_AmountAndSizeOfButtons: Add, Text, xm, % "Number of keys vertically in px: " . (CalculateVariable ? WizardStep2_AmountOfKeysVertically : "") 
           . " and not used margin at the bottom side in px: " . (CalculateVariable ? WizardStep2_MarginVertically : "")
 
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x50 y+20 w80 gPlotButtons, &Test
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x50 y+20 w80 gPlotButtons hwndTestButtonHwnd, &Test
+     
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gWizardStep1, &Back
      Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gExitWizard, &Cancel
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, xm w80 gSaveConfigurationWizard hwndSaveConfigHwnd, &Save Config
+     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, xm w80 gSaveConfigurationWizard hwndSaveConfigHwnd, &Save config
+     if (CalculateVariable = 0)
+          {
+          GuiControl, Wizard_AmountAndSizeOfButtons: Disable, % TestButtonHwnd
+          GuiControl, Wizard_AmountAndSizeOfButtons: Disable, % SaveConfigHwnd
+          }
      Gui, Wizard_AmountAndSizeOfButtons: Add, Progress, x+m w350 h25 cGreen vProgressBarVar BackgroundC9C9C9, 0
      SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
      Gui, Wizard_AmountAndSizeOfButtons: Show
@@ -171,6 +187,8 @@ BCalculate:
      Gui, Wizard_AmountAndSizeOfButtons: Submit
      CalculateButtonsAndGaps()
      Gui, Wizard_AmountAndSizeOfButtons: Destroy
+     GuiControl, Wizard_AmountAndSizeOfButtons: Enable, % TestButtonHwnd
+     GuiControl, Wizard_AmountAndSizeOfButtons: Enable, % SaveConfigHwnd
      Goto, WizardStep2
 return
 
@@ -203,14 +221,13 @@ SaveConfigurationWizard:
 
 
      Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
-     ;~ Gui, Wizard_AmountAndSizeOfButtons: Add, Progress, w400 h25 cGreen vProgressBarVar, 0
      if (WinExist())
           {
           F_SavePositionOfButtons()     
           }
      else
           {
-          CalculateButtonsAndGaps()
+          ;~ CalculateButtonsAndGaps()
           F_AddButtonsAndGaps("Disable")
           F_SavePositionOfButtons()
           }
@@ -228,14 +245,10 @@ WizardStep3:
      
      Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
      if (WinExist())
-          Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer
-     else
-          {
-          ;~ CalculateButtonsAndGaps()
-          Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
-          F_AddButtonsAndGaps("Enable")
-          Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer
-          }
+          Gui, Wizard_PlotMatrixOfButtons: Destroy
+     Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
+     F_AddButtonsAndGaps("Enable")
+     Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer
           
      Gui, Wizard_ConfigureFunctions: Font, bold
      Gui, Wizard_ConfigureFunctions: Add, Text, , Step 3: `t`tAssociate functions with buttons.
@@ -296,8 +309,10 @@ StartOtagle:
 return
 
 NextLayer:
-     Gui, Wizard_PlotMatrixOfButtons: Destroy
+     Gui, Wizard_PlotMatrixOfButtons:   Destroy
+     Gui, Wizard_ConfigureFunctions:    Destroy
      CurrentLayer++
+     CalculateVariable := 0
      Goto Wizard_Intro
 ;~ return
 
@@ -325,40 +340,38 @@ ExitWizard:
 F_ReadConfig_ini()
      {
      global
+     local HowManyLayers
+     local ExternalLoopLayersIndex, ExternalLoopVerticallyIndex
      
-     IniRead, MonitorRadioGroup,          % A_ScriptDir . "\Config.ini", Main, WhichMonitor
-     IniRead, ButtonWidth,                % A_ScriptDir . "\Config.ini", Main, ButtonWidth
-     IniRead, ButtonHeight,               % A_ScriptDir . "\Config.ini", Main, ButtonHeight
-     IniRead, ButtonHorizontalGap,        % A_ScriptDir . "\Config.ini", Main, ButtonHorizontalGap
-     IniRead, ButtonVerticalGap,          % A_ScriptDir . "\Config.ini", Main, ButtonVerticalGap
+     IniRead, WhichMonitor,               % A_ScriptDir . "\Config.ini", Main, WhichMonitor
+     IniRead, HowManyLayers,              % A_ScriptDir . "\Config.ini", Main, HowManyLayers
      
-     IniRead, WizardStep2_AmountOfKeysHorizontally, % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons horizontally
-     IniRead, WizardStep2_AmountOfKeysVertically,   % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons vertically
-
-     Loop, % WizardStep2_AmountOfKeysVertically
+     Loop, % HowManyLayers
           {
-          ExternalLoopIndex := A_Index
-          Loop, % WizardStep2_AmountOfKeysHorizontally
+          ExternalLoopLayersIndex := A_Index
+          IniRead, ButtonWidth,                          % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, ButtonWidth
+          IniRead, ButtonHeight,                         % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, ButtonHeight
+          IniRead, ButtonHorizontalGap,                  % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, ButtonHorizontalGap
+          IniRead, ButtonVerticalGap,                    % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, ButtonVerticalGap
+          IniRead, AmountOfKeysHorizontally,             % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, Amount of buttons horizontally
+          IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, Amount of buttons vertically
+          Loop, % AmountOfKeysVertically
                {
-               ;~ GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd
-               IniRead, ButtonX, % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_X"
-               IniRead, ButtonY, % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Y"
-               IniRead, ButtonW, % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_W"
-               IniRead, ButtonH, % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_H"
-          ;~ MsgBox, 0, % WindowWizardTitle
-               ;~ , % "WizardStep2_AmountOfKeysHorizontally: " . WizardStep2_AmountOfKeysHorizontally .    "`n"
-               ;~ . "WizardStep2_AmountOfKeysVertically: "     . WizardStep2_AmountOfKeysVertically .      "`n"
-               ;~ . "ExternalLoopIndex:`t"                     . ExternalLoopIndex .                       "`n"
-               ;~ . "A_Index:`t`t`t"                           . A_Index .                                 "`n"
-               ;~ . "ButtonX`t`t`t" . ButtonX . "`n"
-               ;~ . "ButtonY`t`t`t" . ButtonY . "`n"
-               ;~ . "ButtonW`t`t`t" . ButtonW . "`n"
-               ;~ . "ButtonH`t`t`t" . ButtonH . "`n"
-               Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd" . " gButtonPressed", % ExternalLoopIndex . "_" . A_Index
+               ExternalLoopVerticallyIndex := A_Index
+               Loop, % AmountOfKeysHorizontally
+                    {
+                    IniRead, ButtonX, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_X"
+                    IniRead, ButtonY, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_Y"
+                    IniRead, ButtonW, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_W"
+                    IniRead, ButtonH, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_H"
+                    Gui, % "Layer" . ExternalLoopLayersIndex . ": Add"
+                    , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . ExternalLoopLayersIndex . "_" . A_Index . "hwnd" . " gButtonPressed"
+                    , % ExternalLoopLayersIndex . "_" . A_Index
+                    }
                }
           }
-          SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
-          Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % "O T A G L E: Layer " . CurrentLayer
+     
+
      }
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
