@@ -27,8 +27,8 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      MonitorBoundingCoordinates_Right       := 0
      MonitorBoundingCoordinates_Top         := 0
      MonitorBoundingCoordinates_Bottom      := 0
-     PictureSelected                        := 0
-     ScriptSelected                         := 0
+     ;~ PictureSelected                        := 0
+     ;~ ScriptSelected                         := 0
      ReadButtonPosX                         := 0
      ReadButtonPosY                         := 0
      ReadButtonPosW                         := 0
@@ -342,6 +342,7 @@ F_ReadConfig_ini()
      global
      local HowManyLayers
      local ExternalLoopLayersIndex, ExternalLoopVerticallyIndex
+     local ButtonX, ButtonY, ButtonW, ButtonH
      
      IniRead, WhichMonitor,               % A_ScriptDir . "\Config.ini", Main, WhichMonitor
      IniRead, HowManyLayers,              % A_ScriptDir . "\Config.ini", Main, HowManyLayers
@@ -364,14 +365,21 @@ F_ReadConfig_ini()
                     IniRead, ButtonY, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_Y"
                     IniRead, ButtonW, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_W"
                     IniRead, ButtonH, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_H"
+                    IniRead, ButtonP, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_Picture"
                     Gui, % "Layer" . ExternalLoopLayersIndex . ": Add"
                     , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . ExternalLoopLayersIndex . "_" . A_Index . "hwnd" . " gButtonPressed"
                     , % ExternalLoopLayersIndex . "_" . A_Index
+                    if (ButtonP = "")
+                         GuiControl, % "Layer" . ExternalLoopLayersIndex . ": Disable", % %ExternalLoopLayersIndex%_%A_Index%hwnd
+                    else
+                         {   
+                         GuiControl, % "Layer" . ExternalLoopLayersIndex . ": Hide", % %ExternalLoopLayersIndex%_%A_Index%hwnd ; Hide the button
+                         Gui, % "Layer" . ExternalLoopLayersIndex . ": Add"
+                         , Picture, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h-1", % ButtonP ; Add the selected picture instead of button
+                         }
                     }
                }
           }
-     
-
      }
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
