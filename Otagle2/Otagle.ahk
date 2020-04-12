@@ -302,6 +302,13 @@ ButtonPressed:
      Gui,      Wizard_ConfigureFunctions: Show
 return
 
+PicturePressed:
+     MsgBox, % "Picture was activated!`n" . A_GuiControl
+     ;~ MsgBox, % A_GuiControl
+     ;~ SplitPath, % A_GuiControl, FunctionName
+     ;~ MsgBox, % FunctionName
+return
+
 StartOtagle:
      IniWrite, % CurrentLayer,       % A_ScriptDir . "\Config.ini", Main, HowManyLayers ; Save the total amount of created layers
      CurrentLayer := 1  ; initialization of application
@@ -342,7 +349,7 @@ F_ReadConfig_ini()
      global
      local HowManyLayers
      local ExternalLoopLayersIndex, ExternalLoopVerticallyIndex
-     local ButtonX, ButtonY, ButtonW, ButtonH
+     local ButtonX, ButtonY, ButtonW, ButtonH, ButtonP
      
      IniRead, WhichMonitor,               % A_ScriptDir . "\Config.ini", Main, WhichMonitor
      IniRead, HowManyLayers,              % A_ScriptDir . "\Config.ini", Main, HowManyLayers
@@ -356,6 +363,7 @@ F_ReadConfig_ini()
           IniRead, ButtonVerticalGap,                    % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, ButtonVerticalGap
           IniRead, AmountOfKeysHorizontally,             % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, Amount of buttons horizontally
           IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, Amount of buttons vertically
+          LayerObj := {}
           Loop, % AmountOfKeysVertically
                {
                ExternalLoopVerticallyIndex := A_Index
@@ -366,16 +374,32 @@ F_ReadConfig_ini()
                     IniRead, ButtonW, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_W"
                     IniRead, ButtonH, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_H"
                     IniRead, ButtonP, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_Picture"
+                    IniRead, ButtonA, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_Action"
                     Gui, % "Layer" . ExternalLoopLayersIndex . ": Add"
                     , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . ExternalLoopLayersIndex . "_" . A_Index . "hwnd" . " gButtonPressed"
                     , % ExternalLoopLayersIndex . "_" . A_Index
                     if (ButtonP = "")
-                         GuiControl, % "Layer" . ExternalLoopLayersIndex . ": Disable", % %ExternalLoopLayersIndex%_%A_Index%hwnd
+                         GuiControl, % "Layer" . ExternalLoopLayersIndex . ": Disable", % %ExternalLoopLayersIndex%_%A_Index%hwnd ; Disable unused button
                     else
                          {   
                          GuiControl, % "Layer" . ExternalLoopLayersIndex . ": Hide", % %ExternalLoopLayersIndex%_%A_Index%hwnd ; Hide the button
-                         Gui, % "Layer" . ExternalLoopLayersIndex . ": Add"
-                         , Picture, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h-1", % ButtonP ; Add the selected picture instead of button
+                         Gui, % "Layer" . ExternalLoopLayersIndex . ": Add", Picture, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h-1" . " vPicture" . ExternalLoopVerticallyIndex . "_" . A_Index . " gPicturePressed"
+                         , % ButtonP ; Add the selected picture instead of button
+                         Key := ExternalLoopVerticallyIndex . "_" . A_Index
+                         MsgBox, % "ExternalLoopVerticallyIndex: " . ExternalLoopVerticallyIndex . "`n A_Index: " . A_Index . "`nKey: " . Key
+                         LayerObj[Key] := ButtonA
+                         MsgBox, % "Key: " . Key . "`nValue: " . LayerObj[Key]
+                         }
+                    
+                    if (ButtonA)
+                         {
+                         SplitPath, % ButtonA, FunctionName     
+                         ;~ Temp := "Picture" . ExternalLoopVerticallyIndex . "_" . A_Index ; to działa
+                         ;~ "Picture" . ExternalLoopVerticallyIndex . "_" . A_Index := FunctionName ; to nie działa
+                         ;~ MsgBox, % Picture . ExternalLoopVerticallyIndex . "_" . A_Index
+                         ;~ MsgBox, % Temp . "`n" . FunctionName
+                         ;~ %Temp% := %FunctionName%
+                         ;~ MsgBox, % Temp
                          }
                     }
                }

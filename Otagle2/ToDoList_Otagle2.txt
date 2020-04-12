@@ -1,0 +1,19 @@
+﻿To Do list, Otagle 2:
+
+1. Gestures.
+Change of the layer just by using touch functionality and gesture.
+
+2. Pictures acting as buttons.
+Integration of code snippet found on AHK forum.
+
+3. AHK 2.0.
+Maybe it solves a problem of dynamic #include directive. To be checked. Then it would be possible to use .ahk scripts instead of .exe functions.
+
+4. Scallable picture graphics (.svg preferably).
+it was done as File Explorer plugin, so it should be possible for Otagle as well.
+
+5. Build library of functions.
+For Microsoft Word, Total Commander.
+
+6. Make GUIs in separate functions.
+Clean up the code.
