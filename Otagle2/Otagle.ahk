@@ -60,14 +60,7 @@ if (A_Args.Length() = 0)
 else if (A_Args.Length() = 1)
      {
      F_ReadConfig_ini()
-     SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
-     ;~ MsgBox, 4, ,Switch between layers
-     ;~ IfMsgBox, No
-          Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % "O T A G L E: Layer " . CurrentLayer
-     ;~ IfMsgBox, Yes
-          ;~ Gui, Layer2: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", O T A G L E: Layer 2
-     ;~ MsgBox, Narysowane!
-     return
+     Goto StartOtagle
      }
 else if (A_Args.Length() > 1)
     {
@@ -303,21 +296,22 @@ ButtonPressed:
 return
 
 PicturePressed:
-     MsgBox, % "Picture was activated!`n" . A_GuiControl
-     ;~ MsgBox, % A_GuiControl
-     ;~ SplitPath, % A_GuiControl, FunctionName
-     ;~ MsgBox, % FunctionName
+     ;~ MsgBox, % "Picture was activated!`n" . A_GuiControl . "`r`n" . TableOfLayers[CurrentLayer][SubStr(A_GuiControl, StrLen("Picture") + 1)]
+     ;~ Run, % TableOfLayers[CurrentLayer][SubStr(A_GuiControl, StrLen("Picture") + 1)] ; read value of object: path to executable
+     Run, % TableOfLayers[CurrentLayer][A_GuiControl] ; read value of object: path to executable
 return
 
 StartOtagle:
-     IniWrite, % CurrentLayer,       % A_ScriptDir . "\Config.ini", Main, HowManyLayers ; Save the total amount of created layers
      CurrentLayer := 1  ; initialization of application
-     ExitApp ; ← temporarily
+     SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
+     Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % "O T A G L E: Layer " . CurrentLayer
+     ;~ ExitApp ; ← temporarily
 return
 
 NextLayer:
      Gui, Wizard_PlotMatrixOfButtons:   Destroy
      Gui, Wizard_ConfigureFunctions:    Destroy
+     IniWrite, % CurrentLayer,       % A_ScriptDir . "\Config.ini", Main, HowManyLayers ; Save the total amount of created layers
      CurrentLayer++
      CalculateVariable := 0
      Goto Wizard_Intro
@@ -348,61 +342,53 @@ F_ReadConfig_ini()
      {
      global
      local HowManyLayers
-     local ExternalLoopLayersIndex, ExternalLoopVerticallyIndex
+     local LayerIndex, VerticalIndex
      local ButtonX, ButtonY, ButtonW, ButtonH, ButtonP
      
      IniRead, WhichMonitor,               % A_ScriptDir . "\Config.ini", Main, WhichMonitor
      IniRead, HowManyLayers,              % A_ScriptDir . "\Config.ini", Main, HowManyLayers
+     TableOfLayers := [{}]
      
      Loop, % HowManyLayers
           {
-          ExternalLoopLayersIndex := A_Index
-          IniRead, ButtonWidth,                          % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, ButtonWidth
-          IniRead, ButtonHeight,                         % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, ButtonHeight
-          IniRead, ButtonHorizontalGap,                  % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, ButtonHorizontalGap
-          IniRead, ButtonVerticalGap,                    % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, ButtonVerticalGap
-          IniRead, AmountOfKeysHorizontally,             % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, Amount of buttons horizontally
-          IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, Amount of buttons vertically
-          LayerObj := {}
+          LayerIndex := A_Index
+          IniRead, ButtonWidth,                          % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonWidth
+          IniRead, ButtonHeight,                         % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonHeight
+          IniRead, ButtonHorizontalGap,                  % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonHorizontalGap
+          IniRead, ButtonVerticalGap,                    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonVerticalGap
+          IniRead, AmountOfKeysHorizontally,             % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, Amount of buttons horizontally
+          IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, Amount of buttons vertically
+          TableOfLayers[LayerIndex] := []
           Loop, % AmountOfKeysVertically
                {
-               ExternalLoopVerticallyIndex := A_Index
+               VerticalIndex := A_Index
                Loop, % AmountOfKeysHorizontally
                     {
-                    IniRead, ButtonX, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_X"
-                    IniRead, ButtonY, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_Y"
-                    IniRead, ButtonW, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_W"
-                    IniRead, ButtonH, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_H"
-                    IniRead, ButtonP, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_Picture"
-                    IniRead, ButtonA, % A_ScriptDir . "\Config.ini", % "Layer" . ExternalLoopLayersIndex, % "Button_" . ExternalLoopVerticallyIndex . "_" . A_Index . "_Action"
-                    Gui, % "Layer" . ExternalLoopLayersIndex . ": Add"
-                    , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . ExternalLoopLayersIndex . "_" . A_Index . "hwnd" . " gButtonPressed"
-                    , % ExternalLoopLayersIndex . "_" . A_Index
+                    IniRead, ButtonX, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_X"
+                    IniRead, ButtonY, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Y"
+                    IniRead, ButtonW, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_W"
+                    IniRead, ButtonH, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_H"
+                    IniRead, ButtonP, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Picture"
+                    IniRead, ButtonA, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Action"
+                    Gui, % "Layer" . LayerIndex . ": Add"
+                    , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gButtonPressed"
+                    , % LayerIndex . "_" . A_Index
                     if (ButtonP = "")
-                         GuiControl, % "Layer" . ExternalLoopLayersIndex . ": Disable", % %ExternalLoopLayersIndex%_%A_Index%hwnd ; Disable unused button
+                         GuiControl, % "Layer" . LayerIndex . ": Disable", % %LayerIndex%_%A_Index%hwnd ; Disable unused button
                     else
                          {   
-                         GuiControl, % "Layer" . ExternalLoopLayersIndex . ": Hide", % %ExternalLoopLayersIndex%_%A_Index%hwnd ; Hide the button
-                         Gui, % "Layer" . ExternalLoopLayersIndex . ": Add", Picture, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h-1" . " vPicture" . ExternalLoopVerticallyIndex . "_" . A_Index . " gPicturePressed"
+                         GuiControl, % "Layer" . LayerIndex . ": Hide", % %LayerIndex%_%A_Index%hwnd ; Hide the button
+                         Gui, % "Layer" . LayerIndex . ": Add", Picture, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h-1" . " v" . VerticalIndex . "_" . A_Index . " gPicturePressed"
                          , % ButtonP ; Add the selected picture instead of button
-                         Key := ExternalLoopVerticallyIndex . "_" . A_Index
-                         MsgBox, % "ExternalLoopVerticallyIndex: " . ExternalLoopVerticallyIndex . "`n A_Index: " . A_Index . "`nKey: " . Key
-                         LayerObj[Key] := ButtonA
-                         MsgBox, % "Key: " . Key . "`nValue: " . LayerObj[Key]
-                         }
-                    
-                    if (ButtonA)
-                         {
-                         SplitPath, % ButtonA, FunctionName     
-                         ;~ Temp := "Picture" . ExternalLoopVerticallyIndex . "_" . A_Index ; to działa
-                         ;~ "Picture" . ExternalLoopVerticallyIndex . "_" . A_Index := FunctionName ; to nie działa
-                         ;~ MsgBox, % Picture . ExternalLoopVerticallyIndex . "_" . A_Index
-                         ;~ MsgBox, % Temp . "`n" . FunctionName
-                         ;~ %Temp% := %FunctionName%
-                         ;~ MsgBox, % Temp
+                         TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := ButtonP ; add key of object: index of button / picture
+                         TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := ButtonA ; add value of object: path to executable
                          }
                     }
                }
+          ;~ vOutput := ""
+          ;~ for vKey, vValue in TableOfLayers[LayerIndex]
+               ;~ vOutput .= vKey " " vValue "`r`n"
+          ;~ MsgBox, % vOutput
           }
      }
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
