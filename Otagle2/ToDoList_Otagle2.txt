@@ -6,8 +6,9 @@ Change of the layer just by using touch functionality and gesture.
 2. Pictures acting as buttons.
 Integration of code snippet found on AHK forum.
 
-3. AHK 2.0.
+* 3. AHK 2.0.
 Maybe it solves a problem of dynamic #include directive. To be checked. Then it would be possible to use .ahk scripts instead of .exe functions.
+No, it doesn't. Checked on 2020-04-12
 
 4. Scallable picture graphics (.svg preferably).
 it was done as File Explorer plugin, so it should be possible for Otagle as well.
@@ -15,7 +16,7 @@ it was done as File Explorer plugin, so it should be possible for Otagle as well
 5. Build library of functions.
 For Microsoft Word, Total Commander.
 
-6. Make GUIs in separate functions.
+* 6. Make GUIs in separate functions.
 Clean up the code.
 
 7. Speed up saving of options.
@@ -24,3 +25,6 @@ Clean up the code.
 8.1. Configuration.
 8.2. Logo.
 8.3. About.
+
+9. If Wizard is run from the middle:
+9.1. Remove part of Config.ini

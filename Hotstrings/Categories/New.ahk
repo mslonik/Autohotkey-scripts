@@ -49,3 +49,4 @@ Hotstring(":*:oem.", 			func("ViaClipboard").bind("Original Equipment Manufactur
 Hotstring(":B0*:oem", 			func("NormalWay").bind("{BackSpace 3}OEM"), "On")
 Hotstring(":*:ems.", 			func("ViaClipboard").bind("Electronics Manufacturing Services"), "On")
 Hotstring(":B0*:ems", 			func("NormalWay").bind("{BackSpace 3}EMS"), "On")
+Hotstring(":*:otagle", 			func("NormalWay").bind("O T A G L E"), "On")

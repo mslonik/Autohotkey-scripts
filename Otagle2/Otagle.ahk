@@ -13,8 +13,8 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #Persistent
 
      CurrentLayer                           := 1
-     ;~ MonitorRadioGroup                      := 3 ; 0
-     MonitorRadioGroup                      := 0
+     ;~ WhichMonitor                      := 3 ; 0
+     WhichMonitor                      := 0
      WindowWizardTitle                      := "O T A G L E Configuration Wizard"
      ;~ ButtonWidth                            := 300 ; 80
      ButtonWidth                            := 80
@@ -22,7 +22,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ButtonHeight                           := 80
      ButtonHorizontalGap                    := 10
      ButtonVerticalGap                      := 10
-     CalculateVariable                      := 0
+     CalculateButtonVar                      := 0
      MonitorBoundingCoordinates_Left        := 0
      MonitorBoundingCoordinates_Right       := 0
      MonitorBoundingCoordinates_Top         := 0
@@ -64,17 +64,18 @@ else if (A_Args.Length() = 1)
      }
 else if (A_Args.Length() > 1)
     {
-    MsgBox, 48, Diacritic.ahk, % "Too many input arguments: " . A_Args.Length() . ". Expected just one, *.ini." 
+    MsgBox, 48, Diacritic.ahk, % "Too many input arguments: " . A_Args.Length() . ". Expected just one, *Config.ini." 
     ExitApp, 0
     }
 
 
 Wizard_Intro:
+     Gui, Wizard_Intro: New, +LabelMyGui_On
      Gui, Wizard_Intro: Font, bold
      Gui, Wizard_Intro: Add, Text, w500, Introduction
      Gui, Wizard_Intro: Font, 
      Gui, Wizard_Intro: Add, Text, w500, When there is no otagle.ini file or on purspose User decided to change crucial application settings, this wizard appears. User is asked to answer 3 questions related to settings of monitor.
-     Gui, Wizard_Intro: Add, Text, w500, Step 1: `t`tChoose a monitor where GUI of OTAGLE will be located.
+     Gui, Wizard_Intro: Add, Text, w500, Step 1: `t`tChoose a monitor where GUI of O T A G L E will be located.
      Gui, Wizard_Intro: Add, Text, w500, Step 2: `t`tCheck monitor size, specify amount and size of buttons.
      Gui, Wizard_Intro: Add, Text, w500, Step 3: `t`tPlot on the screen matrix of buttons.
      Gui, Wizard_Intro: Add, Button, % "Default xm+" . 500//3 . " w80 gWizardStep1", &Next
@@ -85,36 +86,37 @@ return
 
 
 WizardStep1:
-     CalculateVariable := 0
+     CalculateButtonVar := 0
      Gui, Wizard_Intro:    Destroy
-     Gui, Wizard_AmountAndSizeOfButtons: Destroy
-     Gui, Wizard_WhereGUI: Submit, NoHide
-     Gui, Wizard_WhereGUI: Destroy
+     Gui, WizardStep2: Destroy
+     Gui, WizardStep1: Submit, NoHide
+     Gui, WizardStep1: Destroy
      
-     Gui, Wizard_WhereGUI: Font, bold
-     Gui, Wizard_WhereGUI: Add, Text, w500, Step 1 out of 3: `t`tChoose a monitor where GUI of OTAGLE will be located.
-     Gui, Wizard_WhereGUI: Font
-     Gui, Wizard_WhereGUI: Add, Text, w500, Specify one out of the available Monitor No.
+     Gui, WizardStep1: New, +LabelMyGui_On
+     Gui, WizardStep1: Font, bold
+     Gui, WizardStep1: Add, Text, w500, Step 1 out of 3: `t`tChoose a monitor where GUI of OTAGLE will be located.
+     Gui, WizardStep1: Font
+     Gui, WizardStep1: Add, Text, w500, Specify one out of the available Monitor No.
 
      SysGet, HowManyMonitors,       MonitorCount
      SysGet, WhichIsPrimary,        MonitorPrimary
      
-     if (MonitorRadioGroup = 0) 
-          MonitorRadioGroup := WhichIsPrimary
+     if (WhichMonitor = 0) 
+          WhichMonitor := WhichIsPrimary
      
      Loop, % HowManyMonitors
           {
-          if (A_Index = MonitorRadioGroup)
-               Gui, Wizard_WhereGUI: Add, Radio, xm+50 gWizardStep1 AltSubmit vMonitorRadioGroup Checked, % "Monitor #" . A_Index . (A_Index = WhichIsPrimary ? " (primary)" : "")
+          if (A_Index = WhichMonitor)
+               Gui, WizardStep1: Add, Radio, xm+50 gWizardStep1 AltSubmit vWhichMonitor Checked, % "Monitor #" . A_Index . (A_Index = WhichIsPrimary ? " (primary)" : "")
           else
-               Gui, Wizard_WhereGUI: Add, Radio, xm+50 gWizardStep1 AltSubmit, % "Monitor #" . A_Index . (A_Index = WhichIsPrimary ? " (primary)" : "")
+               Gui, WizardStep1: Add, Radio, xm+50 gWizardStep1 AltSubmit, % "Monitor #" . A_Index . (A_Index = WhichIsPrimary ? " (primary)" : "")
           }     
-     Gui, Wizard_WhereGUI: Add, Button, Default xm+30 y+20 gCheckMonitorNumbering, &Check Monitor Numbering
-     Gui, Wizard_WhereGUI: Add, Button, x+30 w80 gWizardStep2, &Next
-     Gui, Wizard_WhereGUI: Add, Button, x+30 w80 gWizard_Intro, &Back
-     Gui, Wizard_WhereGUI: Add, Button, x+30 w80 gExitWizard, &Cancel
-     SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
-     Gui, Wizard_WhereGUI: Show
+     Gui, WizardStep1: Add, Button, Default xm+30 y+20 gCheckMonitorNumbering, &Check Monitor Numbering
+     Gui, WizardStep1: Add, Button, x+30 w80 gWizardStep2, &Next
+     Gui, WizardStep1: Add, Button, x+30 w80 gWizard_Intro, &Back
+     Gui, WizardStep1: Add, Button, x+30 w80 gExitWizard, &Cancel
+     SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
+     Gui, WizardStep1: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
           . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle . " Layer " . CurrentLayer
      WinGetPos, , , WizardWindow_Width, WizardWindow_Height, A
@@ -122,76 +124,75 @@ return
 
 
 WizardStep2:
-     Gui, Wizard_WhereGUI: Destroy
-     Gui, Wizard_AmountAndSizeOfButtons: Font, bold
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Text, , Step 2: `t`tCheck monitor size, specify amount and size of buttons.
-     Gui, Wizard_AmountAndSizeOfButtons: Font
+     Gui, WizardStep1: Destroy
      
-     SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
+     Gui, WizardStep2: New, +LabelMyGui_On
+     Gui, WizardStep2: Font, bold
+     Gui, WizardStep2: Add, Text, , Step 2: `t`tCheck monitor size, specify amount and size of buttons.
+     Gui, WizardStep2: Font
+     
+     SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
 
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Text, y+20
-          , % "Monitor #: " . MonitorRadioGroup . "`tMonitor width: " . Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) 
+     Gui, WizardStep2: Add, Text, y+20
+          , % "Monitor #: " . WhichMonitor . "`tMonitor width: " . Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) 
           . "`tMonitor height: " . Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) . " Suggested size of key: 80x80 px and gap size: 20x20 px."
           
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Text, xm, Specify key size width: `
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 w50
-     Gui, Wizard_AmountAndSizeOfButtons: Add, UpDown, vButtonWidth Range1-300, % ButtonWidth
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Text, x+m yp, Specify key size height: `
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 w50
-     Gui, Wizard_AmountAndSizeOfButtons: Add, UpDown, vButtonHeight Range1-300, % ButtonHeight
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Text, xm, Specify horizontal gap between buttons: `
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 w50
-     Gui, Wizard_AmountAndSizeOfButtons: Add, UpDown, vButtonHorizontalGap Range0-300, % ButtonHorizontalGap
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Text, x+m yp, Specify vertical gap between buttons: `
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Edit, x+m yp r1 w50
-     Gui, Wizard_AmountAndSizeOfButtons: Add, UpDown, vButtonVerticalGap Range0-300, % ButtonVerticalGap
-     
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, xm Default w80 gBCalculate, C&alculate 
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Text, xm, % "Number of keys horizontally in px: " . (CalculateVariable ? WizardStep2_AmountOfKeysHorizontally : "") 
-          . " and not used margin at the left side in px: " . (CalculateVariable ? WizardStep2_MarginHorizontally : "")
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Text, xm, % "Number of keys vertically in px: " . (CalculateVariable ? WizardStep2_AmountOfKeysVertically : "") 
-          . " and not used margin at the bottom side in px: " . (CalculateVariable ? WizardStep2_MarginVertically : "")
-
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x50 y+20 w80 gPlotButtons hwndTestButtonHwnd, &Test
-     
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gWizardStep1, &Back
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+30 w80 gExitWizard, &Cancel
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, xm w80 gSaveConfigurationWizard hwndSaveConfigHwnd, &Save config
-     if (CalculateVariable = 0)
+     Gui, WizardStep2: Add, Text, xm, Specify key size width: `
+     Gui, WizardStep2: Add, Edit, x+m yp r1 w50
+     Gui, WizardStep2: Add, UpDown, vButtonWidth Range1-300, % ButtonWidth
+     Gui, WizardStep2: Add, Text, x+m yp, Specify key size height: `
+     Gui, WizardStep2: Add, Edit, x+m yp r1 w50
+     Gui, WizardStep2: Add, UpDown, vButtonHeight Range1-300, % ButtonHeight
+     Gui, WizardStep2: Add, Text, xm, Specify horizontal gap between buttons: `
+     Gui, WizardStep2: Add, Edit, x+m yp r1 w50
+     Gui, WizardStep2: Add, UpDown, vButtonHorizontalGap Range0-300, % ButtonHorizontalGap
+     Gui, WizardStep2: Add, Text, x+m yp, Specify vertical gap between buttons: `
+     Gui, WizardStep2: Add, Edit, x+m yp r1 w50
+     Gui, WizardStep2: Add, UpDown, vButtonVerticalGap Range0-300, % ButtonVerticalGap
+     Gui, WizardStep2: Add, Button, xm Default w80 gBCalculate, C&alculate 
+     Gui, WizardStep2: Add, Text, xm, % "Number of keys horizontally in px: " . (CalculateButtonVar ? WizardStep2_AmountOfKeysHorizontally : "") 
+          . " and not used margin at the left side in px: " . (CalculateButtonVar ? WizardStep2_MarginHorizontally : "")
+     Gui, WizardStep2: Add, Text, xm, % "Number of keys vertically in px: " . (CalculateButtonVar ? WizardStep2_AmountOfKeysVertically : "") 
+          . " and not used margin at the bottom side in px: " . (CalculateButtonVar ? WizardStep2_MarginVertically : "")
+     Gui, WizardStep2: Add, Button, x50 y+20 w80 gPlotButtons hwndTestButtonHwnd, &Test
+     Gui, WizardStep2: Add, Button, x+30 w80 gWizardStep1, &Back
+     Gui, WizardStep2: Add, Button, x+30 w80 gExitWizard, &Cancel
+     Gui, WizardStep2: Add, Button, xm w80 gSaveConfigurationWizard hwndSaveConfigHwnd, &Save config
+     if (CalculateButtonVar = 0)
           {
-          GuiControl, Wizard_AmountAndSizeOfButtons: Disable, % TestButtonHwnd
-          GuiControl, Wizard_AmountAndSizeOfButtons: Disable, % SaveConfigHwnd
+          GuiControl, WizardStep2: Disable, % TestButtonHwnd
+          GuiControl, WizardStep2: Disable, % SaveConfigHwnd
           }
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Progress, x+m w350 h25 cGreen vProgressBarVar BackgroundC9C9C9, 0
-     SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup
-     Gui, Wizard_AmountAndSizeOfButtons: Show
+     Gui, WizardStep2: Add, Progress, x+m w350 h25 cGreen vProgressBarVar BackgroundC9C9C9, 0
+     SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
+     Gui, WizardStep2: Show
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
           . " y" . MonitorBoundingCoordinates_Top
           , HiddenAttempt
      WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
-     Gui, Wizard_AmountAndSizeOfButtons: Show
+     Gui, WizardStep2: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
           . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2)
           , % WindowWizardTitle . " Layer " . CurrentLayer
 return
 
 BCalculate:
-     CalculateVariable := 1
-     Gui, Wizard_AmountAndSizeOfButtons: Submit
+     CalculateButtonVar := 1
+     Gui, WizardStep2: Submit
      CalculateButtonsAndGaps()
-     Gui, Wizard_AmountAndSizeOfButtons: Destroy
-     GuiControl, Wizard_AmountAndSizeOfButtons: Enable, % TestButtonHwnd
-     GuiControl, Wizard_AmountAndSizeOfButtons: Enable, % SaveConfigHwnd
+     Gui, WizardStep2: Destroy
+     GuiControl, WizardStep2: Enable, % TestButtonHwnd
+     GuiControl, WizardStep2: Enable, % SaveConfigHwnd
      Goto, WizardStep2
 return
 
 PlotButtons:
-     Gui, Wizard_AmountAndSizeOfButtons:    Submit, NoHide
-     Gui, Wizard_AmountAndSizeOfButtons:    Destroy
+     Gui, WizardStep2:    Submit, NoHide
+     Gui, WizardStep2:    Destroy
      Gui, Wizard_PlotMatrixOfButtons:       Destroy
      
      CalculateButtonsAndGaps()
-     Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
+     
      F_AddButtonsAndGaps("Disable")
      Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer 
      MsgBox, 4096,  % WindowWizardTitle, Press OK button to continue to go back: test new configuration again or save it.
@@ -200,13 +201,13 @@ PlotButtons:
 return
 
 SaveConfigurationWizard:
-     if (CalculateVariable = 0)
+     if (CalculateButtonVar = 0)
           {
           MsgBox, 0, % WindowWizardTitle, Press Calculate button at first.
           return
           }
 
-     IniWrite, % MonitorRadioGroup,       % A_ScriptDir . "\Config.ini", Main, WhichMonitor
+     IniWrite, % WhichMonitor,       % A_ScriptDir . "\Config.ini", Main, WhichMonitor
      IniWrite, % ButtonWidth,             % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonWidth
      IniWrite, % ButtonHeight,            % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonHeight
      IniWrite, % ButtonHorizontalGap,     % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonHorizontalGap
@@ -228,52 +229,53 @@ SaveConfigurationWizard:
      MsgBox, 0, % WindowWizardTitle, % "Configuration saved to the file :`n" . A_ScriptDir . "\Config.ini"
 
      GuiControl, Disable, % SaveConfigHwnd
-     Gui, Wizard_AmountAndSizeOfButtons: Add, Button, x+m w80 gWizardStep3, C&ontinue
+     Gui, WizardStep2: Add, Button, x+m w80 gWizardStep3, C&ontinue
 return
 
 
 WizardStep3:
      ;~ Ta linijka 
-     Gui, Wizard_AmountAndSizeOfButtons: Destroy
+     Gui, WizardStep2: Destroy
      
      Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
      if (WinExist())
           Gui, Wizard_PlotMatrixOfButtons: Destroy
-     Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
+     ;~ Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
      F_AddButtonsAndGaps("Enable")
      Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer
-          
-     Gui, Wizard_ConfigureFunctions: Font, bold
-     Gui, Wizard_ConfigureFunctions: Add, Text, , Step 3: `t`tAssociate functions with buttons.
-     Gui, Wizard_ConfigureFunctions: Font
-     Gui, Wizard_ConfigureFunctions: Add, Text, , Click any of the buttons in the bottom window and associate a picture and function to it.
-     Gui, Wizard_ConfigureFunctions: Add, Button, xm+30 w80 gStartOtagle, &Finish wizard
-     Gui, Wizard_ConfigureFunctions: Add, Button, x+30 w80 gNextLayer, &Next layer
 
-     Gui, Wizard_ConfigureFunctions: Show ; small trick to correctly calculate position of window on a screen
+     Gui, WizardStep3: New, +LabelMyGui_On
+     Gui, WizardStep3: Font, bold
+     Gui, WizardStep3: Add, Text, , Step 3: `t`tAssociate functions with buttons.
+     Gui, WizardStep3: Font
+     Gui, WizardStep3: Add, Text, , Click any of the buttons in the bottom window and associate a picture and function to it.
+     Gui, WizardStep3: Add, Button, xm+30 w80 gStartOtagle, &Finish wizard
+     Gui, WizardStep3: Add, Button, x+30 w80 gNextLayer, &Next layer
+
+     Gui, WizardStep3: Show ; small trick to correctly calculate position of window on a screen
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
           . " y" . MonitorBoundingCoordinates_Top
           , HiddenAttempt
      WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
      
      ; Ta linijka
-     ;~ SysGet, MonitorBoundingCoordinates_, Monitor, % MonitorRadioGroup ; ← do usunięcia
+     ;~ SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor ; ← do usunięcia
      
-     Gui, Wizard_ConfigureFunctions: Show
+     Gui, WizardStep3: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
           . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
           , % WindowWizardTitle  . " Layer " . CurrentLayer
 return
 
 ButtonPressed:
-     Gui,               Wizard_ConfigureFunctions: Show, Hide
+     Gui,               WizardStep3: Show, Hide
      Gui,               Wizard_PlotMatrixOfButtons: +OwnDialogs
      GuiControlGet,     ReadButtonPos, Wizard_PlotMatrixOfButtons: Pos, % A_GuiControl
      FileSelectFile,    SelectedFile, 3, %A_ScriptDir%, Select a picture file, Picture (*.png; *.jpg)
      if (SelectedFile = "")
           {
           MsgBox,   No picture file was selected.
-          Gui,      Wizard_ConfigureFunctions: Show
+          Gui,      WizardStep3: Show
           }
      else
           {
@@ -281,23 +283,21 @@ ButtonPressed:
           Gui, Wizard_PlotMatrixOfButtons: Add, Picture, % "x" . ReadButtonPosX . " y" . ReadButtonPosY . " w" . ReadButtonPosW . " h-1", % SelectedFile ; Add the selected picture instead of button
           ;~ MsgBox, Tu jestem!
           IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Picture" ; Save the picture into config file
-          FileSelectFile, SelectedFile, 3, %A_ScriptDir%, Select an .ahk script file, AHK script (*.ahk)
+          FileSelectFile, SelectedFile, 3, %A_ScriptDir%, Select an .exe file, the compiled AHK script (*.exe)
           if (SelectedFile = "") ; Now when picture is associated to a button, associate function as well.
                {
                MsgBox,   No picture file was selected.
-               Gui,      Wizard_ConfigureFunctions: Show
+               Gui,      WizardStep3: Show
                }
           else
                {
                IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action" ; Save the picture into config file
                }
           }
-     Gui,      Wizard_ConfigureFunctions: Show
+     Gui,      WizardStep3: Show
 return
 
 PicturePressed:
-     ;~ MsgBox, % "Picture was activated!`n" . A_GuiControl . "`r`n" . TableOfLayers[CurrentLayer][SubStr(A_GuiControl, StrLen("Picture") + 1)]
-     ;~ Run, % TableOfLayers[CurrentLayer][SubStr(A_GuiControl, StrLen("Picture") + 1)] ; read value of object: path to executable
      Run, % TableOfLayers[CurrentLayer][A_GuiControl] ; read value of object: path to executable
 return
 
@@ -310,10 +310,10 @@ return
 
 NextLayer:
      Gui, Wizard_PlotMatrixOfButtons:   Destroy
-     Gui, Wizard_ConfigureFunctions:    Destroy
+     Gui, WizardStep3:    Destroy
      IniWrite, % CurrentLayer,       % A_ScriptDir . "\Config.ini", Main, HowManyLayers ; Save the total amount of created layers
      CurrentLayer++
-     CalculateVariable := 0
+     CalculateButtonVar := 0
      Goto Wizard_Intro
 ;~ return
 
@@ -331,7 +331,8 @@ DestroyGuis:
      Gui, Font ; restore the font to the system's default GUI typeface, zize and color.
 return
 
-GuiClose:
+MyGui_OnClose:
+     ;~ MsgBox, % "CurrentLayer: " CurrentLayer " Tu jestem!"
 ExitWizard:
      ExitApp
 
@@ -359,6 +360,7 @@ F_ReadConfig_ini()
           IniRead, AmountOfKeysHorizontally,             % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, Amount of buttons horizontally
           IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, Amount of buttons vertically
           TableOfLayers[LayerIndex] := []
+          Gui, % "Layer" . LayerIndex . ": New", % "+hwndGuiLayer" . LayerIndex . "Hwnd" . " +LabelMyGui_On"
           Loop, % AmountOfKeysVertically
                {
                VerticalIndex := A_Index
@@ -416,17 +418,17 @@ F_SavePositionOfButtons()
                ;~ MsgBox, Tu jestem
                GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd
                IniWrite, % GuziorX,         % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_X"
-               GuiControl, Wizard_AmountAndSizeOfButtons:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
+               GuiControl, WizardStep2:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                IniWrite, % GuziorY,         % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Y"
-               GuiControl, Wizard_AmountAndSizeOfButtons:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
+               GuiControl, WizardStep2:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                IniWrite, % GuziorW,         % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_W"
-               GuiControl, Wizard_AmountAndSizeOfButtons:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
+               GuiControl, WizardStep2:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                IniWrite, % GuziorH,         % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_H"
-               GuiControl, Wizard_AmountAndSizeOfButtons:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
+               GuiControl, WizardStep2:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                IniWrite, % PictureFilePath, % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Picture"
-               GuiControl, Wizard_AmountAndSizeOfButtons:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
+               GuiControl, WizardStep2:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                IniWrite, % ButtonScript,    % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Action"
-               GuiControl, Wizard_AmountAndSizeOfButtons:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
+               GuiControl, WizardStep2:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                }
           }
      }
@@ -436,6 +438,9 @@ F_AddButtonsAndGaps(IfEnable)
      global ; Assume-global mode
      ;~ global WizardStep2_AmountOfKeysHorizontally, WizardStep2_AmountOfKeysVertically
      ;~ global ButtonHeight, ButtonWidth
+     
+     Gui, Wizard_PlotMatrixOfButtons: New, +LabelMyGui_On
+     Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
      
      Loop, % WizardStep2_AmountOfKeysVertically
           {
@@ -485,7 +490,7 @@ CalculateButtonsAndGaps()
      {
      global WizardStep2_AmountOfKeysHorizontally, WizardStep2_MarginHorizontally, WizardStep2_AmountOfKeysVertically, WizardStep2_MarginVertically
      global MonitorBoundingCoordinates_, MonitorBoundingCoordinates_Bottom, MonitorBoundingCoordinates_Left, MonitorBoundingCoordinates_Right, MonitorBoundingCoordinates_Top
-     global MonitorRadioGroup, ButtonWidth, ButtonHeight, ButtonHorizontalGap, ButtonVerticalGap
+     global WhichMonitor, ButtonWidth, ButtonHeight, ButtonHorizontalGap, ButtonVerticalGap
      
      WizardStep2_AmountOfKeysHorizontally := (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) -  ButtonHorizontalGap) // ( ButtonWidth + ButtonHorizontalGap)
      WizardStep2_MarginHorizontally := Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) - (WizardStep2_AmountOfKeysHorizontally * ButtonHorizontalGap + WizardStep2_AmountOfKeysHorizontally * ButtonWidth + ButtonHorizontalGap)
