@@ -25,6 +25,7 @@ Clean up the code.
 8.1. Configuration.
 8.2. Logo.
 8.3. About.
+8.4. Default config file.
 
 9. If Wizard is run from the middle:
 9.1. Remove part of Config.ini

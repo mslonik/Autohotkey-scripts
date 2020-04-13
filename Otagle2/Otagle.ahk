@@ -14,8 +14,9 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 
      CurrentLayer                           := 1
      ;~ WhichMonitor                      := 3 ; 0
-     WhichMonitor                      := 0
-     WindowWizardTitle                      := "O T A G L E Configuration Wizard"
+     WhichMonitor                           := 0
+     ApplicationName                        := "O T A G L E 2"
+     WindowWizardTitle                      := ApplicationName . " Configuration Wizard"
      ;~ ButtonWidth                            := 300 ; 80
      ButtonWidth                            := 80
      ;~ ButtonHeight                           := 300 ; 80
@@ -75,7 +76,7 @@ Wizard_Intro:
      Gui, Wizard_Intro: Add, Text, w500, Introduction
      Gui, Wizard_Intro: Font, 
      Gui, Wizard_Intro: Add, Text, w500, When there is no otagle.ini file or on purspose User decided to change crucial application settings, this wizard appears. User is asked to answer 3 questions related to settings of monitor.
-     Gui, Wizard_Intro: Add, Text, w500, Step 1: `t`tChoose a monitor where GUI of O T A G L E will be located.
+     Gui, Wizard_Intro: Add, Text, w500, Step 1: `t`tChoose a monitor where GUI of %ApplicationName% will be located.
      Gui, Wizard_Intro: Add, Text, w500, Step 2: `t`tCheck monitor size, specify amount and size of buttons.
      Gui, Wizard_Intro: Add, Text, w500, Step 3: `t`tPlot on the screen matrix of buttons.
      Gui, Wizard_Intro: Add, Button, % "Default xm+" . 500//3 . " w80 gWizardStep1", &Next
@@ -302,9 +303,11 @@ PicturePressed:
 return
 
 StartOtagle:
+     Menu,   Tray, Icon, % A_ScriptDir . "\OtagleIcon.ico"    ; this line applies icon of O T A G L E designed by Sylwia Ławrów
+     Gosub,  Traymenu                         ; Jumps to the specified label and continues execution until Return is encountered
      CurrentLayer := 1  ; initialization of application
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
-     Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % "O T A G L E: Layer " . CurrentLayer
+     Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . CurrentLayer
      ;~ ExitApp ; ← temporarily
 return
 
@@ -335,7 +338,46 @@ MyGui_OnClose:
      ;~ MsgBox, % "CurrentLayer: " CurrentLayer " Tu jestem!"
 ExitWizard:
      ExitApp
+     
+Traymenu:
+     ;~ MsgBox, Tu jestem!
+     Menu, Tray, Add, %ApplicationName%.ahk ABOUT, About
+     Menu, Tray, Add, % ".ini file: " . A_Args[1], _iniFile
+     Menu, Tray, Default, %ApplicationName%.ahk ABOUT ; Default: Changes the menu's default item to be the specified menu item and makes its font bold.
+     Menu, Tray, Add ; To add a menu separator line, omit all three parameters. To put your menu items on top of the standard menu items (after adding your own menu items) run Menu, Tray, NoStandard followed by Menu, Tray, Standard.
+     Menu, Tray, NoStandard
+     Menu, Tray, Standard
+     Menu, Tray, Tip, %ApplicationName% ; Changes the tray icon's tooltip.
+return
 
+_iniFile:
+return
+
+About:
+    Gui, MyAbout: New, +LabelMyGui_On
+    Gui, MyAbout: Font, Bold
+    Gui, MyAbout: Add, Text, , %ApplicationName% v.2.0 by mslonik (🐘)
+    Gui, MyAbout: Font
+    Gui, MyAbout: Add, Text, xm, Make your computer PersonaL a g a i n...
+    Gui, MyAbout: Add, Text, xm, Open source release of Stream Deck concept. Works at its best with touch screens.
+    ;~ Gui, MyAbout: Font, CBlue Underline 
+    ;~ Gui, MyAbout: Add, Text, x+1, https://en.wikipedia.org/wiki/Diacritic
+    ;~ Gui, MyAbout: Font
+    Gui, MyAbout: Add, Text, xm+20, * one can run Wizard from SysTray menu to adjust settings.
+    Gui, MyAbout: Add, Picture, xm+50 y+20 w300 h-1, % A_ScriptDir . "\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia Ławrów
+
+    Gui, MyAbout: Add, Button, Default Hidden w100 gAboutOkBut Center vOkButtonVar hwndOkButtonHwnd, &OK
+    GuiControlGet, MyGuiControlGetVariable, MyAbout: Pos, %OkButtonHwnd%
+    Gui, MyAbout: Show, Center, %ApplicationName% About
+    WinGetPos, , , MyAboutWindowWidth, , %ApplicationName% About
+    NewButtonXPosition := (MyAboutWindowWidth / 2) - (MyGuiControlGetVariableW / 2)
+    GuiControl, Move, %OkButtonHwnd%, % "x" NewButtonXPosition
+    GuiControl, Show, %OkButtonHwnd%
+return    
+
+AboutOkBut:
+     Gui, MyAbout: Destroy
+return
 
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
 
