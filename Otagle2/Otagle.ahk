@@ -299,7 +299,7 @@ ButtonPressed:
 return
 
 PicturePressed:
-     Run, % TableOfLayers[CurrentLayer][A_GuiControl] ; read value of object: path to executable
+     Run, % TableOfLayers[CurrentLayer][A_GuiControl] . " " . WhichMonitor ; read value of object: path to executable
 return
 
 StartOtagle:
