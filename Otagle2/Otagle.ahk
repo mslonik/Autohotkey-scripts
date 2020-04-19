@@ -112,11 +112,11 @@ WizardStep1:
           else
                Gui, WizardStep1: Add, Radio, xm+50 gWizardStep1 AltSubmit, % "Monitor #" . A_Index . (A_Index = WhichIsPrimary ? " (primary)" : "")
           }     
-     Gui, WizardStep1: Add, Button, Default xm+30 y+20 gCheckMonitorNumbering, &Check Monitor Numbering
-     
-     Gui, WizardStep1: Add, Button, x+30 w80 gWizardStep2,  &Next
-     Gui, WizardStep1: Add, Button, x+30 w80 gWizard_Intro, &Back
-     Gui, WizardStep1: Add, Button, x+30 w80 gExitWizard,   &Cancel
+
+     Gui, WizardStep1: Add, Button, Default xm+30 y+20 gCheckMonitorNumbering,  &Check Monitor Numbering
+     Gui, WizardStep1: Add, Button, x+30 w80 gWizardStep2,                      &Next
+     Gui, WizardStep1: Add, Button, x+30 w80 gWizard_Intro,                     &Back
+     Gui, WizardStep1: Add, Button, x+30 w80 gExitWizard,                       &Cancel
      
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
      Gui, WizardStep1: Show
@@ -309,7 +309,11 @@ StartOtagle:
      CurrentLayer := 1  ; initialization of application
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
      Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . CurrentLayer
-     ;~ ExitApp ; ← temporarily
+     F_WelcomeScreen()
+return
+
+DestroyWelcomeScreen:
+     Gui, WelcomeScreen: Destroy
 return
 
 NextLayer:
@@ -324,7 +328,7 @@ NextLayer:
 
 CheckMonitorNumbering:
      F_ShowMonitorNumbers()
-     SetTimer, DestroyGuis, -3000     
+     SetTimer, DestroyGuis, -3000
 return
 
 DestroyGuis:
@@ -439,6 +443,26 @@ AboutOkBut:
 return
 
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
+
+F_WelcomeScreen()
+     {
+     global
+     
+     SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
+     Gui, WelcomeScreen: New, +LabelMyGui_On +AlwaysOnTop -Caption
+     Gui, WelcomeScreen: Add, Picture, w500 h-1, % A_ScriptDir . "\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia Ławrów 
+     Gui, WelcomeScreen: Show ; small trick to correctly calculate position of window on a screen
+          , % "hide" . " x" . MonitorBoundingCoordinates_Left 
+          . " y" . MonitorBoundingCoordinates_Top
+          , HiddenAttempt
+     WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
+     Gui, WelcomeScreen: Show
+          , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
+          . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % ApplicationName . " Welcome!"
+     SetTimer, DestroyWelcomeScreen, -3000
+     }
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 F_ReadConfig_ini()
      {
