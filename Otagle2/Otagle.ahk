@@ -23,7 +23,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ButtonHeight                           := 80
      ButtonHorizontalGap                    := 10
      ButtonVerticalGap                      := 10
-     CalculateButtonVar                      := 0
+     CalculateButtonVar                     := 0
      MonitorBoundingCoordinates_Left        := 0
      MonitorBoundingCoordinates_Right       := 0
      MonitorBoundingCoordinates_Top         := 0
@@ -75,12 +75,12 @@ Wizard_Intro:
      Gui, Wizard_Intro: Font, bold
      Gui, Wizard_Intro: Add, Text, w500, Introduction
      Gui, Wizard_Intro: Font, 
-     Gui, Wizard_Intro: Add, Text, w500, When there is no otagle.ini file or on purspose User decided to change crucial application settings, this wizard appears. User is asked to answer 3 questions related to settings of monitor.
+     Gui, Wizard_Intro: Add, Text, w500, When there is no Config.ini file or on purspose User decided to change crucial application settings, this wizard appears. User is asked to answer 3 questions related to settings of application.
      Gui, Wizard_Intro: Add, Text, w500, Step 1: `t`tChoose a monitor where GUI of %ApplicationName% will be located.
      Gui, Wizard_Intro: Add, Text, w500, Step 2: `t`tCheck monitor size, specify amount and size of buttons.
      Gui, Wizard_Intro: Add, Text, w500, Step 3: `t`tPlot on the screen matrix of buttons.
-     Gui, Wizard_Intro: Add, Button, % "Default xm+" . 500//3 . " w80 gWizardStep1", &Next
-     Gui, Wizard_Intro: Add, Button, x+30 w80 gExitWizard, &Cancel
+     Gui, Wizard_Intro: Add, Button, % "Default xm+" . 500//3 . " w80 gWizardStep1",    &Next
+     Gui, Wizard_Intro: Add, Button, x+30 w80 gExitWizard,                              &Cancel
      Gui, Wizard_Intro: Show, , % WindowWizardTitle . " Layer " . CurrentLayer
      WinGetPos, , , WizardWindow_Width, WizardWindow_Height, A
 return 
@@ -95,7 +95,7 @@ WizardStep1:
      
      Gui, WizardStep1: New, +LabelMyGui_On
      Gui, WizardStep1: Font, bold
-     Gui, WizardStep1: Add, Text, w500, Step 1 out of 3: `t`tChoose a monitor where GUI of OTAGLE will be located.
+     Gui, WizardStep1: Add, Text, w500, Step 1 out of 3: `t`tChoose a monitor where GUI will be located.
      Gui, WizardStep1: Font
      Gui, WizardStep1: Add, Text, w500, Specify one out of the available Monitor No.
 
@@ -113,9 +113,11 @@ WizardStep1:
                Gui, WizardStep1: Add, Radio, xm+50 gWizardStep1 AltSubmit, % "Monitor #" . A_Index . (A_Index = WhichIsPrimary ? " (primary)" : "")
           }     
      Gui, WizardStep1: Add, Button, Default xm+30 y+20 gCheckMonitorNumbering, &Check Monitor Numbering
-     Gui, WizardStep1: Add, Button, x+30 w80 gWizardStep2, &Next
+     
+     Gui, WizardStep1: Add, Button, x+30 w80 gWizardStep2,  &Next
      Gui, WizardStep1: Add, Button, x+30 w80 gWizard_Intro, &Back
-     Gui, WizardStep1: Add, Button, x+30 w80 gExitWizard, &Cancel
+     Gui, WizardStep1: Add, Button, x+30 w80 gExitWizard,   &Cancel
+     
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
      Gui, WizardStep1: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
@@ -129,7 +131,7 @@ WizardStep2:
      
      Gui, WizardStep2: New, +LabelMyGui_On
      Gui, WizardStep2: Font, bold
-     Gui, WizardStep2: Add, Text, , Step 2: `t`tCheck monitor size, specify amount and size of buttons.
+     Gui, WizardStep2: Add, Text, , Step 2: `t`tSpecify amount and size of buttons
      Gui, WizardStep2: Font
      
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
@@ -155,9 +157,9 @@ WizardStep2:
           . " and not used margin at the left side in px: " . (CalculateButtonVar ? WizardStep2_MarginHorizontally : "")
      Gui, WizardStep2: Add, Text, xm, % "Number of keys vertically in px: " . (CalculateButtonVar ? WizardStep2_AmountOfKeysVertically : "") 
           . " and not used margin at the bottom side in px: " . (CalculateButtonVar ? WizardStep2_MarginVertically : "")
-     Gui, WizardStep2: Add, Button, x50 y+20 w80 gPlotButtons hwndTestButtonHwnd, &Test
-     Gui, WizardStep2: Add, Button, x+30 w80 gWizardStep1, &Back
-     Gui, WizardStep2: Add, Button, x+30 w80 gExitWizard, &Cancel
+     Gui, WizardStep2: Add, Button, x50 y+20 w80 gPlotButtons hwndTestButtonHwnd,       &Test
+     Gui, WizardStep2: Add, Button, x+30 w80 gWizardStep1,                              &Back
+     Gui, WizardStep2: Add, Button, x+30 w80 gExitWizard,                               &Cancel
      Gui, WizardStep2: Add, Button, xm w80 gSaveConfigurationWizard hwndSaveConfigHwnd, &Save config
      if (CalculateButtonVar = 0)
           {
@@ -208,7 +210,7 @@ SaveConfigurationWizard:
           return
           }
 
-     IniWrite, % WhichMonitor,       % A_ScriptDir . "\Config.ini", Main, WhichMonitor
+     IniWrite, % WhichMonitor,            % A_ScriptDir . "\Config.ini", Main, WhichMonitor
      IniWrite, % ButtonWidth,             % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonWidth
      IniWrite, % ButtonHeight,            % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonHeight
      IniWrite, % ButtonHorizontalGap,     % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonHorizontalGap
@@ -250,8 +252,8 @@ WizardStep3:
      Gui, WizardStep3: Add, Text, , Step 3: `t`tAssociate functions with buttons.
      Gui, WizardStep3: Font
      Gui, WizardStep3: Add, Text, , Click any of the buttons in the bottom window and associate a picture and function to it.
-     Gui, WizardStep3: Add, Button, xm+30 w80 gStartOtagle, &Finish wizard
-     Gui, WizardStep3: Add, Button, x+30 w80 gNextLayer, &Next layer
+     Gui, WizardStep3: Add, Button, xm+30 w80 gStartOtagle,     &Finish wizard
+     Gui, WizardStep3: Add, Button, x+30 w80 gNextLayer,        &Next layer
 
      Gui, WizardStep3: Show ; small trick to correctly calculate position of window on a screen
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
@@ -303,7 +305,6 @@ PicturePressed:
 return
 
 StartOtagle:
-     Menu,   Tray, Icon, % A_ScriptDir . "\OtagleIcon.ico"    ; this line applies icon of O T A G L E designed by Sylwia Ławrów
      Gosub,  Traymenu                         ; Jumps to the specified label and continues execution until Return is encountered
      CurrentLayer := 1  ; initialization of application
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
@@ -313,11 +314,11 @@ return
 
 NextLayer:
      Gui, Wizard_PlotMatrixOfButtons:   Destroy
-     Gui, WizardStep3:    Destroy
+     Gui, WizardStep3:                  Destroy
      IniWrite, % CurrentLayer,       % A_ScriptDir . "\Config.ini", Main, HowManyLayers ; Save the total amount of created layers
      CurrentLayer++
      CalculateButtonVar := 0
-     Goto Wizard_Intro
+     Goto WizardStep2
 ;~ return
 
 
@@ -341,14 +342,13 @@ ExitWizard:
      
 Traymenu:
      ;~ MsgBox, Tu jestem!
+     Menu, Tray, Icon, % A_ScriptDir . "\OtagleIcon.ico"    ; this line applies icon of O T A G L E designed by Sylwia Ławrów
      Menu, Tray, Add, %ApplicationName%.ahk ABOUT, L_About
      Menu, Tray, Add ; tray menu separator
-     ;~ Menu, Tray, Add, Configure, L_Configure
      Menu, SubmenuConfigure, Add, Monitor,                              L_ConfigureMonitor
      Menu, SubmenuConfigure, Add, Existing layer buttons / functions,   L_ConfigureButtonsFunctions
      Menu, SubmenuConfigure, Add, Add layer,                            L_ConfigureAddLayer
      Menu, Tray, Add, Configure,                                        :SubmenuConfigure
-     ;~ Menu, Tray, Add, Configure,                                        L_Configure
      Menu, Tray, Default, %ApplicationName%.ahk ABOUT ; Default: Changes the menu's default item to be the specified menu item and makes its font bold.
      Menu, Tray, Add ; To add a menu separator line, omit all three parameters. To put your menu items on top of the standard menu items (after adding your own menu items) run Menu, Tray, NoStandard followed by Menu, Tray, Standard.
      Menu, Tray, NoStandard
@@ -356,10 +356,54 @@ Traymenu:
      Menu, Tray, Tip, %ApplicationName% ; Changes the tray icon's tooltip.
 return
 
-;~ L_Configure:
-;~ return
 
 L_ConfigureMonitor:
+     CalculateButtonVar := 0
+     Gui, ConfigureMonitor: Submit, NoHide ; required to refresh Radio button
+     Gui, ConfigureMonitor: Destroy        ; required to recreate the ConfigureMonitor GUI
+     
+     Gui, ConfigureMonitor: New, +LabelMyGui_On
+     Gui, ConfigureMonitor: Font, bold
+     Gui, ConfigureMonitor: Add, Text, w500, Choose a monitor where GUI will be located.
+     Gui, ConfigureMonitor: Font
+     Gui, ConfigureMonitor: Add, Text, w500, Specify one out of the available Monitor No.
+
+     SysGet, HowManyMonitors,       MonitorCount
+     SysGet, WhichIsPrimary,        MonitorPrimary
+     
+     if (WhichMonitor = 0) 
+          WhichMonitor := WhichIsPrimary
+     
+     Loop, % HowManyMonitors
+          {
+          if (A_Index = WhichMonitor)
+               Gui, ConfigureMonitor: Add, Radio, xm+50 gL_ConfigureMonitor AltSubmit vWhichMonitor Checked, % "Monitor #" . A_Index . (A_Index = WhichIsPrimary ? " (primary)" : "")
+          else
+               Gui, ConfigureMonitor: Add, Radio, xm+50 gL_ConfigureMonitor AltSubmit, % "Monitor #" . A_Index . (A_Index = WhichIsPrimary ? " (primary)" : "")
+          }     
+
+     Gui, ConfigureMonitor: Add, Button, xm+30 y+20 w120 gL_ConfigureMonitor_Save,      &Save and reload
+     Gui, ConfigureMonitor: Add, Button, x+30 w80 gL_ConfigureMonitor_Cancel,    &Cancel
+     SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
+
+     Gui, ConfigureMonitor: Show ; small trick to correctly calculate position of window on a screen
+          , % "hide" . " x" . MonitorBoundingCoordinates_Left 
+          . " y" . MonitorBoundingCoordinates_Top
+          , HiddenAttempt
+     WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
+     Gui, ConfigureMonitor: Show
+          , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
+          . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle . " ConfigureMonitor"
+return
+
+L_ConfigureMonitor_Save:
+     Gui, WizardStep1: Destroy
+     IniWrite, % WhichMonitor,            % A_ScriptDir . "\Config.ini", Main, WhichMonitor     
+     Goto StartOtagle
+;~ return
+
+L_ConfigureMonitor_Cancel:
+     Gui, ConfigureMonitor: Destroy
 return
 
 L_ConfigureButtonsFunctions:
