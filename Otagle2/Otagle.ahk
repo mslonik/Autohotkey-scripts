@@ -35,6 +35,9 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ReadButtonPosW                         := 0
      ReadButtonPosH                         := 0
 
+#Include *i %A_ScriptDir%\ButtonFunctions.ahk ; ← Functions to be included
+
+
 ; Temp:
 ;~ WizardStep2_AmountOfKeysHorizontally := 6
 ;~ WizardStep2_AmountOfKeysVertically   := 3
@@ -60,7 +63,7 @@ if (A_Args.Length() = 0)
     }
 else if (A_Args.Length() = 1)
      {
-     F_ReadConfig_ini()
+     ;~ F_ReadConfig_ini()
      Goto StartOtagle
      }
 else if (A_Args.Length() > 1)
@@ -71,18 +74,8 @@ else if (A_Args.Length() > 1)
 
 
 Wizard_Intro:
-     Gui, Wizard_Intro: New, +LabelMyGui_On
-     Gui, Wizard_Intro: Font, bold
-     Gui, Wizard_Intro: Add, Text, w500, Introduction
-     Gui, Wizard_Intro: Font, 
-     Gui, Wizard_Intro: Add, Text, w500, When there is no Config.ini file or on purspose User decided to change crucial application settings, this wizard appears. User is asked to answer 3 questions related to settings of application.
-     Gui, Wizard_Intro: Add, Text, w500, Step 1: `t`tChoose a monitor where GUI of %ApplicationName% will be located.
-     Gui, Wizard_Intro: Add, Text, w500, Step 2: `t`tCheck monitor size, specify amount and size of buttons.
-     Gui, Wizard_Intro: Add, Text, w500, Step 3: `t`tPlot on the screen matrix of buttons.
-     Gui, Wizard_Intro: Add, Button, % "Default xm+" . 500//3 . " w80 gWizardStep1",    &Next
-     Gui, Wizard_Intro: Add, Button, x+30 w80 gExitWizard,                              &Cancel
-     Gui, Wizard_Intro: Show, , % WindowWizardTitle . " Layer " . CurrentLayer
-     WinGetPos, , , WizardWindow_Width, WizardWindow_Height, A
+     FileRecycle, %A_ScriptDir%\ButtonFunctions.ahk ; ← remove ButtonFunctions.ahk
+     F_WizardIntro()
 return 
 
 
@@ -153,10 +146,10 @@ WizardStep2:
      Gui, WizardStep2: Add, Edit, x+m yp r1 w50
      Gui, WizardStep2: Add, UpDown, vButtonVerticalGap Range0-300, % ButtonVerticalGap
      Gui, WizardStep2: Add, Button, xm Default w80 gBCalculate, C&alculate 
-     Gui, WizardStep2: Add, Text, xm, % "Number of keys horizontally in px: " . (CalculateButtonVar ? WizardStep2_AmountOfKeysHorizontally : "") 
-          . " and not used margin at the left side in px: " . (CalculateButtonVar ? WizardStep2_MarginHorizontally : "")
-     Gui, WizardStep2: Add, Text, xm, % "Number of keys vertically in px: " . (CalculateButtonVar ? WizardStep2_AmountOfKeysVertically : "") 
-          . " and not used margin at the bottom side in px: " . (CalculateButtonVar ? WizardStep2_MarginVertically : "")
+     Gui, WizardStep2: Add, Text, xm, % "Number of keys horizontally: " . (CalculateButtonVar ? WizardStep2_AmountOfKeysHorizontally : "") 
+          . "`tNot used margin at the left side in px: " . (CalculateButtonVar ? WizardStep2_MarginHorizontally : "")
+     Gui, WizardStep2: Add, Text, xm, % "Number of keys vertically: " . (CalculateButtonVar ? WizardStep2_AmountOfKeysVertically : "") 
+          . "`tNot used margin at the bottom side in px: " . (CalculateButtonVar ? WizardStep2_MarginVertically : "")
      Gui, WizardStep2: Add, Button, x50 y+20 w80 gPlotButtons hwndTestButtonHwnd,       &Test
      Gui, WizardStep2: Add, Button, x+30 w80 gWizardStep1,                              &Back
      Gui, WizardStep2: Add, Button, x+30 w80 gExitWizard,                               &Cancel
@@ -211,6 +204,7 @@ SaveConfigurationWizard:
           }
 
      IniWrite, % WhichMonitor,            % A_ScriptDir . "\Config.ini", Main, WhichMonitor
+     IniWrite, % CurrentLayer,       % A_ScriptDir . "\Config.ini", Main, HowManyLayers ; Save the total amount of created layers
      IniWrite, % ButtonWidth,             % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonWidth
      IniWrite, % ButtonHeight,            % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonHeight
      IniWrite, % ButtonHorizontalGap,     % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonHorizontalGap
@@ -286,7 +280,8 @@ ButtonPressed:
           Gui, Wizard_PlotMatrixOfButtons: Add, Picture, % "x" . ReadButtonPosX . " y" . ReadButtonPosY . " w" . ReadButtonPosW . " h-1", % SelectedFile ; Add the selected picture instead of button
           ;~ MsgBox, Tu jestem!
           IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Picture" ; Save the picture into config file
-          FileSelectFile, SelectedFile, 3, %A_ScriptDir%, Select an .exe file, the compiled AHK script (*.exe)
+          FileSelectFile, SelectedFile, 3, %A_ScriptDir%, Select an .ahk or .exe file, File (*.ahk; *.exe)
+          ;~ FileSelectFile, SelectedFile, 3, %A_ScriptDir%, Select an AutoHotkey script or executable file (*.ahk; *.exe), (*.ahk; *.exe)
           if (SelectedFile = "") ; Now when picture is associated to a button, associate function as well.
                {
                MsgBox,   No picture file was selected.
@@ -294,18 +289,23 @@ ButtonPressed:
                }
           else
                {
-               IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action" ; Save the picture into config file
+               IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action" ; Save the function into config file
+               FileAppend, % "#Include *i " . SelectedFile . "`r`n", %A_ScriptDir%\ButtonFunctions.ahk, UTF-8
                }
           }
      Gui,      WizardStep3: Show
 return
 
 PicturePressed:
-     Run, % TableOfLayers[CurrentLayer][A_GuiControl] . " " . WhichMonitor ; read value of object: path to executable
+     RunWait, % TableOfLayers[CurrentLayer][A_GuiControl] . " " . WhichMonitor ; read value of object: path to executable
 return
 
 StartOtagle:
-     Gosub,  Traymenu                         ; Jumps to the specified label and continues execution until Return is encountered
+     Gui, WizardStep3:                  Destroy
+     Gui, Wizard_PlotMatrixOfButtons:   Destroy
+     FileSetAttrib, +H, %A_ScriptDir%\ButtonFunctions.ahk  ; hide ButtonFunctions.ahk
+     Gosub,  Traymenu     ; Jumps to the specified label and continues execution until Return is encountered
+     F_ReadConfig_ini()
      CurrentLayer := 1  ; initialization of application
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
      Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . CurrentLayer
@@ -319,7 +319,7 @@ return
 NextLayer:
      Gui, Wizard_PlotMatrixOfButtons:   Destroy
      Gui, WizardStep3:                  Destroy
-     IniWrite, % CurrentLayer,       % A_ScriptDir . "\Config.ini", Main, HowManyLayers ; Save the total amount of created layers
+     ;~ IniWrite, % CurrentLayer,       % A_ScriptDir . "\Config.ini", Main, HowManyLayers ; Save the total amount of created layers
      CurrentLayer++
      CalculateButtonVar := 0
      Goto WizardStep2
@@ -444,6 +444,26 @@ return
 
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
 
+F_WizardIntro()
+     {
+     global
+     
+     Gui, Wizard_Intro: New, +LabelMyGui_On
+     Gui, Wizard_Intro: Font, bold
+     Gui, Wizard_Intro: Add, Text, w500, Introduction
+     Gui, Wizard_Intro: Font, 
+     Gui, Wizard_Intro: Add, Text, w500, When there is no Config.ini file or on purspose User decided to change crucial application settings, this wizard appears. User is asked to answer 3 questions related to settings of application.
+     Gui, Wizard_Intro: Add, Text, w500, Step 1: `t`tChoose a monitor where GUI of %ApplicationName% will be located.
+     Gui, Wizard_Intro: Add, Text, w500, Step 2: `t`tCheck monitor size, specify amount and size of buttons.
+     Gui, Wizard_Intro: Add, Text, w500, Step 3: `t`tPlot on the screen matrix of buttons.
+     Gui, Wizard_Intro: Add, Button, % "Default xm+" . 500//3 . " w80 gWizardStep1",    &Next
+     Gui, Wizard_Intro: Add, Button, x+30 w80 gExitWizard,                              &Cancel
+     Gui, Wizard_Intro: Show, , % WindowWizardTitle . " Layer " . CurrentLayer
+     WinGetPos, , , WizardWindow_Width, WizardWindow_Height, A
+     }
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 F_WelcomeScreen()
      {
      global
@@ -467,7 +487,7 @@ F_WelcomeScreen()
 F_ReadConfig_ini()
      {
      global
-     local HowManyLayers
+     ;~ local HowManyLayers
      local LayerIndex, VerticalIndex
      local ButtonX, ButtonY, ButtonW, ButtonH, ButtonP
      

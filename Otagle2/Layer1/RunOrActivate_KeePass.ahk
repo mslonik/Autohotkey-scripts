@@ -1,4 +1,4 @@
-RunOrActivateKeePass()
+RunOrActivate_KeePass()
 {
 	Process, Exist, KeePass.Exe
 	if (ErrorLevel = 0)
@@ -19,4 +19,4 @@ RunOrActivateKeePass()
 		}
 }
 
-RunOrActivateKeePass()
+;~ RunOrActivateKeePass()

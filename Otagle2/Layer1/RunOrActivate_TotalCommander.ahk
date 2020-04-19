@@ -1,4 +1,4 @@
-RunOrActivateTotalCommander()
+RunOrActivate_TotalCommander()
 { 
 	Process, Exist, totalcmd64.exe
 	if (ErrorLevel = 0)
@@ -19,4 +19,3 @@ RunOrActivateTotalCommander()
 		}
 }
 
-RunOrActivateTotalCommander()

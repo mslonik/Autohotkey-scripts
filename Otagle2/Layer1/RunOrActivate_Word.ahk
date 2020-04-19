@@ -1,10 +1,15 @@
-﻿RunOrActivateWord()
+﻿RunOrActivate_Word()
 {
-     MonitorBoundingCoordinates_Left        := 0
-     MonitorBoundingCoordinates_Right       := 0
-     MonitorBoundingCoordinates_Top         := 0
-     MonitorBoundingCoordinates_Bottom      := 0
-	 HowManyMonitors						:= 0
+	global
+	DetectHiddenWindows, 	On
+	SetTitleMatchMode, 		RegEx
+	
+     ;~ MonitorBoundingCoordinates_Left        := 0
+     ;~ MonitorBoundingCoordinates_Right       := 0
+     ;~ MonitorBoundingCoordinates_Top         := 0
+     ;~ MonitorBoundingCoordinates_Bottom      := 0
+	 ;~ HowManyMonitors						:= 0
+	 
 	 WordOutputVarPID						:= 0
 
 ;~ A_Args[1] := 2
@@ -153,7 +158,4 @@
 ;~ }
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-DetectHiddenWindows, 	On
-SetTitleMatchMode, 		RegEx
 
-RunOrActivateWord()
