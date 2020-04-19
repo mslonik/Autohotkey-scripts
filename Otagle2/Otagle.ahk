@@ -341,8 +341,14 @@ ExitWizard:
      
 Traymenu:
      ;~ MsgBox, Tu jestem!
-     Menu, Tray, Add, %ApplicationName%.ahk ABOUT, About
-     Menu, Tray, Add, % ".ini file: " . A_Args[1], _iniFile
+     Menu, Tray, Add, %ApplicationName%.ahk ABOUT, L_About
+     Menu, Tray, Add ; tray menu separator
+     ;~ Menu, Tray, Add, Configure, L_Configure
+     Menu, SubmenuConfigure, Add, Monitor,                              L_ConfigureMonitor
+     Menu, SubmenuConfigure, Add, Existing layer buttons / functions,   L_ConfigureButtonsFunctions
+     Menu, SubmenuConfigure, Add, Add layer,                            L_ConfigureAddLayer
+     Menu, Tray, Add, Configure,                                        :SubmenuConfigure
+     ;~ Menu, Tray, Add, Configure,                                        L_Configure
      Menu, Tray, Default, %ApplicationName%.ahk ABOUT ; Default: Changes the menu's default item to be the specified menu item and makes its font bold.
      Menu, Tray, Add ; To add a menu separator line, omit all three parameters. To put your menu items on top of the standard menu items (after adding your own menu items) run Menu, Tray, NoStandard followed by Menu, Tray, Standard.
      Menu, Tray, NoStandard
@@ -350,10 +356,19 @@ Traymenu:
      Menu, Tray, Tip, %ApplicationName% ; Changes the tray icon's tooltip.
 return
 
-_iniFile:
+;~ L_Configure:
+;~ return
+
+L_ConfigureMonitor:
 return
 
-About:
+L_ConfigureButtonsFunctions:
+return
+
+L_ConfigureAddLayer:
+return
+
+L_About:
     Gui, MyAbout: New, +LabelMyGui_On
     Gui, MyAbout: Font, Bold
     Gui, MyAbout: Add, Text, , %ApplicationName% v.2.0 by mslonik (🐘)
