@@ -292,7 +292,13 @@ ButtonPressed:
 return
 
 PicturePressed:
-     RunWait, % TableOfLayers[CurrentLayer][A_GuiControl] . " " . WhichMonitor ; read value of object: path to executable
+     ;~ RunWait, % TableOfLayers[CurrentLayer][A_GuiControl] . " " . WhichMonitor ; read value of object: path to executable
+     SplitPath, % TableOfLayers[CurrentLayer][A_GuiControl], FunctionName
+     ;~ RTrim(FunctionName, ".ahk").Call()
+     ;~ FunctionName := RTrim(FunctionName, ".ahk") ; to działa
+     ;~ FunctionName.Call() ; to nie działa
+     ;~ %FunctionName%() ; to działa
+     %RTrim(FunctionName, ".ahk")%.Call()
 return
 
 StartOtagle:
@@ -311,7 +317,7 @@ StartOtagle:
           CurrentLayer := 1  ; initialization of application
           SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
           Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . CurrentLayer
-          F_WelcomeScreen()
+          ;~ F_WelcomeScreen()
           }
 return
 
@@ -322,7 +328,6 @@ return
 NextLayer:
      Gui, Wizard_PlotMatrixOfButtons:   Destroy
      Gui, WizardStep3:                  Destroy
-     ;~ IniWrite, % CurrentLayer,       % A_ScriptDir . "\Config.ini", Main, HowManyLayers ; Save the total amount of created layers
      CurrentLayer++
      T_CalculateButton := 0
      Goto WizardStep2
