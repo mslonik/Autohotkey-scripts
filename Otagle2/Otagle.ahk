@@ -12,18 +12,28 @@ SendMode Input  				; Recommended for new scripts due to its superior speed and 
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #Persistent
 
+; The naming convention applied in this script
+; F_* ← Function
+; L_* ← Label
+; T_* ← Toggle ← two state variable to remeber specific setting
+
+; Global variables
      CurrentLayer                           := 1
      ;~ WhichMonitor                      := 3 ; 0
      WhichMonitor                           := 0
      ApplicationName                        := "O T A G L E 2"
      WindowWizardTitle                      := ApplicationName . " Configuration Wizard"
+
+     T_CalculateButton                      := 0 ; 0 ← do not calculate button position, 1 ← yes, calculate button position
+     T_Reload                               := 0 ; 0 ← do not Reload the main script (Otagle.ahk), 1 ← yes, reload the main script, because content of ButtonFunctions.ahk has been updated
+
      ;~ ButtonWidth                            := 300 ; 80
-     ButtonWidth                            := 80
+     ButtonWidth                            := 80   ; default / starting value for button width
      ;~ ButtonHeight                           := 300 ; 80
-     ButtonHeight                           := 80
-     ButtonHorizontalGap                    := 10
-     ButtonVerticalGap                      := 10
-     CalculateButtonVar                     := 0
+     ButtonHeight                           := 80   ; default / starting value for button height
+     ButtonHorizontalGap                    := 10   ; default / starting value for "horizontal gap", the area of bottom margin
+     ButtonVerticalGap                      := 10   ; default / starting value for "vertical gap", the area of left margin 
+     
      MonitorBoundingCoordinates_Left        := 0
      MonitorBoundingCoordinates_Right       := 0
      MonitorBoundingCoordinates_Top         := 0
@@ -49,13 +59,13 @@ if (A_Args.Length() = 0)
     {
     IfExist, *.ini
         {
-        MsgBox, 16, %A_ScriptName%, At least one *.ini file found in directory `n`n%A_WorkingDir%`n`n but current script (%A_ScriptName%) was run without any arguments.`n`nOne argument`
+        MsgBox, 16, %ApplicationName% . ": " . %A_ScriptName%, At least one *.ini file found in directory `r`n`r`n%A_WorkingDir%`r`n`r`n but current script (%A_ScriptName%) was run without any arguments.`r`n`r`nOne argument`
               , the name of .ini file`, is obligatory. Therefore script will now exit.
         ExitApp, 0
         }
     IfNotExist, *.ini
-        MsgBox, 4, %A_ScriptName%, No input arguments found and no *.ini files found in directory`n %A_ScriptDir%`n`nExpected at least a single *.ini file
-               .`n`nDo you want to run %WindowWizardTitle% which will help you to create Config.ini ? `n`n
+        MsgBox, 4, %ApplicationName%: %A_ScriptName%, No Config.ini file has been found in the script directory:`r`n`r`n%A_ScriptDir%`r`n`r`nExpected the Config.ini file
+.`r`n`r`nDo you want to run %WindowWizardTitle% which will help you to create Config.ini? `r`n`r`n
     IfMsgBox, No
         ExitApp, 0
     IfMsgBox, Yes
@@ -80,7 +90,7 @@ return
 
 
 WizardStep1:
-     CalculateButtonVar := 0
+     T_CalculateButton := 0
      Gui, Wizard_Intro:    Destroy
      Gui, WizardStep2: Destroy
      Gui, WizardStep1: Submit, NoHide
@@ -146,15 +156,15 @@ WizardStep2:
      Gui, WizardStep2: Add, Edit, x+m yp r1 w50
      Gui, WizardStep2: Add, UpDown, vButtonVerticalGap Range0-300, % ButtonVerticalGap
      Gui, WizardStep2: Add, Button, xm Default w80 gBCalculate, C&alculate 
-     Gui, WizardStep2: Add, Text, xm, % "Number of keys horizontally: " . (CalculateButtonVar ? WizardStep2_AmountOfKeysHorizontally : "") 
-          . "`tNot used margin at the left side in px: " . (CalculateButtonVar ? WizardStep2_MarginHorizontally : "")
-     Gui, WizardStep2: Add, Text, xm, % "Number of keys vertically: " . (CalculateButtonVar ? WizardStep2_AmountOfKeysVertically : "") 
-          . "`tNot used margin at the bottom side in px: " . (CalculateButtonVar ? WizardStep2_MarginVertically : "")
+     Gui, WizardStep2: Add, Text, xm, % "Number of keys horizontally:`t" . (T_CalculateButton ? WizardStep2_AmountOfKeysHorizontally : "") 
+          . "`tNot used margin at the left side in px:`t" . (T_CalculateButton ? WizardStep2_MarginHorizontally : "")
+     Gui, WizardStep2: Add, Text, xm, % "Number of keys vertically:`t" . (T_CalculateButton ? WizardStep2_AmountOfKeysVertically : "") 
+          . "`tNot used margin at the bottom side in px:`t" . (T_CalculateButton ? WizardStep2_MarginVertically : "")
      Gui, WizardStep2: Add, Button, x50 y+20 w80 gPlotButtons hwndTestButtonHwnd,       &Test
      Gui, WizardStep2: Add, Button, x+30 w80 gWizardStep1,                              &Back
      Gui, WizardStep2: Add, Button, x+30 w80 gExitWizard,                               &Cancel
      Gui, WizardStep2: Add, Button, xm w80 gSaveConfigurationWizard hwndSaveConfigHwnd, &Save config
-     if (CalculateButtonVar = 0)
+     if (T_CalculateButton = 0)
           {
           GuiControl, WizardStep2: Disable, % TestButtonHwnd
           GuiControl, WizardStep2: Disable, % SaveConfigHwnd
@@ -173,9 +183,9 @@ WizardStep2:
 return
 
 BCalculate:
-     CalculateButtonVar := 1
+     T_CalculateButton := 1
      Gui, WizardStep2: Submit
-     CalculateButtonsAndGaps()
+     F_CalculateButtonsAndGaps()
      Gui, WizardStep2: Destroy
      GuiControl, WizardStep2: Enable, % TestButtonHwnd
      GuiControl, WizardStep2: Enable, % SaveConfigHwnd
@@ -187,7 +197,7 @@ PlotButtons:
      Gui, WizardStep2:    Destroy
      Gui, Wizard_PlotMatrixOfButtons:       Destroy
      
-     CalculateButtonsAndGaps()
+     F_CalculateButtonsAndGaps()
      
      F_AddButtonsAndGaps("Disable")
      Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer 
@@ -197,18 +207,18 @@ PlotButtons:
 return
 
 SaveConfigurationWizard:
-     if (CalculateButtonVar = 0)
+     if (T_CalculateButton = 0)
           {
           MsgBox, 0, % WindowWizardTitle, Press Calculate button at first.
           return
           }
 
-     IniWrite, % WhichMonitor,            % A_ScriptDir . "\Config.ini", Main, WhichMonitor
-     IniWrite, % CurrentLayer,       % A_ScriptDir . "\Config.ini", Main, HowManyLayers ; Save the total amount of created layers
-     IniWrite, % ButtonWidth,             % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonWidth
-     IniWrite, % ButtonHeight,            % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonHeight
-     IniWrite, % ButtonHorizontalGap,     % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonHorizontalGap
-     IniWrite, % ButtonVerticalGap,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, ButtonVerticalGap
+     IniWrite, % WhichMonitor,            % A_ScriptDir . "\Config.ini", Main,                      WhichMonitor
+     IniWrite, % CurrentLayer,            % A_ScriptDir . "\Config.ini", Main,                      HowManyLayers ; Save the total amount of created layers
+     IniWrite, % ButtonWidth,             % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer,  ButtonWidth
+     IniWrite, % ButtonHeight,            % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer,  ButtonHeight
+     IniWrite, % ButtonHorizontalGap,     % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer,  ButtonHorizontalGap
+     IniWrite, % ButtonVerticalGap,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer,  ButtonVerticalGap
 
 
      Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
@@ -218,7 +228,7 @@ SaveConfigurationWizard:
           }
      else
           {
-          ;~ CalculateButtonsAndGaps()
+          ;~ F_CalculateButtonsAndGaps()
           F_AddButtonsAndGaps("Disable")
           F_SavePositionOfButtons()
           }
@@ -291,6 +301,7 @@ ButtonPressed:
                {
                IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action" ; Save the function into config file
                FileAppend, % "#Include *i " . SelectedFile . "`r`n", %A_ScriptDir%\ButtonFunctions.ahk, UTF-8
+               T_Reload := 1 ; the ButtonFunctions.ahk file has been updated, so reload is required
                }
           }
      Gui,      WizardStep3: Show
@@ -303,13 +314,21 @@ return
 StartOtagle:
      Gui, WizardStep3:                  Destroy
      Gui, Wizard_PlotMatrixOfButtons:   Destroy
-     FileSetAttrib, +H, %A_ScriptDir%\ButtonFunctions.ahk  ; hide ButtonFunctions.ahk
-     Gosub,  Traymenu     ; Jumps to the specified label and continues execution until Return is encountered
-     F_ReadConfig_ini()
-     CurrentLayer := 1  ; initialization of application
-     SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
-     Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . CurrentLayer
-     F_WelcomeScreen()
+     if (T_Reload)
+          {
+          FileSetAttrib, +H, %A_ScriptDir%\ButtonFunctions.ahk  ; hide ButtonFunctions.ahk     
+          MsgBox, 0, % ApplicationName, % ApplicationName . " will reload now in order to apply updated settings" 
+          Reload
+          }
+     else
+          {
+          Gosub,  Traymenu     ; Jumps to the specified label and continues execution until Return is encountered
+          F_ReadConfig_ini()
+          CurrentLayer := 1  ; initialization of application
+          SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
+          Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . CurrentLayer
+          F_WelcomeScreen()
+          }
 return
 
 DestroyWelcomeScreen:
@@ -321,7 +340,7 @@ NextLayer:
      Gui, WizardStep3:                  Destroy
      ;~ IniWrite, % CurrentLayer,       % A_ScriptDir . "\Config.ini", Main, HowManyLayers ; Save the total amount of created layers
      CurrentLayer++
-     CalculateButtonVar := 0
+     T_CalculateButton := 0
      Goto WizardStep2
 ;~ return
 
@@ -352,6 +371,7 @@ Traymenu:
      Menu, SubmenuConfigure, Add, Monitor,                              L_ConfigureMonitor
      Menu, SubmenuConfigure, Add, Existing layer buttons / functions,   L_ConfigureButtonsFunctions
      Menu, SubmenuConfigure, Add, Add layer,                            L_ConfigureAddLayer
+     Menu, SubmenuConfigure, Add, Run Wizard,                           L_ConfigureWizard
      Menu, Tray, Add, Configure,                                        :SubmenuConfigure
      Menu, Tray, Default, %ApplicationName%.ahk ABOUT ; Default: Changes the menu's default item to be the specified menu item and makes its font bold.
      Menu, Tray, Add ; To add a menu separator line, omit all three parameters. To put your menu items on top of the standard menu items (after adding your own menu items) run Menu, Tray, NoStandard followed by Menu, Tray, Standard.
@@ -360,9 +380,11 @@ Traymenu:
      Menu, Tray, Tip, %ApplicationName% ; Changes the tray icon's tooltip.
 return
 
+L_ConfigureWizard:
+return
 
 L_ConfigureMonitor:
-     CalculateButtonVar := 0
+     T_CalculateButton := 0
      Gui, ConfigureMonitor: Submit, NoHide ; required to refresh Radio button
      Gui, ConfigureMonitor: Destroy        ; required to recreate the ConfigureMonitor GUI
      
@@ -631,7 +653,7 @@ return
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-CalculateButtonsAndGaps()     
+F_CalculateButtonsAndGaps()     
      {
      global WizardStep2_AmountOfKeysHorizontally, WizardStep2_MarginHorizontally, WizardStep2_AmountOfKeysVertically, WizardStep2_MarginVertically
      global MonitorBoundingCoordinates_, MonitorBoundingCoordinates_Bottom, MonitorBoundingCoordinates_Left, MonitorBoundingCoordinates_Right, MonitorBoundingCoordinates_Top
