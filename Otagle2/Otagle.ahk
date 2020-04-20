@@ -55,33 +55,17 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 DetectHiddenWindows, On ; Caution!
 ;~ - - - - - - - - - - - - - - - - - - - - ProcessInputArgs() - - - - - - - - - - - - - - - - - - - -
 
-if (A_Args.Length() = 0)
-    {
-    IfExist, *.ini
-        {
-        MsgBox, 16, %ApplicationName% . ": " . %A_ScriptName%, At least one *.ini file found in directory `r`n`r`n%A_WorkingDir%`r`n`r`n but current script (%A_ScriptName%) was run without any arguments.`r`n`r`nOne argument`
-              , the name of .ini file`, is obligatory. Therefore script will now exit.
-        ExitApp, 0
-        }
-    IfNotExist, *.ini
-        MsgBox, 4, %ApplicationName%: %A_ScriptName%, No Config.ini file has been found in the script directory:`r`n`r`n%A_ScriptDir%`r`n`r`nExpected the Config.ini file
-.`r`n`r`nDo you want to run %WindowWizardTitle% which will help you to create Config.ini? `r`n`r`n
+if !FileExist(A_ScriptDir . "\Config.ini")
+     {
+     MsgBox, 4, %ApplicationName%: %A_ScriptName%, No Config.ini file has been found in the script directory:`r`n`r`n%A_ScriptDir%`r`n`r`nExpected the Config.ini file
+                   .`r`n`r`nDo you want to run %WindowWizardTitle% which will help you to create Config.ini? `r`n`r`n
     IfMsgBox, No
         ExitApp, 0
     IfMsgBox, Yes
         Goto  Wizard_Intro
-    }
-else if (A_Args.Length() = 1)
-     {
-     ;~ F_ReadConfig_ini()
-     Goto StartOtagle
      }
-else if (A_Args.Length() > 1)
-    {
-    MsgBox, 48, Diacritic.ahk, % "Too many input arguments: " . A_Args.Length() . ". Expected just one, *Config.ini." 
-    ExitApp, 0
-    }
-
+else
+     Goto StartOtagle
 
 Wizard_Intro:
      FileRecycle, %A_ScriptDir%\ButtonFunctions.ahk ; ← remove ButtonFunctions.ahk
@@ -233,7 +217,7 @@ SaveConfigurationWizard:
           F_SavePositionOfButtons()
           }
 
-     MsgBox, 0, % WindowWizardTitle, % "Configuration saved to the file :`n" . A_ScriptDir . "\Config.ini"
+     MsgBox, 0, % WindowWizardTitle, % "Configuration saved to the file:`r`n" . A_ScriptDir . "\Config.ini"
 
      GuiControl, Disable, % SaveConfigHwnd
      Gui, WizardStep2: Add, Button, x+m w80 gWizardStep3, C&ontinue
