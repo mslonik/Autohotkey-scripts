@@ -21,7 +21,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      CurrentLayer                           := 1
      ;~ WhichMonitor                      := 3 ; 0
      WhichMonitor                           := 0
-     ApplicationName                        := "O T A G L E 2"
+     ApplicationName                        := "O T A G L E"
      WindowWizardTitle                      := ApplicationName . " Configuration Wizard"
 
      T_CalculateButton                      := 0 ; 0 ← do not calculate button position, 1 ← yes, calculate button position
@@ -46,7 +46,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ReadButtonPosH                         := 0
 
 #Include *i %A_ScriptDir%\ButtonFunctions.ahk ; ← Functions to be included
-
+#Include Class_ImageButton.ahk                  ; Buttons with pictures
 
 ; Temp:
 ;~ WizardStep2_AmountOfKeysHorizontally := 6
@@ -291,14 +291,10 @@ ButtonPressed:
      Gui,      WizardStep3: Show
 return
 
-PicturePressed:
-     ;~ RunWait, % TableOfLayers[CurrentLayer][A_GuiControl] . " " . WhichMonitor ; read value of object: path to executable
+L_PicturePressed:
      SplitPath, % TableOfLayers[CurrentLayer][A_GuiControl], FunctionName
-     ;~ RTrim(FunctionName, ".ahk").Call()
-     ;~ FunctionName := RTrim(FunctionName, ".ahk") ; to działa
-     ;~ FunctionName.Call() ; to nie działa
-     ;~ %FunctionName%() ; to działa
-     %RTrim(FunctionName, ".ahk")%.Call()
+     FunctionName := RTrim(FunctionName, ".ahk") 
+     %FunctionName%() 
 return
 
 StartOtagle:
@@ -536,8 +532,21 @@ F_ReadConfig_ini()
                     else
                          {   
                          GuiControl, % "Layer" . LayerIndex . ": Hide", % %LayerIndex%_%A_Index%hwnd ; Hide the button
-                         Gui, % "Layer" . LayerIndex . ": Add", Picture, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h-1" . " v" . VerticalIndex . "_" . A_Index . " gPicturePressed"
-                         , % ButtonP ; Add the selected picture instead of button
+                         ;~ Gui, % "Layer" . LayerIndex . ": Add", Picture, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h-1" . " v" . VerticalIndex . "_" . A_Index . " gL_PicturePressed" ; to działa
+                         Gui, % "Layer" . LayerIndex . ": Add", Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h-1" . " v" . VerticalIndex . "_" . A_Index . " gL_PicturePressed" . " hwnd" . VerticalIndex . "_" . A_Index . "HWND"
+                         ;~ , % ButtonP ; Add the selected picture instead of button
+                         , % VerticalIndex . "_" . A_Index
+                         MsgBox, % ButtonP
+                         Opt1 := {1: 0, 2: ButtonP, 4: "Blue"}
+                         Opt2 := {2: ButtonP, 4: "Yellow"}
+                         Opt5 := {2: ButtonP, 4: "Yellow"}
+                         temp := VerticalIndex . "_" . A_Index . "HWND"
+                         ;~ temp := % %VerticalIndex%_%A_Index%HWND ; to działa
+                         ;~ MsgBox, % "temp: " . temp . " hwnd:" . %VerticalIndex%_%A_Index%HWND
+                         ;~ If !ImageButton.Create(temp, Opt1, Opt2, , , Opt5)
+                         If !ImageButton.Create(1_1HWND, Opt1, Opt2, , , Opt5)
+                              MsgBox, 0, ImageButton Error Btn4, % ImageButton.LastError
+
                          TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := ButtonP ; add key of object: index of button / picture
                          TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := ButtonA ; add value of object: path to executable
                          }
