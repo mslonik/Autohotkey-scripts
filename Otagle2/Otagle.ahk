@@ -11,6 +11,9 @@ SendMode Input  				; Recommended for new scripts due to its superior speed and 
 #SingleInstance, Force
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #Persistent
+#Include *i %A_ScriptDir%\ButtonFunctions.ahk ; ← Functions to be included
+#Include Class_ImageButton.ahk                  ; Buttons with pictures
+
 
 ; The naming convention applied in this script
 ; F_* ← Function
@@ -45,8 +48,6 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ReadButtonPosW                         := 0
      ReadButtonPosH                         := 0
 
-#Include *i %A_ScriptDir%\ButtonFunctions.ahk ; ← Functions to be included
-#Include Class_ImageButton.ahk                  ; Buttons with pictures
 
 ; Temp:
 ;~ WizardStep2_AmountOfKeysHorizontally := 6
@@ -524,27 +525,29 @@ F_ReadConfig_ini()
                     IniRead, ButtonH, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_H"
                     IniRead, ButtonP, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Picture"
                     IniRead, ButtonA, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Action"
-                    Gui, % "Layer" . LayerIndex . ": Add"
-                    , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gButtonPressed"
-                    , % LayerIndex . "_" . A_Index
+                    ;~ Gui, % "Layer" . LayerIndex . ": Add"
+                    ;~ , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gButtonPressed"
+                    ;~ , % LayerIndex . "_" . A_Index
                     if (ButtonP = "")
                          GuiControl, % "Layer" . LayerIndex . ": Disable", % %LayerIndex%_%A_Index%hwnd ; Disable unused button
                     else
                          {   
-                         GuiControl, % "Layer" . LayerIndex . ": Hide", % %LayerIndex%_%A_Index%hwnd ; Hide the button
-                         ;~ Gui, % "Layer" . LayerIndex . ": Add", Picture, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h-1" . " v" . VerticalIndex . "_" . A_Index . " gL_PicturePressed" ; to działa
-                         Gui, % "Layer" . LayerIndex . ": Add", Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h-1" . " v" . VerticalIndex . "_" . A_Index . " gL_PicturePressed" . " hwnd" . VerticalIndex . "_" . A_Index . "HWND"
-                         ;~ , % ButtonP ; Add the selected picture instead of button
-                         , % VerticalIndex . "_" . A_Index
-                         MsgBox, % ButtonP
+                         ;~ GuiControl, % "Layer" . LayerIndex . ": Hide", % %LayerIndex%_%A_Index%hwnd ; Hide the button (and in the same area draw the associated picture)
+                         Gui, % "Layer" . LayerIndex . ": Add", Button
+                         , % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gL_PicturePressed" ; to działa
+                         , % LayerIndex . "_" . A_Index 
+                         
+                         temp1 := LayerIndex . "_" . A_Index . "hwnd"
+                         ;~ temp := %temp%
                          Opt1 := {1: 0, 2: ButtonP, 4: "Blue"}
                          Opt2 := {2: ButtonP, 4: "Yellow"}
                          Opt5 := {2: ButtonP, 4: "Yellow"}
-                         temp := VerticalIndex . "_" . A_Index . "HWND"
                          ;~ temp := % %VerticalIndex%_%A_Index%HWND ; to działa
                          ;~ MsgBox, % "temp: " . temp . " hwnd:" . %VerticalIndex%_%A_Index%HWND
-                         ;~ If !ImageButton.Create(temp, Opt1, Opt2, , , Opt5)
-                         If !ImageButton.Create(1_1HWND, Opt1, Opt2, , , Opt5)
+                         ;~ MsgBox, % "temp: " . %temp%
+
+                         If !ImageButton.Create(%temp1%, Opt1, Opt2, , , Opt5)
+                         ;~ If !ImageButton.Create(1_1HWND, Opt1, Opt2, , , Opt5)
                               MsgBox, 0, ImageButton Error Btn4, % ImageButton.LastError
 
                          TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := ButtonP ; add key of object: index of button / picture
