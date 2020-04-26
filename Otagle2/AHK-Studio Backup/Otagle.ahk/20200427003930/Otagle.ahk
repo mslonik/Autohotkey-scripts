@@ -6,7 +6,7 @@ License:     GNU GPL v.3
 */
 
 #NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
- ;#Warn  							; Enable warnings to assist with detecting common errors. Commented out because of Class_ImageButton.ahk
+ #Warn  							; Enable warnings to assist with detecting common errors. Commented out because of Class_ImageButton.ahk
 SendMode Input  				; Recommended for new scripts due to its superior speed and reliability.
 #SingleInstance, Force
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
@@ -303,7 +303,7 @@ L_WizardButton:
      Gui,      WizardStep3: Show
 return
 
-L_ButtonPressed: 
+L_ButtonPressed: ;#[Otagle1]
      ;~ MsgBox, % "CurrentLayer: " CurrentLayer . " A_GuiControl: " A_GuiControl
      SplitPath, % TableOfLayers[CurrentLayer][A_GuiControl], FunctionName
      FunctionName := RTrim(FunctionName, ".ahk") 

@@ -1,7 +1,7 @@
 ﻿RunOrActivate_KeePass()
 {
 	global
-/*	
+	
 	SysGet,	HowManyMonitors, MonitorCount
 	Loop, % HowManyMonitors
 		{
@@ -12,7 +12,7 @@
 			break
 			}
 		}
-*/
+
 	
 	Process, Exist, KeePass.Exe
 	if (ErrorLevel = 0)
@@ -34,7 +34,7 @@
 			;WinMaximize, ahk_exe KeePass.exe
 			;WinActivate, ahk_exe KeePass.exe
 			WinActivate ahk_exe KeePass.exe
-			;WinMove, ahk_class OpusApp, , % MonitorBoundingCoordinates_Left, % MonitorBoundingCoordinates_Top
+			WinMove, ahk_class OpusApp, , % MonitorBoundingCoordinates_Left, % MonitorBoundingCoordinates_Top
 			;WinWaitActive, ahk_exe KeePass.exe
 			;MsgBox, Tu jestem!
 			}

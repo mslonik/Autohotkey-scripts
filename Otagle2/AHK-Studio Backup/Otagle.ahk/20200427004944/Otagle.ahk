@@ -303,7 +303,7 @@ L_WizardButton:
      Gui,      WizardStep3: Show
 return
 
-L_ButtonPressed: 
+L_ButtonPressed: ;#[Otagle1]
      ;~ MsgBox, % "CurrentLayer: " CurrentLayer . " A_GuiControl: " A_GuiControl
      SplitPath, % TableOfLayers[CurrentLayer][A_GuiControl], FunctionName
      FunctionName := RTrim(FunctionName, ".ahk") 
