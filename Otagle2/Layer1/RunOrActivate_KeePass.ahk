@@ -1,4 +1,4 @@
-RunOrActivate_KeePass()
+﻿RunOrActivate_KeePass()
 {
 	Process, Exist, KeePass.Exe
 	if (ErrorLevel = 0)
@@ -14,10 +14,14 @@ RunOrActivate_KeePass()
 			} 
 		else
 			{
-			;~ MsgBox, Tu jestem!
-			WinActivate ahk_exe KeePass.exe
+			
+			;~ #WinActivateForce ; nie działa
+			;~ WinShow, ahk_exe KeePass.exe
+			WinMaximize, ahk_exe KeePass.exe
+			WinActivate, ahk_exe KeePass.exe
+			MsgBox, Tu jestem!
 			}
 		}
 }
 
-;~ RunOrActivateKeePass()
+;RunOrActivate_KeePass()

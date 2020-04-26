@@ -16,7 +16,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 
 
 ; The naming convention applied in this script
-; F_* ← Function
+; F_* ← Function ;#[Otagle]
 ; L_* ← Label
 ; T_* ← Toggle ← two state variable to remeber specific setting
 
@@ -28,7 +28,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      WindowWizardTitle                      := ApplicationName . " Configuration Wizard"
 
      T_CalculateButton                      := 0 ; 0 ← do not calculate button position, 1 ← yes, calculate button position
-     T_Reload                               := 0 ; 0 ← do not Reload the main script (Otagle.ahk), 1 ← yes, reload the main script, because content of ButtonFunctions.ahk has been updated
+     ;T_Reload                               := 0 ; 0 ← do not Reload the main script (Otagle.ahk), 1 ← yes, reload the main script, because content of ButtonFunctions.ahk has been updated
 
      ;~ ButtonWidth                            := 300 ; 80
      ButtonWidth                            := 80   ; default / starting value for button width
@@ -303,7 +303,7 @@ L_WizardButton:
      Gui,      WizardStep3: Show
 return
 
-L_ButtonPressed:
+L_ButtonPressed: ;#[Otagle1]
      ;~ MsgBox, % "CurrentLayer: " CurrentLayer . " A_GuiControl: " A_GuiControl
      SplitPath, % TableOfLayers[CurrentLayer][A_GuiControl], FunctionName
      FunctionName := RTrim(FunctionName, ".ahk") 
@@ -375,7 +375,7 @@ Traymenu:
      Menu, Tray, Default, %ApplicationName%.ahk ABOUT ; Default: Changes the menu's default item to be the specified menu item and makes its font bold.
      Menu, Tray, Add ; To add a menu separator line, omit all three parameters. To put your menu items on top of the standard menu items (after adding your own menu items) run Menu, Tray, NoStandard followed by Menu, Tray, Standard.
      Menu, Tray, NoStandard
-     Menu, Tray, Standard
+     Menu, Tray, Standard ;#[1]
      Menu, Tray, Tip, %ApplicationName% ; Changes the tray icon's tooltip.
 return
 
@@ -427,7 +427,8 @@ return
 
 L_ConfigureMonitor_Save:
      Gui, WizardStep1: Destroy
-     IniWrite, % WhichMonitor,            % A_ScriptDir . "\Config.ini", Main, WhichMonitor     
+     IniWrite, % WhichMonitor,            % A_ScriptDir . "\Config.ini", Main, WhichMonitor
+     Gui, ConfigureMonitor: Destroy
      Goto StartOtagle
 ;~ return
 
@@ -547,16 +548,16 @@ F_ReadConfig_ini()
                     
                     if (VerticalIndex = 1) and (A_Index = 1)
                          Gui, % "Layer" . LayerIndex . ": Add" ; Create button by default, next check if it should be disabled or enabled
-                              , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . LayerIndex . "_" . A_Index . " +Default"
+                              , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . VerticalIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . VerticalIndex . "_" . A_Index . " +Default"
                     else
                          Gui, % "Layer" . LayerIndex . ": Add" ; Create button by default, next check if it should be disabled or enabled
-                              , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . LayerIndex . "_" . A_Index     
+                              , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . VerticalIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . VerticalIndex . "_" . A_Index     
                     ;~ , % LayerIndex . "_" . A_Index
                     if (PictureDef = "") ; if there is no picture assigned to particular button ← the button should be disabled
-                         GuiControl, % "Layer" . LayerIndex . ": Disable", % %LayerIndex%_%A_Index%hwnd ; Disable unused button
+                         GuiControl, % "Layer" . LayerIndex . ": Disable", % %VerticalIndex%_%A_Index%hwnd ; Disable unused button
                     else ; if there is a picture, prepare its graphics
                          {   
-                         WhichButton := LayerIndex . "_" . A_Index . "hwnd"
+                         WhichButton := VerticalIndex . "_" . A_Index . "hwnd"
                          ;~ temp := %temp%
                          Opt1 := {1: 0, 2: PictureDef, 4: "Black"}
                          Opt2 := {2: PictureSel, 4: "Yellow"}
