@@ -70,6 +70,7 @@ else
 
 Wizard_Intro:
      FileRecycle, %A_ScriptDir%\ButtonFunctions.ahk ; ← remove ButtonFunctions.ahk
+     FileRecycle, %A_ScriptDir%\Config.ini          ; remove old Config.ini. Perhaps warning should be added
      F_WizardIntro()
 return 
 
@@ -238,9 +239,9 @@ WizardStep3:
 
      Gui, WizardStep3: New, +LabelMyGui_On
      Gui, WizardStep3: Font, bold
-     Gui, WizardStep3: Add, Text, , Step 3: `t`tAssociate functions with buttons.
+     Gui, WizardStep3: Add, Text, , Step 3: `t`tAssociate pictures and functions with buttons.
      Gui, WizardStep3: Font
-     Gui, WizardStep3: Add, Text, , Click any of the buttons in the bottom window and associate a picture and function to it.
+     Gui, WizardStep3: Add, Text, , Click any of the buttons in the bottom window and associate up to 2 pictures and 1 function to it:`r`n * 1st picture which will be shown by default`r`n * 2nd picture which will be shown if button is selected`r`n* function (*.ahk) which will be run after button is selected.
      Gui, WizardStep3: Add, Button, xm+30 w80 gStartOtagle,     &Finish wizard
      Gui, WizardStep3: Add, Button, x+30 w80 gNextLayer,        &Next layer
 
@@ -259,7 +260,7 @@ WizardStep3:
           , % WindowWizardTitle  . " Layer " . CurrentLayer
 return
 
-ButtonPressed:
+L_WizardButton:
      Gui,               WizardStep3: Show, Hide
      Gui,               Wizard_PlotMatrixOfButtons: +OwnDialogs
      GuiControlGet,     ReadButtonPos, Wizard_PlotMatrixOfButtons: Pos, % A_GuiControl
@@ -275,11 +276,21 @@ ButtonPressed:
           Gui, Wizard_PlotMatrixOfButtons: Add, Picture, % "x" . ReadButtonPosX . " y" . ReadButtonPosY . " w" . ReadButtonPosW . " h-1", % SelectedFile ; Add the selected picture instead of button
           ;~ MsgBox, Tu jestem!
           IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Picture" ; Save the picture into config file
-          FileSelectFile, SelectedFile, 3, %A_ScriptDir%, Select an .ahk or .exe file, File (*.ahk; *.exe)
-          ;~ FileSelectFile, SelectedFile, 3, %A_ScriptDir%, Select an AutoHotkey script or executable file (*.ahk; *.exe), (*.ahk; *.exe)
+          FileSelectFile,    SelectedFile, 3, %A_ScriptDir%, Select a "selected" picture file, Picture (*.png; *.jpg)
           if (SelectedFile = "") ; Now when picture is associated to a button, associate function as well.
                {
-               MsgBox,   No picture file was selected.
+               MsgBox,   No "selected" picture file was selected.
+               ;~ IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_PictureIfSelected" ; Save the second picture in config file
+               Gui,      WizardStep3: Show
+               }
+          else
+               IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_PictureIfSelected" ; Save the function into config file
+          
+          FileSelectFile, SelectedFile, 3, %A_ScriptDir%, Select an .ahk or .exe file, File (*.ahk; *.exe)
+          if (SelectedFile = "") ; Now when picture is associated to a button, associate function as well.
+               {
+               MsgBox,   No action file was selected.
+               IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action" ; Save the function into config file
                Gui,      WizardStep3: Show
                }
           else
@@ -296,7 +307,7 @@ L_ButtonPressed:
      ;~ MsgBox, % "CurrentLayer: " CurrentLayer . " A_GuiControl: " A_GuiControl
      SplitPath, % TableOfLayers[CurrentLayer][A_GuiControl], FunctionName
      FunctionName := RTrim(FunctionName, ".ahk") 
-     MsgBox, % FunctionName
+     ;~ MsgBox, % FunctionName
      %FunctionName%() 
 return
 
@@ -316,7 +327,7 @@ StartOtagle:
           CurrentLayer := 1  ; initialization of application
           SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
           Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . CurrentLayer
-          ;~ F_WelcomeScreen()
+          F_WelcomeScreen()
           }
 return
 
@@ -369,6 +380,10 @@ Traymenu:
 return
 
 L_ConfigureWizard:
+     Gui, % "Layer" . CurrentLayer . ": +LastFoundExist"
+     if (WinExist())
+          Gui, % "Layer" . CurrentLayer . ": Destroy"
+     Goto Wizard_Intro
 return
 
 L_ConfigureMonitor:
@@ -499,7 +514,7 @@ F_ReadConfig_ini()
      global
      ;~ local HowManyLayers
      local LayerIndex, VerticalIndex
-     local ButtonX, ButtonY, ButtonW, ButtonH, ButtonP
+     local ButtonX, ButtonY, ButtonW, ButtonH, PictureDef, PictureSel
      
      IniRead, WhichMonitor,               % A_ScriptDir . "\Config.ini", Main, WhichMonitor
      IniRead, HowManyLayers,              % A_ScriptDir . "\Config.ini", Main, HowManyLayers
@@ -516,43 +531,40 @@ F_ReadConfig_ini()
           IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, Amount of buttons vertically
           TableOfLayers[LayerIndex] := []
           Gui, % "Layer" . LayerIndex . ": New", % "+hwndGuiLayer" . LayerIndex . "Hwnd" . " +LabelMyGui_On"
+          ;~ Gui, % "Layer" . LayerIndex . ": Font", s18, Arial Black
           Loop, % AmountOfKeysVertically
                {
                VerticalIndex := A_Index
                Loop, % AmountOfKeysHorizontally
                     {
-                    IniRead, ButtonX, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_X"
-                    IniRead, ButtonY, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Y"
-                    IniRead, ButtonW, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_W"
-                    IniRead, ButtonH, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_H"
-                    IniRead, ButtonP, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Picture"
-                    IniRead, ButtonA, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Action"
-                    Gui, % "Layer" . LayerIndex . ": Add" ; Create button by default, next check if it should be disabled or enabled
-                    , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . LayerIndex . "_" . A_Index
-                    , % LayerIndex . "_" . A_Index
-                    if (ButtonP = "") ; if there is no picture assigned to particular button ← the button should be disabled
+                    IniRead, ButtonX,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_X"
+                    IniRead, ButtonY,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Y"
+                    IniRead, ButtonW,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_W"
+                    IniRead, ButtonH,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_H"
+                    IniRead, PictureDef,    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Picture"
+                    IniRead, PictureSel,    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_PictureIfSelected"
+                    IniRead, ButtonA,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Action"
+                    
+                    if (VerticalIndex = 1) and (A_Index = 1)
+                         Gui, % "Layer" . LayerIndex . ": Add" ; Create button by default, next check if it should be disabled or enabled
+                              , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . LayerIndex . "_" . A_Index . " +Default"
+                    else
+                         Gui, % "Layer" . LayerIndex . ": Add" ; Create button by default, next check if it should be disabled or enabled
+                              , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . LayerIndex . "_" . A_Index     
+                    ;~ , % LayerIndex . "_" . A_Index
+                    if (PictureDef = "") ; if there is no picture assigned to particular button ← the button should be disabled
                          GuiControl, % "Layer" . LayerIndex . ": Disable", % %LayerIndex%_%A_Index%hwnd ; Disable unused button
                     else ; if there is a picture, prepare its graphics
                          {   
-                         ;~ GuiControl, % "Layer" . LayerIndex . ": Hide", % %LayerIndex%_%A_Index%hwnd ; Hide the button (and in the same area draw the associated picture)
-                         ;~ Gui, % "Layer" . LayerIndex . ": Add", Button
-                         ;~ , % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" ; to działa
-                         ;~ , % LayerIndex . "_" . A_Index 
-                         
-                         temp1 := LayerIndex . "_" . A_Index . "hwnd"
+                         WhichButton := LayerIndex . "_" . A_Index . "hwnd"
                          ;~ temp := %temp%
-                         Opt1 := {1: 0, 2: ButtonP, 4: "Blue"}
-                         Opt2 := {2: ButtonP, 4: "Yellow"}
-                         Opt5 := {2: ButtonP, 4: "Yellow"}
-                         ;~ temp := % %VerticalIndex%_%A_Index%HWND ; to działa
-                         ;~ MsgBox, % "temp: " . temp . " hwnd:" . %VerticalIndex%_%A_Index%HWND
-                         ;~ MsgBox, % "temp: " . %temp%
-
-                         If !ImageButton.Create(%temp1%, Opt1, Opt2, , , Opt5)
-                         ;~ If !ImageButton.Create(1_1HWND, Opt1, Opt2, , , Opt5)
+                         Opt1 := {1: 0, 2: PictureDef, 4: "Black"}
+                         Opt2 := {2: PictureSel, 4: "Yellow"}
+                         Opt5 := {2: PictureSel, 4: "Yellow"}
+                         If !ImageButton.Create(%WhichButton%, Opt1, Opt2, , , Opt5)
                               MsgBox, 0, ImageButton Error Btn4, % ImageButton.LastError
 
-                         TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := ButtonP ; add key of object: index of button / picture
+                         TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := PictureDef ; add key of object: index of button / picture
                          TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := ButtonA ; add value of object: path to executable
                          }
                     }
@@ -619,14 +631,14 @@ F_AddButtonsAndGaps(IfEnable)
                {
                if (A_Index = 1)
                     {
-                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m" . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd"  . " gButtonPressed", % ExternalLoopIndex . "_" . A_Index
+                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "xm"  . " y+m" . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd"  . " gL_WizardButton", % ExternalLoopIndex . "_" . A_Index
                     if (IfEnable = "Disable")
                          GuiControl, Wizard_PlotMatrixOfButtons: Disable, % %ExternalLoopIndex%_%A_Index%hwnd
                     else if (IfEnable = "Enable")
                          GuiControl, Wizard_PlotMatrixOfButtons: Enable, % %ExternalLoopIndex%_%A_Index%hwnd
                     }
                else ; (A_Index > 1)
-                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"  . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd" . " gButtonPressed", % ExternalLoopIndex . "_" . A_Index
+                    Gui, Wizard_PlotMatrixOfButtons: Add, Button, % "x+m" . " yp"  . " w" . ButtonWidth . " h" . ButtonHeight . " hwnd" . ExternalLoopIndex . "_" . A_Index . "hwnd" . " gL_WizardButton", % ExternalLoopIndex . "_" . A_Index
                     if (IfEnable = "Disable")
                          GuiControl, Wizard_PlotMatrixOfButtons: Disable, % %ExternalLoopIndex%_%A_Index%hwnd
                     else if (IfEnable = "Enable")
