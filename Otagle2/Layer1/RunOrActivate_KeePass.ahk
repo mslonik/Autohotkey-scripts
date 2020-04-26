@@ -14,6 +14,7 @@ RunOrActivate_KeePass()
 			} 
 		else
 			{
+			MsgBox, Tu jestem!
 			WinActivate ahk_exe KeePass.exe
 			}
 		}

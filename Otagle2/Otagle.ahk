@@ -6,13 +6,13 @@ License:     GNU GPL v.3
 */
 
 #NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
-#Warn  							; Enable warnings to assist with detecting common errors.
+; #Warn  							; Enable warnings to assist with detecting common errors. Commented out because of Class_ImageButton.ahk
 SendMode Input  				; Recommended for new scripts due to its superior speed and reliability.
 #SingleInstance, Force
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #Persistent
 #Include *i %A_ScriptDir%\ButtonFunctions.ahk ; ← Functions to be included
-#Include Class_ImageButton.ahk                  ; Buttons with pictures
+#Include %A_ScriptDir%\Class_ImageButton.ahk                  ; Buttons with pictures
 
 
 ; The naming convention applied in this script
@@ -292,9 +292,11 @@ ButtonPressed:
      Gui,      WizardStep3: Show
 return
 
-L_PicturePressed:
+L_ButtonPressed:
+     ;~ MsgBox, % "CurrentLayer: " CurrentLayer . " A_GuiControl: " A_GuiControl
      SplitPath, % TableOfLayers[CurrentLayer][A_GuiControl], FunctionName
      FunctionName := RTrim(FunctionName, ".ahk") 
+     MsgBox, % FunctionName
      %FunctionName%() 
 return
 
@@ -525,17 +527,17 @@ F_ReadConfig_ini()
                     IniRead, ButtonH, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_H"
                     IniRead, ButtonP, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Picture"
                     IniRead, ButtonA, % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Action"
-                    ;~ Gui, % "Layer" . LayerIndex . ": Add"
-                    ;~ , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gButtonPressed"
-                    ;~ , % LayerIndex . "_" . A_Index
-                    if (ButtonP = "")
+                    Gui, % "Layer" . LayerIndex . ": Add" ; Create button by default, next check if it should be disabled or enabled
+                    , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . LayerIndex . "_" . A_Index
+                    , % LayerIndex . "_" . A_Index
+                    if (ButtonP = "") ; if there is no picture assigned to particular button ← the button should be disabled
                          GuiControl, % "Layer" . LayerIndex . ": Disable", % %LayerIndex%_%A_Index%hwnd ; Disable unused button
-                    else
+                    else ; if there is a picture, prepare its graphics
                          {   
                          ;~ GuiControl, % "Layer" . LayerIndex . ": Hide", % %LayerIndex%_%A_Index%hwnd ; Hide the button (and in the same area draw the associated picture)
-                         Gui, % "Layer" . LayerIndex . ": Add", Button
-                         , % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gL_PicturePressed" ; to działa
-                         , % LayerIndex . "_" . A_Index 
+                         ;~ Gui, % "Layer" . LayerIndex . ": Add", Button
+                         ;~ , % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . LayerIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" ; to działa
+                         ;~ , % LayerIndex . "_" . A_Index 
                          
                          temp1 := LayerIndex . "_" . A_Index . "hwnd"
                          ;~ temp := %temp%
