@@ -5,8 +5,6 @@ Change of the layer just by using touch functionality and gesture.
 
 *2. Pictures acting as buttons.
 Integration of code snippet found on AHK forum.
-2.1. Global variable: font size
-2.2. Global variable: font color if defaulted.
 
 *3. AHK 2.0.
 Maybe it solves a problem of dynamic #include directive. To be checked. Then it would be possible to use .ahk scripts instead of .exe functions.
@@ -24,7 +22,7 @@ Clean up the code.
 7. Speed up saving of options.
 
 8. Add menu.
-8.1. Configuration.
+*8.1. Configuration.
 *8.2. Logo.
 *8.3. About.
 
