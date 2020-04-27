@@ -33,10 +33,10 @@
 			;~ WinShow, ahk_exe KeePass.exe
 			;WinMaximize, ahk_exe KeePass.exe
 			;WinActivate, ahk_exe KeePass.exe
-			WinActivate ahk_exe KeePass.exe
+			WinActivate, ahk_exe KeePass.exe
 			;WinMove, ahk_class OpusApp, , % MonitorBoundingCoordinates_Left, % MonitorBoundingCoordinates_Top
 			;WinWaitActive, ahk_exe KeePass.exe
-			;MsgBox, Tu jestem!
+			;~ MsgBox, Tu jestem!
 			}
 		}
 }

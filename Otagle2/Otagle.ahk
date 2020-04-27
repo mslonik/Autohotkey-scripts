@@ -16,7 +16,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 
 
 ; The naming convention applied in this script
-; F_* ← Function ;#[Otagle]
+; F_* ← Function 
 ; L_* ← Label
 ; T_* ← Toggle ← two state variable to remeber specific setting
 
@@ -49,12 +49,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ReadButtonPosH                         := 0
 
 
-; Temp:
-;~ WizardStep2_AmountOfKeysHorizontally := 6
-;~ WizardStep2_AmountOfKeysVertically   := 3
-
-DetectHiddenWindows, On ; Caution!
-;~ - - - - - - - - - - - - - - - - - - - - ProcessInputArgs() - - - - - - - - - - - - - - - - - - - -
+;~ DetectHiddenWindows, On ; Caution! Extremely dangerous. May stop working existing parts of a script. Use only if you know what you're doing.
 
 if !FileExist(A_ScriptDir . "\Config.ini")
      {
@@ -227,7 +222,6 @@ return
 
 
 WizardStep3:
-     ;~ Ta linijka 
      Gui, WizardStep2: Destroy
      
      Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
@@ -245,14 +239,13 @@ WizardStep3:
      Gui, WizardStep3: Add, Button, xm+30 w80 gStartOtagle,     &Finish wizard
      Gui, WizardStep3: Add, Button, x+30 w80 gNextLayer,        &Next layer
 
+     DetectHiddenWindows, On
      Gui, WizardStep3: Show ; small trick to correctly calculate position of window on a screen
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
           . " y" . MonitorBoundingCoordinates_Top
           , HiddenAttempt
      WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
-     
-     ; Ta linijka
-     ;~ SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor ; ← do usunięcia
+     DetectHiddenWindows, Off
      
      Gui, WizardStep3: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
@@ -304,10 +297,8 @@ L_WizardButton:
 return
 
 L_ButtonPressed: 
-     ;~ MsgBox, % "CurrentLayer: " CurrentLayer . " A_GuiControl: " A_GuiControl
      SplitPath, % TableOfLayers[CurrentLayer][A_GuiControl], FunctionName
      FunctionName := RTrim(FunctionName, ".ahk") 
-     ;~ MsgBox, % FunctionName
      %FunctionName%() 
 return
 
@@ -326,8 +317,9 @@ StartOtagle:
           F_ReadConfig_ini()
           CurrentLayer := 1  ; initialization of application
           SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
-          Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . CurrentLayer
-          F_WelcomeScreen()
+          F_DisplayLayer(CurrentLayer)
+          ;~ Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . CurrentLayer
+          ;~ F_WelcomeScreen()
           }
 return
 
@@ -415,11 +407,13 @@ L_ConfigureMonitor:
      Gui, ConfigureMonitor: Add, Button, x+30 w80 gL_ConfigureMonitor_Cancel,    &Cancel
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
 
+     DetectHiddenWindows, On
      Gui, ConfigureMonitor: Show ; small trick to correctly calculate position of window on a screen
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
           . " y" . MonitorBoundingCoordinates_Top
           , HiddenAttempt
      WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
+     DetectHiddenWindows, Off
      Gui, ConfigureMonitor: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
           . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle . " ConfigureMonitor"
@@ -437,6 +431,36 @@ L_ConfigureMonitor_Cancel:
 return
 
 L_ConfigureButtonsFunctions:
+     ; WinGet ← current O T A G L E window
+     F_AddButtonsAndGaps("Enable")
+     Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer
+
+     Gui, ConfigureButtonsFunctions: New, +LabelMyGui_On
+     Gui, ConfigureButtonsFunctions: Font, bold
+     Gui, ConfigureButtonsFunctions: Add, Text, ,`t`tAssociate pictures and functions with buttons.
+     Gui, ConfigureButtonsFunctions: Font
+     Gui, ConfigureButtonsFunctions: Add, Text, , Click any of the buttons in the bottom window and associate up to 2 pictures and 1 function to it:`r`n * 1st picture which will be shown by default`r`n * 2nd picture which will be shown if button is selected`r`n* function (*.ahk) which will be run after button is selected.
+     Gui, ConfigureButtonsFunctions: Add, Button, xm+30 w80 gL_RedrawLastWindow,     &Finish
+     ;~ Gui, ConfigureButtonsFunctions: Add, Button, x+30 w80 gNextLayer,        &Next layer
+
+     MsgBox, % "WhichMonitor: " . WhichMonitor
+     SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
+     DetectHiddenWindows, On
+     Gui, ConfigureButtonsFunctions: Show ; small trick to correctly calculate position of window on a screen
+          , % "hide" . " x" . MonitorBoundingCoordinates_Left 
+          . " y" . MonitorBoundingCoordinates_Top
+          , HiddenAttempt
+     WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
+     MsgBox, % "WizardWindow_Width: " . WizardWindow_Width . " WizardWindow_Height: " WizardWindow_Height
+     DetectHiddenWindows, Off
+     
+     Gui, ConfigureButtonsFunctions: Show
+          , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
+          . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
+          , % WindowWizardTitle  . " Layer " . CurrentLayer
+return
+
+L_RedrawLastWindow:
 return
 
 L_ConfigureAddLayer:
@@ -470,6 +494,15 @@ return
 
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
 
+F_DisplayLayer(WhichLayer)
+     {
+     global     
+          
+     Gui, % "Layer" . WhichLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . WhichLayer
+     }
+     
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 F_WizardIntro()
      {
      global
@@ -497,11 +530,13 @@ F_WelcomeScreen()
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
      Gui, WelcomeScreen: New, +LabelMyGui_On +AlwaysOnTop -Caption
      Gui, WelcomeScreen: Add, Picture, w500 h-1, % A_ScriptDir . "\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia Ławrów 
+     DetectHiddenWindows, On
      Gui, WelcomeScreen: Show ; small trick to correctly calculate position of window on a screen
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
           . " y" . MonitorBoundingCoordinates_Top
           , HiddenAttempt
      WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
+     DetectHiddenWindows, Off
      Gui, WelcomeScreen: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
           . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % ApplicationName . " Welcome!"
@@ -558,13 +593,11 @@ F_ReadConfig_ini()
                     else ; if there is a picture, prepare its graphics
                          {   
                          WhichButton := VerticalIndex . "_" . A_Index . "hwnd"
-                         ;~ temp := %temp%
                          Opt1 := {1: 0, 2: PictureDef, 4: "Black"}
                          Opt2 := {2: PictureSel, 4: "Yellow"}
                          Opt5 := {2: PictureSel, 4: "Yellow"}
                          If !ImageButton.Create(%WhichButton%, Opt1, Opt2, , , Opt5)
-                              MsgBox, 0, ImageButton Error Btn4, % ImageButton.LastError
-
+                              MsgBox, 0, % "ImageButton Error" . VerticalIndex . "_" . A_Index, % ImageButton.LastError
                          TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := PictureDef ; add key of object: index of button / picture
                          TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := ButtonA ; add value of object: path to executable
                          }
@@ -656,7 +689,7 @@ F_ShowMonitorNumbers()
 
      Loop, %HowManyMonitors%
           {
-		  SysGet, MonitorBoundingCoordinates_, Monitor, %A_Index%
+                  SysGet, MonitorBoundingCoordinates_, Monitor, %A_Index%
           Gui, %A_Index%:-SysMenu -Caption +Border
           Gui, %A_Index%:Color, Black ; WindowColor, ControlColor
           Gui, %A_Index%:Font, cWhite s26 bold, Calibri
