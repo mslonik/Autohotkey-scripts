@@ -152,11 +152,13 @@ WizardStep2:
           }
      Gui, WizardStep2: Add, Progress, x+m w350 h25 cGreen vProgressBarVar BackgroundC9C9C9, 0
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
+     DetectHiddenWindows, On
      Gui, WizardStep2: Show
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
           . " y" . MonitorBoundingCoordinates_Top
           , HiddenAttempt
      WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
+     DetectHiddenWindows, Off
      Gui, WizardStep2: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
           . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2)
@@ -183,7 +185,7 @@ PlotButtons:
      F_AddButtonsAndGaps("Disable")
      Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer 
      MsgBox, 4096,  % WindowWizardTitle, Press OK button to continue to go back: test new configuration again or save it.
-     Gui, Wizard_PlotMatrixOfButtons: Submit ; Hide
+     Gui, Wizard_PlotMatrixOfButtons: Submit 
      GoTo, WizardStep2
 return
 
@@ -431,12 +433,67 @@ L_ConfigureMonitor_Cancel:
 return
 
 L_ConfigureButtonsFunctions: ; tu skończyłem
-     ; WinGet ← current O T A G L E window
-     ;~ WinGet, OtagleHandle, ID, ahk_class AutoHotkeyGUI, "O T A G L E"
-     WinGet, OtagleHandle, ID, ahk_class AutoHotkeyGUI
-     MsgBox, It's time to hide this window!
+     WinGet, OtagleHandle, ID, O T A G L E ahk_class AutoHotkeyGUI 
      WinHide, % "ahk_id " . OtagleHandle
-     
+
+
+     ;~ Loop, % HowManyLayers
+          ;~ {
+          ;~ LayerIndex := A_Index
+          ;~ IniRead, ButtonWidth,                          % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonWidth
+          ;~ IniRead, ButtonHeight,                         % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonHeight
+          ;~ IniRead, ButtonHorizontalGap,                  % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonHorizontalGap
+          ;~ IniRead, ButtonVerticalGap,                    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonVerticalGap
+Chyba dobrze, żeby to były zmienne globalne dla wszystkich warstw.
+          IniRead, AmountOfKeysHorizontally,             % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons horizontally
+          IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons vertically
+          TableOfLayers[CurrentLayer] := []
+          ;~ Gui, % "Layer" . CurrentLayer . ": New", % "+hwndGuiLayer" . CurrentLayer . "Hwnd" . " +LabelMyGui_On"
+          ;~ Gui, % "Layer" . CurrentLayer . ": Font", s18, Arial Black
+          Loop, % AmountOfKeysVertically
+               {
+               VerticalIndex := A_Index
+               Loop, % AmountOfKeysHorizontally
+                    {
+                    ;~ IniRead, ButtonX,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_X"
+                    ;~ IniRead, ButtonY,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Y"
+                    ;~ IniRead, ButtonW,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_W"
+                    ;~ IniRead, ButtonH,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_H"
+                    ;~ IniRead, PictureDef,    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Picture"
+                    ;~ IniRead, PictureSel,    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_PictureIfSelected"
+                    ;~ IniRead, ButtonA,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Action"
+                    
+                    ;~ if (VerticalIndex = 1) and (A_Index = 1)
+                         ;~ Gui, % "Layer" . LayerIndex . ": Add" ; Create button by default, next check if it should be disabled or enabled
+                              ;~ , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . VerticalIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . VerticalIndex . "_" . A_Index . " +Default"
+                    ;~ else
+Dla danego GUI wszystkie Disabled na Enabled, nadaj im indeksy tekstowe. Dlatego potrzebuję liczby guziorów pionowo i poziomo dla wszystkich warstw. Każdy z guziorów ma już indywidualny hwnd, ale tylko dla jednej warstwy!!!
+                         Gui, % "Layer" . LayerIndex . ": Add" ; Create button by default, next check if it should be disabled or enabled
+                              , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . VerticalIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . VerticalIndex . "_" . A_Index     
+                    ;~ , % LayerIndex . "_" . A_Index
+                    if (PictureDef = "") ; if there is no picture assigned to particular button ← the button should be disabled
+                         GuiControl, % "Layer" . LayerIndex . ": Disable", % %VerticalIndex%_%A_Index%hwnd ; Disable unused button
+                    else ; if there is a picture, prepare its graphics
+                         {   
+                         WhichButton := VerticalIndex . "_" . A_Index . "hwnd"
+                         Opt1 := {1: 0, 2: PictureDef, 4: "Black"}
+                         Opt2 := {2: PictureSel, 4: "Yellow"}
+                         Opt5 := {2: PictureSel, 4: "Yellow"}
+                         If !ImageButton.Create(%WhichButton%, Opt1, Opt2, , , Opt5)
+                              MsgBox, 0, % "ImageButton Error" . VerticalIndex . "_" . A_Index, % ImageButton.LastError
+                         TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := PictureDef ; add key of object: index of button / picture
+                         TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := ButtonA ; add value of object: path to executable
+                         }
+                    }
+               }
+          ;~ vOutput := ""
+          ;~ for vKey, vValue in TableOfLayers[LayerIndex]
+               ;~ vOutput .= vKey " " vValue "`r`n"
+          ;~ MsgBox, % vOutput
+          ;~ }
+
+
+
      ;~ F_AddButtonsAndGaps("Enable")
      ;~ Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer
 
@@ -556,7 +613,6 @@ F_WelcomeScreen()
 F_ReadConfig_ini()
      {
      global
-     ;~ local HowManyLayers
      local LayerIndex, VerticalIndex
      local ButtonX, ButtonY, ButtonW, ButtonH, PictureDef, PictureSel
      
