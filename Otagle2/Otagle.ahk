@@ -430,10 +430,15 @@ L_ConfigureMonitor_Cancel:
      Gui, ConfigureMonitor: Destroy
 return
 
-L_ConfigureButtonsFunctions:
+L_ConfigureButtonsFunctions: ; tu skończyłem
      ; WinGet ← current O T A G L E window
-     F_AddButtonsAndGaps("Enable")
-     Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer
+     ;~ WinGet, OtagleHandle, ID, ahk_class AutoHotkeyGUI, "O T A G L E"
+     WinGet, OtagleHandle, ID, ahk_class AutoHotkeyGUI
+     MsgBox, It's time to hide this window!
+     WinHide, % "ahk_id " . OtagleHandle
+     
+     ;~ F_AddButtonsAndGaps("Enable")
+     ;~ Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer
 
      Gui, ConfigureButtonsFunctions: New, +LabelMyGui_On
      Gui, ConfigureButtonsFunctions: Font, bold
@@ -443,7 +448,7 @@ L_ConfigureButtonsFunctions:
      Gui, ConfigureButtonsFunctions: Add, Button, xm+30 w80 gL_RedrawLastWindow,     &Finish
      ;~ Gui, ConfigureButtonsFunctions: Add, Button, x+30 w80 gNextLayer,        &Next layer
 
-     MsgBox, % "WhichMonitor: " . WhichMonitor
+     ;~ MsgBox, % "WhichMonitor: " . WhichMonitor
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
      DetectHiddenWindows, On
      Gui, ConfigureButtonsFunctions: Show ; small trick to correctly calculate position of window on a screen
@@ -451,16 +456,19 @@ L_ConfigureButtonsFunctions:
           . " y" . MonitorBoundingCoordinates_Top
           , HiddenAttempt
      WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
-     MsgBox, % "WizardWindow_Width: " . WizardWindow_Width . " WizardWindow_Height: " WizardWindow_Height
+     ;~ MsgBox, % "WizardWindow_Width: " . WizardWindow_Width . " WizardWindow_Height: " WizardWindow_Height
      DetectHiddenWindows, Off
      
      Gui, ConfigureButtonsFunctions: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
           . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
           , % WindowWizardTitle  . " Layer " . CurrentLayer
+     
 return
 
 L_RedrawLastWindow:
+     Gui, ConfigureButtonsFunctions: Destroy
+     WinShow, % "ahk_id " . OtagleHandle
 return
 
 L_ConfigureAddLayer:
