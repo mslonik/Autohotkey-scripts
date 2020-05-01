@@ -319,8 +319,13 @@ StartOtagle:
           F_ReadConfig_ini()
           CurrentLayer := 1  ; initialization of application
           SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
-          F_DisplayLayer(CurrentLayer)
-          ;~ Gui, % "Layer" . CurrentLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . CurrentLayer
+          try          
+               F_DisplayLayer(CurrentLayer)
+          catch e
+               {
+               MsgBox, An exception was thrown!`r`nIncorrect value of Monitor variable within Config.ini. Probably this monitor has not been found. Application will exit now.
+               Exit, 1
+               }
           ;~ F_WelcomeScreen()
           }
 return
@@ -433,69 +438,21 @@ L_ConfigureMonitor_Cancel:
 return
 
 L_ConfigureButtonsFunctions: ; tu skończyłem
-     WinGet, OtagleHandle, ID, O T A G L E ahk_class AutoHotkeyGUI 
-     WinHide, % "ahk_id " . OtagleHandle
+     ;~ Gui, % GuiLayer%CurrentLayer%Hwnd . ": Hide"
 
-
-     ;~ Loop, % HowManyLayers
-          ;~ {
-          ;~ LayerIndex := A_Index
-          ;~ IniRead, ButtonWidth,                          % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonWidth
-          ;~ IniRead, ButtonHeight,                         % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonHeight
-          ;~ IniRead, ButtonHorizontalGap,                  % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonHorizontalGap
-          ;~ IniRead, ButtonVerticalGap,                    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonVerticalGap
-Chyba dobrze, żeby to były zmienne globalne dla wszystkich warstw.
           IniRead, AmountOfKeysHorizontally,             % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons horizontally
           IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons vertically
           TableOfLayers[CurrentLayer] := []
-          ;~ Gui, % "Layer" . CurrentLayer . ": New", % "+hwndGuiLayer" . CurrentLayer . "Hwnd" . " +LabelMyGui_On"
-          ;~ Gui, % "Layer" . CurrentLayer . ": Font", s18, Arial Black
           Loop, % AmountOfKeysVertically
                {
                VerticalIndex := A_Index
                Loop, % AmountOfKeysHorizontally
                     {
-                    ;~ IniRead, ButtonX,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_X"
-                    ;~ IniRead, ButtonY,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Y"
-                    ;~ IniRead, ButtonW,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_W"
-                    ;~ IniRead, ButtonH,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_H"
-                    ;~ IniRead, PictureDef,    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Picture"
-                    ;~ IniRead, PictureSel,    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_PictureIfSelected"
-                    ;~ IniRead, ButtonA,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Action"
-                    
-                    ;~ if (VerticalIndex = 1) and (A_Index = 1)
-                         ;~ Gui, % "Layer" . LayerIndex . ": Add" ; Create button by default, next check if it should be disabled or enabled
-                              ;~ , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . VerticalIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . VerticalIndex . "_" . A_Index . " +Default"
-                    ;~ else
-Dla danego GUI wszystkie Disabled na Enabled, nadaj im indeksy tekstowe. Dlatego potrzebuję liczby guziorów pionowo i poziomo dla wszystkich warstw. Każdy z guziorów ma już indywidualny hwnd, ale tylko dla jednej warstwy!!!
-                         Gui, % "Layer" . LayerIndex . ": Add" ; Create button by default, next check if it should be disabled or enabled
-                              , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . VerticalIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . VerticalIndex . "_" . A_Index     
-                    ;~ , % LayerIndex . "_" . A_Index
-                    if (PictureDef = "") ; if there is no picture assigned to particular button ← the button should be disabled
-                         GuiControl, % "Layer" . LayerIndex . ": Disable", % %VerticalIndex%_%A_Index%hwnd ; Disable unused button
-                    else ; if there is a picture, prepare its graphics
-                         {   
-                         WhichButton := VerticalIndex . "_" . A_Index . "hwnd"
-                         Opt1 := {1: 0, 2: PictureDef, 4: "Black"}
-                         Opt2 := {2: PictureSel, 4: "Yellow"}
-                         Opt5 := {2: PictureSel, 4: "Yellow"}
-                         If !ImageButton.Create(%WhichButton%, Opt1, Opt2, , , Opt5)
-                              MsgBox, 0, % "ImageButton Error" . VerticalIndex . "_" . A_Index, % ImageButton.LastError
-                         TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := PictureDef ; add key of object: index of button / picture
-                         TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := ButtonA ; add value of object: path to executable
-                         }
+                    GuiControl, % GuiLayer%CurrentLayer%Hwnd . ": Enable",  % %CurrentLayer%_%VerticalIndex%_%A_Index%hwnd
+                    GuiControl,,                                            % %CurrentLayer%_%VerticalIndex%_%A_Index%hwnd, % VerticalIndex . "_" . A_Index
+                    GuiControl, +gL_AddPicturesFunction,                    % %CurrentLayer%_%VerticalIndex%_%A_Index%hwnd
                     }
                }
-          ;~ vOutput := ""
-          ;~ for vKey, vValue in TableOfLayers[LayerIndex]
-               ;~ vOutput .= vKey " " vValue "`r`n"
-          ;~ MsgBox, % vOutput
-          ;~ }
-
-
-
-     ;~ F_AddButtonsAndGaps("Enable")
-     ;~ Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . CurrentLayer
 
      Gui, ConfigureButtonsFunctions: New, +LabelMyGui_On
      Gui, ConfigureButtonsFunctions: Font, bold
@@ -523,9 +480,13 @@ Dla danego GUI wszystkie Disabled na Enabled, nadaj im indeksy tekstowe. Dlatego
      
 return
 
+L_AddPicturesFunction:
+     MsgBox, Tu jestem!
+return
+
 L_RedrawLastWindow:
      Gui, ConfigureButtonsFunctions: Destroy
-     WinShow, % "ahk_id " . OtagleHandle
+     ;~ Gui, % GuiLayer%CurrentLayer%Hwnd . ": Show"
 return
 
 L_ConfigureAddLayer:
@@ -645,25 +606,26 @@ F_ReadConfig_ini()
                     IniRead, PictureSel,    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_PictureIfSelected"
                     IniRead, ButtonA,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Action"
                     
-                    if (VerticalIndex = 1) and (A_Index = 1)
-                         Gui, % "Layer" . LayerIndex . ": Add" ; Create button by default, next check if it should be disabled or enabled
-                              , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . VerticalIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . VerticalIndex . "_" . A_Index . " +Default"
-                    else
-                         Gui, % "Layer" . LayerIndex . ": Add" ; Create button by default, next check if it should be disabled or enabled
-                              , Button, % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH . " hwnd" . VerticalIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . VerticalIndex . "_" . A_Index     
-                    ;~ , % LayerIndex . "_" . A_Index
+                    if (VerticalIndex = 1) and (A_Index = 1) ; the first button is set as default
+                         Gui, % "Layer" . LayerIndex . ": Add", Button
+                         , % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH 
+                         . " hwnd" . LayerIndex . "_" . VerticalIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . VerticalIndex . "_" . A_Index . " +Default"
+                    else                                     ; the other buttons are set but not as default
+                         Gui, % "Layer" . LayerIndex . ": Add", Button
+                         , % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH 
+                         . " hwnd" . LayerIndex . "_" . VerticalIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . VerticalIndex . "_" . A_Index     
                     if (PictureDef = "") ; if there is no picture assigned to particular button ← the button should be disabled
-                         GuiControl, % "Layer" . LayerIndex . ": Disable", % %VerticalIndex%_%A_Index%hwnd ; Disable unused button
+                         GuiControl, % "Layer" . LayerIndex . ": Disable", % %LayerIndex%_%VerticalIndex%_%A_Index%hwnd ; Disable unused button
                     else ; if there is a picture, prepare its graphics
                          {   
-                         WhichButton := VerticalIndex . "_" . A_Index . "hwnd"
+                         WhichButton := LayerIndex . "_" . VerticalIndex . "_" . A_Index . "hwnd"
                          Opt1 := {1: 0, 2: PictureDef, 4: "Black"}
                          Opt2 := {2: PictureSel, 4: "Yellow"}
                          Opt5 := {2: PictureSel, 4: "Yellow"}
                          If !ImageButton.Create(%WhichButton%, Opt1, Opt2, , , Opt5)
-                              MsgBox, 0, % "ImageButton Error" . VerticalIndex . "_" . A_Index, % ImageButton.LastError
-                         TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := PictureDef ; add key of object: index of button / picture
-                         TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := ButtonA ; add value of object: path to executable
+                              MsgBox, 0, % "ImageButton Error" . LayerIndex . "_" . VerticalIndex . "_" . A_Index, % ImageButton.LastError
+                         TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := PictureDef     ; add key of object: index of button / picture
+                         TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := ButtonA        ; add value of object: path to executable
                          }
                     }
                }
