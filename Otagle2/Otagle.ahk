@@ -440,19 +440,19 @@ return
 L_ConfigureButtonsFunctions: ; tu skończyłem
      ;~ Gui, % GuiLayer%CurrentLayer%Hwnd . ": Hide"
 
-          IniRead, AmountOfKeysHorizontally,             % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons horizontally
-          IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons vertically
-          TableOfLayers[CurrentLayer] := []
-          Loop, % AmountOfKeysVertically
+     IniRead, AmountOfKeysHorizontally,             % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons horizontally
+     IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons vertically
+     TableOfLayers[CurrentLayer] := []
+     Loop, % AmountOfKeysVertically
+          {
+          VerticalIndex := A_Index
+          Loop, % AmountOfKeysHorizontally
                {
-               VerticalIndex := A_Index
-               Loop, % AmountOfKeysHorizontally
-                    {
-                    GuiControl, % GuiLayer%CurrentLayer%Hwnd . ": Enable",  % %CurrentLayer%_%VerticalIndex%_%A_Index%hwnd
-                    GuiControl,,                                            % %CurrentLayer%_%VerticalIndex%_%A_Index%hwnd, % VerticalIndex . "_" . A_Index
-                    GuiControl, +gL_AddPicturesFunction,                    % %CurrentLayer%_%VerticalIndex%_%A_Index%hwnd
-                    }
+               GuiControl, % GuiLayer%CurrentLayer%Hwnd . ": Enable",  % %CurrentLayer%_%VerticalIndex%_%A_Index%hwnd
+               GuiControl,,                                            % %CurrentLayer%_%VerticalIndex%_%A_Index%hwnd, % VerticalIndex . "_" . A_Index
+               GuiControl, +gL_AddPicturesFunction,                    % %CurrentLayer%_%VerticalIndex%_%A_Index%hwnd
                }
+          }
 
      Gui, ConfigureButtonsFunctions: New, +LabelMyGui_On
      Gui, ConfigureButtonsFunctions: Font, bold
@@ -481,12 +481,56 @@ L_ConfigureButtonsFunctions: ; tu skończyłem
 return
 
 L_AddPicturesFunction:
-     MsgBox, Tu jestem!
+     Gui,               ConfigureButtonsFunctions: Show, Hide
+     ;~ Gui,               Wizard_PlotMatrixOfButtons: +OwnDialogs
+     GuiControlGet,     ReadButtonPos, % GuiLayer%CurrentLayer%Hwnd . ": Pos", % A_GuiControl
+     ;~ MsgBox, % "A_GuiControl: " . A_GuiControl
+     
+     FileSelectFile,    SelectedFile, 3, %A_ScriptDir%, Select a picture file, Picture (*.png; *.jpg)
+     if (SelectedFile = "")
+          {
+          MsgBox,   No picture file was selected.
+          Gui,      WizardStep3: Show
+          }
+     else
+          {
+          ;~ GuiControl, Wizard_PlotMatrixOfButtons: Hide, % A_GuiControl ; Hide the button
+          GuiControl, Hide, % A_GuiControl ; Hide the button
+          Gui, % GuiLayer%CurrentLayer%Hwnd . ": Add", Picture, % "x" . ReadButtonPosX . " y" . ReadButtonPosY . " w" . ReadButtonPosW . " h-1", % SelectedFile ; Add the selected picture instead of button
+          ;~ MsgBox, Tu jestem!
+          IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Picture" ; Save the picture into config file
+          FileSelectFile,    SelectedFile, 3, %A_ScriptDir%, Select a "selected" picture file, Picture (*.png; *.jpg)
+          if (SelectedFile = "") ; Now when picture is associated to a button, associate function as well.
+               {
+               MsgBox,   No "selected" picture file was selected.
+               ;~ IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_PictureIfSelected" ; Save the second picture in config file
+               Gui,      ConfigureButtonsFunctions: Show
+               }
+          else
+               IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_PictureIfSelected" ; Save the function into config file
+          
+          FileSelectFile, SelectedFile, 3, %A_ScriptDir%, Select an .ahk or .exe file, File (*.ahk; *.exe)
+          if (SelectedFile = "") ; Now when picture is associated to a button, associate function as well.
+               {
+               MsgBox,   No action file was selected.
+               ;~ IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action" ; Save the function into config file
+               Gui,      ConfigureButtonsFunctions: Show
+               }
+          else
+               {
+               IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action" ; Save the function into config file
+               FileAppend, % "#Include *i " . SelectedFile . "`r`n", %A_ScriptDir%\ButtonFunctions.ahk, UTF-8
+               T_Reload := 1 ; the ButtonFunctions.ahk file has been updated, so reload is required
+               }
+          }
+     Gui,      ConfigureButtonsFunctions: Show
+
 return
 
 L_RedrawLastWindow:
      Gui, ConfigureButtonsFunctions: Destroy
      ;~ Gui, % GuiLayer%CurrentLayer%Hwnd . ": Show"
+     Goto StartOtagle
 return
 
 L_ConfigureAddLayer:
