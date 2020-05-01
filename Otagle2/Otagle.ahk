@@ -579,12 +579,11 @@ L_About:
      Gui, MyAbout: Font, Bold
      Gui, MyAbout: Add, Text, , %ApplicationName% v.2.0 by mslonik (🐘)
      Gui, MyAbout: Font
-     Gui, MyAbout: Add, Text, xm, Make your computer PersonaL a g a i n...
-     Gui, MyAbout: Add, Text, xm, Open source release of Stream Deck concept. Works at its best with touch screens.
-     ;~ Gui, MyAbout: Font, CBlue Underline 
-     ;~ Gui, MyAbout: Add, Text, x+1, https://en.wikipedia.org/wiki/Diacritic
-     ;~ Gui, MyAbout: Font
-     Gui, MyAbout: Add, Text, xm+20, * one can run Wizard from SysTray menu to adjust settings.
+     Gui, MyAbout: Add, Text, xm
+     , Make your computer Personal a g a i n...`r`nOpen source release of Stream Deck concept. Works at its best with touch screens.`r`n`r`nFor project description visit the following webpages:
+          Gui, MyAbout: Font, CBlue Underline 
+     Gui, MyAbout: Add, Text, xm, http://mslonik.pl/biuro/o-t-a-g-l-e`r`nhttps://www.autohotkey.com/boards/viewtopic.php?t=69690&p=300713`r`nhttps://github.com/mslonik/Autohotkey-scripts/tree/master/Otagle2
+     Gui, MyAbout: Font
      Gui, MyAbout: Add, Picture, xm+50 y+20 w300 h-1, % A_ScriptDir . "\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia Ławrów
      
      Gui, MyAbout: Add, Button, Default Hidden w100 gAboutOkBut Center vOkButtonVar hwndOkButtonHwnd, &OK
