@@ -22,7 +22,6 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 
 ; Global variables
      CurrentLayer                           := 1
-     MaxLayer                               := 0    ; variable used to control which GUIs should be hidden
      WhichMonitor                           := 0
      ApplicationName                        := "O T A G L E"
      WindowWizardTitle                      := ApplicationName . " Configuration Wizard"
@@ -235,7 +234,7 @@ WizardStep3:
      Gui, WizardStep3: Font
      Gui, WizardStep3: Add, Text, , Click any of the buttons in the bottom window and associate up to 2 pictures and 1 function to it:`r`n * 1st picture which will be shown by default`r`n * 2nd picture which will be shown if button is selected`r`n* function (*.ahk) which will be run after button is selected.
      Gui, WizardStep3: Add, Button, xm+30 w80 gStartOtagle,     &Finish wizard
-     Gui, WizardStep3: Add, Button, x+30 w80 gNextLayer,        &Next layer
+     Gui, WizardStep3: Add, Button, x+30 w80 gL_AddNextLayer,        &Add next layer
 
      DetectHiddenWindows, On
      Gui, WizardStep3: Show ; small trick to correctly calculate position of window on a screen
@@ -281,7 +280,7 @@ L_WizardButton:
           if (SelectedFile = "") ; Now when picture is associated to a button, associate function as well.
                {
                MsgBox,   No action file was selected.
-               IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action" ; Save the function into config file
+               ;~ IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action" ; Save the function into config file
                Gui,      WizardStep3: Show
                }
           else
@@ -330,7 +329,7 @@ DestroyWelcomeScreen:
      Gui, WelcomeScreen: Destroy
 return
 
-NextLayer:
+L_AddNextLayer:
      Gui, Wizard_PlotMatrixOfButtons:   Destroy
      Gui, WizardStep3:                  Destroy
      CurrentLayer++
@@ -355,6 +354,7 @@ return
 MyGui_OnClose:
      ;~ MsgBox, % "CurrentLayer: " CurrentLayer " Tu jestem!"
 ExitWizard:
+/*
      if (CurrentLayer > 1)
           {
           Gui, WizardStep2: Destroy
@@ -362,24 +362,70 @@ ExitWizard:
           return
           }
      else     
+*/     
           ExitApp
-     
-Traymenu:
+
+#IfWinActive O T A G L E 
+F10::
      ;~ MsgBox, Tu jestem!
-     Menu, Tray, Icon, % A_ScriptDir . "\OtagleIcon.ico"    ; this line applies icon of O T A G L E designed by Sylwia Ławrów
-     Menu, Tray, Add, %ApplicationName%.ahk ABOUT, L_About
-     Menu, Tray, Add ; tray menu separator
-     Menu, SubmenuConfigure, Add, Monitor,                              L_ConfigureMonitor
-     Menu, SubmenuConfigure, Add, Existing layer buttons / functions,   L_ConfigureButtonsFunctions
-     Menu, SubmenuConfigure, Add, Add layer,                            L_ConfigureAddLayer
-     Menu, SubmenuConfigure, Add, Run Wizard,                           L_ConfigureWizard
-     Menu, Tray, Add, Configure,                                        :SubmenuConfigure
-     Menu, Tray, Default, %ApplicationName%.ahk ABOUT ; Default: Changes the menu's default item to be the specified menu item and makes its font bold.
-     Menu, Tray, Add ; To add a menu separator line, omit all three parameters. To put your menu items on top of the standard menu items (after adding your own menu items) run Menu, Tray, NoStandard followed by Menu, Tray, Standard.
-     Menu, Tray, NoStandard
-     Menu, Tray, Standard ;#[1]
-     Menu, Tray, Tip, %ApplicationName% ; Changes the tray icon's tooltip.
+     ;~ Menu, OtagleMenu, Show
+     
+     Gui, % GuiLayer%CurrentLayer%Hwnd . ": Menu", OtagleMenu
 return
+#IfWinActive
+
+
+Traymenu:
+     Menu, Tray,                Icon, % A_ScriptDir . "\OtagleIcon.ico"    ; this line applies icon of O T A G L E designed by Sylwia Ławrów
+     Menu, Tray,                Add, %ApplicationName%.ahk ABOUT, L_About
+     Menu, Tray,                Add ; tray menu separator
+     Menu, SubmenuConfigure,    Add, Monitor,                              L_ConfigureMonitor
+     Menu, SubmenuConfigure,    Add, Existing layer buttons / functions,   L_ConfigureButtonsFunctions
+     Menu, SubmenuConfigure,    Add, Add layer,                            L_ConfigureAddLayer
+     Menu, SubmenuConfigure,    Add, Erase layer,                          L_ConfigureEraseLayer
+     Menu, SubmenuConfigure,    Add, Run Wizard,                           L_ConfigureWizard
+     Menu, Tray,                Add, Configure,                                        :SubmenuConfigure
+     Menu, Tray,                Default, %ApplicationName%.ahk ABOUT ; Default: Changes the menu's default item to be the specified menu item and makes its font bold.
+     Menu, Tray,                Add ; tray menu separator
+     Menu, Tray,                NoStandard
+     Menu, Tray,                Standard ;#[1]
+     Menu, Tray,                Tip, %ApplicationName% ; Changes the tray icon's tooltip.
+     
+     Menu, OtagleMenu,          Add, About, L_About
+return
+
+L_ConfigureEraseLayer:
+     Gui, EraseLayer: New, +LabelMyGui_On
+     Gui, EraseLayer: Font, bold
+     Gui, EraseLayer: Add, Text, , Erase layer
+     Gui, EraseLayer: Font
+     Gui, EraseLayer: Add, Text, , Select which layer should be erased:
+     Gui, EraseLayer: Add, Edit, x+m yp r1 w50
+     Gui, EraseLayer: Add, UpDown, % "vLayerToBeErased Range1-" . HowManyLayers, % CurrentLayer
+     Gui, EraseLayer: Add, Button, xm+30 w80 gL_EraseLayer,     &Erase layer
+
+     SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
+     DetectHiddenWindows, On
+     Gui, EraseLayer: Show ; small trick to correctly calculate position of window on a screen
+          , % "hide" . " x" . MonitorBoundingCoordinates_Left 
+          . " y" . MonitorBoundingCoordinates_Top
+          , HiddenAttempt
+     WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
+     DetectHiddenWindows, Off
+     
+     Gui, EraseLayer: Show
+          , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
+          . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
+          , % WindowWizardTitle  . " Layer " . CurrentLayer
+
+return
+
+L_EraseLayer:
+     Gui, EraseLayer: Submit, NoHide
+     Gui, EraseLayer: Destroy
+     IniDelete, % A_ScriptDir . "\Config.ini", % "Layer" . LayerToBeErased
+     T_Reload := 1 ; the Config.ini file has been updated, so reload is required
+     Goto StartOtagle
 
 L_ConfigureWizard:
      Gui, % "Layer" . CurrentLayer . ": +LastFoundExist"
@@ -415,8 +461,8 @@ L_ConfigureMonitor:
 
      Gui, ConfigureMonitor: Add, Button, xm+30 y+20 w120 gL_ConfigureMonitor_Save,      &Save and reload
      Gui, ConfigureMonitor: Add, Button, x+30 w80 gL_ConfigureMonitor_Cancel,    &Cancel
+     
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
-
      DetectHiddenWindows, On
      Gui, ConfigureMonitor: Show ; small trick to correctly calculate position of window on a screen
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
@@ -526,41 +572,46 @@ return
 L_ConfigureAddLayer:
      CurrentLayer++
      Goto WizardStep2
-/*     
-     Gui, AddNextLayer: New, +LabelMyGui_On
-     Gui, AddNextLayer: Font, bold
-     Gui, AddNextLayer: Add, Text, , `t`tAdd next layer.
-     Gui, AddNextLayer: Font
-     Gui, AddNextLayer: Add, Text, , New layer will be added. Set up amount of buttons.
-     Gui, AddNextLayer: Add, Button, xm+30 w80 gStartOtagle,     &Finish wizard
-     Gui, AddNextLayer: Add, Button, x+30 w80 gNextLayer,        &Next layer
-*/     
 return
 
 L_About:
-    Gui, MyAbout: New, +LabelMyGui_On
-    Gui, MyAbout: Font, Bold
-    Gui, MyAbout: Add, Text, , %ApplicationName% v.2.0 by mslonik (🐘)
-    Gui, MyAbout: Font
-    Gui, MyAbout: Add, Text, xm, Make your computer PersonaL a g a i n...
-    Gui, MyAbout: Add, Text, xm, Open source release of Stream Deck concept. Works at its best with touch screens.
-    ;~ Gui, MyAbout: Font, CBlue Underline 
-    ;~ Gui, MyAbout: Add, Text, x+1, https://en.wikipedia.org/wiki/Diacritic
-    ;~ Gui, MyAbout: Font
-    Gui, MyAbout: Add, Text, xm+20, * one can run Wizard from SysTray menu to adjust settings.
-    Gui, MyAbout: Add, Picture, xm+50 y+20 w300 h-1, % A_ScriptDir . "\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia Ławrów
+     Gui, MyAbout: New, +LabelMyGui_On
+     Gui, MyAbout: Font, Bold
+     Gui, MyAbout: Add, Text, , %ApplicationName% v.2.0 by mslonik (🐘)
+     Gui, MyAbout: Font
+     Gui, MyAbout: Add, Text, xm, Make your computer PersonaL a g a i n...
+     Gui, MyAbout: Add, Text, xm, Open source release of Stream Deck concept. Works at its best with touch screens.
+     ;~ Gui, MyAbout: Font, CBlue Underline 
+     ;~ Gui, MyAbout: Add, Text, x+1, https://en.wikipedia.org/wiki/Diacritic
+     ;~ Gui, MyAbout: Font
+     Gui, MyAbout: Add, Text, xm+20, * one can run Wizard from SysTray menu to adjust settings.
+     Gui, MyAbout: Add, Picture, xm+50 y+20 w300 h-1, % A_ScriptDir . "\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia Ławrów
+     
+     Gui, MyAbout: Add, Button, Default Hidden w100 gAboutOkBut Center vOkButtonVar hwndOkButtonHwnd, &OK
+    
+     SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
+     DetectHiddenWindows, On
+     Gui, MyAbout: Show ; small trick to correctly calculate position of window on a screen
+          , % "hide" . " x" . MonitorBoundingCoordinates_Left 
+          . " y" . MonitorBoundingCoordinates_Top
+          , HiddenAttempt
+     WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
+     DetectHiddenWindows, Off
+     
+     Gui, MyAbout: Show
+          , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
+          . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
+          , % WindowWizardTitle  . " Layer " . CurrentLayer
 
-    Gui, MyAbout: Add, Button, Default Hidden w100 gAboutOkBut Center vOkButtonVar hwndOkButtonHwnd, &OK
-    GuiControlGet, MyGuiControlGetVariable, MyAbout: Pos, %OkButtonHwnd%
-    Gui, MyAbout: Show, Center, %ApplicationName% About
-    WinGetPos, , , MyAboutWindowWidth, , %ApplicationName% About
-    NewButtonXPosition := (MyAboutWindowWidth / 2) - (MyGuiControlGetVariableW / 2)
-    GuiControl, Move, %OkButtonHwnd%, % "x" NewButtonXPosition
-    GuiControl, Show, %OkButtonHwnd%
+     GuiControlGet, MyGuiControlGetVariable, MyAbout: Pos, %OkButtonHwnd%
+     NewButtonXPosition := (WizardWindow_Width / 2) - (MyGuiControlGetVariableW / 2)
+     GuiControl, MyAbout: Move, %OkButtonHwnd%, % "x" NewButtonXPosition
+     GuiControl, MyAbout: Show, %OkButtonHwnd%    
 return    
 
 AboutOkBut:
      Gui, MyAbout: Destroy
+          Gui, % GuiLayer%CurrentLayer%Hwnd . ": Menu" ; detach the menu bar
 return
 
 ; ------------------------------ SECTION OF FUNCTIONS ---------------------------------------
@@ -570,21 +621,17 @@ F_DisplayLayer(WhichLayer)
      global     
           
      Gui, % "Layer" . WhichLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . WhichLayer
-     if (CurrentLayer > MaxLayer)
-          MaxLayer := CurrentLayer  ; this line is used to have just one O T A G L E window displayed
+     ;~ if (CurrentLayer > MaxLayer)
+          ;~ MaxLayer := CurrentLayer  ; this line is used to have just one O T A G L E window displayed
 
-     if (MaxLayer > 1)
+     if (HowManyLayers > 1)
           {
-          ;~ MsgBox, % "MaxLayer: " . MaxLayer
-          Loop, % MaxLayer
+          Loop, % HowManyLayers
                {
-               MsgBox, % "A_Index: " . A_Index
                if (A_Index <> WhichLayer)
                     {
-                    MsgBox, Tu jestem!               
                     Gui, % GuiLayer%A_Index%Hwnd . ": Hide"
                     }
-                    ;~ Gui, % "Layer" . A_Index . ": Hide"
                }
           }     
      }
