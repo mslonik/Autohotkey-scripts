@@ -22,7 +22,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 
 ; Global variables
      CurrentLayer                           := 1
-     ;~ WhichMonitor                      := 3 ; 0
+     MaxLayer                               := 0    ; variable used to control which GUIs should be hidden
      WhichMonitor                           := 0
      ApplicationName                        := "O T A G L E"
      WindowWizardTitle                      := ApplicationName . " Configuration Wizard"
@@ -30,9 +30,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      T_CalculateButton                      := 0 ; 0 ← do not calculate button position, 1 ← yes, calculate button position
      T_Reload                               := 0 ; 0 ← do not Reload the main script (Otagle.ahk), 1 ← yes, reload the main script, because content of ButtonFunctions.ahk has been updated
 
-     ;~ ButtonWidth                            := 300 ; 80
      ButtonWidth                            := 80   ; default / starting value for button width
-     ;~ ButtonHeight                           := 300 ; 80
      ButtonHeight                           := 80   ; default / starting value for button height
      ButtonHorizontalGap                    := 10   ; default / starting value for "horizontal gap", the area of bottom margin
      ButtonVerticalGap                      := 10   ; default / starting value for "vertical gap", the area of left margin 
@@ -41,8 +39,6 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      MonitorBoundingCoordinates_Right       := 0
      MonitorBoundingCoordinates_Top         := 0
      MonitorBoundingCoordinates_Bottom      := 0
-     ;~ PictureSelected                        := 0
-     ;~ ScriptSelected                         := 0
      ReadButtonPosX                         := 0
      ReadButtonPosY                         := 0
      ReadButtonPosW                         := 0
@@ -359,7 +355,14 @@ return
 MyGui_OnClose:
      ;~ MsgBox, % "CurrentLayer: " CurrentLayer " Tu jestem!"
 ExitWizard:
-     ExitApp
+     if (CurrentLayer > 1)
+          {
+          Gui, WizardStep2: Destroy
+          CurrentLayer--
+          return
+          }
+     else     
+          ExitApp
      
 Traymenu:
      ;~ MsgBox, Tu jestem!
@@ -437,9 +440,7 @@ L_ConfigureMonitor_Cancel:
      Gui, ConfigureMonitor: Destroy
 return
 
-L_ConfigureButtonsFunctions: ; tu skończyłem
-     ;~ Gui, % GuiLayer%CurrentLayer%Hwnd . ": Hide"
-
+L_ConfigureButtonsFunctions: 
      IniRead, AmountOfKeysHorizontally,             % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons horizontally
      IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons vertically
      TableOfLayers[CurrentLayer] := []
@@ -460,9 +461,7 @@ L_ConfigureButtonsFunctions: ; tu skończyłem
      Gui, ConfigureButtonsFunctions: Font
      Gui, ConfigureButtonsFunctions: Add, Text, , Click any of the buttons in the bottom window and associate up to 2 pictures and 1 function to it:`r`n * 1st picture which will be shown by default`r`n * 2nd picture which will be shown if button is selected`r`n* function (*.ahk) which will be run after button is selected.
      Gui, ConfigureButtonsFunctions: Add, Button, xm+30 w80 gL_RedrawLastWindow,     &Finish
-     ;~ Gui, ConfigureButtonsFunctions: Add, Button, x+30 w80 gNextLayer,        &Next layer
 
-     ;~ MsgBox, % "WhichMonitor: " . WhichMonitor
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
      DetectHiddenWindows, On
      Gui, ConfigureButtonsFunctions: Show ; small trick to correctly calculate position of window on a screen
@@ -470,21 +469,17 @@ L_ConfigureButtonsFunctions: ; tu skończyłem
           . " y" . MonitorBoundingCoordinates_Top
           , HiddenAttempt
      WinGetPos, , , WizardWindow_Width, WizardWindow_Height, HiddenAttempt
-     ;~ MsgBox, % "WizardWindow_Width: " . WizardWindow_Width . " WizardWindow_Height: " WizardWindow_Height
      DetectHiddenWindows, Off
      
      Gui, ConfigureButtonsFunctions: Show
           , % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (WizardWindow_Width / 2) 
           . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
           , % WindowWizardTitle  . " Layer " . CurrentLayer
-     
 return
 
 L_AddPicturesFunction:
      Gui,               ConfigureButtonsFunctions: Show, Hide
-     ;~ Gui,               Wizard_PlotMatrixOfButtons: +OwnDialogs
      GuiControlGet,     ReadButtonPos, % GuiLayer%CurrentLayer%Hwnd . ": Pos", % A_GuiControl
-     ;~ MsgBox, % "A_GuiControl: " . A_GuiControl
      
      FileSelectFile,    SelectedFile, 3, %A_ScriptDir%, Select a picture file, Picture (*.png; *.jpg)
      if (SelectedFile = "")
@@ -494,16 +489,13 @@ L_AddPicturesFunction:
           }
      else
           {
-          ;~ GuiControl, Wizard_PlotMatrixOfButtons: Hide, % A_GuiControl ; Hide the button
           GuiControl, Hide, % A_GuiControl ; Hide the button
           Gui, % GuiLayer%CurrentLayer%Hwnd . ": Add", Picture, % "x" . ReadButtonPosX . " y" . ReadButtonPosY . " w" . ReadButtonPosW . " h-1", % SelectedFile ; Add the selected picture instead of button
-          ;~ MsgBox, Tu jestem!
           IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Picture" ; Save the picture into config file
           FileSelectFile,    SelectedFile, 3, %A_ScriptDir%, Select a "selected" picture file, Picture (*.png; *.jpg)
           if (SelectedFile = "") ; Now when picture is associated to a button, associate function as well.
                {
                MsgBox,   No "selected" picture file was selected.
-               ;~ IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_PictureIfSelected" ; Save the second picture in config file
                Gui,      ConfigureButtonsFunctions: Show
                }
           else
@@ -513,7 +505,6 @@ L_AddPicturesFunction:
           if (SelectedFile = "") ; Now when picture is associated to a button, associate function as well.
                {
                MsgBox,   No action file was selected.
-               ;~ IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action" ; Save the function into config file
                Gui,      ConfigureButtonsFunctions: Show
                }
           else
@@ -529,11 +520,21 @@ return
 
 L_RedrawLastWindow:
      Gui, ConfigureButtonsFunctions: Destroy
-     ;~ Gui, % GuiLayer%CurrentLayer%Hwnd . ": Show"
      Goto StartOtagle
 return
 
 L_ConfigureAddLayer:
+     CurrentLayer++
+     Goto WizardStep2
+/*     
+     Gui, AddNextLayer: New, +LabelMyGui_On
+     Gui, AddNextLayer: Font, bold
+     Gui, AddNextLayer: Add, Text, , `t`tAdd next layer.
+     Gui, AddNextLayer: Font
+     Gui, AddNextLayer: Add, Text, , New layer will be added. Set up amount of buttons.
+     Gui, AddNextLayer: Add, Button, xm+30 w80 gStartOtagle,     &Finish wizard
+     Gui, AddNextLayer: Add, Button, x+30 w80 gNextLayer,        &Next layer
+*/     
 return
 
 L_About:
@@ -569,6 +570,23 @@ F_DisplayLayer(WhichLayer)
      global     
           
      Gui, % "Layer" . WhichLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . WhichLayer
+     if (CurrentLayer > MaxLayer)
+          MaxLayer := CurrentLayer  ; this line is used to have just one O T A G L E window displayed
+
+     if (MaxLayer > 1)
+          {
+          ;~ MsgBox, % "MaxLayer: " . MaxLayer
+          Loop, % MaxLayer
+               {
+               MsgBox, % "A_Index: " . A_Index
+               if (A_Index <> WhichLayer)
+                    {
+                    MsgBox, Tu jestem!               
+                    Gui, % GuiLayer%A_Index%Hwnd . ": Hide"
+                    }
+                    ;~ Gui, % "Layer" . A_Index . ": Hide"
+               }
+          }     
      }
      
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -10,4 +10,4 @@
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ; the following line was prepared for OTAGLE
-HideSelectedText()
+; HideSelectedText()
