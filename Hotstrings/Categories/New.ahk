@@ -88,3 +88,4 @@ Hotstring(":*:dwg.", 			func("NormalWay").bind("Drawing Exchange Format"), "Off"
 Hotstring("::dwg", 			func("NormalWay").bind("DWG"), "On")
 Hotstring(":*:dxf.", 			func("NormalWay").bind("Drawing Exchange Format"), "On")
 Hotstring("::dxf", 			func("NormalWay").bind("DXF"), "On")
+Hotstring(":*:flowers.", 			func("NormalWay").bind("💐: 🌹🍀🌻🌺🌸"), "On")
