@@ -72,9 +72,10 @@ if ((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580") && (A_Args[1] !
 	FindWebsite("WhatsApp","chrome.exe web.whatsapp.com", Tabs)
 	FindWebsite("myTeamsites - Home", "chrome.exe team.voestalpine.net/SitePages/Home.aspx", Tabs)
 	FindWebsite("Pulpit", "chrome.exe helpdesk.tens.pl/helpdesk", Tabs)
-	FindWebsite("Exact Synergy Enterprise","chrome.exe portal-signaling-sopot.voestalpine.net/synergy/docs/Portal.aspx", Tabs)
+	FindWebsite("Exact Synergy Enterprise","chrome.exe https://portal-signaling-poland.voestalpine.net/synergy/docs/Portal.aspx", Tabs)
 	FindWebsite("Cooperation Platform Sopot","chrome.exe solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx", Tabs)
 	FindWebsite("MDS Upgrade Kit","chrome.exe solidsystemteamwork.voestalpine.root.local/Processes/custprojects/780MDSUpgradeKit/SitePages/Home.aspx",Tabs)
+	FindWebsite("mssopot | Jitsi Meet","chrome.exe https://meet.jit.si/mssopot",Tabs)
 	}
 
 ; Maciej Słojewski only; home-office or office
@@ -901,7 +902,7 @@ Loop, Parse, Items, `n
 	}
 	else
 	{
-		modstring := string := ":"divString2[1]"."""
+		modstring := ":"divString2[1]"."""
 		modfl := 1
 	}
 	InHotString := StrReplace(InHotString, "func", "`t`t`tfunc")
@@ -1071,7 +1072,7 @@ LV_Delete()
   
   Loop, % SectionList.MaxIndex()
   {
-    if InStr(SectionList[A_Index], "On")
+    if InStr(SectionList[A_Index], """On""")
     {str1 := StrSplit(SectionList[A_Index], """")
     strh := StrSplit(str1[2], ":")
     strop := SubStr(str1[2], 1, StrLen(str1[2])-StrLen(strh[3]))

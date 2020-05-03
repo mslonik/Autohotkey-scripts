@@ -1,5 +1,4 @@
-﻿Hotstring(":*:dd",			func("ViaClipboard").bind("Dzień dobry, " . Chr(0x000B) . Chr(0x000B) ), "On")
-Hotstring(":*:pms", 		func("ViaClipboard").bind("Pozdrawia ms"), "On")
+﻿Hotstring(":*:pms", 		func("ViaClipboard").bind("Pozdrawia ms"), "On")
 Hotstring(":*:m.", 			func("ViaClipboard").bind("Maciej"), "On")
 Hotstring(":*:s.", 			func("ViaClipboard").bind("Słojewski"), "On")
 Hotstring(":*:telms",		func("ViaClipboard").bind("+48 601 403 775"), "On")
@@ -9,3 +8,4 @@ Hotstring(":*:zws",			func("ViaClipboard").bind("Z wyrazami szacunku`, Maciej S�
 Hotstring(":c*:kr`t",		func("ViaClipboard").bind("Kind regards`, Maciej Słojewski"), "On")
 Hotstring(":*:dw.",			func("ViaClipboard").bind("Do wiadomości.`r`n`r`nPozdrawia ms"), "On")
 Hotstring(":*:v.",			func("ViaClipboard").bind("V523580"), "On")
+Hotstring(":*:dd", 			func("NormalWay").bind("Dzień dobry, {Shift Down}{Enter 2}{Shift Up}"), "On")
