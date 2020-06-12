@@ -1,104 +1,95 @@
-; ********************************
-; Basic Demo Script (download contains additional functionality)
-; ********************************
+#SingleInstance force
+#Persistent
+#NoEnv
+SetTitleMatchMode 2
+SetWorkingDir %A_ScriptDir%
+CoordMode, Mouse, Relative
 
-; Download sample images if necessary
-IfNotExist %A_WorkingDir%\testbmp.bmp
-{
-    SplashTextOn, 300, 30, !, Downloading images. Please wait...
-	URLDownloadToFile https://ahknet.autohotkey.com/~corr/ahk.bmp, ahk.bmp
-	URLDownloadToFile https://ahknet.autohotkey.com/~corr/testbmp.bmp, testbmp.bmp
-	URLDownloadToFile https://ahknet.autohotkey.com/~corr/test2.bmp, test2.bmp
-    SplashTextOff
+OnMessage(0x200, "WM_MOUSEMOVE")
+OnMessage(0x201, "WM_LBUTTONDOWN")
+OnMessage(0x202, "WM_LBUTTONUP")
+
+btnW = 100	; button width
+btnH = 030	; button height
+flag := false
+NonMovableCtrl := "ButDmy"	; this button can't be moved
+
+Gui, Add, Button, 	x160 y196 w%btnW% h%btnH% vButDmy   gBtn, FixedButton
+Gui, Add, Button, 	x020 y016 w%btnW% h%btnH% vBtn1 	gBtn, MovableButton1
+Gui, Add, Button, 	x020 y056 w%btnW% h%btnH% vBtn2 	gBtn, MovableButton2
+Gui, Add, Button, 	x020 y096 w%btnW% h%btnH% vBtn3 	gBtn, MovableButton3
+Gui, Add, GroupBox, x020 y010 w400 h400 vGrpb hwndGrpHWND cBlack
+Gui, Show, 			w440 h450,Movable Buttons
+ControlGetPos, wx, wy, ww, wh,, ahk_id %GrpHWND%
+wx +=10
+wy +=30
+ww +=20
+wh +=10
+return
+
+Btn:	
+return
+
+GuiEscape:
+GuiClose:
+	ExitApp
+return
+
+;----------------------------------------------------------------------------------***
+; 
+;----------------------------------------------------------------------------------***
+WM_LBUTTONUP() {
+    global flag, NonMovableCtrl
+	If A_GuiControl contains %NonMovableCtrl%
+		return			
+	if A_Gui 
+		flag := false		
 }
-; Create the buttons  
-Gui, Add, Button, h30 w140 gNbutton, Normal Button  
-AddGraphicButton("SampleButton1", "pic1.jpg", "h30 w140 gMyButton", 30, 140)
-AddGraphicButton("SampleButton2", A_WorkingDir . "\ahk.bmp", "h30 w140 gMyButton", 80, 140) 
-Gui, Add, Button, h30 w140 gNbutton, Another Normal Button 
-AddGraphicButton("SampleButton3", "pic2.jpg", "h30 w140 gMyButton", 20, 130) 
-
-; Show the window 
-Gui, Show,, Bitmap Buttons 
-
-; Image rollover for SampleButton1
-OnMessage(0x200, "MouseMove")
-OnMessage(0x2A3, "MouseLeave")
-OnMessage(0x202, "MouseLeave") ; Restore image on LBUTTONUP
-Return 
-
-MouseLeave(wParam, lParam, msg, hwnd)
-{
-  Global
-  If (hwnd = SampleButton1_hwnd)
-    AddGraphicButton("SampleButton1", "pic1.jpg", "h30 w140 gMyButton", 30, 140) 
-  Return
+;----------------------------------------------------------------------------------***
+; 
+;----------------------------------------------------------------------------------***
+WM_LBUTTONDOWN() {
+	global flag, NonMovableCtrl, deltaX, deltaY
+	If A_GuiControl contains %NonMovableCtrl%
+		return			
+	if A_Gui
+	{        
+		MouseGetPos		, mouDWNx, mouDWNy
+		GuiControlGet	, btnDWN, Pos, %A_GuiControl%
+		deltaX := mouDWNx-btnDWNx
+		deltaY := mouDWNy-btnDWNy
+		flag := true
+	}
 }
-MouseMove(wParam, lParam, msg, hwnd)
-{
-  Global
-  Static _LastButtonData = true
-  If (hwnd = SampleButton1_hwnd)
-    If (_LastButtonData != SampleButton1_hwnd)
-      AddGraphicButton("SampleButton1", "\ahk.bmp", "h30 w140 gMyButton", 60, 120) 
-  _LastButtonData := hwnd
-  Return
+;----------------------------------------------------------------------------------***
+; 
+;----------------------------------------------------------------------------------***
+WM_MOUSEMOVE(wParam,lParam, msg) {	
+	global flag, NonMovableCtrl, wx, wy, ww, wh, deltaX, deltaY
+	MouseGetPos, mx, my
+	GuiControlGet, cn, Pos, %A_GuiControl%
+
+	hCursM:=DllCall("LoadCursor","UInt",0,"Int",32646)
+	hCursX:=DllCall("LoadCursor","UInt",0,"Int",32648)	
+
+	
+    if (msg = 0x200) {
+        MouseGetPos,,,id,control
+		GuiControlGet, ctrlName,Name, %control%
+		If instr(ctrlName, "Btn")
+			DllCall("SetCursor","UInt",hCursM)
+		If instr(ctrlName, "ButDmy")
+			DllCall("SetCursor","UInt",hCursX)
+    }	
+	If A_GuiControl contains %NonMovableCtrl%
+		return		
+	if ( flag ) {        
+		mx -= deltaX ; this do the work !
+		my -= deltaY ; this do the work !
+		mx := mx+cnw > ww ? ww-cnw : mx
+		mx := mx <= 20    ? 20     : mx
+		my := my+cnh > wh ? wh-cnh : my
+		my := my <= 16    ? 16     : my
+		GuiControl, Move, %A_GuiControl%, x%mx% y%my% w%cnw% h%cnh%		
+	}
 }
-
-MyButton: 
-MsgBox, Graphic button clicked :) 
-return 
-
-Nbutton: 
-MsgBox, Normal button Clicked :)
-AddGraphicButton("SampleButton3", "pic2.jpg", "h30 w140 gMyButton", 20, 130)
-Return 
-
-GuiClose: 
-ExitApp 
-
-
-
-; ******************************************************************* 
-; AddGraphicButton.ahk 
-; ******************************************************************* 
-; Version: 2.2 Updated: May 20, 2007 
-; by corrupt 
-; ******************************************************************* 
-; VariableName = variable name for the button 
-; ImgPath = Path to the image to be displayed 
-; Options = AutoHotkey button options (g label, button size, etc...) 
-; bHeight = Image height (default = 32) 
-; bWidth = Image width (default = 32) 
-; ******************************************************************* 
-; note: 
-; - calling the function again with the same variable name will 
-; modify the image on the button 
-; ******************************************************************* 
-AddGraphicButton(VariableName, ImgPath, Options="", bHeight=32, bWidth=32) 
-{ 
-Global 
-Local ImgType, ImgType1, ImgPath0, ImgPath1, ImgPath2, hwndmode 
-; BS_BITMAP := 128, IMAGE_BITMAP := 0, BS_ICON := 64, IMAGE_ICON := 1 
-Static LR_LOADFROMFILE := 16 
-Static BM_SETIMAGE := 247 
-Static NULL 
-SplitPath, ImgPath,,, ImgType1 
-If ImgPath is float 
-{ 
-  ImgType1 := (SubStr(ImgPath, 1, 1)  = "0") ? "bmp" : "ico" 
-  StringSplit, ImgPath, ImgPath,`. 
-  %VariableName%_img := ImgPath2 
-  hwndmode := true 
-} 
-ImgTYpe := (ImgType1 = "bmp") ? 128 : 64 
-If (%VariableName%_img != "") AND !(hwndmode) 
-  DllCall("DeleteObject", "UInt", %VariableName%_img) 
-If (%VariableName%_hwnd = "") 
-  Gui, Add, Button,  v%VariableName% hwnd%VariableName%_hwnd +%ImgTYpe% %Options% 
-ImgType := (ImgType1 = "bmp") ? 0 : 1 
-If !(hwndmode) 
-  %VariableName%_img := DllCall("LoadImage", "UInt", NULL, "Str", ImgPath, "UInt", ImgType, "Int", bWidth, "Int", bHeight, "UInt", LR_LOADFROMFILE, "UInt") 
-DllCall("SendMessage", "UInt", %VariableName%_hwnd, "UInt", BM_SETIMAGE, "UInt", ImgType,  "UInt", %VariableName%_img) 
-Return, %VariableName%_img ; Return the handle to the image 
-} 
