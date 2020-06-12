@@ -12,7 +12,7 @@ SendMode Input  				; Recommended for new scripts due to its superior speed and 
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #Persistent
 #Include *i %A_ScriptDir%\ButtonFunctions.ahk ; ← Functions to be included
-#Include %A_ScriptDir%\Class_ImageButton.ahk                  ; Buttons with pictures https://github.com/AHK-just-me/Class_ImageButton
+#Include %A_ScriptDir%\Core\Class_ImageButton.ahk                  ; Buttons with pictures https://github.com/AHK-just-me/Class_ImageButton
 
 
 ; The naming convention applied in this script
@@ -391,7 +391,7 @@ return
 #IfWinActive
 
 Traymenu:
-     Menu, Tray,                Icon, % A_ScriptDir . "\OtagleIcon.ico"    ; this line applies icon of O T A G L E designed by Sylwia Ławrów
+     Menu, Tray,                Icon, % A_ScriptDir . "\Core\OtagleIcon.ico"    ; this line applies icon of O T A G L E designed by Sylwia Ławrów
      Menu, Tray,                Add, %ApplicationName%.ahk ABOUT, L_About
      Menu, Tray,                Add ; tray menu separator
      Menu, SubmenuConfigure,    Add, Monitor,                              L_ConfigureMonitor
@@ -890,7 +890,7 @@ F_WelcomeScreen()
      IniRead, WhichMonitor,               % A_ScriptDir . "\Config.ini", Main, WhichMonitor
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
      Gui, WelcomeScreen: New, +LabelMyGui_On +AlwaysOnTop -Caption
-     Gui, WelcomeScreen: Add, Picture, w500 h-1, % A_ScriptDir . "\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia Ławrów 
+     Gui, WelcomeScreen: Add, Picture, w500 h-1, % A_ScriptDir . "\Core\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia Ławrów 
      DetectHiddenWindows, On
      Gui, WelcomeScreen: Show ; small trick to correctly calculate position of window on a screen
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
