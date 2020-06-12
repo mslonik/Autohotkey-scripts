@@ -1,4 +1,4 @@
-BB_StronaOzdobna()
+ï»¿BB_StronaOzdobna()
 {
 	OurTemplateEN := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
 	OurTemplatePL := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
@@ -7,10 +7,10 @@ BB_StronaOzdobna()
 	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
 		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
 	{
-		MsgBox, 16, Próba wywo³ania stylu z szablonu, 
+		MsgBox, 16, PrÃ³ba wywoÅ‚ania stylu z szablonu, 
 		( Join
-		 Próbujesz wstawiæ blok konstrukcyjny przypisany do szablonu, ale szablon nie zosta³ jeszcze do³¹czony do tego pliku. 
-	Najpierw do³¹cz szablon, a nastêpnie wywo³aj ponownie tê funkcjê.
+		 PrÃ³bujesz wstawiÄ‡ blok konstrukcyjny przypisany do szablonu, ale szablon nie zostaÅ‚ jeszcze doÅ‚Ä…czony do tego pliku. 
+	Najpierw doÅ‚Ä…cz szablon, a nastÄ™pnie wywoÅ‚aj ponownie tÄ™ funkcjÄ™.
 		)
 	}
 	else

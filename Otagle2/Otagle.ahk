@@ -951,7 +951,7 @@ F_ReadConfig_ini()
                          WhichButton := LayerIndex . "_" . VerticalIndex . "_" . A_Index . "hwnd"
                          Opt1 := {1: 0, 2: PictureDef, 4: "Black"}
                          Opt2 := {2: PictureSel, 4: "Yellow"}
-                         Opt5 := {2: PictureSel, 4: "Yellow"}
+                         ;~ Opt5 := {2: PictureSel, 4: "Yellow"}
                          If !ImageButton.Create(%WhichButton%, Opt1, Opt2 )
                               MsgBox, 0, % "ImageButton Error" . LayerIndex . "_" . VerticalIndex . "_" . A_Index, % ImageButton.LastError
                          TableOfLayers[LayerIndex][VerticalIndex . "_" . A_Index] := PictureDef     ; add key of object: index of button / picture
