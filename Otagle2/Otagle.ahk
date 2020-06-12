@@ -1,5 +1,5 @@
-/*
-Author:      Maciej S≥ojewski, mslonik, http://mslonik.pl
+Ôªø/*
+Author:      Maciej S≈Çojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
 License:     GNU GPL v.3
@@ -11,14 +11,14 @@ SendMode Input  				; Recommended for new scripts due to its superior speed and 
 #SingleInstance, Force
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #Persistent
-#Include *i %A_ScriptDir%\ButtonFunctions.ahk ; ã Functions to be included
+#Include *i %A_ScriptDir%\ButtonFunctions.ahk ; ‚Üê Functions to be included
 #Include %A_ScriptDir%\Class_ImageButton.ahk                  ; Buttons with pictures https://github.com/AHK-just-me/Class_ImageButton
 
 
 ; The naming convention applied in this script
-; F_* ã Function 
-; L_* ã Label
-; T_* ã Toggle ã two state variable to remeber specific setting
+; F_* ‚Üê Function 
+; L_* ‚Üê Label
+; T_* ‚Üê Toggle two state variable to remeber specific setting
 
 ; Global variables
      CurrentLayer                           := 1
@@ -27,8 +27,8 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ApplicationName                        := "O T A G L E"
      WindowWizardTitle                      := ApplicationName . " Configuration Wizard"
 
-     T_CalculateButton                      := 0 ; 0 ã do not calculate button position, 1 ã yes, calculate button position
-     T_Reload                               := 0 ; 0 ã do not Reload the main script (Otagle.ahk), 1 ã yes, reload the main script, because content of ButtonFunctions.ahk has been updated
+     T_CalculateButton                      := 0 ; 0 ‚Üê no, do not calculate button position, 1 ‚Üê yes, calculate button position
+     T_Reload                               := 0 ; 0 ‚Üê no, do not Reload the main script (Otagle.ahk), 1 ‚Üê yes, reload the main script, because content of ButtonFunctions.ahk has been updated
 
      ButtonWidth                            := 80   ; default / starting value for button width
      ButtonHeight                           := 80   ; default / starting value for button height
@@ -61,7 +61,7 @@ else
      Goto StartOtagle
 
 Wizard_Intro:
-     FileRecycle, %A_ScriptDir%\ButtonFunctions.ahk ; ã remove ButtonFunctions.ahk
+     FileRecycle, %A_ScriptDir%\ButtonFunctions.ahk ; remove ButtonFunctions.ahk
      FileRecycle, %A_ScriptDir%\Config.ini          ; remove old Config.ini. Perhaps warning should be added
      F_WizardIntro()
 return 
@@ -218,13 +218,11 @@ SaveConfigurationWizard:
           }
      else
           {
-          ;~ F_CalculateButtonsAndGaps()
           F_AddButtonsAndGaps("Disable")
           F_SavePositionOfButtons()
           }
 
      MsgBox, 0, % WindowWizardTitle, % "Configuration saved to the file:`r`n" . A_ScriptDir . "\Config.ini"
-
      GuiControl, Disable, % SaveConfigHwnd
      Gui, WizardStep2: Add, Button, x+m w80 gWizardStep3, C&ontinue
 return
@@ -236,7 +234,6 @@ WizardStep3:
      Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
      if (WinExist())
           Gui, Wizard_PlotMatrixOfButtons: Destroy
-     ;~ Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
      F_AddButtonsAndGaps("Enable")
      Gui, Wizard_PlotMatrixOfButtons: Show, % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % WindowWizardTitle . " Layer " . HowManyLayers
 
@@ -277,13 +274,11 @@ L_WizardButton:
           {
           GuiControl, Wizard_PlotMatrixOfButtons: Hide, % A_GuiControl ; Hide the button
           Gui, Wizard_PlotMatrixOfButtons: Add, Picture, % "x" . ReadButtonPosX . " y" . ReadButtonPosY . " w" . ReadButtonPosW . " h-1", % SelectedFile ; Add the selected picture instead of button
-          ;~ MsgBox, Tu jestem!
           IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers, % "Button_" . A_GuiControl . "_Picture" ; Save the picture into config file
           FileSelectFile,    SelectedFile, 3, , Select a "selected" picture file, Picture (*.png; *.jpg)
           if (SelectedFile = "") ; Now when picture is associated to a button, associate function as well.
                {
                MsgBox,   No "selected" picture file was selected.
-               ;~ IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_PictureIfSelected" ; Save the second picture in config file
                Gui,      WizardStep3: Show
                }
           else
@@ -293,7 +288,6 @@ L_WizardButton:
           if (SelectedFile = "") ; Now when picture is associated to a button, associate function as well.
                {
                MsgBox,   No action file was selected.
-               ;~ IniWrite, % SelectedFile,       % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action" ; Save the function into config file
                Gui,      WizardStep3: Show
                }
           else
@@ -308,7 +302,6 @@ return
 
 L_ButtonPressed: 
      SplitPath, % TableOfLayers[CurrentLayer][A_GuiControl], FunctionName
-     ;FunctionName := RTrim(FunctionName, ".ahk")
      FunctionName := SubStr(FunctionName, 1, StrLen(FunctionName)-4)
      %FunctionName%()
 return
@@ -329,10 +322,6 @@ StartOtagle:
           F_ReadConfig_ini()
           CurrentLayer := 1  ; initialization of application
           SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor 
-          ;~ MonitorBoundingCoordinates_Left := Format("{:d}", MonitorBoundingCoordinates_Left/ (A_ScreenDPI/96))
-          ;~ MonitorBoundingCoordinates_Right := Format("{:d}", MonitorBoundingCoordinates_Right/ (A_ScreenDPI/96))
-          ;~ MonitorBoundingCoordinates_Top := Format("{:d}", MonitorBoundingCoordinates_Top/ (A_ScreenDPI/96))
-          ;~ MonitorBoundingCoordinates_Bottom := Format("{:d}", MonitorBoundingCoordinates_Bottom/ (A_ScreenDPI/96))
           try          
                F_DisplayLayer(CurrentLayer)
           catch e
@@ -353,8 +342,6 @@ L_AddNextLayer:
      HowManyLayers++
      T_CalculateButton := 0
      Goto WizardStep2
-;~ return
-
 
 CheckMonitorNumbering:
      F_ShowMonitorNumbers()
@@ -378,13 +365,11 @@ ExitWizard:
 
 #IfWinActive O T A G L E 
 F10::
-     ;~ MsgBox, Tu jestem!
-     ;~ Menu, OtagleMenu, Show
-if (Mod(MenuVar, 2) == 0)
-     Gui, % GuiLayer%CurrentLayer%Hwnd . ": Menu", OtagleMenu
-else
-     Gui, % GuiLayer%CurrentLayer%Hwnd . ": Menu",
-MenuVar := MenuVar + 1
+     if (Mod(MenuVar, 2) == 0)
+          Gui, % GuiLayer%CurrentLayer%Hwnd . ": Menu", OtagleMenu
+     else
+          Gui, % GuiLayer%CurrentLayer%Hwnd . ": Menu",
+     MenuVar := MenuVar + 1
 return
 
 ^x::
@@ -405,9 +390,8 @@ return
 
 #IfWinActive
 
-
 Traymenu:
-     Menu, Tray,                Icon, % A_ScriptDir . "\OtagleIcon.ico"    ; this line applies icon of O T A G L E designed by Sylwia £awrÛw
+     Menu, Tray,                Icon, % A_ScriptDir . "\OtagleIcon.ico"    ; this line applies icon of O T A G L E designed by Sylwia ≈Åawr√≥w
      Menu, Tray,                Add, %ApplicationName%.ahk ABOUT, L_About
      Menu, Tray,                Add ; tray menu separator
      Menu, SubmenuConfigure,    Add, Monitor,                              L_ConfigureMonitor
@@ -623,14 +607,14 @@ return
 L_About:
      Gui, MyAbout: New, +LabelMyGui_On -Caption +Border
      Gui, MyAbout: Font, Bold
-     Gui, MyAbout: Add, Text, , %ApplicationName% v.2.0 by mslonik (??)
+     Gui, MyAbout: Add, Text, , %ApplicationName% v.2.0 by mslonik (üêò)
      Gui, MyAbout: Font
      Gui, MyAbout: Add, Text, xm
      , Make your computer Personal a g a i n...`r`nOpen source release of Stream Deck concept. Works at its best with touch screens.`r`n`r`nFor project description visit the following webpages:
           Gui, MyAbout: Font, CBlue Underline 
      Gui, MyAbout: Add, Text, xm, http://mslonik.pl/biuro/o-t-a-g-l-e`r`nhttps://www.autohotkey.com/boards/viewtopic.php?t=69690&p=300713`r`nhttps://github.com/mslonik/Autohotkey-scripts/tree/master/Otagle2
      Gui, MyAbout: Font
-     Gui, MyAbout: Add, Picture, xm+50 y+20 w300 h-1, % A_ScriptDir . "\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia £awrÛw
+     Gui, MyAbout: Add, Picture, xm+50 y+20 w300 h-1, % A_ScriptDir . "\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia ≈Åawr√≥w
      
      Gui, MyAbout: Add, Button, Default Hidden w100 gAboutOkBut Center vOkButtonVar hwndOkButtonHwnd, &OK
     
@@ -864,8 +848,6 @@ F_DisplayLayer(WhichLayer)
      MenuVar := 0
      Gui, % "Layer" . WhichLayer . ": -Resize  -DPIScale -MinimizeBox "
      Gui, % "Layer" . WhichLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . WhichLayer
-     ;~ if (CurrentLayer > MaxLayer)
-          ;~ MaxLayer := CurrentLayer  ; this line is used to have just one O T A G L E window displayed
 
      if (HowManyLayers > 1)
           {
@@ -908,7 +890,7 @@ F_WelcomeScreen()
      IniRead, WhichMonitor,               % A_ScriptDir . "\Config.ini", Main, WhichMonitor
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
      Gui, WelcomeScreen: New, +LabelMyGui_On +AlwaysOnTop -Caption
-     Gui, WelcomeScreen: Add, Picture, w500 h-1, % A_ScriptDir . "\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia £awrÛw 
+     Gui, WelcomeScreen: Add, Picture, w500 h-1, % A_ScriptDir . "\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia ≈Åawr√≥w 
      DetectHiddenWindows, On
      Gui, WelcomeScreen: Show ; small trick to correctly calculate position of window on a screen
           , % "hide" . " x" . MonitorBoundingCoordinates_Left 
@@ -946,7 +928,6 @@ F_ReadConfig_ini()
           IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, Amount of buttons vertically
           TableOfLayers[LayerIndex] := []
           Gui, % "Layer" . LayerIndex . ": New", % "+hwndGuiLayer" . LayerIndex . "Hwnd" . " +LabelMyGui_On"
-          ;~ Gui, % "Layer" . LayerIndex . ": Font", s18, Arial Black
           Loop, % AmountOfKeysVertically
                {
                VerticalIndex := A_Index
@@ -960,15 +941,10 @@ F_ReadConfig_ini()
                     IniRead, PictureSel,    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_PictureIfSelected"
                     IniRead, ButtonA,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Action"
                     
-                    ;~ if (VerticalIndex = 1) and (A_Index = 1) ; the first button is set as default
-                         ;~ Gui, % "Layer" . LayerIndex . ": Add", Button
-                         ;~ , % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH 
-                         ;~ . " hwnd" . LayerIndex . "_" . VerticalIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . VerticalIndex . "_" . A_Index . " +Default"
-                    ;~ else                                     ; the other buttons are set but not as default
-                         Gui, % "Layer" . LayerIndex . ": Add", Button
+                    Gui, % "Layer" . LayerIndex . ": Add", Button
                          , % "x" . ButtonX . " y" . ButtonY . " w" . ButtonW . " h" . ButtonH 
                          . " hwnd" . LayerIndex . "_" . VerticalIndex . "_" . A_Index . "hwnd" . " gL_ButtonPressed" . " v" . VerticalIndex . "_" . A_Index     
-                    if (PictureDef = "") ; if there is no picture assigned to particular button ã the button should be disabled
+                    if (PictureDef = "") ; if there is no picture assigned to particular button, then the button should be disabled
                          GuiControl, % "Layer" . LayerIndex . ": Disable", % %LayerIndex%_%VerticalIndex%_%A_Index%hwnd ; Disable unused button
                     else ; if there is a picture, prepare its graphics
                          {   
@@ -995,7 +971,6 @@ F_SavePositionOfButtons()
      {
      global ; Assume-global mode
      local ExternalLoopIndex, Guzior := 0
-     ;~ global WizardStep2_AmountOfKeysVertically, WizardStep2_AmountOfKeysHorizontally
      local GuziorX := 0, GuziorY := 0, GuziorW := 0, GuziorH := 0
      local PictureFilePath := ""
      local ButtonScript := ""
@@ -1003,7 +978,7 @@ F_SavePositionOfButtons()
      IniWrite, % WizardStep2_AmountOfKeysHorizontally,  % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers, Amount of buttons horizontally
      IniWrite, % WizardStep2_AmountOfKeysVertically,    % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers, Amount of buttons vertically
      
-     ProgressBarVarMax := WizardStep2_AmountOfKeysVertically * WizardStep2_AmountOfKeysHorizontally * 6 ; 6 ã 6x IniWrite in internal loop
+     ProgressBarVarMax := WizardStep2_AmountOfKeysVertically * WizardStep2_AmountOfKeysHorizontally * 6 ; 6 ‚Üê 6x IniWrite in internal loop
      ProgressBarTemp := 0
      
      Loop, % WizardStep2_AmountOfKeysVertically
@@ -1011,7 +986,6 @@ F_SavePositionOfButtons()
           ExternalLoopIndex := A_Index
           Loop, % WizardStep2_AmountOfKeysHorizontally
                {
-               ;~ MsgBox, Tu jestem
                GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd
                IniWrite, % GuziorX,         % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_X"
                GuiControl, WizardStep2:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
@@ -1032,11 +1006,8 @@ F_SavePositionOfButtons()
 F_AddButtonsAndGaps(IfEnable)
      {
      global ; Assume-global mode
-     ;~ global WizardStep2_AmountOfKeysHorizontally, WizardStep2_AmountOfKeysVertically
-     ;~ global ButtonHeight, ButtonWidth
      
      Gui, Wizard_PlotMatrixOfButtons: New, +LabelMyGui_On
-     ;~ Gui, Wizard_PlotMatrixOfButtons: Margin, % ButtonHorizontalGap, % ButtonVerticalGap
      
      local FirstRow := 0
      
@@ -1091,7 +1062,7 @@ F_ShowMonitorNumbers()
           Gui, %A_Index%:-SysMenu -Caption +Border
           Gui, %A_Index%:Color, Black ; WindowColor, ControlColor
           Gui, %A_Index%:Font, cWhite s26 bold, Calibri
-          Gui, %A_Index%:Add, Text, x150 y150 w150 h150, % A_Index ; to dzia≥a
+          Gui, %A_Index%:Add, Text, x150 y150 w150 h150, % A_Index
           Gui, % A_Index . ":Show", % "x" .  MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (300 / 2) . "y" 
           . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (300 / 2) . "w300" . "h300"
           }
