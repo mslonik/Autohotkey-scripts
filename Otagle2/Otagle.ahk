@@ -612,7 +612,7 @@ L_About:
      Gui, MyAbout: Add, Text, xm
      , Make your computer Personal a g a i n...`r`nOpen source release of Stream Deck concept. Works at its best with touch screens.`r`n`r`nFor project description visit the following webpages:
           Gui, MyAbout: Font, CBlue Underline 
-     Gui, MyAbout: Add, Text, xm, http://mslonik.pl/biuro/o-t-a-g-l-e`r`nhttps://www.autohotkey.com/boards/viewtopic.php?t=69690&p=300713`r`nhttps://github.com/mslonik/Autohotkey-scripts/tree/master/Otagle2
+     Gui, MyAbout: Add, Text, xm, http://mslonik.pl/biuro/1095-o-t-a-g-l-e-q-a`r`nhttps://www.autohotkey.com/boards/viewtopic.php?t=69690&p=300713`r`nhttps://github.com/mslonik/Autohotkey-scripts/tree/master/Otagle2
      Gui, MyAbout: Font
      Gui, MyAbout: Add, Picture, xm+50 y+20 w300 h-1, % A_ScriptDir . "\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia Ławrów
      
