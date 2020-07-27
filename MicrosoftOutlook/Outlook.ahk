@@ -1,4 +1,4 @@
-Menu, Tray, Icon, shell32.dll, 157
+﻿Menu, Tray, Icon, shell32.dll, 157
 SetKeyDelay, 0 
 
 #NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
@@ -46,6 +46,11 @@ return
 ^n::
 ^+m::
 	NewMessageForm()
+return
+
+^Space::
+^+n::
+	TemplateStyle("Odkryty ms")
 return
 
 #If
