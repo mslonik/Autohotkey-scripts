@@ -1,7 +1,7 @@
-RejectChange() ; odrzuæ zmianê
+ï»¿RejectChange() ; odrzuÄ‡ zmianÄ™
 {	
 	oWord := ComObjActive("Word.Application")
-	oWord.Selection.Range.Revisions.RejectAll ; Odrzuæ zmianê
+	oWord.Selection.Range.Revisions.RejectAll ; OdrzuÄ‡ zmianÄ™
 	oWord := ""
 	WinActivate, ahk_class OpusApp
 	return

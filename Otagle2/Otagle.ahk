@@ -1,4 +1,4 @@
-﻿/*
+/*
 Author:      Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
@@ -44,7 +44,6 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ReadButtonPosW                         := 0
      ReadButtonPosH                         := 0
      MenuVar                                := 0
-
 
 ;~ DetectHiddenWindows, On ; Caution! Extremely dangerous. May stop working existing parts of a script. Use only if you know what you're doing.
 
@@ -138,9 +137,11 @@ WizardStep2:
      Gui, WizardStep2: Add, UpDown, vButtonVerticalGap Range0-300, % ButtonVerticalGap
      Gui, WizardStep2: Add, Button, xm Default w80 gBCalculate, C&alculate 
      Gui, WizardStep2: Add, Text, xm, % "Number of keys horizontally:`t" . (T_CalculateButton ? WizardStep2_AmountOfKeysHorizontally : "") 
-          . "`tNot used margin at the left side in px:`t" . (T_CalculateButton ? WizardStep2_MarginHorizontally : "")
+          . "`tNot used margin at the left side in px:`t" . (T_CalculateButton ? WizardStep2_MarginHorizontally : "") . "`t"
+     Gui, WizardStep2: Add, Text, yp x+m, Write the title of the layer:
      Gui, WizardStep2: Add, Text, xm, % "Number of keys vertically:`t" . (T_CalculateButton ? WizardStep2_AmountOfKeysVertically : "") 
-          . "`tNot used margin at the bottom side in px:`t" . (T_CalculateButton ? WizardStep2_MarginVertically : "")
+          . "`tNot used margin at the bottom side in px:`t" . (T_CalculateButton ? WizardStep2_MarginVertically : "") . "`t"
+     Gui, WizardStep2: Add, Edit, yp x+m w120 vTitle, %Title%
      Gui, WizardStep2: Add, Button, x50 y+20 w80 gPlotButtons hwndTestButtonHwnd,       &Test
      Gui, WizardStep2: Add, Button, x+30 w80 gWizardStep1,                              &Back
      Gui, WizardStep2: Add, Button, x+30 w80 gExitWizard,                               &Cancel
@@ -205,6 +206,7 @@ SaveConfigurationWizard:
 
      IniWrite, % WhichMonitor,            % A_ScriptDir . "\Config.ini", Main,                      WhichMonitor
      IniWrite, % HowManyLayers,           % A_ScriptDir . "\Config.ini", Main,                      HowManyLayers ; Save the total amount of created layers
+     IniWrite, % Title,                   % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  Title
      IniWrite, % ButtonWidth,             % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonWidth
      IniWrite, % ButtonHeight,            % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonHeight
      IniWrite, % ButtonHorizontalGap,     % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonHorizontalGap
@@ -321,6 +323,7 @@ StartOtagle:
           Gosub,  Traymenu     ; Jumps to the specified label and continues execution until Return is encountered
           F_ReadConfig_ini()
           CurrentLayer := 1  ; initialization of application
+          EditFlag := 0
           SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor 
           try          
                F_DisplayLayer(CurrentLayer)
@@ -329,6 +332,7 @@ StartOtagle:
                MsgBox, An exception was thrown!`r`nIncorrect value of Monitor variable within Config.ini. Probably this monitor has not been found. Application will exit now.
                Exit, 1
                }
+          Gui, ProgressBar:Destroy
           }
 return
 
@@ -371,47 +375,61 @@ F10::
           Gui, % GuiLayer%CurrentLayer%Hwnd . ": Menu",
      MenuVar := MenuVar + 1
 return
+#IfWinActive O T A G L E 
 
+#If (!(EditFlag)) and (WinActive("O T A G L E")) ; dodaj opcje, zeby tylko w O T A G L E
 ^x::
+     EditFlag := 0
+     Gui, CopyLayers:Destroy
      goto, L_SwapButtons
 return
 
 ^c::
+     EditFlag := 0
+     Gui, SwapLayers:Destroy
      goto, L_CopyButton
 return
 
 ^z::
+     EditFlag := 0
+     Gui, SwapLayers:Destroy
+     Gui, CopyLayers:Destroy
      goto, L_DeleteButton
 return
+#If
 
+#If ((EditFlag == 0) or (EditFlag ==1)) and (WinActive("O T A G L E"))
 esc::
+     Gui, SwapLayers:Destroy
+     Gui, CopyLayers:Destroy
      goto, StartOtagle
 return
-
-#IfWinActive
+#If
 
 Traymenu:
      Menu, Tray,                Icon, % A_ScriptDir . "\Core\OtagleIcon.ico"    ; this line applies icon of O T A G L E designed by Sylwia Ławrów
      Menu, Tray,                Add, %ApplicationName%.ahk ABOUT, L_About
      Menu, Tray,                Add ; tray menu separator
-     Menu, SubmenuConfigure,    Add, Monitor,                              L_ConfigureMonitor
-     Menu, SubmenuConfigure,    Add, Existing layer buttons / functions,   L_ConfigureButtonsFunctions
-     Menu, SubmenuConfigure,    Add, Add layer,                            L_ConfigureAddLayer
-     Menu, SubmenuConfigure,    Add, Erase layer,                          L_ConfigureEraseLayer
-     Menu, SubmenuConfigure,    Add, Run Wizard,                           L_ConfigureWizard
-     Menu, Tray,                Add, Configure,                                        :SubmenuConfigure
+     Menu, SubmenuConfigure,    Add, &Monitor,                              L_ConfigureMonitor
+     Menu, SubmenuConfigure,    Add, &Existing layer buttons / functions,   L_ConfigureButtonsFunctions
+     Menu, SubmenuConfigure,    Add, &Add layer,                            L_ConfigureAddLayer
+     Menu, SubmenuConfigure,    Add, &Erase layer,                          L_ConfigureEraseLayer
+     Menu, SubmenuEdit,         Add, &Copy button,                          L_CopyButton
+     Menu, SubmenuEdit,         Add, &Swap buttons,                         L_SwapButtons
+     Menu, SubmenuEdit,         Add, &Delete button,                        L_DeleteButton
+     Menu, Tray,                Add, &Configure,                            :SubmenuConfigure
+     Menu, Tray,                Add, &Edit buttons,                         :SubmenuEdit
+     Menu, Tray,                Add, &Run Wizard,                           L_ConfigureWizard
      Menu, Tray,                Default, %ApplicationName%.ahk ABOUT ; Default: Changes the menu's default item to be the specified menu item and makes its font bold.
      Menu, Tray,                Add ; tray menu separator
      Menu, Tray,                NoStandard
      Menu, Tray,                Standard ;#[1]
      Menu, Tray,                Tip, %ApplicationName% ; Changes the tray icon's tooltip.
      
-     Menu, OtagleMenu,    Add, Monitor,                              L_ConfigureMonitor
-     Menu, OtagleMenu,    Add, Existing layer buttons / functions,   L_ConfigureButtonsFunctions
-     Menu, OtagleMenu,    Add, Add layer,                            L_ConfigureAddLayer
-     Menu, OtagleMenu,    Add, Erase layer,                          L_ConfigureEraseLayer
-     Menu, OtagleMenu,    Add, Run Wizard,                           L_ConfigureWizard
-     Menu, OtagleMenu,    Add, About,                                L_About
+     Menu, OtagleMenu,    Add, &Configure,                            :SubmenuConfigure
+     Menu, OtagleMenu,    Add, &Edit buttons,                         :SubmenuEdit
+     Menu, OtagleMenu,    Add, &Run Wizard,                           L_ConfigureWizard
+     Menu, OtagleMenu,    Add, &About,                                L_About
 return
 
 L_ConfigureEraseLayer:
@@ -645,6 +663,7 @@ AboutOkBut:
 return
 
 L_SwapButtons:
+
      IniRead, AmountOfKeysHorizontally,             % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons horizontally
      IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . CurrentLayer, Amount of buttons vertically
      Gui, % GuiLayer%CurrentLayer%Hwnd . ": Color", FFA500
@@ -654,6 +673,7 @@ L_SwapButtons:
      Gui, SwapLayers:Add, UpDown, vMyUpDown Range1-%HowManyLayers%, %CurrentLayer%
      Gui, SwapLayers:Add, Button, Default gL_SwapGoTo, Go To Layer
      Gui, SwapLayers:Show,, Layers
+     WinActivate, O T A G L E
      Loop, % AmountOfKeysVertically
           {
           VerticalIndex := A_Index
@@ -668,7 +688,8 @@ L_SwapButtons:
 return
 
 L_SelectButtonToSwap:
-
+     
+     EditFlag := 1
      IniRead, FirstButtonPicture,                   % A_ScriptDir . "\Config.ini",  % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Picture", 0
      IniRead, FirstButtonAction,                    % A_ScriptDir . "\Config.ini",  % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action", 0 
      IniRead, FirstButtonPictureIfSelected,         % A_ScriptDir . "\Config.ini",  % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_PictureIfSelected", 0
@@ -745,6 +766,7 @@ L_CopyButton:
      Gui, CopyLayers:Add, UpDown, vMyUpDown Range1-%HowManyLayers%, %CurrentLayer%
      Gui, CopyLayers:Add, Button, Default gL_CopyGoTo, Go To Layer
      Gui, CopyLayers:Show,, Layers
+     WinActivate, O T A G L E
      Loop, % AmountOfKeysVertically
           {
           VerticalIndex := A_Index
@@ -759,6 +781,7 @@ return
      
 L_SelectButtonToCopy:
 
+     EditFlag := 1
      IniRead, FirstButtonPicture,                   % A_ScriptDir . "\Config.ini",  % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Picture", 0
      IniRead, FirstButtonAction,                    % A_ScriptDir . "\Config.ini",  % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_Action", 0 
      IniRead, FirstButtonPictureIfSelected,         % A_ScriptDir . "\Config.ini",  % "Layer" . CurrentLayer, % "Button_" . A_GuiControl . "_PictureIfSelected", 0
@@ -847,8 +870,7 @@ F_DisplayLayer(WhichLayer)
 
      MenuVar := 0
      Gui, % "Layer" . WhichLayer . ": -Resize  -DPIScale -MinimizeBox "
-     Gui, % "Layer" . WhichLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . WhichLayer
-
+     Gui, % "Layer" . WhichLayer . ": Show", % "x" . MonitorBoundingCoordinates_Left . " y" . MonitorBoundingCoordinates_Top . " Maximize", % ApplicationName . ": Layer " . WhichLayer . " - " . Title%WhichLayer%
      if (HowManyLayers > 1)
           {
           Loop, % HowManyLayers
@@ -886,9 +908,21 @@ F_WizardIntro()
 F_WelcomeScreen()
      {
      global
-     
+       
      IniRead, WhichMonitor,               % A_ScriptDir . "\Config.ini", Main, WhichMonitor
      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor
+     Gui, ProgressBar:New
+     Gui, ProgressBar:Add, Progress, w300 h20 HwndhPB2 -0x1, 50
+     Gui, ProgressBar:Add, Text, x80 , OTAGLE is loading. Please wait...
+     WinSet, Style, +0x8, % "ahk_id " hPB2
+     SendMessage, 0x40A, 1, 50,, % "ahk_id " hPB2
+     Gui, ProgressBar:Show, hide AutoSize, HiddenAttempt
+     DetectHiddenWindows, On
+     Gui, ProgressBar:-DPIScale
+     WinGetPos, , , ProgressWindow_Width, ProgressWindow_Height, HiddenAttempt
+     DetectHiddenWindows, Off
+     Gui, ProgressBar:Show, % "x" . MonitorBoundingCoordinates_Left + (Abs(MonitorBoundingCoordinates_Left - MonitorBoundingCoordinates_Right) / 2) - (ProgressWindow_Width / 2)
+          . "y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (ProgressWindow_Height / 2), O T A G L E
      Gui, WelcomeScreen: New, +LabelMyGui_On +AlwaysOnTop -Caption
      Gui, WelcomeScreen: Add, Picture, w500 h-1, % A_ScriptDir . "\Core\OtagleBigLogo.png" ; Add the O T A G L E picture designed by Sylwia Ławrów 
      DetectHiddenWindows, On
@@ -920,6 +954,7 @@ F_ReadConfig_ini()
      Loop, % HowManyLayers
           {
           LayerIndex := A_Index
+          IniRead, Title%LayerIndex%,                    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, Title
           IniRead, ButtonWidth,                          % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonWidth
           IniRead, ButtonHeight,                         % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonHeight
           IniRead, ButtonHorizontalGap,                  % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, ButtonHorizontalGap
@@ -927,6 +962,7 @@ F_ReadConfig_ini()
           IniRead, AmountOfKeysHorizontally,             % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, Amount of buttons horizontally
           IniRead, AmountOfKeysVertically,               % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, Amount of buttons vertically
           TableOfLayers[LayerIndex] := []
+          Title%LayerIndex% := % MsgText(Title%LayerIndex%)
           Gui, % "Layer" . LayerIndex . ": New", % "+hwndGuiLayer" . LayerIndex . "Hwnd" . " +LabelMyGui_On"
           Loop, % AmountOfKeysVertically
                {
@@ -935,8 +971,10 @@ F_ReadConfig_ini()
                     {
                     IniRead, ButtonX,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_X"
                     IniRead, ButtonY,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Y"
-                    IniRead, ButtonW,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_W"
-                    IniRead, ButtonH,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_H"
+                    ButtonW := ButtonWidth
+                    ButtonH := ButtonHeight
+                    ;~ IniRead, ButtonY,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Y"
+                    ;~ IniRead, ButtonW,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_W"
                     IniRead, PictureDef,    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Picture"
                     IniRead, PictureSel,    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_PictureIfSelected"
                     IniRead, ButtonA,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Action"
@@ -987,11 +1025,11 @@ F_SavePositionOfButtons()
           Loop, % WizardStep2_AmountOfKeysHorizontally
                {
                GuiControlGet, Guzior, Pos, % %ExternalLoopIndex%_%A_Index%hwnd
-               IniWrite, % GuziorX,         % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_X"
+               ; IniWrite, % GuziorX,         % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_X"
                GuiControl, WizardStep2:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                IniWrite, % GuziorY,         % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_Y"
                GuiControl, WizardStep2:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
-               IniWrite, % GuziorW,         % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_W"
+               ; IniWrite, % GuziorW,         % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_W"
                GuiControl, WizardStep2:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
                IniWrite, % GuziorH,         % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers, % "Button_" . ExternalLoopIndex . "_" . A_Index . "_H"
                GuiControl, WizardStep2:, ProgressBarVar, % Round((++ProgressBarTemp / ProgressBarVarMax) * 100)
@@ -1082,3 +1120,4 @@ F_CalculateButtonsAndGaps()
      WizardStep2_AmountOfKeysVertically := (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) - ButtonVerticalGap) // (ButtonHeight + ButtonVerticalGap)
      WizardStep2_MarginVertically := Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) - ((WizardStep2_AmountOfKeysVertically-1) * ButtonVerticalGap + WizardStep2_AmountOfKeysVertically * ButtonHeight )
      }
+

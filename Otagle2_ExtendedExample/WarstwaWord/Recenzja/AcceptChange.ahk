@@ -1,7 +1,7 @@
-AcceptChange() ; zaakceptuj zmianê
+ï»¿AcceptChange() ; zaakceptuj zmianÄ™
 {
 	oWord := ComObjActive("Word.Application")
-	oWord.Selection.Range.Revisions.AcceptAll ; Zaakceptuj zmianê
+	oWord.Selection.Range.Revisions.AcceptAll ; Zaakceptuj zmianÄ™
 	oWord := ""
 	WinActivate, ahk_class OpusApp
 	return

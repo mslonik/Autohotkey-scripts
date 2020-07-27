@@ -2,7 +2,7 @@ NavigationPaneVisibility()
 {
 	oWord := ComObjActive("Word.Application")
 	StateOfNavigationPane := oWord.ActiveWindow.DocumentMap
-	if (StateOfNavigationPane = WordTrue)
+	if (StateOfNavigationPane = -1)
 		{
 		oWord.ActiveWindow.DocumentMap := 0
 		}

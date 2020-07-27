@@ -1,25 +1,29 @@
 BB_nnnextlist()
 {
-	OurTemplateEN := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
-	OurTemplatePL := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
-	
-	oWord := ComObjActive("Word.Application")
-	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
-		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
-	{
-		MsgBox, 16, Próba wywo³ania stylu z szablonu, 
+	oWord := ComObjActive("Word.Application") 
+	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm") 
+		and (oWord.ActiveDocument.AttachedTemplate.FullName <> "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm") )
+		{
+		MsgBox, 16, Prï¿½ba wywoï¿½ania stylu z szablonu, 
 		( Join
-		 Próbujesz wstawiæ blok konstrukcyjny przypisany do szablonu, ale szablon nie zosta³ jeszcze do³¹czony do tego pliku. 
-	Najpierw do³¹cz szablon, a nastêpnie wywo³aj ponownie tê funkcjê.
+		 Prï¿½bujesz wywoï¿½aï¿½ styl przypisany do szablonu, ale szablon nie zostaï¿½ jeszcze doï¿½ï¿½czony do tego pliku. 
+ Najpierw dolacz szablon, a nastï¿½pnie wywoï¿½aj ponownie tï¿½ funkcjï¿½.
 		)
-	}
+		oWord := "" ; Clear global COM objects when done with them
+		return
+		}
 	else
-	{
+		{
 		oWord.Selection.Style := "ListaSeq 3 ms"
+		if !((oWord.ActiveDocument.Range.End - oWord.Selection.Range.Start == 1) and (StrLen(oWord.Selection.Paragraphs(1).Range.Text) == 1))
+		{
+			oWord.Selection.MoveRight(Unit := wdCharacter := 1, Count:=1)
+			oWord.Selection.MoveUp(Unit := wdParagraph := 4, Count:=1)
+		}
 		OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
 		oWord.Templates(OurTemplate).BuildingBlockEntries("nnnextlist").Insert(oWord.Selection.Range, -1)
-	}
-	oWord :=  "" ; Clear global COM objects when done with them
+		oWord := "" ; Clear global COM objects when done with them
+		}
 	WinActivate, ahk_class OpusApp
 	return
 }

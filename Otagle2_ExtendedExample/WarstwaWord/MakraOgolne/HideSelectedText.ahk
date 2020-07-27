@@ -5,8 +5,11 @@ HideSelectedText() ; 2019-10-22 2019-11-08
 	if (OurTemplate = "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm" || OurTemplate = "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm")
 	{
 		nazStyl := oWord.Selection.Style.NameLocal
-		if (nazStyl = "Ukryty ms")
+		if (nazStyl == "Ukryty ms")
+		{
+			WinActivate, ahk_class OpusApp
 			Send, ^{Space}
+		}
 		else
 		{
 			language := oWord.Selection.Range.LanguageID

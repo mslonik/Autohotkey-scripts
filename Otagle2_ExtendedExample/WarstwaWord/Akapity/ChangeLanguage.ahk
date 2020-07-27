@@ -2,7 +2,6 @@ ChangeLanguage()
 ;~ by Jakub Masiak
 {
 	global oWord
-	Base(AdditionalText)
 	oWord := ComObjActive("Word.Application")
 	Lang := oWord.Selection.LanguageID
 	if (Lang = 2057 or Lang = 1033)

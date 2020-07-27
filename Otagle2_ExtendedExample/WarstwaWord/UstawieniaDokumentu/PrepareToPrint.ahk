@@ -4,35 +4,28 @@ PrepareToPrint()
 	OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
 	if (OurTemplate != "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm" && OurTemplate != "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm")
 	{
-		MsgBox, 48, Zanim wydrukujesz..., 
-		( Join	
-1. Wykonaj makro, które wstawi tward¹ spacjê po etykietach tabel i rysunków.`n
-2. Odœwie¿ zawartoœæ ca³ego dokumentu (Ctrl + F9).`n
-3. Zamieñ wszystkie odsy³acze na ³¹cza.`n
-4. Ponownie odœwie¿ zawartoœæ ca³ego dokumentu (Ctrl + F9).`n
-5. Poszukaj s³owa "B³¹d".
-		)
+		MsgBox, 48, Zanim wydrukujesz..., % MsgText("1. WywoÅ‚aj makro, ktÃ³re wstawi nagÅ‚Ã³wki i stopki. `n2. WywoÅ‚aj makro, ktÃ³re sprawdzi poprawnoÅ›Ä‡ znakÃ³w przestankowych w wypunktowaniach. `n3. Wykonaj makro, ktÃ³re wstawi twardÄ… spacjÄ™ po etykietach tabel i rysunkÃ³w.`n4. OdÅ›wieÅ¼ zawartoÅ›Ä‡ caÅ‚ego dokumentu (Ctrl + F9).`n5. ZamieÅ„ wszystkie odsyÅ‚acze na Å‚Ä…cza.`n6. Ponownie odÅ›wieÅ¼ zawartoÅ›Ä‡ caÅ‚ego dokumentu (Ctrl + F9).`n7. Poszukaj sÅ‚owa ""BÅ‚Ä…d"".")
 		
 	}
 	else
 	{
 		oWord.Run("TwardaSpacja")
 		oWord.Run("UpdateFieldsPasek")
-		MsgBox, 64, Microsoft Word, Odœwie¿ono dokument
+		MsgBox, 64, Microsoft Word, Odï¿½wieï¿½ono dokument
 		oWord.Run("HiperlaczaPasek")
-		MsgBox, 64, Microsoft Word, Zamieniono odsy³acze na ³¹cza
+		MsgBox, 64, Microsoft Word, Zamieniono odsyï¿½acze na ï¿½ï¿½cza
 		oWord.Run("UpdateFieldsPasek")
-		MsgBox, 64, Microsoft Word, Ponownie odœwie¿ono dokument
+		MsgBox, 64, Microsoft Word, Ponownie odï¿½wieï¿½ono dokument
 		oWord.Selection.Find.ClearFormatting
 		oWord.Selection.Find.Wrap := 1
-		oWord.Selection.Find.Execute("B³¹d")
+		oWord.Selection.Find.Execute("Bï¿½ï¿½d")
 		if (oWord.Selection.Find.Found = -1)
 		{
-			Msgbox, 48, Microsoft Word, Znaleziono s³owo "B³¹d"
+			Msgbox, 48, Microsoft Word, Znaleziono sï¿½owo "Bï¿½ï¿½d"
 		}
 		else
 		{
-			MsgBox, 64, Microsoft Word, Nie znaleziono s³owa "B³¹d"
+			MsgBox, 64, Microsoft Word, Nie znaleziono sï¿½owa "Bï¿½ï¿½d"
 		}
 		
 	}

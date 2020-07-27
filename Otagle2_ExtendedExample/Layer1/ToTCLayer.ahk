@@ -2,7 +2,7 @@ ToTCLayer()
 {
 	global
 
-	CurrentLayer := 12
+	CurrentLayer := 13
 	F_DisplayLayer(CurrentLayer)
 	
 	IfWinExist, ahk_class TTOTAL_CMD
@@ -12,6 +12,6 @@ ToTCLayer()
 	}
 	else
 	{
-		run, TOTALCMD64.EXE
+		run, C:\totalcmd\TOTALCMD64.EXE
 	}
 }

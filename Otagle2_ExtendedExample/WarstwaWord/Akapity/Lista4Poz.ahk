@@ -4,10 +4,10 @@ Lista4Poz()
 	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm") 
 		and (oWord.ActiveDocument.AttachedTemplate.FullName <> "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm") )
 		{
-		MsgBox, 16, Próba wywo³ania stylu z szablonu, 
+		MsgBox, 16, Prï¿½ba wywoï¿½ania stylu z szablonu, 
 		( Join
-		 Próbujesz wywo³aæ styl przypisany do szablonu, ale szablon nie zosta³ jeszcze do³¹czony do tego pliku. 
- Najpierw dolacz szablon, a nastêpnie wywo³aj ponownie tê funkcjê.
+		 Prï¿½bujesz wywoï¿½aï¿½ styl przypisany do szablonu, ale szablon nie zostaï¿½ jeszcze doï¿½ï¿½czony do tego pliku. 
+ Najpierw dolacz szablon, a nastï¿½pnie wywoï¿½aj ponownie tï¿½ funkcjï¿½.
 		)
 		oWord := "" ; Clear global COM objects when done with them
 		return
@@ -15,8 +15,11 @@ Lista4Poz()
 	else
 		{
 		oWord.Selection.Style := "ListaSeq 4 ms"
-		oWord.Selection.MoveRight(Unit := wdCharacter := 1, Count:=1)
-		oWord.Selection.MoveUp(Unit := wdParagraph := 4, Count:=1)
+		if !((oWord.ActiveDocument.Range.End - oWord.Selection.Range.Start == 1) and (StrLen(oWord.Selection.Paragraphs(1).Range.Text) == 1))
+		{
+			oWord.Selection.MoveRight(Unit := wdCharacter := 1, Count:=1)
+			oWord.Selection.MoveUp(Unit := wdParagraph := 4, Count:=1)
+		}
 		OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
 		oWord.Templates(OurTemplate).BuildingBlockEntries("nnnnewlist").Insert(oWord.Selection.Range, -1)
 		oWord := "" ; Clear global COM objects when done with them
