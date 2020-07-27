@@ -1,8 +1,9 @@
 ﻿‖2d‖A‖On‖2D
 *0‖3d‖A‖On‖3D
+*‖a/‖A‖On‖Availability
 *‖ac/‖C‖On‖Alternating Current
 *‖ac`t‖A‖On‖AC
-*‖an/‖C‖On‖Artur Nowak
+*‖an/‖MC‖On‖Artur Nowak¦Artura Nowaka¦Arturowi Nowakowi¦Arturem Nowakiem¦Arturze Nowaku
 B0*‖api ‖A‖On‖{BackSpace 3}API 
 *‖API/‖C‖On‖Application Programming Interface
 B0*‖axc ‖A‖On‖{BackSpace 3}AxC 
@@ -11,17 +12,21 @@ B0*‖cad ‖A‖On‖{BackSpace 3}CAD
 *‖cad/‖C‖On‖Computer Aided Design
 *‖can/‖C‖On‖Controller Area Network
 B0*‖can`t‖A‖On‖{BackSpace 4}CAN
+*‖cccms/‖MA‖On‖ CCMS¦ Component Content Management System
 B0*‖cfo ‖A‖On‖{BackSpace 3}CFO 
 *‖cfo/‖A‖On‖Chief Financial Officer
+*‖cms/‖MC‖On‖CMS¦Content Management System
 B0*‖cot ‖A‖On‖{Backspace 3}CoT 
 *‖CoT/‖A‖On‖Clearance of Track
 B0*‖covid ‖A‖On‖{BackSpace 5}COVID-19 
 *‖covid/‖C‖On‖{BackSpace 3}severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2)
 B0*‖cso ‖A‖On‖{BackSpace 3}CSO 
 *‖cso/‖A‖On‖Chief Sales Officer
+*‖csss‖MA‖On‖{BackSpace 2}CSS¦{BackSpace 2}Cascading Style Sheets
 *‖cu/‖C‖On‖Competence Unit
 *‖dc/‖C‖On‖Direct Current
 B0*‖dc`t‖A‖On‖{BackSpace 3}DC
+*‖ddns/‖MA‖On‖DDNS¦Dynamic Domain Name System
 B0*‖dlds ‖A‖On‖{BackSpace 4}DLD/S 
 *‖dlds/‖A‖On‖Drive, Locking, Detection & Signaling
 *‖dmt rs/‖C‖Off‖Diagnostic and Monitoring Technologies for Rolling Stock
@@ -31,6 +36,7 @@ B0*‖dmtrs ‖A‖On‖{BackSpace 5}DMT RS
 *‖dmtrs/‖C‖On‖Diagnostic and Monitoring Technologies for Rolling Stock
 B0*‖dwg ‖A‖On‖DWG 
 *‖dwg/‖A‖Off‖Drawing Exchange Format
+*‖dx4‖A‖On‖Dx4 
 B0*‖dxf ‖A‖On‖DXF 
 *‖dxf/‖A‖On‖Drawing Exchange Format
 ‖eg‖A‖On‖e.g.
@@ -46,19 +52,27 @@ B0*‖gps ‖A‖On‖{BackSpace 3}GPS
 B0*‖gsm ‖A‖On‖{BackSpace 3}GSM 
 C1*‖gsm/‖C‖On‖Global System for Mobile Communications
 *‖hsz31‖A‖On‖HSZ31
-B0*‖html ‖A‖On‖{BackSpace 4}HTML 
-‖ie‖A‖On‖i.e.
+B0*‖html ‖A‖On‖{BackSpace 5}HTML 
+*‖html/‖C‖On‖HyperText Markup Language
+‖ie‖A‖Off‖i.e.
+*‖ie/‖MA‖On‖i.e.¦Ie-120¦Ie-120 Wymagania techniczne dla zapewnienia ochrony przed przepięciami i od wyładowań atmosferycznych urządzeń sterowania ruchem kolejowym, łączności i dSAT  - obowiązują od 1 lutego 2018 r.¦Ie-3
+*‖internet‖A‖On‖Internet
 ‖iq ‖A‖On‖IQ 
 *‖iq/‖C‖On‖Inteligence Quotient
+*‖javascript‖A‖On‖JavaScript
+*T‖jooomla/‖C‖On‖ Joomla!
 B0*‖led ‖A‖On‖{BackSpace 3}LED 
 *‖LED/‖A‖On‖Light Emitting Diode
+*‖mw/‖C‖On‖Microsoft Word
+*‖nas/‖MA‖On‖NAS¦Network Attached Storage
 B0*‖oem ‖A‖On‖{BackSpace 3}OEM 
 *‖orcad‖A‖On‖OrCAD
 *T‖otagle‖A‖On‖OTAGLE
 *‖otagle‖A‖On‖O T A G L E
 ‖pas2e‖A‖On‖passé
-B0*‖pdf ‖A‖On‖{BackSpace 3}PDF 
+B0*‖pdf ‖A‖On‖{BackSpace 4}PDF 
 *‖pdf/‖C‖On‖Portable Document Format
+*‖php‖A‖On‖PHP
 *‖pit‖A‖On‖PIT
 B0*‖pkb ‖A‖On‖{Backspace 3}PKB 
 *‖pkb/‖C‖On‖Produkt Krajowwy Brutto
@@ -71,21 +85,29 @@ B0*‖qna ‖A‖On‖{Backspace 3}Q&A
 *‖qna/‖C‖On‖Questions and Answers
 B0*‖qr ‖A‖On‖{BackSpace 2}QR code 
 *‖qr/‖A‖On‖{BackSpace 5}Quick Response code
+*‖r/‖A‖On‖Reliability
+*‖railpro‖A‖On‖RailPro
 B0*‖rms ‖A‖On‖{BackSpace 3}RMS 
 *‖rms/‖C‖On‖Root Mean Square
 *‖shcl/‖C‖On‖TW-2090-171R-SoftwareandHardwareCompatibilityLog.xlsx
 B0*‖siwz ‖A‖On‖{BackSpace 4}SIWZ 
 *‖siwz/‖C‖On‖Specyfikacja Istotnych Warunków Zamówienia
-B0*‖sql ‖A‖On‖{BackSpace 3}SQL 
+B0*‖sql ‖A‖On‖{BackSpace 4}SQL 
 *‖sql/‖C‖On‖Structured Query Language
 *‖tbc/‖C‖On‖to be continued
 B0*‖ui ‖A‖On‖{BackSpace 2}UI 
 *‖ui/‖C‖On‖User Interface
+*‖uic/‖MA‖On‖UIC¦International Union of Railways¦ French: Union internationale des chemins de fer
 B0*‖usa ‖A‖On‖{Backspace 3}USA 
 *‖USA/‖C‖On‖United States of America
+B0*‖utf‖A‖On‖{BackSpace 3}UTF
+*‖utf/‖C‖On‖Unicode Transformation Format
 B0‖ux ‖A‖On‖{Backspace 3}UX 
 *‖ux/‖C‖On‖User Experience
 *‖vvv/‖C‖On‖Vereinigte Österreichische Eisen und Stahlwerke & Österreichisch-Alpine Montangengesellschaft
+*‖wawa/‖A‖On‖Warszawa
+*‖webex/‖A‖On‖Webex
 B0*‖wsc ‖A‖On‖{BackSpace 3}WSC 
 *‖wsc/‖C‖On‖Wheel Sensor Cable
+*‖www‖A‖On‖WWW
 *‖yt‖C‖On‖youtube.com

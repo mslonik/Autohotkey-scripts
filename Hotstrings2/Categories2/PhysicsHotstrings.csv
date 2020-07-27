@@ -1,10 +1,8 @@
 ﻿*‖+-‖C‖On‖±
 *‖-+‖C‖On‖±
 *‖--‖C‖On‖─
-b0*x‖->‖A‖On‖{Backspace 2}→
+*‖->‖MC‖On‖→¦←¦↔
 *‖/=‖C‖On‖≠
-b0*x‖<-‖A‖On‖{Backspace 2}←
-b0*x‖<->‖A‖On‖{Backspace 2}↔
 *‖<=‖C‖On‖≤")
 *‖>=‖C‖On‖≥
 *‖\<‖C‖On‖↓
@@ -18,7 +16,7 @@ b0*x‖<->‖A‖On‖{Backspace 2}↔
 *‖euro/‖C‖On‖€
 *‖gamma/‖C‖On‖γ
 *‖kamp‖C‖On‖kA
-*‖kohm‖C‖On‖kΩ
+*‖kohm‖C‖Off‖kΩ
 *‖kropkam‖C‖On‖·
 *‖kv‖C‖On‖kV
 *‖lambda/‖C‖On‖λ
@@ -30,7 +28,7 @@ b0*x‖<->‖A‖On‖{Backspace 2}↔
 *‖mniejszyrowny‖C‖On‖≤
 *‖mniejszyrówny‖C‖On‖≤
 *‖oddo‖C‖On‖÷
-*‖ohm‖C‖On‖Ω
+*?‖ohm‖C‖On‖Ω
 *‖omega/‖C‖On‖ω
 *‖pi/‖C‖On‖π
 *‖plusminus‖C‖On‖±
