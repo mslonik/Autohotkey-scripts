@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg47"
+   version="1.1"
+   viewBox="0 0 52.758294 52.758296"
+   height="199.40143"
+   width="199.40143">
+  <defs
+     id="defs42">
+    <pattern
+       id="EMFhbasepattern"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+  </defs>
+  <metadata
+     id="metadata45">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g8556"
+     transform="translate(49.836509,-375.23204)">
+    <g
+       id="g5305">
+      <text
+         id="text898-7-3-6-8-3-3-0-66-7-8-8-0-8-3-4-2-6-22-3-3-4-7-0-2-6-2"
+         y="425.61624"
+         x="-23.21401"
+         style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+         xml:space="preserve"><tspan
+           style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+           y="425.61624"
+           x="-23.21401"
+           id="tspan3280-8-2-3-8">Pokaż nagłówek</tspan></text>
+      <g
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1"
+         id="g3425-7-6"
+         transform="matrix(0.43424404,0,0,-0.43424404,-45.178706,415.78283)">
+        <rect
+           id="rect3393-7-1"
+           height="2"
+           width="13.89"
+           y="68.667"
+           x="17.409"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+        <path
+           id="path3395-1-7"
+           d="M 85.235,77.833 H 14.106 c -2.998,0 -5.436,-2.438 -5.436,-5.436 V 23.27 c 0,-2.998 2.438,-5.436 5.436,-5.436 h 71.129 c 2.998,0 5.436,2.438 5.436,5.436 v 49.128 c -0.001,2.998 -2.438,5.435 -5.436,5.435 z m -71.129,-58 c -1.895,0 -3.436,1.541 -3.436,3.437 v 49.128 c 0,1.895 1.541,3.436 3.436,3.436 h 71.129 c 1.895,0 3.436,-1.541 3.436,-3.436 V 23.27 c 0,-1.896 -1.541,-3.437 -3.436,-3.437 z"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+        <rect
+           id="rect3397-6-6"
+           height="2"
+           width="13.89"
+           y="68.667"
+           x="42.648998"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+        <rect
+           id="rect3399-8-5"
+           height="2"
+           width="13.89"
+           y="68.667"
+           x="67.704002"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+        <rect
+           id="rect3401-4-7"
+           height="2"
+           width="13.89"
+           y="62.667"
+           x="17.500999"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+        <rect
+           id="rect3403-9-4"
+           height="2"
+           width="13.89"
+           y="62.667"
+           x="42.742001"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+        <rect
+           id="rect3405-2-5"
+           height="2"
+           width="13.89"
+           y="62.667"
+           x="67.795998"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+        <rect
+           id="rect3407-0-9"
+           height="2"
+           width="64.139"
+           y="56.667"
+           x="17.500999"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+      </g>
+      <g
+         id="g335"
+         transform="translate(-111.62454,192.55161)">
+        <rect
+           y="182.84322"
+           x="61.866634"
+           height="52.916668"
+           width="52.916668"
+           id="rect833-0-59-1-4"
+           style="fill:#c4c4c4;fill-opacity:1;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
+        <g
+           transform="translate(64.444943)"
+           id="g1333-4">
+          <rect
+             ry="2.4568453"
+             y="190.12202"
+             x="9.0714293"
+             height="6.4255953"
+             width="34.017857"
+             id="rect1266-7"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.57949901;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
+          <rect
+             style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.534289;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+             id="rect1266-5-8"
+             width="28.917158"
+             height="6.4255953"
+             x="14.172128"
+             y="200.70537"
+             ry="2.4568453" />
+          <rect
+             ry="2.4568453"
+             y="212.04466"
+             x="20.597723"
+             height="6.4255953"
+             width="22.491564"
+             id="rect1266-5-9-1"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.471203;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
+          <text
+             id="text1300-3"
+             y="196.14973"
+             x="3.8085251"
+             style="font-size:8.62236977px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;stroke-width:0.404174"
+             xml:space="preserve"><tspan
+               style="fill:#ffffff;fill-opacity:1;stroke-width:0.404174"
+               y="196.14973"
+               x="3.8085251"
+               id="tspan1298-92">1</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-size:8.62236977px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;stroke-width:0.40417501"
+             x="6.0564728"
+             y="206.18579"
+             id="text1300-4-0"><tspan
+               id="tspan1298-9-2"
+               x="6.0564728"
+               y="206.18579"
+               style="fill:#ffffff;fill-opacity:1;stroke-width:0.40417501">a</tspan></text>
+          <text
+             id="text1322-5"
+             y="218.33734"
+             x="6.2614646"
+             style="font-size:8.37666035px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;stroke-width:0.392656"
+             xml:space="preserve"><tspan
+               style="fill:#ffffff;fill-opacity:1;stroke-width:0.392656"
+               y="218.33734"
+               x="6.2614646"
+               id="tspan1320-9">001</tspan></text>
+        </g>
+        <text
+           transform="scale(1.0124726,0.98768104)"
+           id="text858-5-83-73-7-0-7-0-7-9-81-0-2-2-6-2-6"
+           y="237.55396"
+           x="87.331978"
+           style="font-size:6.27179003px;line-height:1.04999995;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.261323"
+           xml:space="preserve"><tspan
+             id="tspan934-2"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.82082987px;font-family:voestalpine;-inkscape-font-specification:'voestalpine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.261323"
+             y="237.55396"
+             x="87.331978">WYPUNKTOWANIA</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

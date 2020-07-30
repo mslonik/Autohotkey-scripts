@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg47"
+   version="1.1"
+   viewBox="0 0 52.758294 52.758296"
+   height="199.40143"
+   width="199.40143">
+  <defs
+     id="defs42">
+    <pattern
+       id="EMFhbasepattern"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mend-5-0"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1146-3-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mend-5-3"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1146-3-9" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-5-0-4"
+       style="overflow:visible">
+      <path
+         id="path1146-3-3-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-5-3-8"
+       style="overflow:visible">
+      <path
+         id="path1146-3-9-5"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mend"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1146" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-5"
+       style="overflow:visible">
+      <path
+         id="path1146-3"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mstart"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1143" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart-1"
+       style="overflow:visible">
+      <path
+         id="path1143-7"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1140" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1137" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-5"
+       style="overflow:visible">
+      <path
+         id="path1140-4"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart-93"
+       style="overflow:visible">
+      <path
+         id="path1137-7"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+  </defs>
+  <metadata
+     id="metadata45">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g8556"
+     transform="translate(49.836509,-375.23204)">
+    <g
+       id="g5305">
+      <text
+         id="text898-7-3-6-8-3-3-0-66-7-8-8-0-8-3-4-2-6-22-3-3-4-7-0-2-6-2"
+         y="425.61624"
+         x="-23.21401"
+         style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+         xml:space="preserve"><tspan
+           style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+           y="425.61624"
+           x="-23.21401"
+           id="tspan3280-8-2-3-8">Pokaż nagłówek</tspan></text>
+      <g
+         id="g3430"
+         transform="translate(155.04195,344.33935)">
+        <rect
+           y="31.055695"
+           x="-204.68945"
+           height="52.916668"
+           width="52.916668"
+           id="rect833-6"
+           style="fill:#c4c4c4;fill-opacity:1;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
+        <text
+           id="text886-6"
+           y="39.616966"
+           x="-181.89075"
+           style="font-size:6.24998999px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke-width:0.292968"
+           xml:space="preserve"><tspan
+             style="fill:#ffffff;fill-opacity:1;stroke-width:0.292968"
+             y="39.616966"
+             x="-181.89075"
+             id="tspan884-9">WSU</tspan></text>
+        <g
+           transform="matrix(0.46786287,0,0,0.46786287,-200.91375,25.862847)"
+           id="g908-3"
+           style="fill:#ffffff;fill-opacity:1">
+          <g
+             style="fill:#ffffff;fill-opacity:1"
+             id="g894-3">
+            <path
+               style="fill:#ffffff;fill-opacity:1"
+               d="m 26.623,37.3 c 0.293,0.293 0.677,0.439 1.061,0.439 0.384,0 0.768,-0.146 1.061,-0.439 l 3.933,-3.932 H 76.69 c 0.828,0 1.5,-0.671 1.5,-1.5 0,-0.829 -0.672,-1.5 -1.5,-1.5 H 32.677 l -3.933,-3.933 c -0.586,-0.586 -1.535,-0.586 -2.121,0 l -4.372,4.372 c -0.281,0.281 -0.439,0.663 -0.439,1.061 0,0.398 0.158,0.779 0.439,1.061 z m 6.132,-4.011 0.037,-0.037 c 0.032,0.014 0.007,0.026 -0.037,0.037 z m 0.037,-2.806 -0.037,-0.037 c 0.044,0.011 0.069,0.023 0.037,0.037 z m -5.108,-0.866 2.251,2.251 -2.251,2.25 -2.251,-2.25 z"
+               id="path888-5" />
+            <path
+               style="fill:#ffffff;fill-opacity:1"
+               d="M 76.688,48.5 H 32.677 l -3.933,-3.933 c -0.586,-0.586 -1.535,-0.586 -2.121,0 l -4.372,4.372 c -0.586,0.585 -0.586,1.536 0,2.121 l 4.372,4.372 c 0.293,0.293 0.677,0.439 1.061,0.439 0.384,0 0.768,-0.146 1.061,-0.439 l 3.933,-3.933 H 76.69 c 0.828,0 1.5,-0.671 1.5,-1.5 0,-0.829 -0.673,-1.499 -1.502,-1.499 z M 27.684,52.251 25.433,50 27.684,47.749 29.935,50 Z"
+               id="path890-1" />
+            <path
+               style="fill:#ffffff;fill-opacity:1"
+               d="M 76.688,66.632 H 32.677 L 28.744,62.7 c -0.586,-0.586 -1.535,-0.586 -2.121,0 l -4.372,4.372 c -0.281,0.281 -0.439,0.663 -0.439,1.061 0,0.398 0.158,0.779 0.439,1.061 l 4.372,4.372 c 0.293,0.293 0.677,0.439 1.061,0.439 0.384,0 0.768,-0.146 1.061,-0.439 l 3.933,-3.933 H 76.69 c 0.828,0 1.5,-0.671 1.5,-1.5 0,-0.829 -0.673,-1.501 -1.502,-1.501 z m -49.004,3.751 -2.251,-2.251 2.251,-2.25 2.251,2.25 z"
+               id="path892-7" />
+          </g>
+        </g>
+        <text
+           xml:space="preserve"
+           style="font-size:6.24998999px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke-width:0.292968"
+           x="-184.14111"
+           y="47.695084"
+           id="text886-7-5"><tspan
+             id="tspan884-6-3"
+             x="-184.14111"
+             y="47.695084"
+             style="fill:#ffffff;fill-opacity:1;stroke-width:0.292968">UniAS</tspan></text>
+        <text
+           id="text983-7"
+           y="81.888046"
+           x="-195.91614"
+           style="font-size:6.3499999px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+           xml:space="preserve"><tspan
+             style="font-size:6.3499999px;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+             y="81.888046"
+             x="-195.91614"
+             id="tspan981-0">Spis skrótów</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

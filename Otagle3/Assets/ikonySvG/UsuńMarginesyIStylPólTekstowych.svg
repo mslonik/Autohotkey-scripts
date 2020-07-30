@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg47"
+   version="1.1"
+   viewBox="0 0 52.758294 52.758296"
+   height="199.40143"
+   width="199.40143">
+  <defs
+     id="defs42">
+    <pattern
+       id="EMFhbasepattern"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+  </defs>
+  <metadata
+     id="metadata45">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g8239"
+     transform="translate(-522.10598,-235.02062)">
+    <rect
+       height="52.258293"
+       y="235.24812"
+       x="522.58636"
+       width="52.258293"
+       id="rect833-1-5-3-0-1-8-8-4-0-2-7"
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
+    <text
+       id="text898-7-3-6-3-6-38-1-0-0-1-2"
+       y="279.43784"
+       x="548.83282"
+       style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.26458299"
+       xml:space="preserve"><tspan
+         id="tspan1502-3-3"
+         style="font-size:5.99723005px;text-align:center;text-anchor:middle;stroke-width:0.26458299"
+         y="279.43784"
+         x="548.83282">Usuń marginesy i</tspan><tspan
+         id="tspan1667"
+         style="font-size:5.99723005px;text-align:center;text-anchor:middle;stroke-width:0.26458299"
+         y="285.47034"
+         x="548.83282">styl pól tekstowych</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444017px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;stroke-width:0.26458299"
+       x="548.71552"
+       y="286.57382"
+       id="text1732-9-9-0-5-5-9"><tspan
+         id="tspan1730-7-6-0-8-2-2"
+         x="548.71552"
+         y="286.57382"
+         style="stroke-width:0.26458299"> </tspan></text>
+    <g
+       transform="matrix(1.3229167,0,0,1.3229167,535.48635,240.68958)"
+       id="g1665"
+       style="fill:#000000">
+      <g
+         id="g1647">
+        <path
+           d="M 9,2 H 0 v 16 h 9 v 2 h 2 V 0 H 9 Z M 2,16 V 4 h 7 v 12 z"
+           id="path1633"
+           style="fill:#000000" />
+        <rect
+           x="13"
+           y="2"
+           width="2"
+           height="2"
+           id="rect1635"
+           style="fill:#000000" />
+        <rect
+           x="18"
+           y="7"
+           width="2"
+           height="2"
+           id="rect1637"
+           style="fill:#000000" />
+        <rect
+           x="18"
+           y="11"
+           width="2"
+           height="2"
+           id="rect1639"
+           style="fill:#000000" />
+        <polygon
+           points="17,4 18,4 18,5 20,5 20,2 17,2 "
+           id="polygon1641"
+           style="fill:#000000" />
+        <rect
+           x="13"
+           y="16"
+           width="2"
+           height="2"
+           id="rect1643"
+           style="fill:#000000" />
+        <polygon
+           points="17,16 17,18 20,18 20,15 18,15 18,16 "
+           id="polygon1645"
+           style="fill:#000000" />
+      </g>
+    </g>
+  </g>
+</svg>

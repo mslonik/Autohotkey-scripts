@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg47"
+   version="1.1"
+   viewBox="0 0 52.758294 52.758296"
+   height="199.40143"
+   width="199.40143">
+  <defs
+     id="defs42">
+    <pattern
+       id="EMFhbasepattern"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+  </defs>
+  <metadata
+     id="metadata45">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g8153"
+     transform="translate(-401.69672,-293.40363)">
+    <text
+       id="text1732-9-9-0-5-4"
+       y="345.108"
+       x="444.86328"
+       style="font-size:5.64444017px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;stroke-width:0.26458299"
+       xml:space="preserve"><tspan
+         style="stroke-width:0.26458299"
+         y="345.108"
+         x="444.86328"
+         id="tspan1730-7-6-0-8-7"> </tspan></text>
+    <rect
+       style="fill:#c4c4c4;fill-opacity:1;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect833-1-5-3-0-1-8-8-4-0-1"
+       width="52.258293"
+       x="401.81808"
+       y="293.78229"
+       height="52.258293" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+       x="427.90881"
+       y="337.97202"
+       id="text898-7-3-6-3-6-38-1-0-0-7"><tspan
+         id="tspan1432-5-1"
+         x="427.90881"
+         y="337.97202"
+         style="font-size:5.99723005px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299">Usuń ostatnią</tspan><tspan
+         x="427.90881"
+         y="344.00452"
+         style="font-size:5.99723005px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+         id="tspan1502-5">sekcję</tspan></text>
+    <text
+       id="text1732-9-9-0-5-9"
+       y="345.108"
+       x="427.94724"
+       style="font-size:5.64444017px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;stroke-width:0.26458299"
+       xml:space="preserve"><tspan
+         style="stroke-width:0.26458299"
+         y="345.108"
+         x="427.94724"
+         id="tspan1730-7-6-0-8-8"> </tspan></text>
+    <g
+       style="fill:#ffffff;fill-opacity:1"
+       id="g1498-4"
+       transform="matrix(0.40451844,0,0,0.40451844,407.72131,293.2447)">
+      <path
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;stroke:none;enable-background:accumulate"
+         d="m 50,9.99998 c -22.09139,0 -40,17.90859 -40,40.00004 0,22.0914 17.90861,40 40,40 22.09139,0 40,-17.9086 40,-40 C 90,27.90858 72.09139,9.99998 50,9.99998 Z m 0,37.1562 12.71875,-12.7187 c 0.96794,-0.82871 1.78228,-0.6133 2.74067,-0.1454 0.97145,0.9086 0.57126,2.09389 0.10308,2.9579 l -12.75,12.75004 12.75,12.7188 c 0.76493,0.7381 0.7734,2.1143 0.0176,2.8617 -0.75579,0.7475 -2.1318,0.7238 -2.86137,-0.049 L 50,52.81252 37.28125,65.53122 c -0.72957,0.7731 -2.10558,0.7968 -2.86137,0.049 -0.75578,-0.7474 -0.74731,-2.1236 0.0176,-2.8617 l 12.75,-12.7188 -12.75,-12.75005 c -0.78437,-1.1678 -0.67664,-1.94359 0.0369,-2.9111 1.1603,-0.5567 1.96994,-0.3787 2.74678,0.064 4.27479,4.2229 8.52489,8.4997 12.77884,12.7536 z"
+         marker="none"
+         visibility="visible"
+         display="inline"
+         overflow="visible"
+         id="path1484-6" />
+    </g>
+  </g>
+</svg>

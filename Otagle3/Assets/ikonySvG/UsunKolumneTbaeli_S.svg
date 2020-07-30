@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg47"
+   version="1.1"
+   viewBox="0 0 52.758294 52.758296"
+   height="199.40143"
+   width="199.40143">
+  <defs
+     id="defs42">
+    <pattern
+       id="EMFhbasepattern"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+  </defs>
+  <metadata
+     id="metadata45">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g8516"
+     transform="translate(118.27424,-427.68531)">
+    <rect
+       height="52.258293"
+       y="427.79944"
+       x="-118.03951"
+       width="52.258293"
+       id="rect833-1-5-3-7-4-9-2"
+       style="fill:#c4c4c4;fill-opacity:1;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
+    <text
+       id="text898-7-3-6-8-3-9-9"
+       y="472.49896"
+       x="-92.083855"
+       style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+       xml:space="preserve"><tspan
+         style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+         y="472.49896"
+         x="-92.083855"
+         id="tspan1396-4-6">Usuń kolumnę</tspan><tspan
+         id="tspan1477-3"
+         style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+         y="478.53146"
+         x="-92.083855">tabeli</tspan></text>
+    <g
+       transform="matrix(0.42916795,0,0,0.42916795,-111.22314,427.41038)"
+       id="g1527-9"
+       style="fill:#ffffff;fill-opacity:1">
+      <g
+         id="g1508-1"
+         style="fill:#ffffff;fill-opacity:1">
+        <path
+           d="M 87.059,13.325 H 67.941 66.175 45.883 44.117 23.824 22.058 2.941 C 1.317,13.325 0,14.642 0,16.266 v 12.455 1.766 13.63 1.766 13.631 1.765 12.455 c 0,1.625 1.317,2.941 2.941,2.941 h 19.118 1.766 20.293 1.766 20.293 1.766 19.117 c 1.624,0 2.941,-1.316 2.941,-2.941 V 61.278 59.513 45.883 44.117 30.487 28.721 16.266 C 90,14.642 88.683,13.325 87.059,13.325 Z M 44.117,30.487 v 13.63 H 23.824 V 30.487 Z M 23.824,28.721 v -13.63 h 20.293 v 13.63 z M 44.117,45.883 V 59.514 H 23.824 V 45.883 Z m 0,15.395 V 74.909 H 23.824 V 61.278 Z M 66.176,45.883 V 59.514 H 45.883 V 45.883 Z M 45.883,44.117 v -13.63 h 20.293 v 13.63 z M 66.176,61.278 V 74.909 H 45.883 V 61.278 Z m 0,-32.557 H 45.883 V 15.091 H 66.176 Z M 1.765,16.266 c 0,-0.647 0.525,-1.172 1.172,-1.175 h 19.122 v 13.63 H 1.765 Z m 0,14.221 h 20.294 v 13.63 H 1.765 Z m 0,15.396 H 22.059 V 59.514 H 1.765 Z m 0,27.85 V 61.278 H 22.059 V 74.909 H 2.937 C 2.29,74.906 1.765,74.381 1.765,73.733 Z m 86.469,0 c 0,0.647 -0.524,1.173 -1.172,1.176 H 67.941 V 61.278 h 20.293 z m 0,-14.219 H 67.941 V 45.883 h 20.293 z m 0,-15.397 H 67.941 v -13.63 h 20.293 z m 0,-15.396 H 67.941 v -13.63 h 19.121 c 0.647,0.003 1.172,0.528 1.172,1.175 z"
+           id="path1492-5"
+           style="fill:#ffffff;fill-opacity:1" />
+        <path
+           d="M 17.813,18.121 H 6.012 c -0.487,0 -0.883,0.396 -0.883,0.883 v 5.805 c 0,0.487 0.396,0.883 0.883,0.883 h 11.801 c 0.487,0 0.883,-0.396 0.883,-0.883 V 19.004 C 18.695,18.516 18.3,18.121 17.813,18.121 Z"
+           id="path1494-9"
+           style="fill:#ffffff;fill-opacity:1" />
+        <path
+           d="M 17.813,33.517 H 6.012 c -0.487,0 -0.883,0.394 -0.883,0.882 v 5.805 c 0,0.487 0.396,0.882 0.883,0.882 h 11.801 c 0.487,0 0.883,-0.395 0.883,-0.882 V 34.399 C 18.695,33.911 18.3,33.517 17.813,33.517 Z"
+           id="path1496-1"
+           style="fill:#ffffff;fill-opacity:1" />
+        <path
+           d="M 17.813,48.913 H 6.012 c -0.487,0 -0.883,0.395 -0.883,0.883 v 5.805 c 0,0.487 0.396,0.883 0.883,0.883 h 11.801 c 0.487,0 0.883,-0.396 0.883,-0.883 V 49.796 C 18.695,49.308 18.3,48.913 17.813,48.913 Z"
+           id="path1498-1"
+           style="fill:#ffffff;fill-opacity:1" />
+        <path
+           d="M 17.813,64.309 H 6.012 c -0.487,0 -0.883,0.395 -0.883,0.883 v 5.805 c 0,0.487 0.396,0.883 0.883,0.883 h 11.801 c 0.487,0 0.883,-0.396 0.883,-0.883 V 65.192 C 18.695,64.703 18.3,64.309 17.813,64.309 Z"
+           id="path1500-0"
+           style="fill:#ffffff;fill-opacity:1" />
+        <path
+           d="M 39.871,18.121 H 28.07 c -0.487,0 -0.883,0.396 -0.883,0.883 v 5.805 c 0,0.487 0.396,0.883 0.883,0.883 h 11.801 c 0.487,0 0.883,-0.396 0.883,-0.883 v -5.805 c 0,-0.488 -0.396,-0.883 -0.883,-0.883 z"
+           id="path1502-6"
+           style="fill:#ffffff;fill-opacity:1" />
+        <path
+           d="M 50.129,25.691 H 61.93 c 0.487,0 0.883,-0.396 0.883,-0.883 v -5.805 c 0,-0.487 -0.396,-0.883 -0.883,-0.883 H 50.129 c -0.487,0 -0.883,0.396 -0.883,0.883 v 5.805 c 0,0.487 0.396,0.883 0.883,0.883 z"
+           id="path1504-6"
+           style="fill:#ffffff;fill-opacity:1" />
+        <path
+           d="m 83.988,18.121 h -11.8 c -0.487,0 -0.883,0.396 -0.883,0.883 v 5.805 c 0,0.487 0.396,0.883 0.883,0.883 h 11.801 c 0.487,0 0.883,-0.396 0.883,-0.883 v -5.805 c -0.001,-0.488 -0.396,-0.883 -0.884,-0.883 z"
+           id="path1506-2"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+    </g>
+    <path
+       id="path1529-9"
+       d="m -77.685223,430.39797 v 33.0756"
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.76499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+</svg>

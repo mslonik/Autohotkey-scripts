@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg47"
+   version="1.1"
+   viewBox="0 0 52.758294 52.758296"
+   height="199.40143"
+   width="199.40143">
+  <defs
+     id="defs42">
+    <pattern
+       id="EMFhbasepattern"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+  </defs>
+  <metadata
+     id="metadata45">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g8556"
+     transform="translate(49.836509,-375.23204)">
+    <g
+       id="g5305">
+      <g
+         id="g9212"
+         transform="translate(-521.88251,-53.316216)">
+        <rect
+           height="52.258293"
+           y="428.75687"
+           x="472.24283"
+           width="52.258293"
+           id="rect833-1-5-3-7-4-8-5-1-4-2-8-1-1"
+           style="fill:#c4c4c4;fill-opacity:1;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
+        <text
+           id="text898-7-3-6-8-3-3-0-66-7-8-8-0-3"
+           y="472.33878"
+           x="498.27765"
+           style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+           xml:space="preserve"><tspan
+             id="tspan1636-7-7"
+             style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+             y="472.33878"
+             x="498.27765">Podziel komórkę:</tspan><tspan
+             style="font-size:4.93889999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
+             y="478.37128"
+             x="498.27765"
+             id="tspan1705-4">2 wiersze, 1 kolumna</tspan></text>
+        <path
+           d="m 515.91773,434.11982 h -35.09158 c -1.44812,0 -2.62567,0.37807 -2.62567,0.84299 v 5.54218 c 0,0.46494 1.17755,0.84301 2.62567,0.84301 h 35.09158 c 1.44818,0 2.62573,-0.37807 2.62573,-0.84301 v -5.54218 c 0,-0.46588 -1.17755,-0.84299 -2.62573,-0.84299 z"
+           id="path1502-9-5-5-3-8-5-6-1-2"
+           style="fill:#c4c4c4;fill-opacity:1;stroke:#ffffff;stroke-width:0.49999899;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <g
+           transform="matrix(-32.393509,-1.3046802e-7,1.3046802e-7,-32.393509,502.12438,452.95464)"
+           id="g1225-72-7-7-9-7-6"
+           style="clip-rule:evenodd;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision">
+          <polygon
+             style="fill:#ffffff;fill-opacity:1"
+             id="polygon1212-2-61-0-7-1-3"
+             points="0.147984,0.092689 0.214819,0.159531 0.248433,0.125913 0.123807,0 0,0.123807 0.0336142,0.157421 0.100445,0.0905945 0.100445,0.306461 0.147984,0.306461 "
+             class="fil0" />
+        </g>
+        <path
+           style="fill:#c4c4c4;fill-opacity:1;stroke:#ffffff;stroke-width:0.49999899;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="path1502-9-5-5-3-8-5-6-1-3-3"
+           d="m 515.91773,454.81326 h -35.09158 c -1.44812,0 -2.62567,0.37807 -2.62567,0.84299 v 5.54218 c 0,0.46495 1.17755,0.84301 2.62567,0.84301 h 35.09158 c 1.44818,0 2.62573,-0.37806 2.62573,-0.84301 v -5.54218 c 0,-0.46588 -1.17755,-0.84299 -2.62573,-0.84299 z" />
+        <path
+           style="fill:none;stroke:#ffffff;stroke-width:0.49999899;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 478.23907,458.49436 h 40.19955"
+           id="path1731-1" />
+      </g>
+    </g>
+  </g>
+</svg>
