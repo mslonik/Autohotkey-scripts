@@ -1,13 +1,98 @@
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 #SingleInstance, Force
-    #Include lib/Neutron.ahk
+#Include lib/Neutron.ahk
 #Include Otagle.ahk
-FileRemoveDir, PlikiHtml,1
-FileCreateDir, PlikiHtml
-IniRead, Layers , % A_ScriptDir . "\Config.ini",Main,HowManyLayers
+FileRead, Contents2,Assets/hashCode.txt ;Read CheckSum File
 
-Loop, %Layers%{
-    Ln := A_Index
+;Variables
+
+hashCodeR                                   := 0
+pages                                       := 0
+
+; CheckSum MD5 
+
+FileRead, Contents,Config.ini
+data := Contents
+MD5( ByRef V, L=0 ) {
+    VarSetCapacity( MD5_CTX,104,0 ), DllCall( "advapi32\MD5Init", Str,MD5_CTX )
+    DllCall( "advapi32\MD5Update", Str,MD5_CTX, Str,V, UInt,L ? L : VarSetCapacity(V) )
+    DllCall( "advapi32\MD5Final", Str,MD5_CTX )
+    Loop % StrLen( Hex:="123456789ABCDEF0" )
+    N := NumGet( MD5_CTX,87+A_Index,"Char"), MD5 .= SubStr(Hex,N>>4,1) . SubStr(Hex,N&15,1)
+    Return MD5
+}
+
+
+If (Contents2 == MD5(data,StrLen(data))){
+FileDelete, Assets/hashCode.txt
+FileAppend,% MD5(data,StrLen(data)),Assets/hashCode.txt
+
+}Else If(Contents2 != MD5(data,StrLen(data))){
+FileDelete, Assets/hashCode.txt
+FileAppend,% MD5(data,StrLen(data)),Assets/hashCode.txt
+RemoveFolder()
+}
+
+;Ini Function
+
+if !(FileExist("PlikiHtml")){
+    FileCreateDir, PlikiHtml
+    BuildHTMLFile()
+}Else {
+    Gosub, Loader
+    SetTimer,Gui,-3000
+}
+
+return
+Loader:
+DisplayLoader()
+return
+Gui:
+DisplayMainGui()
+return
+
+;Remove folder
+
+RemoveFolder(){
+    FileRemoveDir, PlikiHtml,1
+}
+
+; Read config && Create HTML files
+
+BuildHTMLFile(){
+       FileAppend,
+    (
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../Assets/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../Style/index.css" />
+        <title>Otagle</title>
+    </head>
+    <body>
+    <div class="loader-wrapper">
+       <img class="logo"  src="../Assets/OtagleBigLogo.png" alt="">
+    </div>
+    ), PlikiHtml/a_Welcome.html
+    ; FileAppend,% "<div class=""loader""><span> loaded files " . loadedLayers . "/15 </span></div>", PlikiHtml/a_Welcome.html
+       FileAppend,
+    ( 
+    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    ), PlikiHtml/a_Welcome.html
+    FileAppend,
+    (
+    </body>
+    </html>  
+    ), PlikiHtml/a_Welcome.html
+
+    IniRead, Layers , % A_ScriptDir . "\Config.ini",Main,HowManyLayers
+     Gosub, Loader
+    Loop, %Layers%{
+     Ln := A_Index
+    loadedLayers := A_Index
     btns:= []
     SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
     SetWorkingDir %A_ScriptDir%  ; zmienna przechowuje "scieżkę do głownego katalogu z plikami należy tylko wskazać plik."
@@ -55,7 +140,7 @@ Loop, %Layers%{
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../Assets/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../Style/style.css" />
+    <link rel="stylesheet" href="../Style/index.css" />
     <title>Otagle</title>
     </head>
     <body>
@@ -72,6 +157,10 @@ Loop, %Layers%{
     <button class="btnOk">ok</button>
     </div>
     <header>
+    ), PlikiHtml/Layer%Ln%.html
+        FileAppend,
+    ( 
+        <img class="bar-icon" src="../Assets/OtagleIcon.ico" alt="icon"> 
     ), PlikiHtml/Layer%Ln%.html
     FileAppend,% "<span class=""title-bar""  onmousedown=""neutron.DragTitleBar()"" >" . "Otagle: " . "Layer" . Ln . " - " . Title . "</span>",PlikiHtml/Layer%Ln%.html
     FileAppend,
@@ -129,61 +218,34 @@ Loop, %Layers%{
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="crossorigin="anonymous"></script>
     <script src="../index.js"></script>
-    <script type="module">
-    import interact from 'https://cdn.jsdelivr.net/npm/@interactjs/interactjs/index.js'
-    interact('.draggable')
-    .draggable({
-        // enable inertial throwing
-        inertia: true,
-        // keep the element within the area of it's parent
-        modifiers: [
-        interact.modifiers.restrictRect({
-            restriction: 'parent',
-            endOnly: true
-        })
-        ],
-        // enable autoScroll
-        autoScroll: true,
-        
-        listeners: {
-            // call this function on every dragmove event
-            move: dragMoveListener,
-            
-            // call this function on every dragend event
-            end (event) {
-                var textEl = event.target.querySelector('p')
-                
-                textEl && (textEl.textContent =
-                'moved a distance of ' +
-                (Math.sqrt(Math.pow(event.pageX - event.x0, 2) +
-                Math.pow(event.pageY - event.y0, 2) | 0))
-                .toFixed(2) + 'px')
-            }
-        }
-    })
-    
-    function dragMoveListener (event) {
-        var target = event.target
-        // keep the dragged position in the data-x/data-y attributes
-        var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
-        var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
-        
-        // translate the element
-        target.style.webkitTransform =
-            target.style.transform =
-            'translate(' + x + 'px, ' + y + 'px)'
-        
-        // update the posiion attributes
-        target.setAttribute('data-x', x)
-        target.setAttribute('data-y', y)
-    }
-    
-    // this function is used later in the resizing and gesture demos
-    window.dragMoveListener = dragMoveListener
-    </script>
     </body> 
     </html>   
     ), PlikiHtml/Layer%Ln%.html
+        If (Ln == 15){
+        pages:=1
     
+    }
+  
+}
+     If (pages == 1){
+        Gosub, Gui
+    }
 }
 
+;Display GUI
+
+DisplayLoader(){
+    global
+    neutron := new NeutronWindow()
+    neutron.Load("PlikiHtml/a_Welcome.html")
+    neutron.Gui("+LabelNeutron")
+    neutron.Show("w800 h400")
+}
+DisplayMainGui(){
+    global
+    neutron.Close("PlikiHtml/a_Welcome.html")
+    neutron := new NeutronWindow()
+    neutron.Load("PlikiHtml/Layer1.html")
+    neutron.Gui("+LabelNeutron")
+    neutron.Show("w1024 h768")
+}
