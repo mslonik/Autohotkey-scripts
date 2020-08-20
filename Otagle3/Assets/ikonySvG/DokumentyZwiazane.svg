@@ -1,253 +1,94 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg47"
-   version="1.1"
-   viewBox="0 0 52.758294 52.758296"
-   height="199.40143"
-   width="199.40143">
-  <defs
-     id="defs42">
-    <pattern
-       id="EMFhbasepattern"
-       patternUnits="userSpaceOnUse"
-       width="6"
-       height="6"
-       x="0"
-       y="0" />
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mend-5-0"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1146-3-3" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mend-5-3"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1146-3-9" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mend-5-0-4"
-       style="overflow:visible">
-      <path
-         id="path1146-3-3-8"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mend-5-3-8"
-       style="overflow:visible">
-      <path
-         id="path1146-3-9-5"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mend"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1146" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mend-5"
-       style="overflow:visible">
-      <path
-         id="path1146-3"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mstart"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.4,0,0,0.4,4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1143" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mstart-1"
-       style="overflow:visible">
-      <path
-         id="path1143-7"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(0.4,0,0,0.4,4,0)" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Lend"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1140" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Lstart"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.8,0,0,0.8,10,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1137" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Lend-5"
-       style="overflow:visible">
-      <path
-         id="path1140-4"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Lstart-93"
-       style="overflow:visible">
-      <path
-         id="path1137-7"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(0.8,0,0,0.8,10,0)" />
-    </marker>
-    <linearGradient
-       id="linearGradient4460"
-       osb:paint="solid">
-      <stop
-         style="stop-color:#db3b3b;stop-opacity:1;"
-         offset="0"
-         id="stop4458" />
-    </linearGradient>
-  </defs>
-  <metadata
-     id="metadata45">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="g8556"
-     transform="translate(49.836509,-375.23204)">
-    <g
-       id="g5305">
-      <g
-         id="g4722"
-         transform="translate(-999.58915,406.95598)">
-        <rect
-           y="-31.749987"
-           x="949.62024"
-           height="52.916668"
-           width="52.916668"
-           id="rect833-4-4-4-3-1-1-6"
-           style="fill:#db3b3b;fill-opacity:1;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
-        <text
-           id="text983-1-5-6-98-51-0-81"
-           y="11.094067"
-           x="975.78589"
-           style="font-size:6.3499999px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
-           xml:space="preserve"><tspan
-             style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
-             y="11.094067"
-             x="975.78589"
-             id="tspan1598-7-34">Dokumenty</tspan><tspan
-             style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
-             y="19.031567"
-             x="975.78589"
-             id="tspan2071">związane</tspan></text>
-        <g
-           transform="matrix(0.67661425,0,0,0.67661425,959.74631,-28.517887)"
-           id="g1665"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.40939131;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
-          <path
-             style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.40939131;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-             d="m 9.47,38.5 c 1.38,0 2.5,-1.12 2.5,-2.5 0,-1.38 -1.12,-2.5 -2.5,-2.5 -1.38,0 -2.5,1.12 -2.5,2.5 0,1.38 1.12,2.5 2.5,2.5 z m 0,-4 c 0.83,0 1.5,0.67 1.5,1.5 0,0.83 -0.67,1.5 -1.5,1.5 -0.83,0 -1.5,-0.67 -1.5,-1.5 0,-0.83 0.67,-1.5 1.5,-1.5 z"
-             id="path1636" />
-          <path
-             style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.40939131;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-             d="m 9.47,29.5 c 0.28,0 0.5,-0.22 0.5,-0.5 V 10 C 9.97,9.72 9.75,9.5 9.47,9.5 9.19,9.5 8.97,9.72 8.97,10 v 19 c 0,0.28 0.22,0.5 0.5,0.5 z"
-             id="path1638" />
-          <path
-             style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.40939131;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-             d="m 17.47,38.5 c 1.38,0 2.5,-1.12 2.5,-2.5 0,-1.38 -1.12,-2.5 -2.5,-2.5 -1.38,0 -2.5,1.12 -2.5,2.5 0,1.38 1.12,2.5 2.5,2.5 z m 0,-4 c 0.83,0 1.5,0.67 1.5,1.5 0,0.83 -0.67,1.5 -1.5,1.5 -0.83,0 -1.5,-0.67 -1.5,-1.5 0,-0.83 0.67,-1.5 1.5,-1.5 z"
-             id="path1640" />
-          <path
-             style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.40939131;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-             d="m 17.47,29.5 c 0.28,0 0.5,-0.22 0.5,-0.5 V 10 c 0,-0.28 -0.22,-0.5 -0.5,-0.5 -0.28,0 -0.5,0.22 -0.5,0.5 v 19 c 0,0.28 0.22,0.5 0.5,0.5 z"
-             id="path1642" />
-          <path
-             style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.40939131;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-             d="M 43.01,41.58 30.47,3.6 C 30.38,3.34 30.1,3.19 29.84,3.28 l -7.6,2.51 C 22.12,5.83 22.03,5.91 21.97,6.02 V 4 c 0,-0.28 -0.22,-0.5 -0.5,-0.5 h -8 -8 C 5.19,3.5 4.97,3.72 4.97,4 v 40 c 0,0.28 0.22,0.5 0.5,0.5 h 8 8 c 0.28,0 0.5,-0.22 0.5,-0.5 V 6.55 l 12.5,37.85 c 0.04,0.13 0.13,0.23 0.25,0.29 0.07,0.04 0.15,0.05 0.22,0.05 0.05,0 0.11,-0.01 0.16,-0.03 l 7.6,-2.51 c 0.25,-0.07 0.4,-0.36 0.31,-0.62 z M 12.97,43.5 h -7 v -39 h 7 z m 8,0 h -7 v -39 h 7 z M 35.26,43.61 23.03,6.58 29.68,4.39 41.9,41.42 Z"
-             id="path1644" />
-          <path
-             style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.40939131;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-             d="m 33.85,36.18 c 0.21,0.63 0.65,1.15 1.25,1.45 0.35,0.18 0.74,0.27 1.12,0.27 0.26,0 0.53,-0.04 0.79,-0.13 0.63,-0.21 1.15,-0.65 1.45,-1.25 0.3,-0.6 0.35,-1.27 0.14,-1.91 -0.21,-0.63 -0.65,-1.15 -1.25,-1.45 -0.6,-0.3 -1.27,-0.35 -1.91,-0.14 -0.63,0.21 -1.15,0.65 -1.45,1.25 -0.3,0.6 -0.35,1.27 -0.14,1.91 z m 1.04,-1.46 c 0.18,-0.36 0.49,-0.62 0.87,-0.75 0.16,-0.05 0.31,-0.08 0.47,-0.08 0.63,0 1.22,0.4 1.43,1.03 0.13,0.38 0.1,0.79 -0.08,1.14 -0.18,0.36 -0.49,0.62 -0.87,0.75 -0.38,0.13 -0.79,0.1 -1.14,-0.08 -0.36,-0.18 -0.62,-0.49 -0.75,-0.87 -0.14,-0.37 -0.11,-0.78 0.07,-1.14 z"
-             id="path1646" />
-          <path
-             style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.40939131;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-             d="m 27.92,10.23 c -0.26,0.09 -0.4,0.37 -0.32,0.63 l 5.96,18.04 c 0.07,0.21 0.26,0.34 0.47,0.34 0.05,0 0.1,-0.01 0.16,-0.03 0.26,-0.09 0.41,-0.37 0.32,-0.63 L 28.55,10.54 c -0.09,-0.25 -0.37,-0.4 -0.63,-0.31 z"
-             id="path1648" />
+<svg id="SVGRoot" width="208" height="208" version="1.1" viewBox="0 0 208 208" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(0,7)">
+  <g transform="matrix(3.7795 0 0 3.7795 10.171 -6.7758)">
+   <g transform="translate(-1.0884 -121.69)">
+    <g transform="translate(1.6608 -59.209)">
+     <g transform="translate(-.6443 -59.335)">
+      <g transform="translate(-1396.8 269.89)">
+       <g transform="translate(-57.972 -.024822)">
+        <g transform="translate(1658.1 73.867)">
+         <g transform="translate(-203.03 -103.33)">
+          <flowRoot transform="matrix(.26458 0 0 .26458 -2.875 1.091)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-85.582" y="-60.812" width="342.33" height="293.65"/></flowRegion><flowPara/></flowRoot>
+          <g transform="translate(-1039.4 318.88)">
+           <flowRoot transform="matrix(.26458 0 0 .26458 1036.5 -317.79)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-105.21" y="-13.703" width="562.17" height="513.49"/></flowRegion><flowPara/></flowRoot>
+           <g transform="translate(-66.134 .039287)">
+            <g transform="translate(-66.173 .043409)">
+             <flowRoot transform="matrix(.26458 0 0 .26458 1168.8 -317.87)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-114.63" y="-91.434" width="675.23" height="522.91"/></flowRegion><flowPara/></flowRoot>
+             <g transform="translate(-66.2 -.040316)">
+              <g transform="translate(-65.918 -.60254)">
+               <g transform="translate(-66.6 .14883)">
+                <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-24.34" y="-19.695" width="252.04" height="245.75"/></flowRegion><flowPara/></flowRoot>
+                <g transform="translate(-68.678 -.48293)">
+                 <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-65.168" y="-26.762" width="382.37" height="335.26"/></flowRegion><flowPara/></flowRoot>
+                 <g transform="translate(-63.347 .4912)">
+                  <g transform="translate(529.82 -.18087)">
+                   <g transform="translate(794.67 .06923)">
+                    <g transform="translate(-198.36 .17569)">
+                     <g transform="translate(-530.68 .043413)">
+                      <g transform="translate(912.04 -.041317)">
+                       <g transform="translate(132.58 -.39794)">
+                        <g transform="translate(-580.62 .35866)">
+                         <g transform="translate(-264.6 -.1571)">
+                          <g transform="translate(463.55 .097138)">
+                           <g transform="translate(-397.36 .059959)">
+                            <g transform="translate(66.026 -.30592)">
+                             <g transform="translate(-264.69 -.093008)">
+                              <g transform="translate(734.89 179.33)">
+                               <g transform="translate(-205.07 -178.97)">
+                                <g transform="translate(-1081.1 -686.85)">
+                                 <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="21" y="-71" width="223" height="308"/></flowRegion><flowPara/></flowRoot>
+                                 <g transform="translate(-112.28 .55746)">
+                                  <flowRoot transform="matrix(.26458 0 0 .26458 1500.7 367.6)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-6.364" y="-2.0107" width="231.22" height="230.87"/></flowRegion><flowPara/></flowRoot>
+                                  <g transform="translate(1386.8 133.57)">
+                                   <g transform="translate(-1180.5 267.04)">
+                                    <g transform="translate(753.05 -.28062)">
+                                     <g transform="translate(-407.08 .093542)">
+                                      <rect x="949.62" y="-31.75" width="52.917" height="52.917" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
+                                      <text x="975.78589" y="9.0339251" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="975.78589" y="9.0339251" text-align="center">Dokumenty</tspan><tspan x="975.78589" y="16.971424" text-align="center">związane</tspan></text>
+                                      <g transform="matrix(.67661 0 0 .67661 959.75 -28.518)" fill="#fff" stroke="#fff" stroke-width=".40939">
+                                       <path d="m9.47 38.5c1.38 0 2.5-1.12 2.5-2.5s-1.12-2.5-2.5-2.5-2.5 1.12-2.5 2.5 1.12 2.5 2.5 2.5zm0-4c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"/>
+                                       <path d="m9.47 29.5c.28 0 .5-.22.5-.5v-19c0-.28-.22-.5-.5-.5s-.5.22-.5.5v19c0 .28.22.5.5.5z"/>
+                                       <path d="m17.47 38.5c1.38 0 2.5-1.12 2.5-2.5s-1.12-2.5-2.5-2.5-2.5 1.12-2.5 2.5 1.12 2.5 2.5 2.5zm0-4c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"/>
+                                       <path d="m17.47 29.5c.28 0 .5-.22.5-.5v-19c0-.28-.22-.5-.5-.5s-.5.22-.5.5v19c0 .28.22.5.5.5z"/>
+                                       <path d="m43.01 41.58-12.54-37.98c-.09-.26-.37-.41-.63-.32l-7.6 2.51c-.12.04-.21.12-.27.23v-2.02c0-.28-.22-.5-.5-.5h-16c-.28 0-.5.22-.5.5v40c0 .28.22.5.5.5h16c.28 0 .5-.22.5-.5v-37.45l12.5 37.85c.04.13.13.23.25.29.07.04.15.05.22.05.05 0 .11-.01.16-.03l7.6-2.51c.25-.07.4-.36.31-.62zm-30.04 1.92h-7v-39h7zm8 0h-7v-39h7zm14.29.11-12.23-37.03 6.65-2.19 12.22 37.03z"/>
+                                       <path d="m33.85 36.18c.21.63.65 1.15 1.25 1.45.35.18.74.27 1.12.27.26 0 .53-.04.79-.13.63-.21 1.15-.65 1.45-1.25s.35-1.27.14-1.91c-.21-.63-.65-1.15-1.25-1.45s-1.27-.35-1.91-.14c-.63.21-1.15.65-1.45 1.25s-.35 1.27-.14 1.91zm1.04-1.46c.18-.36.49-.62.87-.75.16-.05.31-.08.47-.08.63 0 1.22.4 1.43 1.03.13.38.1.79-.08 1.14-.18.36-.49.62-.87.75s-.79.1-1.14-.08c-.36-.18-.62-.49-.75-.87-.14-.37-.11-.78.07-1.14z"/>
+                                       <path d="m27.92 10.23c-.26.09-.4.37-.32.63l5.96 18.04c.07.21.26.34.47.34.05 0 .1-.01.16-.03.26-.09.41-.37.32-.63l-5.96-18.04c-.09-.25-.37-.4-.63-.31z"/>
+                                      </g>
+                                     </g>
+                                    </g>
+                                   </g>
+                                  </g>
+                                 </g>
+                                </g>
+                               </g>
+                              </g>
+                             </g>
+                            </g>
+                           </g>
+                          </g>
+                         </g>
+                        </g>
+                       </g>
+                      </g>
+                     </g>
+                    </g>
+                   </g>
+                  </g>
+                 </g>
+                </g>
+               </g>
+              </g>
+             </g>
+            </g>
+           </g>
+          </g>
+         </g>
         </g>
+       </g>
       </g>
+     </g>
     </g>
+   </g>
   </g>
+ </g>
 </svg>

@@ -1,97 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg47"
-   version="1.1"
-   viewBox="0 0 52.758294 52.758296"
-   height="199.40143"
-   width="199.40143">
-  <defs
-     id="defs42">
-    <pattern
-       id="EMFhbasepattern"
-       patternUnits="userSpaceOnUse"
-       width="6"
-       height="6"
-       x="0"
-       y="0" />
-  </defs>
-  <metadata
-     id="metadata45">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="g8556"
-     transform="translate(49.836509,-375.23204)">
-    <g
-       id="g5305">
-      <g
-         id="g8697"
-         transform="translate(-108.37663,6.1421171)">
-        <rect
-           style="fill:#ffffff;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-           id="rect833-1-5-3-7-4-8-5-2"
-           width="52.258293"
-           x="58.680305"
-           y="369.54422"
-           height="52.258293" />
-        <text
-           xml:space="preserve"
-           style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.26458299"
-           x="84.883621"
-           y="413.12613"
-           id="text898-7-3-6-8-3-3-0-6"><tspan
-             id="tspan1396-8-7-1"
-             x="84.883621"
-             y="413.12613"
-             style="font-size:6.3499999px;text-align:center;text-anchor:middle;stroke-width:0.26458299">Wstaw kolumnę</tspan><tspan
-             id="tspan1701-9"
-             x="84.883621"
-             y="419.15863"
-             style="font-size:6.3499999px;text-align:center;text-anchor:middle;stroke-width:0.26458299">z lewej</tspan></text>
-        <g
-           id="g5425">
-          <path
-             style="fill:#000000;stroke-width:0.342926"
-             id="path1492-9-6-2"
-             d="m 99.232416,380.29562 h -6.556065 -0.605607 -6.958659 -0.605607 -6.959003 -0.605607 -6.555721 c -0.556913,0 -1.008547,0.45163 -1.008547,1.00854 v 4.27114 0.60562 4.67408 0.6056 4.67444 0.60526 4.27115 c 0,0.55725 0.451634,1.00854 1.008547,1.00854 h 6.556063 0.605608 6.959003 0.605607 6.959003 0.605608 6.555721 c 0.556911,0 1.00855,-0.45129 1.00855,-1.00854 v -4.27149 -0.60527 -4.67409 -0.6056 -4.67408 -0.60562 -4.27114 c -2.7e-4,-0.55691 -0.45198,-1.00854 -1.008894,-1.00854 z m -14.725938,5.8853 v 4.67408 h -6.959003 v -4.67408 z m -6.959003,-0.60562 v -4.67408 h 6.959003 v 4.67408 z m 6.959003,5.8853 v 4.67444 h -6.959003 v -4.67444 z m 0,5.27936 v 4.67443 h -6.959003 v -4.67443 z m 7.56461,-5.27936 v 4.67444 h -6.959003 v -4.67444 z m -6.959003,-0.6056 v -4.67408 h 6.959003 v 4.67408 z m 6.959003,5.88496 v 4.67443 h -6.959003 v -4.67443 z m 0,-11.16466 h -6.959003 v -4.67408 h 6.959003 z m -22.088223,-4.27114 c 0,-0.22188 0.180035,-0.40191 0.401909,-0.40294 h 6.557436 v 4.67408 h -6.959345 z m 0,4.87676 h 6.959345 v 4.67408 h -6.959345 z m 0,5.27968 h 6.959345 v 4.67444 h -6.959345 z m 0,9.55051 v -4.27115 h 6.959345 v 4.67443 h -6.557436 c -0.221874,-0.001 -0.401909,-0.18107 -0.401909,-0.40328 z m 29.652491,0 c 0,0.22186 -0.179695,0.40225 -0.40191,0.40328 h -6.557095 v -4.67443 h 6.959005 z m 0,-4.87607 h -6.959005 v -4.67444 h 6.959005 z m 0,-5.28004 h -6.959005 v -4.67408 h 6.959005 z m 0,-5.2797 h -6.959005 v -4.67408 h 6.557095 c 0.221874,10e-4 0.40191,0.18106 0.40191,0.40294 z" />
-          <path
-             style="fill:#000000;stroke-width:0.342926"
-             id="path1502-9-5-9"
-             d="m 83.050412,381.77067 h -4.046873 c -0.167003,0 -0.302803,0.1358 -0.302803,0.3028 v 1.99069 c 0,0.167 0.1358,0.3028 0.302803,0.3028 h 4.046873 c 0.167005,0 0.302805,-0.1358 0.302805,-0.3028 v -1.99069 c 0,-0.16734 -0.1358,-0.3028 -0.302805,-0.3028 z" />
-          <g
-             style="clip-rule:evenodd;fill:#000000;fill-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
-             id="g1225-72-8"
-             transform="matrix(-22.665859,0,0,-22.665859,80.002348,379.8835)">
-            <polygon
-               class="fil0"
-               points="0.147984,0.306461 0.147984,0.092689 0.214819,0.159531 0.248433,0.125913 0.123807,0 0,0.123807 0.0336142,0.157421 0.100445,0.0905945 0.100445,0.306461 "
-               id="polygon1212-2-6" />
-          </g>
-          <text
-             xml:space="preserve"
-             style="font-size:11.17070007px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;stroke-width:0.52362603"
-             x="78.670013"
-             y="378.53369"
-             id="text1723-0"><tspan
-               id="tspan1721-0"
-               x="78.670013"
-               y="378.53369"
-               style="stroke-width:0.52362603">+</tspan></text>
-        </g>
+<svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
+ <g transform="matrix(3.7795 0 0 3.7795 -1795.2 2502.6)">
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-392.69" y="-63.57" width="758.02" height="397.52"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-251.87" y="-84.492" width="624.44" height="455.45"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-202.78" y="-50.695" width="473.96" height="281.64"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-86.906" y="-78.859" width="516.61" height="410.39"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-81.273" y="-32.188" width="309" height="322.68"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-90.93" y="-68.398" width="392.69" height="252.67"/></flowRegion><flowPara/></flowRoot>
+  <g transform="translate(675.17 -.21291)">
+   <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-100.59" y="-53.109" width="462.7" height="369.35"/></flowRegion><flowPara/></flowRoot>
+   <g transform="translate(57.194 .21291)">
+    <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-329.12" y="-12.07" width="696.05" height="259.91"/></flowRegion><flowPara/></flowRoot>
+    <g transform="translate(-1495.1 -629.38)">
+     <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-306.59" y="-111.05" width="206" height="51.5"/></flowRegion><flowPara/></flowRoot>
+     <g transform="translate(1180.3 -401.18)">
+      <rect x="58.68" y="369.54" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
+      <text x="84.883621" y="411.4938" font-family="sans-serif" font-size="5.6444px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="84.883621" y="411.4938" text-align="center">Wstaw kolumnę</tspan><tspan x="84.883621" y="417.52631" text-align="center">z lewej</tspan></text>
+      <g>
+       <path d="m99.232 380.3h-28.846c-.55691 0-1.0085.45163-1.0085 1.0085v19.707c0 .55725.45163 1.0085 1.0085 1.0085h28.847c.55691 0 1.0086-.45129 1.0086-1.0085v-19.707c-.00027-.55691-.45198-1.0085-1.0089-1.0085zm-14.726 5.8853v4.6741h-6.959v-4.6741zm-6.959-.60562v-4.6741h6.959v4.6741zm6.959 5.8853v4.6744h-6.959v-4.6744zm0 5.2794v4.6744h-6.959v-4.6744zm7.5646-5.2794v4.6744h-6.959v-4.6744zm-6.959-.6056v-4.6741h6.959v4.6741zm6.959 5.885v4.6744h-6.959v-4.6744zm0-11.165h-6.959v-4.6741h6.959zm-22.088-4.2711c0-.22188.18004-.40191.40191-.40294h6.5574v4.6741h-6.9593zm0 4.8768h6.9593v4.6741h-6.9593zm0 5.2797h6.9593v4.6744h-6.9593zm0 9.5505v-4.2712h6.9593v4.6744h-6.5574c-.22187-.001-.40191-.18107-.40191-.40328zm29.652 0c0 .22186-.1797.40225-.40191.40328h-6.5571v-4.6744h6.959zm0-4.8761h-6.959v-4.6744h6.959zm0-5.28h-6.959v-4.6741h6.959zm0-5.2797h-6.959v-4.6741h6.5571c.22187.001.40191.18106.40191.40294z" stroke-width=".34293"/>
+       <path d="m83.05 381.77h-4.0469c-.167 0-.3028.1358-.3028.3028v1.9907c0 .167.1358.3028.3028.3028h4.0469c.167 0 .3028-.1358.3028-.3028v-1.9907c0-.16734-.1358-.3028-.3028-.3028z" stroke-width=".34293"/>
+       <g transform="matrix(-22.666 0 0 -22.666 80.002 379.88)" clip-rule="evenodd" fill-rule="evenodd" image-rendering="optimizeQuality" shape-rendering="geometricPrecision">
+        <polygon class="fil0" points=".14798 .30646 .14798 .092689 .21482 .15953 .24843 .12591 .12381 0 0 .12381 .033614 .15742 .10044 .090594 .10044 .30646"/>
+       </g>
       </g>
+      <text x="78.670013" y="378.53369" font-family="voestalpine" font-size="11.171px" letter-spacing="0px" stroke-width=".52363" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="78.670013" y="378.53369" stroke-width=".52363">+</tspan></text>
+     </g>
     </g>
+   </g>
   </g>
+ </g>
 </svg>

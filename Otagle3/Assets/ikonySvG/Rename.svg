@@ -1,65 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg47"
-   version="1.1"
-   viewBox="0 0 52.758294 52.758296"
-   height="199.40143"
-   width="199.40143">
-  <defs
-     id="defs42" />
-  <metadata
-     id="metadata45">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="g6852"
-     transform="translate(63.11278,-68.006797)">
-    <rect
-       style="fill:#ffffff;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-       id="rect833-1-5"
-       width="52.258293"
-       x="-62.840286"
-       y="68.328804"
-       height="52.258293" />
-    <text
-       xml:space="preserve"
-       style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.26458299"
-       x="-36.9132"
-       y="118.017"
-       id="text898-7-3"><tspan
-         x="-36.9132"
-         y="118.017"
-         style="font-size:6.3499999px;text-align:center;text-anchor:middle;stroke-width:0.26458299"
-         id="tspan900-6-1">Rename</tspan></text>
-    <g
-       style="fill:#000000"
-       id="g1226"
-       transform="matrix(0.39791903,0,0,0.39791903,-56.607093,66.779048)">
-      <g
-         id="g1199">
-        <path
-           id="path1193"
-           d="M 61.3,63.3 H 7 V 36.7 H 61.4 V 32.2 H 4.7 c -1.3,0 -2.2,1 -2.2,2.2 v 31.1 c 0,1.3 1,2.2 2.2,2.2 h 56.6 z" />
-        <path
-           id="path1195"
-           d="M 95.3,32.2 H 71.6 v -9.6 h 12.1 c 1.2,0 2.2,-1 2.2,-2.2 0,-1.2 -1,-2.2 -2.2,-2.2 H 55 c -1.2,0 -2.2,1 -2.2,2.2 0,1.2 1,2.2 2.2,2.2 H 67.1 V 77.3 H 55 c -1.2,0 -2.2,1 -2.2,2.2 0,1.2 1,2.2 2.2,2.2 h 28.7 c 1.2,0 2.2,-1 2.2,-2.2 0,-1.2 -1,-2.2 -2.2,-2.2 H 71.6 v -9.6 h 23.7 c 1.3,0 2.2,-1 2.2,-2.2 V 34.4 c 0,-1.2 -1,-2.2 -2.2,-2.2 z M 93,63.3 H 71.6 V 36.7 H 93 Z" />
-        <path
-           id="path1197"
-           d="m 13.4,42.3 c -0.4,0 -0.8,0.3 -0.8,0.8 V 57 c 0,0.4 0.3,0.8 0.8,0.8 h 47.2 c 0.4,0 0.8,-0.3 0.8,-0.8 V 43.1 c 0,-0.4 -0.3,-0.8 -0.8,-0.8 z" />
-      </g>
-    </g>
+<svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
+ <g transform="matrix(3.7795 0 0 3.7795 240.54 -254.81)">
+  <rect x="-62.84" y="68.329" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
+  <text x="-36.9132" y="117.61485" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="-36.9132" y="117.61485" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458" text-align="center" text-anchor="middle">Rename</tspan></text>
+  <g transform="matrix(.39792 0 0 .39792 -56.607 66.779)">
+   <path d="m61.3 63.3h-54.3v-26.6h54.4v-4.5h-56.7c-1.3 0-2.2 1-2.2 2.2v31.1c0 1.3 1 2.2 2.2 2.2h56.6z"/>
+   <path d="m95.3 32.2h-23.7v-9.6h12.1c1.2 0 2.2-1 2.2-2.2s-1-2.2-2.2-2.2h-28.7c-1.2 0-2.2 1-2.2 2.2s1 2.2 2.2 2.2h12.1v54.7h-12.1c-1.2 0-2.2 1-2.2 2.2s1 2.2 2.2 2.2h28.7c1.2 0 2.2-1 2.2-2.2s-1-2.2-2.2-2.2h-12.1v-9.6h23.7c1.3 0 2.2-1 2.2-2.2v-31.1c0-1.2-1-2.2-2.2-2.2zm-2.3 31.1h-21.4v-26.6h21.4z"/>
+   <path d="m13.4 42.3c-.4 0-.8.3-.8.8v13.9c0 .4.3.8.8.8h47.2c.4 0 .8-.3.8-.8v-13.9c0-.4-.3-.8-.8-.8z"/>
   </g>
+ </g>
 </svg>

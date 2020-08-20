@@ -1,88 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="SVGRoot"
-   version="1.1"
-   viewBox="0 0 200 200"
-   height="200px"
-   width="200px">
-  <defs
-     id="defs827" />
-  <metadata
-     id="metadata830">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="layer1">
-    <g
-       id="g1563"
-       transform="matrix(3.7795276,0,0,3.7795276,-3154.1723,121.0312)">
-      <rect
-         y="-31.749987"
-         x="834.56622"
-         height="52.916668"
-         width="52.916668"
-         id="rect833-4-4-4-3-1-1-88"
-         style="fill:#db3b3b;fill-opacity:1;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
-      <text
-         id="text983-1-5-6-98-51-0-4"
-         y="11.144867"
-         x="861.07007"
-         style="font-size:6.3499999px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
-         xml:space="preserve"><tspan
-           style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
-           y="11.144867"
-           x="861.07007"
-           id="tspan1979">Kasowanie</tspan><tspan
-           style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
-           y="19.082367"
-           x="861.07007"
-           id="tspan1983">ostatniej sekcji</tspan></text>
-      <g
-         style="fill:#ffffff;fill-opacity:1"
-         id="g1975"
-         transform="matrix(0.45036824,0,0,0.45036824,838.50616,-34.577454)">
-        <g
-           id="g1949"
-           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1">
-          <path
-             d="M 71.000739,25.961567 69.154355,73.967558 C 69.090254,75.634175 67.668528,77 65.999974,77 H 34.000025 c -1.671304,0 -3.09024,-1.364808 -3.15438,-3.032442 L 28.999261,25.961567 c -0.02123,-0.551877 -0.485817,-0.982054 -1.037694,-0.960828 -0.551877,0.02123 -0.982054,0.485817 -0.960828,1.037694 l 1.846384,48.005991 C 28.952573,76.786121 31.254254,79 34.000025,79 h 31.999949 c 2.742484,0 5.047471,-2.214358 5.152903,-4.955576 l 1.846384,-48.005991 c 0.02123,-0.551877 -0.408951,-1.016468 -0.960828,-1.037694 -0.551877,-0.02123 -1.016468,0.408951 -1.037694,0.960828 z"
-             id="path1937"
-             style="fill:#ffffff;fill-opacity:1" />
-          <path
-             d="m 49,36 v 34 c 0,0.552285 0.447715,1 1,1 0.552285,0 1,-0.447715 1,-1 V 36 c 0,-0.552285 -0.447715,-1 -1,-1 -0.552285,0 -1,0.447715 -1,1 z"
-             id="path1939"
-             style="fill:#ffffff;fill-opacity:1" />
-          <path
-             d="m 38.000432,36.029399 1,34 c 0.01624,0.552046 0.476921,0.986405 1.028967,0.970169 0.552046,-0.01624 0.986405,-0.476921 0.970169,-1.028967 l -1,-34 c -0.01624,-0.552046 -0.476921,-0.986405 -1.028967,-0.970169 -0.552046,0.01624 -0.986405,0.476921 -0.970169,1.028967 z"
-             id="path1941"
-             style="fill:#ffffff;fill-opacity:1" />
-          <path
-             d="m 60.000432,35.970601 -1,34 c -0.01624,0.552046 0.418123,1.01273 0.970169,1.028967 0.552046,0.01624 1.01273,-0.418123 1.028967,-0.970169 l 1,-34 c 0.01624,-0.552046 -0.418123,-1.01273 -0.970169,-1.028967 -0.552046,-0.01624 -1.01273,0.418123 -1.028967,0.970169 z"
-             id="path1943"
-             style="fill:#ffffff;fill-opacity:1" />
-          <path
-             d="m 25,27 h 50 c 0.552285,0 1,-0.447715 1,-1 0,-0.552285 -0.447715,-1 -1,-1 H 25 c -0.552285,0 -1,0.447715 -1,1 0,0.552285 0.447715,1 1,1 z"
-             id="path1945"
-             style="fill:#ffffff;fill-opacity:1" />
-          <path
-             d="m 40.928477,26.371391 1.070261,-2.675653 C 42.359599,22.793585 43.531957,22 44.5,22 h 11 c 0.973537,0 2.13843,0.788658 2.501262,1.695738 l 1.070261,2.675653 1.856954,-0.742782 -1.070261,-2.675652 C 59.191655,21.286555 57.29134,20 55.5,20 h -11 c -1.785787,0 -3.693604,1.291426 -4.358216,2.952957 l -1.070261,2.675652 z"
-             id="path1947"
-             style="fill:#ffffff;fill-opacity:1" />
+<svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
+ <g transform="matrix(3.7795 0 0 3.7795 -1795.2 2502.6)">
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-392.69" y="-63.57" width="758.02" height="397.52"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-251.87" y="-84.492" width="624.44" height="455.45"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-202.78" y="-50.695" width="473.96" height="281.64"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-86.906" y="-78.859" width="516.61" height="410.39"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-81.273" y="-32.188" width="309" height="322.68"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-90.93" y="-68.398" width="392.69" height="252.67"/></flowRegion><flowPara/></flowRoot>
+  <g transform="translate(675.17 -.21291)">
+   <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-100.59" y="-53.109" width="462.7" height="369.35"/></flowRegion><flowPara/></flowRoot>
+   <g transform="translate(57.194 .21291)">
+    <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-329.12" y="-12.07" width="696.05" height="259.91"/></flowRegion><flowPara/></flowRoot>
+    <g transform="translate(-1495.1 -629.38)">
+     <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-306.59" y="-111.05" width="206" height="51.5"/></flowRegion><flowPara/></flowRoot>
+     <g transform="translate(174.63 .21291)">
+      <g transform="translate(229.39 -.31626)">
+       <rect x="834.57" y="-31.75" width="52.917" height="52.917" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
+       <text x="861.07007" y="8.6599503" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="861.07007" y="8.6599503" text-align="center">Kasowanie</tspan><tspan x="861.07007" y="16.59745" text-align="center">ostatniej sekcji</tspan></text>
+       <g transform="matrix(.45037 0 0 .45037 838.51 -34.577)" fill="#fff">
+        <g fill="#fff">
+         <path d="m71.001 25.962-1.8464 48.006c-.064101 1.6666-1.4858 3.0324-3.1544 3.0324h-32c-1.6713 0-3.0902-1.3648-3.1544-3.0324l-1.8464-48.006c-.02123-.55188-.48582-.98205-1.0377-.96083-.55188.02123-.98205.48582-.96083 1.0377l1.8464 48.006c.10545 2.7417 2.4071 4.9556 5.1529 4.9556h32c2.7425 0 5.0475-2.2144 5.1529-4.9556l1.8464-48.006c.02123-.55188-.40895-1.0165-.96083-1.0377-.55188-.02123-1.0165.40895-1.0377.96083z"/>
+         <path d="m49 36v34c0 .55228.44772 1 1 1s1-.44772 1-1v-34c0-.55228-.44772-1-1-1s-1 .44772-1 1z"/>
+         <path d="m38 36.029 1 34c.01624.55205.47692.9864 1.029.97017.55205-.01624.9864-.47692.97017-1.029l-1-34c-.01624-.55205-.47692-.9864-1.029-.97017-.55205.01624-.9864.47692-.97017 1.029z"/>
+         <path d="m60 35.971-1 34c-.01624.55205.41812 1.0127.97017 1.029.55205.01624 1.0127-.41812 1.029-.97017l1-34c.01624-.55205-.41812-1.0127-.97017-1.029-.55205-.01624-1.0127.41812-1.029.97017z"/>
+         <path d="m25 27h50c.55228 0 1-.44772 1-1s-.44772-1-1-1h-50c-.55228 0-1 .44772-1 1s.44772 1 1 1z"/>
+         <path d="m40.928 26.371 1.0703-2.6757c.36086-.90215 1.5332-1.6957 2.5013-1.6957h11c.97354 0 2.1384.78866 2.5013 1.6957l1.0703 2.6757 1.857-.74278-1.0703-2.6757c-.66656-1.6664-2.5669-2.953-4.3582-2.953h-11c-1.7858 0-3.6936 1.2914-4.3582 2.953l-1.0703 2.6757z"/>
         </g>
+       </g>
       </g>
+     </g>
     </g>
+   </g>
   </g>
+ </g>
 </svg>

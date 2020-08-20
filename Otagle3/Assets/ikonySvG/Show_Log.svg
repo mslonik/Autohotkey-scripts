@@ -1,56 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg47"
-   version="1.1"
-   viewBox="0 0 52.758294 52.758296"
-   height="199.40143"
-   width="199.40143">
-  <defs
-     id="defs42" />
-  <metadata
-     id="metadata45">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="g6808"
-     transform="translate(118.47268,-67.987901)">
-    <rect
-       style="fill:#ffffff;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-       id="rect833-1-8"
-       width="52.258293"
-       x="-118.35133"
-       y="68.328804"
-       height="52.258293" />
-    <text
-       xml:space="preserve"
-       style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.26458299"
-       x="-92.13224"
-       y="118.01699"
-       id="text898-7-8"><tspan
-         x="-92.13224"
-         y="118.01699"
-         style="font-size:6.3499999px;text-align:center;text-anchor:middle;stroke-width:0.26458299"
-         id="tspan900-6-2">Show Log</tspan></text>
-    <g
-       style="fill:#000000"
-       id="g1151"
-       transform="matrix(0.62225049,0,0,0.62225049,-112.1342,67.398908)">
-      <path
-         d="m 25.625,22.481 a 1.5,1.5 0 0 1 -1.5,1.5 H 16.2 a 1.5,1.5 0 0 1 0,-3 h 7.926 a 1.5,1.5 0 0 1 1.499,1.5 z m -1.5,6.463 H 16.2 a 1.5,1.5 0 0 0 0,3 h 7.926 a 1.5,1.5 0 0 0 0,-3 z m 15.75,-4.963 H 47.8 a 1.5,1.5 0 0 0 0,-3 h -7.925 a 1.5,1.5 0 0 0 0,3 z m 0,7.963 H 47.8 a 1.5,1.5 0 0 0 0,-3 h -7.925 a 1.5,1.5 0 0 0 0,3 z m 22.2,-13.656 v 32.424 a 1.5,1.5 0 0 1 -1.5,1.5 H 3.425 a 1.5,1.5 0 0 1 -1.5,-1.5 V 18.288 a 1.5,1.5 0 0 1 3,0 v 30.924 h 25.853 l -0.53,-0.7 A 6.751,6.751 0 0 0 24.892,45.846 H 8.24 a 1.5,1.5 0 0 1 -1.5,-1.5 V 13.288 a 1.5,1.5 0 0 1 1.5,-1.5 H 24.892 A 9.763,9.763 0 0 1 32,14.894 9.767,9.767 0 0 1 39.108,11.788 h 16.653 a 1.5,1.5 0 0 1 1.5,1.5 v 31.055 a 1.5,1.5 0 0 1 -1.5,1.5 H 39.108 a 6.749,6.749 0 0 0 -5.356,2.667 l -0.53,0.7 H 59.075 V 18.288 a 1.5,1.5 0 1 1 3,0 z M 33.752,17.455 33.5,17.789 v 26.86 a 9.745,9.745 0 0 1 5.608,-1.806 H 54.261 V 14.788 H 39.108 a 6.749,6.749 0 0 0 -5.356,2.667 z M 30.5,44.649 V 17.789 L 30.248,17.455 A 6.749,6.749 0 0 0 24.892,14.788 H 9.74 v 28.055 h 15.152 a 9.745,9.745 0 0 1 5.608,1.806 z"
-         id="path1137" />
-    </g>
+<svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
+ <g transform="matrix(3.7795 0 0 3.7795 452.76 -252.8)">
+  <rect x="-118.35" y="68.329" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
+  <text x="-92.13224" y="116.13725" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="-92.13224" y="116.13725" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458" text-align="center" text-anchor="middle">Show Log</tspan></text>
+  <g transform="matrix(.62225 0 0 .62225 -112.13 67.399)">
+   <path d="m25.625 22.481a1.5 1.5 0 01-1.5 1.5h-7.925a1.5 1.5 0 010-3h7.926a1.5 1.5 0 011.499 1.5zm-1.5 6.463h-7.925a1.5 1.5 0 000 3h7.926a1.5 1.5 0 000-3zm15.75-4.963h7.925a1.5 1.5 0 000-3h-7.925a1.5 1.5 0 000 3zm0 7.963h7.925a1.5 1.5 0 000-3h-7.925a1.5 1.5 0 000 3zm22.2-13.656v32.424a1.5 1.5 0 01-1.5 1.5h-57.15a1.5 1.5 0 01-1.5-1.5v-32.424a1.5 1.5 0 013 0v30.924h25.853l-.53-.7a6.751 6.751 0 00-5.356-2.666h-16.652a1.5 1.5 0 01-1.5-1.5v-31.058a1.5 1.5 0 011.5-1.5h16.652a9.763 9.763 0 017.108 3.106 9.767 9.767 0 017.108-3.106h16.653a1.5 1.5 0 011.5 1.5v31.055a1.5 1.5 0 01-1.5 1.5h-16.653a6.749 6.749 0 00-5.356 2.667l-.53.7h25.853v-30.922a1.5 1.5 0 113 0zm-28.323-.833-.252.334v26.86a9.745 9.745 0 015.608-1.806h15.153v-28.055h-15.153a6.749 6.749 0 00-5.356 2.667zm-3.252 27.194v-26.86l-.252-.334a6.749 6.749 0 00-5.356-2.667h-15.152v28.055h15.152a9.745 9.745 0 015.608 1.806z"/>
   </g>
+ </g>
 </svg>

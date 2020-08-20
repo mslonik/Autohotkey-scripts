@@ -6,8 +6,7 @@ const btnOk = document.querySelector(".btnOk");
 btn.addEventListener('click', ToggleClas);
 window.addEventListener("keyup",function (event) {
     if (event.which == 121 || event.keyCode == 121) {
-        const menu = document.querySelector('.menu-bar');
-        menu.classList.toggle('active');
+        ToggleClas()
         return false;
     }
     return true;
@@ -29,5 +28,5 @@ function closeAlert() {
     AboutBox.classList.remove('active');
 }
 
-// Animation text loader
+
 

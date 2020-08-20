@@ -1,0 +1,81 @@
+<svg id="SVGRoot" width="500" height="400" version="1.1" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <radialGradient id="radialGradient6929" cx="59.429" cy="110.43" r="4.35" gradientTransform="translate(-1.1039 -38.847)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#aef" offset="0"/>
+   <stop stop-color="#aef" stop-opacity="0" offset="1"/>
+  </radialGradient>
+  <radialGradient id="radialGradient6937" cx="69.815" cy="110.43" r="4.35" gradientTransform="translate(-1.1039 -38.847)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#afe9dd" offset="0"/>
+   <stop stop-color="#afe9dd" stop-opacity="0" offset="1"/>
+  </radialGradient>
+  <radialGradient id="radialGradient6953" cx="80.2" cy="110.43" r="4.35" gradientTransform="translate(-1.1039 -38.847)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#fea" offset="0"/>
+   <stop stop-color="#fea" stop-opacity="0" offset="1"/>
+  </radialGradient>
+  <radialGradient id="radialGradient6971" cx="90.585" cy="110.43" r="4.35" gradientTransform="translate(-1.1039 -38.847)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#ffd5d5" offset="0"/>
+   <stop stop-color="#ffd5d5" stop-opacity="0" offset="1"/>
+  </radialGradient>
+  <radialGradient id="radialGradient6987" cx="100.97" cy="110.43" r="4.35" gradientTransform="translate(-1.1039 -38.847)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#ccc" offset="0"/>
+   <stop stop-color="#ccc" stop-opacity="0" offset="1"/>
+  </radialGradient>
+  <radialGradient id="radialGradient7003" cx="111.36" cy="110.43" r="4.35" gradientTransform="translate(-1.1039 -38.847)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#d5d5ff" offset="0"/>
+   <stop stop-color="#d5d5ff" stop-opacity="0" offset="1"/>
+  </radialGradient>
+ </defs>
+ <g transform="translate(0,144)">
+  <g transform="matrix(5.8788 0 0 6.4398 -247.38 -405.64)">
+   <g stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".7">
+    <rect x="54.325" y="67.582" width="8" height="8" ry=".85045" fill="url(#radialGradient6929)" style="paint-order:stroke fill markers"/>
+    <rect x="64.711" y="67.582" width="8" height="8" ry=".85045" fill="url(#radialGradient6937)" style="paint-order:stroke fill markers"/>
+    <rect x="75.096" y="67.582" width="8" height="8" ry=".85045" fill="url(#radialGradient6953)" style="paint-order:stroke fill markers"/>
+    <rect x="85.481" y="67.582" width="8" height="8" ry=".85045" fill="url(#radialGradient6971)" style="paint-order:stroke fill markers"/>
+    <rect x="95.867" y="67.582" width="8" height="8" ry=".85045" fill="url(#radialGradient6987)" style="paint-order:stroke fill markers"/>
+    <rect x="106.25" y="67.582" width="8" height="8" ry=".85045" fill="url(#radialGradient7003)" style="paint-order:stroke fill markers"/>
+   </g>
+   <g transform="matrix(.26458 0 0 .26458 55.15 68.407)">
+    <path d="m0 0h24v24h-24z" fill="none"/>
+    <path d="m9.4 10.5 4.77-8.26c-.7-.15-1.42-.24-2.17-.24-2.4 0-4.6.85-6.32 2.25l3.66 6.35zm12.14-1.5c-.92-2.92-3.15-5.26-6-6.34l-3.66 6.34zm.26 1h-7.49l.29.5 4.76 8.25c1.64-1.78 2.64-4.14 2.64-6.75 0-.69-.07-1.35-.2-2zm-13.26 2-3.9-6.75c-1.63 1.78-2.64 4.14-2.64 6.75 0 .69.07 1.35.2 2h7.49zm-6.08 3c.92 2.92 3.15 5.26 6 6.34l3.66-6.34zm11.27 0-3.9 6.76c.7.15 1.42.24 2.17.24 2.4 0 4.6-.85 6.32-2.25l-3.66-6.35z"/>
+   </g>
+   <g transform="matrix(.26458 0 0 .26458 65.536 68.407)">
+    <path d="m5 4v3h5.5v12h3v-12h5.5v-3z"/>
+    <path d="m0 0h24v24h-24z" fill="none"/>
+   </g>
+   <text transform="scale(1.0149 .98528)" x="74.718575" y="74.681625" fill="#000000" font-family="sans-serif" font-size="9.6485px" letter-spacing="0px" stroke="#000000" stroke-width=".05" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="74.718575" y="74.681625" font-size="6.4323px" stroke="#000000" stroke-width=".05">@</tspan></text>
+   <g transform="matrix(0 .26458 -.26458 0 92.656 68.407)">
+    <path d="m0 0h24v24h-24z" fill="none"/>
+    <path d="m13 3h-2v10h2zm4.83 2.17-1.42 1.42c1.58 1.27 2.59 3.22 2.59 5.41 0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42l-1.41-1.41c-1.94 1.65-3.17 4.09-3.17 6.83 0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/>
+   </g>
+   <g transform="matrix(.26458 0 0 .26458 107.08 68.407)">
+    <path d="m15 18.5c-2.51 0-4.68-1.42-5.76-3.5h5.76v-2h-6.42c-.05-.33-.08-.66-.08-1s.03-.67.08-1h6.42v-2h-5.76c1.08-2.08 3.26-3.5 5.76-3.5 1.61 0 3.09.59 4.23 1.57l1.77-1.77c-1.59-1.43-3.7-2.3-6-2.3-3.92 0-7.24 2.51-8.48 6h-3.52v2h3.06c-.04.33-.06.66-.06 1s.02.67.06 1h-3.06v2h3.52c1.24 3.49 4.56 6 8.48 6 2.31 0 4.41-.87 6-2.3l-1.78-1.77c-1.13.98-2.6 1.57-4.22 1.57z"/>
+    <path d="m0 0h24v24h-24z" fill="none"/>
+   </g>
+   <g transform="translate(-1.1039 -38.847)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".7">
+    <rect x="71.543" y="95.867" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+    <rect x="61.045" y="95.867" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+    <rect x="82.04" y="95.867" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+    <rect x="50.548" y="95.867" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+    <rect x="92.537" y="95.867" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+    <rect x="103.03" y="95.867" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+    <rect x="113.53" y="95.867" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+   </g>
+   <g transform="translate(-.96256 -38.847)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".7">
+    <rect x="71.056" y="117.09" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+    <rect x="60.538" y="117.09" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+    <rect x="81.575" y="117.09" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+    <rect x="50.019" y="117.09" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+    <rect x="92.094" y="117.09" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+    <rect x="102.61" y="117.09" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+    <rect x="113.13" y="117.09" width="8" height="8" ry=".85045" style="paint-order:stroke fill markers"/>
+   </g>
+   <g transform="matrix(.26458 0 0 .26458 96.692 68.407)">
+    <path d="m0 0h24v24h-24z" fill="none"/>
+    <path d="m19 15-6 6-1.42-1.42 3.59-3.58h-11.17v-12h2v10h9.17l-3.59-3.58 1.42-1.42z"/>
+   </g>
+   <rect x="116.64" y="67.582" width="8" height="8" ry=".85045" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".7" style="paint-order:stroke fill markers"/>
+   <rect x="43.94" y="67.582" width="8" height="8" ry=".85045" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".7" style="paint-order:stroke fill markers"/>
+  </g>
+ </g>
+</svg>

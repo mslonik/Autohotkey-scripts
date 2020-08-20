@@ -1,0 +1,24 @@
+<svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
+ <g transform="matrix(3.7795 0 0 3.7795 -1795.2 2502.6)">
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-392.69" y="-63.57" width="758.02" height="397.52"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-251.87" y="-84.492" width="624.44" height="455.45"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-202.78" y="-50.695" width="473.96" height="281.64"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-86.906" y="-78.859" width="516.61" height="410.39"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-81.273" y="-32.188" width="309" height="322.68"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-90.93" y="-68.398" width="392.69" height="252.67"/></flowRegion><flowPara/></flowRoot>
+  <g transform="translate(675.17 -.21291)">
+   <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-100.59" y="-53.109" width="462.7" height="369.35"/></flowRegion><flowPara/></flowRoot>
+   <g transform="translate(57.194 .21291)">
+    <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-329.12" y="-12.07" width="696.05" height="259.91"/></flowRegion><flowPara/></flowRoot>
+    <g transform="translate(-1495.1 -629.38)">
+     <g transform="translate(-116.07 6.3036e-6)">
+      <rect x="1354.7" y="-31.75" width="52.951" height="52.917" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".50016" style="paint-order:fill markers stroke"/>
+      <text transform="scale(1.0003 .99968)" x="1380.8032" y="16.526237" fill="#ffffff" font-family="voestalpine" font-size="6.352px" letter-spacing="0px" stroke-width=".26467" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1380.8032" y="16.526237" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" stroke-width=".26467" text-align="center" text-anchor="middle">AXM cały</tspan></text>
+      <rect x="1373.6" y="-26.581" width="15.182" height="28.242" fill="#fff" stroke="#fff" stroke-linecap="round" stroke-width="1.5909" style="paint-order:fill markers stroke"/>
+      <text transform="scale(1.0003 .99968)" x="1374.8536" y="0.53145152" fill="#ff0000" font-family="voestalpine" font-size="5.6462px" letter-spacing="0px" stroke-width=".26467" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1374.8536" y="0.53145152" fill="#ff0000" stroke-width=".26467">AXM</tspan></text>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>

@@ -1,92 +1,83 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg47"
-   version="1.1"
-   viewBox="0 0 52.758294 52.758296"
-   height="199.40143"
-   width="199.40143">
-  <defs
-     id="defs42">
-    <pattern
-       id="EMFhbasepattern"
-       patternUnits="userSpaceOnUse"
-       width="6"
-       height="6"
-       x="0"
-       y="0" />
-  </defs>
-  <metadata
-     id="metadata45">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="g8556"
-     transform="translate(49.836509,-375.23204)">
-    <g
-       id="g5305">
-      <g
-         id="g10477"
-         transform="translate(-1780.698,6.3971966)">
-        <rect
-           height="52.258293"
-           y="369.25134"
-           x="1731.2096"
-           width="52.258293"
-           id="rect833-1-5-3-7-4-8-5-1-4-2-8-1-5-8-6-0-5-58-4-8-8-2-1"
-           style="fill:#ffffff;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
-        <text
-           id="text898-7-3-6-8-3-3-0-66-7-8-8-0-8-3-4-2-6-22-3-3-4-7-4"
-           y="407.61624"
-           x="1757.6919"
-           style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.26458299"
-           xml:space="preserve"><tspan
-             style="font-size:6.3499999px;text-align:center;text-anchor:middle;stroke-width:0.26458299"
-             y="407.61624"
-             x="1757.6919"
-             id="tspan3280-9">Pokaż pełną</tspan><tspan
-             id="tspan3443"
-             style="font-size:6.3499999px;text-align:center;text-anchor:middle;stroke-width:0.26458299"
-             y="413.64874"
-             x="1757.6919">ścieżkę w tytule</tspan><tspan
-             id="tspan3445"
-             style="font-size:6.3499999px;text-align:center;text-anchor:middle;stroke-width:0.26458299"
-             y="419.68124"
-             x="1757.6919">okna</tspan></text>
-        <rect
-           y="376.12659"
-           x="1738.386"
-           height="24.227541"
-           width="37.900509"
-           id="rect3498"
-           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.5291667;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke" />
-        <path
-           id="path3500"
-           d="m 1738.446,379.84467 c 12.5738,0 25.1473,0 37.7206,0"
-           style="fill:none;stroke:#000000;stroke-width:0.5291667;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-        <text
-           id="text3506"
-           y="378.52835"
-           x="1739.3004"
-           style="font-size:2.04979992px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;stroke-width:0.0960844"
-           xml:space="preserve"><tspan
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:consolas;-inkscape-font-specification:consolas;stroke-width:0.0960844"
-             y="378.52835"
-             x="1739.3004"
-             id="tspan3504">S:\OrgFirma\Szablony</tspan></text>
+<svg id="SVGRoot" width="208" height="208" version="1.1" viewBox="0 0 208 208" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(0,7)">
+  <g transform="matrix(3.7795 0 0 3.7795 10.171 -6.7758)">
+   <g transform="translate(-1.0884 -121.69)">
+    <g transform="translate(1.6608 -59.209)">
+     <g transform="translate(-.6443 -59.335)">
+      <g transform="translate(-1396.8 269.89)">
+       <g transform="translate(-57.972 -.024822)">
+        <g transform="translate(1658.1 73.867)">
+         <g transform="translate(-203.03 -103.33)">
+          <flowRoot transform="matrix(.26458 0 0 .26458 -2.875 1.091)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-85.582" y="-60.812" width="342.33" height="293.65"/></flowRegion><flowPara/></flowRoot>
+          <g transform="translate(-1039.4 318.88)">
+           <flowRoot transform="matrix(.26458 0 0 .26458 1036.5 -317.79)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-105.21" y="-13.703" width="562.17" height="513.49"/></flowRegion><flowPara/></flowRoot>
+           <g transform="translate(-66.134 .039287)">
+            <g transform="translate(-66.173 .043409)">
+             <flowRoot transform="matrix(.26458 0 0 .26458 1168.8 -317.87)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-114.63" y="-91.434" width="675.23" height="522.91"/></flowRegion><flowPara/></flowRoot>
+             <g transform="translate(-66.2 -.040316)">
+              <g transform="translate(-65.918 -.60254)">
+               <g transform="translate(-66.6 .14883)">
+                <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-24.34" y="-19.695" width="252.04" height="245.75"/></flowRegion><flowPara/></flowRoot>
+                <g transform="translate(-68.678 -.48293)">
+                 <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-65.168" y="-26.762" width="382.37" height="335.26"/></flowRegion><flowPara/></flowRoot>
+                 <g transform="translate(-63.347 .4912)">
+                  <g transform="translate(529.82 -.18087)">
+                   <g transform="translate(794.67 .06923)">
+                    <g transform="translate(-198.36 .17569)">
+                     <g transform="translate(-530.68 .043413)">
+                      <g transform="translate(912.04 -.041317)">
+                       <g transform="translate(132.58 -.39794)">
+                        <g transform="translate(-580.62 .35866)">
+                         <g transform="translate(-264.6 -.1571)">
+                          <g transform="translate(463.55 .097138)">
+                           <g transform="translate(-397.36 .059959)">
+                            <g transform="translate(66.026 -.30592)">
+                             <g transform="translate(-264.69 -.093008)">
+                              <g transform="translate(734.89 179.33)">
+                               <g transform="translate(-205.07 -178.97)">
+                                <g transform="translate(-1081.1 -686.85)">
+                                 <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="21" y="-71" width="223" height="308"/></flowRegion><flowPara/></flowRoot>
+                                 <g transform="translate(-112.28 .55746)">
+                                  <g transform="translate(-396.77 -.26462)">
+                                   <g transform="translate(167.68 .26462)">
+                                    <rect x="1731.2" y="369.25" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
+                                    <text x="1757.6919" y="406.25949" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="1757.6919" y="406.25949" text-align="center">Pokaż pełną</tspan><tspan x="1757.6919" y="412.29199" text-align="center">ścieżkę w tytule</tspan><tspan x="1757.6919" y="418.32449" text-align="center">okna</tspan></text>
+                                    <rect x="1738.4" y="375.07" width="37.901" height="24.228" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".52917" style="paint-order:fill markers stroke"/>
+                                    <path d="m1738.4 379.84h37.721" fill="none" stroke="#000" stroke-width=".52917"/>
+                                    <text x="1739.3004" y="378.52835" font-family="sans-serif" font-size="2.0498px" letter-spacing="0px" stroke-width=".096084" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1739.3004" y="378.52835" font-family="sans-serif" stroke-width=".096084">S:\OrgFirma\Szablony</tspan></text>
+                                   </g>
+                                  </g>
+                                 </g>
+                                </g>
+                               </g>
+                              </g>
+                             </g>
+                            </g>
+                           </g>
+                          </g>
+                         </g>
+                        </g>
+                       </g>
+                      </g>
+                     </g>
+                    </g>
+                   </g>
+                  </g>
+                 </g>
+                </g>
+               </g>
+              </g>
+             </g>
+            </g>
+           </g>
+          </g>
+         </g>
+        </g>
+       </g>
       </g>
+     </g>
     </g>
+   </g>
   </g>
+ </g>
 </svg>

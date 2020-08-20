@@ -1,6 +1,12 @@
 /* font-family: 'Open Sans', sans-serif;
 font-family: 'Roboto', sans-serif; */
-
+@font-face{
+    font-family:'lato';
+    src: url('../Assets/Lato/Lato-Regular.ttf');
+}
+:root{
+    font-family: 'Lato', sans-serif;
+}
 *,
 *::after,
 *::before {
@@ -11,7 +17,6 @@ font-family: 'Roboto', sans-serif; */
 
 html {
     font-size: 10px;
-    font-family: 'Open Sans', sans-serif;
 }
 
 main {
@@ -101,7 +106,7 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 2.3px solid #000;
+    /* border: 2.3px solid #000; */
 }
 
 .box_item:hover {

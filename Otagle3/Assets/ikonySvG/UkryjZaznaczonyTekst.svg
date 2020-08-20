@@ -1,290 +1,89 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg47"
-   version="1.1"
-   viewBox="0 0 52.758294 52.758296"
-   height="199.40143"
-   width="199.40143">
-  <defs
-     id="defs42">
-    <pattern
-       id="EMFhbasepattern"
-       patternUnits="userSpaceOnUse"
-       width="6"
-       height="6"
-       x="0"
-       y="0" />
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mend-5-0"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1146-3-3" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mend-5-3"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1146-3-9" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mend-5-0-4"
-       style="overflow:visible">
-      <path
-         id="path1146-3-3-8"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mend-5-3-8"
-       style="overflow:visible">
-      <path
-         id="path1146-3-9-5"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mend"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1146" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mend-5"
-       style="overflow:visible">
-      <path
-         id="path1146-3"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mstart"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.4,0,0,0.4,4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1143" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mstart-1"
-       style="overflow:visible">
-      <path
-         id="path1143-7"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(0.4,0,0,0.4,4,0)" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Lend"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1140" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Lstart"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.8,0,0,0.8,10,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1137" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Lend-5"
-       style="overflow:visible">
-      <path
-         id="path1140-4"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Lstart-93"
-       style="overflow:visible">
-      <path
-         id="path1137-7"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(0.8,0,0,0.8,10,0)" />
-    </marker>
-  </defs>
-  <metadata
-     id="metadata45">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="g8556"
-     transform="translate(49.836509,-375.23204)">
-    <g
-       id="g5305">
-      <text
-         id="text898-7-3-6-8-3-3-0-66-7-8-8-0-8-3-4-2-6-22-3-3-4-7-0-2-6-2"
-         y="425.61624"
-         x="-23.21401"
-         style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
-         xml:space="preserve"><tspan
-           style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
-           y="425.61624"
-           x="-23.21401"
-           id="tspan3280-8-2-3-8">Pokaż nagłówek</tspan></text>
-      <g
-         style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1"
-         id="g3425-7-6"
-         transform="matrix(0.43424404,0,0,-0.43424404,-44.422754,415.59384)">
-        <rect
-           id="rect3393-7-1"
-           height="2"
-           width="13.89"
-           y="68.667"
-           x="17.409"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <path
-           id="path3395-1-7"
-           d="M 85.235,77.833 H 14.106 c -2.998,0 -5.436,-2.438 -5.436,-5.436 V 23.27 c 0,-2.998 2.438,-5.436 5.436,-5.436 h 71.129 c 2.998,0 5.436,2.438 5.436,5.436 v 49.128 c -0.001,2.998 -2.438,5.435 -5.436,5.435 z m -71.129,-58 c -1.895,0 -3.436,1.541 -3.436,3.437 v 49.128 c 0,1.895 1.541,3.436 3.436,3.436 h 71.129 c 1.895,0 3.436,-1.541 3.436,-3.436 V 23.27 c 0,-1.896 -1.541,-3.437 -3.436,-3.437 z"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3397-6-6"
-           height="2"
-           width="13.89"
-           y="68.667"
-           x="42.648998"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3399-8-5"
-           height="2"
-           width="13.89"
-           y="68.667"
-           x="67.704002"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3401-4-7"
-           height="2"
-           width="13.89"
-           y="62.667"
-           x="17.500999"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3403-9-4"
-           height="2"
-           width="13.89"
-           y="62.667"
-           x="42.742001"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3405-2-5"
-           height="2"
-           width="13.89"
-           y="62.667"
-           x="67.795998"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3407-0-9"
-           height="2"
-           width="64.139"
-           y="56.667"
-           x="17.500999"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-      </g>
-      <g
-         id="g2895"
-         transform="translate(-1185.5439,462.01257)">
-        <rect
-           y="-86.664398"
-           x="1135.9058"
-           height="52.63237"
-           width="52.632374"
-           id="rect833-2-8-6-2-6-4-8-1-7-4-6-9-4-5-2"
-           style="fill:#b9d4ff;fill-opacity:1;stroke:#000000;stroke-width:0.28429499;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
-        <g
-           id="g2886">
-          <text
-             xml:space="preserve"
-             style="font-size:6.3499999px;line-height:1.04999995;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;stroke-width:0.26458299"
-             x="1161.9551"
-             y="-42.098473"
-             id="text837-2-5-3-5-4-2-1-6-9-68-0-7-6-7-4"><tspan
-               x="1161.9551"
-               y="-42.098473"
-               style="font-size:6.3499999px;text-align:center;text-anchor:middle;stroke-width:0.26458299"
-               id="tspan3834-2">Ukryj zaznaczony</tspan><tspan
-               id="tspan4028"
-               x="1161.9551"
-               y="-35.430973"
-               style="font-size:6.3499999px;text-align:center;text-anchor:middle;stroke-width:0.26458299">tekst</tspan></text>
-          <g
-             transform="matrix(1.237761,0,0,1.237761,1142.4178,-87.423365)"
-             id="g4044"
-             style="fill:#000000">
-            <path
-               id="path4030"
-               d="M 22.166,11.249 27.708,5.707 26.294,4.293 20.391,10.196 C 19.013,9.493 17.517,9 16,9 10.625,9 5.451,15.098 5.233,15.357 L 4.695,16 5.233,16.643 c 0.129,0.153 1.993,2.341 4.601,4.108 l -5.542,5.542 1.414,1.414 5.903,-5.903 C 12.988,22.507 14.483,23 16,23 21.375,23 26.549,16.902 26.767,16.643 L 27.305,16 26.767,15.357 c -0.129,-0.153 -1.994,-2.34 -4.601,-4.108 z M 7.351,16 c 1.407,-1.48 5.125,-5 8.649,-5 0.969,0 1.951,0.271 2.897,0.688 l -0.878,0.878 C 17.424,12.216 16.74,12 16,12 c -2.206,0 -4,1.794 -4,4 0,0.739 0.215,1.424 0.567,2.02 l -1.294,1.293 C 9.554,18.198 8.113,16.802 7.351,16 Z M 18,16 c 0,1.103 -0.897,2 -2,2 -0.178,0 -0.347,-0.031 -0.511,-0.074 l 2.437,-2.438 C 17.969,15.653 18,15.822 18,16 Z m -4,0 c 0,-1.103 0.897,-2 2,-2 0.178,0 0.347,0.031 0.511,0.074 l -2.437,2.438 C 14.031,16.347 14,16.178 14,16 Z m 2,5 c -0.969,0 -1.951,-0.271 -2.897,-0.688 l 0.878,-0.878 C 14.576,19.784 15.26,20 16,20 c 2.206,0 4,-1.794 4,-4 0,-0.739 -0.215,-1.424 -0.567,-2.02 l 1.294,-1.293 c 1.719,1.114 3.16,2.511 3.922,3.312 C 23.242,17.48 19.524,21 16,21 Z" />
+<svg id="SVGRoot" width="208" height="208" version="1.1" viewBox="0 0 208 208" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(0,7)">
+  <g transform="matrix(3.7795 0 0 3.7795 10.171 -6.7758)">
+   <g transform="translate(-1.0884 -121.69)">
+    <g transform="translate(1.6608 -59.209)">
+     <g transform="translate(-.6443 -59.335)">
+      <g transform="translate(-1396.8 269.89)">
+       <g transform="translate(-57.972 -.024822)">
+        <g transform="translate(1658.1 73.867)">
+         <g transform="translate(-203.03 -103.33)">
+          <flowRoot transform="matrix(.26458 0 0 .26458 -2.875 1.091)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-85.582" y="-60.812" width="342.33" height="293.65"/></flowRegion><flowPara/></flowRoot>
+          <g transform="translate(-1039.4 318.88)">
+           <flowRoot transform="matrix(.26458 0 0 .26458 1036.5 -317.79)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-105.21" y="-13.703" width="562.17" height="513.49"/></flowRegion><flowPara/></flowRoot>
+           <g transform="translate(-66.134 .039287)">
+            <g transform="translate(-66.173 .043409)">
+             <flowRoot transform="matrix(.26458 0 0 .26458 1168.8 -317.87)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-114.63" y="-91.434" width="675.23" height="522.91"/></flowRegion><flowPara/></flowRoot>
+             <g transform="translate(-66.2 -.040316)">
+              <g transform="translate(-65.918 -.60254)">
+               <g transform="translate(-66.6 .14883)">
+                <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-24.34" y="-19.695" width="252.04" height="245.75"/></flowRegion><flowPara/></flowRoot>
+                <g transform="translate(-68.678 -.48293)">
+                 <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-65.168" y="-26.762" width="382.37" height="335.26"/></flowRegion><flowPara/></flowRoot>
+                 <g transform="translate(-63.347 .4912)">
+                  <g transform="translate(529.82 -.18087)">
+                   <g transform="translate(794.67 .06923)">
+                    <g transform="translate(-198.36 .17569)">
+                     <g transform="translate(-530.68 .043413)">
+                      <g transform="translate(912.04 -.041317)">
+                       <g transform="translate(132.58 -.39794)">
+                        <g transform="translate(-580.62 .35866)">
+                         <g transform="translate(-264.6 -.1571)">
+                          <g transform="translate(463.55 .097138)">
+                           <g transform="translate(-397.36 .059959)">
+                            <g transform="translate(66.026 -.30592)">
+                             <g transform="translate(-264.69 -.093008)">
+                              <g transform="translate(734.89 179.33)">
+                               <g transform="translate(-205.07 -178.97)">
+                                <g transform="translate(-1081.1 -686.85)">
+                                 <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="21" y="-71" width="223" height="308"/></flowRegion><flowPara/></flowRoot>
+                                 <g transform="translate(-112.28 .55746)">
+                                  <g transform="translate(-396.77 -.26462)">
+                                   <g transform="translate(167.68 .26462)">
+                                    <g transform="translate(457.35 -.55746)">
+                                     <g transform="translate(452.66 .26458)">
+                                      <g transform="translate(-314.63 456.02)">
+                                       <rect x="1135.9" y="-86.664" width="52.632" height="52.632" fill="#b9d4ff" stroke="#000" stroke-linecap="round" stroke-width=".28429" style="paint-order:fill markers stroke"/>
+                                       <text x="1161.9551" y="-44.036472" font-family="voestalpine" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="1161.9551" y="-44.036472" text-align="center">Ukryj zaznaczony</tspan><tspan x="1161.9551" y="-37.368973" text-align="center">tekst</tspan></text>
+                                       <g transform="matrix(1.2378 0 0 1.2378 1142.4 -87.423)">
+                                        <path d="m22.166 11.249 5.542-5.542-1.414-1.414-5.903 5.903c-1.378-.703-2.874-1.196-4.391-1.196-5.375 0-10.549 6.098-10.767 6.357l-.538.643.538.643c.129.153 1.993 2.341 4.601 4.108l-5.542 5.542 1.414 1.414 5.903-5.903c1.379.703 2.874 1.196 4.391 1.196 5.375 0 10.549-6.098 10.767-6.357l.538-.643-.538-.643c-.129-.153-1.994-2.34-4.601-4.108zm-14.815 4.751c1.407-1.48 5.125-5 8.649-5 .969 0 1.951.271 2.897.688l-.878.878c-.595-.35-1.279-.566-2.019-.566-2.206 0-4 1.794-4 4 0 .739.215 1.424.567 2.02l-1.294 1.293c-1.719-1.115-3.16-2.511-3.922-3.313zm10.649 0c0 1.103-.897 2-2 2-.178 0-.347-.031-.511-.074l2.437-2.438c.043.165.074.334.074.512zm-4 0c0-1.103.897-2 2-2 .178 0 .347.031.511.074l-2.437 2.438c-.043-.165-.074-.334-.074-.512zm2 5c-.969 0-1.951-.271-2.897-.688l.878-.878c.595.35 1.279.566 2.019.566 2.206 0 4-1.794 4-4 0-.739-.215-1.424-.567-2.02l1.294-1.293c1.719 1.114 3.16 2.511 3.922 3.312-1.407 1.481-5.125 5.001-8.649 5.001z"/>
+                                       </g>
+                                      </g>
+                                     </g>
+                                    </g>
+                                   </g>
+                                  </g>
+                                 </g>
+                                </g>
+                               </g>
+                              </g>
+                             </g>
+                            </g>
+                           </g>
+                          </g>
+                         </g>
+                        </g>
+                       </g>
+                      </g>
+                     </g>
+                    </g>
+                   </g>
+                  </g>
+                 </g>
+                </g>
+               </g>
+              </g>
+             </g>
+            </g>
+           </g>
           </g>
+         </g>
         </g>
+       </g>
       </g>
+     </g>
     </g>
+   </g>
   </g>
+ </g>
 </svg>

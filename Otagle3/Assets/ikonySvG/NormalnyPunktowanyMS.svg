@@ -1,308 +1,79 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg47"
-   version="1.1"
-   viewBox="0 0 52.758294 52.758296"
-   height="199.40143"
-   width="199.40143">
-  <defs
-     id="defs42">
-    <pattern
-       id="EMFhbasepattern"
-       patternUnits="userSpaceOnUse"
-       width="6"
-       height="6"
-       x="0"
-       y="0" />
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mend-5-0"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1146-3-3" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mend-5-3"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1146-3-9" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mend-5-0-4"
-       style="overflow:visible">
-      <path
-         id="path1146-3-3-8"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mend-5-3-8"
-       style="overflow:visible">
-      <path
-         id="path1146-3-9-5"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mend"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1146" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mend-5"
-       style="overflow:visible">
-      <path
-         id="path1146-3"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mstart"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.4,0,0,0.4,4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1143" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mstart-1"
-       style="overflow:visible">
-      <path
-         id="path1143-7"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(0.4,0,0,0.4,4,0)" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Lend"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1140" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Lstart"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.8,0,0,0.8,10,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1137" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Lend-5"
-       style="overflow:visible">
-      <path
-         id="path1140-4"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Lstart-93"
-       style="overflow:visible">
-      <path
-         id="path1137-7"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(0.8,0,0,0.8,10,0)" />
-    </marker>
-  </defs>
-  <metadata
-     id="metadata45">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="g8556"
-     transform="translate(49.836509,-375.23204)">
-    <g
-       id="g5305">
-      <text
-         id="text898-7-3-6-8-3-3-0-66-7-8-8-0-8-3-4-2-6-22-3-3-4-7-0-2-6-2"
-         y="425.61624"
-         x="-23.21401"
-         style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
-         xml:space="preserve"><tspan
-           style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
-           y="425.61624"
-           x="-23.21401"
-           id="tspan3280-8-2-3-8">Pokaż nagłówek</tspan></text>
-      <g
-         style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1"
-         id="g3425-7-6"
-         transform="matrix(0.43424404,0,0,-0.43424404,-44.422754,415.59384)">
-        <rect
-           id="rect3393-7-1"
-           height="2"
-           width="13.89"
-           y="68.667"
-           x="17.409"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <path
-           id="path3395-1-7"
-           d="M 85.235,77.833 H 14.106 c -2.998,0 -5.436,-2.438 -5.436,-5.436 V 23.27 c 0,-2.998 2.438,-5.436 5.436,-5.436 h 71.129 c 2.998,0 5.436,2.438 5.436,5.436 v 49.128 c -0.001,2.998 -2.438,5.435 -5.436,5.435 z m -71.129,-58 c -1.895,0 -3.436,1.541 -3.436,3.437 v 49.128 c 0,1.895 1.541,3.436 3.436,3.436 h 71.129 c 1.895,0 3.436,-1.541 3.436,-3.436 V 23.27 c 0,-1.896 -1.541,-3.437 -3.436,-3.437 z"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3397-6-6"
-           height="2"
-           width="13.89"
-           y="68.667"
-           x="42.648998"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3399-8-5"
-           height="2"
-           width="13.89"
-           y="68.667"
-           x="67.704002"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3401-4-7"
-           height="2"
-           width="13.89"
-           y="62.667"
-           x="17.500999"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3403-9-4"
-           height="2"
-           width="13.89"
-           y="62.667"
-           x="42.742001"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3405-2-5"
-           height="2"
-           width="13.89"
-           y="62.667"
-           x="67.795998"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3407-0-9"
-           height="2"
-           width="64.139"
-           y="56.667"
-           x="17.500999"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-      </g>
-      <g
-         id="g1680"
-         transform="translate(-159.51533,692.48325)">
-        <rect
-           style="fill:#ffec8e;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-           id="rect833-3-1-3-9"
-           width="52.916668"
-           height="52.916668"
-           x="109.98106"
-           y="-317.37164" />
-        <text
-           xml:space="preserve"
-           style="font-size:6.3499999px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.26458299"
-           x="136.55345"
-           y="-275.60468"
-           id="text983-9-1-2-9"><tspan
-             id="tspan1971-0-2-9"
-             x="136.55345"
-             y="-275.60468"
-             style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.26458299">Normalny</tspan><tspan
-             id="tspan2226-3"
-             x="136.55345"
-             y="-267.66718"
-             style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.26458299"> punktowany ms</tspan></text>
-        <g
-           transform="matrix(0.16364267,0,0,0.15245564,123.20362,-309.13279)"
-           id="g2224-0"
-           style="fill:#000000">
-          <path
-             d="M 86.32919,81.16667 A 17.20826,17.20826 0 1 0 103.53755,98.375 17.22746,17.22746 0 0 0 86.32919,81.16667 Z m 0,27.53322 A 10.325,10.325 0 1 1 96.65424,98.375 10.33624,10.33624 0 0 1 86.32919,108.69989 Z"
-             transform="translate(-69.12084,-81.16667)"
-             id="path2198-8" />
-          <path
-             d="m 124.18747,101.81658 h 103.25 a 3.44165,3.44165 0 1 0 0,-6.8833 h -103.25 a 3.44165,3.44165 0 0 0 0,6.8833 z"
-             transform="translate(-69.12084,-81.16667)"
-             id="path2200-1" />
-          <path
-             d="m 86.32919,132.79155 a 17.20836,17.20836 0 1 0 17.20836,17.20836 17.22758,17.22758 0 0 0 -17.20836,-17.20836 z m 0,27.53341 A 10.325,10.325 0 1 1 96.65424,149.99991 10.3364,10.3364 0 0 1 86.32919,160.325 Z"
-             transform="translate(-69.12084,-81.16667)"
-             id="path2202-6" />
-          <path
-             d="M 227.43742,146.55835 H 124.18747 a 3.44165,3.44165 0 0 0 0,6.8833 h 103.25 a 3.44165,3.44165 0 1 0 0,-6.8833 z"
-             transform="translate(-69.12084,-81.16667)"
-             id="path2204-2" />
-          <path
-             d="M 86.32919,184.41662 A 17.20836,17.20836 0 1 0 103.53755,201.625 17.22746,17.22746 0 0 0 86.32919,184.41662 Z m 0,27.53341 A 10.32505,10.32505 0 1 1 96.65424,201.625 10.3364,10.3364 0 0 1 86.32919,211.95 Z"
-             transform="translate(-69.12084,-81.16667)"
-             id="path2206-7" />
-          <path
-             d="M 227.43742,198.18323 H 124.18747 a 3.44166,3.44166 0 0 0 0,6.88331 h 103.25 a 3.44166,3.44166 0 1 0 0,-6.88331 z"
-             transform="translate(-69.12084,-81.16667)"
-             id="path2208-9" />
+<svg id="SVGRoot" width="208" height="208" version="1.1" viewBox="0 0 208 208" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(0,7)">
+  <g transform="matrix(3.7795 0 0 3.7795 10.171 -6.7758)">
+   <g transform="translate(-1.0884 -121.69)">
+    <g transform="translate(1.6608 -59.209)">
+     <g transform="translate(-.6443 -59.335)">
+      <g transform="translate(-1396.8 269.89)">
+       <g transform="translate(-57.972 -.024822)">
+        <g transform="translate(1658.1 73.867)">
+         <g transform="translate(-203.03 -103.33)">
+          <flowRoot transform="matrix(.26458 0 0 .26458 -2.875 1.091)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-85.582" y="-60.812" width="342.33" height="293.65"/></flowRegion><flowPara/></flowRoot>
+          <g transform="translate(-1039.4 318.88)">
+           <flowRoot transform="matrix(.26458 0 0 .26458 1036.5 -317.79)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-105.21" y="-13.703" width="562.17" height="513.49"/></flowRegion><flowPara/></flowRoot>
+           <g transform="translate(-66.134 .039287)">
+            <g transform="translate(-66.173 .043409)">
+             <flowRoot transform="matrix(.26458 0 0 .26458 1168.8 -317.87)" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-114.63" y="-91.434" width="675.23" height="522.91"/></flowRegion><flowPara/></flowRoot>
+             <g transform="translate(-66.2 -.040316)">
+              <g transform="translate(-65.918 -.60254)">
+               <g transform="translate(-66.6 .14883)">
+                <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-24.34" y="-19.695" width="252.04" height="245.75"/></flowRegion><flowPara/></flowRoot>
+                <g transform="translate(-68.678 -.48293)">
+                 <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-65.168" y="-26.762" width="382.37" height="335.26"/></flowRegion><flowPara/></flowRoot>
+                 <g transform="translate(-63.347 .4912)">
+                  <g transform="translate(529.82 -.18087)">
+                   <g transform="translate(794.67 .06923)">
+                    <g transform="translate(-198.36 .17569)">
+                     <g transform="translate(-530.68 .043413)">
+                      <g transform="translate(912.04 -.041317)">
+                       <g transform="translate(132.58 -.39794)">
+                        <g transform="translate(-580.62 .35866)">
+                         <g transform="translate(-264.6 -.1571)">
+                          <g transform="translate(463.55 .097138)">
+                           <g transform="translate(-397.36 .059959)">
+                            <g transform="translate(66.026 -.30592)">
+                             <g transform="translate(-264.69 -.093008)">
+                              <g transform="translate(734.89 179.33)">
+                               <g transform="translate(-6.3354 -178.7)">
+                                <rect x="109.98" y="-317.37" width="52.917" height="52.917" fill="#ffec8e" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
+                                <text x="136.55345" y="-277.09021" fill="#000000" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="136.55345" y="-277.09021" text-align="center">Normalny</tspan><tspan x="136.55345" y="-269.15271" text-align="center"> punktowany ms</tspan></text>
+                                <g transform="matrix(.16364 0 0 .15246 123.2 -309.13)">
+                                 <path transform="translate(-69.121 -81.167)" d="m86.329 81.167a17.208 17.208 0 1017.208 17.208 17.227 17.227 0 00-17.208-17.208zm0 27.533a10.325 10.325 0 1110.325-10.325 10.336 10.336 0 01-10.325 10.325z"/>
+                                 <path transform="translate(-69.121 -81.167)" d="m124.19 101.82h103.25a3.4416 3.4416 0 100-6.8833h-103.25a3.4416 3.4416 0 000 6.8833z"/>
+                                 <path transform="translate(-69.121 -81.167)" d="m86.329 132.79a17.208 17.208 0 1017.208 17.208 17.228 17.228 0 00-17.208-17.208zm0 27.533a10.325 10.325 0 1110.325-10.325 10.336 10.336 0 01-10.325 10.325z"/>
+                                 <path transform="translate(-69.121 -81.167)" d="m227.44 146.56h-103.25a3.4416 3.4416 0 000 6.8833h103.25a3.4416 3.4416 0 100-6.8833z"/>
+                                 <path transform="translate(-69.121 -81.167)" d="m86.329 184.42a17.208 17.208 0 1017.208 17.208 17.227 17.227 0 00-17.208-17.208zm0 27.533a10.325 10.325 0 1110.325-10.325 10.336 10.336 0 01-10.325 10.325z"/>
+                                 <path transform="translate(-69.121 -81.167)" d="m227.44 198.18h-103.25a3.4417 3.4417 0 000 6.8833h103.25a3.4417 3.4417 0 100-6.8833z"/>
+                                </g>
+                               </g>
+                              </g>
+                             </g>
+                            </g>
+                           </g>
+                          </g>
+                         </g>
+                        </g>
+                       </g>
+                      </g>
+                     </g>
+                    </g>
+                   </g>
+                  </g>
+                 </g>
+                </g>
+               </g>
+              </g>
+             </g>
+            </g>
+           </g>
+          </g>
+         </g>
         </g>
+       </g>
       </g>
+     </g>
     </g>
+   </g>
   </g>
+ </g>
 </svg>

@@ -1,86 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg47"
-   version="1.1"
-   viewBox="0 0 52.758294 52.758296"
-   height="199.40143"
-   width="199.40143">
-  <defs
-     id="defs42">
-    <pattern
-       id="EMFhbasepattern"
-       patternUnits="userSpaceOnUse"
-       width="6"
-       height="6"
-       x="0"
-       y="0" />
-  </defs>
-  <metadata
-     id="metadata45">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="g8067"
-     transform="translate(-345.74111,-234.98277)">
-    <rect
-       style="fill:#ffffff;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-       id="rect833-1-5-3-0-1-8-8-4"
-       width="52.258293"
-       x="346.01364"
-       y="235.24811"
-       height="52.258293" />
-    <rect
-       style="fill:#ffffff;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-       id="rect880-2-7-2-3-9-95-4-8"
-       width="44.089348"
-       height="12.057546"
-       x="350.09811"
-       y="254.81059" />
-    <text
-       xml:space="preserve"
-       style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.26458299"
-       x="372.13065"
-       y="279.37787"
-       id="text898-7-3-6-3-6-38-1-0"><tspan
-         x="372.13065"
-         y="279.37787"
-         style="font-size:6.3499999px;text-align:center;text-anchor:middle;stroke-width:0.26458299"
-         id="tspan1143-4">Usuń odstęp</tspan><tspan
-         id="tspan1432"
-         x="372.13065"
-         y="285.41037"
-         style="font-size:5.99722004px;text-align:center;text-anchor:middle;stroke-width:0.26458299">przed nagłówkiem</tspan></text>
-    <text
-       id="text1732-9-9-0"
-       y="286.57382"
-       x="372.14279"
-       style="font-size:5.64444017px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;stroke-width:0.26458299"
-       xml:space="preserve"><tspan
-         style="stroke-width:0.26458299"
-         y="286.57382"
-         x="372.14279"
-         id="tspan1730-7-6-0"> </tspan></text>
-    <g
-       style="clip-rule:evenodd;fill:#000000;fill-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
-       id="g1225-7"
-       transform="matrix(37.859605,0,0,37.859605,367.43999,240.65429)">
-      <polygon
-         class="fil0"
-         points="0.100445,0.306461 0.147984,0.306461 0.147984,0.092689 0.214819,0.159531 0.248433,0.125913 0.123807,0 0,0.123807 0.0336142,0.157421 0.100445,0.0905945 "
-         id="polygon1212-0" />
-    </g>
+<svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
+ <g transform="matrix(3.7795 0 0 3.7795 -5465.1 -1392.5)">
+  <g transform="translate(1101.5 134.3)">
+   <rect x="346.01" y="235.25" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
+   <rect x="350.1" y="254.81" width="44.089" height="12.058" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width="2" style="paint-order:fill markers stroke"/>
+   <text x="372.13065" y="277.34341" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="372.13065" y="277.34341" text-align="center">Usuń odstęp</tspan><tspan x="372.13065" y="283.37592" text-align="center">przed nagłówkiem</tspan></text>
+   <text x="372.14279" y="286.57382" font-family="sans-serif" font-size="5.6444px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="372.14279" y="286.57382" font-family="sans-serif" stroke-width=".26458"> </tspan></text>
+   <g transform="matrix(37.86 0 0 37.86 367.44 240.65)" clip-rule="evenodd" fill-rule="evenodd" image-rendering="optimizeQuality" shape-rendering="geometricPrecision">
+    <polygon class="fil0" points=".14798 .30646 .14798 .092689 .21482 .15953 .24843 .12591 .12381 0 0 .12381 .033614 .15742 .10044 .090594 .10044 .30646"/>
+   </g>
   </g>
+ </g>
 </svg>

@@ -1,189 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg47"
-   version="1.1"
-   viewBox="0 0 52.758294 52.758296"
-   height="199.40143"
-   width="199.40143">
-  <defs
-     id="defs42">
-    <pattern
-       id="EMFhbasepattern"
-       patternUnits="userSpaceOnUse"
-       width="6"
-       height="6"
-       x="0"
-       y="0" />
-  </defs>
-  <metadata
-     id="metadata45">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="g8556"
-     transform="translate(49.836509,-375.23204)">
-    <g
-       id="g5305">
-      <text
-         id="text898-7-3-6-8-3-3-0-66-7-8-8-0-8-3-4-2-6-22-3-3-4-7-0-2-6-2"
-         y="425.61624"
-         x="-23.21401"
-         style="font-size:6.3499999px;line-height:0.94999999;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
-         xml:space="preserve"><tspan
-           style="font-size:6.3499999px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458299"
-           y="425.61624"
-           x="-23.21401"
-           id="tspan3280-8-2-3-8">Pokaż nagłówek</tspan></text>
-      <g
-         style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1"
-         id="g3425-7-6"
-         transform="matrix(0.43424404,0,0,-0.43424404,-45.178706,415.78283)">
-        <rect
-           id="rect3393-7-1"
-           height="2"
-           width="13.89"
-           y="68.667"
-           x="17.409"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <path
-           id="path3395-1-7"
-           d="M 85.235,77.833 H 14.106 c -2.998,0 -5.436,-2.438 -5.436,-5.436 V 23.27 c 0,-2.998 2.438,-5.436 5.436,-5.436 h 71.129 c 2.998,0 5.436,2.438 5.436,5.436 v 49.128 c -0.001,2.998 -2.438,5.435 -5.436,5.435 z m -71.129,-58 c -1.895,0 -3.436,1.541 -3.436,3.437 v 49.128 c 0,1.895 1.541,3.436 3.436,3.436 h 71.129 c 1.895,0 3.436,-1.541 3.436,-3.436 V 23.27 c 0,-1.896 -1.541,-3.437 -3.436,-3.437 z"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3397-6-6"
-           height="2"
-           width="13.89"
-           y="68.667"
-           x="42.648998"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3399-8-5"
-           height="2"
-           width="13.89"
-           y="68.667"
-           x="67.704002"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3401-4-7"
-           height="2"
-           width="13.89"
-           y="62.667"
-           x="17.500999"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3403-9-4"
-           height="2"
-           width="13.89"
-           y="62.667"
-           x="42.742001"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3405-2-5"
-           height="2"
-           width="13.89"
-           y="62.667"
-           x="67.795998"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-        <rect
-           id="rect3407-0-9"
-           height="2"
-           width="64.139"
-           y="56.667"
-           x="17.500999"
-           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
-      </g>
-      <g
-         id="g298"
-         transform="translate(-47.295999,192.19266)">
-        <rect
-           style="fill:#0082b4;fill-opacity:1;stroke:#000000;stroke-width:0.49999899;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-           id="rect833-0-59-1"
-           width="52.916668"
-           height="52.916668"
-           x="-2.5783095"
-           y="182.84322" />
-        <text
-           xml:space="preserve"
-           style="font-size:6.27179003px;line-height:1.04999995;font-family:voestalpine;-inkscape-font-specification:voestalpine;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.261323"
-           x="23.796539"
-           y="237.55396"
-           id="text858-5-83-73-7-0-7-0-7-9-81-0-2-2-6-2"
-           transform="scale(1.0124726,0.98768104)"><tspan
-             x="23.796539"
-             y="237.55396"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.82082987px;font-family:voestalpine;-inkscape-font-specification:'voestalpine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.261323"
-             id="tspan934">WYPUNKTOWANIA</tspan></text>
-        <g
-           id="g1333">
-          <rect
-             style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.57949901;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-             id="rect1266"
-             width="34.017857"
-             height="6.4255953"
-             x="9.0714293"
-             y="190.12202"
-             ry="2.4568453" />
-          <rect
-             ry="2.4568453"
-             y="200.70537"
-             x="14.172128"
-             height="6.4255953"
-             width="28.917158"
-             id="rect1266-5"
-             style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.534289;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
-          <rect
-             style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.471203;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-             id="rect1266-5-9"
-             width="22.491564"
-             height="6.4255953"
-             x="20.597723"
-             y="212.04466"
-             ry="2.4568453" />
-          <text
-             xml:space="preserve"
-             style="font-size:8.62236977px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;stroke-width:0.404174"
-             x="3.8085251"
-             y="196.14973"
-             id="text1300"><tspan
-               id="tspan1298"
-               x="3.8085251"
-               y="196.14973"
-               style="fill:#ffffff;fill-opacity:1;stroke-width:0.404174">1</tspan></text>
-          <text
-             id="text1300-4"
-             y="206.18579"
-             x="6.0564728"
-             style="font-size:8.62236977px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;stroke-width:0.40417501"
-             xml:space="preserve"><tspan
-               style="fill:#ffffff;fill-opacity:1;stroke-width:0.40417501"
-               y="206.18579"
-               x="6.0564728"
-               id="tspan1298-9">a</tspan></text>
-          <text
-             xml:space="preserve"
-             style="font-size:8.37666035px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;stroke-width:0.392656"
-             x="6.2614646"
-             y="218.33734"
-             id="text1322"><tspan
-               id="tspan1320"
-               x="6.2614646"
-               y="218.33734"
-               style="fill:#ffffff;fill-opacity:1;stroke-width:0.392656">001</tspan></text>
-        </g>
-      </g>
+<svg id="SVGRoot" width="205" height="203" version="1.1" viewBox="0 0 205 203" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(0,2)">
+  <g transform="matrix(3.7795 0 0 3.7795 10.171 -6.7758)">
+   <g transform="translate(-1.0884 -121.69)">
+    <g transform="translate(1.6608 -59.209)">
+     <rect x="-2.5783" y="182.84" width="52.917" height="52.917" fill="#0082b4" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
+     <text transform="scale(1.0125 .98768)" x="23.796539" y="234.45358" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26132" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="23.796539" y="234.45358" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" stroke-width=".26132" text-align="center" text-anchor="middle" style="font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal">WYPUNKTOWANIA</tspan></text>
+     <g fill="#fff">
+      <rect x="9.0714" y="190.12" width="34.018" height="6.4256" ry="2.4568" style="paint-order:fill markers stroke"/>
+      <rect x="14.172" y="200.71" width="28.917" height="6.4256" ry="2.4568" style="paint-order:fill markers stroke"/>
+      <rect x="20.598" y="212.04" width="22.492" height="6.4256" ry="2.4568" style="paint-order:fill markers stroke"/>
+     </g>
+     <g font-family="voestalpine" letter-spacing="0px" word-spacing="0px">
+      <text x="3.8085251" y="196.14973" font-size="8.6224px" stroke-width=".40417" style="line-height:1.25" xml:space="preserve"><tspan x="3.8085251" y="196.14973" fill="#ffffff" stroke-width=".40417">1</tspan></text>
+      <text x="6.0564728" y="206.18579" font-size="8.6224px" stroke-width=".40418" style="line-height:1.25" xml:space="preserve"><tspan x="6.0564728" y="206.18579" fill="#ffffff" stroke-width=".40418">a</tspan></text>
+      <text x="6.2614646" y="218.33734" font-size="8.3767px" stroke-width=".39266" style="line-height:1.25" xml:space="preserve"><tspan x="6.2614646" y="218.33734" fill="#ffffff" stroke-width=".39266">001</tspan></text>
+     </g>
     </g>
+   </g>
   </g>
+ </g>
 </svg>

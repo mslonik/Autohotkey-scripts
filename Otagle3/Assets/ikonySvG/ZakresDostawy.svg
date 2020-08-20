@@ -1,242 +1,30 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg47"
-   version="1.1"
-   viewBox="0 0 52.758294 52.758296"
-   height="199.40143"
-   width="199.40143">
-  <defs
-     id="defs42">
-    <pattern
-       id="EMFhbasepattern"
-       patternUnits="userSpaceOnUse"
-       width="6"
-       height="6"
-       x="0"
-       y="0" />
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mend-5-0"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1146-3-3" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mend-5-3"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1146-3-9" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mend-5-0-4"
-       style="overflow:visible">
-      <path
-         id="path1146-3-3-8"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mend-5-3-8"
-       style="overflow:visible">
-      <path
-         id="path1146-3-9-5"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mend"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1146" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mend-5"
-       style="overflow:visible">
-      <path
-         id="path1146-3"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Mstart"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.4,0,0,0.4,4,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1143" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Mstart-1"
-       style="overflow:visible">
-      <path
-         id="path1143-7"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(0.4,0,0,0.4,4,0)" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Lend"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1140" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Lstart"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.8,0,0,0.8,10,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1137" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Lend-5"
-       style="overflow:visible">
-      <path
-         id="path1140-4"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
-    </marker>
-    <marker
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Lstart-93"
-       style="overflow:visible">
-      <path
-         id="path1137-7"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(0.8,0,0,0.8,10,0)" />
-    </marker>
-    <linearGradient
-       id="linearGradient4460"
-       osb:paint="solid">
-      <stop
-         style="stop-color:#db3b3b;stop-opacity:1;"
-         offset="0"
-         id="stop4458" />
-    </linearGradient>
-  </defs>
-  <metadata
-     id="metadata45">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="g8556"
-     transform="translate(49.836509,-375.23204)">
-    <g
-       id="g5305">
-      <g
-         id="g5921"
-         transform="translate(-1982.29,407.08824)">
-        <rect
-           style="fill:#db3b3b;fill-opacity:1;stroke:#000000;stroke-width:0.50015801;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-           id="rect833-4-4-4-3-7-6-0-7-8-17-7-5-2"
-           width="52.950603"
-           height="52.916668"
-           x="1932.3042"
-           y="-31.749985" />
-        <text
-           transform="scale(1.0003206,0.9996795)"
-           xml:space="preserve"
-           style="font-size:6.35203981px;line-height:1.25;font-family:voestalpine;-inkscape-font-specification:voestalpine;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke-width:0.26466799"
-           x="1958.1321"
-           y="17.970533"
-           id="text983-1-5-6-98-2-6-5-2-3-2-7-7-3"><tspan
-             id="tspan3064-9-3-5"
-             x="1958.1321"
-             y="17.970533"
-             style="font-size:6.35203981px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26466799">Zakres dostawy</tspan></text>
-        <g
-           style="fill:#ffffff;fill-opacity:1"
-           id="g3433"
-           transform="matrix(0.3827487,0,0,0.3827487,1939.6421,-31.484387)">
-          <g
-             id="g3403"
-             style="fill:#ffffff;fill-opacity:1">
-            <path
-               id="path3395"
-               d="M 95.8,28.5 66.7,19 c -0.5,-0.2 -1,-0.2 -1.6,0 L 36,28.5 c -1,0.3 -1.7,1.3 -1.7,2.4 v 38.2 c 0,1.1 0.7,2 1.7,2.4 L 65.1,81 c 0.3,0.1 0.5,0.1 0.8,0.1 0.3,0 0.5,0 0.8,-0.1 l 29.1,-9.6 c 1,-0.3 1.7,-1.3 1.7,-2.4 V 30.9 c 0,-1.1 -0.7,-2 -1.7,-2.4 z M 63.4,75.2 39.3,67.3 v -33 l 9.6,3.1 v 18.7 c 0,1.4 1.1,2.5 2.5,2.5 1.4,0 2.5,-1.1 2.5,-2.5 v -17 l 9.6,3.1 v 33 z m 2.5,-37.4 -6.8,-2.2 4.8,-1.7 c 1.3,-0.5 2,-1.9 1.5,-3.2 -0.5,-1.3 -1.9,-1.9 -3.2,-1.5 L 51.5,33.1 44.8,30.9 65.9,24 87,30.9 Z m 26.6,29.5 -9.6,3.1 V 59.6 c 0,-1.4 -1.1,-2.5 -2.5,-2.5 -1.4,0 -2.4,1.1 -2.4,2.5 v 12.5 l -9.6,3.1 v -33 l 24.1,-7.9 z"
-               style="fill:#ffffff;fill-opacity:1" />
-            <path
-               id="path3397"
-               d="M 22.7,33.6 H 5 c -1.4,0 -2.5,1.1 -2.5,2.5 0,1.4 1.1,2.5 2.5,2.5 h 17.7 c 1.4,0 2.5,-1.1 2.5,-2.5 -0.1,-1.4 -1.2,-2.5 -2.5,-2.5 z"
-               style="fill:#ffffff;fill-opacity:1" />
-            <path
-               id="path3399"
-               d="M 22.7,47.5 H 5 c -1.4,0 -2.5,1.1 -2.5,2.5 0,1.4 1.1,2.5 2.5,2.5 h 17.7 c 1.4,0 2.5,-1.1 2.5,-2.5 0,-1.4 -1.2,-2.5 -2.5,-2.5 z"
-               style="fill:#ffffff;fill-opacity:1" />
-            <path
-               id="path3401"
-               d="M 22.7,61.4 H 5 c -1.4,0 -2.5,1.1 -2.5,2.5 0,1.4 1.1,2.5 2.5,2.5 h 17.7 c 1.4,0 2.5,-1.1 2.5,-2.5 0,-1.4 -1.2,-2.5 -2.5,-2.5 z"
-               style="fill:#ffffff;fill-opacity:1" />
-          </g>
-        </g>
+<svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
+ <g transform="matrix(3.7795 0 0 3.7795 -1795.2 2502.6)">
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-392.69" y="-63.57" width="758.02" height="397.52"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-251.87" y="-84.492" width="624.44" height="455.45"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-202.78" y="-50.695" width="473.96" height="281.64"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-86.906" y="-78.859" width="516.61" height="410.39"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-81.273" y="-32.188" width="309" height="322.68"/></flowRegion><flowPara/></flowRoot>
+  <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-90.93" y="-68.398" width="392.69" height="252.67"/></flowRegion><flowPara/></flowRoot>
+  <g transform="translate(675.17 -.21291)">
+   <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-100.59" y="-53.109" width="462.7" height="369.35"/></flowRegion><flowPara/></flowRoot>
+   <g transform="translate(57.194 .21291)">
+    <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-329.12" y="-12.07" width="696.05" height="259.91"/></flowRegion><flowPara/></flowRoot>
+    <g transform="translate(-1495.1 -629.38)">
+     <g transform="translate(-693.42 2.9187e-6)">
+      <rect x="1932.3" y="-31.75" width="52.951" height="52.917" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".50016" style="paint-order:fill markers stroke"/>
+      <text transform="scale(1.0003 .99968)" x="1958.1321" y="16.526241" fill="#ffffff" font-family="voestalpine" font-size="6.352px" letter-spacing="0px" stroke-width=".26467" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1958.1321" y="16.526241" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" stroke-width=".26467" text-align="center" text-anchor="middle">Zakres dostawy</tspan></text>
+      <g transform="matrix(.38275 0 0 .38275 1939.6 -31.484)" fill="#fff">
+       <g fill="#fff">
+        <path d="m95.8 28.5-29.1-9.5c-.5-.2-1-.2-1.6 0l-29.1 9.5c-1 .3-1.7 1.3-1.7 2.4v38.2c0 1.1.7 2 1.7 2.4l29.1 9.5c.3.1.5.1.8.1s.5 0 .8-.1l29.1-9.6c1-.3 1.7-1.3 1.7-2.4v-38.1c0-1.1-.7-2-1.7-2.4zm-32.4 46.7-24.1-7.9v-33l9.6 3.1v18.7c0 1.4 1.1 2.5 2.5 2.5s2.5-1.1 2.5-2.5v-17l9.6 3.1v33zm2.5-37.4-6.8-2.2 4.8-1.7c1.3-.5 2-1.9 1.5-3.2s-1.9-1.9-3.2-1.5l-10.7 3.9-6.7-2.2 21.1-6.9 21.1 6.9zm26.6 29.5-9.6 3.1v-10.8c0-1.4-1.1-2.5-2.5-2.5s-2.4 1.1-2.4 2.5v12.5l-9.6 3.1v-33l24.1-7.9z"/>
+        <path d="m22.7 33.6h-17.7c-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5h17.7c1.4 0 2.5-1.1 2.5-2.5-.1-1.4-1.2-2.5-2.5-2.5z"/>
+        <path d="m22.7 47.5h-17.7c-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5h17.7c1.4 0 2.5-1.1 2.5-2.5s-1.2-2.5-2.5-2.5z"/>
+        <path d="m22.7 61.4h-17.7c-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5h17.7c1.4 0 2.5-1.1 2.5-2.5s-1.2-2.5-2.5-2.5z"/>
+       </g>
       </g>
+     </g>
     </g>
+   </g>
   </g>
+ </g>
 </svg>
