@@ -32,7 +32,7 @@ InsertBookmarkText()
 		}
 		Hlb := H -  Var
 		Wlb := W - 2 * Var
-		Gui, bookmark:New, +Resize
+		Gui, bookmark:New, +Resize +AlwaysOnTop
 		Gui, Add, ListBox, H%Hlb% W%Wlb% vMyListBoxBookmark gMyListBoxBookmark +AltSubmit
 		myHeadings := oWord.ActiveDocument.GetCrossReferenceItems(2) ; 2 - bookmark
 		Loop, % myHeadings.MaxIndex()
@@ -40,11 +40,11 @@ InsertBookmarkText()
 			GuiControl,, MyListBoxbookmark, % myHeadings[A_Index]
 		}
 		Gui, bookmark:Add, Button, Hidden Default gOKBookmark,OKbookmark
-		Gui, bookmark:Show,X%X% Y%Y% H%H% W%W%, Wstaw tekst zak³adki
+		Gui, bookmark:Show,X%X% Y%Y% H%H% W%W%, Wstaw tekst zakï¿½adki
 	}
 	else if(flag_bookmark == 1)
 	{
-		WinGetPos, X, Y, W, H, Wstaw tekst zak³adki
+		WinGetPos, X, Y, W, H, Wstaw tekst zakï¿½adki
 		Gui, bookmark:Destroy
 		flag_bookmark := 0
 	}
@@ -61,12 +61,13 @@ OKBookmark:
 		Index := MyListBoxBookmark
 		bookmark := myHeadings[Index]
 		oWord.Selection.InsertCrossReference(2, -1, bookmark, 0, 0, 0, " ") ; 2 - bookmark, -1 - text
+		WinActivate, ahk_class OpusApp
 	}
 	return
 
 bookmarkGuiEscape:
 bookmarkGuiClose:
-	WinGetPos, X, Y, W, H, Wstaw tekst zak³adki
+	WinGetPos, X, Y, W, H, Wstaw tekst zakï¿½adki
 	Gui, bookmark:Destroy
 	flag_bookmark := 0
 	WinActivate, ahk_class OpusApp

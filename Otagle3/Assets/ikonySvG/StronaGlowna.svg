@@ -9,7 +9,7 @@
         <g transform="translate(1658.1 73.867)">
          <g>
           <rect x="-205.07" y="-101.86" width="52.917" height="52.917" fill="#0082b4" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-          <text x="-178.87273" y="-60.77029" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-178.87273" y="-60.77029" text-align="center">STRONA</tspan><tspan x="-178.87273" y="-52.83279" text-align="center"> GŁÓWNA</tspan></text>
+          <text x="-178.87273" y="-60.77029" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-178.87273" y="-60.77029" text-align="center">STRONA</tspan><tspan x="-178.87273" y="-52.83279" text-align="center"> GŁÓWNA</tspan></text>
           <g transform="matrix(1.8895 0 0 1.8895 -201.12 -104.9)" fill="#fff">
            <g fill="#fff">
             <path d="m6.934 12.202c-.341 0-.62.271-.62.612v6.025c0 .341.28.616.62.616h10.145c.34 0 .611-.275.611-.616v-6.025c0-.341-.271-.612-.611-.612-.341 0-.621.271-.621.612v5.409h-8.913v-5.409c0-.341-.279-.612-.611-.612z"/>

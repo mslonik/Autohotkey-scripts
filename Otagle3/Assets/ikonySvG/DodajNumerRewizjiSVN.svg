@@ -2,7 +2,7 @@
  <g transform="matrix(3.7795 0 0 3.7795 -5465.1 -1392.5)">
   <g transform="translate(1388.4 134.4)">
    <rect x="58.907" y="235.25" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-   <text x="84.784195" y="277.23694" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="84.784195" y="277.23694" text-align="center">Dodaj numer</tspan><tspan x="84.784195" y="283.26944" text-align="center">rewizji SVN</tspan></text>
+   <text x="84.784195" y="277.23694" font-family="sans-serif" class="svgT"  font-size="5.2px" letter-spacing=".5px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="84.784195" y="277.23694" text-align="center">Dodaj numer</tspan><tspan x="84.784195" y="283.26944" text-align="center">rewizji SVN</tspan></text>
    <text x="85.036263" y="286.57382" font-family="sans-serif" font-size="5.6444px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="85.036263" y="286.57382" font-family="sans-serif" stroke-width=".26458"> </tspan></text>
    <g transform="matrix(.20671 0 0 .20671 71.807 241.04)">
     <circle cx="112" cy="8" r="2"/>

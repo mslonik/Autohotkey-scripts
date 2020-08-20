@@ -7,10 +7,10 @@ UsunKolor()
 	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
 		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
 	{
-		MsgBox, 16, Próba wywo³ania makra, 
+		MsgBox, 16, PrÃ³ba wywoÅ‚ania makra, 
 		( Join
-		 Próbujesz wywo³aæ makro przypisane do szablonu, ale szablon nie zosta³ jeszcze do³¹czony do tego pliku. 
-	Najpierw do³¹cz szablon, a nastêpnie wywo³aj ponownie tê funkcjê.
+		 PrÃ³bujesz wywoÅ‚aÄ‡ makro przypisane do szablonu, ale szablon nie zostac jeszcze doÅ‚Ä…czony do tego pliku. 
+	Najpierw doÅ‚Ä…cz szablon, a nastÄ™pnie wywoÅ‚aj ponownie tÄ… funkcjÄ™.
 		)
 	}
 	else

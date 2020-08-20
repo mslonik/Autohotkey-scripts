@@ -32,7 +32,7 @@ InsertHeadingText()
 		}
 		Hlb := H -  Var
 		Wlb := W - 2 * Var
-		Gui, text:New, +Resize
+		Gui, text:New, +Resize +AlwaysOnTop
 		Gui, Add, ListBox, H%Hlb% W%Wlb% vMyListBoxText gMyListBoxText +AltSubmit
 		myHeadings := oWord.ActiveDocument.GetCrossReferenceItems(1) ; 1 - heading
 		Loop, % myHeadings.MaxIndex()
@@ -40,11 +40,11 @@ InsertHeadingText()
 			GuiControl,, MyListBoxText, % myHeadings[A_Index]
 		}
 		Gui, text:Add, Button, Hidden Default gOKText,OKText
-		Gui, text:Show,X%X% Y%Y% H%H% W%W%, Wstaw tekst nag³ówka
+		Gui, text:Show,X%X% Y%Y% H%H% W%W%, Wstaw tekst nagï¿½ï¿½wka
 	}
 	else if(flag_text == 1)
 	{
-		WinGetPos, X, Y, W, H, Wstaw tekst nag³ówka
+		WinGetPos, X, Y, W, H, Wstaw tekst nagï¿½ï¿½wka
 		Gui, text:Destroy
 		flag_text := 0
 	}
@@ -60,12 +60,13 @@ OKText:
 		Gui, Submit, Nohide
 		Index := MyListBoxText
 		oWord.Selection.InsertCrossReference(1, -1, Index, 1, 0, 0, " ") ; 1 - heading, -1 - text
+		WinActivate, ahk_class OpusApp
 	}
 	return
 
 textGuiEscape:
 textGuiClose:
-	WinGetPos, X, Y, W, H, Wstaw tekst nag³ówka
+	WinGetPos, X, Y, W, H, Wstaw tekst nagï¿½ï¿½wka
 	Gui, text:Destroy
 	flag_text := 0
 	WinActivate, ahk_class OpusApp

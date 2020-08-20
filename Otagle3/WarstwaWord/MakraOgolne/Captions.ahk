@@ -40,7 +40,7 @@ Captions()
 		}
 		Hti := H -  Var
 		Wti := W - 2 * Var
-		Gui, ti:New, +Resize -MinimizeBox -MaximizeBox
+		Gui, ti:New, +Resize -MinimizeBox -MaximizeBox +AlwaysOnTop
 		Gui, Add, ListBox, H%Hti% W%Wti% vMyListBox3 gMyListBox3 +AltSubmit
 		cnt := oWord.CaptionLabels.Count
 		Loop, % cnt
@@ -87,14 +87,12 @@ OK3:
 			var2 := myLabels[MyListBox3]
 			Index := MyListBox3
 			oWord.Selection.InsertCrossReference(var, 3, Index, 1, 0, 0, " ")
+			WinActivate, ahk_class OpusApp
 			
 		}
 	}
 	
 	return
-				
-
-
 	
 tiGuiEscape:
 	if(fl = 1)

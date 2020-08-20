@@ -1,7 +1,7 @@
 <svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
  <g transform="matrix(3.7795 0 0 3.7795 -1795.2 2502.6)">
   <rect x="476.46" y="-660.87" width="52.396" height="52.396" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".52068" style="paint-order:fill markers stroke"/>
-  <text x="502.79269" y="-612.86243" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="502.79269" y="-612.86243" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458" text-align="center" text-anchor="middle">Stopka ostatnia</tspan></text>
+  <text x="502.79269" y="-612.86243" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="502.79269" y="-612.86243" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle">Stopka ostatnia</tspan></text>
   <g transform="translate(-278.79 -630.33)">
    <g transform="matrix(-.44097 0 0 -.44097 795.01 2.2571)" fill="#fff">
     <g fill="#fff">

@@ -6,7 +6,7 @@
  </defs>
  <g transform="matrix(3.7795 0 0 3.7795 -575.57 331.89)">
   <rect x="153.65" y="-86.664" width="52.632" height="52.632" fill="#b9d4ff" stroke="#000" stroke-linecap="round" stroke-width=".28429" style="paint-order:fill markers stroke"/>
-  <text x="179.95107" y="-45.215492" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="179.95107" y="-45.215492" text-align="center">Razem z</tspan><tspan x="179.95107" y="-38.547993" text-align="center">następnym</tspan></text>
+  <text x="179.95107" y="-45.215492" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="179.95107" y="-45.215492" text-align="center">Razem z</tspan><tspan x="179.95107" y="-38.547993" text-align="center">następnym</tspan></text>
   <g fill="none" stroke="#000">
    <path d="m163.52-78.715h32.884" stroke-width="1.765"/>
    <path d="m163.52-58.557h32.884" stroke-width="1.765"/>

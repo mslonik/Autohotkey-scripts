@@ -17,7 +17,7 @@
              <g transform="translate(-66.2 -.040316)">
               <g transform="translate(-65.918 -.60254)">
                <rect x="1302.4" y="-317.37" width="52.917" height="52.917" fill="#ffec8e" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-               <text x="1328.6327" y="-268.76892" fill="#000000" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1328.6327" y="-268.76892" fill="#000000" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458" text-align="center" text-anchor="middle">Nagłówek 5 ms</tspan></text>
+               <text x="1328.6327" y="-268.76892" fill="#000000" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1328.6327" y="-268.76892" fill="#000000" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px"  stroke-width=".26458" text-align="center" text-anchor="middle">Nagłówek 5 ms</tspan></text>
                <circle cx="1328.8" cy="-295.04" r="15.302" fill="#ffec8e" stroke="#000" stroke-width=".765"/>
                <text x="1321.444" y="-287.03406" fill="#000000" font-family="sans-serif" font-size="22.48px" letter-spacing="0px" stroke-width=".562" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1321.444" y="-287.03406" stroke-width=".562">5</tspan></text>
               </g>

@@ -50,7 +50,7 @@
                                           <g transform="translate(-236.4)">
                                            <g transform="translate(-57.885 .26458)">
                                             <rect x="214.93" y="192.33" width="52.632" height="52.632" fill="#87deaa" stroke="#000" stroke-linecap="round" stroke-width=".28429" style="paint-order:fill markers stroke"/>
-                                            <text x="241.45518" y="229.57309" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="241.45518" y="229.57309" text-align="center">Wyświetl panel</tspan><tspan x="241.45518" y="236.24059" text-align="center">formatowania</tspan><tspan x="241.45518" y="242.9081" text-align="center">kształtu</tspan></text>
+                                            <text x="241.45518" y="229.57309" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="241.45518" y="229.57309" text-align="center">Wyświetl panel</tspan><tspan x="241.45518" y="236.24059" text-align="center">formatowania</tspan><tspan x="241.45518" y="242.9081" text-align="center">kształtu</tspan></text>
                                             <g transform="matrix(.48346 0 0 .48346 225.77 193.44)">
                                              <rect x="13" y="38" width="2" height="2"/>
                                              <rect x="9" y="38" width="2" height="2"/>

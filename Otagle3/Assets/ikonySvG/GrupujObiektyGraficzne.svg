@@ -28,7 +28,7 @@
         <path d="m1117.6-74.907 5.4972-5.4972-.5156-.51562-5.4972 5.4972v-3.2278h-.7294l7e-4 4.1085c-4e-4.19284.1708.36403.3654.3654l4.1081-.000343v-.72943z"/>
         <circle transform="rotate(45)" cx="736.9" cy="-836.07" r="3.6241"/>
        </g>
-       <text x="1106.7699" y="-44.983978" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="1106.7699" y="-44.983978" text-align="center">Grupuj obiekty</tspan><tspan x="1106.7699" y="-38.316479" text-align="center">graficzne</tspan></text>
+       <text x="1106.7699" y="-44.983978" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="1106.7699" y="-44.983978" text-align="center">Grupuj obiekty</tspan><tspan x="1106.7699" y="-38.316479" text-align="center">graficzne</tspan></text>
       </g>
      </g>
     </g>

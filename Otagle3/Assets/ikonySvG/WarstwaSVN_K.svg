@@ -1,7 +1,7 @@
 <svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
  <g transform="matrix(3.7795 0 0 3.7795 -4599.7 109.05)">
   <rect x="1217.8" y="-27.585" width="52.396" height="52.396" fill="#0082b4" stroke="#000" stroke-linecap="round" stroke-width=".52068" style="paint-order:fill markers stroke"/>
-  <text x="1245.0255" y="12.464207" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="1245.8937" y="12.464207" text-align="center">Warstwa </tspan><tspan x="1245.0255" y="21.35421" text-align="center">SVN</tspan></text>
+  <text x="1245.0255" y="12.464207" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="1245.8937" y="12.464207" text-align="center">Warstwa </tspan><tspan x="1245.0255" y="21.35421" text-align="center">SVN</tspan></text>
   <text x="1240.2559" y="-8.5272741" fill="#0082b4" font-family="voestalpine" font-size="5.6444px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1240.2559" y="-8.5272741" fill="#0082b4" stroke-width=".26458">EN</tspan></text>
   <g transform="matrix(.34476 0 0 .34476 1226.8 -27.769)" fill="#fff">
    <path d="m83.338 49.999c-2.464 0-4.591 1.351-5.745 3.333h-27.593v6.67h27.593c1.154 1.982 3.281 3.33 5.745 3.33 3.677 0 6.662-2.979 6.662-6.666 0-3.68-2.985-6.667-6.662-6.667z"/>

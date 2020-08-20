@@ -1,7 +1,7 @@
 <svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
  <g transform="matrix(3.7795 0 0 3.7795 24.136 -254.81)">
   <rect x="-5.2629" y="68.329" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-  <text x="20.548117" y="117.61485" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="20.548117" y="117.61485" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458" text-align="center" text-anchor="middle">Lock</tspan></text>
+  <text x="20.548117" y="117.61485" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="20.548117" y="117.61485" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px"  stroke-width=".26458" text-align="center" text-anchor="middle">Lock</tspan></text>
   <g transform="matrix(.58462 0 0 .58462 7.4199 73.069)">
    <g data-name="Key Lock">
     <path d="m36.29 48h-26.58a3.71 3.71 0 01-3.71-3.71v-20.58a3.71 3.71 0 013.71-3.71h26.58a3.71 3.71 0 013.71 3.71v20.58a3.71 3.71 0 01-3.71 3.71zm-26.58-26a1.72 1.72 0 00-1.71 1.71v20.58a1.72 1.72 0 001.71 1.71h26.58a1.72 1.72 0 001.71-1.71v-20.58a1.72 1.72 0 00-1.71-1.71z"/>

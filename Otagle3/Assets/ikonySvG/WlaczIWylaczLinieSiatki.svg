@@ -44,7 +44,7 @@
                                      <g transform="translate(452.66 .26458)">
                                       <g transform="translate(-797.14 .29285)">
                                        <rect x="1618.8" y="369.25" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-                                       <text x="1645.2593" y="412.29202" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="1645.2593" y="412.29202" text-align="center">Włącz lub wyłącz</tspan><tspan x="1645.2593" y="418.32452" text-align="center">linie siatki</tspan></text>
+                                       <text x="1645.2593" y="412.29202" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="1645.2593" y="412.29202" text-align="center">Włącz lub wyłącz</tspan><tspan x="1645.2593" y="418.32452" text-align="center">linie siatki</tspan></text>
                                        <g transform="matrix(.35903 0 0 .35903 1626.5 370.71)">
                                         <g>
                                          <path d="m23 23v65h65v-65zm-1-1h67v67h-67z"/>

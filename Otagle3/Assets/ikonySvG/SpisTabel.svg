@@ -8,7 +8,7 @@
   <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-90.93" y="-68.398" width="392.69" height="252.67"/></flowRegion><flowPara/></flowRoot>
   <g transform="translate(559.26 -3.2027e-6)">
    <rect x="-83.018" y="-660.87" width="52.396" height="52.396" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".52068" style="paint-order:fill markers stroke"/>
-   <text x="-56.682465" y="-612.86243" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-56.682465" y="-612.86243" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458" text-align="center" text-anchor="middle">Spis tabel</tspan></text>
+   <text x="-56.682465" y="-612.86243" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-56.682465" y="-612.86243" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle">Spis tabel</tspan></text>
    <rect x="-72.861" y="-653.32" width="32.741" height="4.1427" ry="2.0713" fill="#fff" style="paint-order:fill markers stroke"/>
    <g transform="matrix(.30875 0 0 .30875 -70.385 -650.78)" fill="#fff">
     <g fill="#fff">

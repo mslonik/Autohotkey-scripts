@@ -1,7 +1,7 @@
 <svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
  <g transform="matrix(3.7795 0 0 3.7795 -3492.7 108.24)">
   <rect x="925.37" y="-27.585" width="52.396" height="52.396" fill="#ffec8e" stroke="#000" stroke-linecap="round" stroke-width=".52068" style="paint-order:fill markers stroke"/>
-  <text x="951.51538" y="21.557472" fill="#000000" font-family="voestalpine" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="951.51538" y="21.557472" fill="#000000" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458" text-align="center" text-anchor="middle">Szablon PL</tspan></text>
+  <text x="951.51538" y="21.557472" fill="#000000" font-family="voestalpine" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="951.51538" y="21.557472" fill="#000000" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle">Szablon PL</tspan></text>
   <g transform="translate(-202.72)">
    <g transform="matrix(.26458 0 0 .26458 1141.1 -23.76)">
     <path d="m82.188 100h-65.463v-.033c-9.265-.563-16.642-8.266-16.725-17.686v-82.281h74.377v64.245h25.623v17.875c0 9.859-7.99 17.88-17.812 17.88zm-48.39-10h48.391c4.307 0 7.811-3.535 7.811-7.88v-7.875h-54.377v7.875c0 2.826-.657 5.501-1.825 7.88zm-23.798-7.88c0 4.345 3.504 7.88 7.812 7.88s7.811-3.535 7.811-7.88v-17.875h38.754v-54.245h-54.377z"/>

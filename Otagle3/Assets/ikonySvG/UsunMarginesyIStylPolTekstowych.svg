@@ -17,7 +17,7 @@
       <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-138.41" y="-65.18" width="448.21" height="363.72"/></flowRegion><flowPara/></flowRoot>
       <g transform="translate(178.04 134.26)">
        <rect x="522.59" y="235.25" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-       <text x="548.83282" y="277.19632" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="548.83282" y="277.19632" text-align="center">Usuń marginesy i</tspan><tspan x="548.83282" y="283.22882" text-align="center">styl pól tekstowych</tspan></text>
+       <text x="548.83282" y="277.19632" font-family="sans-serif" class="svgT" letter-spacing=".4px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="548.83282" y="277.19632" text-align="center">Usuń marginesy i</tspan><tspan x="548.83282" y="283.22882" text-align="center">styl pól tekstowych</tspan></text>
        <text x="548.71552" y="286.57382" font-family="sans-serif" font-size="5.6444px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="548.71552" y="286.57382" font-family="sans-serif" stroke-width=".26458"> </tspan></text>
        <g transform="matrix(1.3229 0 0 1.3229 535.49 240.69)">
         <g>

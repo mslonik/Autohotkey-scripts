@@ -1,7 +1,7 @@
 <svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
  <g transform="matrix(3.7795 0 0 3.7795 240.54 -254.81)">
   <rect x="-62.84" y="68.329" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-  <text x="-36.9132" y="117.61485" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="-36.9132" y="117.61485" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458" text-align="center" text-anchor="middle">Rename</tspan></text>
+  <text x="-36.9132" y="117.61485" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="-36.9132" y="117.61485" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle">Rename</tspan></text>
   <g transform="matrix(.39792 0 0 .39792 -56.607 66.779)">
    <path d="m61.3 63.3h-54.3v-26.6h54.4v-4.5h-56.7c-1.3 0-2.2 1-2.2 2.2v31.1c0 1.3 1 2.2 2.2 2.2h56.6z"/>
    <path d="m95.3 32.2h-23.7v-9.6h12.1c1.2 0 2.2-1 2.2-2.2s-1-2.2-2.2-2.2h-28.7c-1.2 0-2.2 1-2.2 2.2s1 2.2 2.2 2.2h12.1v54.7h-12.1c-1.2 0-2.2 1-2.2 2.2s1 2.2 2.2 2.2h28.7c1.2 0 2.2-1 2.2-2.2s-1-2.2-2.2-2.2h-12.1v-9.6h23.7c1.3 0 2.2-1 2.2-2.2v-31.1c0-1.2-1-2.2-2.2-2.2zm-2.3 31.1h-21.4v-26.6h21.4z"/>

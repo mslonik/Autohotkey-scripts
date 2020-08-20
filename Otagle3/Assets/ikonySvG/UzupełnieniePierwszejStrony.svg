@@ -1,7 +1,7 @@
 <svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
  <g transform="matrix(3.7795 0 0 3.7795 452.29 -885.69)">
   <rect x="-118.23" y="235.25" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-  <text x="-92.3283" y="277.5563" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="-92.3283" y="277.5563" text-align="center">Uzupełnienie</tspan><tspan x="-92.3283" y="283.58881" text-align="center">pierwszej strony</tspan></text>
+  <text x="-92.3283" y="277.5563" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="-92.3283" y="277.5563" text-align="center">Uzupełnienie</tspan><tspan x="-92.3283" y="283.58881" text-align="center">pierwszej strony</tspan></text>
   <g transform="matrix(.47491 0 0 .47491 -115.87 229.67)">
    <path d="m83.7 25h-67.4c-2.8 0-5 2.2-5 5v40c0 2.8 2.2 5 5 5h67.5c2.8 0 5-2.2 5-5v-40c-.1-2.8-2.3-5-5.1-5zm0 45h-67.4v-40h67.5v40z"/>
    <path d="m56.3 42.7h18.7c1.4 0 2.5-1.1 2.5-2.5s-1.1-2.5-2.5-2.5h-18.7c-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5z"/>

@@ -19,7 +19,7 @@
       <g transform="translate(-380.28 455.78)">
        <g transform="translate(986.55 5.5529e-6)">
         <rect x="93.974" y="-86.664" width="52.632" height="52.632" fill="#b9d4ff" stroke="#000" stroke-linecap="round" stroke-width=".28429" style="paint-order:fill markers stroke"/>
-        <text x="120.11205" y="-49.883572" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="120.11205" y="-49.883572" text-align="center">Pole tekstowe</tspan><tspan x="121.22826" y="-43.216072" text-align="center">niewyrównane </tspan><tspan x="120.11205" y="-36.548573" text-align="center">w pionie</tspan></text>
+        <text x="120.11205" y="-49.883572" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="120.11205" y="-49.883572" text-align="center">Pole tekstowe</tspan><tspan x="121.22826" y="-43.216072" text-align="center">niewyrównane </tspan><tspan x="120.11205" y="-36.548573" text-align="center">w pionie</tspan></text>
         <rect x="98.745" y="-80.603" width="43.089" height="23.246" fill="#b9d4ff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
         <g transform="translate(57.924 -.37798)" fill="none" stroke="#000" stroke-width="1.765">
          <path d="m45.924-76.729h32.884"/>

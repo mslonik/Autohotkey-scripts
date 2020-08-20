@@ -64,7 +64,7 @@
                                          <path d="m39.881 57.928a4.453 4.453 0 001.819-.356v-1.472a8.073 8.073 0 01-.8.286 2.894 2.894 0 01-.826.118q-1.412 0-1.411-1.854a2.459 2.459 0 01.347-1.4 1.11 1.11 0 01.967-.508 2.5 2.5 0 01.765.115 5.932 5.932 0 01.711.282l.532-1.368a4.574 4.574 0 00-1.991-.453 3.263 3.263 0 00-1.658.407 2.682 2.682 0 00-1.081 1.163 3.883 3.883 0 00-.376 1.753 3.481 3.481 0 00.775 2.439 2.882 2.882 0 002.227.848z"/>
                                         </g>
                                        </g>
-                                       <text transform="scale(1.0003 .99968)" x="1783.1212" y="10.061578" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26467" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1783.1212" y="10.061578" text-align="center">Informacje</tspan><tspan x="1783.1212" y="18.001627" text-align="center">o dokumencie</tspan></text>
+                                       <text transform="scale(1.0003 .99968)" x="1783.1212" y="10.061578" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26467" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1783.1212" y="10.061578" text-align="center">Informacje</tspan><tspan x="1783.1212" y="18.001627" text-align="center">o dokumencie</tspan></text>
                                       </g>
                                      </g>
                                     </g>

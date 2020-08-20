@@ -44,7 +44,7 @@
                                     <g transform="translate(753.05 -.28062)">
                                      <g>
                                       <rect x="542.45" y="-31.75" width="52.917" height="52.917" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-                                      <text x="568.61389" y="9.1274672" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="568.61389" y="9.1274672" text-align="center">Podrodziały</tspan><tspan x="568.61389" y="17.064968" text-align="center">dok. związanych</tspan></text>
+                                      <text x="568.61389" y="9.1274672" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="568.61389" y="9.1274672" text-align="center">Podrodziały</tspan><tspan x="568.61389" y="17.064968" text-align="center">dok. związanych</tspan></text>
                                       <g transform="matrix(.47796 0 0 .47796 557.96 -30.146)" fill="#fff" stroke="#fff" stroke-width=".71855">
                                        <path d="m9.47 38.5c1.38 0 2.5-1.12 2.5-2.5s-1.12-2.5-2.5-2.5-2.5 1.12-2.5 2.5 1.12 2.5 2.5 2.5zm0-4c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"/>
                                        <path d="m9.47 29.5c.28 0 .5-.22.5-.5v-19c0-.28-.22-.5-.5-.5s-.5.22-.5.5v19c0 .28.22.5.5.5z"/>

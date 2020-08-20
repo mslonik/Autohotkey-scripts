@@ -32,8 +32,8 @@ InsertEnumNumber()
 		}
 		Hlb := H -  Var
 		Wlb := W - 2 * Var
-		Gui, Enum:New, +Resize
-		Gui, Add, ListBox, H%Hlb% W%Wlb% vMyListBoxEnum gMyListBoxEnum +AltSubmit
+		Gui, Enum:New, +Resize +AlwaysOnTop
+		Gui, Enum:Add, ListBox, H%Hlb% W%Wlb% vMyListBoxEnum gMyListBoxEnum +AltSubmit
 		myHeadings := oWord.ActiveDocument.GetCrossReferenceItems(0) ; 0 - numbered item
 		Loop, % myHeadings.MaxIndex()
 		{
@@ -60,6 +60,7 @@ OKenum:
 		Gui, Submit, Nohide
 		Index := MyListBoxenum
 		oWord.Selection.InsertCrossReference(0, -4, Index, 1, 0, 0, " ") ; 0 - numbered item, -4 - number
+		WinActivate, ahk_class OpusApp
 	}
 	return
 

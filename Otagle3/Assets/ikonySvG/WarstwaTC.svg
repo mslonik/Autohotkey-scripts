@@ -31,7 +31,7 @@
           <path d="m17.511 20.062h-11.014c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h11.014c.276 0 .5.224.5.5s-.223.5-.5.5z"/>
          </g>
         </g>
-        <text x="1126.0963" y="12.493834" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="1126.9645" y="12.493834" text-align="center">Warstwa </tspan><tspan x="1126.0963" y="21.383835" text-align="center">Total Commander</tspan></text>
+        <text x="1126.0963" y="12.493834" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="1126.9645" y="12.493834" text-align="center">Warstwa </tspan><tspan x="1126.0963" y="21.383835" text-align="center">Total Commander</tspan></text>
        </g>
       </g>
      </g>

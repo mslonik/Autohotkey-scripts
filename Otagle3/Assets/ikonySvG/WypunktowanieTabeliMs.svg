@@ -36,7 +36,7 @@
                               <g transform="translate(734.89 179.33)">
                                <g transform="translate(-205.07 -178.97)">
                                 <rect x="308.71" y="-317.37" width="52.917" height="52.917" fill="#ffec8e" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-                                <text x="335.14417" y="-275.90637" fill="#000000" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="336.01233" y="-275.90637" text-align="center">Wypunktowanie </tspan><tspan x="335.14417" y="-267.96887" text-align="center">w tabeli ms</tspan></text>
+                                <text x="335.14417" y="-275.90637" fill="#000000" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="336.01233" y="-275.90637" text-align="center">Wypunktowanie </tspan><tspan x="335.14417" y="-267.96887" text-align="center">w tabeli ms</tspan></text>
                                 <g transform="matrix(1.6536 0 0 1.6536 321.94 -310.87)">
                                  <g fill="none" fill-rule="evenodd">
                                   <g fill="#000">

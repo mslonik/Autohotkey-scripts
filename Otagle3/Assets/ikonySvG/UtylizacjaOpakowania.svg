@@ -14,7 +14,7 @@
      <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-306.59" y="-111.05" width="206" height="51.5"/></flowRegion><flowPara/></flowRoot>
      <g transform="translate(346.92 4.8455e-6)">
       <rect x="891.77" y="-31.75" width="52.917" height="52.917" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-      <text x="918.3335" y="8.5831251" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="918.3335" y="8.5831251" text-align="center">Utylizacja</tspan><tspan x="918.3335" y="16.520624" text-align="center">opakowania</tspan></text>
+      <text x="918.3335" y="8.5831251" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="918.3335" y="8.5831251" text-align="center">Utylizacja</tspan><tspan x="918.3335" y="16.520624" text-align="center">opakowania</tspan></text>
       <g transform="matrix(.31843 0 0 .31843 902.34 -28.69)" fill="#fff">
        <path d="m25.67 82-6.86-12h28.12v-6h-19.75l3.22-5.59 6.08 3.59-6.48-24.89-24.92 6.71 6.33 3.66-6 11.13 16.78 29.39h24.74v-6zm-6.81-35.67 6.88-1.85 1.8 6.91-7.29 12.61h-4.87l-3.15-5.5z"/>
        <path d="m24.19 34.47 10.6-18.47h13.91l-14.12 24.48 5.19 3 9.67-16.75 3.34 5.27-6 3.45 24.76 6.85 6.65-25.07-6.32 3.67-6.62-10.9h-34l-12.25 21.49zm45-6.52-1.84 7-6.82-1.95-7.7-12.16 2.8-4.84h6.25z"/>

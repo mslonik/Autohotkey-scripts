@@ -1,7 +1,7 @@
 <svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
  <g transform="matrix(3.7795 0 0 3.7795 85.209 332.41)">
   <rect x="-21.463" y="-86.664" width="52.632" height="52.632" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".28429" style="paint-order:fill markers stroke"/>
-  <text x="-12.713891" y="-38.699711" font-family="voestalpine" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="-12.713891" y="-38.699711" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458">Pokaż oryginał</tspan></text>
+  <text x="-12.713891" y="-38.699711" font-family="voestalpine" class="svgT" letter-spacing=".5px" font-size="6.35px" stroke-width=".26458" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="-18.999999" y="-38.699711" font-family="sans-serif"  stroke-width=".26458">Pokaż oryginał</tspan></text>
   <g transform="matrix(.65824 0 0 .65824 -15.552 -90.041)">
    <path d="m50 17h-44c-.552 0-1 .448-1 1v36c0 .553.448 1 1 1h44c.553 0 1-.447 1-1v-36c0-.552-.447-1-1-1zm-22 28h-16c-.552 0-1-.447-1-1s.448-1 1-1h16c.552 0 1 .447 1 1s-.448 1-1 1zm12-6h-28c-.552 0-1-.447-1-1s.448-1 1-1h28c.553 0 1 .447 1 1s-.447 1-1 1zm0-6h-28c-.552 0-1-.448-1-1s.448-1 1-1h28c.553 0 1 .448 1 1s-.447 1-1 1zm0-6h-28c-.552 0-1-.448-1-1s.448-1 1-1h28c.553 0 1 .448 1 1s-.447 1-1 1z"/>
    <path d="m14 15c.552 0 1-.448 1-1v-1h1c.552 0 1-.448 1-1s-.448-1-1-1h-2c-.552 0-1 .448-1 1v2c0 .552.448 1 1 1z"/>

@@ -48,7 +48,7 @@
                                         <g transform="translate(60.987 1.1523e-6)">
                                          <g transform="translate(57.841)">
                                           <rect x="-78.835" y="192.33" width="52.632" height="52.632" fill="#87deaa" stroke="#000" stroke-linecap="round" stroke-width=".28429" style="paint-order:fill markers stroke"/>
-                                          <text x="-52.577744" y="233.97287" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="-52.577744" y="233.97287" text-align="center">Wyświetl</tspan><tspan x="-52.577744" y="240.64037" text-align="center">panel nawigacji</tspan></text>
+                                          <text x="-52.577744" y="233.97287" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="-52.577744" y="233.97287" text-align="center">Wyświetl</tspan><tspan x="-52.577744" y="240.64037" text-align="center">panel nawigacji</tspan></text>
                                           <g transform="matrix(.63089 0 0 .63089 -67.66 196.02)">
                                            <path d="m25.9.6c-14.5-1.2-26.5 10.8-25.3 25.3.9 11.4 10.1 20.6 21.5 21.5 14.5 1.1 26.5-10.9 25.3-25.3-.9-11.4-10.1-20.6-21.5-21.5zm.5 27-13.6 8.2c-.4.3-.9-.2-.6-.6l8.2-13.6c.3-.5.7-.8 1.1-1.1l13.6-8.2c.4-.3.9.2.6.6l-8.2 13.6c-.2.4-.6.8-1.1 1.1z"/>
                                           </g>

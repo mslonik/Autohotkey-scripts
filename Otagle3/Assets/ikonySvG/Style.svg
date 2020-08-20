@@ -6,7 +6,7 @@
      <g transform="translate(-.6443 -59.335)">
       <g transform="translate(144.82 343.03)">
        <rect x="-146.61" y="-101.21" width="52.917" height="52.917" fill="#0082b4" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-       <text x="-119.76649" y="-52.122395" fill="#ffffff" font-family="voestalpine" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-119.76649" y="-52.122395" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458" text-align="center" text-anchor="middle">STYLE</tspan></text>
+       <text x="-119.76649" y="-52.122395" fill="#ffffff" font-family="voestalpine" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-119.76649" y="-52.122395" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle">STYLE</tspan></text>
        <g transform="matrix(.32995 0 0 .32995 -135.84 -95.615)" fill="#fff">
         <path d="m92 89c0 1.657-1.343 3-3 3h-63c-1.657 0-3-1.343-3-3s1.343-3 3-3h63c1.657 0 3 1.343 3 3z"/>
         <path d="m83 71c1.657 0 3 1.343 3 3s-1.343 3-3 3h-45c-1.657 0-3-1.343-3-3s1.343-3 3-3z"/>

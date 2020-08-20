@@ -92,9 +92,11 @@ SetHeadersAndFooters()
         oWord.ActiveWindow.ActivePane.View.SeekView := 9
         if (oWord.Selection.Information(12) = -1) 
 		{
-            oWord.Selection.Tables(1).PreferredWidthType := 3 
-            oWord.Selection.Tables(1).PreferredWidth := oWord.Selection.PageSetup.PageWidth - (oWord.Selection.PageSetup.LeftMargin + oWord.Selection.PageSetup.RightMargin + oWord.Selection.PageSetup.Gutter)
-            oWord.Selection.Tables(1).Rows.Alignment := 1 
+            oWord.Selection.Tables(1).AutoFitBehavior(1)
+            oWord.Selection.Tables(1).AutoFitBehavior(2)
+            ; oWord.Selection.Tables(1).PreferredWidthType := 3 
+            ; oWord.Selection.Tables(1).PreferredWidth := oWord.Selection.PageSetup.PageWidth - (oWord.Selection.PageSetup.LeftMargin + oWord.Selection.PageSetup.RightMargin + oWord.Selection.PageSetup.Gutter)
+            ; oWord.Selection.Tables(1).Rows.Alignment := 1 
 		}
     }
     if (TitPage)
@@ -104,12 +106,4 @@ SetHeadersAndFooters()
     }
     oWord.ActiveWindow.ActivePane.View.SeekView := 0
     oWord := ""
-}
-
-MsgText(string)
-{
-    vSize := StrPut(string, "CP0")
-    VarSetCapacity(vUtf8, vSize)
-    vSize := StrPut(string, &vUtf8, vSize, "CP0")
-    Return StrGet(&vUtf8, "UTF-8") 
 }

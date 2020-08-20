@@ -10,7 +10,7 @@
  <g transform="matrix(3.7795 0 0 3.7795 -5465.1 -1392.5)">
   <g transform="translate(1174.9 342.76)">
    <rect x="272.28" y="26.6" width="52.632" height="52.632" fill="#b9d4ff" stroke="#000" stroke-linecap="round" stroke-width=".28429" style="paint-order:fill markers stroke"/>
-   <text x="298.70023" y="61.594791" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="298.70023" y="61.594791" text-align="center">Przywróć</tspan><tspan x="298.70023" y="68.262291" text-align="center">domyślną</tspan><tspan x="298.70023" y="74.929787" text-align="center">interlinię</tspan></text>
+   <text x="298.70023" y="61.594791" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="298.70023" y="61.594791" text-align="center">Przywróć</tspan><tspan x="298.70023" y="68.262291" text-align="center">domyślną</tspan><tspan x="298.70023" y="74.929787" text-align="center">interlinię</tspan></text>
    <g transform="translate(-.38082 112.32)" fill="none" stroke="#000" stroke-width="1.765">
     <path d="m278.92-74.599h32.884"/>
     <path d="m278.92-58.048h32.884"/>

@@ -15,7 +15,7 @@
      <g transform="translate(174.63 .21291)">
       <g transform="translate(345.33 -.21291)">
        <rect x="718.77" y="-31.75" width="52.917" height="52.917" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-       <text x="745.03125" y="16.520624" fill="#ffffff" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="745.03125" y="16.520624" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458" text-align="center" text-anchor="middle">Ryzyko resztkowe</tspan></text>
+       <text x="745.03125" y="16.520624" fill="#ffffff" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="745.03125" y="16.520624" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle">Ryzyko resztkowe</tspan></text>
        <g transform="matrix(.32012 0 0 .32012 729.2 -28.373)" fill="#fff">
         <g fill="#fff">
          <path d="m53.7 94.3c0 .9.7 1.6 1.6 1.6h15c.9 0 1.6-.7 1.6-1.6v-8.1h-18.2z"/>

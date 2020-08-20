@@ -37,7 +37,7 @@
                                <g transform="translate(-205.07 -178.97)">
                                 <g transform="translate(-1081.1 -686.85)">
                                  <rect x="1390.1" y="369.54" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-                                 <text x="1415.939" y="412.8591" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="1415.939" y="412.8591" text-align="center">Pokaż ukryty</tspan><tspan x="1415.939" y="418.8916" text-align="center">tekst</tspan></text>
+                                 <text x="1415.939" y="412.8591" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="1415.939" y="412.8591" text-align="center">Pokaż ukryty</tspan><tspan x="1415.939" y="418.8916" text-align="center">tekst</tspan></text>
                                  <text x="1392.4391" y="392.02319" font-family="sans-serif" font-size="9.2831px" letter-spacing="0px" stroke-width=".43515" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1392.4391" y="392.02319" font-family="sans-serif" stroke-width=".43515">Ukryty ms</tspan></text>
                                  <path d="m1396.6 396.16h39.34" fill="none" stroke="#000" stroke-dasharray="1.97605, 1.97605" stroke-width="1.9761"/>
                                 </g>

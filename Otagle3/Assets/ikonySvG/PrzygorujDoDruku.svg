@@ -2,7 +2,7 @@
  <g transform="matrix(3.7795 0 0 3.7795 -5465.1 -1392.5)">
   <g transform="translate(287.84 -2.8144e-6)">
    <rect x="1159.5" y="369.54" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-   <text x="1186.0513" y="412.58487" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="1186.9194" y="412.58487" text-align="center">Przygotuj </tspan><tspan x="1186.0513" y="418.61737" text-align="center">do druku</tspan></text>
+   <text x="1186.0513" y="412.58487" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="1186.9194" y="412.58487" text-align="center">Przygotuj </tspan><tspan x="1186.0513" y="418.61737" text-align="center">do druku</tspan></text>
    <g transform="matrix(.33957 0 0 .33957 1168.6 371.33)">
     <path d="m72.09 8.47h-44.18a5 5 0 00-5 5v13.26h-7.58a10 10 0 00-10 10v27.64a10 10 0 0010 10h8.55v12.16a5 5 0 005 5h42.25a5 5 0 005-5v-12.16h8.55a10 10 0 0010-10v-27.64a10 10 0 00-10-10h-7.59v-13.26a5 5 0 00-5-5zm-45.19 5a1 1 0 011-1h44.19a1 1 0 011 1v13.26h-46.18zm45.23 73.06a1 1 0 01-1 1h-42.26a1 1 0 01-1-1v-28.1h44.26zm18.55-49.8v27.64a6 6 0 01-6 6h-8.55v-13.94a2 2 0 00-2-2h-48.26a2 2 0 00-2 2v13.94h-8.54a6 6 0 01-6-6v-27.64a6 6 0 016-6h69.35a6 6 0 016 6z"/>
     <path d="m72.09 42.5a6.84 6.84 0 106.84-6.84 6.85 6.85 0 00-6.84 6.84zm6.84-2.84a2.84 2.84 0 11-2.84 2.84 2.84 2.84 0 012.84-2.84z"/>

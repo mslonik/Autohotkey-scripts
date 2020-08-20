@@ -33,7 +33,7 @@
          <g>
           <rect x="-33.553" y="-31.75" width="52.917" height="52.917" fill="url(#linearGradient12428)" fill-rule="evenodd" stroke="url(#linearGradient12426)" stroke-linecap="round" stroke-width=".5" style="mix-blend-mode:color;paint-order:fill markers stroke"/>
           <path d="m-33.553-31.75 52.917 52.917h-52.917z" fill="#ffec8e" stroke="#000" stroke-width=".26458px"/>
-          <text x="-7.0336947" y="8.5877028" fill="#000000" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-7.0336943" y="8.5877028" text-align="center">Początek listy</tspan><tspan x="-7.0336943" y="16.525202" text-align="center">4 poziom</tspan></text>
+          <text x="-7.0336947" y="8.5877028" fill="#000000" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-7.0336943" y="8.5877028" text-align="center">Początek listy</tspan><tspan x="-7.0336943" y="16.525202" text-align="center">4 poziom</tspan></text>
          </g>
          <g fill="none" stroke="#000" stroke-width="1.6">
           <path d="m-28.065-21.606h41.01"/>

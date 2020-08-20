@@ -1,7 +1,7 @@
 <svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
  <g transform="matrix(3.7795 0 0 3.7795 -1460.4 331.89)">
   <rect x="387.75" y="-86.664" width="52.632" height="52.632" fill="#b9d4ff" stroke="#000" stroke-linecap="round" stroke-width=".28429" style="paint-order:fill markers stroke"/>
-  <text x="413.77182" y="-45.203438" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="413.77182" y="-45.203438" text-align="center">Podział strony</tspan><tspan x="413.77182" y="-38.535938" text-align="center">przed</tspan></text>
+  <text x="413.77182" y="-45.203438" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="413.77182" y="-45.203438" text-align="center">Podział strony</tspan><tspan x="413.77182" y="-38.535938" text-align="center">przed</tspan></text>
   <g stroke-width=".25369">
    <path d="m410.01-57.165v-1.0147h-10.147a1.0147 1.0147 0 01-1.0147-1.0147v-22.832a1.0147 1.0147 0 011.0147-1.0147h15.221a1.0147 1.0147 0 011.0148 1.0147v2.5369h1.0148v-2.5369a2.0318 2.0318 0 00-2.0295-2.0295h-15.221a2.0318 2.0318 0 00-2.0295 2.0295v22.832a2.0318 2.0318 0 002.0295 2.0295z"/>
    <path d="m426.24-64.775h-11.162a.50737.50737 0 000 1.0147h11.162a.50737.50737 0 000-1.0147z"/>

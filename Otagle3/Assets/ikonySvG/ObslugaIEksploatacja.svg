@@ -21,7 +21,7 @@
        <path d="m43.007 68h16c.55225 0 1-.44775 1-1s-.44775-1-1-1h-16c-.55225 0-1 .44775-1 1s.44775 1 1 1z"/>
        <path d="m43.007 74.666h16c.55225 0 1-.44775 1-1 0-.55225-.44775-1-1-1h-16c-.55225 0-1 .44775-1 1 0 .55225.44775 1 1 1z"/>
       </g>
-      <text x="-120.42656" y="8.5565882" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-119.5584" y="8.5565882" text-align="center">Obsługa </tspan><tspan x="-120.42656" y="16.494089" text-align="center">i eksploatacja</tspan></text>
+      <text x="-120.42656" y="8.5565882" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-119.5584" y="8.5565882" text-align="center">Obsługa </tspan><tspan x="-120.42656" y="16.494089" text-align="center">i eksploatacja</tspan></text>
      </g>
     </g>
    </g>

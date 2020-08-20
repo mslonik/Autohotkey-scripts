@@ -7,7 +7,7 @@
       <g transform="translate(-1396.8 269.89)">
        <g transform="translate(-57.972 -.024822)">
         <rect x="1453.3" y="-27.658" width="52.396" height="52.396" fill="#0082b4" stroke="#000" stroke-linecap="round" stroke-width=".52068" style="paint-order:fill markers stroke"/>
-        <text x="1479.1055" y="21.10928" font-family="voestalpine" font-size="8.4667px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1479.1055" y="21.10928" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458" text-align="center" text-anchor="middle">MAKRA</tspan></text>
+        <text x="1479.1055" y="21.10928" font-family="voestalpine" font-size="8.4667px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1479.1055" y="21.10928" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px"  stroke-width=".26458" text-align="center" text-anchor="middle">MAKRA</tspan></text>
         <g transform="matrix(.41802 0 0 .41802 1464.9 -25.235)" fill="#fff">
          <g fill="#fff">
           <path d="m48.763 30.675c-1.152 0-1.9897 1.4067-1.9897 4.0555 0 2.5289.77796 3.9655 1.9751 3.9655 1.3464 0 1.9897-1.5712 1.9897-4.055 0-2.3942-.61285-3.966-1.9751-3.966z"/>

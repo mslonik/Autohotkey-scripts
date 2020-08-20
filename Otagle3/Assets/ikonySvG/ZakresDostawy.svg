@@ -13,7 +13,7 @@
     <g transform="translate(-1495.1 -629.38)">
      <g transform="translate(-693.42 2.9187e-6)">
       <rect x="1932.3" y="-31.75" width="52.951" height="52.917" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".50016" style="paint-order:fill markers stroke"/>
-      <text transform="scale(1.0003 .99968)" x="1958.1321" y="16.526241" fill="#ffffff" font-family="voestalpine" font-size="6.352px" letter-spacing="0px" stroke-width=".26467" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1958.1321" y="16.526241" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" stroke-width=".26467" text-align="center" text-anchor="middle">Zakres dostawy</tspan></text>
+      <text transform="scale(1.0003 .99968)" x="1958.1321" y="16.526241" fill="#ffffff" font-family="voestalpine" font-size="6.352px" letter-spacing="0px" stroke-width=".26467" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1958.1321" y="16.526241" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26467" text-align="center" text-anchor="middle">Zakres dostawy</tspan></text>
       <g transform="matrix(.38275 0 0 .38275 1939.6 -31.484)" fill="#fff">
        <g fill="#fff">
         <path d="m95.8 28.5-29.1-9.5c-.5-.2-1-.2-1.6 0l-29.1 9.5c-1 .3-1.7 1.3-1.7 2.4v38.2c0 1.1.7 2 1.7 2.4l29.1 9.5c.3.1.5.1.8.1s.5 0 .8-.1l29.1-9.6c1-.3 1.7-1.3 1.7-2.4v-38.1c0-1.1-.7-2-1.7-2.4zm-32.4 46.7-24.1-7.9v-33l9.6 3.1v18.7c0 1.4 1.1 2.5 2.5 2.5s2.5-1.1 2.5-2.5v-17l9.6 3.1v33zm2.5-37.4-6.8-2.2 4.8-1.7c1.3-.5 2-1.9 1.5-3.2s-1.9-1.9-3.2-1.5l-10.7 3.9-6.7-2.2 21.1-6.9 21.1 6.9zm26.6 29.5-9.6 3.1v-10.8c0-1.4-1.1-2.5-2.5-2.5s-2.4 1.1-2.4 2.5v12.5l-9.6 3.1v-33l24.1-7.9z"/>

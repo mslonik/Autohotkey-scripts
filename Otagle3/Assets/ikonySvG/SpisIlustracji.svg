@@ -12,7 +12,7 @@
     <flowRoot fill="black" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="-329.12" y="-12.07" width="696.05" height="259.91"/></flowRegion><flowPara/></flowRoot>
     <g transform="translate(-1836.7 -629.38)">
      <rect x="1580.3" y="-31.75" width="52.951" height="52.917" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".50016" style="paint-order:fill markers stroke"/>
-     <text transform="scale(1.0003 .99968)" x="1606.3315" y="16.611044" fill="#ffffff" font-family="voestalpine" font-size="6.352px" letter-spacing="0px" stroke-width=".26467" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1606.3315" y="16.611044" fill="#ffffff" font-size="4.9389px" stroke-width=".26467" text-align="center" text-anchor="middle">Spis ilustracji</tspan></text>
+     <text transform="scale(1.0003 .99968)" x="1606.3315" y="16.611044" fill="#ffffff" font-family="sans-serif" font-size="6.352px" letter-spacing="0px" stroke-width=".26467" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1606.3315" y="16.611044" fill="#ffffff" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26467" text-align="center" text-anchor="middle">Spis ilustracji</tspan></text>
      <rect x="1592.2" y="-25.354" width="29.23" height="3.8758" ry="1.7764" fill="#fff" style="paint-order:fill markers stroke"/>
      <g transform="matrix(.33495 0 0 .33495 1590.3 -25.55)" fill="#fff">
       <g fill="#fff" data-name="Olympus pen">

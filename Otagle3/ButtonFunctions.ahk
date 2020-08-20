@@ -309,6 +309,7 @@
 #Include *i WarstwaWord\MakraOgolne\InsertEnumNumber.ahk
 #Include *i WarstwaWord\MakraOgolne\InsertBookmarkText.ahk
 #Include *i Layer1\ToBuildingBlocksLayer.ahk
+#Include *i WarstwaWord\MakraOgolne\SetHeadersAndFooters.ahk
 #Include *i WarstwaWord\UstawieniaDokumentu\SetDefaultInterlines.ahk
 ||||||| .r848
 #Include *i Layer1\ToWordLayer.ahk

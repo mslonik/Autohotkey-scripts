@@ -15,7 +15,7 @@
      <g transform="translate(174.63 .21291)">
       <g transform="translate(229.39 -.31626)">
        <rect x="834.57" y="-31.75" width="52.917" height="52.917" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-       <text x="861.07007" y="8.6599503" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="861.07007" y="8.6599503" text-align="center">Kasowanie</tspan><tspan x="861.07007" y="16.59745" text-align="center">ostatniej sekcji</tspan></text>
+       <text x="861.07007" y="8.6599503" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px"  stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="861.07007" y="8.6599503" text-align="center">Kasowanie</tspan><tspan x="861.07007" y="16.59745" text-align="center">ostatniej sekcji</tspan></text>
        <g transform="matrix(.45037 0 0 .45037 838.51 -34.577)" fill="#fff">
         <g fill="#fff">
          <path d="m71.001 25.962-1.8464 48.006c-.064101 1.6666-1.4858 3.0324-3.1544 3.0324h-32c-1.6713 0-3.0902-1.3648-3.1544-3.0324l-1.8464-48.006c-.02123-.55188-.48582-.98205-1.0377-.96083-.55188.02123-.98205.48582-.96083 1.0377l1.8464 48.006c.10545 2.7417 2.4071 4.9556 5.1529 4.9556h32c2.7425 0 5.0475-2.2144 5.1529-4.9556l1.8464-48.006c.02123-.55188-.40895-1.0165-.96083-1.0377-.55188-.02123-1.0165.40895-1.0377.96083z"/>

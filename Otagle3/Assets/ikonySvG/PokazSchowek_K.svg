@@ -45,7 +45,7 @@
                                       <g transform="translate(-200.71 456.02)">
                                        <g transform="translate(750.88 -278.99)">
                                         <rect x="271.1" y="192.33" width="52.632" height="52.632" fill="#87deaa" stroke="#000" stroke-linecap="round" stroke-width=".28429" style="paint-order:fill markers stroke"/>
-                                        <text x="297.09879" y="241.58571" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="end" text-anchor="end" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="297.09879" y="241.58571" font-family="sans-serif" font-size="4.9389px" stroke-width=".26458" text-align="center" text-anchor="middle">Pokaż schowek</tspan></text>
+                                        <text x="297.09879" y="241.58571" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="end" text-anchor="end" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="297.09879" y="241.58571" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle">Pokaż schowek</tspan></text>
                                         <g transform="matrix(.30925 0 0 .30925 283.87 195.79)">
                                          <path d="m31.7 61.6c-1-11.3 12.5-18.5 13-18.8l2.8 5.2c-.1.1-10.5 5.7-9.9 13.1z"/>
                                          <path d="m38.1 73.8 10.6 5.9c-3 1.9-6.7 3-8.5 3.3l1 5.8c.4-.1 7.9-1.4 13.2-6l14.1 7.8 2.9-5.2-13.2-7.3c.5-1 .9-2 1.2-3.2l-5.8-1.3c-.1.6-.4 1.1-.6 1.7l-4.9-2.7 24.3-22.3-32-19.8-3.1 5 25.3 15.7z"/>

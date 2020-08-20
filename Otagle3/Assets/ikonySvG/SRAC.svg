@@ -42,7 +42,7 @@
                                   <g transform="translate(1386.8 133.57)">
                                    <g transform="translate(-1180.5 267.04)">
                                     <rect x="1295.7" y="-31.75" width="52.917" height="52.917" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-                                    <text x="1322.3284" y="8.8468456" fill="#ffffff" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1322.3284" y="8.8468456" text-align="center">SRAC (Wytyczne</tspan><tspan x="1322.3284" y="16.784346" text-align="center">Związane z Bezp.)</tspan></text>
+                                    <text x="1322.3284" y="8.8468456" fill="#ffffff" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="1322.3284" y="8.8468456" text-align="center">SRAC (Wytyczne</tspan><tspan x="1322.3284" y="16.784346" text-align="center">Związane z Bezp.)</tspan></text>
                                     <g transform="matrix(.32592 0 0 .32571 1306.2 -29.515)" fill="#fff">
                                      <path d="m65.391 67.891 32.892-16.25v-3.281l-32.892-16.25-27.891-14.376v19.766h-37.5v25h37.5v19.766l27.891-14.375" fill="#fff"/>
                                     </g>

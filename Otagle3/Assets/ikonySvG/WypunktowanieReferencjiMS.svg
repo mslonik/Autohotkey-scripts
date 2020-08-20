@@ -35,7 +35,7 @@
                              <g transform="translate(-264.69 -.093008)">
                               <g transform="translate(734.89 179.33)">
                                <rect x="103.43" y="-496.48" width="52.917" height="52.917" fill="#ffec8e" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-                               <text x="129.85907" y="-455.81927" fill="#000000" font-family="sans-serif" font-size="4.9389px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="130.72723" y="-455.81927" text-align="center">Wypunktowanie </tspan><tspan x="129.85907" y="-447.88177" text-align="center">referencji ms</tspan></text>
+                               <text x="129.85907" y="-455.81927" fill="#000000" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="130.72723" y="-455.81927" text-align="center">Wypunktowanie </tspan><tspan x="129.85907" y="-447.88177" text-align="center">referencji ms</tspan></text>
                                <g transform="matrix(.30639 0 0 .30639 116.02 -490.83)">
                                 <path d="m83.344 17.968h-52c-1.104 0-2-.9-2-2s.896-2 2-2h52c1.1 0 2 .9 2 2s-.9 2-2 2z"/>
                                 <path d="m83.344 41.968h-52c-1.104 0-2-.9-2-2s.896-2 2-2h52c1.1 0 2 .9 2 2s-.9 2-2 2z"/>

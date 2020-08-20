@@ -119,10 +119,10 @@ BuildHTMLFile(){
                 
                 ; If !(PictureDef = ""){
                 If (Path == "#"){
-                    btn:= % "<a id=""" . "drag" . "-" . A_Index . " " . ButtonA . """ class=""box_item draggable"" href=""#""  onclick=""ahk.ClickF(event,id)""><img style=""font-size: 16px; font-family: 'Lato', sans-serif; max-width:300px; max-height:300px; display:block;width:" . Bw . "vw;" .  "height:" . Bh . "vw;" """ src=""" . PictureDef . """ ></a>"
+                    btn:= % "<a id=""" . "drag" . "-" . A_Index . " " . ButtonA . """ class=""box_item draggable"" href=""#""  onclick=""ahk.ClickF(event,id)""><img class=""icon"" style=""font-size: 16px; font-family: 'Lato', sans-serif; max-width:300px; max-height:300px; display:block;width:" . Bw . "vw;" .  "height:" . Bh . "vw;" """ src=""" . PictureDef . """ ></a>"
                 }
                 Else{
-                    btn:= % "<a id=""" . "drag" . "-" . A_Index . " " . ButtonA . """ class=""box_item draggable"" href=""" . "Layer" . Path . ".html" . """  onclick=""ahk.ClickF(event,id)""><img style=""font-size: 16px; font-family: 'Lato', sans-serif; max-width:300px; max-height:300px; display:block;width:" . Bw . "vw;" .  "height:" . Bh . "vw;" """ src=""" . PictureDef . """ ></a>"
+                    btn:= % "<a id=""" . "drag" . "-" . A_Index . " " . ButtonA . """ class=""box_item draggable"" href=""" . "Layer" . Path . ".html" . """  onclick=""ahk.ClickF(event,id)""><img class=""icon"" style=""font-size: 16px; font-family: 'Lato', sans-serif; max-width:300px; max-height:300px; display:block;width:" . Bw . "vw;" .  "height:" . Bh . "vw;" """ src=""" . PictureDef . """ ></a>"
                 }
                 
                 btns[VarVertical,A_Index]:= btn
