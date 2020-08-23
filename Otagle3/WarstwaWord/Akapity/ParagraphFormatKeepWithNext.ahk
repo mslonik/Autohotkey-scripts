@@ -8,7 +8,7 @@ ParagraphFormatKeepWithNext()
 		}
 	else
 		{
-		oWord.Selection.ParagraphFormat.KeepWithNext := 0
+		oWord.Selection.ParagraphFormat.KeepWithNext := -1
 		}
 	oWord := ""
 	WinActivate, ahk_class OpusApp

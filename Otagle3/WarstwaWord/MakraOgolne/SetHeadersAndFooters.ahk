@@ -2,6 +2,14 @@ SetHeadersAndFooters()
 {
     WinActivate, ahk_class OpusApp
     oWord := ComObjActive("Word.Application")
+    OurTemplateEN := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
+	OurTemplatePL := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
+    if  ((oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL))
+    {
+        MsgBox, 0x30,, The template has not been attached. Attach the template and run the macro again.
+        return
+
+    }
     cntSec := oWord.ActiveDocument.Sections.Count
     if (oWord.ActiveDocument.Bookmarks.Exists("StrTyt"))
         TitPage := 1
@@ -42,7 +50,8 @@ SetHeadersAndFooters()
     }
     Loop, %cntSec%
     {
-        if ((TitPage) and (A_Index == 1))
+        ; if ((TitPage) and (A_Index == 1))
+        if ((A_Index == 1))
         {
             oWord.ActiveDocument.Sections(A_Index).PageSetup.DifferentFirstPageHeaderFooter := -1
         }
@@ -60,13 +69,17 @@ SetHeadersAndFooters()
             oWord.ActiveDocument.Sections(A_Index).Footers(1).LinkToPrevious := 0
             oWord.ActiveDocument.Sections(A_Index).Headers(1).LinkToPrevious := 0
         }
-        if !(LastPage)
+        if ((TitPage) and !(LastPage))
         {
             oWord.ActiveDocument.AttachedTemplate.BuildingBlockEntries(MsgText("Stopka zwykła")).Insert(oWord.ActiveDocument.Sections(A_Index).Footers(1).Range,-1)
         }
-        else if (LastPage)
+        else if (!(TitPage) and !(LastPage)) or ((TitPage) and (LastPage))
         {
             oWord.ActiveDocument.AttachedTemplate.BuildingBlockEntries(MsgText("Stopka - 1")).Insert(oWord.ActiveDocument.Sections(A_Index).Footers(1).Range,-1)
+        }
+        else if (!(TitPage) and (LastPage))
+        {
+            oWord.ActiveDocument.AttachedTemplate.BuildingBlockEntries(MsgText("Stopka - 2")).Insert(oWord.ActiveDocument.Sections(A_Index).Footers(1).Range,-1)
         }
         oWord.ActiveDocument.AttachedTemplate.BuildingBlockEntries(MsgText("Nagłówek zwykły")).Insert(oWord.ActiveDocument.Sections(A_Index).Headers(1).Range,-1)
     }
@@ -77,10 +90,13 @@ SetHeadersAndFooters()
     oWord.Selection.GoTo(1,1)
     Loop,
     {
-        if (A_Index == 1)
-        {
-            oWord.ActiveWindow.ActivePane.View.SeekView := 10
-        }
+        oWord.ActiveWindow.ActivePane.View.SeekView := 9
+        if (oWord.Selection.Information(12) = -1) 
+		{
+            oWord.Selection.Tables(1).AutoFitBehavior(1)
+            Sleep, 10
+            oWord.Selection.Tables(1).AutoFitBehavior(2)
+		}
         try
         {
             oWord.ActiveWindow.ActivePane.View.NextHeaderFooter
@@ -89,21 +105,12 @@ SetHeadersAndFooters()
         {
             break
         }
-        oWord.ActiveWindow.ActivePane.View.SeekView := 9
-        if (oWord.Selection.Information(12) = -1) 
-		{
-            oWord.Selection.Tables(1).AutoFitBehavior(1)
-            oWord.Selection.Tables(1).AutoFitBehavior(2)
-            ; oWord.Selection.Tables(1).PreferredWidthType := 3 
-            ; oWord.Selection.Tables(1).PreferredWidth := oWord.Selection.PageSetup.PageWidth - (oWord.Selection.PageSetup.LeftMargin + oWord.Selection.PageSetup.RightMargin + oWord.Selection.PageSetup.Gutter)
-            ; oWord.Selection.Tables(1).Rows.Alignment := 1 
-		}
     }
-    if (TitPage)
-    {
+    ; if (TitPage)
+    ; {
         oWord.ActiveDocument.Sections(1).Footers(1).PageNumbers.RestartNumberingAtSection := 1
         oWord.ActiveDocument.Sections(1).Footers(1).PageNumbers.StartingNumber := "0"
-    }
+    ; }
     oWord.ActiveWindow.ActivePane.View.SeekView := 0
     oWord := ""
 }

@@ -12,6 +12,7 @@ CurrentLayer                           := 1
 FileInstall, Layer1.html, Layer1.html
 FileInstall, index.js, index.js
 FileInstall, index.css, index.css
+FileInstall, Assets/ikonySVG, *
 FileInstall, bootstrap.min.css, bootstrap.min.css
 FileInstall, bootstrap.min.js, bootstrap.min.js
 FileInstall, jquery.min.js, jquery.min.js

@@ -1,7 +1,6 @@
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 #SingleInstance, Force
-    #Include lib/Neutron.ahk
-#Include Otagle.ahk
+
 FileRead, Contents2,Assets/hashCode.txt ;Read CheckSum File
 
 ;Variables
@@ -222,10 +221,10 @@ BuildHTMLFile(){
         </body> 
         </html>   
         ), PlikiHtml/Layer%Ln%.html
-        If (Ln == 15){
-            pages:=1
+        
+        pages:=1
             
-        }
+   
         
     }
     If (pages == 1){

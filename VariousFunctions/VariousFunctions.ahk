@@ -198,12 +198,6 @@ return
 ShowHiddenText("Włącz/wyłącz tekst ukryty")
 return
 
-F7::
-oWord := ComObjActive("Word.Application")
-
-oWord := ""
-return
-
 ^+t::
 oWord := ComObjActive("Word.Application")
 OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
@@ -280,7 +274,7 @@ XButton1:: ; switching between Chrome browser tabs; author: Taran VH
 		{
 		Run, chrome.exe
 		}
-	if WinActive("ahk_class Chrome_WidgetWin_1")
+	if WinActive("ahk_class Chrome_WidgetWin_1") or WinActive("ahk_class TTOTAL_CMD")
 		{
 		Send, ^+{Tab}
 		}
@@ -296,7 +290,7 @@ XButton2:: ; switching between Chrome browser tabs; author: Taran VH
 		{
 		Run, chrome.exe
 		}
-	if WinActive("ahk_class Chrome_WidgetWin_1")
+	if WinActive("ahk_class Chrome_WidgetWin_1")  or WinActive("ahk_class TTOTAL_CMD")
 		{
 		Send, ^{Tab}
 		}
