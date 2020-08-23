@@ -1,5 +1,5 @@
 ﻿/*
-Author:      Jakub Masiak, Maciej Słojewski, mslonik, http://mslonik.pl
+Author:      Jakub Masiak, Maciej Słojewski (mslonik, http://mslonik.pl 🐘)
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
 License:     GNU GPL v.3
@@ -12,11 +12,6 @@ License:     GNU GPL v.3
 SendMode Input  				; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 ; ---------------------- HOTSTRINGS -----------------------------------
-;~ The general hotstring rules:
-;~ 1. Automatic changing small letters to capital letters: just press ending character (e.g. <Enter> or <Space> or <(>).
-;~ 2. Automatic expansion of abbreviation: after small letters just press a </>.
-;~ 2.1. If expansion contain double letters, use that letter and <2>. E.g. <c2ms> expands to <CCMS> and <c2ms/> expands to <Component Content Management System>.
-;~ 3. Each hotstrings can be undone upon pressing of usual shotcuts: <Ctrl + z> or <Ctrl + BackSpace>.
 
 IfNotExist, Categories2\PersonalHotstrings.csv
 	FileAppend,, Categories2\PersonalHotstrings.csv, UTF-8
