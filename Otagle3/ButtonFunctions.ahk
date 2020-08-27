@@ -936,4 +936,4 @@
 #Include *i Layer1\ToBuildingBlocksLayer.ahk
 #Include *i WarstwaWord\UstawieniaDokumentu\SetDefaultInterlines.ahk
 #Include *i WarstwaWord\MakraOgolne\SetHeadersAndFooters.ahk
->>>>>>> .r856
+#Include *i WarstwaWord\UstawieniaDokumentu\Wypunktowania.ahk

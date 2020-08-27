@@ -9,6 +9,7 @@ Captions()
 		WinGetPos, X, Y, W, H, Podpisy
 		Gui, ti:Destroy
 		flag_ti := 0
+		WinActivate, ahk_class OpusApp
 		
 	}
 	else if (flag_ti = 0) or !(flag_ti)

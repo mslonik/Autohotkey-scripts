@@ -30,7 +30,6 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
      ReadButtonPosH                         := 0
      MenuVar                                := 0
 
-
 WizardStep2:   
      Gui, WizardStep2: New, +LabelMyGui_On -DPIScale
      Gui, WizardStep2: Font, bold
@@ -50,12 +49,6 @@ WizardStep2:
      Gui, WizardStep2: Add, Text, x+m yp, Specify key size height: `
      Gui, WizardStep2: Add, Edit, x+m yp r1 w50
      Gui, WizardStep2: Add, UpDown, vButtonHeight Range1-300, % ButtonHeight
-     Gui, WizardStep2: Add, Text, xm, Specify horizontal gap between buttons: `
-     Gui, WizardStep2: Add, Edit, x+m yp r1 w50
-     Gui, WizardStep2: Add, UpDown, vButtonHorizontalGap Range0-300, % ButtonHorizontalGap
-     Gui, WizardStep2: Add, Text, x+m yp, Specify vertical gap between buttons: `
-     Gui, WizardStep2: Add, Edit, x+m yp r1 w50
-     Gui, WizardStep2: Add, UpDown, vButtonVerticalGap Range0-300, % ButtonVerticalGap
      Gui, WizardStep2: Add, Button, xm Default w80 gBCalculate, C&alculate 
      Gui, WizardStep2: Add, Text, xm, % "Number of keys horizontally:`t" . (T_CalculateButton ? WizardStep2_AmountOfKeysHorizontally : "") 
           . "`tNot used margin at the left side in px:`t" . (T_CalculateButton ? WizardStep2_MarginHorizontally : "") . "`t"
@@ -140,7 +133,7 @@ WizardStep3:
      Gui, WizardStep3: Font, bold
      Gui, WizardStep3: Add, Text, , Step 3: `t`tAssociate pictures and functions with buttons.
      Gui, WizardStep3: Font
-     Gui, WizardStep3: Add, Text, , Click any of the buttons in the bottom window and associate up to 2 pictures and 1 function to it:`r`n * 1st picture which will be shown by default`r`n * 2nd function (*.ahk) which will be run after button is selected.
+     Gui, WizardStep3: Add, Text, , Click any of the buttons in the bottom window and associate up to 1 pictures and 1 function to it:`r`n * 1st picture which will be shown by default`r`n * 2nd function (*.ahk) which will be run after button is selected `r`n * Enter number of the layer the button should move to.
      Gui, WizardStep3: Add, Button, xm+30 w80 gStartOtagle,     &Finish wizard
      Gui, WizardStep3: Add, Button, x+30 w80 gL_AddNextLayer,        &Add next layer
 
@@ -158,7 +151,6 @@ WizardStep3:
           . " y" . MonitorBoundingCoordinates_Top + (Abs(MonitorBoundingCoordinates_Top - MonitorBoundingCoordinates_Bottom) / 2) - (WizardWindow_Height / 2), % WindowWizardTitle
           , % WindowWizardTitle  . " Layer " . CurrentLayer
 return
-
 
 Traymenu:
      Menu, Tray,                Icon, % A_ScriptDir . "\Core\OtagleIcon.ico"    ; this line applies icon of O T A G L E designed by Sylwia Ławrów
@@ -309,7 +301,6 @@ L_WizardButton:
       
 return     
 
-
 WizardStep4:
 
      Gui, WizardStep4: New, +LabelMyGui_On -DPIScale
@@ -345,7 +336,6 @@ Gosub, CloseS4
 Gui,      WizardStep3: Show   
 return
 
-
 CloseS4:
 Gui,WizardStep4: Destroy
 Gui,      WizardStep3: Show  
@@ -355,28 +345,7 @@ StartOtagle:
      
      Gui, WizardStep3:                  Destroy
      Gui, Wizard_PlotMatrixOfButtons:   Destroy
-     ; if (T_Reload)
-     ;      {
-     ;      FileSetAttrib, +H, %A_ScriptDir%\ButtonFunctions.ahk  ; hide ButtonFunctions.ahk     
-     ;      MsgBox, 0, % ApplicationName, % ApplicationName . " will reload now in order to apply updated settings" 
-     ;      Reload
-     ;      }
-     ; else
-     ;      {
-     ;      Gosub,  Traymenu     ; Jumps to the specified label and continues execution until Return is encountered
-     ;      F_ReadConfig_ini()
-     ;      CurrentLayer := 1  ; initialization of application
-     ;      EditFlag := 0
-     ;      SysGet, MonitorBoundingCoordinates_, Monitor, % WhichMonitor 
-     ;      try          
-               ; F_DisplayLayer(CurrentLayer)
-          ; catch e
-          ;      {
-          ;      MsgBox, An exception was thrown!`r`nIncorrect value of Monitor variable within Config.ini. Probably this monitor has not been found. Application will exit now.
-          ;      Exit, 1
-          ;      }
-          ; Gui, ProgressBar:Destroy
-          ; }
+
 return
 
 L_AddNextLayer:
@@ -437,8 +406,6 @@ F_ReadConfig_ini()
                     IniRead, ButtonY,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Y"
                     ButtonW := ButtonWidth
                     ButtonH := ButtonHeight
-                    ;~ IniRead, ButtonY,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Y"
-                    ;~ IniRead, ButtonW,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_W"
                     IniRead, PictureDef,    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Picture"
                     IniRead, PictureSel,    % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_PictureIfSelected"
                     IniRead, ButtonA,       % A_ScriptDir . "\Config.ini", % "Layer" . LayerIndex, % "Button_" . VerticalIndex . "_" . A_Index . "_Action"
@@ -461,15 +428,10 @@ F_ReadConfig_ini()
                          }
                     }
                }
-          ;~ vOutput := ""
-          ;~ for vKey, vValue in TableOfLayers[LayerIndex]
-               ;~ vOutput .= vKey " " vValue "`r`n"
-          ;~ MsgBox, % vOutput
+
           }
      }
-; - -      
-
-
+  
 
 SaveConfigurationWizard:
      if (T_CalculateButton = 0)
@@ -477,15 +439,23 @@ SaveConfigurationWizard:
           MsgBox, 0, % WindowWizardTitle, Press Calculate button at first.
           return
           }
-     
-     IniWrite, % WhichMonitor,            % A_ScriptDir . "\Config.ini", Main,                      WhichMonitor
-     IniWrite, % HowManyLayers,           % A_ScriptDir . "\Config.ini", Main,                      HowManyLayers ; Save the total amount of created layers
-     IniWrite, % Title,                   % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  Title
-     IniWrite, % Floor(100/WizardStep2_AmountOfKeysHorizontally),             % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonWidth
-     IniWrite, % Floor(100/WizardStep2_AmountOfKeysHorizontally),            % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonHeight
-     IniWrite, % ButtonHorizontalGap,     % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonHorizontalGap
-     IniWrite, % ButtonVerticalGap,       % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonVerticalGap
-
+     If (ButtonWidth == ButtonHeight){
+          IniWrite, % WhichMonitor,            % A_ScriptDir . "\Config.ini", Main,                      WhichMonitor
+          IniWrite, % HowManyLayers,           % A_ScriptDir . "\Config.ini", Main,                      HowManyLayers ; Save the total amount of created layers
+          IniWrite, % Title,                   % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  Title
+          IniWrite, % Floor(100/WizardStep2_AmountOfKeysHorizontally),             % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonWidth
+          IniWrite, % Floor(100/WizardStep2_AmountOfKeysHorizontally),             % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonHeight
+          IniWrite, % ButtonHorizontalGap,     % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonHorizontalGap
+          IniWrite, % ButtonVerticalGap,       % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonVerticalGap
+     }else {
+          IniWrite, % WhichMonitor,            % A_ScriptDir . "\Config.ini", Main,                      WhichMonitor
+          IniWrite, % HowManyLayers,           % A_ScriptDir . "\Config.ini", Main,                      HowManyLayers ; Save the total amount of created layers
+          IniWrite, % Title,                   % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  Title
+          IniWrite, % Floor(ButtonWidth/1920 * 100),             % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonWidth
+          IniWrite, % Floor(ButtonHeight/1080 * 100),            % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonHeight
+          IniWrite, % ButtonHorizontalGap,     % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonHorizontalGap
+          IniWrite, % ButtonVerticalGap,       % A_ScriptDir . "\Config.ini", % "Layer" . HowManyLayers,  ButtonVerticalGap
+     }
 
      Gui, Wizard_PlotMatrixOfButtons: +LastFoundExist
      if (WinExist())
@@ -494,7 +464,7 @@ SaveConfigurationWizard:
           }
      else
           {
-          F_AddButtonsAndGaps("Disable")
+          ; F_AddButtonsAndGaps("Disable")
           F_SavePositionOfButtons()
           }
 
@@ -503,14 +473,9 @@ SaveConfigurationWizard:
      Gui, WizardStep2: Add, Button, x+m w80 gWizardStep3, C&ontinue
 return
 
-
-
 ExitWizard:
-     ;~ MsgBox, 4,, Do you want to close O T A G L E?
-     ;~ IfMsgBox, No
-     ;~ return
-ExitApp
 
+ExitApp
 
 MsgText(string)
 {

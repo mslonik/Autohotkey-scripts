@@ -47,6 +47,7 @@ InsertEnumNumber()
 		WinGetPos, X, Y, W, H, Wstaw numer elementu listy numerowanej
 		Gui, Enum:Destroy
 		flag_enum := 0
+		WinActivate, ahk_class OpusApp
 	}
 	return
 	

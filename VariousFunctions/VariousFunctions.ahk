@@ -5,6 +5,8 @@
 SendMode Input  				; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 
+Menu, Tray,Icon, % A_SCriptDir . "\vh.ico" 
+
 global English_USA 		:= 0x0409   ; see AutoHotkey help: Language Codes
 global TransFactor := 255
 global WordTrue := -1 ; ComObj(0xB, -1) ; 0xB = VT_Bool || -1 = true
@@ -134,7 +136,9 @@ return
 return
 
 ; These are valid for any keyboard
-+^F1::DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0) ; Suspend: 
++^F1::DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0)		; Suspend: 
++^F2::Shutdown, 2															; Reboot
++^F3::Shutdown, 1 + 8														; Shutdown + Powerdown
 +^k::Run, C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe 	 ; run Kee Pass application (password manager)
 
 ^#F8:: 			; Ctrl + Windows + F8, toggle window parameter always on top

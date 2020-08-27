@@ -1,5 +1,5 @@
 ﻿/*
-Author:      Jakub Masiak, Maciej Słojewski (mslonik, http://mslonik.pl 🐘)
+Author:      Jakub Masiak, Maciej Słojewski, mslonik, http://mslonik.pl
 Purpose:     Facilitate normal operation for company desktop.
 Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
 License:     GNU GPL v.3
@@ -12,13 +12,17 @@ License:     GNU GPL v.3
 SendMode Input  				; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 ; ---------------------- HOTSTRINGS -----------------------------------
+;~ The general hotstring rules:
+;~ 1. Automatic changing small letters to capital letters: just press ending character (e.g. <Enter> or <Space> or <(>).
+;~ 2. Automatic expansion of abbreviation: after small letters just press a </>.
+;~ 2.1. If expansion contain double letters, use that letter and <2>. E.g. <c2ms> expands to <CCMS> and <c2ms/> expands to <Component Content Management System>.
+;~ 3. Each hotstrings can be undone upon pressing of usual shotcuts: <Ctrl + z> or <Ctrl + BackSpace>.
 
 IfNotExist, Categories2\PersonalHotstrings.csv
 	FileAppend,, Categories2\PersonalHotstrings.csv, UTF-8
 IfNotExist, Categories2\New.csv
 	FileAppend,, Categories2\New.csv, UTF-8
 
-Menu, Tray, Icon, shell32.dll, 75
 Menu, Tray, Add, Edit Hotstring, GUIInit
 ; Menu, Tray, Add, About, About
 Menu, Tray, Default, Edit Hotstring
@@ -32,15 +36,25 @@ CapCheck := ""
 HotString := ""
 PrevSec := A_Args[2]
 PrevW := A_Args[3], PrevH := A_Args[4], PrevX := A_Args[5], PrevY := A_Args[6]
+prevMon := A_Args[8]
 init := 0
 WindowTransparency	:= 0
 MyHotstring 		:= ""
-SelectedRow := 0
+if !(A_Args[7])
+	SelectedRow := 0
+else
+	SelectedRow := A_Args[7]
 delay := 200
-chMon := 0
+if !(prevMon)
+	chMon := 0
+else
+	chMon := prevMon
 delay := 200
 flagMon := 0
-showGui := 1
+if !(PrevSec)
+	showGui := 1
+else
+	showGui := 2
 
 ; ---------------------------- INITIALIZATION -----------------------------
 
@@ -101,11 +115,6 @@ LoadFiles(nameoffile)
 		FileReadLine, line, Categories\%nameoffile%, %A_Index%
 		if ErrorLevel
 			break
-		line := StrReplace(line, "A_YYYY", A_YYYY)
-		line := StrReplace(line, "A_MM", A_MM)
-		line := StrReplace(line, "A_DD", A_DD)
-		line := StrReplace(line, "A_Hour", A_Hour)
-		line := StrReplace(line, "A_Min", A_Min)
 		line := StrReplace(line, "``n", "`n")
 		line := StrReplace(line, "``r", "`r")
 		StartHotstring(line)
@@ -129,6 +138,8 @@ StartHotstring(txt)
 		SendFun := "MenuText"
 	else if (txtsp[3] == "MA") 
 		SendFun := "MenuTextAHK"
+	else if (txtsp[3] == "T")
+		SendFun := "TimeAndDate"
 	OnOff := txtsp[4]
 	TextInsert := % txtsp[5]
 	Hotstring(":" . Options . ":" . NewString, func(SendFun).bind(TextInsert), OnOff)
@@ -276,6 +287,30 @@ Return
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+TimeAndDate(ReplacementString)
+{
+    global MyHotstring
+	ReplacementString := StrReplace(ReplacementString, "A_YYYY", A_YYYY)
+	ReplacementString := StrReplace(ReplacementString, "A_MM", A_MM)
+	ReplacementString := StrReplace(ReplacementString, "A_DD", A_DD)
+	ReplacementString := StrReplace(ReplacementString, "A_Hour", A_Hour)
+	ReplacementString := StrReplace(ReplacementString, "A_Min", A_Min)
+    Send, %ReplacementString%
+    SetFormat, Integer, H
+	InputLocaleID:=DllCall("GetKeyboardLayout", "UInt", 0, "UInt")
+	Polish := Format("{:#x}", 0x415)
+	InputLocaleID := InputLocaleID / 0xFFFF
+	InputLocaleID := Format("{:#04x}", InputLocaleID)
+	if(InputLocaleID = Polish)
+	{
+		Send, {LCtrl up}
+	}
+	
+	MyHotstring := SubStr(A_ThisHotkey, InStr(A_ThisHotkey, ":", false, 1, 2) + 1)
+}
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 CheckOption(State,Button)
 {
 	If (State = "Yes")
@@ -360,7 +395,7 @@ GUIInit:
     Gui, HS3:Add, CheckBox, % "gCapsCheck vInsideWord xp+" . 225*DPI%chMon% . " yp+" . 0*DPI%chMon%, Inside Word (?)
     Gui, HS3:Add, CheckBox, % "gCapsCheck vNoEndChar xp-" . 225*DPI%chMon% . " yp+" . 25*DPI%chMon%, No End Char (O)
     Gui, HS3:Add, CheckBox, % "gCapsCheck vDisHS xp+" . 225*DPI%chMon% . " yp+" . 0*DPI%chMon%, Disable
-    Gui, HS3:Add, DropDownList, % "xm yp+" . 35*DPI%chMon% . " w" . 424*DPI%chMon% . " vByClip gByClip hwndddl", Send by Autohotkey|Send by Clipboard|Send by Menu (Clipboard)|Send by Menu (Autohotkey)
+    Gui, HS3:Add, DropDownList, % "xm yp+" . 35*DPI%chMon% . " w" . 424*DPI%chMon% . " vByClip gByClip hwndddl", Send by Autohotkey|Send by Clipboard|Send by Menu (Clipboard)|Send by Menu (Autohotkey)|Send Time or Date
     PostMessage, 0x153, -1, 22*DPI%chMon%,, ahk_id %ddl%
     Gui, HS3:Add, Edit, % "yp+" . 37*DPI%chMon% . " w" . 424*DPI%chMon% . " h" . 25*DPI%chMon% . " vTextInsert xm"
     Gui, HS3:Add, Edit, % "yp+" . 31*DPI%chMon% . " w" . 424*DPI%chMon% . " h" . 25*DPI%chMon% . " vTextInsert1 xm Disabled"
@@ -539,6 +574,8 @@ AddHotstring:
 		SendFun := "MenuText"
 	else if (ByClip == "Send by Menu (Autohotkey)")
 		SendFun := "MenuTextAHK"
+	else if (ByClip == "Send Time or Date")
+		SendFun := "TimeAndDate"
 	else 
 	{
 		MsgBox, Choose the method of sending the hotstring!
@@ -592,6 +629,8 @@ Edit:
 	{
 		SendFun := "MenuTextAHK"
 	}
+	else if (Fun := "T")
+		SendFun := "TimeAndDate"
 	LV_GetText(TextInsert, SelectedRow, 5)
 	LV_GetText(OnOff, SelectedRow, 4)
 	Hotstring(":"Options ":" NewString,func(SendFun).bind(TextInsert),OnOff)
@@ -693,6 +732,8 @@ SetOptions:
 		GuiControl, Choose, ByClip, Send by Menu (Clipboard)
 	else if(InStr(Select, """MenuTextAHK"""))
 		GuiControl, Choose, ByClip, Send by Menu (Autohotkey)
+	else if(InStr(Select, """TimeAndDate"""))
+		GuiControl, Choose, ByCli, Send Time or Date
 	CapCheck := 0
 return
 
@@ -749,6 +790,8 @@ SaveHotstrings:
 		SendFun := "MC"
 	else if InStr(Items, """MenuTextAHK""")
 		SendFun := "MA"
+	else if InStr(Items, """TimeAndDate""")
+		SendFun := "T"
 	HSSplit := StrSplit(Items, ":")
 	Options := HSSplit[2]
 	StrSp2 := StrSplit(HSSplit[3], """,")
@@ -804,7 +847,7 @@ SaveHotstrings:
 	FileAppend, %txt%, Categories\%name%, UTF-8
 	MsgBox Hotstring added to the %SaveFile%.csv file!
 	WinGetPos, PrevX, PrevY , , ,HS3
-	Run, AutoHotkey.exe Hotstrings3.ahk GUIInit %SectionCombo% %PrevW% %PrevH% %PrevX% %PrevY% %SelectedRow%
+	Run, AutoHotkey.exe Hotstrings3.ahk GUIInit %SectionCombo% %PrevW% %PrevH% %PrevX% %PrevY% %SelectedRow% %chMon%
 Return
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
