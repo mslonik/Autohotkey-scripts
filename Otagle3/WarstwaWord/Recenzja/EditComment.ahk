@@ -8,7 +8,7 @@ EditComment() ; edytuj komentarz
 	}
 	catch e
 	{
-		MsgBox, 48,, Aby edytowaæ komentarz, musisz umieœciæ kursor w obrêbie tekstu, którego komentarz dotyczy.
+		MsgBox, 48,, % MsgText("Aby edytowaÄ‡ komentarz, musisz umieÅ›ciÄ‡ kursor w obrÄ™bie tekstu, ktÃ³rego komentarz dotyczy.")
 	}
 	oWord := ""
 	WinActivate, ahk_class OpusApp

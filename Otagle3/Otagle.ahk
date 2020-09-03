@@ -5,10 +5,12 @@ SetWorkingDir %A_ScriptDir%
 if !(FileExist("Config.ini")){
     Run, ConfigBuilder.ahk,%A_ScriptDir% 
 }Else{
+#Include *i %A_ScriptDir%\CopyTemplate.ahk
 #Include *i %A_ScriptDir%\lib\Neutron.ahk
 #Include *i %A_ScriptDir%\ButtonFunctions.ahk 
 #Include *i %A_ScriptDir%\GuiGenerator.ahk
 #Include *i %A_ScriptDir%\ConfigBuilder.ahk
+#Include *i %A_ScriptDir%\ArrangeBtn.ahk
 Menu, Tray,Icon, % A_ScriptDir . "\Assets\OtagleIcon.ico"
 ; Global variables
 
@@ -31,7 +33,10 @@ ClickF(neutron,event,action){
     %FunctionName%()
     return
 }
-
+BarF(neutron,event,action){
+    %action%()
+    return
+}
 rWizard(neutron,event){
 Run, ConfigBuilder.ahk,%A_ScriptDir% 
 }
@@ -39,3 +44,10 @@ Run, ConfigBuilder.ahk,%A_ScriptDir%
 
 
 
+Reset(){
+    global
+    neutron.Close("PlikiHtml/Layer1.html")
+    RemoveFolder()
+    FileCreateDir, PlikiHtml
+    BuildHTMLFile()
+}

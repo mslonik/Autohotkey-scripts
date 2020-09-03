@@ -494,9 +494,7 @@ class NeutronWindow
 		w := RegExMatch(options, "w\s*\K\d+", match) ? match : this.w
 		h := RegExMatch(options, "h\s*\K\d+", match) ? match : this.h
 		
-		; AutoHotkey sizes the window incorrectly, trying to account for borders
-		; that aren't actually there. Call the function AHK uses to offset and
-		; apply the change in reverse to get the actual wanted size.
+
 		VarSetCapacity(rect, 16, 0)
 		DllCall("AdjustWindowRectEx"
 		, "Ptr", &rect ;  LPRECT lpRect
@@ -510,118 +508,57 @@ class NeutronWindow
 		Gui, % this.hWnd ":Show", %options% w%w% h%h%
 	}
 	
-	; Loads an HTML file by name (not path). When running the script uncompiled,
-	; looks for the file in the local directory. When running the script
-	; compiled, looks for the file in the EXE's RCDATA. Files included in your
-	; compiled EXE by FileInstall are stored in RCDATA whether they get
-	; extracted or not. An easy way to get your Neutron resources into a
-	; compiled script, then, is to put FileInstall commands for them right below
-	; the return at the bottom of your AutoExecute section.
-	;
-	; Parameters:
-	;   fileName - The name of the HTML file to load into the Neutron window.
-	;              Make sure to give just the file name, not the full path.
-	;
-	; Returns: nothing
-	;
-	; Example:
-	;
-	; ; AutoExecute Section
-	; neutron := new NeutronWindow()
-	; neutron.Load("index.html")
-	; neutron.Show()
-	; return
-	; FileInstall, index.html, index.html
-	; FileInstall, index.css, index.css
-	;
+
 	Load(fileName)
 	{
-		; Complete the path based on compiled state
+
 		if A_IsCompiled
 			url := "res://" this.wnd.encodeURIComponent(A_ScriptFullPath) "/10/" fileName 
 		else
 			url := A_WorkingDir "/" fileName
 		
-		; Navigate to the calculated file URL
+
 		this.wb.Navigate(url)
 		
-		; Wait for the page to finish loading
+
 		while this.wb.readyState < 3
 			Sleep, 50
 		
-		; Inject the AHK objects into the JS scope
+
 		this.wnd.neutron := this
 		this.wnd.ahk := new this.Dispatch(this)
 		
-		; Wait for the page to finish loading
+
 		while this.wb.readyState < 4
 			Sleep, 50
 	}
 	
-	; Shorthand method for document.querySelector
+
 	qs(selector)
 	{
 		return this.doc.querySelector(selector)
 	}
 	
-	; Shorthand method for document.querySelectorAll
+
 	qsa(selector)
 	{
 		return this.doc.querySelectorAll(selector)
 	}
 	
-	; Passthrough method for the Gui command, targeted at the Neutron Window
-	; instance
+
 	Gui(subCommand, value1:="", value2:="", value3:="")
 	{
 		Gui, % this.hWnd ":" subCommand, %value1%, %value2%, %value3%
 	}
 	
 	
-	; --- Static Methods ---
-	
-	; Given an HTML Collection (or other JavaScript array), return an enumerator
-	; that will iterate over its items.
-	;
-	; Parameters:
-	;     htmlCollection - The JavaScript array to be iterated over
-	;
-	; Returns: An Enumerable object
-	;
-	; Example:
-	;
-	; neutron := new NeutronWindow("<body><p>A</p><p>B</p><p>C</p></body>")
-	; neutron.Show()
-	; for i, element in neutron.Each(neutron.body.children)
-	;     MsgBox, % i ": " element.innerText
-	;
+
 	Each(htmlCollection)
 	{
 		return new this.Enumerable(htmlCollection)
 	}
 	
-	; Given an HTML Form Element, construct a FormData object
-	;
-	; Parameters:
-	;   formElement - The HTML Form Element
-	;   useIdAsName - When a field's name is blank, use it's ID instead
-	;
-	; Returns: A FormData object
-	;
-	; Example:
-	;
-	; neutron := new NeutronWindow("<form>"
-	; . "<input type='text' name='field1' value='One'>"
-	; . "<input type='text' name='field2' value='Two'>"
-	; . "<input type='text' name='field3' value='Three'>"
-	; . "</form>")
-	; neutron.Show()
-	; formElement := neutron.doc.querySelector("form") ; Grab 1st form on page
-	; formData := neutron.GetFormData(formElement) ; Get form data
-	; MsgBox, % formData.field2 ; Pull a single field
-	; for name, element in formData ; Iterate all fields
-	;     MsgBox, %name%: %element%
-	;
+
 	GetFormData(formElement, useIdAsName:=True)
 	{
 		formData := new this.FormData()

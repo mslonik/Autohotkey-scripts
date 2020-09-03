@@ -1,18 +1,18 @@
 SzablonPL()
 	{
-	OurTemplatePL := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
+	LocTempPL := % A_ScriptDir . "\Templates\TQ-S402-pl_OgolnyTechDok.dotm"
 	WinActivate, ahk_class OpusApp
 	oWord := ComObjActive("Word.Application")
-	if (oWord.ActiveDocument.AttachedTemplate.FullName = OurTemplatePL)	
+	if (oWord.ActiveDocument.AttachedTemplate.FullName = LocTempPL)	
 	{
-		MsgBox, 64, Juø ustawi≥eú szablon, % "Juø wczeúniej zosta≥ wybrany szablon " oWord.ActiveDocument.AttachedTemplate.FullName
+		MsgBox, 64, % MsgText("Ju≈º ustawi≈Çe≈õ szablon"), % MsgText("Ju≈º wcze≈õniej zosta≈Ç wybrany szablon ") oWord.ActiveDocument.AttachedTemplate.FullName
 	}
 	else
 	{
-		oWord.ActiveDocument.AttachedTemplate := OurTemplatePL
+		oWord.ActiveDocument.AttachedTemplate := LocTempPL
 		oWord.ActiveDocument.UpdateStylesOnOpen := -1
 		oWord.ActiveDocument.UpdateStyles
-		MsgBox, 64, Informacja, % "Do≥πczono szablon!`n Do≥πczono domyslny szablon dokumentu: `n" oWord.ActiveDocument.AttachedTemplate.FullName, 5
+		MsgBox, 64, Informacja, % MsgText("Do≈ÇƒÖczono szablon!`n Do≈ÇƒÖczono domyslny szablon dokumentu: `n") oWord.ActiveDocument.AttachedTemplate.FullName, 5
 		template := "PL"
 		try
 			oWord.ActiveDocument.CustomDocumentProperties["PopSzab"] := template

@@ -11,7 +11,7 @@ ToggleApplyStylesPane() ; 2019-10-03
 	}
 		catch
 	{
-		MsgBox,48,, Aby wywo³aæ panel "Stosowanie stylów", zaznaczenie nie powinno zawieraæ kanwy rysunku.
+		MsgBox,48,, % MsgText("Aby wywoÅ‚aÄ‡ panel ""Stosowanie stylÃ³w"", zaznaczenie nie powinno zawieraÄ‡ kanwy rysunku.")
 		return
 	}
 	

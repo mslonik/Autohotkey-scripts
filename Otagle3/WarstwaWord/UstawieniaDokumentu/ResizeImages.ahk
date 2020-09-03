@@ -1,6 +1,4 @@
-#SingleInstance, Force
-
-ResizeImages()
+ResizeImages(SelectedFile:=0)
 {
     static 
 
@@ -22,10 +20,12 @@ ResizeImages()
         MsgBox, 0x30,Warning!,This macro is using the external program ImageMagick. Please install it before continuing.
         return
     }
-
-    FileSelectFile, SelectedFile,,%A_ScriptDir%,Select document to change size, Documents( *.docx)
-    If (SelectedFile == "")
-        return
+    if (SelectedFile == 0)
+    {
+        FileSelectFile, SelectedFile,,%A_ScriptDir%,Select document to change size, Documents( *.docx)
+        If (SelectedFile == "")
+            return
+    }
     FileGetSize, OrgFile, %SelectedFile%
     Gui, ChangeSize:New, -MinimizeBox -MaximizeBox
     Gui, ChangeSize:Show, Hide w400 h60 xCenter yCenter, Changing size of the images

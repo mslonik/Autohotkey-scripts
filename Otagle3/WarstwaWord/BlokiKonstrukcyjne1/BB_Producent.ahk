@@ -1,21 +1,21 @@
 BB_Producent()
 {
-	OurTemplateEN := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
-	OurTemplatePL := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
-	
-	oWord := ComObjActive("Word.Application")
-	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
-		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
-	{
-		MsgBox, 16, Próba wywołania stylu z szablonu, 
-		( Join
-		 Próbujesz wstawić blok konstrukcyjny przypisany do szablonu, ale szablon nie zostać jeszcze dołączony do tego pliku. 
-		 Najpierw dołącz szablon, a następnie wywołaj ponownie ta funkcję.
-		)
+	OurTempPL := "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
+	OurTempEN := "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
+	LocTempPL := % A_ScriptDir . "\Templates\TQ-S402-pl_OgolnyTechDok.dotm"
+	LocTempEN := % A_ScriptDir . "\Templates\TQ-S402-en_OgolnyTechDok.dotm"
+	SzabPath := SubStr(A_ScriptDir, 1, InStr(A_ScriptDir, "Otagle")-1)
+	SzabTempPL := % SzabPath . "OgolneZmakrami\szab_TQ-S402-pl_OgolnyTechDok.dotm"
+	SzabTempEN := % SzabPath . "OgolneZmakrami\szab_TQ-S402-en_OgolnyTechDok.dotm"
+
+	oWord := ComObjActive("Word.Application") 
+	OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
+	if  ((OurTemplate != OurTempPL) and (OurTemplate != OurTempEN) and (OurTemplate != LocTempPL) and (OurTemplate != LocTempEN) and (OurTemplate != SzabTempPL) and (OurTemplate != SzabTempEN))
+		{
+		MsgBox, 16, % MsgText("Próba wywołania stylu z szablonu"),  % MsgText("Próbujesz wstawić blok konstrukcyjny przypisany do szablonu, ale szablon nie został jeszcze dołączony do tego pliku.`r`nNajpierw dołącz szablon, a następnie wywołaj ponownie tę funkcję.")
 	}
 	else
 	{
-		OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
 		oWord.Templates(OurTemplate).BuildingBlockEntries("Producent").Insert(oWord.Selection.Range, -1)
 	}
 	oWord :=  "" ; Clear global COM objects when done with them

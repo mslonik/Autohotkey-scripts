@@ -1,0 +1,9 @@
+<svg id="SVGRoot" version="1.1" viewBox="0 0 205 205" xmlns="http://www.w3.org/2000/svg">
+ <rect y="-8.0078e-10" width="205" height="205" fill="#b9d4ff" stroke="#000" stroke-width="1.8898"/>
+ <g transform="matrix(2.3898 0 0 2.3898 9.157 15.973)">
+  <path d="m27.584 26.168-6.406-6.404c1.291-1.606 1.996-3.587 1.996-5.678 0-2.428-0.945-4.709-2.662-6.425-1.716-1.717-3.998-2.662-6.425-2.662s-4.71 0.945-6.425 2.662c-3.543 3.543-3.543 9.308 0 12.851 1.716 1.716 3.998 2.661 6.425 2.661 2.09 0 4.07-0.705 5.677-1.995l6.406 6.404c0.195 0.195 0.451 0.293 0.707 0.293s0.512-0.098 0.707-0.293c0.391-0.391 0.391-1.023 0-1.414zm-18.508-7.07c-2.763-2.764-2.763-7.26 0-10.022 1.338-1.339 3.118-2.076 5.011-2.076s3.673 0.737 5.011 2.076c1.339 1.338 2.076 3.118 2.076 5.011 0 1.894-0.737 3.673-2.076 5.012-1.338 1.338-3.118 2.075-5.011 2.075s-3.673-0.738-5.011-2.076z"/>
+ </g>
+ <rect x="13.213" y="12.812" width="178.57" height="84.883" fill="none" stroke="#000" stroke-width="1.8898"/>
+ <text x="171.625" y="157.98958" fill="#000000" font-family="sans-serif" font-size="21.333px" letter-spacing="0px" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="105.59375" y="157.98958"><tspan x="101.84375" y="157.98958" text-align="center" text-anchor="middle">Znajdź słowo </tspan></tspan><tspan x="101.84375" y="184.65625"><tspan x="101.84375" text-align="center" text-anchor="middle">"błąd"</tspan></tspan></text>
+ <text x="82.480469" y="67.118492" fill="#000000" font-family="sans-serif" font-size="21.333px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="82.480469" y="67.118492"><tspan x="82.480469" y="67.118492" font-size="42.667px">Błąd</tspan></tspan></text>
+</svg>

@@ -1,17 +1,17 @@
 UstawMarginesy()
 {
-	OurTemplateEN := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
-	OurTemplatePL := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
-	
 	oWord := ComObjActive("Word.Application")
-	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
-		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
+	OurTempPL := "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
+	OurTempEN := "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
+	LocTempPL := % A_ScriptDir . "\Templates\TQ-S402-pl_OgolnyTechDok.dotm"
+	LocTempEN := % A_ScriptDir . "\Templates\TQ-S402-en_OgolnyTechDok.dotm"
+	SzabPath := SubStr(A_ScriptDir, 1, InStr(A_ScriptDir, "Otagle")-1)
+	SzabTempPL := % SzabPath . "OgolneZmakrami\szab_TQ-S402-pl_OgolnyTechDok.dotm"
+	SzabTempEN := % SzabPath . "OgolneZmakrami\szab_TQ-S402-en_OgolnyTechDok.dotm"
+	OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
+	if  ((OurTemplate != OurTempPL) and (OurTemplate != OurTempEN) and (OurTemplate != LocTempPL) and (OurTemplate != LocTempEN) and (OurTemplate != SzabTempPL) and (OurTemplate != SzabTempEN))
 	{
-		MsgBox, 16, Próba wywo³ania makra, 
-		( Join
-		 Próbujesz wywo³aæ makro przypisane do szablonu, ale szablon nie zosta³ jeszcze do³¹czony do tego pliku. 
-	Najpierw do³¹cz szablon, a nastêpnie wywo³aj ponownie tê funkcjê.
-		)
+		MsgBox, 16, % MsgText("PrÃ³ba wywoÅ‚ania makra"), % MsgText("PrÃ³bujesz wywoÅ‚aÄ‡ makro przypisane do szablonu, ale szablon nie zostaÅ‚ jeszcze doÅ‚Ä…czony do tego pliku.`r`nNajpierw doÅ‚Ä…cz szablon, a nastÄ™pnie wywoÅ‚aj ponownie tÄ™ funkcjÄ™.")
 	}
 	else
 	{

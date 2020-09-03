@@ -1,39 +1,28 @@
 PrepareToPrint()
 {
 	oWord := ComObjActive("Word.Application")
+	OurTempPL := "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
+	OurTempEN := "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
+	LocTempPL := % A_ScriptDir . "\Templates\TQ-S402-pl_OgolnyTechDok.dotm"
+	LocTempEN := % A_ScriptDir . "\Templates\TQ-S402-en_OgolnyTechDok.dotm"
+	SzabPath := SubStr(A_ScriptDir, 1, InStr(A_ScriptDir, "Otagle")-1)
+	SzabTempPL := % SzabPath . "OgolneZmakrami\szab_TQ-S402-pl_OgolnyTechDok.dotm"
+	SzabTempEN := % SzabPath . "OgolneZmakrami\szab_TQ-S402-en_OgolnyTechDok.dotm"
 	OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
-	if (OurTemplate != "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm" && OurTemplate != "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm")
+	if  ((OurTemplate != OurTempPL) and (OurTemplate != OurTempEN) and (OurTemplate != LocTempPL) and (OurTemplate != LocTempEN) and (OurTemplate != SzabTempPL) and (OurTemplate != SzabTempEN))
 	{
-		MsgBox, 48, Zanim wydrukujesz..., 
-		( Join	
-1. Wykonaj makro, które wstawi tward¹ spacjê po etykietach tabel i rysunków.`n
-2. Odœwie¿ zawartoœæ ca³ego dokumentu (Ctrl + F9).`n
-3. Zamieñ wszystkie odsy³acze na ³¹cza.`n
-4. Ponownie odœwie¿ zawartoœæ ca³ego dokumentu (Ctrl + F9).`n
-5. Poszukaj s³owa "B³¹d".
-		)
-		
+		MsgBox, 48, Zanim wydrukujesz..., % MsgText("1. Wykonaj makro, ktÃ³re wstawi twardÄ… spacjÄ™ po etykietach tabel i rysunkÃ³w.`n2. OdÅ›wieÅ¼ zawartoÅ›Ä‡ caÅ‚ego dokumentu (Ctrl + F9).`n3. ZamieÅ„ wszystkie odsyÅ‚acze na Å‚Ä…cza.`n4. Ponownie odÅ›wieÅ¼ zawartoÅ›Ä‡ caÅ‚ego dokumentu (Ctrl + F9).`n5. Poszukaj sÅ‚owa ""BÅ‚Ä…d"".")	
 	}
 	else
 	{
 		oWord.Run("TwardaSpacja")
-		oWord.Run("UpdateFieldsPasek")
-		MsgBox, 64, Microsoft Word, Odœwie¿ono dokument
+		Refresh()
+		MsgBox, 64, Microsoft Word, % MsgText("OdÅ›wieÅ¼ono dokument")
 		oWord.Run("HiperlaczaPasek")
-		MsgBox, 64, Microsoft Word, Zamieniono odsy³acze na ³¹cza
-		oWord.Run("UpdateFieldsPasek")
-		MsgBox, 64, Microsoft Word, Ponownie odœwie¿ono dokument
-		oWord.Selection.Find.ClearFormatting
-		oWord.Selection.Find.Wrap := 1
-		oWord.Selection.Find.Execute("B³¹d")
-		if (oWord.Selection.Find.Found = -1)
-		{
-			Msgbox, 48, Microsoft Word, Znaleziono s³owo "B³¹d"
-		}
-		else
-		{
-			MsgBox, 64, Microsoft Word, Nie znaleziono s³owa "B³¹d"
-		}
+		MsgBox, 64, Microsoft Word, % MsgText("Zamieniono odsyÅ‚acze na Å‚Ä…cza")
+		Refresh()
+		MsgBox, 64, Microsoft Word, % MsgText("Ponownie odÅ›wieÅ¼ono dokument")
+		FindBlad()
 		
 	}
 	Send, {F12 down}{F12 up}

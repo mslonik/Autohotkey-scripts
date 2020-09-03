@@ -1,8 +1,13 @@
 ﻿AutoTemplate()
 {
 	global
-	OurTemplateEN := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
-	OurTemplatePL := "s:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
+	OurTempPL := "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
+	OurTempEN := "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
+	LocTempPL := % A_ScriptDir . "\Templates\TQ-S402-pl_OgolnyTechDok.dotm"
+	LocTempEN := % A_ScriptDir . "\Templates\TQ-S402-en_OgolnyTechDok.dotm"
+	SzabPath := SubStr(A_ScriptDir, 1, InStr(A_ScriptDir, "Otagle")-1)
+	SzabTempPL := % SzabPath . "OgolneZmakrami\szab_TQ-S402-pl_OgolnyTechDok.dotm"
+	SzabTempEN := % SzabPath . "OgolneZmakrami\szab_TQ-S402-en_OgolnyTechDok.dotm"
 	oWord := ComObjActive("Word.Application")
 	try
 		template := oWord.ActiveDocument.CustomDocumentProperties["PopSzab"].Value
@@ -31,30 +36,30 @@ AddTemplate(){
 	OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
 	if (template == "PL")
 	{
-		if (OurTemplate == OurTemplatePL)
+		if ((OurTemplate == OurTempPL) or (OurTemplate == LocTempPL) or (OurTemplate == SzabTempPL))
 		{
 			oWord := ""
 			
 		}
 		else
 		{
-			oWord.ActiveDocument.AttachedTemplate := OurTemplatePL
+			oWord.ActiveDocument.AttachedTemplate := LocTempPL
 			oWord.ActiveDocument.UpdateStylesOnOpen := -1
 			oWord.ActiveDocument.UpdateStyles
 			MsgBox, 64, Informacja, % "Dołączono szablon!`n Dołączono domyslny szablon dokumentu: `n" oWord.ActiveDocument.AttachedTemplate.FullName, 5
-			OurTemplate := OurTemplatePL
+			OurTemplate := LocTempPL
 		}
 	}
 	else if (template == "EN")
 	{
-		if (OurTemplate == OurTemplateEN)
+		if ((OurTemplate == OurTempEN) or (OurTemplate == LocTempEN) or (OurTemplate == SzabTempEN))
 		{
 			oWord := ""
 			
 		}
 		else
 		{
-			oWord.ActiveDocument.AttachedTemplate := OurTemplateEN
+			oWord.ActiveDocument.AttachedTemplate := LocTempEN
 			oWord.ActiveDocument.UpdateStylesOnOpen :=  -1
 			oWord.ActiveDocument.UpdateStyles
 			oWord.ActiveWindow.ActivePane.View.SeekView := 9
@@ -63,7 +68,7 @@ AddTemplate(){
 			oWord.ActiveWindow.ActivePane.View.SeekView := 10
 			BB_Insert("Stopka zwykła")
 			MsgBox, 64, Informacja, % "Dołączono szablon!`n Dołączono domyslny szablon dokumentu: `n" oWord.ActiveDocument.AttachedTemplate.FullName, 5
-			OurTemplate := OurTemplateEN
+			OurTemplate := LocTempEN
 		}
 	}
 	oWord.ActiveDocument.CustomDocumentProperties["PopSzab"] := template
@@ -179,15 +184,18 @@ BB_Insert(Name_BB)
 	global 
 
 	oWord := ComObjActive("Word.Application")
-	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
-		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
-		{
-		MsgBox, 16, Próba wywołania stylu z szablonu, 
-		( Join
-		 Próbujesz wstawić blok konstrukcyjny przypisany do szablonu, ale szablon nie został jeszcze dołączony do tego pliku. 
- Najpierw dołącz szablon, a następnie wywołaj ponownie tę funkcję.
-		)
-		}
+	OurTempPL := "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-pl_OgolnyTechDok.dotm"
+	OurTempEN := "S:\OrgFirma\Szablony\Word\OgolneZmakrami\TQ-S402-en_OgolnyTechDok.dotm"
+	LocTempPL := % A_ScriptDir . "\Templates\TQ-S402-pl_OgolnyTechDok.dotm"
+	LocTempEN := % A_ScriptDir . "\Templates\TQ-S402-en_OgolnyTechDok.dotm"
+	SzabPath := SubStr(A_ScriptDir, 1, InStr(A_ScriptDir, "Otagle")-1)
+	SzabTempPL := % SzabPath . "OgolneZmakrami\szab_TQ-S402-pl_OgolnyTechDok.dotm"
+	SzabTempEN := % SzabPath . "OgolneZmakrami\szab_TQ-S402-en_OgolnyTechDok.dotm"
+	OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
+	if  ((OurTemplate != OurTempPL) and (OurTemplate != OurTempEN) and (OurTemplate != LocTempPL) and (OurTemplate != LocTempEN) and (OurTemplate != SzabTempPL) and (OurTemplate != SzabTempEN))
+	{
+		MsgBox, 16, % MsgText("Próba wywołania stylu z szablonu"), % MsgText("Próbujesz wstawić blok konstrukcyjny przypisany do szablonu, ale szablon nie został jeszcze dołączony do tego pliku.`r`n Najpierw dołącz szablon, a następnie wywołaj ponownie tę funkcję.")
+	}
 	else
 		{
 		OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName

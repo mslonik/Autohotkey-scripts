@@ -182,18 +182,17 @@ BuildHTMLFile(){
         <li class="menu-bar__item">
         <a class="item__link" href="#">Configure</a>
         <ul class="sub-menu">
-        <li onclick="ahk.Monitor(event)" class="sub-menu__item "><a class="item__link sub__link" href="#">Monitor</a></li>
-        <li class="sub-menu__item"><a class="item__link sub__link" href="#">Existing layer buttons/functions</a></li>
         <li class="sub-menu__item"><a class="item__link sub__link" href="#">Add layer</a></li>
         <li class="sub-menu__item"><a class="item__link sub__link" href="#">Erase layer</a></li>
         </ul>
         </li>
         <li class="menu-bar__item">
-        <a class="item__link" href="">Edit Buttons</a>
+        <a class="item__link" href="#">Edit Buttons</a>
         <ul class="sub-menu">
-        <li class="sub-menu__item "><a class="item__link sub__link" href="#">Copy buttons</a></li>
-        <li class="sub-menu__item"><a class="item__link sub__link" href="#">Swap buttons</a></li>
-        <li class="sub-menu__item"><a class="item__link sub__link" href="#">Delete button</a></li>
+        <li class="sub-menu__item" id="AddBtn" onclick="ahk.BarF(event,id)"><a class="item__link sub__link" href="#">Add buttons</a></li>
+        <li class="sub-menu__item" id="F_display_configurator" onclick="ahk.BarF(event,id)" ><a class="item__link sub__link" href="#">Swap buttons</a></li>
+        <li class="sub-menu__item" id="FdGuiDelete" onclick="ahk.BarF(event,id)"><a class="item__link sub__link" href="#">Delete button</a></li>
+        <li class="sub-menu__item" id="Clone" onclick="ahk.BarF(event,id)"><a class="item__link sub__link" href="#">Clone button</a></li>
         </ul>
         </li>
         <li class="menu-bar__item"  onclick="ahk.rWizard(event)">

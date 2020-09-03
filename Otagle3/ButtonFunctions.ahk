@@ -255,7 +255,6 @@
 #Include *i WarstwaTotalCommander\SVN\SVNRename.ahk
 #Include *i WarstwaTotalCommander\SVN\SVNCleanUp.ahk
 #Include *i WarstwaWord\MakraOgolne\HideSelectedText.ahk
-#Include *i WarstwaWord\MakraOgolne\MSWordSetFont.ahk
 #Include *i WarstwaWord\MakraOgolne\DeleteLineOfText.ahk
 #Include *i WarstwaWord\MakraOgolne\ShowClipboard.ahk
 #Include *i WarstwaWord\MakraOgolne\ToggleApplyStylesPane.ahk
@@ -315,3 +314,6 @@
 #Include *i WarstwaWord\UstawieniaDokumentu\CheckingMacro.ahk
 #Include *i WarstwaWord\Wypunktowania\BB_newnumlist1level.ahk
 #Include *i WarstwaWord\Wypunktowania\BB_nextnumlist1level.ahk
+#Include *i WarstwaWord\UstawieniaDokumentu\Refresh.ahk
+#Include *i WarstwaWord\UstawieniaDokumentu\FindBlad.ahk
+#Include *i WarstwaWord\MakraOgolne\CapNoLabels.ahk 
