@@ -1,9 +1,0 @@
-<svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
- <g transform="matrix(3.7795 0 0 3.7795 -1623.4 123.13)">
-  <rect x="430.61" y="-31.75" width="52.917" height="52.917" fill="#db3b3b" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-  <path d="m430.61-31.75 52.917 52.917h-52.917z" fill="#ffec8e" stroke="#000" stroke-width=".26458px"/>
-  <text x="457.12964" y="8.7348146" fill="#000000" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="457.12964" y="8.7348146" text-align="center">Początek listy</tspan><tspan x="457.12964" y="16.672314" text-align="center">liczbowej</tspan></text>
-  <path d="m436.1-10.915h41.01" stroke="#000" stroke-width="1.6"/>
-  <text x="436.58066" y="-12.467165" fill="#000000" font-family="voestalpine" font-size="6.8289px" letter-spacing="0px" stroke-width=".32011" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="436.58066" y="-12.467165" fill="#000000" stroke-width=".32011">1</tspan></text>
- </g>
-</svg>

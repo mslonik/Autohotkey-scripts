@@ -1,9 +1,0 @@
-<svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
- <g transform="matrix(3.7795 0 0 3.7795 -1099.8 -254.01)">
-  <rect x="292.01" y="68.329" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-  <text x="317.93558" y="117.414" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan x="317.93558" y="117.414" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle">Delete</tspan></text>
-  <g transform="matrix(.34188 0 0 .34188 301.04 70.806)">
-   <path d="m62.2 42-8 8 8 8-4.2 4.2-8-8-8 8-4.2-4.2 8-8-8-8 4.2-4.2 8 8 8-8zm27.3 8c0 21.8-17.7 39.5-39.5 39.5s-39.5-17.7-39.5-39.5 17.7-39.5 39.5-39.5 39.5 17.7 39.5 39.5zm-5.9 0c0-18.5-15.1-33.6-33.6-33.6s-33.6 15.1-33.6 33.6 15.1 33.6 33.6 33.6 33.6-15.1 33.6-33.6z"/>
-  </g>
- </g>
-</svg>

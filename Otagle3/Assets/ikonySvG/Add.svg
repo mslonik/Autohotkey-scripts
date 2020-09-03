@@ -1,9 +1,0 @@
-<svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
- <g transform="matrix(3.7795 0 0 3.7795 -844.08 -254.41)">
-  <rect x="224.56" y="68.329" width="52.258" height="52.258" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
-  <text x="250.94838" y="117.50839" font-family="sans-serif" font-size="6.35px" letter-spacing="0px" stroke-width=".26458" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:0.94999999" xml:space="preserve"><tspan class="svgT" letter-spacing=".4px" x="250.94838" y="117.50839" font-family="sans-serif"  font-size="5.2px" stroke-width=".26458" text-align="center" text-anchor="middle">Add</tspan></text>
-  <g transform="matrix(.46709 0 0 .46709 235.74 72.253)">
-   <path d="m32 3.56a28.44 28.44 0 1028.44 28.44 28.47 28.47 0 00-28.44-28.44zm0 53.88a25.44 25.44 0 1125.44-25.44 25.47 25.47 0 01-25.44 25.44zm13.84-25.44a1.5 1.5 0 01-1.5 1.5h-10.84v10.84a1.5 1.5 0 01-3 0v-10.84h-10.84a1.5 1.5 0 110-3h10.84v-10.84a1.5 1.5 0 113 0v10.84h10.84a1.5 1.5 0 011.5 1.5z"/>
-  </g>
- </g>
-</svg>

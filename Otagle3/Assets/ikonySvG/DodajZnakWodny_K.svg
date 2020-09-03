@@ -1,9 +1,0 @@
-<svg id="SVGRoot" width="206px" height="206px" version="1.1" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
- <g transform="matrix(3.7795 0 0 3.7795 -5465.1 -1392.5)">
-  <g transform="translate(1525.7 307.17)">
-   <rect x="-78.767" y="62.185" width="52.632" height="52.632" fill="#fea" stroke="#000" stroke-linecap="round" stroke-width=".28429" style="paint-order:fill markers stroke"/>
-   <text x="-52.769268" y="103.85887" font-family="sans-serif" class="svgT" letter-spacing=".5px" font-size="5.2px" stroke-width=".26458" text-align="end" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="-52.769268" y="103.85887" text-align="center">Dodaj znak</tspan><tspan x="-52.769268" y="110.52637" text-align="center">wodny</tspan></text>
-   <text transform="rotate(30)" x="-26.850611" y="101.18963" fill="#b3b3b3" font-family="voestalpine" font-size="13.881px" letter-spacing="0px" stroke-width=".65067" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-26.850611" y="101.18963" fill="#b3b3b3" stroke-width=".65067">DRAFT</tspan></text>
-  </g>
- </g>
-</svg>
