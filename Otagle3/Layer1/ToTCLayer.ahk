@@ -1,9 +1,8 @@
 ToTCLayer()
 {
-	global
 
-	CurrentLayer := 13
-	F_DisplayLayer(CurrentLayer)
+
+
 	
 	IfWinExist, ahk_class TTOTAL_CMD
 	{

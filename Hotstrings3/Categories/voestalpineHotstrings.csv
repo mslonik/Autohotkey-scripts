@@ -14,10 +14,12 @@ B0*‖asdek‖MA‖On‖{Backspace 5}ASDEK¦{Backspace 5}ASDEK/GM/GH/PHOENIX¦{B
 *‖asdek/‖C‖On‖automatyczny system detekcji i eksploatacji kół pojazdów kolejowych
 *b0‖asm‖A‖On‖{Backspace 3}ASM
 *‖asm/‖MC‖On‖evaluation module¦moduł oceniający
+B0*‖axc ‖A‖On‖{BackSpace 3}AxC 
+*‖axc/‖C‖On‖Axle Counter
 b0*‖axm‖A‖On‖{BackSpace 3}AXM
 *‖axm/‖MC‖On‖moduł uniwersalny rozszerzony o wejścia i wyjścia binarne¦universal module extended with binary inputs and outputs
 *‖axma‖A‖On‖AXM{Space}/{Space}AXM^=R^={Space}/{Space}AXM^=IO^=
-*b0‖axmio‖A‖On‖{Backspace 4}AXM^=IO^="
+B0*‖axmio‖A‖On‖{Backspace 4}AXM^=IO^=
 *‖axmio/‖MC‖On‖universal module extended with binary inputs and outputs¦moduł uniwersalny rozszerzony o wejścia i wyjścia binarne
 b0*x‖axmp/‖A‖On‖{BackSpace 5}AXM,{Space}AXM^=R^=,{Space}AXM^=IO^=
 B0*‖axmr‖A‖On‖{Backspace 4}AXM^=R^=
@@ -56,14 +58,12 @@ B0*‖du ‖A‖On‖{Backspace 3}DUiR
 *b0‖hwd‖A‖On‖{Backspace 3}HWD
 *‖hwd/‖C‖On‖Hot-Wheel Detector
 *‖ihd1‖A‖On‖I^=HD1^=
-*‖ihd2‖A‖On‖I^=HD2^=
-B0*‖mag‖A‖Off‖{Backspace 3}MAG
-*‖mag/‖MC‖On‖backplane¦magistrala¦MAG
+*‖mag/‖MC‖On‖MAG¦backplane¦magistrala
 *b0‖magadm‖A‖On‖{Backspace 6}MAG_ADM
 *‖magadm/‖MA‖On‖{Backspace 1}basic diagnostic module¦{Backspace 1}moduł podstawowej diagnostyki
-B0*‖magsac‖A‖On‖{Backspace 6}MAG_SAC (MAG_SUP + MAG_ADM + MAG_COM)
+*‖magsac‖C‖On‖MAG_SAC (MAG_SUP + MAG_ADM + MAG_COM)
 *‖magsac/‖MA‖On‖{BackSpace 29}integrated diagnostic, communication and voltage supply module¦{BackSpace 29}zintegrowany moduł diagnostyczny, komunikacyjny i zasilający
-B0*‖magsak‖A‖On‖{Backspace 6}MAG_SAC (MAG_SUP + MAG_ADM + MAG_COM)
+*‖magsak‖C‖On‖MAG_SAC (MAG_SUP + MAG_ADM + MAG_COM)
 *b0‖magsup‖A‖On‖{Backspace 6}MAG_SUP
 *‖magsup/‖MA‖On‖{Backspace 1}voltage supply module¦{Backspace 1}moduł zasilający
 *b0‖mb‖A‖On‖{Backspace 2}MB
@@ -76,6 +76,7 @@ B0*‖magsak‖A‖On‖{Backspace 6}MAG_SAC (MAG_SUP + MAG_ADM + MAG_COM)
 *‖muk‖C‖On‖MDS Upgrade Kit (https://solidsystemteamwork.voestalpine.root.local/Processes/custprojects/780MDSUpgradeKit/SitePages/Home.aspx)
 *‖nipv/‖C‖On‖584-025-39-29
 *‖nout‖C‖On‖~OUT
+*‖otagle‖A‖On‖OTAGLE
 *‖phoenix‖C‖On‖PHOENIX
 *b0‖pm‖A‖On‖{Backspace 2}PM
 *b0‖rnd‖A‖On‖{Backspace 3}R&D
@@ -84,6 +85,7 @@ B0*‖magsak‖A‖On‖{Backspace 6}MAG_SAC (MAG_SUP + MAG_ADM + MAG_COM)
 *‖s2d/‖C‖On‖szlakowy system diagnostyki
 *‖sai/‖C‖On‖Sainerholz
 *‖SG52/‖MC‖On‖shape gauge¦przymiar
+*‖shcl/‖C‖On‖TW-2090-171R-SoftwareandHardwareCompatibilityLog.xlsx
 *‖si/‖C‖On‖Siershahn
 *‖so/‖C‖On‖Sopot
 *b0‖sps‖A‖On‖{Backspace 3}Documentation Sharepoint Sopot (https://team.voestalpine.net/site/4077/default.aspx)
@@ -118,11 +120,7 @@ B0*‖unirc‖A‖On‖{BackSpace 5}UniRC
 *‖wdd/‖C‖On‖Wheel Defect Detection
 *b0‖wim‖A‖On‖{Backspace 3}WIM
 *‖wim/‖C‖On‖Weighing in Motion
-*b0‖wsu‖A‖On‖{Backspace 3}WSU
-*‖wsu/‖C‖On‖wheel sensor unit
-B0*‖axc ‖A‖On‖{BackSpace 3}AxC 
-*‖axc/‖C‖On‖Axle Counter
-*‖otagle‖A‖On‖OTAGLE
-*‖shcl/‖C‖On‖TW-2090-171R-SoftwareandHardwareCompatibilityLog.xlsx
 B0*‖wsc ‖A‖On‖{BackSpace 3}WSC 
 *‖wsc/‖C‖On‖Wheel Sensor Cable
+*b0‖wsu‖A‖On‖{Backspace 3}WSU
+*‖wsu/‖C‖On‖wheel sensor unit

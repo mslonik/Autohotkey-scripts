@@ -61,7 +61,8 @@ B0*‖html ‖A‖On‖{BackSpace 5}HTML
 *‖iq/‖C‖On‖Inteligence Quotient
 *‖javascript‖A‖On‖JavaScript
 *T‖jooomla/‖C‖On‖ Joomla!
-B0*‖led ‖A‖On‖{BackSpace 3}LED 
+B0*‖led‖A‖On‖{BackSpace 3}LED
+B0*‖led ‖A‖Off‖{BackSpace 3}LED 
 *‖LED/‖A‖On‖Light Emitting Diode
 *‖mw/‖C‖On‖Microsoft Word
 *‖nas/‖MA‖On‖NAS¦Network Attached Storage
@@ -69,6 +70,7 @@ B0*‖oem ‖A‖On‖{BackSpace 3}OEM
 *‖orcad‖A‖On‖OrCAD
 *T‖otagle‖A‖On‖OTAGLE
 *‖otagle‖A‖On‖O T A G L E
+*‖par/‖A‖On‖§
 ‖pas2e‖A‖On‖passé
 B0*‖pdf ‖A‖On‖{BackSpace 4}PDF 
 *‖pdf/‖C‖On‖Portable Document Format

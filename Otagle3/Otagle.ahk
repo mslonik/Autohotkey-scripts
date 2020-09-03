@@ -1,13 +1,17 @@
 #NoEnv
 #SingleInstance, Force
-#Include lib/Neutron.ahk
-#Include ButtonFunctions.ahk 
-#Include GuiGenerator.ahk
 SetBatchLines, -1
 SetWorkingDir %A_ScriptDir%
+if !(FileExist("Config.ini")){
+    Run, ConfigBuilder.ahk,%A_ScriptDir% 
+}Else{
+#Include *i %A_ScriptDir%\lib\Neutron.ahk
+#Include *i %A_ScriptDir%\ButtonFunctions.ahk 
+#Include *i %A_ScriptDir%\GuiGenerator.ahk
+#Include *i %A_ScriptDir%\ConfigBuilder.ahk
 Menu, Tray,Icon, % A_ScriptDir . "\Assets\OtagleIcon.ico"
 ; Global variables
-CurrentLayer                           := 1 
+
 ;Install filles
 FileInstall, Layer1.html, Layer1.html
 FileInstall, index.js, index.js
@@ -17,9 +21,7 @@ FileInstall, bootstrap.min.css, bootstrap.min.css
 FileInstall, bootstrap.min.js, bootstrap.min.js
 FileInstall, jquery.min.js, jquery.min.js
 
-F_DisplayLayer(CurrentLayer){
-    CurrentLayer := 0
-}
+
 ; Button handler
 ClickF(neutron,event,action){
     
@@ -28,14 +30,12 @@ ClickF(neutron,event,action){
   
     %FunctionName%()
     return
-    
-    F_DisplayLayer(CurrentLayer)
 }
 
-MsgText(string)
-{
-    vSize := StrPut(string, "CP0")
-    VarSetCapacity(vUtf8, vSize)
-    vSize := StrPut(string, &vUtf8, vSize, "CP0")
-    Return StrGet(&vUtf8, "UTF-8") 
+rWizard(neutron,event){
+Run, ConfigBuilder.ahk,%A_ScriptDir% 
 }
+}
+
+
+

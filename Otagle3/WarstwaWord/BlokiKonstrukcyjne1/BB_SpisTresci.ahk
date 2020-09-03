@@ -7,16 +7,16 @@ BB_SpisTresci()
 	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
 		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
 	{
-		MsgBox, 16, Próba wywo³ania stylu z szablonu, 
+		MsgBox, 16, PrÃ³ba wywoÅ‚ania stylu z szablonu, 
 		( Join
-		 Próbujesz wstawiæ blok konstrukcyjny przypisany do szablonu, ale szablon nie zosta³ jeszcze do³¹czony do tego pliku. 
-	Najpierw do³¹cz szablon, a nastêpnie wywo³aj ponownie tê funkcjê.
+		 PrÃ³bujesz wstawiÄ‡ blok konstrukcyjny przypisany do szablonu, ale szablon nie zostaÄ‡ jeszcze doÅ‚Ä…czony do tego pliku. 
+		 Najpierw doÅ‚Ä…cz szablon, a nastÄ™pnie wywoÅ‚aj ponownie ta funkcjÄ™.
 		)
 	}
 	else
 	{
 		OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
-		oWord.Templates(OurTemplate).BuildingBlockEntries("Spis treœci").Insert(oWord.Selection.Range, -1)
+		oWord.Templates(OurTemplate).BuildingBlockEntries("Spis treï¿½ci").Insert(oWord.Selection.Range, -1)
 	}
 	oWord :=  "" ; Clear global COM objects when done with them
 	WinActivate, ahk_class OpusApp

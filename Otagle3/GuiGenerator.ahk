@@ -37,8 +37,8 @@ if !(FileExist("PlikiHtml")){
     FileCreateDir, PlikiHtml
     BuildHTMLFile()
 }Else {
-    Gosub, Loader
-    SetTimer,Gui,-3000
+    Gosub, Gui
+    
 }
 
 return
@@ -118,10 +118,10 @@ BuildHTMLFile(){
                 
                 ; If !(PictureDef = ""){
                 If (Path == "#"){
-                    btn:= % "<a id=""" . "drag" . "-" . A_Index . " " . ButtonA . """ class=""box_item draggable"" href=""#""  onclick=""ahk.ClickF(event,id)""><img class=""icon"" style=""font-size: 16px; font-family: 'Lato', sans-serif; max-width:300px; max-height:300px; display:block;width:" . Bw . "vw;" .  "height:" . Bh . "vw;" """ src=""" . PictureDef . """ ></a>"
+                    btn:= % "<a style=""max-width:300px; max-height:300px; height:" . Bh . "vw; width:" . Bw . "vw;   ""  id=""" . "drag" . "-" . A_Index . " " . ButtonA . """ class=""box_item draggable"" href=""#""  onclick=""ahk.ClickF(event,id)""><img class=""icon"" style=""font-size: 16px; font-family: 'Lato', sans-serif; display:block;width:" . 100 . "%;" .  "height:" . 100 . "%;" """ src=""" . PictureDef . """ ></a>"
                 }
                 Else{
-                    btn:= % "<a id=""" . "drag" . "-" . A_Index . " " . ButtonA . """ class=""box_item draggable"" href=""" . "Layer" . Path . ".html" . """  onclick=""ahk.ClickF(event,id)""><img class=""icon"" style=""font-size: 16px; font-family: 'Lato', sans-serif; max-width:300px; max-height:300px; display:block;width:" . Bw . "vw;" .  "height:" . Bh . "vw;" """ src=""" . PictureDef . """ ></a>"
+                    btn:= % "<a style=""max-width:300px; max-height:300px; height:" . Bh . "vw; width:" . Bw . "vw;   "" id=""" . "drag" . "-" . A_Index . " " . ButtonA . """ class=""box_item draggable"" href=""" . "Layer" . Path . ".html" . """  onclick=""ahk.ClickF(event,id)""><img class=""icon"" style=""font-size: 16px; font-family: 'Lato', sans-serif;  display:block;width:" . 100 . "%;" .  "height:" . 100 . "%;" """ src=""" . PictureDef . """ ></a>"
                 }
                 
                 btns[VarVertical,A_Index]:= btn
@@ -196,8 +196,11 @@ BuildHTMLFile(){
         <li class="sub-menu__item"><a class="item__link sub__link" href="#">Delete button</a></li>
         </ul>
         </li>
+        <li class="menu-bar__item"  onclick="ahk.rWizard(event)">
+        <a class="item__link" href="#" >Run Wizzard</a></li>
         <li class="menu-bar__item">
-        <a class="item__link" href="#">Run Wizzard</a></li>
+        <a class="item__link Order" href="#"><i class="fa fa-toggle-off" aria-hidden="true"></i><i class="fa fa-toggle-on" aria-hidden="true"> </i> Arrangement Buttosn</a>
+        </li>
         <li class="menu-bar__item">
         <a class="item__link About" href="#">About</a>
         </li>

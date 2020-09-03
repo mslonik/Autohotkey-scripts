@@ -1,0 +1,30 @@
+<svg id="SVGRoot" version="1.1" viewBox="0 0 205 205" xmlns="http://www.w3.org/2000/svg">
+ <rect y=".90617" width="205" height="203.19" fill="none" stroke="#000" stroke-width="1.8898"/>
+ <g transform="translate(0,-2)" fill="none">
+  <g stroke="#000">
+   <g>
+    <rect x="56.455" y="7.6133" width="92.09" height="108.11" stroke-width="2.8346"/>
+    <g stroke-width="1.8898">
+     <rect x="66.455" y="23.229" width="16.016" height="16.016"/>
+     <rect x="66.455" y="84.088" width="16.016" height="16.016"/>
+     <rect x="66.455" y="53.658" width="16.016" height="16.016"/>
+    </g>
+   </g>
+   <g stroke-width="1.8898">
+    <path d="m91.361 65.674h48.413"/>
+    <path d="m91.361 35.244h48.413"/>
+    <path d="m91.361 96.104h48.413"/>
+   </g>
+  </g>
+  <g stroke="#1a1a1a" stroke-width="1.8898">
+   <path d="m63.918 25.885 8.9551 8.9551 15.522-16.119"/>
+   <path d="m63.918 56.315 8.9551 8.9551 15.522-16.119"/>
+   <path d="m63.918 86.744 8.9551 8.9551 15.522-16.119"/>
+  </g>
+ </g>
+ <g font-family="sans-serif" letter-spacing="0px" word-spacing="0px">
+  <text transform="scale(1.1024 .90714)" x="4.4165492" y="149.19798" fill="#000000" font-size="23.517px" stroke-width="1.1024" style="line-height:1.25" xml:space="preserve"><tspan x="0" y="0" stroke-width="1.1024"><tspan x="4.4165492" stroke-width="1.1024"/></tspan></text>
+  <flowRoot fill="black" font-size="21.333px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="1.6886" y="140.83" width="118.2" height="54.035"/></flowRegion><flowPara/></flowRoot>
+  <text x="181.08333" y="135.34375" fill="#000000" font-size="21.333px" text-align="center" text-anchor="middle" style="line-height:1.25" xml:space="preserve"><tspan x="105.77084" y="135.34375"><tspan x="102.02083" y="135.34375" text-align="center" text-anchor="middle">Wykonaj przed </tspan></tspan><tspan x="105.77084" y="162.01042"><tspan x="102.02083" text-align="center" text-anchor="middle">zapisem lub </tspan></tspan><tspan x="102.02083" y="188.67708"><tspan x="102.02083" text-align="center" text-anchor="middle">drukiem</tspan></tspan></text>
+ </g>
+</svg>

@@ -92,12 +92,32 @@ header {
 
 .box_item {
     position: relative;
-    margin: 8px auto;
+    margin: 10px 5px;
     border: .5px solid #DDD;
     box-shadow: rgba(199, 150, 150, 0.15) 0px 8px 16px 0px;
     transition: .3s;
-}
 
+}
+.box_item.stopResize{
+    min-height: 100px;
+    min-width: 100px; 
+}
+.fa-toggle-off{
+    display: inline-block;
+    color: #dc3545;
+    padding-right: 2px;
+}
+.fa-toggle-off.off{
+    display: none;
+}
+.fa-toggle-on{
+    color: green;
+    padding-right: 2px;
+    display: none;
+}
+.fa-toggle-on.active{
+    display: inline-block;
+}
 .box_item::after {
     content: "";
     width: 100%;
@@ -116,6 +136,12 @@ header {
 .box_item:hover::after {
     background-color: rgba(0, 0, 0, 0.3);
 }
+
+
+
+
+
+
 /* 
     Menu Bar
 */
@@ -233,9 +259,6 @@ header {
 }
 
 
-.svgT{
-    text-transform: uppercase;
-}
 
 
 

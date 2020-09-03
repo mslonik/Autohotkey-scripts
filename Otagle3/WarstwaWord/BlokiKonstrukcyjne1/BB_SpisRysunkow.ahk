@@ -9,8 +9,8 @@
 	{
 		MsgBox, 16, Próba wywołania stylu z szablonu, 
 		( Join
-		 Próbujesz wstawić blok konstrukcyjny przypisany do szablonu, ale szablon nie został jeszcze dołączony do tego pliku. 
-	Najpierw dołącz szablon, a następnie wywołaj ponownie tą funkcję.
+		 Próbujesz wstawić blok konstrukcyjny przypisany do szablonu, ale szablon nie zostać jeszcze dołączony do tego pliku. 
+		 Najpierw dołącz szablon, a następnie wywołaj ponownie ta funkcję.
 		)
 	}
 	else

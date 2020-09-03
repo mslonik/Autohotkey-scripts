@@ -7,11 +7,8 @@ PolaTekstowe()
 	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
 		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
 	{
-		MsgBox, 16, Próba wywo³ania makra, 
-		( Join
-		 Próbujesz wywo³aæ makro przypisane do szablonu, ale szablon nie zosta³ jeszcze do³¹czony do tego pliku. 
-	Najpierw do³¹cz szablon, a nastêpnie wywo³aj ponownie tê funkcjê.
-		)
+		MsgBox, 16, % MsgText("PrÃ³ba wywoÅ‚ania makra"), % MsgText("PrÃ³bujesz wywoÅ‚aÄ‡ makro przypisane do szablonu, ale szablon nie zostaÅ‚ jeszcze doÅ‚Ä…czony do tego pliku.`r`nNajpierw dolacz szablon, a nastepnie wywoÅ‚aj ponownie tÄ™ funkcjÄ™.")
+		
 	}
 	else
 	{
@@ -19,5 +16,9 @@ PolaTekstowe()
 	}
 	oWord :=  "" ; Clear global COM objects when done with them
 	WinActivate, ahk_class OpusApp
+	WinGetPos, WinX, WinY,WinW,WinH,A
+    mouseX := Round(WinX+WinW/2)
+    mouseY := Round(WinY+WinH/2)
+    DllCall("SetCursorPos", "int", mouseX, "int", mouseY)
 	return
 }

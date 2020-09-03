@@ -1,10 +1,8 @@
 ﻿ToWordLayer()
 {
-	global
 
-	CurrentLayer := 2
-	F_DisplayLayer(CurrentLayer)
-	
+
+
 	IfWinExist, ahk_class OpusApp
 	{
 		IfWinNotActive, ahk_class OpusApp

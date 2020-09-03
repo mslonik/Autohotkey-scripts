@@ -1,0 +1,29 @@
+<svg width="53.417mm" height="53.417mm" version="1.1" viewBox="0 0 53.417 53.417" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <marker id="Arrow1Mstart" overflow="visible" orient="auto">
+   <path transform="matrix(.4 0 0 .4 4 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <marker id="Arrow1Mend" overflow="visible" orient="auto">
+   <path transform="matrix(-.4 0 0 -.4 -4 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+ </defs>
+ <g transform="matrix(.99999 0 0 .99999 -56.093 -83.493)">
+  <g font-family="sans-serif" letter-spacing="0px" word-spacing="0px">
+   <text transform="scale(1.0125 .98768)" x="81.487617" y="125.43761" font-size="5.6444px" stroke-width=".26132" text-align="center" text-anchor="middle" style="line-height:1.04999995" xml:space="preserve"><tspan x="82.479805" y="125.43761" text-align="center"/></text>
+   <flowRoot transform="matrix(.26459 0 0 .26459 54.831 80.976)" font-size="21.333px" style="line-height:1.25" xml:space="preserve"><flowRegion font-size="21.333px"><rect x="13.637" y="133.08" width="184.35" height="239.91"/></flowRegion><flowPara/></flowRoot>
+   <flowRoot transform="matrix(.26459 0 0 .26459 54.831 80.976)" font-size="21.333px" style="line-height:1.25" xml:space="preserve"><flowRegion font-size="21.333px"><rect x="16.162" y="134.09" width="174.25" height="215.16"/></flowRegion><flowPara/></flowRoot>
+   <text x="68.32827" y="131.28694" font-size="5.6445px" stroke-width=".26459" style="line-height:1.25" xml:space="preserve"><tspan x="68.32827" y="136.43657" font-size="5.6445px" stroke-width=".26459"/></text>
+  </g>
+  <rect x="56.343" y="83.743" width="52.917" height="52.917" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".5" style="paint-order:fill markers stroke"/>
+  <text transform="scale(1.0125 .98768)" x="81.487617" y="125.43761" fill="#000000" font-family="sans-serif" font-size="5.6444px" letter-spacing="0px" stroke-width=".26132" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.04999995" xml:space="preserve"><tspan x="82.479805" y="125.43761" text-align="center"> </tspan></text>
+  <text transform="scale(.5029 1.9885)" x="165.81053" y="62.267239" fill="#000000" font-family="sans-serif" font-size="4.5003px" letter-spacing="0px" stroke-width=".21095" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan font-size="3.6275px" stroke-width=".21095"/></text>
+  <flowRoot fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="57.402" y="131.24" width="91.464" height="49.201"/></flowRegion><flowPara/></flowRoot>
+  <g transform="translate(-.11317 -4.2334)" fill="none" stroke="#000">
+   <rect x="69.355" y="88.764" width="27.12" height="28.391" stroke-width=".50001"/>
+   <rect x="81.381" y="95.81" width="13.451" height="19.807" stroke-width=".50001"/>
+   <path d="m71.494 89.966 7.7478 4.6414" marker-end="url(#Arrow1Mend)" marker-start="url(#Arrow1Mstart)" stroke-width=".32573"/>
+  </g>
+  <text x="103.23048" y="118.481" fill="#000000" font-family="sans-serif" font-size="5.6445px" letter-spacing="0px" stroke-width=".26459" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="83.612518" y="118.481" text-align="center"><tspan x="82.620323" y="118.481" stroke-width=".26459" text-align="center" text-anchor="middle">Zmień rozmiar </tspan></tspan><tspan x="83.612518" y="125.53663" text-align="center"><tspan x="82.620323" y="125.53663" stroke-width=".26459" text-align="center" text-anchor="middle">obrazków w </tspan></tspan><tspan x="82.620323" y="132.59225" text-align="center"><tspan x="82.620323" y="132.59225" stroke-width=".26459" text-align="center" text-anchor="middle">dokumencie</tspan></tspan></text>
+ </g>
+ <flowRoot fill="black" font-family="sans-serif" font-size="21.333px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="11.977" y="118.91" width="150.56" height="73.143"/></flowRegion><flowPara/></flowRoot>
+</svg>

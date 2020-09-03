@@ -178,7 +178,6 @@ Traymenu:
      Menu, OtagleMenu,    Add, &About,                                L_About
 return
 
-
 F_SavePositionOfButtons()
      {
      global ; Assume-global mode
@@ -217,7 +216,6 @@ F_SavePositionOfButtons()
                }
           }
      }
-
 
 F_AddButtonsAndGaps(IfEnable)
      {
@@ -345,6 +343,7 @@ StartOtagle:
      
      Gui, WizardStep3:                  Destroy
      Gui, Wizard_PlotMatrixOfButtons:   Destroy
+     
 
 return
 
@@ -472,10 +471,11 @@ SaveConfigurationWizard:
      GuiControl, Disable, % SaveConfigHwnd
      Gui, WizardStep2: Add, Button, x+m w80 gWizardStep3, C&ontinue
 return
+; .................... BUTTONS ARRANGE (SWAP, DELETE, ADD)................................
 
-ExitWizard:
 
-ExitApp
+
+
 
 MsgText(string)
 {
@@ -484,3 +484,9 @@ MsgText(string)
     vSize := StrPut(string, &vUtf8, vSize, "CP0")
     Return StrGet(&vUtf8, "UTF-8") 
 }
+
+
+ExitWizard:
+
+ExitApp
+
