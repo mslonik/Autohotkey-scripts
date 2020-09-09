@@ -1,4 +1,4 @@
-#SingleInstance force 			; only one instance of this script may run at a time!
+﻿#SingleInstance force 			; only one instance of this script may run at a time!
 #NoEnv  						; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  							; Enable warnings to assist with detecting common errors.
 #Persistent
@@ -31,7 +31,8 @@ global MyTemplate := ""
 global template := ""
 
 SetTimer, AutoSave, % interval
-MsgBox,48,Uwaga!, % MsgText("Uruchomiona jest funkcja autozapisu, która co 10 minut tworzy kopie zapasowe dokumentów aktywnych w programie Microsoft Word. Aby wyłączyć tę funkcję, naciśnij kombinację klawiszy Ctrl+LewyAlt+Q.")
+txtVar := "Autozapis dokumentów w MS Word włączony.`nAby wyłączyć tę funkcję, naciśnij kombinację klawiszy Ctrl+LewyAlt+Q."
+TrayTip, %A_ScriptName%, %txtVar%, 5, 0x1
 
 ; - - - - - - - - - - - SECTION DEDICATED TO  Maciej Słojewski's specific hardware AND PREFERENCES - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - -
 
@@ -53,8 +54,8 @@ if ((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580") && (A_Args[1] !
 	FindWebsite("Exact Synergy Enterprise","chrome.exe https://portal-signaling-poland.voestalpine.net/synergy/docs/Portal.aspx", Tabs)
 	FindWebsite("Cooperation Platform Sopot", "chrome.exe solidsystemteamwork.voestalpine.root.local/internalprojects/vaSupp/CPS/SitePages/Home.aspx", Tabs)
 	FindWebsite("MDS Upgrade Kit","chrome.exe solidsystemteamwork.voestalpine.root.local/Processes/custprojects/780MDSUpgradeKit/SitePages/Home.aspx",Tabs)
-	FindWebsite("ERTMS axis counters for ProRail BV", "chrome.exe team.voestalpine.net/site/5061/SitePages/Home.aspx", Tabs)
-	FindWebsite("mssopot | Jitsi Meet","chrome.exe https://meet.jit.si/mssopot",Tabs)
+;	FindWebsite("ERTMS axis counters for ProRail BV", "chrome.exe team.voestalpine.net/site/5061/SitePages/Home.aspx", Tabs)
+;	FindWebsite("mssopot | Jitsi Meet","chrome.exe https://meet.jit.si/mssopot",Tabs)
 	}
 
 ; Maciej Słojewski only; home-office or office
@@ -63,7 +64,7 @@ if (	((A_ComputerName = "2277NB010") && 		(A_UserName = "V523580"))
 	{
 	;~ CapitalizeFirstLetters() only context dependent.
 	SetDefaultKeyboard(English_USA)
-	MsgBox, Keyboard style: English_USA
+	TrayTip, VariousFunctions.ahk, Keyboard style: English_USA, 5, 0x1
 	}
 	
 
@@ -194,6 +195,10 @@ return
 
 #if  WinActive(, "Microsoft Word") ; <--Everything after this line will only happen in Microsoft Word.
 
+^k::
+Send, {LAlt Down}{Ctrl Down}h{Ctrl Up}{LAlt Up}
+return
+
 +^h:: ; Shift + Ctrl + H - hide text; there is dedicated style to do that
 	HideSelectedText()
 return
@@ -205,7 +210,8 @@ return
 ^+t::
 oWord := ComObjActive("Word.Application")
 OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
-if (OurTemplate == OurTemplatePL) or (OurTemplate == OurTemplateEN)
+
+if (InStr(OurTemplate, "TQ-S402-pl_OgolnyTechDok.dotm") or InStr(OurTemplate, "TQ-S402-en_OgolnyTechDok.dotm"))
 {
 	oWord.ActiveDocument.AttachedTemplate := ""
 	oWord.ActiveDocument.UpdateStylesOnOpen := -1
@@ -234,15 +240,6 @@ return
 	FullPath() ; to do: call this function whenever document was saved with a filename.
 	Send, ^{o down}{o up}
 return
-
-^p::
-	MsgBox, 48, Zanim wydrukujesz...,% MsgText("1. Wykonaj makro`, które wstawi twardą spację po etykietach tabel i rysunków.`n2. Odśwież zawartość całego dokumentu (Ctrl + F9).`n3. Zamień wszystkie odsyłacze na łącza.`n4. Ponownie odśwież zawartość całego dokumentu (Ctrl + F9).`n5. Poszukaj słowa ""Błąd"".")
-	Send, ^{p down}{p up}
-return 
-
-F12::
-	PrepareToPrint()
-return 
 
 #3::
 	Switching()
@@ -338,13 +335,13 @@ return
 if (flag_as = 0)
 {
 	SetTimer, AutoSave, Off
-	MsgBox, % MsgText("Autozapis został wyłączony!")
+	TrayTip, %A_ScriptName%, Autozapis został wyłączony!, 5, 0x1
 	flag_as := 1
 }
 else if (flag_as = 1)
 {
 	SetTimer, AutoSave, On
-	MsgBox, % MsgText("Autozapis został ponownie włączony!")
+	TrayTip, %A_ScriptName%, Autozapis został ponownie włączony!, 5, 0x1
 	flag_as := 0
 }
 return
@@ -565,7 +562,7 @@ HideSelectedText() ; 2019-10-22 2019-11-08
 
 	oWord := ComObjActive("Word.Application")
 	OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
-	if (OurTemplate = OurTemplateEN || OurTemplate = OurTemplatePL)
+	if (InStr(OurTemplate, "TQ-S402-pl_OgolnyTechDok.dotm") or InStr(OurTemplate, "TQ-S402-en_OgolnyTechDok.dotm"))
 	{
 		nazStyl := oWord.Selection.Style.NameLocal
 		if (nazStyl = "Ukryty ms")
@@ -692,42 +689,6 @@ FullPath(AdditionalText := "") ; display full path to a file in window title bar
     oWord := ""
 }
 
-; -----------------------------------------------------------------------------------------------------------------------------
-PrepareToPrint()
-{
-	global oWord
-	oWord := ComObjActive("Word.Application")
-	OurTemplate := oWord.ActiveDocument.AttachedTemplate.FullName
-	if (OurTemplate != OurTemplateEN && OurTemplate != OurTemplatePL)
-	{
-		MsgBox, 48, Zanim wydrukujesz..., % MsgText("1. Wykonaj makro, które wstawi twardą spację po etykietach tabel i rysunków.`n2. Odśwież zawartość całego dokumentu (Ctrl + F9).`n3. Zamień wszystkie odsyłacze na łącza.`n4. Ponownie odśwież zawartość całego dokumentu (Ctrl + F9).`n5. Poszukaj słowa ""Błąd"".")
-		
-	}
-	else
-	{
-		oWord.Run("TwardaSpacja")
-		oWord.Run("UpdateFieldsPasek")
-		MsgBox, 64, Microsoft Word, % MsgText("Odświeżono dokument")
-		oWord.Run("HiperlaczaPasek")
-		MsgBox, 64, Microsoft Word, % MsgText("Zamieniono odsyłacze na łącza")
-		oWord.Run("UpdateFieldsPasek")
-		MsgBox, 64, Microsoft Word, % MsgText("Ponownie odświeżono dokument")
-		oWord.Selection.Find.ClearFormatting
-		oWord.Selection.Find.Wrap := 1
-		oWord.Selection.Find.Execute("B��d")
-		if (oWord.Selection.Find.Found = -1)
-		{
-			Msgbox, 48, Microsoft Word, % MsgText("Znaleziono słowo ""Błąd""")
-		}
-		else
-		{
-			MsgBox, 64, Microsoft Word, % MsgText("Nie znaleziono słowa ""Błąd""")
-		}
-		
-	}
-	Send, {F12 down}{F12 up}
-	oWord := ""
-}
 
 ; -----------------------------------------------------------------------------------------------------------------------------
 Switching()
@@ -767,8 +728,7 @@ TemplateStyle(StyleName)
 	Base(StyleName)
 	oWord := ComObjActive("Word.Application") 
 	;~ SoundBeep, 750, 500 ; to fajnie dzia�a
-	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
-		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
+	if  !(InStr(OurTemplate, "TQ-S402-pl_OgolnyTechDok.dotm") or InStr(OurTemplate, "TQ-S402-en_OgolnyTechDok.dotm"))
 		{
 		;~ MsgBox, % oWord.ActiveDocument.AttachedTemplate.FullName
 		MsgBox, 16, % MsgText("Próba wywołania stylu z szablonu"), % MsgText("Próbujesz wywołać styl przypisany do szablonu, ale szablon nie został jeszcze dołączony do tego pliku.`nNajpierw dołącz szablon, a następnie wywołaj ponownie tę funkcję.")
@@ -801,8 +761,7 @@ BB_Insert(Name_BB, AdditionalText)
 	Base(AdditionalText)
 	oWord := ComObjActive("Word.Application")
 	;~ MsgBox, % oWord.ActiveDocument.AttachedTemplate.FullName
-	if  ( (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplateEN) 
-		and (oWord.ActiveDocument.AttachedTemplate.FullName <> OurTemplatePL) )
+	if  !( InStr(OurTemplate, "TQ-S402-pl_OgolnyTechDok.dotm") or InStr(OurTemplate, "TQ-S402-en_OgolnyTechDok.dotm") )
 		{
 		MsgBox, 16, % MsgText("Próba wstawienia bloku z szablonu"), % MsgText("Próbujesz wstawić blok konstrukcyjny przypisany do szablonu, ale szablon nie zostać jeszcze dołączony do tego pliku.`nNajpierw dołącz szablon, a nastepnie wywołaj ponownie tę funkcję.")
 		}
