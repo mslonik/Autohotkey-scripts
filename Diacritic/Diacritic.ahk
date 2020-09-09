@@ -306,7 +306,8 @@ Double_SoundBeep_Duration = 150 ; The duration of the sound, in milliseconds
 else if (A_Args.Length() = 1)
     {
     IniRead, _Language,                         % A_ScriptDir . "\" . A_Args[1], Global, Language
-    MsgBox, 64, Diacritic.ahk, % "Input argument: " . A_Args[1] . ". Found language: " . _Language . "."
+    ; MsgBox, 64, Diacritic.ahk, % "Input argument: " . A_Args[1] . ". Found language: " . _Language . "."
+	TrayTip, Diactric.ahk, % "Input argument: " . A_Args[1] . ". Found language: " . _Language . ".",5, 0x1
     }
 else if (A_Args.Length() > 1)
     {
