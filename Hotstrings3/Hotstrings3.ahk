@@ -142,7 +142,8 @@ StartHotstring(txt)
 		SendFun := "TimeAndDate"
 	OnOff := txtsp[4]
 	TextInsert := % txtsp[5]
-	Hotstring(":" . Options . ":" . NewString, func(SendFun).bind(TextInsert), OnOff)
+	if !((Options == "") and (NewString == "") and (TextInsert == "") and (OnOff == ""))
+		Hotstring(":" . Options . ":" . NewString, func(SendFun).bind(TextInsert), OnOff)
 	return
 }
 
@@ -196,6 +197,10 @@ ViaClipboard(ReplacementString)
 MenuText(TextOptions)
 {
 	global MyHotstring, MenuListbox
+	WinGetPos, WinX, WinY,WinW,WinH,A
+    mouseX := Round(WinX+WinW/2)
+    mouseY := Round(WinY+WinH/2)
+    DllCall("SetCursorPos", "int", mouseX, "int", mouseY)
 	MyHotstring := ""
 	Gui, Menu:New, +LastFound +AlwaysOnTop -Caption +ToolWindow
 	Gui, Menu:Margin, 0, 0
@@ -239,6 +244,10 @@ Return
 
 MenuTextAHK(TextOptions){
 	global MyHotstring, MenuListbox
+	WinGetPos, WinX, WinY,WinW,WinH,A
+    mouseX := Round(WinX+WinW/2)
+    mouseY := Round(WinY+WinH/2)
+    DllCall("SetCursorPos", "int", mouseX, "int", mouseY)
 	MyHotstring := ""
 	Gui, MenuAHK:New, +LastFound +AlwaysOnTop -Caption +ToolWindow
 	Gui, MenuAHK:Margin, 0, 0
@@ -836,7 +845,8 @@ SaveHotstrings:
 		LV_GetText(txt4, A_Index, 4)
 		LV_GetText(txt5, A_Index, 5)
 		txt := % txt1 . "‖" . txt2 . "‖" . txt3 . "‖" . txt4 . "‖" . txt5 . "`r`n"
-		FileAppend, %txt%, Categories\%name%, UTF-8
+		if !((txt1 == "") and (txt2 == "") and (txt3 == "") and (txt4 == "") and (txt5 == ""))
+			FileAppend, %txt%, Categories\%name%, UTF-8
 	}
 	LV_GetText(txt1, SectionList.MaxIndex()+addvar, 1)
 	LV_GetText(txt2, SectionList.MaxIndex()+addvar, 2)
