@@ -1,9 +1,3 @@
-/*
-Author:      Maciej Słojewski, mslonik, http://mslonik.pl
-Purpose:     Facilitate normal operation for company desktop.
-Description: Hotkeys and hotstrings for my everyday professional activities and office cockpit.
-License:     GNU GPL v.3
-*/
 ;                 I N T R O D U C T I O N
 ;~ Simple script used to get diacritic letters (https://en.wikipedia.org/wiki/Diacritic) without usage of AltGr key (right alt, see https://en.wikipedia.org/wiki/AltGr_key#Polish for further details):
 ;~ * double press a key configured to correspond to diacritic key, e.g. in Polish ee converts into ę
@@ -12,7 +6,7 @@ License:     GNU GPL v.3
 ;~ * optionally sounds and tooltips are generated upon key presses.
 ;~ 
 ;~ WHY:
-;~ a. "programmers keyboard" layout and Diacritic with old ANSI 101 keys keyboard, where AltGr is unergonomically shifted to the right side of keyboard is cumbersome and decrease touch typing speed,
+;~ a. "programmers keyboard" layout and diactric with old ANSI 101 keys keyboard, where AltGr is unergonomically shifted to the right side of keyboard is cumbersome and decrease touch typing speed,
 ;~ b. all other "programmers keyboard" when one doesn't want to press AltGr or use just one hand to press all letters of alphabet.
 ;~
 ;~ Author: Maciej Słojewski, 2020-02-27
@@ -26,7 +20,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #SingleInstance force 			; only one instance of this script may run at a time!
 
 ;~ - - - - - - - - - - Global Variables - - - - - - - - - - -
-ApplicationName     := "Diacritic"
+ApplicationName     := "Diactric"
 English_USA 		:= 0x0409   ; see AutoHotkey help: Language Codes
 ;~ - - - - - - - - - - End of Global Variables - - - - - - - - - - -
 
@@ -40,7 +34,7 @@ ProcessInputArgs()
 IniRead, _AmericanLayout,                   % A_ScriptDir . "\" . A_Args[1], Global, AmericanLayout
 IniRead, _AllTooltips,                      % A_ScriptDir . "\" . A_Args[1], Global, AllTooltips
 IniRead, _AllBeeps,                         % A_ScriptDir . "\" . A_Args[1], Global, AllBeeps
-IniRead, _DiacriticWord,                    % A_ScriptDir . "\" . A_Args[1], Global, DiacriticWord
+IniRead, _DiactricWord,                     % A_ScriptDir . "\" . A_Args[1], Global, DiactricWord
 IniRead, _DoubleWord,                       % A_ScriptDir . "\" . A_Args[1], Global, DoubleWord
 
 ;~ switch to AmericanLayout (neutral)?
@@ -49,68 +43,68 @@ if (_AmericanLayout = "yes")
 if (_AllTooltips = "on")
     F_AllKeyboardKeys()     ; Set dynamic hotkeys for all keys of 60% keyboard, ANSI layout    
 
-;~ determine how many [Diacritic] sections are in .ini file
-DiacriticSectionCounter := 0
+;~ determine how many [Diactric] sections are in .ini file
+DiactricSectionCounter := 0
 Loop, Read, % A_ScriptDir . "\" . A_Args[1]
     {
-    if (InStr(A_LoopReadLine, "[Diacritic"))
+    if (InStr(A_LoopReadLine, "[Diactric"))
         {
-        DiacriticSectionCounter++
+        DiactricSectionCounter++
         }
     }
 
-;~ MsgBox, % "DiacriticSectionCounter: " . DiacriticSectionCounter
+;~ MsgBox, % "DiactricSectionCounter: " . DiactricSectionCounter
 ;~ read all the rest of configuration parameters from .ini file and create hotstrings
 
 ;~ Initialization of parameters
 BaseKey        = ""
 ShiftBaseKey   = ""
-Diacritic       = ""
-ShiftDiacritic  = ""
+Diactric       = ""
+ShiftDiactric  = ""
 Tooltip        = ""
 
-Loop, %DiacriticSectionCounter%
+Loop, %DiactricSectionCounter%
     {
-    IniRead, _BaseKey,                      % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, BaseKey
-    IniRead, _ShiftBaseKey,                 % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, ShiftBaseKey
+    IniRead, _BaseKey,                      % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, BaseKey
+    IniRead, _ShiftBaseKey,                 % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, ShiftBaseKey
     if (_ShiftBaseKey = "")
         {
         MsgBox, 16, %ApplicationName%.ahk, % "Warning!`nConfiguration file (" . A_Args[1] . ")`, section: " . A_Index . ", parameter name: ShiftBaseKey is empty. This could cause application malfunction. Application will now exit. Correct the " . A_Args[1] . " file in specified place and try again."
         ExitApp, 0
         }
-    IniRead, _Diacritic,                     % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, Diacritic
-    IniRead, _ShiftDiacritic,                % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, ShiftDiacritic
-    IniRead, _Tooltip,                      % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, Tooltip
+    IniRead, _Diactric,                     % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Diactric
+    IniRead, _ShiftDiactric,                % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, ShiftDiactric
+    IniRead, _Tooltip,                      % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Tooltip
     
-    ;~ MsgBox, % _BaseKey . " " . _Diacritic . " " . _ShiftDiacritic . " "
-    IniRead, _BaseKey_SoundBeep_Frequency,  % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, BaseKey_SoundBeep_Frequency
+    ;~ MsgBox, % _BaseKey . " " . _Diactric . " " . _ShiftDiactric . " "
+    IniRead, _BaseKey_SoundBeep_Frequency,  % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, BaseKey_SoundBeep_Frequency
     ;~ MsgBox, %_BaseKey_SoundBeep_Frequency%
-    IniRead, _BaseKey_SoundBeep_Duration,   % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, BaseKey_SoundBeep_Duration
+    IniRead, _BaseKey_SoundBeep_Duration,   % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, BaseKey_SoundBeep_Duration
     ;~ MsgBox, %_BaseKey_SoundBeep_Duration%
-    IniRead, _Diacritic_SoundBeep_Frequency, % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, Diacritic_SoundBeep_Frequency
-    ;~ MsgBox, %_Diacritic_SoundBeep_Frequency%
-    IniRead, _Diacritic_SoundBeep_Duration,  % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, Diacritic_SoundBeep_Duration
-    ;~ MsgBox, %_Diacritic_SoundBeep_Duration%
-    IniRead, _Double_SoundBeep_Frequency,   % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, Double_SoundBeep_Frequency
+    IniRead, _Diactric_SoundBeep_Frequency, % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Diactric_SoundBeep_Frequency
+    ;~ MsgBox, %_Diactric_SoundBeep_Frequency%
+    IniRead, _Diactric_SoundBeep_Duration,  % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Diactric_SoundBeep_Duration
+    ;~ MsgBox, %_Diactric_SoundBeep_Duration%
+    IniRead, _Double_SoundBeep_Frequency,   % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Double_SoundBeep_Frequency
     ;~ MsgBox, %_Double_SoundBeep_Frequency%
-    IniRead, _Double_SoundBeep_Duration,    % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, Double_SoundBeep_Duration
+    IniRead, _Double_SoundBeep_Duration,    % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Double_SoundBeep_Duration
     ;~ MsgBox, %_Double_SoundBeep_Duration%
 
-    ;~ MsgBox, % _BaseKey . " " . _Diacritic . " " . _Diacritic_SoundBeep_Frequency . " "  _Diacritic_SoundBeep_Duration . " " . _Tooltip
+    ;~ MsgBox, % _BaseKey . " " . _Diactric . " " . _Diactric_SoundBeep_Frequency . " "  _Diactric_SoundBeep_Duration . " " . _Tooltip
     ;~ MsgBox, % A_Index
     ;~ if (A_Index = 6)
         ;~ MsgBox, Po raz 6
     
     Hotstring(":zx:" . _BaseKey . _BaseKey . _BaseKey,                func("DoubleLetter").bind(_BaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration))
-    Hotstring(":x:"  . _BaseKey . _BaseKey,                           func("DiacriticLetter").bind(_Diacritic, _Diacritic_SoundBeep_Frequency, _Diacritic_SoundBeep_Duration, _Tooltip))
+    Hotstring(":x:"  . _BaseKey . _BaseKey,                           func("DiactricLetter").bind(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip))
     Hotstring(":x:"  . _BaseKey,                                      func("SingleLetter").bind(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip))
 
     Hotstring(":zx:" . _ShiftBaseKey . _ShiftBaseKey . _ShiftBaseKey, func("DoubleLetter").bind(_ShiftBaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration))
-    Hotstring(":x:"  . _ShiftBaseKey . _ShiftBaseKey,                 func("DiacriticLetter").bind(_ShiftDiacritic, _Diacritic_SoundBeep_Frequency, _Diacritic_SoundBeep_Duration, _Tooltip))
+    Hotstring(":x:"  . _ShiftBaseKey . _ShiftBaseKey,                 func("DiactricLetter").bind(_ShiftDiactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip))
     Hotstring(":x:"  . _ShiftBaseKey,                                 func("SingleLetter").bind(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip))
     }
 
-~BackSpace:: ; this line prevent the following sequence from triggering: ao › aoo › aó › aó{Backspace} › a › ao › ó
+~BackSpace:: ; this line prevent the following sequence from triggering: ao > aoo > aó > aó{Backspace} > a > ao > ó
     ;~ MsgBox, Backspace
     Hotstring("Reset")
 return
@@ -131,14 +125,14 @@ DoubleLetter(_BaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration)
 
 ;~ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-DiacriticLetter(_Diacritic, _Diacritic_SoundBeep_Frequency, _Diacritic_SoundBeep_Duration, _Tooltip)
+DiactricLetter(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip)
     {
     global _AllBeeps, _AllTooltips, _DoubleWord
     
-    ;~ MsgBox, % _Diacritic
-    Send, {BackSpace 2}%_Diacritic%
+    ;~ MsgBox, % _Diactric
+    Send, {BackSpace 2}%_Diactric%
     if (_AllBeeps = "on")
-        SoundBeep, _Diacritic_SoundBeep_Frequency, _Diacritic_SoundBeep_Duration
+        SoundBeep, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration
     if ((_AllTooltips = "on") && (_Tooltip = "on") )
         {
         Tooltip, % _DoubleWord . "?", % A_CaretX,% A_CaretY-20
@@ -154,13 +148,13 @@ DiacriticLetter(_Diacritic, _Diacritic_SoundBeep_Frequency, _Diacritic_SoundBeep
 
 SingleLetter(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip)
     {
-    global _AllBeeps, _AllTooltips, _DiacriticWord
+    global _AllBeeps, _AllTooltips, _DiactricWord
     
     if (_AllBeeps = "on")
         SoundBeep, _BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration
     if ((_AllTooltips = "on") && (_Tooltip = "on") )
         {
-        Tooltip, % _DiacriticWord . "?", % A_CaretX,% A_CaretY-20
+        Tooltip, % _DiactricWord . "?", % A_CaretX,% A_CaretY-20
         }
     else
         {
@@ -266,11 +260,11 @@ if (A_Args.Length() = 0)
     {
     IfExist, *.ini
         {
-        MsgBox, 16, %A_ScriptName%, At least one *.ini file found in directory %A_WorkingDir%`n but current script (%A_ScriptName%) was run without any arguments. One argument`, the name of .ini file`, is obligatory. Therefore script will now exit.
+        MsgBox, 16, %ApplicationName%.ahk, At least one *.ini file found in directory %A_WorkingDir%`n but current script (%ApplicationName%.ahk) was run without any arguments. One argument`, the name of .ini file`, is obligatory. Therefore script will now exit.
         ExitApp, 0
         }
     IfNotExist, *.ini
-        MsgBox, 308, %A_ScriptName%, No input arguments found and no *.ini files found in directory %A_ScriptDir%. Expected a single *.ini file. Do you want to create Default.ini configuration template? Script will exit after the default configuration .ini file is created.
+        MsgBox, 308, %ApplicationName%.ahk, No input arguments found and no *.ini files found in directory %A_WorkingDir%. Expected a single *.ini file. Do you want to create Default.ini configuration template? Script will exit after the default configuration file Default%ApplicationName%ConfigFile.ini is created.
     IfMsgBox, No
         ExitApp, 0
     IfMsgBox, Yes
@@ -282,19 +276,19 @@ Language = NameOfYourLanguage
 AmericanLayout = yes ; or no
 AllTooltips = on ; or off
 AllBeeps = on ; or off
-DiacriticWord = Diacritic ; e.g. Diacritic, this parameter will appear in Tooltip, if Tooltips are enabled
+DiactricWord = Diactric ; e.g. Diactric, this parameter will appear in Tooltip, if Tooltips are enabled
 DoubleWord = Double ; e.g. Double, this parameter will appear in Tooltip, if Tooltips are enabled
 
-[Diacritic1] ; exapmple of single section; such a section have to be repeated for each Diacritic key
-BaseKey = a ; name of a key which will activate a Diacritic key
-Diacritic = {U+0105} ; definition of Diacritic key, the format {U+xyza} is obligatory
+[Diactric1] ; exapmple of single section; such a section have to be repeated for each diactric key
+BaseKey = a ; name of a key which will activate a diactric key
+Diactric = {U+0105} ; definition of diactric key, the format {U+xyza} is obligatory
 ShiftBaseKey = A ; as for basekey, but this time explicite specify which key will appear
-ShiftDiacritic = {U+0104} ; definition of Diacritic key, the format {U+xyza} is obligatory
+ShiftDiactric = {U+0104} ; definition of diactric key, the format {U+xyza} is obligatory
 Tooltip = on ; or off
 BaseKey_SoundBeep_Frequency = 1000 ; a number between 37 and 32767
 BaseKey_SoundBeep_Duration = 150 ; The duration of the sound, in milliseconds
-Diacritic_SoundBeep_Frequency = 1100 ; a number between 37 and 32767
-Diacritic_SoundBeep_Duration = 150 ; The duration of the sound, in milliseconds
+Diactric_SoundBeep_Frequency = 1100 ; a number between 37 and 32767
+Diactric_SoundBeep_Duration = 150 ; The duration of the sound, in milliseconds
 Double_SoundBeep_Frequency = 1200 ; a number between 37 and 32767
 Double_SoundBeep_Duration = 150 ; The duration of the sound, in milliseconds
 )
@@ -306,13 +300,12 @@ Double_SoundBeep_Duration = 150 ; The duration of the sound, in milliseconds
 else if (A_Args.Length() = 1)
     {
     IniRead, _Language,                         % A_ScriptDir . "\" . A_Args[1], Global, Language
-    ; MsgBox, 64, Diacritic.ahk, % "Input argument: " . A_Args[1] . ". Found language: " . _Language . "."
-	TrayTip, Diactric.ahk, % "Input argument: " . A_Args[1] . ". Found language: " . _Language . ".",5, 0x1
+    TrayTip, Diactric.ahk, % "Input argument: " . A_Args[1] . ". Found language: " . _Language . ".",5, 0x1
+    ;~ MsgBox, 64, Diactric.ahk, % "Input argument: " . A_Args[1] . ". Found language: " . _Language . "."
     }
 else if (A_Args.Length() > 1)
     {
-    MsgBox, 48, Diacritic.ahk, % "Too many input arguments: " . A_Args.Length() . ". Expected just one, *.ini." 
-    ExitApp, 0
+    MsgBox, 48, Diactric.ahk, % "Too many input arguments: " . A_Args.Length() . ". Expected just one, *.ini." 
     }
 }    
 
