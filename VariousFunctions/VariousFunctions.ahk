@@ -30,6 +30,17 @@ global order := []
 global MyTemplate := ""
 global template := ""
 
+#Include, ..\Otagle3\WarstwaWord\MakraOgolne\SetHeadersAndFooters.ahk
+#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\Wypunktowania.ahk 
+#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\UsunWielokrotneSpacje.ahk 
+#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\Refresh.ahk 
+#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\TwardaSpacja.ahk 
+#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\Hiperlacza.ahk 
+#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\FindBlad.ahk
+#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\FindDeadLinks.ahk 
+#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\ResizeImages.ahk 
+#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\CheckingMacro.ahk 
+
 SetTimer, AutoSave, % interval
 txtVar := "Autozapis dokumentów w MS Word włączony.`nAby wyłączyć tę funkcję, naciśnij kombinację klawiszy Ctrl+LewyAlt+Q."
 TrayTip, %A_ScriptName%, %txtVar%, 5, 0x1
@@ -194,6 +205,27 @@ return
 ;~ WheelUp::ShiftAltTab
 
 #if  WinActive(, "Microsoft Word") ; <--Everything after this line will only happen in Microsoft Word.
+
+^+F12::
++F12::
+F12::
+^s::
+^p::
+SetWorkingDir, % SubStr(A_ScriptDir, 1 , InStr(A_ScriptDir, "VariousFunctions")-1) . "Otagle3"
+CheckingMacro()
+SetTimer, Druk, 500
+return
+
+Druk:
+if !(WinExist("Checklist")) and !(WinExist("Checklist Macro"))
+{
+	SetTimer, Druk, Off
+	WinActivate, ahk_class OpusApp
+	shortcut := A_ThisHotkey
+	shortcut := StrReplace(shortcut, "F12" , "{F12}")
+	SendInput, % shortcut
+}
+return
 
 ^k::
 Send, {LAlt Down}{Ctrl Down}h{Ctrl Up}{LAlt Up}
