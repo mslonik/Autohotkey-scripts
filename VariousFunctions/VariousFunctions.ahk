@@ -21,7 +21,7 @@ global size_org := 0
 global table := []
 global AutosaveFilePath := "C:\temp1\KopiaZapasowaPlikowWord\"
 global interval := 10*60*1000
-;--------------- Zmienne do prze��czania okienek ---------------
+;--------------- Zmienne do przełączania okienek ---------------
 global cntWnd := 0
 global cntWnd2 := 0
 global id := []
@@ -30,16 +30,16 @@ global order := []
 global MyTemplate := ""
 global template := ""
 
-#Include, ..\Otagle3\WarstwaWord\MakraOgolne\SetHeadersAndFooters.ahk
-#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\Wypunktowania.ahk 
-#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\UsunWielokrotneSpacje.ahk 
-#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\Refresh.ahk 
-#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\TwardaSpacja.ahk 
-#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\Hiperlacza.ahk 
-#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\FindBlad.ahk
-#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\FindDeadLinks.ahk 
-#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\ResizeImages.ahk 
-#Include, ..\Otagle3\WarstwaWord\UstawieniaDokumentu\CheckingMacro.ahk 
+#Include, *i ..\Otagle3\WarstwaWord\MakraOgolne\SetHeadersAndFooters.ahk
+#Include, *i ..\Otagle3\WarstwaWord\UstawieniaDokumentu\Wypunktowania.ahk 
+#Include, *i ..\Otagle3\WarstwaWord\UstawieniaDokumentu\UsunWielokrotneSpacje.ahk 
+#Include, *i ..\Otagle3\WarstwaWord\UstawieniaDokumentu\Refresh.ahk 
+#Include, *i ..\Otagle3\WarstwaWord\UstawieniaDokumentu\TwardaSpacja.ahk 
+#Include, *i ..\Otagle3\WarstwaWord\UstawieniaDokumentu\Hiperlacza.ahk 
+#Include, *i ..\Otagle3\WarstwaWord\UstawieniaDokumentu\FindBlad.ahk
+#Include, *i ..\Otagle3\WarstwaWord\UstawieniaDokumentu\FindDeadLinks.ahk 
+#Include, *i ..\Otagle3\WarstwaWord\UstawieniaDokumentu\ResizeImages.ahk 
+#Include, *i ..\Otagle3\WarstwaWord\UstawieniaDokumentu\CheckingMacro.ahk 
 
 SetTimer, AutoSave, % interval
 txtVar := "Autozapis dokumentów w MS Word włączony.`nAby wyłączyć tę funkcję, naciśnij kombinację klawiszy Ctrl+LewyAlt+Q."
@@ -181,7 +181,8 @@ return
 ; ----------------- SECTION OF ADDITIONAL I/O DEVICES -------------------------------
 ; pedals (Foot Switch FS3-P, made by https://pcsensor.com/)
 
-F13:: ; not used
+F13:: 
+	Send, #t
 	SoundBeep, 1000, 200 ; freq = 50, duration = 200 ms
 return
 
@@ -206,14 +207,14 @@ return
 
 #if  WinActive(, "Microsoft Word") ; <--Everything after this line will only happen in Microsoft Word.
 
-^+F12::
-+F12::
-F12::
-^s::
-^p::
-SetWorkingDir, % SubStr(A_ScriptDir, 1 , InStr(A_ScriptDir, "VariousFunctions")-1) . "Otagle3"
-CheckingMacro()
-SetTimer, Druk, 500
+; ^+F12::
+; +F12::
+; F12::
+; ^s::
+; ^p::
+; SetWorkingDir, % SubStr(A_ScriptDir, 1 , InStr(A_ScriptDir, "VariousFunctions")-1) . "Otagle3"
+; CheckingMacro()
+; SetTimer, Druk, 500
 return
 
 Druk:
