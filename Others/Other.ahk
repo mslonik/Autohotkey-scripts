@@ -55,6 +55,7 @@ if (v_SelectedMonitor == 0)
 
 ;Flags to control application
 v_SandboxFlag := 1
+v_ResizingFlag := 1
 
 ;Configuration parameters
 v_FontSize 	:= 14 ;points
@@ -279,15 +280,12 @@ v_xNext += v_OutVarTemp2W + v_xmarg
 GuiControl, Move, % IdButton4, % "x" . v_xNext . A_Space . "y" . v_yNext
 v_yNext += HofButton
 LeftColumnH := v_yNext
-;Gui, 		%HS3Hwnd%:Show, AutoSize Center
 
 ;5.2. Right column
 ;5.2.1. Position the text "Library content"
 v_yNext := v_ymarg
 v_xNext := LeftColumnW + v_xmarg
 GuiControl, Move, % IdText7, % "x" . v_xNext . A_Space . "y" . v_yNext
-
-;Gui, 		%HS3Hwnd%:Show, AutoSize Center
 
 ;5.2.2. Position the only one List View 
 GuiControlGet, v_OutVarTemp1, Pos, % IdEdit10 ; height of Sandbox edit field
@@ -327,10 +325,11 @@ if (v_SandboxFlag)
 		v_xNext := LeftColumnW + v_xmarg
 		v_wNext := RightColumnW
 		GuiControl, Move, % IdEdit10, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Space . "w" . v_wNext
-	}
+}
 else
 	GuiControl, Hide, % IdEdit10
 
+v_ResizingFlag := 1
 return
 
 ;6. Calculate position and size of the GUI window
@@ -341,13 +340,17 @@ return
 
 
 ;7. Show text objects
-^#h::
+^#h:: ; Event
 ;*[Other]
-FlagOfResizing := 1
 	;why double???
-Gui, 		%HS3Hwnd%:Show, AutoSize Center
-Gui, 		%HS3Hwnd%:Show, AutoSize Center
-FlagOfResizing := 0
+if (v_ResizingFlag)
+	{
+		Gui, 		%HS3Hwnd%:Show, AutoSize Center
+		Gui, 		%HS3Hwnd%:Show, AutoSize Center
+		v_ResizingFlag := 0
+	}
+else
+	Gui, %HS3Hwnd%: Restore
 	;WinGetPos, StartX, StartY, StartW, StartH, ahk_id %HS3Hwnd%
 	;MsgBox, , Size and position of the window, % "StartX: " . StartX . "`nStartY: " . StartY . "`nStartW: " . StartW . "`nStartH: " . StartH
 return
@@ -355,9 +358,9 @@ return
 HS3GuiSize: ;Gui event
 if (A_EventInfo = 1) ; The window has been minimized.
 	return
-if (FlagOfResizing)
+if (v_ResizingFlag)
 	return
-AutoXYWH("wh", IdListView1)
+F_AutoXYWH("wh", IdListView1)
 
 Gui, ListView, %IdListView1% ; identify which ListView
 
@@ -390,14 +393,19 @@ if (!v_SandboxFlag) ;if flag v_SandboxFlag isn't set, hide text objects related 
 		v_xNext := LeftColumnW + v_xmarg
 		v_wNext := RightColumnW
 		GuiControl, Move, % IdEdit10, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Space . "w" . v_wNext
-	}
-		
+}
 return
-	
-	
+
+HS3GuiEscape: ; Event
+Gui, 		%HS3Hwnd%: Minimize
+return
+
+HS3GuiClose:	; Event
+ExitApp
+
 CapsCheck:
 return
-	
+
 L_SelectFunction:
 return
 
@@ -422,10 +430,6 @@ return
 ViewString:
 return
 
-HS3GuiClose:
-HS3GuiEscape:
-ExitApp
-
 ; =================================================================================
 ; Function: AutoXYWH
 ;   Move and resize control automatically when GUI resizes.
@@ -445,7 +449,7 @@ ExitApp
 ;          2014-1-2  / tmplinshi
 ; requires AHK version : 1.1.13.01+
 ; =================================================================================
-AutoXYWH(DimSize, cList*){       ; http://ahkscript.org/boards/viewtopic.php?t=1079
+F_AutoXYWH(DimSize, cList*){       ; http://ahkscript.org/boards/viewtopic.php?t=1079
   static cInfo := {}
   Options := 0
  
@@ -474,7 +478,7 @@ AutoXYWH(DimSize, cList*){       ; http://ahkscript.org/boards/viewtopic.php?t=1
 	} 
 }
 
-f_PlotGrid(GridStep, HandleToWindow)
+F_PlotGrid(GridStep, HandleToWindow)
 {
 	;https://www.autohotkey.com/docs/misc/Styles.htm
 	SS_BLACKFRAME		:= 0x07
