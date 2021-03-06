@@ -54,7 +54,7 @@ if (v_SelectedMonitor == 0)
 ;MsgBox, , Height of Primary Monitor, % "Full screen: " . H%PrimMon% . "`nClient area: " . HeightOfClientArea
 
 ;Configuration parameters
-v_FontSize 	:= 12 ;points
+v_FontSize 	:= 14 ;points
 v_xmarg		:= 25 ;pixels
 v_ymarg		:= 25 ;pixels
 v_FontType	:= "Calibri"
@@ -327,31 +327,54 @@ GuiControl, Move, % IdEdit10, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Spac
 ;7. Show text objects
 ;why double???
 ;^#h::
+FlagOfResizing := 1
 Gui, 		%HS3Hwnd%:Show, AutoSize Center
 Gui, 		%HS3Hwnd%:Show, AutoSize Center
-;Gui, 		%HS3Hwnd%:Show, AutoSize Center
 ;WinGetPos, StartX, StartY, StartW, StartH, ahk_id %HS3Hwnd%
 ;MsgBox, , Size and position of the window, % "StartX: " . StartX . "`nStartY: " . StartY . "`nStartW: " . StartW . "`nStartH: " . StartH
 return
 
 HS3GuiSize:
-If (A_EventInfo = 1) ; The window has been minimized.
-	return
-AutoXYWH("wh", IdListView1)
-GuiControlGet, temp2, Pos, %IdListView1%	
+	if (A_EventInfo = 1) ; The window has been minimized.
+		return
+	if (FlagOfResizing)
+		{
+			FlagOfResizing := 0
+			return
+		}
+	AutoXYWH("wh", IdListView1)
+	
+	Gui, %HS3Hwnd%: ListView, %IdListView1% ; identify which Gui
 
-LV_ModifyCol(1, Round(0.2 * temp2W))
-LV_ModifyCol(2, Round(0.1 * temp2W))
-LV_ModifyCol(3, Round(0.2 * temp2W))	
-LV_ModifyCol(4, Round(0.1 * temp2W))
-LV_ModifyCol(5, Round(0.1 * temp2W))
-LV_ModifyCol(6, Round(0.3 * temp2W) - 3)
+	;5.2.3. Position of the long text F1 ... F2 ...
+	GuiControlGet, v_OutVarTemp, Pos, % IdListView1
+	v_yNext := v_ymarg + HofText + v_OutVarTempH + v_ymarg
+	v_xNext := LeftColumnW + v_xmarg
+	LV_ModifyCol(1, Round(0.2 * v_OutVarTempW))
+	LV_ModifyCol(2, Round(0.1 * v_OutVarTempW))
+	LV_ModifyCol(3, Round(0.2 * v_OutVarTempW))	
+	LV_ModifyCol(4, Round(0.1 * v_OutVarTempW))
+	LV_ModifyCol(5, Round(0.1 * v_OutVarTempW))
+	LV_ModifyCol(6, Round(0.3 * v_OutVarTempW) - 3)
+	GuiControl, Move, % IdText8, % "x" . v_xNext . A_Space . "y" . v_yNext
+
+	;5.2.4. Text Sandbox
+	v_yNext += HofText + v_ymarg
+	v_xNext := LeftColumnW + v_xmarg
+	GuiControl, Move, % IdText10, % "x" . v_xNext . A_Space . "y" . v_yNext
+	
+	;5.2.5. Sandbox edit text field
+	v_yNext += HofText
+	v_xNext := LeftColumnW + v_xmarg
+	v_wNext := RightColumnW
+	GuiControl, Move, % IdEdit10, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Space . "w" . v_wNext
+		
 return
-
-
+	
+	
 CapsCheck:
 return
-
+	
 L_SelectFunction:
 return
 
