@@ -53,6 +53,9 @@ if (v_SelectedMonitor == 0)
 ;SysGet, HeightOfClientArea, 17 ;SM_CYFULLSCREEN := 17
 ;MsgBox, , Height of Primary Monitor, % "Full screen: " . H%PrimMon% . "`nClient area: " . HeightOfClientArea
 
+;Flags to control application
+v_SandboxFlag := 1
+
 ;Configuration parameters
 v_FontSize 	:= 14 ;points
 v_xmarg		:= 25 ;pixels
@@ -264,7 +267,6 @@ v_xNext := v_xmarg
 v_wNext := LeftColumnW - v_xNext
 GuiControl, Move, % IdDDL2, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Space . "w" . v_wNext
 
-;*[Other]
 ;Gui, 		%HS3Hwnd%:Show, AutoSize Center
 v_yNext += HofDropDownList + v_ymarg
 v_xNext := v_xmarg
@@ -293,7 +295,10 @@ GuiControlGet, v_OutVarTemp2, Pos, % IdListView1
 v_yNext += HofText
 v_xNext := LeftColumnW + v_xmarg
 v_wNext := RightColumnW
-v_hNext := LeftColumnH - (v_OutVarTemp1H + HofText * 3 + v_ymarg * 3)
+if (v_SandboxFlag)
+	v_hNext := LeftColumnH - (v_OutVarTemp1H + HofText * 3 + v_ymarg * 3)
+else
+	v_hNext := LeftColumnH - (HofText * 2 + v_ymarg * 2)
 GuiControl, Move, % IdListView1, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Space . "w" . v_wNext . A_Space . "h" . v_hNext
 ;Gui, 		%HS3Hwnd%:Show, AutoSize Center
 
@@ -306,16 +311,27 @@ GuiControl, Move, % IdText8, % "x" . v_xNext . A_Space . "y" . v_yNext
 GuiControl, Hide, % IdText9
 
 ;5.2.4. Text Sandbox
-v_yNext += HofText + v_ymarg
-v_xNext := LeftColumnW + v_xmarg
-GuiControl, Move, % IdText10, % "x" . v_xNext . A_Space . "y" . v_yNext
+if (v_SandboxFlag)
+	{
+		v_yNext += HofText + v_ymarg
+		v_xNext := LeftColumnW + v_xmarg
+		GuiControl, Move, % IdText10, % "x" . v_xNext . A_Space . "y" . v_yNext
+	}
+else
+	GuiControl, Hide, % IdText10
 
 ;5.2.5. Sandbox edit text field
-v_yNext += HofText
-v_xNext := LeftColumnW + v_xmarg
-v_wNext := RightColumnW
-GuiControl, Move, % IdEdit10, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Space . "w" . v_wNext
+if (v_SandboxFlag)
+	{
+		v_yNext += HofText
+		v_xNext := LeftColumnW + v_xmarg
+		v_wNext := RightColumnW
+		GuiControl, Move, % IdEdit10, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Space . "w" . v_wNext
+	}
+else
+	GuiControl, Hide, % IdEdit10
 
+return
 
 ;6. Calculate position and size of the GUI window
 ;DetectHiddenWindows, On
@@ -325,49 +341,56 @@ GuiControl, Move, % IdEdit10, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Spac
 
 
 ;7. Show text objects
-;why double???
-;^#h::
+^#h::
+;*[Other]
 FlagOfResizing := 1
+	;why double???
 Gui, 		%HS3Hwnd%:Show, AutoSize Center
 Gui, 		%HS3Hwnd%:Show, AutoSize Center
-;WinGetPos, StartX, StartY, StartW, StartH, ahk_id %HS3Hwnd%
-;MsgBox, , Size and position of the window, % "StartX: " . StartX . "`nStartY: " . StartY . "`nStartW: " . StartW . "`nStartH: " . StartH
+FlagOfResizing := 0
+	;WinGetPos, StartX, StartY, StartW, StartH, ahk_id %HS3Hwnd%
+	;MsgBox, , Size and position of the window, % "StartX: " . StartX . "`nStartY: " . StartY . "`nStartW: " . StartW . "`nStartH: " . StartH
 return
 
-HS3GuiSize:
-	if (A_EventInfo = 1) ; The window has been minimized.
-		return
-	if (FlagOfResizing)
-		{
-			FlagOfResizing := 0
-			return
-		}
-	AutoXYWH("wh", IdListView1)
-	
-	Gui, %HS3Hwnd%: ListView, %IdListView1% ; identify which Gui
+HS3GuiSize: ;Gui event
+if (A_EventInfo = 1) ; The window has been minimized.
+	return
+if (FlagOfResizing)
+	return
+AutoXYWH("wh", IdListView1)
+
+Gui, ListView, %IdListView1% ; identify which ListView
 
 	;5.2.3. Position of the long text F1 ... F2 ...
-	GuiControlGet, v_OutVarTemp, Pos, % IdListView1
-	v_yNext := v_ymarg + HofText + v_OutVarTempH + v_ymarg
-	v_xNext := LeftColumnW + v_xmarg
-	LV_ModifyCol(1, Round(0.2 * v_OutVarTempW))
-	LV_ModifyCol(2, Round(0.1 * v_OutVarTempW))
-	LV_ModifyCol(3, Round(0.2 * v_OutVarTempW))	
-	LV_ModifyCol(4, Round(0.1 * v_OutVarTempW))
-	LV_ModifyCol(5, Round(0.1 * v_OutVarTempW))
-	LV_ModifyCol(6, Round(0.3 * v_OutVarTempW) - 3)
-	GuiControl, Move, % IdText8, % "x" . v_xNext . A_Space . "y" . v_yNext
+GuiControlGet, v_OutVarTemp, Pos, % IdListView1
+v_yNext := v_ymarg + HofText + v_OutVarTempH + v_ymarg
+v_xNext := LeftColumnW + v_xmarg
+LV_ModifyCol(1, Round(0.2 * v_OutVarTempW))
+LV_ModifyCol(2, Round(0.1 * v_OutVarTempW))
+LV_ModifyCol(3, Round(0.2 * v_OutVarTempW))	
+LV_ModifyCol(4, Round(0.1 * v_OutVarTempW))
+LV_ModifyCol(5, Round(0.1 * v_OutVarTempW))
+LV_ModifyCol(6, Round(0.3 * v_OutVarTempW) - 3)
+GuiControl, Move, % IdText8, % "x" . v_xNext . A_Space . "y" . v_yNext
 
-	;5.2.4. Text Sandbox
-	v_yNext += HofText + v_ymarg
-	v_xNext := LeftColumnW + v_xmarg
-	GuiControl, Move, % IdText10, % "x" . v_xNext . A_Space . "y" . v_yNext
-	
-	;5.2.5. Sandbox edit text field
-	v_yNext += HofText
-	v_xNext := LeftColumnW + v_xmarg
-	v_wNext := RightColumnW
-	GuiControl, Move, % IdEdit10, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Space . "w" . v_wNext
+if (!v_SandboxFlag) ;if flag v_SandboxFlag isn't set, hide text objects related to sandbox
+{
+		GuiControl, Hide, % IdText10
+		GuiControl, Hide, % IdEdit10
+	}
+	else
+	{
+		;5.2.4. Text Sandbox
+		v_yNext += HofText + v_ymarg
+		v_xNext := LeftColumnW + v_xmarg
+		GuiControl, Move, % IdText10, % "x" . v_xNext . A_Space . "y" . v_yNext
+		
+		;5.2.5. Sandbox edit text field
+		v_yNext += HofText
+		v_xNext := LeftColumnW + v_xmarg
+		v_wNext := RightColumnW
+		GuiControl, Move, % IdEdit10, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Space . "w" . v_wNext
+	}
 		
 return
 	
