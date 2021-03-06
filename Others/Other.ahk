@@ -55,7 +55,7 @@ if (v_SelectedMonitor == 0)
 ;MsgBox, , Height of Primary Monitor, % "Full screen: " . H%PrimMon% . "`nClient area: " . HeightOfClientArea
 
 ;Configuration parameters
-v_FontSize 	:= 10 ;points
+v_FontSize 	:= 12 ;points
 v_xmarg		:= 25 ;pixels
 v_ymarg		:= 25 ;pixels
 v_FontType	:= "Calibri"
@@ -76,7 +76,6 @@ Gui,			HS3:Color,	% v_WindowColor, % v_ControlColor
 Gui,			HS3:Font,		% "s" . v_FontSize . A_Space . "norm cWhite", % v_FontType
 
 ;2. Prepare all text objects according to mock-up.
-;*[Other]
 Gui,			HS3:Font,		% "s" . v_FontSize . A_Space . "norm cBlue", % v_FontType
 Gui, 		HS3:Add, 		Text, 		HwndIdText1, 									%t_EnterTriggerstring%
 Gui,			HS3:Font,		% "s" . v_FontSize . A_Space . "norm cWhite", % v_FontType
@@ -134,6 +133,7 @@ Gui,			HS3:Font,		% "s" . v_FontSize . A_Space . "norm cBlue", % v_FontType
 Gui, 		HS3:Add, 		Text, 		HwndIdText7,		 							%t_LibraryContent%
 Gui,			HS3:Font,		% "s" . v_FontSize . A_Space . "norm cWhite", % v_FontType
 
+;5.2.3. Position of the long text
 Gui,			HS3:Add, 		Text, 		HwndIdText9, 									%t_TriggerstringTriggOptOutFunEnDisHotstringComment%
 Gui, 		HS3:Add, 		ListView, 	HwndIdListView1 LV0x1 vv_LibraryContent AltSubmit gHSLV, %t_TriggerstringTriggOptOutFunEnDisHotstringComment%
 
@@ -164,12 +164,12 @@ HofDropDownList 	:= v_OutVarTempH
 GuiControlGet, v_OutVarTemp1, Pos, % IdButton2
 GuiControlGet, v_OutVarTemp2, Pos, % IdButton3
 GuiControlGet, v_OutVarTemp3, Pos, % IdButton4
-;LeftColumnW := v_xmarg + v_OutVarTemp1W + v_xmarg + v_OutVarTemp2W + v_xmarg + v_OutVarTemp3W + v_xmarg
+
 LeftColumnW := v_xmarg + v_OutVarTemp1W + v_xmarg + v_OutVarTemp2W + v_xmarg + v_OutVarTemp3W
 
 GuiControlGet, v_OutVarTemp1, Pos, % IdText8
 GuiControlGet, v_OutVarTemp2, Pos, % IdText9
-v_OutVarTemp3 := Max(v_OutVarTemp1W, v_OutVarTemp2W)
+v_OutVarTemp3 := Max(v_OutVarTemp1W, v_OutVarTemp2W) ;longer of two texts
 ;RightColumnW := v_xmarg + v_OutVarTemp3 + v_xmarg
 RightColumnW := v_OutVarTemp3
 
@@ -265,6 +265,8 @@ v_xNext := v_xmarg
 v_wNext := LeftColumnW - v_xNext
 GuiControl, Move, % IdDDL2, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Space . "w" . v_wNext
 
+;*[Other]
+Gui, 		%HS3Hwnd%:Show, AutoSize Center
 v_yNext += HofDropDownList + v_ymarg
 v_xNext := v_xmarg
 GuiControlGet, v_OutVarTemp1, Pos, % IdButton2
@@ -276,12 +278,15 @@ v_xNext += v_OutVarTemp2W + v_xmarg
 GuiControl, Move, % IdButton4, % "x" . v_xNext . A_Space . "y" . v_yNext
 v_yNext += HofButton
 LeftColumnH := v_yNext
+Gui, 		%HS3Hwnd%:Show, AutoSize Center
 
 ;5.2. Right column
 ;5.2.1. Position the text "Library content"
 v_yNext := v_ymarg
 v_xNext := LeftColumnW + v_xmarg
 GuiControl, Move, % IdText7, % "x" . v_xNext . A_Space . "y" . v_yNext
+
+Gui, 		%HS3Hwnd%:Show, AutoSize Center
 
 ;5.2.2. Position the only one List View 
 GuiControlGet, v_OutVarTemp1, Pos, % IdEdit10 ; height of Sandbox edit field
@@ -291,7 +296,9 @@ v_xNext := LeftColumnW + v_xmarg
 v_wNext := RightColumnW
 v_hNext := LeftColumnH - (v_OutVarTemp1H + HofText * 3 + v_ymarg * 3)
 GuiControl, Move, % IdListView1, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Space . "w" . v_wNext . A_Space . "h" . v_hNext
+Gui, 		%HS3Hwnd%:Show, AutoSize Center
 
+;5.2.3. Position of the long text F1 ... F2 ...
 GuiControlGet, v_OutVarTemp, Pos, % IdListView1
 v_yNext += v_OutVarTempH + v_ymarg
 v_xNext := LeftColumnW + v_xmarg
@@ -299,31 +306,49 @@ GuiControl, Move, % IdText8, % "x" . v_xNext . A_Space . "y" . v_yNext
 
 GuiControl, Hide, % IdText9
 
+;5.2.4. Text Sandbox
 v_yNext += HofText + v_ymarg
 v_xNext := LeftColumnW + v_xmarg
 GuiControl, Move, % IdText10, % "x" . v_xNext . A_Space . "y" . v_yNext
 
+;5.2.5. Sandbox edit text field
 v_yNext += HofText
 v_xNext := LeftColumnW + v_xmarg
 v_wNext := RightColumnW
 GuiControl, Move, % IdEdit10, % "x" . v_xNext . A_Space . "y" . v_yNext . A_Space . "w" . v_wNext
 
-Gui, 		HS3:Show, 	Hide AutoSize Center
+;Gui, 		HS3:Show, 	Hide AutoSize Center
+Gui, 		%HS3Hwnd%:Show, AutoSize Center
 
 ;6. Calculate position and size of the GUI window
-DetectHiddenWindows, On
-WinGetPos, StartX, StartY, StartW, StartH, ahk_id %HS3Hwnd%
-DetectHiddenWindows, Off
-MsgBox, , Size and position of the window, % "StartX: " . StartX . "`nStartY: " . StartY . "`nStartW: " . StartW . "`nStartH: " . StartH
+;DetectHiddenWindows, On
+;WinGetPos, StartX, StartY, StartW, StartH, ahk_id %HS3Hwnd%
+;DetectHiddenWindows, Off
+;MsgBox, , Size and position of the window, % "StartX: " . StartX . "`nStartY: " . StartY . "`nStartW: " . StartW . "`nStartH: " . StartH
 
 
 ;7. Show text objects
-Gui, 		%HS3Hwnd%:Show
-WinGetPos, StartX, StartY, StartW, StartH, ahk_id %HS3Hwnd%
-MsgBox, , Size and position of the window, % "StartX: " . StartX . "`nStartY: " . StartY . "`nStartW: " . StartW . "`nStartH: " . StartH
-
-
+Gui, 		%HS3Hwnd%:Show, AutoSize Center
+;WinGetPos, StartX, StartY, StartW, StartH, ahk_id %HS3Hwnd%
+;MsgBox, , Size and position of the window, % "StartX: " . StartX . "`nStartY: " . StartY . "`nStartW: " . StartW . "`nStartH: " . StartH
 return
+
+/*
+	HS3GuiSize:
+	If (A_EventInfo = 1) ; The window has been minimized.
+		return
+	AutoXYWH("wh", IdListView1)
+	GuiControlGet, temp2, Pos, %IdListView1%	
+	
+	LV_ModifyCol(1, Round(0.2 * temp2W))
+	LV_ModifyCol(2, Round(0.1 * temp2W))
+	LV_ModifyCol(3, Round(0.2 * temp2W))	
+	LV_ModifyCol(4, Round(0.1 * temp2W))
+	LV_ModifyCol(5, Round(0.1 * temp2W))
+	LV_ModifyCol(6, Round(0.3 * temp2W) - 3)
+	return
+	
+*/
 
 CapsCheck:
 return
@@ -356,7 +381,53 @@ HS3GuiClose:
 HS3GuiEscape:
 ExitApp
 
-
+; =================================================================================
+; Function: AutoXYWH
+;   Move and resize control automatically when GUI resizes.
+; Parameters:
+;   DimSize - Can be one or more of x/y/w/h  optional followed by a fraction
+;             add a '*' to DimSize to 'MoveDraw' the controls rather then just 'Move', this is recommended for Groupboxes
+;   cList   - variadic list of ControlIDs
+;             ControlID can be a control HWND, associated variable name, ClassNN or displayed text.
+;             The later (displayed text) is possible but not recommend since not very reliable 
+; Examples:
+;   AutoXYWH("xy", "Btn1", "Btn2")
+;   AutoXYWH("w0.5 h 0.75", hEdit, "displayed text", "vLabel", "Button1")
+;   AutoXYWH("*w0.5 h 0.75", hGroupbox1, "GrbChoices")
+; ---------------------------------------------------------------------------------
+; Version: 2015-5-29 / Added 'reset' option (by tmplinshi)
+;          2014-7-03 / toralf
+;          2014-1-2  / tmplinshi
+; requires AHK version : 1.1.13.01+
+; =================================================================================
+AutoXYWH(DimSize, cList*){       ; http://ahkscript.org/boards/viewtopic.php?t=1079
+  static cInfo := {}
+  Options := 0
+ 
+  If (DimSize = "reset")
+    Return cInfo := {}
+ 
+  For i, ctrl in cList 
+	{
+    ctrlID                    := A_Gui ":" ctrl
+    If ( cInfo[ctrlID].x = "" ){
+        GuiControlGet, i, %A_Gui%:Pos, %ctrl%
+        MMD              := InStr(DimSize, "*") ? "MoveDraw" : "Move"
+        fx               := fy := fw := fh := 0
+        For i, dim in (a := StrSplit(RegExReplace(DimSize, "i)[^xywh]")))
+            If !RegExMatch(DimSize, "i)" dim "\s*\K[\d.-]+", f%dim%)
+              f%dim% := 1
+        cInfo[ctrlID]     := { x:ix, fx:fx, y:iy, fy:fy, w:iw, fw:fw, h:ih, fh:fh, gw:A_GuiWidth, gh:A_GuiHeight, a:a , m:MMD}
+    }
+    Else If ( cInfo[ctrlID].a.1) 
+    {
+        dgx              := dgw := A_GuiWidth  - cInfo[ctrlID].gw  , dgy := dgh := A_GuiHeight - cInfo[ctrlID].gh
+        For i, dim in cInfo[ctrlID]["a"]
+            Options .= dim (dg%dim% * cInfo[ctrlID]["f" dim] + cInfo[ctrlID][dim]) A_Space
+        GuiControl, % A_Gui ":" cInfo[ctrlID].m , % ctrl, % Options
+	} 
+	} 
+}
 
 f_PlotGrid(GridStep, HandleToWindow)
 {
