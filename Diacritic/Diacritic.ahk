@@ -22,7 +22,6 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 global AppVersion				:= "1.0.1"
 ;@Ahk2Exe-Let vAppVersion=%A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; Keep these lines together
 ;Overrides the custom EXE icon used for compilation
-;@Ahk2Exe-SetMainIcon  %U_vAppIcon%
 ;@Ahk2Exe-SetCopyright GNU GPL 3.x
 ;@Ahk2Exe-SetDescription Advanced tool for diacritics management.
 ;@Ahk2Exe-SetProductName Original script name: %A_ScriptName%
