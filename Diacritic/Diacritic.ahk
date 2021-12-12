@@ -1,4 +1,4 @@
-;                 I N T R O D U C T I O N
+﻿;                 I N T R O D U C T I O N
 ;~ Simple script used to get diacritic letters (https://en.wikipedia.org/wiki/Diacritic) without usage of AltGr key (right alt, see https://en.wikipedia.org/wiki/AltGr_key#Polish for further details):
 ;~ * double press a key configured to correspond to diacritic key, e.g. in Polish ee converts into ę
 ;~ * special sequence for double letters within words: <letter><letter><letter>, e.g. zaaawansowany converts into zaawansowany
@@ -6,7 +6,7 @@
 ;~ * optionally sounds and tooltips are generated upon key presses.
 ;~ 
 ;~ WHY:
-;~ a. "programmers keyboard" layout and diactric with old ANSI 101 keys keyboard, where AltGr is unergonomically shifted to the right side of keyboard is cumbersome and decrease touch typing speed,
+;~ a. "programmers keyboard" layout and diacritic with old ANSI 101 keys keyboard, where AltGr is unergonomically shifted to the right side of keyboard is cumbersome and decrease touch typing speed,
 ;~ b. all other "programmers keyboard" when one doesn't want to press AltGr or use just one hand to press all letters of alphabet.
 ;~
 ;~ Author: Maciej Słojewski, 2020-02-27
@@ -20,7 +20,7 @@ SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
 #SingleInstance force 			; only one instance of this script may run at a time!
 
 ;~ - - - - - - - - - - Global Variables - - - - - - - - - - -
-global AppVersion				:= "1.0.1"
+global AppVersion				:= "1.0.2"
 ;@Ahk2Exe-Let vAppVersion=%A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; Keep these lines together
 ;Overrides the custom EXE icon used for compilation
 ;@Ahk2Exe-SetCopyright GNU GPL 3.x
@@ -29,7 +29,7 @@ global AppVersion				:= "1.0.1"
 ;@Ahk2Exe-Set OriginalScriptlocation, https://github.com/mslonik/Autohotkey-scripts/tree/master/Diacritic
 ;@Ahk2Exe-SetCompanyName  http://mslonik.pl
 ;@Ahk2Exe-SetFileVersion %U_vAppVersion%
-global ApplicationName     := "Diactric"
+global ApplicationName     := "Diacritic"
 global English_USA 		:= 0x0409   ; see AutoHotkey help: Language Codes
 ;~ - - - - - - - - - - End of Global Variables - - - - - - - - - - -
 
@@ -43,7 +43,7 @@ ProcessInputArgs()
 IniRead, _AmericanLayout,                   % A_ScriptDir . "\" . A_Args[1], Global, AmericanLayout
 IniRead, _AllTooltips,                      % A_ScriptDir . "\" . A_Args[1], Global, AllTooltips
 IniRead, _AllBeeps,                         % A_ScriptDir . "\" . A_Args[1], Global, AllBeeps
-IniRead, _DiactricWord,                     % A_ScriptDir . "\" . A_Args[1], Global, DiactricWord
+IniRead, _DiacriticWord,                    % A_ScriptDir . "\" . A_Args[1], Global, DiacriticWord
 IniRead, _DoubleWord,                       % A_ScriptDir . "\" . A_Args[1], Global, DoubleWord
 
 ;~ switch to AmericanLayout (neutral)?
@@ -52,259 +52,241 @@ if (_AmericanLayout = "yes")
 if (_AllTooltips = "on")
     F_AllKeyboardKeys()     ; Set dynamic hotkeys for all keys of 60% keyboard, ANSI layout    
 
-;~ determine how many [Diactric] sections are in .ini file
-DiactricSectionCounter := 0
+;~ determine how many [Diacritic] sections are in .ini file
+DiacriticSectionCounter := 0
 Loop, Read, % A_ScriptDir . "\" . A_Args[1]
     {
-    if (InStr(A_LoopReadLine, "[Diactric"))
-        {
-        DiactricSectionCounter++
-        }
+    if (InStr(A_LoopReadLine, "[Diacritic"))
+        DiacriticSectionCounter++
     }
 
-;~ MsgBox, % "DiactricSectionCounter: " . DiactricSectionCounter
 ;~ read all the rest of configuration parameters from .ini file and create hotstrings
 
 ;~ Initialization of parameters
-BaseKey        = ""
-ShiftBaseKey   = ""
-Diactric       = ""
-ShiftDiactric  = ""
-Tooltip        = ""
+BaseKey		= ""
+ShiftBaseKey	= ""
+Diacritic		= ""
+ShiftDiacritic	= ""
+Tooltip		= ""
 
-Loop, %DiactricSectionCounter%
+Loop, %DiacriticSectionCounter%
     {
-    IniRead, _BaseKey,                      % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, BaseKey
-    IniRead, _ShiftBaseKey,                 % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, ShiftBaseKey
+    IniRead, _BaseKey,                      % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, BaseKey
+    IniRead, _ShiftBaseKey,                 % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, ShiftBaseKey
     if (_ShiftBaseKey = "")
         {
         MsgBox, 16, %ApplicationName%.ahk, % "Warning!`nConfiguration file (" . A_Args[1] . ")`, section: " . A_Index . ", parameter name: ShiftBaseKey is empty. This could cause application malfunction. Application will now exit. Correct the " . A_Args[1] . " file in specified place and try again."
         ExitApp, 0
         }
-    IniRead, _Diactric,                     % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Diactric
-    IniRead, _ShiftDiactric,                % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, ShiftDiactric
-    IniRead, _Tooltip,                      % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Tooltip
+    IniRead, _Diacritic,                     % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, Diacritic
+    IniRead, _ShiftDiacritic,               	% A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, ShiftDiacritic
+    IniRead, _Tooltip,                      	% A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, Tooltip
     
-    IniRead, _BaseKey_SoundBeep_Frequency,  % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, BaseKey_SoundBeep_Frequency
-    IniRead, _BaseKey_SoundBeep_Duration,   % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, BaseKey_SoundBeep_Duration
-    IniRead, _Diactric_SoundBeep_Frequency, % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Diactric_SoundBeep_Frequency
-    IniRead, _Diactric_SoundBeep_Duration,  % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Diactric_SoundBeep_Duration
-    IniRead, _Double_SoundBeep_Frequency,   % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Double_SoundBeep_Frequency
-    IniRead, _Double_SoundBeep_Duration,    % A_ScriptDir . "\" . A_Args[1], % "Diactric" . A_Index, Double_SoundBeep_Duration
+    IniRead, _BaseKey_SoundBeep_Frequency,  	% A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, BaseKey_SoundBeep_Frequency
+    IniRead, _BaseKey_SoundBeep_Duration,   	% A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, BaseKey_SoundBeep_Duration
+    IniRead, _Diacritic_SoundBeep_Frequency,	% A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, Diacritic_SoundBeep_Frequency
+    IniRead, _Diacritic_SoundBeep_Duration,  % A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, Diacritic_SoundBeep_Duration
+    IniRead, _Double_SoundBeep_Frequency,   	% A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, Double_SoundBeep_Frequency
+    IniRead, _Double_SoundBeep_Duration,    	% A_ScriptDir . "\" . A_Args[1], % "Diacritic" . A_Index, Double_SoundBeep_Duration
     
-    Hotstring(":zx:" . _BaseKey . _BaseKey . _BaseKey,                func("DoubleLetter").bind(_BaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration))
-    Hotstring(":x:"  . _BaseKey . _BaseKey,                           func("DiactricLetter").bind(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip))
-    Hotstring(":x:"  . _BaseKey,                                      func("SingleLetter").bind(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip))
+    Hotstring(":zx:" . _BaseKey . _BaseKey . _BaseKey,                func("DoubleLetter")	.bind(_BaseKey, 					_Double_SoundBeep_Frequency, 		_Double_SoundBeep_Duration))
+    Hotstring(":x:"  . _BaseKey . _BaseKey,                           func("DiacriticLetter")	.bind(_Diacritic, 					_Diacritic_SoundBeep_Frequency, 	_Diacritic_SoundBeep_Duration, _Tooltip))
+    Hotstring(":x:"  . _BaseKey,                                      func("SingleLetter")	.bind(_BaseKey_SoundBeep_Frequency, 	_BaseKey_SoundBeep_Duration, 		_Tooltip))
 
-    Hotstring(":zx:" . _ShiftBaseKey . _ShiftBaseKey . _ShiftBaseKey, func("DoubleLetter").bind(_ShiftBaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration))
-    Hotstring(":x:"  . _ShiftBaseKey . _ShiftBaseKey,                 func("DiactricLetter").bind(_ShiftDiactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip))
-    Hotstring(":x:"  . _ShiftBaseKey,                                 func("SingleLetter").bind(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip))
-    }
+    Hotstring(":zx:" . _ShiftBaseKey . _ShiftBaseKey . _ShiftBaseKey, func("DoubleLetter")	.bind(_ShiftBaseKey, 				_Double_SoundBeep_Frequency, 		_Double_SoundBeep_Duration))
+    Hotstring(":x:"  . _ShiftBaseKey . _ShiftBaseKey,                 func("DiacriticLetter")	.bind(_ShiftDiacritic, 				_Diacritic_SoundBeep_Frequency, 	_Diacritic_SoundBeep_Duration, _Tooltip))
+    Hotstring(":x:"  . _ShiftBaseKey,                                 func("SingleLetter")	.bind(_BaseKey_SoundBeep_Frequency, 	_BaseKey_SoundBeep_Duration, 		_Tooltip))
+}
 
 ~LButton::
 ~BackSpace:: ; this line prevent the following sequence from triggering: ao > aoo > aó > aó{Backspace} > a > ao > ó
-    ;~ MsgBox, Backspace
-    Hotstring("Reset")
+Hotstring("Reset")
 return
 
  ;~ - - - - - - - - - - - - - - - - - - - - - - SECTION OF FUNCTIONS - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 DoubleLetter(_BaseKey, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration)
-    {
-    global _AllBeeps
-    
-    ;~ MsgBox, %_BaseKey%
-    Send, {Raw}`b`b%_BaseKey%%_BaseKey%
-    if (_AllBeeps = "on")
-        SoundBeep, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration
-    Tooltip,
-    ;~ return
-    }
+{
+	global _AllBeeps
+	
+	Send, {Raw}`b`b%_BaseKey%%_BaseKey%
+	if (_AllBeeps = "on")
+		SoundBeep, _Double_SoundBeep_Frequency, _Double_SoundBeep_Duration
+	Tooltip,
+}
 
 ;~ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-DiactricLetter(_Diactric, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration, _Tooltip)
-    {
-    global _AllBeeps, _AllTooltips, _DoubleWord
-    
-    ;~ MsgBox, % _Diactric
-    Send, {BackSpace 2}%_Diactric%
-    if (_AllBeeps = "on")
-        SoundBeep, _Diactric_SoundBeep_Frequency, _Diactric_SoundBeep_Duration
-    if ((_AllTooltips = "on") && (_Tooltip = "on") )
-        {
-        Tooltip, % _DoubleWord . "?", % A_CaretX,% A_CaretY-20
-        }
-    else
-        {
-        Tooltip,
-        }
-    ;~ return
-    }
-    
+DiacriticLetter(_Diacritic, _Diacritic_SoundBeep_Frequency, _Diacritic_SoundBeep_Duration, _Tooltip)
+{
+	global _AllBeeps, _AllTooltips, _DoubleWord
+	
+	Send, {BackSpace 2}%_Diacritic%
+	if (_AllBeeps = "on")
+		SoundBeep, _Diacritic_SoundBeep_Frequency, _Diacritic_SoundBeep_Duration
+	if ((_AllTooltips = "on") && (_Tooltip = "on") )
+		Tooltip, % _DoubleWord . "?", % A_CaretX,% A_CaretY-20
+	else
+		Tooltip,
+}
+
 ;~ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 SingleLetter(_BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration, _Tooltip)
-    {
-    global _AllBeeps, _AllTooltips, _DiactricWord
-    
-    if (_AllBeeps = "on")
-        SoundBeep, _BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration
-    if ((_AllTooltips = "on") && (_Tooltip = "on") )
-        {
-        Tooltip, % _DiactricWord . "?", % A_CaretX,% A_CaretY-20
-        }
-    else
-        {
-        Tooltip,
-        }
-    ;~ return
-    }
+{
+	global _AllBeeps, _AllTooltips, _DiacriticWord
+	
+	if (_AllBeeps = "on")
+		SoundBeep, _BaseKey_SoundBeep_Frequency, _BaseKey_SoundBeep_Duration
+	if ((_AllTooltips = "on") && (_Tooltip = "on") )
+		Tooltip, % _DiacriticWord . "?", % A_CaretX,% A_CaretY-20
+	else
+		Tooltip,
+}
 
 ;~ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 F_AllKeyboardKeys()
 {
 ;~ row #1
-Hotkey, ~Esc,       SwitchOffTooltip, On
-Hotkey, ~F1,        SwitchOffTooltip, On
-Hotkey, ~F2,        SwitchOffTooltip, On
-Hotkey, ~F3,        SwitchOffTooltip, On
-Hotkey, ~F4,        SwitchOffTooltip, On
-Hotkey, ~F5,        SwitchOffTooltip, On
-Hotkey, ~F6,        SwitchOffTooltip, On
-Hotkey, ~F7,        SwitchOffTooltip, On
-Hotkey, ~F8,        SwitchOffTooltip, On
-Hotkey, ~F9,        SwitchOffTooltip, On
-Hotkey, ~F10,       SwitchOffTooltip, On
-Hotkey, ~F11,       SwitchOffTooltip, On
-Hotkey, ~F12,       SwitchOffTooltip, On
-
+	Hotkey, ~Esc,       SwitchOffTooltip, On
+	Hotkey, ~F1,        SwitchOffTooltip, On
+	Hotkey, ~F2,        SwitchOffTooltip, On
+	Hotkey, ~F3,        SwitchOffTooltip, On
+	Hotkey, ~F4,        SwitchOffTooltip, On
+	Hotkey, ~F5,        SwitchOffTooltip, On
+	Hotkey, ~F6,        SwitchOffTooltip, On
+	Hotkey, ~F7,        SwitchOffTooltip, On
+	Hotkey, ~F8,        SwitchOffTooltip, On
+	Hotkey, ~F9,        SwitchOffTooltip, On
+	Hotkey, ~F10,       SwitchOffTooltip, On
+	Hotkey, ~F11,       SwitchOffTooltip, On
+	Hotkey, ~F12,       SwitchOffTooltip, On
+	
 ;~ row #2:
-Hotkey, ~``,        SwitchOffTooltip, On
-Hotkey, ~1,         SwitchOffTooltip, On
-Hotkey, ~2,         SwitchOffTooltip, On
-Hotkey, ~3,         SwitchOffTooltip, On
-Hotkey, ~4,         SwitchOffTooltip, On
-Hotkey, ~5,         SwitchOffTooltip, On
-Hotkey, ~6,         SwitchOffTooltip, On
-Hotkey, ~7,         SwitchOffTooltip, On
-Hotkey, ~8,         SwitchOffTooltip, On
-Hotkey, ~9,         SwitchOffTooltip, On
-Hotkey, ~0,         SwitchOffTooltip, On
-Hotkey, ~-,         SwitchOffTooltip, On
-Hotkey, ~=,         SwitchOffTooltip, On
-Hotkey, ~BS,        SwitchOffTooltip, On
-
+	Hotkey, ~``,        SwitchOffTooltip, On
+	Hotkey, ~1,         SwitchOffTooltip, On
+	Hotkey, ~2,         SwitchOffTooltip, On
+	Hotkey, ~3,         SwitchOffTooltip, On
+	Hotkey, ~4,         SwitchOffTooltip, On
+	Hotkey, ~5,         SwitchOffTooltip, On
+	Hotkey, ~6,         SwitchOffTooltip, On
+	Hotkey, ~7,         SwitchOffTooltip, On
+	Hotkey, ~8,         SwitchOffTooltip, On
+	Hotkey, ~9,         SwitchOffTooltip, On
+	Hotkey, ~0,         SwitchOffTooltip, On
+	Hotkey, ~-,         SwitchOffTooltip, On
+	Hotkey, ~=,         SwitchOffTooltip, On
+	Hotkey, ~BS,        SwitchOffTooltip, On
+	
 ;~ row #3
-Hotkey, ~Tab,       SwitchOffTooltip, On
-Hotkey, ~q,         SwitchOffTooltip, On
-Hotkey, ~w,         SwitchOffTooltip, On
-Hotkey, ~e,         SwitchOffTooltip, On
-Hotkey, ~r,         SwitchOffTooltip, On
-Hotkey, ~t,         SwitchOffTooltip, On
-Hotkey, ~y,         SwitchOffTooltip, On
-Hotkey, ~u,         SwitchOffTooltip, On
-Hotkey, ~i,         SwitchOffTooltip, On
-Hotkey, ~o,         SwitchOffTooltip, On
-Hotkey, ~[,         SwitchOffTooltip, On
-Hotkey, ~],         SwitchOffTooltip, On
-Hotkey, ~\,         SwitchOffTooltip, On
-
+	Hotkey, ~Tab,       SwitchOffTooltip, On
+	Hotkey, ~q,         SwitchOffTooltip, On
+	Hotkey, ~w,         SwitchOffTooltip, On
+	Hotkey, ~e,         SwitchOffTooltip, On
+	Hotkey, ~r,         SwitchOffTooltip, On
+	Hotkey, ~t,         SwitchOffTooltip, On
+	Hotkey, ~y,         SwitchOffTooltip, On
+	Hotkey, ~u,         SwitchOffTooltip, On
+	Hotkey, ~i,         SwitchOffTooltip, On
+	Hotkey, ~o,         SwitchOffTooltip, On
+	Hotkey, ~[,         SwitchOffTooltip, On
+	Hotkey, ~],         SwitchOffTooltip, On
+	Hotkey, ~\,         SwitchOffTooltip, On
+	
 ;~ row #4
-Hotkey, ~CapsLock,  SwitchOffTooltip, On
-Hotkey, ~a,         SwitchOffTooltip, On
-Hotkey, ~s,         SwitchOffTooltip, On
-Hotkey, ~d,         SwitchOffTooltip, On
-Hotkey, ~f,         SwitchOffTooltip, On
-Hotkey, ~g,         SwitchOffTooltip, On
-Hotkey, ~h,         SwitchOffTooltip, On
-Hotkey, ~j,         SwitchOffTooltip, On
-Hotkey, ~k,         SwitchOffTooltip, On
-Hotkey, ~l,         SwitchOffTooltip, On
-Hotkey, ~;,         SwitchOffTooltip, On
-Hotkey, ~',         SwitchOffTooltip, On
-Hotkey, ~Enter,     SwitchOffTooltip, On
-
+	Hotkey, ~CapsLock,  SwitchOffTooltip, On
+	Hotkey, ~a,         SwitchOffTooltip, On
+	Hotkey, ~s,         SwitchOffTooltip, On
+	Hotkey, ~d,         SwitchOffTooltip, On
+	Hotkey, ~f,         SwitchOffTooltip, On
+	Hotkey, ~g,         SwitchOffTooltip, On
+	Hotkey, ~h,         SwitchOffTooltip, On
+	Hotkey, ~j,         SwitchOffTooltip, On
+	Hotkey, ~k,         SwitchOffTooltip, On
+	Hotkey, ~l,         SwitchOffTooltip, On
+	Hotkey, ~;,         SwitchOffTooltip, On
+	Hotkey, ~',         SwitchOffTooltip, On
+	Hotkey, ~Enter,     SwitchOffTooltip, On
+	
 ;~ row #5
-Hotkey, ~Shift,     SwitchOffTooltip, On
-Hotkey, ~z,         SwitchOffTooltip, On
-Hotkey, ~x,         SwitchOffTooltip, On
-Hotkey, ~c,         SwitchOffTooltip, On
-Hotkey, ~v,         SwitchOffTooltip, On
-Hotkey, ~b,         SwitchOffTooltip, On
-Hotkey, ~n,         SwitchOffTooltip, On
-Hotkey, ~m,         SwitchOffTooltip, On
-Hotkey, ~`,,        SwitchOffTooltip, On
-Hotkey, ~.,         SwitchOffTooltip, On
-Hotkey, ~/,         SwitchOffTooltip, On
-
+	Hotkey, ~Shift,     SwitchOffTooltip, On
+	Hotkey, ~z,         SwitchOffTooltip, On
+	Hotkey, ~x,         SwitchOffTooltip, On
+	Hotkey, ~c,         SwitchOffTooltip, On
+	Hotkey, ~v,         SwitchOffTooltip, On
+	Hotkey, ~b,         SwitchOffTooltip, On
+	Hotkey, ~n,         SwitchOffTooltip, On
+	Hotkey, ~m,         SwitchOffTooltip, On
+	Hotkey, ~`,,        SwitchOffTooltip, On
+	Hotkey, ~.,         SwitchOffTooltip, On
+	Hotkey, ~/,         SwitchOffTooltip, On
+	
 ;~ row #6
-Hotkey, ~Control,   SwitchOffTooltip, On
-Hotkey, ~Lwin,      SwitchOffTooltip, On
-Hotkey, ~Alt,       SwitchOffTooltip, On
-Hotkey, ~Space,     SwitchOffTooltip, On
-Hotkey, ~RWin,      SwitchOffTooltip, On
-Hotkey, ~AppsKey,   SwitchOffTooltip, On
+	Hotkey, ~Control,   SwitchOffTooltip, On
+	Hotkey, ~Lwin,      SwitchOffTooltip, On
+	Hotkey, ~Alt,       SwitchOffTooltip, On
+	Hotkey, ~Space,     SwitchOffTooltip, On
+	Hotkey, ~RWin,      SwitchOffTooltip, On
+	Hotkey, ~AppsKey,   SwitchOffTooltip, On
 }
 
 ;~ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 ProcessInputArgs()
 {
-global A_Args, ApplicationName
-
-if (A_Args.Length() = 0)
-    {
-    IfExist, *.ini
-        {
-        MsgBox, 16, %ApplicationName%.ahk, At least one *.ini file found in directory %A_WorkingDir%`n but current script (%ApplicationName%.ahk) was run without any arguments. One argument`, the name of .ini file`, is obligatory. Therefore script will now exit.
-        ExitApp, 0
-        }
-    IfNotExist, *.ini
-        MsgBox, 308, %ApplicationName%.ahk, No input arguments found and no *.ini files found in directory %A_WorkingDir%. Expected a single *.ini file. Do you want to create Default.ini configuration template? Script will exit after the default configuration file Default%ApplicationName%ConfigFile.ini is created.
-    IfMsgBox, No
-        ExitApp, 0
-    IfMsgBox, Yes
-        {
-  ini=
+	global A_Args, ApplicationName
+	
+	if (A_Args.Length() = 0)
+	{
+		IfExist, *.ini
+		{
+			MsgBox, 16, %ApplicationName%.ahk, At least one *.ini file found in directory %A_WorkingDir%`n but current script (%ApplicationName%.ahk) was run without any arguments. One argument`, the name of .ini file`, is obligatory. Therefore script will now exit.
+			ExitApp, 0
+		}
+		IfNotExist, *.ini
+			MsgBox, 308, %ApplicationName%.ahk, No input arguments found and no *.ini files found in directory %A_WorkingDir%. Expected a single *.ini file. Do you want to create Default.ini configuration template? Script will exit after the default configuration file Default%ApplicationName%ConfigFile.ini is created.
+		IfMsgBox, No
+			ExitApp, 0
+		IfMsgBox, Yes
+		{
+			ini=
 (
 [Global]
 Language = NameOfYourLanguage
 AmericanLayout = yes ; or no
 AllTooltips = on ; or off
 AllBeeps = on ; or off
-DiactricWord = Diactric ; e.g. Diactric, this parameter will appear in Tooltip, if Tooltips are enabled
+DiacriticWord = Diacritic ; e.g. Diacritic, this parameter will appear in Tooltip, if Tooltips are enabled
 DoubleWord = Double ; e.g. Double, this parameter will appear in Tooltip, if Tooltips are enabled
 
-[Diactric1] ; exapmple of single section; such a section have to be repeated for each diactric key
-BaseKey = a ; name of a key which will activate a diactric key
-Diactric = {U+0105} ; definition of diactric key, the format {U+xyza} is obligatory
+[Diacritic1] ; exapmple of single section; such a section have to be repeated for each diacritic key
+BaseKey = a ; name of a key which will activate a diacritic key
+Diacritic = {U+0105} ; definition of diacritic key, the format {U+xyza} is obligatory
 ShiftBaseKey = A ; as for basekey, but this time explicite specify which key will appear
-ShiftDiactric = {U+0104} ; definition of diactric key, the format {U+xyza} is obligatory
+ShiftDiacritic = {U+0104} ; definition of diacritic key, the format {U+xyza} is obligatory
 Tooltip = on ; or off
 BaseKey_SoundBeep_Frequency = 1000 ; a number between 37 and 32767
 BaseKey_SoundBeep_Duration = 150 ; The duration of the sound, in milliseconds
-Diactric_SoundBeep_Frequency = 1100 ; a number between 37 and 32767
-Diactric_SoundBeep_Duration = 150 ; The duration of the sound, in milliseconds
+Diacritic_SoundBeep_Frequency = 1100 ; a number between 37 and 32767
+Diacritic_SoundBeep_Duration = 150 ; The duration of the sound, in milliseconds
 Double_SoundBeep_Frequency = 1200 ; a number between 37 and 32767
 Double_SoundBeep_Duration = 150 ; The duration of the sound, in milliseconds
 )
-        FileAppend, %ini%, Default%ApplicationName%ConfigFile.ini
-        ini = ""
-        ExitApp, 0
-        }
-    }
-else if (A_Args.Length() = 1)
-    {
-    IniRead, _Language,                         % A_ScriptDir . "\" . A_Args[1], Global, Language
-    TrayTip, Diactric.ahk, % "Input argument: " . A_Args[1] . ". Found language: " . _Language . ".",5, 0x1
-    ;~ MsgBox, 64, Diactric.ahk, % "Input argument: " . A_Args[1] . ". Found language: " . _Language . "."
-    }
-else if (A_Args.Length() > 1)
-    {
-    MsgBox, 48, Diactric.ahk, % "Too many input arguments: " . A_Args.Length() . ". Expected just one, *.ini." 
-    }
+			FileAppend, %ini%, Default%ApplicationName%ConfigFile.ini
+			ini = ""
+			ExitApp, 0
+		}
+	}
+	else if (A_Args.Length() = 1)
+	{
+		IniRead, _Language,                         % A_ScriptDir . "\" . A_Args[1], Global, Language
+		TrayTip, ApplicationName, % "Input argument: " . A_Args[1] . ". Found language: " . _Language . ".",5, 0x1
+	}
+	else if (A_Args.Length() > 1)
+	{
+		MsgBox, 48, ApplicationName, % "Too many input arguments: " . A_Args.Length() . ". Expected just one, *.ini." 
+	}
 }    
 
 ;~ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -326,11 +308,9 @@ SetDefaultKeyboard(LocaleID)
 		}
 }
 
-
  ;~ - - - - - - - - - - - - - - - - - - - - - - SECTION OF LABELS - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 SwitchOffTooltip:
-    ;~ ToolTip, Carramba
     ToolTip,
 return
 
